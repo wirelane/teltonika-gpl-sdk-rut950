@@ -1,0 +1,408 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/nhrp/interface/config/{id}/mapping/{idMapping}": {
+      "get": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Returns specified nhrp mapping configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMa"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          },
+          {
+            "name": "idMapping",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp mapping identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Updates specified nhrp mapping configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMa"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          },
+          {
+            "name": "idMapping",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp mapping identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_mapping_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Deletes specified nhrp mapping configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          },
+          {
+            "name": "idMapping",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp mapping identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "idMapping",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "NHRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/nhrp/interface/config/{id}/mapping": {
+      "get": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Returns all nhrp mapping configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMaMulti"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Creates nhrp mapping configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMa"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_mapping_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Updates specified nhrp mapping configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMaMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/nhrp_mapping_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "nhrp_mapping"
+        ],
+        "summary": "Deletes specified nhrp mapping configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "NHRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200NhMa": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nhrp_mapping_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NhMaMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/nhrp_mapping_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "nhrp_mapping_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string"
+          },
+          "ip_addr": {
+            "x-web": {
+              "pretty": "IP Address",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address of a station."
+          },
+          "nbma": {
+            "x-web": {
+              "pretty": "NBMA",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Non-Broadcast Multi-Access(NBMA) network IP address."
+          }
+        }
+      }
+    }
+  }
+}

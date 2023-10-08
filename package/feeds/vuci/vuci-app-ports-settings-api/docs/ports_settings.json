@@ -1,0 +1,712 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ports",
+    "version": "1.0",
+    "description": "Ports configuration documentation"
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "Ports"
+    }
+  ],
+  "paths": {
+    "/ports_settings/config": {
+      "get": {
+        "summary": "Returns ports configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ports_settings_multi"
+          }
+        },
+        "operationId": "get-network-ports_settings",
+        "tags": ["Ports"]
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates ports configurations",
+        "operationId": "put-network-ports_settings-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ports_settings_multi"
+          }
+        },
+        "tags": ["Ports"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": [{}]
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/ports_settings"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Network", "Ports", "Ports Settings"],
+        "hw_tags": {
+          "is_access_point": false,
+          "port_link": true
+        }
+      }
+    },
+    "/ports_settings/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Port configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns specified port settings configuration",
+        "tags": ["Ports"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ports_settings_one"
+          }
+        },
+        "operationId": "get-network-ports_settings-config-id"
+      },
+      "put": {
+        "summary": "Updates port settings configuration",
+        "operationId": "put-network-ports_settings-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ports_settings_one"
+          }
+        },
+        "tags": ["Ports"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ports_settings"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Network", "Ports", "Ports Settings"],
+        "hw_tags": {
+          "is_access_point": false,
+          "port_link": true
+        }
+      }
+    },
+    "/ports_settings/status": {
+      "get": {
+        "summary": "Gets ports status",
+        "tags": ["Ports"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ports_status"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Gets ports status"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Ports", "Ports Settings"],
+        "hw_tags": {
+          "is_access_point": false,
+          "port_link": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ports_settings": {
+        "title": "ports_settings",
+        "type": "object",
+        "properties": {
+          "enable": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable",
+              "group": "All Ports",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "enum": ["1", "0"]
+          },
+          "eee_enable": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "EEE",
+              "group": "All Ports",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "enum": ["0", "1"]
+          },
+          "_isolated": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Isolate port",
+              "group": "All Ports",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "enum": ["0", "1"]
+          },
+          "poe_enable": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "PoE",
+              "group": "All Ports",
+              "depends": [
+                {
+                  "id": ["port1", "port2", "port3", "port4", "port5", "port6", "port7", "port8"]
+                }
+              ],
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "enum": ["0", "1"]
+          },
+          "enabled": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable",
+              "group": "All Ports",
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": ["1", "0"]
+          },
+          "mtu": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "MTU",
+              "group": "All Ports",
+              "hw_tags": {
+                "is_switch": false,
+                "dsa": true
+              }
+            },
+            "type": "string",
+            "format": "irange(68,9200)"
+          },
+          "autoneg": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Auto negotiation",
+              "group": "All Ports",
+              "enum-pretty": {
+                "on": "On",
+                "off": "Off"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": ["on", "off"]
+          },
+          "speed": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Link Speed",
+              "group": "All Ports",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "is_switch": false
+                  },
+                  "values": ["", "10", "100"]
+                },
+                {
+                  "hw_tags": {
+                    "is_switch": true
+                  },
+                  "values": ["auto", "10", "100", "1000"]
+                }
+              ],
+              "enum-pretty": {
+                "": "Auto",
+                "auto": "Auto",
+                "10": "10Mbps (E)",
+                "100": "100Mbps (FE)",
+                "1000": "1000Mbps (GbE)"
+              }
+            },
+            "type": "string",
+            "enum": ["10", "100"]
+          },
+          "duplex": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Duplex",
+              "group": "All Ports",
+              "depends": [
+                {
+                  "speed": ["10", "100", "1000"]
+                }
+              ],
+              "enum-pretty": {
+                "full": "Full",
+                "half": "Half"
+              }
+            },
+            "type": "string",
+            "enum": ["full", "half"]
+          },
+          "advert": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Advertisement",
+              "group": "All Ports",
+              "depends": [
+                {
+                  "autoneg": "on"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Auto",
+                "1": "10M-Half",
+                "2": "10M-Full",
+                "3": "10M-Half 10M-Full",
+                "4": "100M-Half",
+                "5": "10M-Half 100M-Half",
+                "6": "10M-Full 100M-Half",
+                "7": "10M-Half 10M-Full 100M-Half",
+                "8": "100M-Full",
+                "9": "10M-Half 100M-Full",
+                "10": "10M-Full 100M-Full",
+                "11": "10M-Half 10M-Full 100M-Full",
+                "12": "100M-Half 100M-Full",
+                "13": "10M-Half 100M-Half 100M-Full",
+                "14": "10M-Full 100M-Half 100M-Full",
+                "15": "10M-Half 10M-Full 100M-Half 100M-Full"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
+          },
+          "qos_pri_group": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Prioritization mode",
+              "group": "Port Priority",
+              "enum-pretty": {
+                "0": "CoS",
+                "1": "DSCP",
+                "2": "Equal"
+              },
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "enum": ["0", "1", "2"]
+          },
+          "qos_pri_inner": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Priority",
+              "group": "Port Priority",
+              "enum-pretty": {
+                "0": "CoS-0",
+                "1": "CoS-1",
+                "2": "CoS-2",
+                "3": "CoS-3",
+                "4": "CoS-4",
+                "5": "CoS-5",
+                "6": "CoS-6",
+                "7": "CoS-7"
+              },
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "enum": ["0", "1", "2", "3", "4", "5", "6", "7"]
+          },
+          "_ingr_rate": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Ingress bandwidth",
+              "group": "Port rate limit",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "format": "range(0, 62500)"
+          },
+          "_egr_rate": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Egress bandwidth",
+              "group": "Port rate limit",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "format": "range(0, 62500)"
+          },
+          "_storm_mult_rate": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Multicast rate",
+              "group": "Port storm control",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "format": "range(0, 62500)"
+          },
+          "_storm_broad_rate": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Broadcast rate",
+              "group": "Port storm control",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "format": "range(0, 62500)"
+          },
+          "_storm_uni_rate": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Unicast rate",
+              "group": "Port storm control",
+              "hw_tags": {
+                "is_switch": true
+              }
+            },
+            "type": "string",
+            "format": "range(0, 62500)"
+          }
+        }
+      },
+      "ports_status": {
+        "title": "ports_status",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the port.",
+                  "x-web": {
+                    "pretty": "Port",
+                    "hw_tags": {
+                      "is_switch": false
+                    }
+                  }
+                },
+                "num": {
+                  "type": "number",
+                  "x-web": {
+                    "pretty": "Num",
+                    "hw_tags": {
+                      "is_switch": false
+                    }
+                  }
+                },
+                "position": {
+                  "type": "number",
+                  "description": "Physical port position.",
+                  "x-web": {
+                    "pretty": "Position",
+                    "hw_tags": {
+                      "is_switch": false
+                    }
+                  }
+                },
+                "state": {
+                  "type": "string",
+                  "description": "Port link.",
+                  "enum": ["up", "down"],
+                  "x-web": {
+                    "pretty": "Link",
+                    "hw_tags": {
+                      "is_switch": false
+                    }
+                  }
+                },
+                "speed": {
+                  "type": "number",
+                  "description": "Link speed."
+                },
+                "duplex": {
+                  "type": "string",
+                  "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals."
+                },
+                "topology": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "MAC": {
+                        "type": "string"
+                      },
+                      "VID": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "x-web": {
+                    "pretty": "Topology",
+                    "hw_tags": {
+                      "is_switch": false
+                    }
+                  }
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Port ID.",
+                  "x-web": {
+                    "pretty": "Port",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "rx_bytes": {
+                  "type": "string",
+                  "description": "Received data.",
+                  "x-web": {
+                    "pretty": "TX sum",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "tx_bytes": {
+                  "type": "string",
+                  "description": "Transmitted data.",
+                  "x-web": {
+                    "pretty": "RX sum",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "rx_rate": {
+                  "type": "string",
+                  "description": "Received data per second.",
+                  "x-web": {
+                    "pretty": "RX rate",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "tx_rate": {
+                  "type": "string",
+                  "description": "Transmitted data per second.",
+                  "x-web": {
+                    "pretty": "TX rate",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "link": {
+                  "type": "string",
+                  "description": "Port link.",
+                  "x-web": {
+                    "pretty": "Status",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "budget": {
+                  "type": "string",
+                  "description": "PoE available power budget.",
+                  "x-web": {
+                    "pretty": "Budget",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "full_duplex": {
+                  "type": "string",
+                  "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals.",
+                  "x-web": {
+                    "pretty": "Duplex",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                },
+                "power": {
+                  "type": "string",
+                  "description": "PoE port power usage in watts.",
+                  "x-web": {
+                    "pretty": "Power",
+                    "hw_tags": {
+                      "is_switch": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {},
+    "responses": {
+      "ports_settings_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/ports_settings"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "ports_settings_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [{}]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/ports_settings"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,826 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/nat_rules/config": {
+      "get": {
+        "summary": "GET All Firewall NAT Rules",
+        "description": "Returns all sections with their parameters form firewall NAT rules configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NatRulMulti"
+          }
+        },
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall NAT Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NatRulMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/nat_rules_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "post": {
+        "summary": "CREATE All Firewall NAT Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NatRul"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nat_rules_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Firewall NAT Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "NAT Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/nat_rules/config/{id}": {
+      "get": {
+        "summary": "GET Firewall NAT Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NatRul"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration NAT rule configuration section indetifier"
+          }
+        ],
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall NAT Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NatRul"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall NAT rule section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nat_rules_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Firewall NAT Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall NAT rule section identifier"
+          }
+        ],
+        "tags": [
+          "Firewall NAT Rules"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "NAT Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200NatRul": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nat_rules_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NatRulMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/nat_rules_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "nat_rules_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Turns the rule on or off",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the rule. This is used for easier management purposes.",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "proto": {
+            "type": "array",
+            "description": "You may specify multiple by selecting",
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "input"
+            }
+          },
+          "src": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Source zone",
+              "input-type": "input"
+            },
+            "description": "The zone from which traffic has originated."
+          },
+          "src_ip": {
+            "type": "array",
+            "x-web": {
+              "pretty": "Source IP address",
+              "input-type": "input"
+            },
+            "items": {
+              "type": "string"
+            },
+            "description": "The IP from which traffic has originated."
+          },
+          "src_port": {
+            "description": "Match incoming traffic originating from the given source port or port range on the client host.",
+            "type": "array",
+            "x-web": {
+              "pretty": "Source port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "all"
+                },
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "items": {
+              "type": "string"
+            }
+          },
+          "dest": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Destination zone",
+              "input-type": "input"
+            },
+            "description": "The zone to which traffic will be forwarded to."
+          },
+          "dest_ip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Destination IP address",
+              "input-type": "input"
+            },
+            "description": "The IP to which traffic will be forwarded to."
+          },
+          "dest_port": {
+            "description": "Match forwarded traffic to the given destination port or port range.",
+            "x-web": {
+              "pretty": "Destination port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "all"
+                },
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "type": "string"
+          },
+          "src_dip": {
+            "type": "string",
+            "description": "Rewrite matched traffic to the given address.",
+            "x-web": {
+              "pretty": "SNAT IP address",
+              "input-type": "input"
+            }
+          },
+          "src_dport": {
+            "description": "Rewrite matched traffic to the given source port. May be left empty to only rewrite the IP address.",
+            "type": "string",
+            "x-web": {
+              "pretty": "SNAT port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            }
+          },
+          "extra": {
+            "type": "string",
+            "description": "Passes additional arguments to iptables. Use with care!",
+            "x-web": {
+              "pretty": "Extra arguments",
+              "input-type": "input"
+            }
+          },
+          "weekdays": {
+            "type": "array",
+            "description": "Specifies on which days of the week the rule is valid.",
+            "x-web": {
+              "pretty": "Week Days",
+              "input-type": "multiselect",
+              "enum-pretty": {
+                "Mon": "Monday",
+                "Tue": "Tuesday",
+                "Wed": "Wednesday",
+                "Thu": "Thursday",
+                "Fri": "Friday",
+                "Sat": "Saturday",
+                "Sun": "Sunday"
+              }
+            },
+            "items": {
+              "enum": [
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun"
+              ],
+              "type": "string"
+            }
+          },
+          "monthdays": {
+            "description": "Specifies on which days of the month the rule is valid.",
+            "type": "array",
+            "x-web": {
+              "pretty": "Month Days",
+              "input-type": "multiselect"
+            },
+            "items": {
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23",
+                "24",
+                "25",
+                "26",
+                "27",
+                "28",
+                "29",
+                "30",
+                "31"
+              ],
+              "type": "string"
+            }
+          },
+          "start_time": {
+            "type": "string",
+            "description": "Indicates the beginning of the time period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Start Time (hh:mm:ss)",
+              "input-type": "input"
+            }
+          },
+          "stop_time": {
+            "type": "string",
+            "description": "Indicates the end of the time period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Stop Time (hh:mm:ss)",
+              "input-type": "input"
+            }
+          },
+          "start_date": {
+            "type": "string",
+            "description": "Indicates the first day of the date of the period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Start Date (yyyy-mm-dd)",
+              "input-type": "input"
+            }
+          },
+          "stop_date": {
+            "type": "string",
+            "description": "Indicates the last day of the date of the period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Stop Date (yyyy-mm-dd)",
+              "input-type": "input"
+            }
+          },
+          "utc_time": {
+            "type": "string",
+            "description": "Specifies whether the device should use UTC time.",
+            "x-web": {
+              "pretty": "Time in UTC",
+              "input-type": "switch"
+            }
+          },
+          "priority": {
+            "type": "string",
+            "description": "Determines ordering of rules",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "src_dip"
+        ]
+      },
+      "nat_rules_options_single_put": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns the rule on or off",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the rule. This is used for easier management purposes.",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "proto": {
+            "type": "array",
+            "description": "You may specify multiple by selecting",
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "input"
+            }
+          },
+          "src": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Source zone",
+              "input-type": "input"
+            },
+            "description": "The zone from which traffic has originated."
+          },
+          "src_ip": {
+            "type": "array",
+            "x-web": {
+              "pretty": "Source IP address",
+              "input-type": "input"
+            },
+            "items": {
+              "type": "string"
+            },
+            "description": "The IP from which traffic has originated."
+          },
+          "src_port": {
+            "description": "Match incoming traffic originating from the given source port or port range on the client host.",
+            "type": "array",
+            "x-web": {
+              "pretty": "Source port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "all"
+                },
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "items": {
+              "type": "string"
+            }
+          },
+          "dest": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Destination zone",
+              "input-type": "input"
+            },
+            "description": "The zone to which traffic will be forwarded to."
+          },
+          "dest_ip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Destination IP address",
+              "input-type": "input"
+            },
+            "description": "The IP to which traffic will be forwarded to."
+          },
+          "dest_port": {
+            "description": "Match forwarded traffic to the given destination port or port range.",
+            "x-web": {
+              "pretty": "Destination port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "all"
+                },
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "type": "string"
+          },
+          "src_dip": {
+            "type": "string",
+            "description": "Rewrite matched traffic to the given address.",
+            "x-web": {
+              "pretty": "SNAT IP address",
+              "input-type": "input"
+            }
+          },
+          "src_dport": {
+            "description": "Rewrite matched traffic to the given source port. May be left empty to only rewrite the IP address.",
+            "type": "string",
+            "x-web": {
+              "pretty": "SNAT port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "all"
+                },
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            }
+          },
+          "extra": {
+            "type": "string",
+            "description": "Passes additional arguments to iptables. Use with care!",
+            "x-web": {
+              "pretty": "Extra arguments",
+              "input-type": "input"
+            }
+          },
+          "weekdays": {
+            "type": "array",
+            "description": "Specifies on which days of the week the rule is valid.",
+            "x-web": {
+              "pretty": "Week Days",
+              "input-type": "multiselect",
+              "enum-pretty": {
+                "Mon": "Monday",
+                "Tue": "Tuesday",
+                "Wed": "Wednesday",
+                "Thu": "Thursday",
+                "Fri": "Friday",
+                "Sat": "Saturday",
+                "Sun": "Sunday"
+              }
+            },
+            "items": {
+              "enum": [
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun"
+              ],
+              "type": "string"
+            }
+          },
+          "monthdays": {
+            "description": "Specifies on which days of the month the rule is valid.",
+            "type": "array",
+            "x-web": {
+              "pretty": "Month Days",
+              "input-type": "multiselect"
+            },
+            "items": {
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23",
+                "24",
+                "25",
+                "26",
+                "27",
+                "28",
+                "29",
+                "30",
+                "31"
+              ],
+              "type": "string"
+            }
+          },
+          "start_time": {
+            "type": "string",
+            "description": "Indicates the beginning of the time period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Start Time (hh:mm:ss)",
+              "input-type": "input"
+            }
+          },
+          "stop_time": {
+            "type": "string",
+            "description": "Indicates the end of the time period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Stop Time (hh:mm:ss)",
+              "input-type": "input"
+            }
+          },
+          "start_date": {
+            "type": "string",
+            "description": "Indicates the first day of the date of the period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Start Date (yyyy-mm-dd)",
+              "input-type": "input"
+            }
+          },
+          "stop_date": {
+            "type": "string",
+            "description": "Indicates the last day of the date of the period during which the rule is valid.",
+            "x-web": {
+              "pretty": "Stop Date (yyyy-mm-dd)",
+              "input-type": "input"
+            }
+          },
+          "utc_time": {
+            "type": "string",
+            "description": "Specifies whether the device should use UTC time.",
+            "x-web": {
+              "pretty": "Time in UTC",
+              "input-type": "switch"
+            }
+          },
+          "priority": {
+            "type": "string",
+            "description": "Determines ordering of rules",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "src_dip"
+        ]
+      }
+    }
+  }
+}

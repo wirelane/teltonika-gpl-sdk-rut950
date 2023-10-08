@@ -1,0 +1,154 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/wol_setup/config/general": {
+      "get": {
+        "tags": [
+          "wol_setup"
+        ],
+        "summary": "Returns specified wake on lan section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolSetup"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [ ]
+      },
+      "put": {
+        "tags": [
+          "wol_setup"
+        ],
+        "summary": "Updates specified wake on lan configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolSetup"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wol_setup_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/wol_setup/actions/wake_all_devices": {
+      "post": {
+        "tags": [
+          "wol_setup"
+        ],
+        "summary": "Wakes all devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200WolSetup": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/wol_setup_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200WolSetupMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/wol_setup_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "wol_setup_options": {
+        "type": "object",
+        "properties": {
+          "broadcast": {
+            "x-web": {
+              "pretty": "Broadcast",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "enum": [
+              "on",
+              "off"
+            ],
+            "description": "If turned on, the WOL function sends a magic packet to the broadcast address (FF:FF:FF:FF:FF:FF) whenever it is asked to wake a device"
+          }
+        }
+      }
+    }
+  }
+}

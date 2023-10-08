@@ -1,0 +1,15 @@
+{
+	"network/failover/vrrp": {
+		"description": "vrrp configuration",
+        "read": {
+            "api": [
+                "/vrrp/*",
+                "/interfaces/*"
+            ]
+        },
+        "write": {
+            "api": ["/vrrp/*"]
+        }
+
+	}
+}

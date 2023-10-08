@@ -1,0 +1,132 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Custom Scripts"
+    }
+  ],
+  "paths": {
+    "/administration/uscripts/config": {
+      "post": {
+        "summary": "Upload a script file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Uscripts"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_uscripts"
+        },
+        "tags": [
+          "Custom Scripts"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Custom Scripts"
+        ],
+        "summary": "Returns script contents",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UscriptsGet"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Custom Scripts"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Uscripts": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "description": "Path of the uploaded script"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200UscriptsGet": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "script": {
+                      "x-web": {
+                        "pretty": "Startup script",
+                        "input-type": "input"
+                      },
+                      "type": "string",
+                      "description": "Contents of the script."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "file_upload_uscripts": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "x-web": {
+                    "pretty": "Startup script"
+                  },
+                  "type": "string",
+                  "format": "binary",
+                  "description": "File to upload."
+                }
+              },
+              "required": [
+                "file"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

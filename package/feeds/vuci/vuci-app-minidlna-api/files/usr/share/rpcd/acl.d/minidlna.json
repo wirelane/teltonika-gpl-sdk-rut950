@@ -1,0 +1,18 @@
+{
+	"services/usb_tools/minidlna": {
+		"read": {
+			"api": [
+				"/minidlna/*",
+				"/wireless/interfaces/*",
+				"/interfaces/config/*",
+				"/usb_tools/general/mounts/*",
+				"/devices/status/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/minidlna/*"
+			]
+		}
+	}
+}

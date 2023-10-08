@@ -1,0 +1,9 @@
+{
+	"services/data_sender": {
+		"title": "Data to Server",
+		"index": 90,
+		"view": "services/DataSender",
+		"acls": [ "services/data_sender" ],
+		"files": [ "/etc/config/data_sender" ]
+	}
+}

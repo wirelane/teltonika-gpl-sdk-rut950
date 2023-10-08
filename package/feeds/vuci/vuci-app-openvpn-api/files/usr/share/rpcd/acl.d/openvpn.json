@@ -1,0 +1,20 @@
+{
+	"services/vpn/openvpn": {
+		"description": "openvpn configuration",
+		"read": {
+			"uci": [
+				"openvpn",
+				"firewall"
+			],
+			"api": [
+				"/openvpn/*",
+				"/interfaces/config/*",
+				"/certificates/config/*"
+			]
+		},
+		"write": {
+			"uci": ["openvpn", "firewall"],
+			"api": ["/openvpn/*"]
+		}
+	}
+}

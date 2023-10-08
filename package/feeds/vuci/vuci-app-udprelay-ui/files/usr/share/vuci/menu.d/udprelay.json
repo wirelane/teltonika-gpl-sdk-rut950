@@ -1,0 +1,13 @@
+{
+	"network/other": {
+		"title": "Other",
+		"index": 130
+	},
+	"network/other/udprelay": {
+		"title": "UDP Broadcast Relay",
+		"index": 10,
+		"view": "network/UdpRelay_aeaafe",
+		"acls": [ "network/other/udprelay" ],
+		"files": [ "/etc/config/udprelay" ]
+	}
+}

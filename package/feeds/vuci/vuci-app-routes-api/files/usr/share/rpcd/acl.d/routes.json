@@ -1,0 +1,58 @@
+{
+	"network/routes/static_routes": {
+		"description": "static routes configuration",
+		"read": {
+			"api": [
+				"/routes/static/*",
+				"/routes/connections/*",
+				"/routes/connections_realtime/*",
+				"/interfaces/config/*",
+				"/l2tp/server/config/*",
+				"/l2tp/client/config/*",
+				"/l2tpv3/config/*",
+				"/pptp/server/config/*",
+				"/pptp/client/config/*",
+				"/gre/config/*",
+				"/wireguard/config/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/routes/static/*",
+				"/routes/connections/*",
+				"/routes/connections_realtime/*"
+			]
+		}
+	},
+
+	"network/routes/advanced_routing": {
+		"description": "advanced static routes configuration",
+		"read": {
+			"api": [
+				"/routes/advanced_static/*",
+				"/interfaces/config/*",
+				"/l2tp/server/config/*",
+				"/l2tp/client/config/*",
+				"/l2tpv3/config/*",
+				"/pptp/server/config/*",
+				"/pptp/client/config/*",
+				"/gre/config/*",
+				"/wireguard/config/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/routes/advanced_static/*"
+			]
+		}
+	},
+
+	"status/routes/general": {
+		"description": "general routes",
+		"read": {
+			"api": [
+				"/routes/status/*"
+			]
+		}
+	}
+}

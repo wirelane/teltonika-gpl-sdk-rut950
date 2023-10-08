@@ -1,0 +1,17 @@
+{
+    "network/traffic_shaping/qos": {
+        "description": "qos configuration",
+        "read": {
+            "api": [
+                "/qos/*",
+                "/interfaces/config/*",
+                "/firewall/nat_offloading/config/general/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/qos/*"
+            ]
+        }
+    }
+}

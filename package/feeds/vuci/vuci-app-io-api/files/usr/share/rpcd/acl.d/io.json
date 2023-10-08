@@ -1,0 +1,146 @@
+{
+	"services/io/general": {
+		"description": "input/output status configuration",
+		"read": {
+			"ubus": {
+				"ioman.*.*": [
+					"status"
+				]
+			},
+			"api": ["/io/status/*"]
+		},
+		"write": {
+			"ubus": {
+				"ioman.*.*": [
+					"update"
+				]
+			},
+			"api": ["/io/status/*"]
+		}
+	},
+
+	"services/io/post_get": {
+		"description": "input.output post/get configuration",
+		"read": {
+			"uci": ["ioman"],
+			"api": ["/io/post_get/*"]
+		},
+		"write": {
+			"uci": ["ioman"],
+			"api": ["/io/post_get/*"]
+		}
+	},
+
+	"services/io/scheduler": {
+		"description": "input.output scheduler configuration",
+		"read": {
+			"uci": ["ioman"],
+			"api": [
+				"/io/scheduler/*",
+				"/io/status/*",
+				"/io/juggler/config/general/actions/*",
+				"/io/juggler/config/general/inputs/*",
+				"/mobile_utilities/sms_rules/config/*",
+				"/mobile_utilities/call_utilities/rules/config/*"
+			]
+		},
+		"write": {
+			"uci": ["ioman"],
+			"api": ["/io/scheduler/*"]
+		}
+	},
+
+	"services/io/juggler/input": {
+		"description": "input.output juggler configuration",
+		"read": {
+			"api": [
+				"/io/juggler/config/*",
+				"/io/status/config/*",
+				"/io/scheduler/config/general/*"
+			],
+			"uci": [
+				"iojuggler"
+			]
+		},
+		"write": {
+			"api": [
+				"/io/juggler/config/*"
+			],
+			"uci": [
+				"iojuggler"
+			]
+		}
+	},
+
+	"services/io/juggler/action": {
+		"description": "input.output juggler actions configuration",
+		"read": {
+			"api": [
+				"/io/juggler/options/general/actions/*",
+				"/io/juggler/config/general/actions/*",
+				"/io/juggler/config/general/conditions/*",
+				"/io/status/*",
+				"/recipients/email_users/config/*",
+				"/recipients/phone_groups/config/*",
+				"/mobile/sim_switch/config/*",
+				"/mobile/modems/status*",
+				"/profiles/config/*",
+				"/devices/status/*",
+				"/certificates/config/*"
+			],
+			"uci": [
+				"iojuggler",
+				"user_groups",
+				"profiles",
+				"simcard"
+			],
+			"ubus": {
+				"vuci.network.mobile": [
+					"get_all_modems"
+				],
+				"sim": [
+					"get"
+				],
+				"network.device": [
+					"status"
+				],
+				"network.interface": [
+					"dump"
+				],
+				"vuci.network.network": [
+					"get_devices",
+					"network_netlist"
+				]
+			}
+		},
+		"write": {
+			"api": [
+				"/io/juggler/config/general/actions/*"
+			],
+			"uci": [
+				"iojuggler"
+			]
+		}
+	},
+
+	"services/io/juggler/condition": {
+		"description": "input.output juggler conditions configuration",
+		"read": {
+			"api": [
+				"/io/juggler/config/general/conditions/*",
+				"/io/status/*"
+			],
+			"uci": [
+				"iojuggler"
+			]
+		},
+		"write": {
+			"api": [
+				"/io/juggler/config/general/conditions/*"
+			],
+			"uci": [
+				"iojuggler"
+			]
+		}
+	}
+}

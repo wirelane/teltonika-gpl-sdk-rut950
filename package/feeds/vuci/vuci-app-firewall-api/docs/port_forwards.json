@@ -1,0 +1,644 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/port_forwards/config": {
+      "get": {
+        "summary": "GET All Firewall Port Forwards",
+        "description": "Returns all sections with their parameters form firewall port forwards configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PorForMulti"
+          }
+        },
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall Port Forwards",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PorForMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/port_forwards_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "post": {
+        "summary": "CREATE All Firewall Port Forwards",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PorFor"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/port_forwards_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Firewall Port Forwards",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Port Forwards"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/port_forwards/config/{id}": {
+      "get": {
+        "summary": "GET Firewall Port Forwards",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PorFor"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration port forawrd configuration section indetifier"
+          }
+        ],
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall Port Forwards",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PorFor"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall port forward section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/port_forwards_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Firewall Port Forwards",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall port forward section identifier"
+          }
+        ],
+        "tags": [
+          "Firewall Port Forwards"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Port Forwards"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200PorFor": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "x-web": {
+                            "pretty": "Configuration ID",
+                            "input-type": "input"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/port_forwards_options"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200PorForMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/port_forwards_options"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "port_forwards_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable"
+            },
+            "type": "string",
+            "description": "Turns the rule on or off"
+          },
+          "name": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Name",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Name of the rule. This is used for easier management purposes"
+          },
+          "proto": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Protocol"
+            },
+            "type": "array",
+            "description": "Specifies to which protocols the rule should apply"
+          },
+          "src": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source zone"
+            },
+            "type": "string",
+            "description": "The zone to which the third party will be connecting. (Same thing as 'External zone' in the New port forward section.)"
+          },
+          "src_mac": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source MAC address"
+            },
+            "type": "array",
+            "description": "MAC address(es) of connecting hosts. The rule will apply only to hosts that match MAC addresses specified in this field. Leave empty to make the rule skip MAC address matching.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source IP address"
+            },
+            "type": "array",
+            "description": "Only match incoming traffic from this IP or range",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_port": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source port",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Only match incoming traffic originating from the given source port or port range on the client host",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_dip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "External IP address"
+            },
+            "type": "string",
+            "description": "Only match incoming traffic directed at the given IP address"
+          },
+          "src_dport": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "External port",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Match incoming traffic directed at the given destination port or port range on this host",
+            "type": "string"
+          },
+          "dest": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Internal zone"
+            },
+            "type": "string",
+            "description": "The zone to which the incoming connection will be redirected"
+          },
+          "dest_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Internal IP address"
+            },
+            "type": "string",
+            "description": "Redirect matched incoming traffic to the specified internal host"
+          },
+          "dest_port": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Internal port",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Redirect matched incoming traffic to the given port on the internal host",
+            "format": "portrange"
+          },
+          "reflection": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable NAT Loopback"
+            },
+            "type": "string",
+            "description": "NAT loopback a.k.a. NAT reflection a.k.a. NAT hairpinning is a method of accessing an internal server using a public IP. NAT loopback enables your local network (i.e., behind your NAT device) to connect to a forward-facing IP address of a machine that it also on your local network."
+          },
+          "extra": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Extra arguments"
+            },
+            "type": "string",
+            "description": "Passes additional arguments to iptables. Use with care!"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Determines ordering of rules",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "port_forwards_options_single_put": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable"
+            },
+            "type": "string",
+            "description": "Turns the rule on or off"
+          },
+          "name": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Name",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Name of the rule. This is used for easier management purposes"
+          },
+          "proto": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Protocol"
+            },
+            "type": "array",
+            "description": "Specifies to which protocols the rule should apply"
+          },
+          "src": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source zone"
+            },
+            "type": "string",
+            "description": "The zone to which the third party will be connecting. (Same thing as 'External zone' in the New port forward section.)"
+          },
+          "src_mac": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source MAC address"
+            },
+            "type": "array",
+            "description": "MAC address(es) of connecting hosts. The rule will apply only to hosts that match MAC addresses specified in this field. Leave empty to make the rule skip MAC address matching.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source IP address"
+            },
+            "type": "array",
+            "description": "Only match incoming traffic from this IP or range",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_port": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Source port",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Only match incoming traffic originating from the given source port or port range on the client host",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_dip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "External IP address"
+            },
+            "type": "string",
+            "description": "Only match incoming traffic directed at the given IP address"
+          },
+          "src_dport": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "External port",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Match incoming traffic directed at the given destination port or port range on this host",
+            "type": "string"
+          },
+          "dest": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Internal zone"
+            },
+            "type": "string",
+            "description": "The zone to which the incoming connection will be redirected"
+          },
+          "dest_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Internal IP address"
+            },
+            "type": "string",
+            "description": "Redirect matched incoming traffic to the specified internal host"
+          },
+          "dest_port": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Internal port",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Redirect matched incoming traffic to the given port on the internal host",
+            "format": "portrange"
+          },
+          "reflection": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable NAT Loopback"
+            },
+            "type": "string",
+            "description": "NAT loopback a.k.a. NAT reflection a.k.a. NAT hairpinning is a method of accessing an internal server using a public IP. NAT loopback enables your local network (i.e., behind your NAT device) to connect to a forward-facing IP address of a machine that it also on your local network."
+          },
+          "extra": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Extra arguments"
+            },
+            "type": "string",
+            "description": "Passes additional arguments to iptables. Use with care!"
+          },
+          "priority": {
+            "type": "string",
+            "description": "Determines ordering of rules",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/wireguard/config/{cfg}/peers": {
+      "post": {
+          "tags": [
+            "Wireguard Peer"
+          ],
+          "summary": "Creates wireguard peer section",
+          "responses": {
+            "200": {
+              "$ref": "#/components/responses/200WirePeer"
+            },
+            "201": {
+              "$ref": "#/components/responses/201response"
+            },
+            "422": {
+              "$ref": "#/components/responses/422response"
+            }
+          },
+          "parameters": [
+            {
+              "name": "cfg",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Uci configuration wireguard section indetifier"
+            },
+            {
+              "name": "cfgPeer",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Name of uci configuration peer to be created"
+            }
+          ],
+          "requestBody": {
+            "description": "Parameter section",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/components/schemas/wireguard_peer_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+      "get": {
+        "tags": [
+          "Wireguard Peer"
+        ],
+        "summary": "Returns all wireguard peer configuration sections",
+        "description": "Returns all sections with their parameters form wireguard configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WirePeerMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard section indetifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Wireguard Peer"
+        ],
+        "summary": "Updates specified wireguard peer configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WirePeer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/wireguard_peer_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Wireguard Peer"
+        ],
+        "summary": "Deletes specified wireguard peer configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Uci configuration wireguard section indetifier"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "Wireguard"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/wireguard/config/{cfg}/peers/{cfgPeer}": {
+      "get": {
+        "tags": [
+          "Wireguard Peer"
+        ],
+        "summary": "Returns specified wireguard peer section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WirePeer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard section indetifier"
+          },
+          {
+            "name": "cfgPeer",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard peer section indetifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Wireguard Peer"
+        ],
+        "summary": "Updates specified wireguard peer configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WirePeer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard section indetifier"
+          },
+          {
+            "name": "cfgPeer",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard peer section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wireguard_peer_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Wireguard Peer"
+        ],
+        "summary": "Deletes specified wireguard peer configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard section indetifier"
+          },
+          {
+            "name": "cfgPeer",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration wireguard peer section indetifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Uci configuration wireguard section indetifier"
+        },
+        {
+          "name": "cfgPeer",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Uci configuration wireguard peer section indetifier"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "Wireguard"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200WirePeer": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/wireguard_peer_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200WirePeerMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/wireguard_peer_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "wireguard_peer_single_options": {
+        "type": "object",
+        "properties": {
+          "public_key": {
+            "x-web": {
+              "pretty": "Public key",
+              "input-type": "input",
+              "group": "General Setup"
+            },
+            "minLength": 44,
+            "maxLength": 44,
+            "type": "string",
+            "description": "Base64",
+            "format": "base64"
+          },
+          "allowed_ips": {
+            "x-web": {
+              "pretty": "Allowed IPs",
+              "input-type": "input",
+              "group": "General Setup"
+            },
+            "type": "array",
+            "description": "IP addresses that this peer is allowed to use inside the tunnel",
+            "format": "ipmask"
+          },
+          "description": {
+            "x-web": {
+              "pretty": "Description",
+              "input-type": "input",
+              "group": "General Setup"
+            },
+            "type": "string",
+            "description": "Description of peer",
+            "format": "string"
+          },
+          "route_allowed_ips": {
+            "x-web": {
+              "pretty": "Route allowed IPs",
+              "input-type": "switch",
+              "group": "General Setup"
+            },
+            "type": "string",
+            "description": "Create routes for Allowed IPs for this peer.",
+            "format": "is_bool"
+          },
+          "preshared_key": {
+            "x-web": {
+              "pretty": "Preshared key",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "minLength": 0,
+            "maxLength": 44,
+            "type": "string",
+            "description": "Base64",
+            "format": "base64"
+          },
+          "endpoint_host": {
+            "x-web": {
+              "pretty": "Endpoint host",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Host of peer",
+            "format": "host"
+          },
+          "endpoint_port": {
+            "x-web": {
+              "pretty": "Endpoint port",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Port of peer",
+            "format": "port"
+          },
+          "persistent_keepalive": {
+            "x-web": {
+              "pretty": "Persistent keep alive",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Seconds between keep alive messages",
+            "format": "range(0, 65535)"
+          },
+          "table": {
+            "x-web": {
+              "pretty": "Routing table",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Defines which routing table to use for this peer's routes, not necessary to configure for most setups."
+          }
+        },
+        "required": [
+          "public_key",
+          "allowed_ips"
+        ]
+      },
+      "wireguard_peer_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                    "pretty": "Peer configuration name",
+                    "input-type": "input"
+                },
+                "type": "string",
+                "description": "Name of a section"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/wireguard_peer_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

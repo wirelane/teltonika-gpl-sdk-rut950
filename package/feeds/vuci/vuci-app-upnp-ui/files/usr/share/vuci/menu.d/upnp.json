@@ -1,0 +1,9 @@
+{
+	"services/upnp": {
+		"title": "UPNP",
+		"index": 220,
+		"view": "services/Upnp_aeaafe",
+		"acls": [ "services/upnp" ],
+		"files": [ "/etc/config/upnpd" ]
+	}
+}

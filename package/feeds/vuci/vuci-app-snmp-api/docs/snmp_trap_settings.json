@@ -1,0 +1,237 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/snmp/trap_settings/config/general": {
+      "summary": "Trap service settings",
+      "description": "This section is used to configure trap service settings.",
+      "get": {
+        "tags": [
+          "SNMP trap settings"
+        ],
+        "summary": "Returns the general SNMP trap settings configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_settings"
+          }
+        },
+        "operationId": "snmp5"
+      },
+      "put": {
+        "tags": [
+          "SNMP trap settings"
+        ],
+        "summary": "Updates the general SNMP trap settings configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_settings"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_trap_settings"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "smnp6"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "Trap Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/snmp/trap_settings/config": {
+      "summary": "Trap service settings",
+      "description": "This section is used to configure trap service settings.",
+      "get": {
+        "tags": [
+          "SNMP trap settings"
+        ],
+        "summary": "Returns the general SNMP trap configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_settings_multi"
+          }
+        },
+        "operationId": "snmp7"
+      },
+      "put": {
+        "tags": [
+          "SNMP trap settings"
+        ],
+        "summary": "Updates the general SNMP trap configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_settings_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configurations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configurations to update",
+                    "items": {
+                      "$ref": "#/components/schemas/snmp_trap_settings_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "snmp8"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "Trap Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200snmp_trap_settings": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/snmp_trap_settings_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200snmp_trap_settings_multi": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configurations objects",
+                  "items": {
+                    "$ref": "#/components/schemas/snmp_trap_settings_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "snmp_trap_settings": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "host": {
+            "type": "string",
+            "description": "Host to transfer SNMP (Simple Network Management Protocol) traffic to.",
+            "format": "host",
+            "x-web": {
+              "pretty": "Host",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Port for trap host.",
+            "format": "port",
+            "default": "162",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "community": {
+            "type": "string",
+            "description": "The SNMP (Simple Network Management Protocol) community is an ID that allows access to a routers SNMP data.",
+            "format": "uciname",
+            "maxLength": 16,
+            "default": "Public",
+            "x-web": {
+              "pretty": "Community",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "snmp_trap_settings_id": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/snmp_trap_settings"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "SNMP Trap Settings Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

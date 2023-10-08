@@ -1,0 +1,1235 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Modbus TCP Client Alarms"
+    }
+  ],
+  "paths": {
+    "/modbus/tcp/config/{modbus_tcp_client_id}/alarms/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_tcp_client_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Configuration identifier (ID)"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Alarm Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified Modbus TCP Client Alarm configuration",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClientAlarm"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates  the specified Modbus TCP Client Alarm configuration",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClientAlarm"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_alarm_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the specified Modbus TCP Client Alarm configuration",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": ""
+      },
+      "post": {
+        "summary": "Upload Modbus alarm certificates",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_alarms"
+        },
+        "tags": [
+          "MQTT Modbus Gateway"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/tcp/config/{modbus_tcp_client_id}/alarms": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_tcp_client_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns all Modbus TCP Client Alarms configurations",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClientAlarmMulti"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates Modbus TCP Client Alarm configuration",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ModbusTcpClientAlarm"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_alarm_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified Modbus TCP Client Alarms configurations",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClientAlarmMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_tcp_alarm_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specified Modbus TCP Client Alarms configurations",
+        "tags": [
+          "Modbus TCP Client Alarms"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "requestBodies": {
+      "file_upload_alarms": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "option": {
+                  "type": "string",
+                  "description": "Parameter to upload the file to.",
+                  "enum": [
+                    "ca_file",
+                    "cert_file",
+                    "key_file"
+                  ]
+                },
+                "file": {
+                  "type": "string",
+                  "format": "binary",
+                  "description": "File to upload."
+                }
+              },
+              "required": [
+                "option",
+                "file"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ModbusTcpClientAlarm": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_tcp_alarm_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ModbusTcpClientAlarmMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_tcp_alarm_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_tcp_option_id": {
+        "title": "modbus_tcp_option_id",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "modbus_tcp_alarm_single_options": {
+        "title": "modbus_tcp_alarm_single_options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable alarm.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "f_code": {
+            "type": "string",
+            "description": "Modbus function code used to get the values.",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "x-web": {
+              "pretty": "Function code",
+              "enum-pretty": {
+                "1": "Read coils (1)",
+                "2": "Read input coils (2)",
+                "3": "Read holding registers (3)",
+                "4": "Read input registers (4)"
+              },
+              "input-type": "select"
+            }
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "8bit_int",
+              "8bit_uint",
+              "16bit_int_hi_first",
+              "16bit_int_low_first",
+              "16bit_uint_hi_first",
+              "16bit_uint_low_first",
+              "32bit_float1234",
+              "32bit_float4321",
+              "32bit_float2143",
+              "32bit_float3412",
+              "32bit_int1234",
+              "32bit_int4321",
+              "32bit_int2143",
+              "32bit_int3412",
+              "32bit_uint1234",
+              "32bit_uint4321",
+              "32bit_uint2143",
+              "32bit_3412",
+              "ascii",
+              "hex",
+              "bool"
+            ],
+            "description": "Select data type that will be used for checking conditions",
+            "x-web": {
+              "pretty": "Compared condition data type",
+              "enum-pretty": {
+                "8bit_int": "8bit INT",
+                "8bit_uint": "8bit UINT",
+                "16bit_int_hi_first": "16bit INT, high byte first",
+                "16bit_int_low_first": "16bit INT, low byte first",
+                "16bit_uint_hi_first": "16bit UINT, high byte first",
+                "16bit_uint_low_first": "16bit UINT, low byte first",
+                "32bit_float1234": "32bit float, Byte order 1,2,3,4",
+                "32bit_float4321": "32bit float, Byte order 4,3,2,1",
+                "32bit_float2143": "32bit float, Byte order 2,1,4,3",
+                "32bit_float3412": "32bit float, Byte order 3,4,1,2",
+                "32bit_int1234": "32bit INT, Byte order 1,2,3,4",
+                "32bit_int4321": "32bit INT, Byte order 4,3,2,1",
+                "32bit_int2143": "32bit INT, Byte order 2,1,4,3",
+                "32bit_int3412": "32bit INT, Byte order 3,4,1,2",
+                "32bit_uint1234": "32bit UINT, Byte order 1,2,3,4",
+                "32bit_uint4321": "32bit UINT, Byte order 4,3,2,1",
+                "32bit_uint2143": "32bit UINT, Byte order 2,1,4,3",
+                "32bit_uint3412": "32bit UINT, Byte order 3,4,1,2",
+                "ascii": "ASCII",
+                "hex": "Hex",
+                "bool": "Bool"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "function": "5"
+                  },
+                  "values": [
+                    "bool"
+                  ]
+                },
+                {
+                  "depends": {
+                    "function": "6"
+                  },
+                  "values": [
+                    "8bit_int",
+                    "8bit_uint",
+                    "16bit_int_hi_first",
+                    "16bit_int_low_first",
+                    "16bit_uint_hi_first",
+                    "16bit_uint_low_first",
+                    "ascii",
+                    "hex",
+                    "bool"
+                  ]
+                }
+              ]
+            }
+          },
+          "register": {
+            "type": "string",
+            "description": "Modbus register or coil.",
+            "format": "range(1, 65536)",
+            "x-web": {
+              "pretty": "First register number",
+              "input-type": "input"
+            }
+          },
+          "condition": {
+            "type": "string",
+            "description": "Condition for comparing values read with configured values.",
+            "enum": [
+              "1",
+              "2",
+              "4",
+              "8",
+              "16",
+              "32"
+            ],
+            "x-web": {
+              "pretty": "Condition",
+              "enum-pretty": {
+                "1": "More than",
+                "2": "Less than",
+                "4": "Equal to",
+                "8": "Not Equal to",
+                "16": "Less or equal",
+                "32": "More or equal"
+              },
+              "input-type": "select"
+            }
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to be compared with values read from server.",
+            "x-web": {
+              "pretty": "Values",
+              "input-type": "input"
+            }
+          },
+          "actionfrequency": {
+            "type": "string",
+            "description": "How frequency every action is triggered.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Action frequency",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "Every trigger",
+                "1": "First trigger"
+              }
+            }
+          },
+          "redundancy_protection": {
+            "type": "string",
+            "description": "Protection against executing a configured action too often.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Redundancy protection",
+              "input-type": "switch"
+            }
+          },
+          "redundancy_protection_period": {
+            "type": "string",
+            "description": "Duration to activate redundancy protection for.",
+            "format": "irange(1, 86400)",
+            "x-web": {
+              "pretty": "Redundancy protection period",
+              "input-type": "input",
+              "depends": [
+                {
+                  "redundancy_protection": "1"
+                }
+              ]
+            }
+          },
+          "action": {
+            "type": "string",
+            "description": "Action triggered by this alarm.",
+            "enum": [
+              "2",
+              "3"
+            ],
+            "x-web": {
+              "pretty": "Action",
+              "enum-pretty": {
+                "1": "Trigger output",
+                "2": "Modbus Write Request",
+                "3": "MQTT message",
+                "0": "SMS"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "mobile": false
+                  },
+                  "values": [
+                    "1",
+                    "2",
+                    "3"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "ios": false
+                  },
+                  "values": [
+                    "3",
+                    "2",
+                    "0"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "ios": true,
+                    "mobile": true
+                  },
+                  "values": [
+                    "1",
+                    "2",
+                    "0",
+                    "3"
+                  ]
+                }
+              ]
+            }
+          },
+          "output": {
+            "type": "string",
+            "description": "Select output.",
+            "x-web": {
+              "pretty": "Output",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "dout1": true
+                  },
+                  "values": [
+                    "dout1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio0": true
+                  },
+                  "values": [
+                    "dio0"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio0": true,
+                    "relay0": true,
+                    "relay1": true
+                  },
+                  "values": [
+                    "dio0",
+                    "relay0",
+                    "relay1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dout1": true,
+                    "relay0": true,
+                    "dout2": true
+                  },
+                  "values": [
+                    "dout1",
+                    "dout2",
+                    "relay0"
+                  ]
+                }
+              ],
+              "input-type": "select",
+              "depends": [
+                {
+                  "action": "1"
+                }
+              ]
+            }
+          },
+          "io_action": {
+            "type": "string",
+            "description": "Action to be performed with selected output.",
+            "enum": [
+              "1",
+              "0",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "I/O action",
+              "input-type": "select",
+              "enum-pretty": {
+                "1": "Close",
+                "0": "Open",
+                "2": "Invert"
+              },
+              "depends": [
+                {
+                  "action": "1"
+                }
+              ]
+            }
+          },
+          "modem": {
+            "type": "string",
+            "description": "Modem, which is used to send information from.",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              },
+              "depends": [
+                {
+                  "action": "0"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "Message.",
+            "maxLength": 160,
+            "x-web": {
+              "pretty": "Message",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "0"
+                }
+              ]
+            }
+          },
+          "telnum": {
+            "type": "array",
+            "description": "Recipient's phone number.",
+            "format": "regex",
+            "pattern": "^[0-9+]*$",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Phone number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "0"
+                }
+              ]
+            }
+          },
+          "modbus_ip_addr": {
+            "type": "string",
+            "description": "Server device IP address or hostname.",
+            "format": "host",
+            "x-web": {
+              "pretty": "Address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_port": {
+            "type": "string",
+            "description": "Server device port number.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_timeout": {
+            "type": "string",
+            "description": "Time period for waiting of the tcp device response.",
+            "format": "irange(1, 30)",
+            "default": "5",
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_id": {
+            "type": "string",
+            "description": "Server ID number.",
+            "format": "irange(1, 255)",
+            "x-web": {
+              "pretty": "ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_function": {
+            "type": "string",
+            "description": "Modbus function code to be used for this request.",
+            "enum": [
+              "5",
+              "6",
+              "15",
+              "16"
+            ],
+            "x-web": {
+              "pretty": "Modbus function",
+              "enum-pretty": {
+                "5": "Set single coil (5)",
+                "6": "Set single holding register (6)",
+                "15": "Set multiple coils (15)",
+                "16": "Set multiple holding registers (16)"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_data_type": {
+            "type": "string",
+            "enum": [
+              "8bit_int",
+              "8bit_uint",
+              "16bit_int_hi_first",
+              "16bit_int_low_first",
+              "16bit_uint_hi_first",
+              "16bit_uint_low_first",
+              "32bit_float1234",
+              "32bit_float4321",
+              "32bit_float2143",
+              "32bit_float3412",
+              "32bit_int1234",
+              "32bit_int4321",
+              "32bit_int2143",
+              "32bit_int3412",
+              "32bit_uint1234",
+              "32bit_uint4321",
+              "32bit_uint2143",
+              "32bit_3412",
+              "ascii",
+              "hex",
+              "bool"
+            ],
+            "description": "Select data type that will be used for executing action",
+            "x-web": {
+              "pretty": "Executed action data type",
+              "enum-pretty": {
+                "8bit_int": "8bit INT",
+                "8bit_uint": "8bit UINT",
+                "16bit_int_hi_first": "16bit INT, high byte first",
+                "16bit_int_low_first": "16bit INT, low byte first",
+                "16bit_uint_hi_first": "16bit UINT, high byte first",
+                "16bit_uint_low_first": "16bit UINT, low byte first",
+                "32bit_float1234": "32bit float, Byte order 1,2,3,4",
+                "32bit_float4321": "32bit float, Byte order 4,3,2,1",
+                "32bit_float2143": "32bit float, Byte order 2,1,4,3",
+                "32bit_float3412": "32bit float, Byte order 3,4,1,2",
+                "32bit_int1234": "32bit INT, Byte order 1,2,3,4",
+                "32bit_int4321": "32bit INT, Byte order 4,3,2,1",
+                "32bit_int2143": "32bit INT, Byte order 2,1,4,3",
+                "32bit_int3412": "32bit INT, Byte order 3,4,1,2",
+                "32bit_uint1234": "32bit UINT, Byte order 1,2,3,4",
+                "32bit_uint4321": "32bit UINT, Byte order 4,3,2,1",
+                "32bit_uint2143": "32bit UINT, Byte order 2,1,4,3",
+                "32bit_uint3412": "32bit UINT, Byte order 3,4,1,2",
+                "ascii": "ASCII",
+                "hex": "Hex",
+                "bool": "Bool"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "function": "5"
+                  },
+                  "values": [
+                    "bool"
+                  ]
+                },
+                {
+                  "depends": {
+                    "function": "6"
+                  },
+                  "values": [
+                    "8bit_int",
+                    "8bit_uint",
+                    "16bit_int_hi_first",
+                    "16bit_int_low_first",
+                    "16bit_uint_hi_first",
+                    "16bit_uint_low_first",
+                    "ascii",
+                    "hex",
+                    "bool"
+                  ]
+                }
+              ],
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_first_reg": {
+            "type": "string",
+            "description": "Start Register/Coil/Input number.",
+            "format": "irange(1, 65536)",
+            "x-web": {
+              "pretty": "First register number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "2"
+                }
+              ]
+            }
+          },
+          "modbus_reg_count": {
+            "type": "string",
+            "description": "Coil/Register value to be written.",
+            "x-web": {
+              "pretty": "Values",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "2",
+                  "modbus_function": [
+                    "5",
+                    "6",
+                    "15",
+                    "16"
+                  ]
+                }
+              ]
+            }
+          },
+          "json": {
+            "type": "string",
+            "description": "Allows to fully customize JSON segment",
+            "x-web": {
+              "pretty": "JSON format",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "host": {
+            "type": "string",
+            "description": "Specify address of the broker",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "port": {
+            "type": "string",
+            "format": "port",
+            "description": "Specify port of the broker",
+            "default": "1883",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "keepalive": {
+            "type": "string",
+            "format": "range(5, 640)",
+            "description": "The number of seconds after which the broker should send a PING message to the client if no other messages have been exchanged in that time",
+            "x-web": {
+              "pretty": "Keepalive",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "topic": {
+            "type": "string",
+            "description": "MQTT topic to be used for publishing the data",
+            "x-web": {
+              "pretty": "Topic",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "client_id": {
+            "type": "string",
+            "description": "Client ID to send with the data. If empty, a random client ID will be generated",
+            "x-web": {
+              "pretty": "Client ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "qos": {
+            "type": "string",
+            "description": "Quality of Service. Allowed values: 0 - when we prefer that the message will not arrive at all rather than arrive twice, 1 - when we want the message to arrive at least once but don't care if it arrives twice or more, 2 - when we want the message to arrive exactly once. A higher QoS value means a slower transfer.",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "QoS",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "At most once (0)",
+                "1": "At least once (1)",
+                "2": "Exactly once (2)"
+              },
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "tls_enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "description": "Use TLS to encrypt the data sent",
+            "x-web": {
+              "pretty": "Use TLS",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "description": "Certificate or PSK based TLS",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "TLS type",
+              "input-type": "select",
+              "enum-pretty": {
+                "1": "Certificate based",
+                "0": "Pre-Shared-Key based"
+              },
+              "depends": [
+                {
+                  "action": "3",
+                  "tls_enabled": "1"
+                }
+              ]
+            }
+          },
+          "preshared_key": {
+            "type": "string",
+            "description": "Pre-shared key for TLS support",
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "tls_enabled": "1",
+                  "tls_type": "0"
+                }
+              ]
+            }
+          },
+          "identity": {
+            "type": "string",
+            "description": "Identity for PSK based TLS support",
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "tls_enabled": "1",
+                  "tls_type": "0"
+                }
+              ]
+            }
+          },
+          "_device_files": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "ca_file": {
+            "type": "string",
+            "description": "Upload CA file",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "tls_enabled": "1",
+                  "tls_type": "1"
+                }
+              ]
+            },
+            "format": "path"
+          },
+          "cert_file": {
+            "type": "string",
+            "description": "Upload certificate file",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "tls_enabled": "1",
+                  "tls_type": "1"
+                }
+              ]
+            },
+            "format": "path"
+          },
+          "key_file": {
+            "type": "string",
+            "description": "Upload key file",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "tls_enabled": "1",
+                  "tls_type": "1"
+                }
+              ]
+            },
+            "format": "path"
+          },
+          "use_credentials": {
+            "type": "string",
+            "format": "is_bool",
+            "description": "Use username and password for MQTT broker authentication",
+            "x-web": {
+              "pretty": "Use credentials",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": "3"
+                }
+              ]
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for MQTT broker authentication",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "use_credentials": "1"
+                }
+              ]
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for MQTT broker authentication",
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "3",
+                  "use_credentials": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "modbus_tcp_alarm_options": {
+        "title": "modbus_tcp_alarm_options",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_tcp_alarm_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

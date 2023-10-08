@@ -1,0 +1,990 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Events reporting",
+    "description": "Events reporting api documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "Events reporting"
+    }
+  ],
+  "paths": {
+    "/events_reporting/actions/send_test_email": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "post": {
+        "summary": "Sends test email",
+        "operationId": "post-services-events_reporting-actions-send_test_email",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_send_email"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events reporting"
+        ]
+      }
+    },
+    "/events_reporting/options": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "get": {
+        "summary": "Returns events reporting options",
+        "tags": [
+          "Events reporting"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_options"
+          }
+        },
+        "operationId": "get-services-events_reporting-options"
+      }
+    },
+    "/events_reporting/config": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "get": {
+        "summary": "Returns all events reporting configurations",
+        "tags": [
+          "Events reporting"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_multi"
+          }
+        },
+        "operationId": "get-services-events_reporting-config"
+      },
+      "post": {
+        "summary": "Creates a new events reporting configuration",
+        "operationId": "post-services-events_reporting-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/events_reporting_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_events_reporting_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events reporting"
+        ]
+      },
+      "put": {
+        "summary": "Updates the selected events reporting configurations",
+        "operationId": "put-services-events_reporting-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_events_reporting_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events reporting"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected events reporting configurations",
+        "operationId": "delete-services-events_reporting-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "tags": [
+          "Events reporting"
+        ]
+      }
+    },
+    "/events_reporting/config/{id}": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns the selected events reporting configuration",
+        "tags": [
+          "Events reporting"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-events_reporting-config-sid"
+      },
+      "put": {
+        "summary": "Updates the selected events reporting configuration",
+        "operationId": "put-services-events_reporting-config-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_events_reporting_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Events reporting"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected events reporting configuration",
+        "operationId": "delete-services-events_reporting-config-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Events reporting"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "events_reporting": {
+        "type": "object",
+        "properties": {
+          "enable": {
+            "description": "Turns the rule on or off",
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "event": {
+            "type": "string",
+            "description": "Event that will trigger the rule",
+            "enum": [
+              "Config",
+              "DHCP",
+              "Reboot",
+              "Startup",
+              "SSH",
+              "Web UI",
+              "WiFi",
+              "Mobile Data",
+              "Failover",
+              "SMS",
+              "Signal strength",
+              "SIM switch",
+              "Switch Events",
+              "Switch Topology",
+              "GPS"
+            ],
+            "x-web": {
+              "pretty": "Event type",
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/event_names"
+              },
+              "unique": true
+            }
+          },
+          "eventMark": {
+            "type": "string",
+            "description": "More specific event type that will trigger the rule",
+            "x-web": {
+              "pretty": "Event subtype",
+              "input-type": "select",
+              "enum-depends": {
+                "$ref": "#/x-schemas/event_mark_select"
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/event_mark_names"
+              },
+              "unique": true
+            }
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "sendEmail"
+            ],
+            "description": "Action that will be executed when the rule is triggered",
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "mobile": true
+                  },
+                  "values": [
+                    "sendEmail",
+                    "sendSMS"
+                  ]
+                }
+              ],
+              "enum-pretty": {
+                "sendEmail": "Send Email",
+                "sendSMS": "Send SMS"
+              }
+            }
+          },
+          "info_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to get information from",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to send information from",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              },
+              "depends": [
+                {
+                  "action": "sendSMS"
+                }
+              ]
+            }
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of an email. Allowed characters (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
+            "format": "fieldvalidation('^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$',0)",
+            "maxLength": 256,
+            "x-web": {
+              "pretty": "Subject",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "sendEmail"
+                }
+              ]
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Message to send.",
+            "format": "string",
+            "maxLength": 4096,
+            "default": "Router name - %rn; Event type - %et; Event text - %ex; Time stamp - %ts",
+            "x-web": {
+              "pretty": "Message text on event",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "sendEmail"
+                }
+              ]
+            }
+          },
+          "recipient_format": {
+            "type": "string",
+            "enum": [
+              "single",
+              "group"
+            ],
+            "description": "You can choose to add a single number or use a phone group list",
+            "x-web": {
+              "pretty": "Recipients",
+              "input-type": "select",
+              "depends": [
+                {
+                  "action": "sendSMS"
+                }
+              ],
+              "enum-pretty": {
+                "single": "Single",
+                "group": "Group"
+              }
+            }
+          },
+          "telnum": {
+            "type": "string",
+            "description": "To whom the message will be sent. The number must be specified in full format, country code included. e.g., +37000000000.",
+            "format": "phonedigit",
+            "x-web": {
+              "pretty": "Recipient's phone number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "sendSMS",
+                  "recipient_format": "single"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A recipient's phone number users group.",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "sendSMS",
+                  "recipient_format": "group"
+                }
+              ]
+            }
+          },
+          "emailgroup": {
+            "type": "string",
+            "description": "Recipient's email configuration",
+            "x-web": {
+              "pretty": "Email account",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "sendEmail"
+                }
+              ]
+            }
+          },
+          "recipEmail": {
+            "type": "array",
+            "description": "For whom you want to send an email to. Allowed characters (a-zA-Z0-9._%+@-)",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "x-web": {
+              "pretty": "Recipient's email address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "sendEmail"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "subject",
+          "message",
+          "telnum",
+          "emailgroup",
+          "recipEmail"
+        ]
+      },
+      "events_reporting_available_events": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/device_param"
+            }
+          },
+          "events": {
+            "type": "object",
+            "properties": {
+              "Signal strength": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Config": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "WiFi": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "GPS": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "SSH": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Switch Topology": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Switch Events": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Reboot": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Failover": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Mobile Data": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "SMS": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Web UI": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "SIM switch": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "DHCP": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-examples": {
+          "example-1": {
+            "events": {
+              "Signal strength": [
+                "all",
+                "Signal strength dropped below -113 dBm",
+                "Signal strength dropped below -98 dBm",
+                "Signal strength dropped below -93 dBm",
+                "Signal strength dropped below -75 dBm",
+                "Signal strength dropped below -60 dBm",
+                "Signal strength dropped below -50 dBm"
+              ],
+              "Config": [
+                "all",
+                "avl",
+                "ble_devices",
+                "blesem",
+                "buttons",
+                "call_utils",
+                "chilli",
+                "cli",
+                "ddns",
+                "dhcp",
+                "dmvpn",
+                "dropbear",
+                "email_to_sms",
+                "etherwake",
+                "events_reporting",
+                "firewall",
+                "frr",
+                "fstab",
+                "gps",
+                "hostblock",
+                "iojuggler",
+                "ioman",
+                "ip_blockd",
+                "ipsec",
+                "landingpage",
+                "modbus_server",
+                "data_sender",
+                "modbus_client",
+                "modbusgateway",
+                "mosquitto",
+                "mqtt_pub",
+                "multi_wifi",
+                "mwan3",
+                "network",
+                "ntpclient",
+                "ntpserver",
+                "openvpn",
+                "operctl",
+                "overview",
+                "p910nd",
+                "package_restore",
+                "periodic_reboot",
+                "ping_reboot",
+                "post_get",
+                "pptpd",
+                "privoxy",
+                "profiles",
+                "quota_limit",
+                "rms_mqtt",
+                "rpcd",
+                "rs_console",
+                "rs_modbus",
+                "rs_modem",
+                "rs_overip",
+                "rut_fota",
+                "samba",
+                "sim_switch",
+                "simcard",
+                "sms_gateway",
+                "sms_utils",
+                "snmpd",
+                "snmptrap",
+                "socat",
+                "sqm",
+                "stunnel",
+                "system",
+                "telnetd",
+                "uhttpd",
+                "ulogd",
+                "upnpd",
+                "user_groups",
+                "vrrpd",
+                "widget",
+                "wifi_scanner",
+                "wireless",
+                "xl2tpd"
+              ],
+              "WiFi": [
+                "all",
+                "client connected",
+                "client disconnected"
+              ],
+              "GPS": [
+                "all",
+                "left geofence",
+                "entered geofence"
+              ],
+              "SSH": [
+                "all",
+                "succeeded",
+                "bad"
+              ],
+              "Switch Topology": [
+                "Changes in topology"
+              ],
+              "Switch Events": [
+                "all",
+                "Port link state",
+                "Port speed for",
+                "changed to DOWN",
+                "changed to UP",
+                "LAN1",
+                "LAN2",
+                "LAN3",
+                "LAN4",
+                "WAN"
+              ],
+              "Reboot": [
+                "all",
+                "web ui",
+                "input/output",
+                "ping reboot",
+                "reboot scheduler",
+                "from button",
+                "sms reboot"
+              ],
+              "Failover": [
+                "all",
+                "Switched to main",
+                "Switched to backup"
+              ],
+              "Mobile Data": [
+                "all",
+                "data connected",
+                "data disconnected"
+              ],
+              "SMS": [
+                "received from"
+              ],
+              "Web UI": [
+                "all",
+                "Password auth succeeded",
+                "Bad password attempt"
+              ],
+              "SIM switch": [
+                "all",
+                "to SIM1",
+                "to SIM2"
+              ],
+              "DHCP": [
+                "all",
+                "lan",
+                "wifi"
+              ]
+            }
+          }
+        }
+      },
+      "req_body_events_reporting_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/events_reporting"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_events_reporting_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {
+                "id": ""
+              }
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/events_reporting"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_send_email": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {
+              "event": "",
+              "group": "",
+              "message": "",
+              "subject": "",
+              "recipients": [
+                "example@example.com"
+              ]
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "object",
+            "required": [
+              "event",
+              "group",
+              "message",
+              "subject",
+              "recipients"
+            ],
+            "properties": {
+              "event": {
+                "type": "string"
+              },
+              "group": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "subject": {
+                "type": "string"
+              },
+              "recipients": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "info_modem_id": {
+                "type": "string",
+                "description": "Modem, which is used to get information from (if device has more than 1 modem)."
+              }
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "events_reporting_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/events_reporting"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "events_reporting_multi": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/events_reporting"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "events_options": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/events_reporting_available_events"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

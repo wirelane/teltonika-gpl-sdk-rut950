@@ -1,0 +1,1315 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PPTP",
+    "version": "1.0",
+    "description": "PPTP api documentation",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "PPTP Client"
+    },
+    {
+      "name": "PPTP Server"
+    },
+    {
+      "name": "PPTP Users"
+    }
+  ],
+  "servers": [],
+  "paths": {
+    "/pptp/client/config": {
+      "get": {
+        "summary": "Get pptp client configurations",
+        "tags": [
+          "PPTP Client"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_client_multi"
+          }
+        },
+        "operationId": "get-services-pptp-client-general",
+        "description": "Gets pptp client configurations"
+      },
+      "post": {
+        "summary": "Create pptp client configuration",
+        "operationId": "post-services-pptp-client-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_client_one"
+          }
+        },
+        "description": "Creates pptp client configuration",
+        "tags": [
+          "PPTP Client"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/pptp_client_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update pptp client configurations",
+        "operationId": "put-services-pptp-client-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_client_multi"
+          }
+        },
+        "description": "Updates pptp client configurations",
+        "tags": [
+          "PPTP Client"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/pptp_client_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pptp client configurations",
+        "operationId": "delete-services-pptp-client-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "description": "Deletes pptp client configurations",
+        "tags": [
+          "PPTP Client"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "PPTP",
+          "Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/pptp/client/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get pptp client configuration",
+        "tags": [
+          "PPTP Client"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_client_one"
+          }
+        },
+        "operationId": "get-services-pptp-client-general-sid",
+        "description": "Gets pptp client configuration"
+      },
+      "put": {
+        "summary": "Update pptp client configuration",
+        "operationId": "put-services-pptp-client-general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_client_one"
+          }
+        },
+        "description": "Updates pptp client configuration",
+        "tags": [
+          "PPTP Client"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/pptp_client"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pptp client configuration",
+        "operationId": "delete-services-pptp-client-general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "description": "Deletes pptp client configuration",
+        "tags": [
+          "PPTP Client"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "PPTP",
+          "Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/pptp/server/config": {
+      "get": {
+        "summary": "Delete pptp server configurations",
+        "tags": [
+          "PPTP Server"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_server_multi"
+          }
+        },
+        "operationId": "get-services-pptp-server-general",
+        "description": "Gets pptp server configurations"
+      },
+      "post": {
+        "summary": "Create pptp server configuration",
+        "operationId": "post-services-pptp-server-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_server_one"
+          }
+        },
+        "description": "Creates pptp server configuration",
+        "tags": [
+          "PPTP Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/pptp_server_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update pptp server configurations",
+        "operationId": "put-services-pptp-server-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_server_multi"
+          }
+        },
+        "description": "Updates pptp server configurations",
+        "tags": [
+          "PPTP Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/pptp_server_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pptp server configurations",
+        "operationId": "delete-services-pptp-server-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "description": "Deletes pptp server configurations",
+        "tags": [
+          "PPTP Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "PPTP",
+          "Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/pptp/server/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get pptp server configuration",
+        "tags": [
+          "PPTP Server"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_server_one"
+          }
+        },
+        "operationId": "get-services-pptp-server-general-sid",
+        "description": "Gets pptp server configuration"
+      },
+      "put": {
+        "summary": "Update pptp server configuration",
+        "operationId": "put-services-pptp-server-general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_server_one"
+          }
+        },
+        "description": "Updates pptp server configuration",
+        "tags": [
+          "PPTP Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/pptp_server"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pptp server configuration",
+        "operationId": "delete-services-pptp-server-general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "description": "Deletes pptp server configuration",
+        "tags": [
+          "PPTP Server"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "PPTP",
+          "Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/pptp/server/config/{sid}/users": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get pptp users configurations",
+        "tags": [
+          "PPTP Users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_login_multi"
+          }
+        },
+        "operationId": "get-services-pptp-server-general-sid-users",
+        "description": "Gets pptp users configurations"
+      },
+      "post": {
+        "summary": "Create pptp user configuration",
+        "operationId": "post-services-pptp-server-general-sid-users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_login_one"
+          }
+        },
+        "description": "Creates pptp user configuration",
+        "tags": [
+          "PPTP Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/pptp_login"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update pptp user configurations",
+        "operationId": "put-services-pptp-server-general-sid-users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_login_multi"
+          }
+        },
+        "description": "Updates pptp user configurations",
+        "tags": [
+          "PPTP Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/pptp_login_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pptp user configurations",
+        "operationId": "delete-services-pptp-server-general-sid-users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "description": "Deletes pptp user configurations",
+        "tags": [
+          "PPTP Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "PPTP",
+          "Users"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/pptp/server/config/{sid}/users/{user_sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "user_sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get pptp user configuration",
+        "tags": [
+          "PPTP Users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_login_one"
+          }
+        },
+        "operationId": "get-services-pptp-server-general-sid-users-user_sid",
+        "description": "Get pptp user configuration"
+      },
+      "put": {
+        "summary": "Update pptp user configuration",
+        "operationId": "put-services-pptp-server-general-sid-users-user_sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_pptp_login_one"
+          }
+        },
+        "description": "Updates pptp user configuration",
+        "tags": [
+          "PPTP Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/pptp_login"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete pptp user configuration",
+        "operationId": "delete-services-pptp-server-general-sid-users-user_sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "description": "Deletes pptp user configuration",
+        "tags": [
+          "PPTP Users"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "PPTP",
+          "Users"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "pptp_client": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "",
+            "server": "",
+            "username": "",
+            "password": "",
+            "client_to_client": "",
+            "defaultroute": ""
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Turns the PPTP instance on or off."
+          },
+          "server": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Server",
+              "input-type": "input"
+            },
+            "description": "PPTP server's IP address or hostname."
+          },
+          "username": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            },
+            "description": "Username used for authentication to the PPTP server."
+          },
+          "password": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "description": "Password used for authentication to the PPTP server."
+          },
+          "client_to_client": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Client to client",
+              "input-type": "switch"
+            },
+            "description": "Add route to make other PPTP clients accessible"
+          },
+          "defaultroute": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Default route",
+              "input-type": "switch"
+            },
+            "description": "When set, this connection will become the device's default route."
+          }
+        },
+        "required": [
+          "enabled",
+          "server",
+          "username",
+          "password",
+          "client_to_client",
+          "defaultroute"
+        ]
+      },
+      "pptp_client_id": {
+        "description": "",
+        "x-examples": {
+          "example-1": {
+            "enabled": "",
+            "server": "",
+            "username": "",
+            "password": "",
+            "client_to_client": "",
+            "defaultroute": ""
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/pptp_client"
+          }
+        ]
+      },
+      "pptp_login": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "username": "",
+            "password": "",
+            "remoteip": ""
+          }
+        },
+        "properties": {
+          "username": {
+            "x-web": {
+                "pretty": "Username",
+                "input-type": "input"
+              },
+            "type": "string",
+            "description": "Username used for authentication to this PPTP server."
+          },
+          "password": {
+            "x-web": {
+                "pretty": "Password",
+                "input-type": "input"
+              },
+            "type": "string",
+            "description": "Password used for authentication to this PPTP server."
+          },
+          "remoteip": {
+            "x-web": {
+                "pretty": "PPTP client's IP",
+                "input-type": "input"
+              },
+            "type": "string",
+            "description": "Assigns an IP address to the client that uses the adjacent authentication info."
+          }
+        },
+        "required": [
+          "username",
+          "password",
+          "remoteip"
+        ]
+      },
+      "pptp_login_id": {
+        "description": "",
+        "x-examples": {
+          "example-1": {
+            "enabled": "",
+            "server": "",
+            "username": "",
+            "password": "",
+            "client_to_client": "",
+            "defaultroute": ""
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/pptp_login"
+          }
+        ]
+      },
+      "pptp_server": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "string",
+            "localip": "string",
+            "start": "string",
+            "limit": "string",
+            "idle": "string",
+            "dns1": "string",
+            "dns2": "string"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns the PPTP instance on or off."
+          },
+          "localip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Local IP",
+              "input-type": "input"
+            },
+            "description": "IP Address of this PPTP network interface."
+          },
+          "start": {
+            "x-web": {
+              "pretty": "Remote IP range begin",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "PPTP IP address leases will begin from the address specified in this field."
+          },
+          "limit": {
+            "x-web": {
+              "pretty": "Remote IP range end",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "PPTP IP address leases will end with the address specified in this field."
+          },
+          "idle": {
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Time in seconds. When no packets pass through the tunnel for the specified time, the server terminates the connection to client"
+          },
+          "dns1": {
+            "x-web": {
+              "pretty": "Primary DNS",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The primary DNS server"
+          },
+          "dns2": {
+            "x-web": {
+              "pretty": "Secondary DNS",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The secondary DNS server"
+          },
+          "client_to_client": {
+            "type": "string",
+            "description": "Add firewall rule to make PPTP clients accessible each other.",
+            "x-web": {
+                "pretty": "Client to client",
+                "input-type": "switch"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "localip",
+          "start",
+          "limit",
+          "idle",
+          "dns1",
+          "dns2"
+        ]
+      },
+      "pptp_server_id": {
+        "description": "",
+        "x-examples": {
+          "example-1": {
+            "enabled": "",
+            "server": "",
+            "username": "",
+            "password": "",
+            "client_to_client": "",
+            "defaultroute": ""
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/pptp_server"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "200_pptp_client_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        ".index": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/pptp_client"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_pptp_login_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        ".index": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/pptp_login"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_pptp_server_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "x-web": {
+                            "pretty": "Configuration name",
+                            "unique": true,
+                            "input-type": "input"
+                          },
+                          "type": "string"
+                        },
+                        ".index": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/pptp_server"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_pptp_client_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          ".index": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/pptp_client"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_pptp_login_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          ".index": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/pptp_login"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_pptp_server_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          ".index": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/pptp_server"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "delete_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      ".index",
+                      "id"
+                    ],
+                    "properties": {
+                      ".index": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      ".index": "",
+                      "id": ""
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

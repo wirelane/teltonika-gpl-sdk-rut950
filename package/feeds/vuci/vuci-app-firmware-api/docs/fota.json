@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RUT FOTA",
+    "description": "RUT FOTA API documentation",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "RUT Fota"
+    }
+  ],
+  "paths": {
+    "/fota/config": {
+      "get": {
+        "summary": "Returns all RUT FOTA configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200fotaMulti"
+          }
+        },
+        "tags": [
+          "RUT Fota"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified RUT FOTA configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200fotaMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/fota_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "RUT Fota"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Firmware",
+          "FOTA Configuration"
+        ]
+      }
+    },
+    "/fota/config/general": {
+      "get": {
+        "summary": "Returns the specified RUT FOTA configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200fota"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "RUT Fota"
+        ]
+      },
+      "put": {
+        "summary": "Updates the specified RUT FOTA configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200fota"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/fota_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "RUT Fota"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Firmware",
+          "FOTA Configuration"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200fota": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fota_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200fotaMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/fota_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "fota_single_options": {
+        "title": "RUT Fota single options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable FOTA",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/disable RUT Fota service.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          }
+        }
+      },
+      "fota_options": {
+        "title": "RUT Fota options",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "RUT Fota Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/fota_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

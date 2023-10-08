@@ -1,0 +1,23 @@
+{
+	"services/vpn/l2tp": {
+		"description": "l2tp configuration",
+		"read": {
+			"api": ["/l2tp/*"]
+		},
+		"write": {
+			"api": ["/l2tp/*"]
+		}
+	},
+	"services/vpn/l2tpv3": {
+		"description": "l2tpv3 configuration",
+		"read": {
+			"api": [
+				"/l2tpv3/*",
+				"/interfaces/*"
+			]
+		},
+		"write": {
+			"api": [ "/l2tpv3/*"]
+		}
+	}
+}

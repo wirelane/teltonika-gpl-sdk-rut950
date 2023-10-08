@@ -1,0 +1,650 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/juggler/config/general/conditions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "I/O Juggler Condition Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Returns the specified I/O Juggler Condition configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerCondition"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Updates the specified I/O Juggler Condition configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerCondition"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_condition_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Deletes the specified I/O Juggler Condition configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "Conditions"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/juggler/config/general/conditions": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "Conditions"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      },
+      "get": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Returns all I/O Juggler Condition configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerConditionMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Creates a new I/O Juggler Condition configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200IoJugglerCondition"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_condition_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Updates the specified I/O Juggler Condition configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerConditionMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_juggler_condition_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "I/O Juggler Conditions"
+        ],
+        "summary": "Deletes the specified I/O Juggler Condition configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoJugglerCondition": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_juggler_condition_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoJugglerConditionMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_juggler_condition_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_juggler_condition_single_options": {
+        "type": "object",
+        "properties": {
+          "ui_name": {
+            "type": "string",
+            "description": "WebUI name of the condition.",
+            "format": "uciname",
+            "maxLength": 16,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the condition.",
+            "enum": [
+              "io",
+              "minute",
+              "hour",
+              "weekday",
+              "monthday",
+              "yearday",
+              "bool"
+            ],
+            "x-web": {
+              "pretty": "Condition type",
+              "input-type": "select",
+              "enum-pretty": {
+                "io": "I/O",
+                "minute": "Minute",
+                "hour": "Hour",
+                "weekday": "Week day",
+                "monthday": "Month day",
+                "yearday": "Year day",
+                "bool": "Boolean group",
+                "analog": "ADC/ACL | Analog voltage"
+              },
+              "enum-depends": [
+                { "hw_tags": { "adc0": true }, "values": ["analog"] }
+              ]
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Specifies the I/O to which the condition is listening to",
+            "x-web": {
+              "pretty": "I/O",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": [
+                    "analog",
+                    "io"
+                  ]
+                }
+              ],
+              "enum-depends": [
+                { "hw_tags": { "din1": true }, "values": ["din1"] },
+                { "hw_tags": { "din2": true }, "values": ["din2"] },
+                { "hw_tags": { "dout1": true }, "values": ["dout1"] },
+                { "hw_tags": { "dout2": true }, "values": ["dout2"] },
+                { "hw_tags": { "dio0": true }, "values": ["dio0"] },
+                { "hw_tags": { "dio1": true }, "values": ["dio1"] },
+                { "hw_tags": { "dio2": true }, "values": ["dio2"] },
+                { "hw_tags": { "iio": true }, "values": ["iio"] },
+                { "hw_tags": { "relay0": true }, "values": ["relay0"] },
+                { "hw_tags": { "relay1": true }, "values": ["relay1"] },
+                { "hw_tags": { "adc0": true }, "values": ["adc0"] },
+                { "hw_tags": { "acl0": true }, "values": ["acl0"] },
+                { "hw_tags": { "dwi0": true }, "values": ["dwi0"] },
+                { "hw_tags": { "dwi1": true }, "values": ["dwi1"] }
+              ]
+            }
+          },
+          "not": {
+            "type": "string",
+            "description": "Inverts the selected condition type. Makes the condition true if the time/date is outside the specified interval. | Whether to evaluate the condition as true inside or outside the specified ADC/ACL range",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Condition | Inverted function",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": [
+                    "analog",
+                    "minute",
+                    "hour",
+                    "weekday",
+                    "yearday"
+                  ]
+                }
+              ],
+              "enum-pretty": {
+                "0": "Inside range | Not inverted",
+                "1": "Outside range | Inverted"
+              }
+            }
+          },
+          "month_override": {
+            "type": "string",
+            "description": "If the option is selected the condition uses the last day of the month if the specified day is not in the month.",
+            "x-web": {
+              "pretty": "Month override",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "monthday"
+                }
+              ]
+            }
+          },
+          "operation": {
+            "type": "string",
+            "description": "This boolean group will be evaluated true, if: \nAND - All added conditions evaluate true \nNAND - At least one condition evaluates false \nOR - At least one condition evaluates true \nNOR - None of the conditions evaluate true",
+            "enum": [
+              "and",
+              "nand",
+              "or",
+              "nor"
+            ],
+            "x-web": {
+              "pretty": "Boolean type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "bool"
+                }
+              ],
+              "enum-pretty": {
+                "and": "AND",
+                "nand": "NAND",
+                "or": "OR",
+                "nor": "NOR"
+              }
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specifies global conditions for this pin. Actions will trigger only if the conditions are met. Conditions are optional.",
+            "x-web": {
+              "pretty": "Add conditions",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "bool"
+                }
+              ]
+            }
+          },
+          "ui_timetype": {
+            "type": "string",
+            "description": "Switch between a specific value and a time interval.",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": [
+                    "minute",
+                    "hour",
+                    "weekday",
+                    "monthday",
+                    "yearday"
+                  ]
+                }
+              ]
+            }
+          },
+          "value": {
+            "type": "string",
+            "description": "Specific time.",
+            "format": "range(0, 366)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "Specific time",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ui_timetype": "0",
+                  "type": [
+                    "minute",
+                    "hour",
+                    "weekday",
+                    "monthday",
+                    "yearday"
+                  ]
+                }
+              ]
+            }
+          },
+          "interval1": {
+            "type": "string",
+            "description": "Start of the interval.",
+            "format": "range(0, 366)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "Start of the interval",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ui_timetype": "1"
+                }
+              ]
+            }
+          },
+          "interval2": {
+            "type": "string",
+            "description": "End of the interval.",
+            "format": "range(0, 366)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "End of the interval",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ui_timetype": "1"
+                }
+              ]
+            }
+          },
+          "state": {
+            "type": "string",
+            "description": "Specifies in what state the pin has to be.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "State",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "io"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Low | Open",
+                "1": "High | Closed"
+              }
+            }
+          },
+          "min": {
+            "type": "string",
+            "description": "Specifies minimum voltage of the range.",
+            "format": "ufloat",
+            "x-web": {
+              "pretty": "Min voltage",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "analog",
+                  "acl": ""
+                }
+              ]
+            }
+          },
+          "max": {
+            "type": "string",
+            "description": "Specifies maximum voltage of the range.",
+            "format": "ufloat",
+            "x-web": {
+              "pretty": "Max voltage",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "analog",
+                  "acl": ""
+                }
+              ]
+            }
+          },
+          "acl": {
+            "type": "string",
+            "description": "Select which property - ampere or percentage the condition listens to.",
+            "enum": [
+              "current",
+              "percent"
+            ],
+            "x-web": {
+              "pretty": "ACL Property",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "analog",
+                  "name": "acl0"
+                }
+              ],
+              "enum-pretty": {
+                "current": "Current",
+                "percent": "Percent"
+              }
+            }
+          },
+          "min_perc": {
+            "type": "string",
+            "description": "Specifies minimum percent of the range.",
+            "format": "range(0, 100)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "Min percent",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "analog",
+                  "name": "acl0",
+                  "acl": "percent"
+                }
+              ]
+            }
+          },
+          "max_perc": {
+            "type": "string",
+            "description": "Specifies maximum percent of the range.",
+            "format": "range(0, 100)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "Max percent",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "analog",
+                  "name": "acl0",
+                  "acl": "percent"
+                }
+              ]
+            }
+          },
+          "min_curr": {
+            "type": "string",
+            "description": "Specifies minimum current of the range. Values between 4-20mA",
+            "format": "range(4, 20)",
+            "minLength": 1,
+            "maxLength": 2,
+            "x-web": {
+              "pretty": "Min current",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "analog",
+                  "name": "acl0",
+                  "acl": "current"
+                }
+              ]
+            }
+          },
+          "max_curr": {
+            "type": "string",
+            "description": "Specifies maximum current of the range.",
+            "format": "range(4, 20)",
+            "minLength": 1,
+            "maxLength": 2,
+            "x-web": {
+              "pretty": "Max current",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "analog",
+                  "name": "acl0",
+                  "acl": "current"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "ui_name",
+          "min",
+          "max",
+          "min_perc",
+          "max_perc",
+          "min_curr",
+          "max_curr"
+        ]
+      },
+      "io_juggler_condition_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "I/O Juggler Condition Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/io_juggler_condition_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

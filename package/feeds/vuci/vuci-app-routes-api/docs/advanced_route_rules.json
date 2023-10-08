@@ -1,0 +1,489 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/advanced_static/rules/config/{id}": {
+      "get": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Returns specified route rules configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRu"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration route rules section identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Updates specified route rule configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRu"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration route rule section identifier"
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/advanced_route_rules"
+        }
+      },
+      "delete": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Deletes specified route rule configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration route rules section identifier"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Policy based routing"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration identifier"
+        }
+      ]
+    },
+    "/routes/advanced_static/rules/config": {
+      "get": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Returns all route rules configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRuMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Creates route rule configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRu"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/advanced_route_rules_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Updates specified route rule configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRuMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/advanced_route_rules_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "advanced_route_rules"
+        ],
+        "summary": "Deletes specified route rules configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Policy based routing"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdRoRu": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration indentifier"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/advanced_route_rules_options"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200AdRoRuMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration identifier"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/advanced_route_rules_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "advanced_route_rules_options": {
+        "type": "object",
+        "properties": {
+          "priority": {
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Controls the order of the IP rules, by default the priority is auto-assigned so that they are processed in the same order."
+          },
+          "in": {
+            "x-web": {
+              "pretty": "Incoming Interface",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the incoming logical interface name."
+          },
+          "out": {
+            "x-web": {
+              "pretty": "Outgoing Interface",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the outgoing logical interface name."
+          },
+          "src": {
+            "x-web": {
+              "pretty": "Source subnet",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the source subnet to match (CIDR notation)."
+          },
+          "dest": {
+            "x-web": {
+              "pretty": "Destination subnet",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the destination subnet to match (CIDR notation)."
+          },
+          "tos": {
+            "x-web": {
+              "pretty": "TOS Value to Match",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the TOS value to match in IP headers."
+          },
+          "mark": {
+            "x-web": {
+              "pretty": "Firewall Mark",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the fwmark and optionally its mask to match, e.g. 0xFF to match mark 255 or 0x0/0x1 to match any even mark value."
+          },
+          "invert": {
+            "x-web": {
+              "pretty": "Invert matches",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "If enabled, the meaning of the match options (Firewall Mark, TOS Value, Source and Destination subnets) is inverted."
+          },
+          "_action": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Matched Traffic Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "lookup": "Lookup Table",
+                "goto": "Jump to Rule",
+                "action": "Routing Action"
+              }
+            }
+          },
+          "lookup": {
+            "x-web": {
+              "pretty": "Lookup Table",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_action": "lookup"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "The rule target is a table lookup."
+          },
+          "goto": {
+            "x-web": {
+              "pretty": "Jump to rule priority",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_action": "goto"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "The rule target is a jump to another rule specified by its priority value."
+          },
+          "action": {
+            "x-web": {
+              "pretty": "Routing Action",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_action": "action"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "The rule target is one of the routing actions outlined in the table below."
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "advanced_route_rules": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/advanced_route_rules_options"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "advanced_route_rules_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration identifier"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/advanced_route_rules_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

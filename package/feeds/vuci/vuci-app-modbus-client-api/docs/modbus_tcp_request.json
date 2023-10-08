@@ -1,0 +1,631 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Modbus TCP Client Requests"
+    }
+  ],
+  "paths": {
+    "/modbus/tcp/config/{modbus_tcp_client_id}/requests/{id}": {
+      "get": {
+        "summary": "Returns the specified Modbus TCP Client Request configuration",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": ""
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_tcp_client_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Configuration identifier (ID)"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Request Configuration identifier (ID)"
+        }
+      ],
+      "put": {
+        "summary": "Updates the specified Modbus TCP Client Request configuration",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_request_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the specified Modbus TCP Client Request configuration",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/tcp/config/{modbus_tcp_client_id}/requests": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_tcp_client_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns all Modbus TCP Client Requests configurations",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpRequestMulti"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates Modbus TCP Client Request configuration",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ModbusTcpRequest"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_request_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specificied Modbus TCP Client Requests configurations",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpRequestMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_tcp_request_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specificied Modbus TCP Client Requests configurations",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/tcp/actions/{modbus_tcp_client_id}/requests/test_request": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_tcp_client_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Configuration identifier (ID)"
+        }
+      ],
+      "post": {
+        "deprecated": true,
+        "summary": "Test Modbus TCP Client Request configuration",
+        "tags": [
+          "Modbus TCP Client Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_request_test_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ModbusTcpRequest": {
+        "description": "Returns Configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_tcp_request_options"
+                }
+              }
+            },
+            "examples": {}
+          }
+        }
+      },
+      "200ModbusTcpRequestMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_tcp_request_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_tcp_request_single_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of this request (only used for easier identification of the request or its meaning).",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Enables/disables Modbus TCP Client Request.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "8bit_int",
+              "8bit_uint",
+              "16bit_int_hi_first",
+              "16bit_int_low_first",
+              "16bit_uint_hi_first",
+              "16bit_uint_low_first",
+              "32bit_float1234",
+              "32bit_float4321",
+              "32bit_float2143",
+              "32bit_float3412",
+              "32bit_int1234",
+              "32bit_int4321",
+              "32bit_int2143",
+              "32bit_int3412",
+              "32bit_uint1234",
+              "32bit_uint4321",
+              "32bit_uint2143",
+              "32bit_3412",
+              "ascii",
+              "hex",
+              "bool"
+            ],
+            "description": "Select data type that will be used for storing the response data (only for read requests).",
+            "x-web": {
+              "pretty": "Data type",
+              "enum-pretty": {
+                "8bit_int": "8bit INT",
+                "8bit_uint": "8bit UINT",
+                "16bit_int_hi_first": "16bit INT, high byte first",
+                "16bit_int_low_first": "16bit INT, low byte first",
+                "16bit_uint_hi_first": "16bit UINT, high byte first",
+                "16bit_uint_low_first": "16bit UINT, low byte first",
+                "32bit_float1234": "32bit float, Byte order 1,2,3,4",
+                "32bit_float4321": "32bit float, Byte order 4,3,2,1",
+                "32bit_float2143": "32bit float, Byte order 2,1,4,3",
+                "32bit_float3412": "32bit float, Byte order 3,4,1,2",
+                "32bit_int1234": "32bit INT, Byte order 1,2,3,4",
+                "32bit_int4321": "32bit INT, Byte order 4,3,2,1",
+                "32bit_int2143": "32bit INT, Byte order 2,1,4,3",
+                "32bit_int3412": "32bit INT, Byte order 3,4,1,2",
+                "32bit_uint1234": "32bit UINT, Byte order 1,2,3,4",
+                "32bit_uint4321": "32bit UINT, Byte order 4,3,2,1",
+                "32bit_uint2143": "32bit UINT, Byte order 2,1,4,3",
+                "32bit_uint3412": "32bit UINT, Byte order 3,4,1,2",
+                "ascii": "ASCII",
+                "hex": "Hex",
+                "bool": "Bool",
+                "pdu": "PDU"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "function": [
+                      "1",
+                      "2",
+                      "3",
+                      "4"
+                    ]
+                  },
+                  "values": [
+                    "8bit_int",
+                    "8bit_uint",
+                    "16bit_int_hi_first",
+                    "16bit_int_low_first",
+                    "16bit_uint_hi_first",
+                    "16bit_uint_low_first",
+                    "32bit_float1234",
+                    "32bit_float4321",
+                    "32bit_float2143",
+                    "32bit_float3412",
+                    "32bit_int1234",
+                    "32bit_int4321",
+                    "32bit_int2143",
+                    "32bit_int3412",
+                    "32bit_uint1234",
+                    "32bit_uint4321",
+                    "32bit_uint2143",
+                    "32bit_3412",
+                    "ascii",
+                    "hex",
+                    "bool",
+                    "pdu"
+                  ]
+                },
+                {
+                  "depends": {
+                    "function": "5"
+                  },
+                  "values": [
+                    "bool"
+                  ]
+                },
+                {
+                  "depends": {
+                    "function": "6"
+                  },
+                  "values": [
+                    "8bit_int",
+                    "8bit_uint",
+                    "16bit_int_hi_first",
+                    "16bit_int_low_first",
+                    "16bit_uint_hi_first",
+                    "16bit_uint_low_first",
+                    "ascii",
+                    "hex",
+                    "bool"
+                  ]
+                }
+              ]
+            }
+          },
+          "function": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "15",
+              "16"
+            ],
+            "description": "Select Modbus function code for the request.",
+            "x-web": {
+              "pretty": "Function",
+              "enum-pretty": {
+                "1": "Read coils (1)",
+                "2": "Read input coils (2)",
+                "3": "Read holding registers (3)",
+                "4": "Read input registers (4)",
+                "5": "Set single coil (5)",
+                "6": "Set single holding register (6)",
+                "15": "Set multiple coils (15)",
+                "16": "Set multiple holding registers (16)"
+              },
+              "input-type": "select"
+            }
+          },
+          "first_reg": {
+            "type": "string",
+            "format": "irange(1, 65536)",
+            "description": "Start Register/Coil/Input (1-65536).",
+            "x-web": {
+              "pretty": "First register number",
+              "input-type": "input"
+            }
+          },
+          "reg_count": {
+            "type": "string",
+            "description": "Number of Registers/Coils/Inputs or actual values to be written (Multiple values must be separated by space character).",
+            "x-web": {
+              "pretty": "Register count / values",
+              "input-type": "input"
+            }
+          },
+          "no_brackets": {
+            "type": "string",
+            "description": "Removes the starting and ending brackets from the request (only for read requests).",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ],
+            "x-web": {
+              "pretty": "Brackets",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "modbus_tcp_request_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus TCP Client Request Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_tcp_request_single_options"
+          }
+        ]
+      },
+      "modbus_tcp_request_test_options": {
+        "type": "object",
+        "properties": {
+          "server_id": {
+            "type": "string",
+            "format": "range(1, 255)",
+            "minLength": 1,
+            "maxLength": 3
+          },
+          "timeout": {
+            "type": "string",
+            "format": "range(1, 30)",
+            "minLength": 1,
+            "maxLength": 2
+          },
+          "function": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "15",
+              "16"
+            ]
+          },
+          "first_reg": {
+            "type": "string",
+            "format": "range(1, 65536)",
+            "minLength": 1,
+            "maxLength": 5
+          },
+          "reg_count": {
+            "type": "string"
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "8bit_int",
+              "8bit_uint",
+              "16bit_int_hi_first",
+              "16bit_int_low_first",
+              "16bit_uint_hi_first",
+              "16bit_uint_low_first",
+              "32bit_float1234",
+              "32bit_float4321",
+              "32bit_float2143",
+              "32bit_float3412",
+              "32bit_int1234",
+              "32bit_int4321",
+              "32bit_int2143",
+              "32bit_int3412",
+              "32bit_uint1234",
+              "32bit_uint4321",
+              "32bit_uint2143",
+              "32bit_3412",
+              "ascii",
+              "hex",
+              "bool"
+            ]
+          },
+          "no_brackets": {
+            "type": "string"
+          },
+          "dev_ipaddr": {
+            "type": "string"
+          },
+          "port": {
+            "type": "string"
+          },
+          "delay": {
+            "type": "string",
+            "format": "irange(0, 999)"
+          }
+        },
+        "required": [
+          "server_id",
+          "timeout",
+          "function",
+          "first_reg",
+          "reg_count",
+          "data_type",
+          "no_brackets",
+          "dev_ipaddr",
+          "port",
+          "delay"
+        ]
+      }
+    }
+  }
+}

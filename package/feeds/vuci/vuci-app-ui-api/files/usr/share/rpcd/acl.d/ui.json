@@ -1,0 +1,11 @@
+{
+	"system/ui": {
+		"description": "webui menu info",
+		"read": {
+			"api": ["/ui/*", "/administration/general/*"]
+		},
+		"write": {
+			"api": ["/ui/*", "/administration/general/*"]
+		}
+	}
+}

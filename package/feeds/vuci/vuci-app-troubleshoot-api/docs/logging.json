@@ -1,0 +1,383 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Logging"
+    }
+  ],
+  "paths": {
+    "/logging/config": {
+      "get": {
+        "summary": "Returns all logging configurations",
+        "tags": [
+          "Logging"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200LogMulti"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified logging configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200LogMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/logging_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Logging"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/logging/config/general": {
+      "get": {
+        "summary": "Returns the specified logging configuration",
+        "tags": [
+          "Logging"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Log"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified logging configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Log"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/logging_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Logging"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/logging/actions/delete_log": {
+      "post": {
+        "tags": [
+          "Logging"
+        ],
+        "summary": "Deletes log file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/logging/logfile": {
+      "get": {
+        "summary": "Returns if logfile exists.",
+        "tags": [
+          "Logging"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns about logfile if it exists and is not empty",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "exists": {
+                          "type": "number",
+                          "description": "Shows if logfile exists",
+                          "enum": [
+                            "0",
+                            "1"
+                          ]
+                        },
+                        "logfile_not_empty": {
+                          "type": "number",
+                          "description": "Shows if logfile is not empty",
+                          "enum": [
+                            "0",
+                            "1"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Log": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/logging_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200LogMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/logging_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "logging_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Logging Configuration identifier (ID).",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                }
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/logging_single_options"
+          }
+        ]
+      },
+      "logging_single_options": {
+        "title": "Logging single options",
+        "type": "object",
+        "properties": {
+          "log_buffer_size": {
+            "x-web": {
+              "pretty": "System log buffer size",
+              "input-type": "input"
+            },
+            "format": "uinteger",
+            "type": "string",
+            "description": "System log buffer size in kilobytes (KB)."
+          },
+          "log_size": {
+            "x-web": {
+              "pretty": "System log file size",
+              "input-type": "input",
+              "depends": [
+                {
+                  "log_type": "file"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "range(10, 500)",
+            "minLength": 2,
+            "maxLength": 3,
+            "description": "Size (in kibibytes) to keep the log file under. Positive value limits the log file size to that value, negative value specifies how much free storage space to leave."
+          },
+          "log_ip": {
+            "x-web": {
+              "pretty": "External system log server",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address of an external server that will be used to store router logs.",
+            "format": "host"
+          },
+          "log_port": {
+            "x-web": {
+              "pretty": "External system log server port",
+              "input-type": "input"
+            },
+            "format": "port",
+            "type": "string",
+            "description": "TCP/UDP port number of the external log server."
+          },
+          "log_proto": {
+            "x-web": {
+              "pretty": "External system log server protocol",
+              "input-type": "select",
+              "enum-pretty": {
+                "udp": "UDP",
+                "tcp": "TCP"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "udp",
+              "tcp"
+            ],
+            "description": "Communication protocol used by the external log server."
+          },
+          "log_type": {
+            "x-web": {
+              "pretty": "Save log in",
+              "input-type": "select",
+              "enum-pretty": {
+                "circular": "RAM memory",
+                "file": "Flash memory"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "circular",
+              "file"
+            ],
+            "description": "Specifies which type of memory to use for storing system logs. RAM (Random access memory) has temporary storage which works only when the devices is powered on. Flash is primary longterm storage."
+          },
+          "log_hostname": {
+            "x-web": {
+              "pretty": "Show hostname",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Show hostname instead of IP address in syslog",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "log_compress": {
+            "x-web": {
+              "pretty": "Compress",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "log_type": "file"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Compress old rotated logs using GZ format.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

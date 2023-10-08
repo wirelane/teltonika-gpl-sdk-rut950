@@ -1,0 +1,371 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/upnp/acls/config/{upnp_acl_id}": {
+      "get": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Returns the specified UPnP ACL's configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpAcl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "upnp_acl_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UPnP ACL Configuration identifier (ID)."
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Updates the specified UPnP ACL's configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpAcl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "upnp_acl_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UPnP ACL Configuration identifier (ID)."
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/upnp_acls_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Deletes the specified UPnP ACL's configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "upnp_acl_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UPnP ACL Configuration identifier (ID)."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "upnp_acl_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UPnP ACL Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "UPNP",
+          "UPNP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/upnp/acls/config": {
+      "get": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Returns all UPnP ACL's configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpAclMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Updates specified UPnP ACL's configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpAclMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/upnp_acls_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Deletes specified UPnP ACL's configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UPnP ACLs"
+        ],
+        "summary": "Creates UPnP ACL's configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200UpnpAcl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/upnp_acls_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "UPNP",
+          "UPNP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200UpnpAcl": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/upnp_acls_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200UpnpAclMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/upnp_acls_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "upnp_acls_single_options": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "x-web": {
+              "pretty": "Comment",
+              "input-type": "input",
+              "group": "General Settings",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Adds a comment to rule.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9_ ]+$"
+          },
+          "ext_ports": {
+            "x-web": {
+              "pretty": "External Port",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "External port(s) which may be redirected. May be specified as a single port or a range of ports.",
+            "format": "portrange"
+          },
+          "int_addr": {
+            "x-web": {
+              "pretty": "Internal addresses",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Internal address to be redirect to.",
+            "format": "ipmask4"
+          },
+          "int_ports": {
+            "x-web": {
+              "pretty": "Internal ports",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Internal port(s) to be redirect to. May be specified as a single port or a range of ports.",
+            "format": "portrange"
+          },
+          "action": {
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Allows or forbids the UPnP service to open the specified port.",
+            "enum": [
+              "allow",
+              "deny"
+            ]
+          }
+        }
+      },
+      "upnp_acls_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "UPnP ACL Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/upnp_acls_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

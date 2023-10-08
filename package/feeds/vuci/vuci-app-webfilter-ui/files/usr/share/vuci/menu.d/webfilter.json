@@ -1,0 +1,20 @@
+{
+	"services/webfilter": {
+		"title": "Web Filter",
+		"index": 200
+	},
+		"services/webfilter/site": {
+			"title": "Site Blocking",
+			"index": 1,
+			"view": "services/WebfilterSite_aeaafe",
+			"acls": [ "services/webfilter/site" ],
+			"files": [ "/etc/config/hostblock" ]
+		},
+		"services/webfilter/proxy": {
+			"title": "Proxy Based Content Blocker",
+			"index": 2,
+			"view": "services/WebfilterProxy_aeaafe",
+			"acls": [ "services/webfilter/proxy" ],
+			"files": [ "/etc/config/privoxy" ]
+		}
+}

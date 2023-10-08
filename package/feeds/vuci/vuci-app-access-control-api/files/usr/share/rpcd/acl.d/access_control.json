@@ -1,0 +1,84 @@
+{
+    "system/admin/access_control/general": {
+        "description": "access control general",
+        "read": {
+            "file": {
+                "/usr/lib/opkg/info/pam.control": [
+                    "list"
+                ]
+            },
+            "uci": [
+                "dropbear",
+                "firewall",
+                "uhttpd",
+                "cli",
+                "telnetd",
+                "rpcd",
+                "pam"
+            ],
+            "ubus": {
+                "vuci.system": [
+                    "get_ca",
+                    "modify_ca"
+                ]
+            },
+            "api": [
+				"/access_control/ssh/*",
+				"/access_control/cli/*",
+				"/access_control/webui/*",
+				"/access_control/telnet/*",
+				"/certificates/config/*"
+			]
+        },
+        "write": {
+            "uci": [
+                "dropbear",
+                "firewall",
+                "uhttpd",
+                "cli",
+                "telnetd",
+                "rpcd",
+                "pam"
+            ],
+            "ubus": {
+                "vuci.system": [
+                    "firewall_access",
+                    "cli_access",
+                    "telnet_access",
+                    "modify_ca",
+                    "validate_uhttpd_cert"
+                ]
+            },
+            "cgi-io": [
+                "upload"
+            ],
+            "api": [
+				"/access_control/ssh/*",
+				"/access_control/cli/*",
+				"/access_control/webui/*",
+				"/access_control/telnet/*"
+			]
+        }
+    },
+    "system/admin/access_control/safety": {
+        "description": "access control security",
+        "read": {
+			"api": ["/access_control/security/general/*", "/access_control/security/attempts/*"],
+            "uci": [
+                "ip_blockd"
+            ]
+        },
+        "write": {
+			"api": ["/access_control/security/general/*", "/access_control/security/attempts/*"],
+            "uci": [
+                "ip_blockd"
+            ],
+            "ubus": {
+                "ip_block": [
+                    "unblock",
+                    "reload"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,557 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Profiles Scheduler"
+    }
+  ],
+  "paths": {
+    "/profiles_scheduler/config": {
+      "get": {
+        "summary": "Returns all profiles scheduler configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200scheMulti"
+          }
+        },
+        "description": "Returns all sections with their parameters from profiles scheduler configuration",
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified profiles scheduler configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sche"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/scheduler_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified profiles scheduler configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "post": {
+        "summary": "Creates profiles scheduler configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200sche"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/scheduler_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Scheduler"
+        ]
+      }
+    },
+    "/profiles_scheduler/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified profiles scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sche"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "put": {
+        "summary": "Updates the specified profiles scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sche"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/scheduler_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the specified profiles scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Profiles Scheduler"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Scheduler"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200sche": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/scheduler_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200scheMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "description": "Array of section objects",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/scheduler_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "scheduler_single_options": {
+        "title": "Profiles scheduler options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/disable selected profile change instance.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "profile_id": {
+            "x-web": {
+              "pretty": "Profile",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "Change to selected profile."
+          },
+          "period": {
+            "x-web": {
+              "pretty": "Interval type",
+              "input-type": "select",
+              "enum-pretty": {
+                "week": "Weekdays",
+                "month": "Month days"
+              }
+            },
+            "type": "string",
+            "description": "Allows selecting between week and month days for instance intervals.",
+            "enum": [
+              "week",
+              "month"
+            ]
+          },
+          "start_day": {
+            "x-web": {
+              "pretty": "Start day",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "period": "week"
+                  },
+                  "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                },
+                {
+                  "depends": {
+                    "period": "month"
+                  },
+                  "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                    "25",
+                    "26",
+                    "27",
+                    "28",
+                    "29",
+                    "30",
+                    "31"
+                  ]
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Day of profile change interval start.",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24",
+              "25",
+              "26",
+              "27",
+              "28",
+              "29",
+              "30",
+              "31"
+            ]
+          },
+          "start_time": {
+            "x-web": {
+              "pretty": "Start time",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Time of profile change interval start (hh:mm).",
+            "format": "time"
+          },
+          "end_day": {
+            "x-web": {
+              "pretty": "End day",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "period": "week"
+                  },
+                  "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                },
+                {
+                  "depends": {
+                    "period": "month"
+                  },
+                  "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                    "25",
+                    "26",
+                    "27",
+                    "28",
+                    "29",
+                    "30",
+                    "31"
+                  ]
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Day of profile change interval end.",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24",
+              "25",
+              "26",
+              "27",
+              "28",
+              "29",
+              "30",
+              "31"
+            ]
+          },
+          "end_time": {
+            "x-web": {
+              "pretty": "End time",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Time of profile change interval end (hh:mm).",
+            "format": "time"
+          },
+          "force_last": {
+            "x-web": {
+              "pretty": "Force last day",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "period": "month"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Forces intervals to accept last day of month as valid option if selected day does not exist in ongoing month.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          }
+        },
+        "required": [
+          "profile_id",
+          "period",
+          "start_day",
+          "end_day"
+        ]
+      },
+      "scheduler_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Profiles scheduler Configuration identifier (ID).",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                }
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/scheduler_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

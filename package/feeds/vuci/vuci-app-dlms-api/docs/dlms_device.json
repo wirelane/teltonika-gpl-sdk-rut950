@@ -1,0 +1,718 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DLMS device"
+    }
+  ],
+  "paths": {
+    "/dlms/devices/config": {
+      "get": {
+        "summary": "Returns all DLMS device configurations",
+        "tags": [
+          "DLMS device"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DlmsDevicesMulti"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates DLMS device configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200DlmsDevicesMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dlms_devices_multiple_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DLMS device"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified DLMS device configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DlmsDevicesMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/dlms_devices_multiple_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DLMS device"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified DLMS device configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "DLMS device"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DLMS",
+          "DLMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dlms/devices/config/{dlms_devices_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "dlms_devices_id",
+          "in": "path",
+          "required": true,
+          "description": "DLMS device Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified DLMS device configuration",
+        "tags": [
+          "DLMS device"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DlmsDevices"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified DLMS device configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DlmsDevices"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dlms_devices_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DLMS device"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the specified DLMS device configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "DLMS device"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DLMS",
+          "DLMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dlms/devices/actions/test": {
+      "deprecated": true,
+      "post": {
+        "summary": "Test DLMS physical device configuration",
+        "tags": [
+          "DLMS device"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TestResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dlms_device_test_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DLMS",
+          "DLMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200DlmsDevices": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/dlms_devices_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200TestResponse": {
+        "description": "Returns test results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "properties": {
+                    "error": {
+                      "type": "number",
+                      "description": "Error code"
+                    },
+                    "result": {
+                      "type": "string",
+                      "description": "Test result"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DlmsDevicesMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/dlms_devices_multiple_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "dlms_device_test_options": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "DLMS device IP address for TCP connection"
+          },
+          "port": {
+            "type": "string",
+            "description": "DLMS device port for TCP connection"
+          },
+          "dev": {
+            "type": "string",
+            "description": "DLMS serial device"
+          },
+          "connection_type": {
+            "type": "string",
+            "description": "DLMS connection type",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "baudrate": {
+            "type": "string",
+            "enum": [
+              "300",
+              "1200",
+              "2400",
+              "4800",
+              "9600",
+              "19200",
+              "38400",
+              "57600",
+              "115200"
+            ],
+            "default": "9600",
+            "description": "Select supported baud rate"
+          },
+          "databits": {
+            "type": "string",
+            "enum": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "default": "8",
+            "description": "Select how many bits will be used for character"
+          },
+          "parity": {
+            "type": "string",
+            "enum": [
+              "odd",
+              "even",
+              "none"
+            ],
+            "description": "Select what kind of parity bit to use for error detection"
+          },
+          "stopbits": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "default": "1",
+            "description": "Select how many stop bits will be used to detect the end of character"
+          },
+          "flowcontrol": {
+            "type": "string",
+            "enum": [
+              "none",
+              "xon/xoff",
+              "rts/cts"
+            ],
+            "description": "Select what kind of characters to use for flow control"
+          },
+          "server_addr": {
+            "type": "string",
+            "description": "DLMS device server address",
+            "default": "1"
+          },
+          "log_server_addr": {
+            "type": "string",
+            "description": "DLMS device logical server address",
+            "default": "0"
+          },
+          "client_addr": {
+            "type": "string",
+            "description": "DLMS client address",
+            "default": "16"
+          },
+          "transport_security": {
+            "type": "string",
+            "description": "Transport security",
+            "enum": [
+              "0",
+              "16",
+              "32",
+              "48"
+            ]
+          },
+          "interface": {
+            "type": "string",
+            "description": "Interface type",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "invocation_counter": {
+            "type": "string",
+            "description": "DLMS device invocation counter OBIS code"
+          },
+          "authentication_key": {
+            "type": "string",
+            "description": "DLMS device authentication key'"
+          },
+          "block_cipher_key": {
+            "type": "string",
+            "description": "DLMS devices block cipher key'"
+          },
+          "dedicated_key": {
+            "type": "string",
+            "description": "DLMS device dedicated key'"
+          },
+          "access_security": {
+            "type": "string",
+            "description": "Access security",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "description": "DLMS device password if authentication is used"
+          }
+        },
+        "required": [
+          "type",
+          "server_addr",
+          "logical_server_addr",
+          "client_addr"
+        ]
+      },
+      "dlms_devices_single_options": {
+        "title": "dlms_devices_single_options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Physical device state.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Physical device name",
+            "maxLength": 200,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "server_addr": {
+            "type": "string",
+            "description": "DLMS device server address",
+            "default": "1",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input"
+            }
+          },
+          "connection": {
+            "type": "string",
+            "description": "Dlms connection",
+            "x-web": {
+              "pretty": "Connection",
+              "input-type": "input"
+            }
+          },
+          "log_server_addr": {
+            "type": "string",
+            "description": "DLMS device logical server address",
+            "default": "0",
+            "x-web": {
+              "pretty": "Logical server address",
+              "input-type": "input"
+            }
+          },
+          "client_addr": {
+            "type": "string",
+            "description": "DLMS client address",
+            "default": "16",
+            "x-web": {
+              "pretty": "Client address",
+              "input-type": "input"
+            }
+          },
+          "access_security": {
+            "type": "string",
+            "description": "Access security",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "x-web": {
+              "pretty": "DLMS device authentication type",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "None",
+                "1": "Low",
+                "2": "High",
+                "3": "HIGH MD5",
+                "4": "HIGH SHA1",
+                "5": "HIGH GMAC"
+              }
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "DLMS device password if authentication is used",
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "s.access_security": [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                  ]
+                }
+              ]
+            }
+          },
+          "transport_security": {
+            "type": "string",
+            "description": "Transport security",
+            "enum": [
+              "0",
+              "16",
+              "32",
+              "48"
+            ],
+            "x-web": {
+              "pretty": "DLMS device message encryption",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "None",
+                "16": "Authentication",
+                "32": "Encryption",
+                "48": "Authentication encryption"
+              }
+            }
+          },
+          "interface": {
+            "type": "string",
+            "description": "Interface type",
+            "enum": [
+              "0",
+              "4",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "DLMS device interface type",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "HDLC",
+                "4": "HDLC with mode E",
+                "1": "WRAPPER"
+              }
+            }
+          },
+          "invocation_counter": {
+            "type": "string",
+            "description": "DLMS device invocation counter OBIS code",
+            "x-web": {
+              "pretty": "Invocation counter OBIS code",
+              "input-type": "input",
+              "depends": [
+                {
+                  "s.transport_security": [
+                    "16",
+                    "32",
+                    "48"
+                  ]
+                }
+              ]
+            }
+          },
+          "authentication_key": {
+            "type": "string",
+            "description": "DLMS device authentication key'",
+            "x-web": {
+              "pretty": "Authentication key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "s.transport_security": [
+                    "16",
+                    "48"
+                  ]
+                },
+                {
+                  "s.access_security": "5"
+                }
+              ]
+            }
+          },
+          "block_cipher_key": {
+            "type": "string",
+            "description": "DLMS devices block cipher key'",
+            "x-web": {
+              "pretty": "Block cipher key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "s.transport_security": [
+                    "32",
+                    "48"
+                  ]
+                },
+                {
+                  "s.access_security": "5"
+                }
+              ]
+            }
+          },
+          "dedicated_key": {
+            "type": "string",
+            "description": "DLMS device dedicated key'",
+            "x-web": {
+              "pretty": "Dedicated key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "s.transport_security": [
+                    "32",
+                    "48"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "server_addr",
+          "log_server_addr",
+          "client_addr",
+          "access_security",
+          "interface",
+          "transport_security"
+        ]
+      },
+      "dlms_devices_multiple_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "DLMS device Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/dlms_devices_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

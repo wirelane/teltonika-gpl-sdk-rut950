@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DNP3 Serial Request"
+    }
+  ],
+  "paths": {
+    "/dnp3/tcp/config/{cfg}/requests/{id}": {
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration DNP3 indetifier"
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Name of configuration request to be created"
+        }
+      ],
+      "post": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Creates DNP3 request configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3RequestTcp"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dnp3_tcp_request_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Returns specified DNP3 request configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3RequestTcp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Updates specified DNP3 request configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3RequestTcp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dnp3_tcp_request_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Deletes specified DNP3 request configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dnp3/tcp/config/{cfg}/requests/": {
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration DNP3 indetifier"
+        }
+      ],
+      "get": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Returns all DNP3 requsts configuration",
+        "description": "Returns all configuration with their parameters form wireguard configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3RequestMultiTcp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Updates specified DNP3 request configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3RequestTcp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects",
+                    "items": {
+                      "$ref": "#/components/schemas/dnp3_tcp_request_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DNP3 Serial Request"
+        ],
+        "summary": "Deletes specified DNP3 request configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects",
+                    "items": {
+                      "type": "string",
+                      "description": "configuration id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200DNP3RequestTcp": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/dnp3_tcp_request_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DNP3RequestMultiTcp": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configuration objects",
+                  "items": {
+                    "$ref": "#/components/schemas/dnp3_tcp_request_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "dnp3_tcp_request_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the instance",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "index": {
+            "type": "string",
+            "description": "Start index of the data subarray",
+            "format": "irange(0, 65535)",
+            "x-web": {
+              "pretty": "Start index",
+              "input-type": "input"
+            }
+          },
+          "count": {
+            "type": "string",
+            "description": "End index of the data subarray",
+            "format": "irange(0, 65535)",
+            "x-web": {
+              "pretty": "End index",
+              "input-type": "input"
+            }
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "1",
+              "3",
+              "20",
+              "21",
+              "30",
+              "110",
+              "40",
+              "10"
+            ],
+            "description": "Data type",
+            "x-web": {
+              "pretty": "Data type",
+              "enum-pretty": {
+                "1": "Binary",
+                "3": "Double binary",
+                "20": "Counter",
+                "21": "Frozen counter",
+                "30": "Analog",
+                "110": "Octet string",
+                "40": "Analog output status",
+                "10": "Binary output status"
+              },
+              "input-type": "select"
+            }
+          }
+        }
+      }
+    }
+  }
+}

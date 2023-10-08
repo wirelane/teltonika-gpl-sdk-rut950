@@ -1,0 +1,32 @@
+{
+	"network/routes": {
+		"title": "Routing",
+		"index": 80
+	},
+		"network/routes/static_routes": {
+			"title": "Static routes",
+			"index": 10,
+			"view": "network/StaticRoutes",
+			"acls": [ "network/routes/static_routes" ],
+			"files": [ "/etc/config/network" ]
+		},
+		"network/routes/advanced_routing": {
+			"title": "Policy based routing",
+			"index": 20,
+			"view": "network/AdvancedRoutes",
+			"acls": [ "network/routes/advanced_routing" ],
+			"files": [ "/etc/config/network" ]
+		},
+
+	"status/routes": {
+		"title": "Routes",
+		"index": 35
+	},
+		"status/routes/general": {
+			"title": "Static",
+			"index": 10,
+			"view": "status/GeneralRoutes",
+			"acls": [ "status/routes/general" ],
+			"files": [ "/etc/config/network" ]
+		}
+}

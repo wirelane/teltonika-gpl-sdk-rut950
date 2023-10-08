@@ -1,0 +1,38 @@
+{
+  "services/webfilter/site": {
+    "description": "Web Filter site blocking",
+    "read": {
+      "api": [
+        "/webfilter/*",
+        "/hotspot/general/status/*",
+        "/interfaces/config/*"
+      ],
+      "uci": [
+        "hostblock"
+      ]
+    },
+    "write": {
+      "api": ["/webfilter/*"],
+      "uci": ["hostblock"],
+      "ubus": {
+        "vuci.services.webfilter": [
+          "parse_hosts"
+        ]
+      },
+      "cgi-io": [
+        "upload"
+      ]
+    }
+  },
+  "services/webfilter/proxy": {
+    "description": "proxy based content blocker",
+    "read": {
+      "api": ["/privoxy/*"],
+      "uci": ["privoxy"]
+    },
+    "write": {
+      "api": ["/privoxy/*"],
+      "uci": ["privoxy"]
+    }
+  }
+}

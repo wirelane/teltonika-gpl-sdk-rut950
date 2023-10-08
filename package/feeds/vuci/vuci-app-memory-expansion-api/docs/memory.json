@@ -1,0 +1,289 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Memory expansion"
+    }
+  ],
+  "paths": {
+    "/usb_tools/memory_expansion/actions/change": {
+      "post": {
+        "tags": [
+          "Memory expansion"
+        ],
+        "summary": "Expand or shrink available memory",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200memorychange"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "expand": {
+                        "type": "string",
+                        "description": "This will wipe the external storage device contents and the router will reboot.",
+                        "format": "is_bool",
+                        "enum": [
+                          "0",
+                          "1"
+                        ],
+                        "x-web": {
+                          "pretty": "Enable storage expansion",
+                          "input-type": "switch"
+                        }
+                      },
+                      "storage": {
+                        "type": "string",
+                        "enum": [
+                          "usb"
+                        ],
+                        "x-web": {
+                          "pretty": "Action frequency",
+                          "input-type": "select",
+                          "enum-pretty": {
+                            "usb": "USB",
+                            "sd": "SD"
+                          },
+                          "enum-depends": [
+                            {
+                              "hw_tags": {
+                                "sd": true
+                              },
+                              "values": [
+                                "sd",
+                                "usb"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
+          "USB"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/memory_expansion/config": {
+      "get": {
+        "summary": "Returns all status information",
+        "tags": [
+          "Memory expansion"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200memoryall"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
+          "USB"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/memory_expansion/config/info": {
+      "get": {
+        "summary": "Returns general memory expansion information",
+        "tags": [
+          "Memory expansion"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200memoryinfo"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
+          "USB"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/memory_expansion/config/status": {
+      "get": {
+        "summary": "Returns status of expansion",
+        "tags": [
+          "Memory expansion"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200memorystatus"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
+          "USB"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200memoryall": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "msd_status": {
+                      "type": "string"
+                    },
+                    "mmc_status": {
+                      "type": "string"
+                    },
+                    "checked": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200memoryinfo": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "msd_status": {
+                      "type": "string"
+                    },
+                    "mmc_status": {
+                      "type": "string"
+                    },
+                    "checked": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200memorystatus": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200memorychange": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "return_code": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {}
+  }
+}

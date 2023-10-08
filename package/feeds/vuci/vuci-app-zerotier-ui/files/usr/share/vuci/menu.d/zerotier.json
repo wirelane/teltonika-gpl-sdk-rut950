@@ -1,0 +1,13 @@
+{
+	"services/vpn": {
+		"title": "VPN",
+		"index": 20
+	},
+	"services/vpn/zerotier": {
+		"title": "ZeroTier",
+		"index": 120,
+		"view": "services/ZeroTier_aeaafe",
+		"acls": [ "services/vpn/zerotier" ],
+		"files": [ "/etc/config/zerotier" ]
+	}
+}

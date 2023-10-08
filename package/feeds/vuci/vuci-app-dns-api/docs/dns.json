@@ -1,0 +1,412 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DNS"
+    }
+  ],
+  "paths": {
+    "/dns/config/general": {
+      "get": {
+        "summary": "GET DNS",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dns"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "DNS"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE DNS",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dns"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dns_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DNS"
+        ]
+      },
+      "post": {
+        "summary": "CREATE DNS",
+        "operationId": "post-network-dns-config-dns_id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_dns"
+        },
+        "tags": [
+          "DNS"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "DNS",
+          "DNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dns/config": {
+      "get": {
+        "summary": "GET All DNS",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dnsMulti"
+          }
+        },
+        "tags": [
+          "DNS"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All DNS",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dnsMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/dns_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DNS"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "DNS",
+          "DNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200dns": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/dns_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dnsMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/dns_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "dns_single_options": {
+        "type": "object",
+        "properties": {
+          "logqueries": {
+            "x-web": {
+              "pretty": "Log queries",
+              "input-type": "switch",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Write received DNS requests to syslog.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "server": {
+            "x-web": {
+              "pretty": "DNS forwardings",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of DNS servers to forward requests to. See the dnsmasq -S option man page for syntax details.",
+            "format": "url",
+            "maxItems": 256
+          },
+          "rebind_protection": {
+            "x-web": {
+              "pretty": "Rebind protection",
+              "input-type": "switch",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Discard upstream RFC1918 responses.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "localservice": {
+            "x-web": {
+              "pretty": "Local service only",
+              "input-type": "switch",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Limit DNS service to subnets interfaces on which we are serving DNS.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "interface": {
+            "x-web": {
+              "pretty": "Listen interfaces",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Limit DHCP and DNS requests listening to these interfaces, and loopback. Leave empty to listen on all interfaces."
+          },
+          "notinterface": {
+            "x-web": {
+              "pretty": "Exclude interfaces",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Prevent DHCP and DNS requests listening on these interfaces. Leave empty to listen on all interfaces."
+          },
+          "boguspriv": {
+            "x-web": {
+              "pretty": "Filter private",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Do not forward reverse lookups for local networks.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "localise_queries": {
+            "x-web": {
+              "pretty": "Localise queries",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Localise hostname depending on the requesting subnet if multiple IPs are available.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "serversfile": {
+            "x-web": {
+              "pretty": "Additional servers file",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "format": "path",
+            "pattern": "^/etc/(vuci-uploads|certificates)/",
+            "description": "This file may contain lines like 'server=/domain/1.2.3.4' or 'server=1.2.3.4' for domain-specific or full upstream DNS servers."
+          },
+          "cachesize": {
+            "x-web": {
+              "pretty": "Size of DNS query cache",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Number of cached DNS entries (max is 10000, 0 is no caching).",
+            "format": "range(0, 10000)",
+            "minLength": 1,
+            "maxLength": 5
+          }
+        }
+      },
+      "dns_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "DNS Configuration identifier (ID).",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                }
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/dns_single_options"
+          }
+        ]
+      }
+    },
+    "requestBodies": {
+      "file_upload_dns": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "option": {
+                  "type": "string",
+                  "description": "Parameter to upload the file to.",
+                  "enum": [
+                    "serversfile"
+                  ]
+                },
+                "file": {
+                  "type": "string",
+                  "format": "binary",
+                  "description": "File to upload."
+                }
+              },
+              "required": [
+                "option",
+                "file"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

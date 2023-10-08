@@ -1,0 +1,1325 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DDNS",
+      "description": "Dynamic DNS service endpoints"
+    }
+  ],
+  "paths": {
+    "/ddns/config/{cfg}": {
+      "get": {
+        "tags": [
+          "DDNS"
+        ],
+        "summary": "Returns the specified dynamic DNS section",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ddns_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Uci configuration dynamic dns section identifier"
+          }
+        ],
+        "x-internal": false,
+        "operationId": "get-services-ddns",
+        "description": ""
+      },
+      "put": {
+        "operationId": "put-services-ddns-cfg",
+        "tags": [
+          "DDNS"
+        ],
+        "summary": "Updates the specified dynamic DNS configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ddns_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "cfg",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration dynamic DNS section identifier"
+          }
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ddns_section_index"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-services-ddns-cfg",
+        "tags": [
+          "DDNS"
+        ],
+        "summary": "Deletes the specified dynamic DNS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "cfg",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration dynamic DNS section identifier"
+          }
+        ],
+        "description": ""
+      },
+      "parameters": [
+        {
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "name": "cfg",
+          "in": "path",
+          "description": "DDNS section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Dynamic DNS",
+          "DDNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ddns/config": {
+      "get": {
+        "tags": [
+          "DDNS"
+        ],
+        "summary": "Returns all dynamic DNS configuration sections",
+        "description": "",
+        "operationId": "get-services-ddns2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ddns_section_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "put-services-ddns",
+        "tags": [
+          "DDNS"
+        ],
+        "summary": "Updates the specified dynamic DNS configurations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ddns_section_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ddns_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DDNS"
+        ],
+        "summary": "Deletes the specified dynamic DNS configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "operationId": "delete-services-ddns",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Section names to delete",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new DDNS section",
+        "operationId": "post-services-ddns",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ddns_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "DDNS"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ddns_section_name_index"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Dynamic DNS",
+          "DDNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ddns/status": {
+      "get": {
+        "summary": "Returns the status about all DDNS instances",
+        "tags": [
+          "DDNS"
+        ],
+        "operationId": "get-services-ddns-status",
+        "description": " ",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ddns_status"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Dynamic DNS",
+          "DDNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ddns/status/{cfg}": {
+      "get": {
+        "summary": "Returns the status about the selected DDNS instance",
+        "tags": [
+          "DDNS"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ddns_status"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-ddns-status-cfg",
+        "description": " "
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cfg",
+          "in": "path",
+          "description": "DDNS section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Dynamic DNS",
+          "DDNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ddns/options": {
+      "get": {
+        "summary": "Returns info needed to configure a DDNS section",
+        "tags": [
+          "DDNS"
+        ],
+        "operationId": "get-services-ddns-info",
+        "description": " ",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ddns_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Dynamic DNS",
+          "DDNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ddns_section_name_index": {
+        "title": "ddns_section",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "use_https": "1",
+            "lookup_host": "example0.com",
+            "service_name": "example_service.com",
+            "update_url": "example1.com",
+            "domain": "user@site.com",
+            "username": "my_username",
+            "password": "my_password",
+            "ip_source": "network",
+            "interface": "wan",
+            "ip_network": "wan",
+            "ip_url": "http://example2.com",
+            "ip_script": "/etc/vuci-uploads/script.sh",
+            "check_interval": "10,seconds",
+            "force_interval": "10,days"
+          },
+          "example-2": {
+            "enabled": "1",
+            "use_https": "1",
+            "lookup_host": "example0.com",
+            "service_name": "example_service.com",
+            "update_url": "example2.com",
+            "domain": "example1.com",
+            "username": "my_username",
+            "password": "my_password",
+            "ip_source": "network",
+            "interface": "wan",
+            "ip_network": "wan",
+            "ip_url": "http://example.com",
+            "ip_script": "/etc/vuci-uploads/script.sh",
+            "check_interval": "10,minutes",
+            "force_interval": "10,hours"
+          }
+        },
+        "description": " ",
+        "required": [
+          "id"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ddns_section_index"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "DDNS name",
+                  "unique": true,
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Section name."
+              }
+            }
+          }
+        ]
+      },
+      "ddns_section_index": {
+        "title": "ddns_section",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "use_https": "1",
+            "lookup_host": "example0.com",
+            "service_name": "example_service.com",
+            "update_url": "example1.com",
+            "domain": "user@site.com",
+            "username": "my_username",
+            "password": "my_password",
+            "ip_source": "network",
+            "interface": "wan",
+            "ip_network": "wan",
+            "ip_url": "http://example2.com",
+            "ip_script": "/etc/vuci-uploads/script.sh",
+            "check_interval": "10,seconds",
+            "force_interval": "10,days"
+          },
+          "example-2": {
+            "enabled": "1",
+            "use_https": "1",
+            "lookup_host": "example0.com",
+            "service_name": "example_service.com",
+            "update_url": "example2.com",
+            "domain": "example1.com",
+            "username": "my_username",
+            "password": "my_password",
+            "ip_source": "network",
+            "interface": "wan",
+            "ip_network": "wan",
+            "ip_url": "http://example.com",
+            "ip_script": "/etc/vuci-uploads/script.sh",
+            "check_interval": "10,minutes",
+            "force_interval": "10,hours"
+          }
+        },
+        "description": " ",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns the DDNS instance on or off.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "use_https": {
+            "x-web": {
+              "pretty": "Use HTTP secure",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Use HTTP Secure // Configure Root CA certificates in System",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "lookup_host": {
+            "x-web": {
+              "pretty": "Lookup hostname",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Fully qualified domain name (FQDN) of your defined host."
+          },
+          "service_name": {
+            "type": "string",
+            "x-web": {
+              "enum-pretty": {
+                "": "-- Custom --"
+              },
+              "pretty": "DDNS service provider",
+              "input-type": "select"
+            },
+            "description": "Third party DNS service provider.",
+            "enum": [
+              "",
+              "myonlineportal.net",
+              "secure.camera",
+              "easydns.com",
+              "dnsmax.com",
+              "dnsexit.com",
+              "mydns.jp",
+              "do.de",
+              "loopia.se",
+              "twodns.de",
+              "spdyn.de",
+              "ddns.com.br",
+              "now-dns.com",
+              "dnsdynamic.org",
+              "no-ip.pl",
+              "bind-nsupdate",
+              "all-inkl.com",
+              "sitelutions.com",
+              "dyns.net",
+              "zzzz.io",
+              "xlhost.de",
+              "afraid.org-basicauth",
+              "desec.io",
+              "changeip.com",
+              "3322.org",
+              "core-networks.de",
+              "dnspark.com",
+              "dnshome.de",
+              "dynsip.org",
+              "afraid.org-v2-token",
+              "dnsmadeeasy.com",
+              "dynu.com",
+              "binero.se",
+              "schokokeks.org",
+              "oray.com",
+              "dtdns.com",
+              "joker.com",
+              "opendns.com",
+              "regfish.de",
+              "dyndns.org",
+              "namecheap.com",
+              "ddnss.de",
+              "nsupdate.info",
+              "google.com",
+              "mythic-beasts.com",
+              "dyndnss.net",
+              "dy.fi",
+              "nubem.com",
+              "thatip.com",
+              "editdns.net",
+              "ovh.com",
+              "no-ip.com",
+              "afraid.org-v2-basic",
+              "cloudflare.com-v4",
+              "strato.com",
+              "duiadns.net",
+              "myip.co.ua",
+              "dhis.org",
+              "zerigo.com",
+              "dyndns.it",
+              "variomedia.de",
+              "udmedia.de",
+              "system-ns.com",
+              "zoneedit.com",
+              "dnsever.com",
+              "he.net",
+              "dnsomatic.com",
+              "spdns.de",
+              "domopoli.de",
+              "duckdns.org",
+              "able.or.kr",
+              "selfhost.de",
+              "ddo.jp",
+              "nettica.com",
+              "dynv6.com",
+              "afraid.org-keyauth",
+              "goip.de",
+              "dyn.com"
+            ]
+          },
+          "update_url": {
+            "x-web": {
+              "pretty": "Custom update-URL",
+              "input-type": "input",
+              "depends": [
+                {
+                  "service_name": ""
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Update URL to be used for updating your DDNS Provider."
+          },
+          "domain": {
+            "type": "string",
+            "description": "Hostname that will be linked with the router's IP address.",
+            "x-web": {
+              "pretty": "Domain",
+              "input-type": "input",
+              "depends": [
+                {
+                  "service_name": "myonlineportal.net"
+                },
+                {
+                  "service_name": "secure.camera"
+                },
+                {
+                  "service_name": "easydns.com"
+                },
+                {
+                  "service_name": "dnsmax.com"
+                },
+                {
+                  "service_name": "dnsexit.com"
+                },
+                {
+                  "service_name": "mydns.jp"
+                },
+                {
+                  "service_name": "do.de"
+                },
+                {
+                  "service_name": "loopia.se"
+                },
+                {
+                  "service_name": "twodns.de"
+                },
+                {
+                  "service_name": "spdyn.de"
+                },
+                {
+                  "service_name": "ddns.com.br"
+                },
+                {
+                  "service_name": "now-dns.com"
+                },
+                {
+                  "service_name": "dnsdynamic.org"
+                },
+                {
+                  "service_name": "no-ip.pl"
+                },
+                {
+                  "service_name": "bind-nsupdate"
+                },
+                {
+                  "service_name": "all-inkl.com"
+                },
+                {
+                  "service_name": "sitelutions.com"
+                },
+                {
+                  "service_name": "dyns.net"
+                },
+                {
+                  "service_name": "zzzz.io"
+                },
+                {
+                  "service_name": "xlhost.de"
+                },
+                {
+                  "service_name": "afraid.org-basicauth"
+                },
+                {
+                  "service_name": "desec.io"
+                },
+                {
+                  "service_name": "changeip.com"
+                },
+                {
+                  "service_name": "3322.org"
+                },
+                {
+                  "service_name": "core-networks.de"
+                },
+                {
+                  "service_name": "dnspark.com"
+                },
+                {
+                  "service_name": "dnshome.de"
+                },
+                {
+                  "service_name": "dynsip.org"
+                },
+                {
+                  "service_name": "afraid.org-v2-token"
+                },
+                {
+                  "service_name": "dnsmadeeasy.com"
+                },
+                {
+                  "service_name": "dynu.com"
+                },
+                {
+                  "service_name": "binero.se"
+                },
+                {
+                  "service_name": "schokokeks.org"
+                },
+                {
+                  "service_name": "oray.com"
+                },
+                {
+                  "service_name": "dtdns.com"
+                },
+                {
+                  "service_name": "joker.com"
+                },
+                {
+                  "service_name": "opendns.com"
+                },
+                {
+                  "service_name": "regfish.de"
+                },
+                {
+                  "service_name": "dyndns.org"
+                },
+                {
+                  "service_name": "namecheap.com"
+                },
+                {
+                  "service_name": "ddnss.de"
+                },
+                {
+                  "service_name": "nsupdate.info"
+                },
+                {
+                  "service_name": "google.com"
+                },
+                {
+                  "service_name": "mythic-beasts.com"
+                },
+                {
+                  "service_name": "dyndnss.net"
+                },
+                {
+                  "service_name": "dy.fi"
+                },
+                {
+                  "service_name": "nubem.com"
+                },
+                {
+                  "service_name": "thatip.com"
+                },
+                {
+                  "service_name": "editdns.net"
+                },
+                {
+                  "service_name": "ovh.com"
+                },
+                {
+                  "service_name": "no-ip.com"
+                },
+                {
+                  "service_name": "afraid.org-v2-basic"
+                },
+                {
+                  "service_name": "cloudflare.com-v4"
+                },
+                {
+                  "service_name": "strato.com"
+                },
+                {
+                  "service_name": "duiadns.net"
+                },
+                {
+                  "service_name": "myip.co.ua"
+                },
+                {
+                  "service_name": "dhis.org"
+                },
+                {
+                  "service_name": "zerigo.com"
+                },
+                {
+                  "service_name": "dyndns.it"
+                },
+                {
+                  "service_name": "variomedia.de"
+                },
+                {
+                  "service_name": "udmedia.de"
+                },
+                {
+                  "service_name": "system-ns.com"
+                },
+                {
+                  "service_name": "zoneedit.com"
+                },
+                {
+                  "service_name": "dnsever.com"
+                },
+                {
+                  "service_name": "he.net"
+                },
+                {
+                  "service_name": "dnsomatic.com"
+                },
+                {
+                  "service_name": "spdns.de"
+                },
+                {
+                  "service_name": "domopoli.de"
+                },
+                {
+                  "service_name": "duckdns.org"
+                },
+                {
+                  "service_name": "able.or.kr"
+                },
+                {
+                  "service_name": "selfhost.de"
+                },
+                {
+                  "service_name": "ddo.jp"
+                },
+                {
+                  "service_name": "nettica.com"
+                },
+                {
+                  "service_name": "dynv6.com"
+                },
+                {
+                  "service_name": "afraid.org-keyauth"
+                },
+                {
+                  "service_name": "goip.de"
+                },
+                {
+                  "service_name": "dyn.com"
+                }
+              ]
+            }
+          },
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Username required to login to the third party DNS service."
+          },
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Password required to login to the third party DNS service."
+          },
+          "ip_source": {
+            "x-web": {
+              "pretty": "IP address source",
+              "input-type": "select",
+              "enum-pretty": {
+                "network": "Custom",
+                "script": "Script",
+                "interface": "Private",
+                "web": "Public"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "network",
+              "script",
+              "interface",
+              "web"
+            ],
+            "default": "network",
+            "description": "Defines the source to read the system's IPv4 Address from, which will be sent to the DNS provider. For example, if your router has a Private IP (i.e., 10.140.56.57) on its WAN interface, then you can send this exact IP to DDNS server by selecting Private."
+          },
+          "interface": {
+            "x-web": {
+              "pretty": "Event network",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ip_source": "script"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Network on which the DDNS updater scripts will be started."
+          },
+          "ip_network": {
+            "x-web": {
+              "pretty": "Network",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ip_source": "network"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Specifies which interface's IP address should be bound to the hostname."
+          },
+          "ip_url": {
+            "x-web": {
+              "pretty": "URL to detect",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ip_source": "web"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Defines the Web page to read the system's IPv4 address from."
+          },
+          "ip_script": {
+            "x-web": {
+              "pretty": "Script",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ip_source": "script"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "User defined script that will read the system's IPv4 address."
+          },
+          "check_interval": {
+            "x-web": {
+              "pretty": "Check interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Frequency at which the device will check whether it's IP address has changed."
+          },
+          "force_interval": {
+            "x-web": {
+              "pretty": "Force interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Frequency at which IP update requests are sent to the DNS provider."
+          },
+          "_authentication_type": {
+            "x-web": {
+              "pretty": "Authentication type",
+              "input-type": "select",
+              "enum-pretty": {
+                "emailAPI": "Email / API token",
+                "bearer": " Bearer token"
+              },
+              "depends": [
+                {
+                  "service_name": "cloudflare.com-v4"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Authentication type for cloudflare.com-v4 service.",
+            "enum": [
+              "emailAPI",
+              "bearer"
+            ]
+          }
+        }
+      },
+      "ddns_status": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "datenext": "_neverupdated_",
+            "datelast": "_never_",
+            "datelaststat": "Never",
+            "iface": "IPv4 / wan",
+            "force": "10 minutes",
+            "section": "myddns",
+            "check": "300 seconds",
+            "is_up": false,
+            "lookup": "yourhost.example.com"
+          },
+          "example-2": {
+            "datenext": "_neverupdated_",
+            "datelast": "_never_",
+            "datelaststat": "Never",
+            "iface": "IPv4 / wan",
+            "force": "10 minutes",
+            "section": "myddns",
+            "check": "300 seconds",
+            "is_up": false,
+            "lookup": "yourhost.example.com"
+          }
+        },
+        "properties": {
+          "datenext": {
+            "type": "string"
+          },
+          "datelast": {
+            "type": "string"
+          },
+          "datelaststat": {
+            "type": "string"
+          },
+          "iface": {
+            "type": "string"
+          },
+          "force": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string"
+          },
+          "check": {
+            "type": "string"
+          },
+          "is_up": {
+            "type": "boolean"
+          },
+          "lookup": {
+            "type": "string"
+          }
+        }
+      },
+      "ddns_options": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "service_providers": {
+              "myonlineportal.net": "http://[USERNAME]:[PASSWORD]@myonlineportal.net/updateddns?hostname=[DOMAIN]&ip=[IP]",
+              "secure.camera": "http://[USERNAME]:[PASSWORD]@secure.camera/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "easydns.com": "http://[USERNAME]:[PASSWORD]@api.cp.easydns.com/dyn/generic.php?hostname=[DOMAIN]&myip=[IP]",
+              "dnsmax.com": "http://update.dnsmax.com/update/?username=[USERNAME]&password=[PASSWORD]&resellerid=1&clientname=openwrt&clientversion=8.09&protocolversion=2.0&updatehostname=[DOMAIN]&ip=[IP]",
+              "dnsexit.com": "http://update.dnsexit.com/RemoteUpdate.sv?login=[USERNAME]&password=[PASSWORD]&host=[DOMAIN]&myip=[IP]",
+              "mydns.jp": "http://www.mydns.jp/directip.html?MID=[USERNAME]&PWD=[PASSWORD]&IPV4ADDR=[IP]",
+              "do.de": "http://ddns.do.de/?myip=[IP]&hostname=[DOMAIN]&username=[USERNAME]&password=[PASSWORD]",
+              "loopia.se": "http://[USERNAME]:[PASSWORD]@dns.loopia.se/XDynDNSServer/XDynDNS.php?system=custom&hostname=[DOMAIN]&myip=[IP]",
+              "twodns.de": "http://[USERNAME]:[PASSWORD]@update.twodns.de/update?hostname=[DOMAIN]&ip=[IP]",
+              "spdyn.de": "http://[USERNAME]:[PASSWORD]@update.spdyn.de/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "ddns.com.br": "http://[DOMAIN]:[PASSWORD]@members.ddns.com.br/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "now-dns.com": "https://[USERNAME]:[PASSWORD]@now-dns.com/update?hostname=[DOMAIN]",
+              "dnsdynamic.org": "http://[USERNAME]:[PASSWORD]@www.dnsdynamic.org/api/?hostname=[DOMAIN]&myip=[IP]",
+              "no-ip.pl": "http://[USERNAME]:[PASSWORD]@update.no-ip.pl/?hostname=[DOMAIN]",
+              "bind-nsupdate": "update_nsupdate.sh",
+              "all-inkl.com": "http://[USERNAME]:[PASSWORD]@dyndns.kasserver.com/?myip=[IP]",
+              "sitelutions.com": "http://www.sitelutions.com/dnsup?user=[USERNAME]&pass=[PASSWORD]&id=[DOMAIN]&ip=[IP]",
+              "dyns.net": "http://www.dyns.net/postscript011.php?username=[USERNAME]&password=[PASSWORD]&host=[DOMAIN]&ip=[IP]",
+              "zzzz.io": "http://zzzz.io/api/v1/update/[DOMAIN]/?token=[PASSWORD]&ip=[IP]",
+              "xlhost.de": "http://[USERNAME]:[PASSWORD]@nsupdate.xlhost.de/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "afraid.org-basicauth": "http://[USERNAME]:[PASSWORD]@freedns.afraid.org/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "desec.io": "http://update.dedyn.io/?username=[USERNAME]&password=[PASSWORD]&hostname=[DOMAIN]&myipv4=[IP]",
+              "changeip.com": "http://[USERNAME]:[PASSWORD]@nic.changeip.com/nic/update?u=[USERNAME]&p=[PASSWORD]&cmd=update&hostname=[DOMAIN]&ip=[IP]",
+              "3322.org": "http://[USERNAME]:[PASSWORD]@members.3322.org/dyndns/update?system=dyndns&hostname=[DOMAIN]&myip=[IP]",
+              "core-networks.de": "http://[USERNAME]:[PASSWORD]@dyndns.core-networks.de/?hostname=[DOMAIN]&myip=[IP]&keepipv6=1",
+              "dnspark.com": "http://[USERNAME]:[PASSWORD]@control.dnspark.com/api/dynamic/update.php?hostname=[DOMAIN]&ip=[IP]",
+              "dnshome.de": "http://[USERNAME]:[PASSWORD]@www.dnshome.de/dyndns.php?hostname=[DOMAIN]&ip=[IP]",
+              "dynsip.org": "http://[USERNAME]:[PASSWORD]@dynsip.org/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "afraid.org-v2-token": "http://sync.afraid.org/u/[PASSWORD]/?address=[IP]",
+              "dnsmadeeasy.com": "http://cp.dnsmadeeasy.com/servlet/updateip?username=[USERNAME]&password=[PASSWORD]&id=[DOMAIN]&ip=[IP]",
+              "dynu.com": "http://api.dynu.com/nic/update?hostname=[DOMAIN]&myip=[IP]&username=[USERNAME]&password=[PASSWORD]",
+              "binero.se": "http://[USERNAME]:[PASSWORD]@dyndns.binero.se/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "schokokeks.org": "http://[USERNAME]:[PASSWORD]@dyndns.schokokeks.org/nic/update?myip=[IP]",
+              "oray.com": "http://[USERNAME]:[PASSWORD]@ddns.oray.com/ph/update?hostname=[DOMAIN]&myip=[IP]",
+              "dtdns.com": "http://www.dtdns.com/api/autodns.cfm?id=[DOMAIN]&pw=[PASSWORD]&ip=[IP]",
+              "joker.com": "http://svc.joker.com/nic/update?username=[USERNAME]&password=[PASSWORD]&myip=[IP]&hostname=[DOMAIN]",
+              "opendns.com": "http://[USERNAME]:[PASSWORD]@updates.opendns.com/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "regfish.de": "http://dyndns.regfish.de/?fqdn=[DOMAIN]&forcehost=1&authtype=secure&token=[PASSWORD]&ipv4=[IP]",
+              "dyndns.org": "http://[USERNAME]:[PASSWORD]@members.dyndns.org/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "namecheap.com": "http://dynamicdns.park-your-domain.com/update?host=[USERNAME]&domain=[DOMAIN]&password=[PASSWORD]&ip=[IP]",
+              "ddnss.de": "http://ip4.ddnss.de/upd.php?user=[USERNAME]&pwd=[PASSWORD]&host=[DOMAIN]&ip=[IP]",
+              "nsupdate.info": "http://[USERNAME]:[PASSWORD]@ipv4.nsupdate.info/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "google.com": "http://[USERNAME]:[PASSWORD]@domains.google.com/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "mythic-beasts.com": "http://dnsapi4.mythic-beasts.com/?domain=[USERNAME]&password=[PASSWORD]&command=REPLACE%20[DOMAIN]%2060%20A%20DYNAMIC_IP&origin=.",
+              "dyndnss.net": "http://www.dyndnss.net/?user=[USERNAME]&pass=[PASSWORD]&domain=[DOMAIN]&updater=other",
+              "dy.fi": "http://[USERNAME]:[PASSWORD]@www.dy.fi/nic/update?hostname=[DOMAIN]",
+              "nubem.com": "http://[USERNAME]:[PASSWORD]@nubem.com/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "thatip.com": "http://update.dnsmax.com/update/?username=[USERNAME]&password=[PASSWORD]&resellerid=2&clientname=openwrt&clientversion=8.09&protocolversion=2.0&updatehostname=[DOMAIN]&ip=[IP]",
+              "editdns.net": "http://dyndns-free.editdns.net/api/dynLinux.php?p=[PASSWORD]&r=[DOMAIN]",
+              "ovh.com": "http://[USERNAME]:[PASSWORD]@www.ovh.com/nic/update?system=dyndns&hostname=[DOMAIN]&myip=[IP]",
+              "no-ip.com": "update_no-ip_com.sh",
+              "afraid.org-v2-basic": "http://[USERNAME]:[PASSWORD]@sync.afraid.org/u/?h=[DOMAIN]&ip=[IP]",
+              "cloudflare.com-v4": "update_cloudflare_com_v4.sh",
+              "strato.com": "http://[USERNAME]:[PASSWORD]@dyndns.strato.com/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "duiadns.net": "http://ip.duiadns.net/dynamic.duia?host=[DOMAIN]&password=[PASSWORD]&ip4=[IP]",
+              "myip.co.ua": "http://[USERNAME]:[PASSWORD]@myip.co.ua/update?hostname=[DOMAIN]&myip=[IP]",
+              "dhis.org": "http://[USERNAME]:[PASSWORD]@is.dhis.org/",
+              "zerigo.com": "http://update.zerigo.com/dynamic?user=[USERNAME]&password=[PASSWORD]&host=[DOMAIN]&ip=[IP]",
+              "dyndns.it": "http://[USERNAME]:[PASSWORD]@update.dyndns.it/nic/update?system=dyndns&hostname=[DOMAIN]&myip=[IP]",
+              "variomedia.de": "http://[USERNAME]:[PASSWORD]@dyndns.variomedia.de/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "udmedia.de": "http://[USERNAME]:[PASSWORD]@www.udmedia.de/nic/update?myip=[IP]",
+              "system-ns.com": "http://system-ns.com/api?type=dynamic&command=set&domain=[DOMAIN]&token=[PASSWORD]&ip=[IP]",
+              "zoneedit.com": "http://[USERNAME]:[PASSWORD]@dynamic.zoneedit.com/auth/dynamic.html?host=[DOMAIN]&dnsto=[IP]",
+              "dnsever.com": "http://[USERNAME]:[PASSWORD]@dyna.dnsever.com/update.php?host[[DOMAIN]]",
+              "he.net": "http://[DOMAIN]:[PASSWORD]@dyn.dns.he.net/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "dnsomatic.com": "http://[USERNAME]:[PASSWORD]@updates.dnsomatic.com/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "spdns.de": "http://[USERNAME]:[PASSWORD]@update.spdns.de/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "domopoli.de": "http://[USERNAME]:[PASSWORD]@http://dyndns.domopoli.de/nic/update?hostname=[DOMAIN]&myip=[IP]",
+              "duckdns.org": "http://www.duckdns.org/update?domains=[DOMAIN]&token=[PASSWORD]&ip=[IP]",
+              "able.or.kr": "http://able.or.kr/ddns/src/update.php?hostname=[DOMAIN]&myip=[IP]&ddnsuser=[USERNAME]&pwd=[PASSWORD]",
+              "selfhost.de": "http://carol.selfhost.de/update?username=[USERNAME]&password=[PASSWORD]&myip=[IP]&hostname=1",
+              "ddo.jp": "http://free.ddo.jp/dnsupdate.php?dn=[DOMAIN]&pw=[PASSWORD]&ip=[IP]",
+              "nettica.com": "http://www.nettica.com/Domain/Update.aspx?U=[USERNAME]&PC=[PASSWORD]&FQDN=[DOMAIN]&N=[IP]",
+              "dynv6.com": "http://dynv6.com/api/update?hostname=[DOMAIN]&token=[PASSWORD]&ipv4=[IP]",
+              "afraid.org-keyauth": "http://freedns.afraid.org/dynamic/update.php?[PASSWORD]&address=[IP]",
+              "goip.de": "http://www.goip.de/setip?username=[USERNAME]&password=[PASSWORD]&subdomain=[DOMAIN]&ip=[IP]",
+              "dyn.com": "http://[USERNAME]:[PASSWORD]@members.dyndns.org/nic/update?hostname=[DOMAIN]&myip=[IP]"
+            },
+            "env_info": {
+              "has_hostip": false,
+              "has_fetch": true,
+              "has_forceip": true,
+              "has_bindhost": false,
+              "has_nslookup": true,
+              "has_bbwget": false,
+              "has_ssl": true,
+              "has_cacerts": true,
+              "has_curlpxy": true,
+              "has_proxy": true,
+              "has_ipv6": true,
+              "has_curlssl": false,
+              "has_fetchssl": true,
+              "has_dnsserver": true,
+              "has_wgetssl": false,
+              "has_bindnet": true,
+              "has_curl": true
+            }
+          }
+        },
+        "properties": {
+          "service_providers": {
+            "type": "object",
+            "description": "Key/value pairs of available service providers.",
+            "properties": {}
+          },
+          "env_info": {
+            "type": "object",
+            "properties": {
+              "has_hostip": {
+                "type": "boolean"
+              },
+              "has_fetch": {
+                "type": "boolean"
+              },
+              "has_forceip": {
+                "type": "boolean"
+              },
+              "has_bindhost": {
+                "type": "boolean"
+              },
+              "has_nslookup": {
+                "type": "boolean"
+              },
+              "has_bbwget": {
+                "type": "boolean"
+              },
+              "has_ssl": {
+                "type": "boolean"
+              },
+              "has_cacerts": {
+                "type": "boolean"
+              },
+              "has_curlpxy": {
+                "type": "boolean"
+              },
+              "has_proxy": {
+                "type": "boolean"
+              },
+              "has_ipv6": {
+                "type": "boolean"
+              },
+              "has_curlssl": {
+                "type": "boolean"
+              },
+              "has_fetchssl": {
+                "type": "boolean"
+              },
+              "has_dnsserver": {
+                "type": "boolean"
+              },
+              "has_wgetssl": {
+                "type": "boolean"
+              },
+              "has_bindnet": {
+                "type": "boolean"
+              },
+              "has_curl": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {}
+  }
+}

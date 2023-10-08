@@ -1,0 +1,438 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/opcua/server/config/{opcua_server_id}/nodes/{id}": {
+      "parameters": [
+        {
+          "name": "opcua_server_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "x-web": {
+            "pretty": "OPC UA server configuration name"
+          },
+          "description": "OPC UA Server Instance identifier (ID)"
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "OPC UA Server Node Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Returns the specified OPC UA Server Node configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNode"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Updates the specified OPC UA Server Node configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNode"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_node_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Deletes the specified OPC UA Server Node configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/server/config/{opcua_server_id}/nodes": {
+      "parameters": [
+        {
+          "name": "opcua_server_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "x-web": {
+            "pretty": "OPC UA server configuration name"
+          },
+          "description": "OPC UA Server Instance identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Returns all OPC UA Server Node configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNodeMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Creates OPC UA Server Node configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200opcuaServerNode"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_node_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Updates specified OPC UA Server Node configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNodeMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/opcua_server_node_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Deletes specified OPC UA Server Node configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/server/actions/{opcua_server_id}/nodes/test": {
+      "parameters": [
+        {
+          "name": "opcua_server_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "x-web": {
+            "pretty": "OPC UA server configuration name"
+          },
+          "description": "OPC UA Server Instance identifier (ID)"
+        }
+      ],
+      "post": {
+        "deprecated": true,
+        "tags": [
+          "OPC UA Server Nodes"
+        ],
+        "summary": "Test OPC UA Server Node",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNode"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_node_test_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200opcuaServerNode": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/opcua_server_node_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200opcuaServerNodeMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/opcua_server_node_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "opcua_server_node_single_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the server node (no functional use).",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "ns": {
+            "type": "string",
+            "description": "Node ID namespace.",
+            "format": "irange(0, 65535)",
+            "x-web": {
+              "pretty": "ID namespace",
+              "input-type": "input"
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Node ID type.",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "x-web": {
+              "pretty": "ID type",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "Numeric",
+                "1": "String",
+                "2": "GUID",
+                "3": "Bytestring"
+              }
+            }
+          },
+          "_id": {
+            "type": "string",
+            "description": "Node ID",
+            "x-web": {
+              "pretty": "Node ID",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "opcua_server_node_test_options": {
+        "type": "object",
+        "properties": {
+          "ns": {
+            "type": "string",
+            "description": "Node ID namespace.",
+            "format": "range(0, 65535)",
+            "minLength": 1,
+            "maxLength": 5
+          },
+          "type": {
+            "type": "string",
+            "description": "Node ID type.",
+            "format": "range(0, 3)",
+            "minLength": 1,
+            "maxLength": 1
+          },
+          "_id": {
+            "type": "string",
+            "description": "Node ID"
+          }
+        }
+      },
+      "opcua_server_node_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "OPC UA Server Node Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/opcua_server_node_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

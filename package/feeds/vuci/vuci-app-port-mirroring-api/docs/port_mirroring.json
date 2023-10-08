@@ -1,0 +1,290 @@
+{
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "3j5duvcptorb8"
+  },
+  "info": {
+    "title": "Port mirroring",
+    "version": "1.0",
+    "description": "Port mirroring API Documentation"
+  },
+  "servers": [],
+  "paths": {
+    "/port_mirroring/config/general": {
+      "put": {
+        "summary": "",
+        "operationId": "put-services-port_mirroring-config-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_res_port_mirror"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_config_general"
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "Port Mirroring"
+        ]
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-services-port_mirroring-config-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_res_port_mirror"
+          }
+        },
+        "tags": [
+          "Port Mirroring"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Ports",
+          "Port Mirroring"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "req_body_config_general": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {
+              "mirror_monitor_port": "lan2",
+              "mirror_source_port": "lan1",
+              "enable_mirror_rx": "1",
+              "enable_mirror_tx": "1"
+            }
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "mirror_monitor_port": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Monitoring port",
+                  "input-type": "select",
+                  "enum-pretty": {
+                    "disabled": "Disabled",
+                    "1": "LAN1",
+                    "2": "LAN2",
+                    "3": "LAN3",
+                    "4": "LAN4"
+                  },
+                  "enum-depends": [
+                    {
+                      "values": [
+                        "disabled",
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
+                    }
+                  ]
+                },
+                "description": "Port mirror monitor port."
+              },
+              "mirror_source_port": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Source port",
+                  "input-type": "select",
+                  "enum-pretty": {
+                    "1": "LAN1",
+                    "2": "LAN2",
+                    "3": "LAN3",
+                    "4": "LAN4"
+                  },
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "mirror_monitor_port": "1"
+                      },
+                      "values": [
+                        "2",
+                        "3",
+                        "4"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "mirror_monitor_port": "2"
+                      },
+                      "values": [
+                        "1",
+                        "3",
+                        "4"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "mirror_monitor_port": "3"
+                      },
+                      "values": [
+                        "1",
+                        "2",
+                        "4"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "mirror_monitor_port": "4"
+                      },
+                      "values": [
+                        "1",
+                        "2",
+                        "3"
+                      ]
+                    }
+                  ],
+                  "depends": [
+                    {
+                      "mirror_monitor_port": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
+                    }
+                  ]
+                },
+                "description": "Port mirror source port."
+              },
+              "enable_mirror_rx": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Enable mirroring of incoming packets",
+                  "input-type": "switch",
+                  "depends": [
+                    {
+                      "mirror_monitor_port": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ],
+                      "mirror_source_port": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
+                    }
+                  ]
+                },
+                "enum": [
+                  "0",
+                  "1"
+                ]
+              },
+              "enable_mirror_tx": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Enable mirroring of outgoing packets",
+                  "input-type": "switch",
+                  "depends": [
+                    {
+                      "mirror_monitor_port": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ],
+                      "mirror_source_port": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                      ]
+                    }
+                  ]
+                },
+                "enum": [
+                  "0",
+                  "1"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200_res_port_mirror": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    ".name": "general",
+                    ".type": "switch",
+                    "mirror_source_port": "lan1",
+                    "enable_mirror_rx": "1",
+                    "enable_mirror_tx": "1",
+                    "mirror_monitor_port": "lan2"
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "mirror_source_port": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "mirror_monitor_port": {
+                      "type": "string"
+                    },
+                    "enable_mirror_rx": {
+                      "type": "string",
+                      "enum": [
+                        "0",
+                        "1"
+                      ]
+                    },
+                    "enable_mirror_tx": {
+                      "type": "string",
+                      "enum": [
+                        "0",
+                        "1"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

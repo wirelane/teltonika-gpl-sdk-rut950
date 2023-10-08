@@ -1,0 +1,11 @@
+{
+	"network/wireless/wifi_scanner": {
+		"description": "wifi_scanner config",
+		"read": {
+			"api": ["/wireless/wifi_scanner/*"]
+		},
+		"write": {
+			"api": ["/wireless/wifi_scanner/*"]
+		}
+	}
+}

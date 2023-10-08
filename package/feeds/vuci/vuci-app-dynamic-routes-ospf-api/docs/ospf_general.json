@@ -1,0 +1,213 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/ospf/general/config/general": {
+      "get": {
+        "tags": [
+          "ospf_general"
+        ],
+        "summary": "Returns ospf general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ospf_general"
+        ],
+        "summary": "Updates ospf general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "OSPF"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/ospf/general/ospf_info": {
+      "get": {
+        "summary": "Fetches data about ospf neighbors",
+        "tags": [
+          "ospf_general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "operationId": "get-network-routes-dynamic-ospf-general-actions-ospf_info"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "OSPF"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200OsGe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ospf_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OsGeMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/ospf_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ospf_general_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable Service",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable OSPF protocol."
+          },
+          "enabled_vty": {
+            "x-web": {
+              "pretty": "Enable VTY",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable vty access from LAN."
+          },
+          "ospfd_custom_conf": {
+            "x-web": {
+              "pretty": "Import Config"
+            },
+            "type": "string",
+			"format": "binary",
+            "description": "Use imported OSPF configuration."
+          },
+          "router_id": {
+            "x-web": {
+              "pretty": "Router ID",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address or any arbitrary 32bit number."
+          },
+          "passive_ifname": {
+            "x-web": {
+              "pretty": "Passive Interfaces",
+              "input-type": "input"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "OSPF hello packets are not sent on these interfaces."
+          },
+          "originate": {
+            "x-web": {
+              "pretty": "Generate a default external route",
+              "input-type": "select",
+              "enum-pretty": {
+                "": "Off",
+                "default": "Default",
+                "always": "Always"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "default",
+              "always"
+            ],
+            "description": "Default - Advertises the default route if the route is in the route table. Always - Specifies to always advertise the default route regardless of whether the route table has a default route."
+          },
+          "redistribute": {
+            "x-web": {
+              "pretty": "Redistribution Options",
+              "input-type": "input"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Route redistribution is a process that allows a network to use a routing protocol to dynamically route traffic based on information learned from a different routing protocol. Valid values are: Connected, Kernel, NHRP, BGP, RIP, EIGRP, Static or a custom value"
+          }
+        }
+      }
+    }
+  }
+}

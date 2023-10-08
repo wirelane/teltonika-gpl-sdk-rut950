@@ -1,0 +1,21 @@
+{
+	"services/modbus/modbus_serial_client": {
+		"description": "modbus tcl client configuration",
+		"read": {
+			"api": [
+				"/modbus/serial/*",
+				"/io/status/*",
+				"/mobile/modems/*",
+				"/modbus/main/*",
+				"/serial/*",
+				"/devices/status/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/modbus/serial/*",
+				"/modbus/main/*"
+			]
+		}
+	}
+}

@@ -1,0 +1,1257 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Samba",
+    "version": "1.0",
+    "contact": {},
+    "description": "Samba api documentation."
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "General"
+    },
+    {
+      "name": "Shares"
+    },
+    {
+      "name": "Users"
+    }
+  ],
+  "paths": {
+    "/samba/general/config/general": {
+      "get": {
+        "summary": "Get SAMBA general configuration",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba"
+          }
+        },
+        "operationId": "get-services-samba-general-sid",
+        "description": "Gets SAMBA general configuration"
+      },
+      "put": {
+        "summary": "Update SAMBA general configuration",
+        "operationId": "put-services-samba-general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba"
+        },
+        "description": "Updates SAMBA general configuration",
+        "tags": [
+          "General"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/samba/shares/config": {
+      "get": {
+        "summary": "Get SAMBA share configurations",
+        "tags": [
+          "Shares"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_share_multi"
+          }
+        },
+        "operationId": "get-services-samba-shares",
+        "description": "Gets SAMBA share configurations"
+      },
+      "post": {
+        "summary": "Create SAMBA share configuration",
+        "operationId": "post-services-samba-shares",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_share"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba_share"
+        },
+        "description": "Creates SAMBA share configuration",
+        "tags": [
+          "Shares"
+        ]
+      },
+      "put": {
+        "summary": "Update SAMBA share configurations",
+        "operationId": "put-services-samba-shares",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_share_multi"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba_share_multi"
+        },
+        "description": "Updates SAMBA share configurations",
+        "tags": [
+          "Shares"
+        ]
+      },
+      "delete": {
+        "summary": "Delete SAMBA share configurations",
+        "operationId": "delete-services-samba-shares",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "description": "Deletes SAMBA share configurations",
+        "tags": [
+          "Shares"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/samba/shares/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get SAMBA share configuration",
+        "tags": [
+          "Shares"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_share"
+          }
+        },
+        "operationId": "get-services-samba-shares-sid",
+        "description": "Gets SAMBA share configuration"
+      },
+      "put": {
+        "summary": "Update SAMBA share configuration",
+        "operationId": "put-services-samba-shares-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_share"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba_share"
+        },
+        "description": "Updates SAMBA share configuration",
+        "tags": [
+          "Shares"
+        ]
+      },
+      "delete": {
+        "summary": "Delete SAMBA share configuration",
+        "operationId": "delete-services-samba-shares-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "Deletes SAMBA share configuration",
+        "tags": [
+          "Shares"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/samba/users/config": {
+      "get": {
+        "summary": "Get SAMBA user configurations",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_user_multi"
+          }
+        },
+        "operationId": "get-services-samba-users",
+        "description": "Gets SAMBA user configurations"
+      },
+      "post": {
+        "summary": "Create SAMBA user configuration",
+        "operationId": "post-services-samba-users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_user"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba_user_post"
+        },
+        "description": "Creates SAMBA user configuration",
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "summary": "Update SAMBA user configurations",
+        "operationId": "put-services-samba-users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_user_multi"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba_user_multi"
+        },
+        "description": "Updates SAMBA user configurations",
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "summary": "Delete SAMBA user configurations",
+        "operationId": "delete-services-samba-users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "description": "Deletes SAMBA user configurations",
+        "tags": [
+          "Users"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/samba/users/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get SAMBA user configuration",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_user"
+          }
+        },
+        "operationId": "get-services-samba-users-sid",
+        "description": "Gets SAMBA user configuration"
+      },
+      "put": {
+        "summary": "Update SAMBA user configuration",
+        "operationId": "put-services-samba-users-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_user"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/samba_user"
+        },
+        "description": "Updates SAMBA user configuration",
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "summary": "Delete SAMBA user configuration",
+        "operationId": "delete-services-samba-users-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "Deletes SAMBA user configuration",
+        "tags": [
+          "Users"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/samba/general/status": {
+      "get": {
+        "summary": "Get SAMBA instance status and all active sessions",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_status"
+          }
+        },
+        "operationId": "get-services-samba-general-status",
+        "description": "SAMBA instance status and all active sessions"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/samba/general/config_file": {
+      "get": {
+        "summary": "Get SAMBA general configuration file",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_samba_config"
+          }
+        },
+        "operationId": "get-services-samba-general-config_file",
+        "description": "Get SAMBA general configuration file"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Network Shares"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "samba_share": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "string",
+            "path": "string",
+            "users": [
+              "string"
+            ],
+            "read_only": "1",
+            "browseable": "1",
+            "guest_ok": "1"
+          }
+        },
+        "properties": {
+          "name": {
+            "x-web": {
+              "pretty": "Name",
+              "unique": true,
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Name of the shared directory"
+          },
+          "path": {
+            "x-web": {
+              "pretty": "Path",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Path to the shared directory. To share an entire drive, choose an automatically generated path from this drop-down box."
+          },
+          "users": {
+            "x-web": {
+              "pretty": "Allowed users",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Defines which users can access the shared directory. Users can be created from the User tab.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "read_only": {
+            "x-web": {
+              "pretty": "Read-only",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Makes the directory read-only, which means the shared directory can only be accessed to view and read files"
+          },
+          "browseable": {
+            "x-web": {
+              "pretty": "Browseable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "This controls whether this share is seen in the list of available shares in a net view and in the browse list."
+          },
+          "guest_ok": {
+            "x-web": {
+              "pretty": "Allow guests",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "This controls whether this share is seen in the list of available shares in a net view and in the browse list."
+          }
+        },
+        "required": [
+          "name",
+          "path",
+          "users",
+          "read_only",
+          "browseable",
+          "guest_ok"
+        ]
+      },
+      "samba_user": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "username": "string",
+            "password": "string"
+          }
+        },
+        "properties": {
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "type": "string",
+	    "format": "regex",
+	    "pattern": "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])",
+	    "minLength": 8,
+	    "maxLength": 130,
+            "description": "User password",
+            "writeOnly": true
+          },
+          "username": {
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+	      "unique": true
+            },
+	    "readOnly": true,
+            "type": "string",
+	    "maxLength": 8,
+            "description": "User name"
+          }
+        },
+        "required": [
+          "password",
+          "username"
+        ]
+      },
+      "samba": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "name": "string",
+            "description": "string",
+            "workgroup": "string",
+            "homes": "1"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Toggles Samba ON or OFF"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Name of the Samba server"
+          },
+          "description": {
+            "x-web": {
+              "pretty": "Description",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Short server description"
+          },
+          "workgroup": {
+            "x-web": {
+              "pretty": "Workgroup",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Name of the server's workgroup"
+          },
+          "homes": {
+            "x-web": {
+              "pretty": "Share home-directories",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Allow system users to reach their home directories via network shares"
+          },
+          "interface": {
+            "x-web": {
+              "pretty": "Interfaces",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Bind samba server to specified interfaces "
+          },
+          "custom": {
+            "x-web": {
+              "pretty": "Insert custom configuration to config",
+              "input-type": "input"
+            },
+            "type": "array",
+	    "items": {
+		    "type": "string"
+	    },
+            "description": "Custom option for global configuration. If the option already exist - it will be replaced with new one. Following format is accepted: [a-Z0-9] = [all characters are allowed except ?]",
+	    "format": "regex",
+	    "pattern": "^[a-zA-Z0-9 ]+=[^?]*$"
+          }
+        },
+        "required": [
+          "enabled",
+          "name",
+          "description",
+          "workgroup",
+          "homes"
+        ]
+      }
+    },
+    "requestBodies": {
+      "samba": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/samba"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "samba_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/samba"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "samba_user": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/samba_user"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "samba_user_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/samba_user"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "samba_share": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/samba_share"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "samba_share_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/samba_share"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "delete_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    ""
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "examples": {}
+          }
+        }
+      },
+      "samba_user_post": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {
+                    "username": ""
+                  }
+                }
+              },
+              "properties": {
+                "data": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/samba_user"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200_samba": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/samba"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "enabled": "string",
+                    "name": "string",
+                    "description": "string",
+                    "workgroup": "string",
+                    "homes": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_samba_user": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string",
+                          "description": "User username"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/samba_user"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "username": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_samba_user_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "username": {
+                            "type": "string",
+                            "description": "User username"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/samba_user"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "username": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_samba_share": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/samba_share"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "name": "string",
+                    "path": "string",
+                    "users": [
+                      "string"
+                    ],
+                    "read_only": "string",
+                    "browseable": "string",
+                    "guest_ok": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_samba_share_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/samba_share"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "name": "string",
+                      "path": "string",
+                      "users": [
+                        "string"
+                      ],
+                      "read_only": "string",
+                      "browseable": "string",
+                      "guest_ok": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_samba_status": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "sessions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "status": true,
+                    "sessions": [
+                      "silgalisau.lan:43392"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_samba_config": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    "[global]",
+                    "\tnetbios name = Router_share ",
+                    "\tdisplay charset = UTF-8",
+                    "\tinterfaces = lo br-lan ",
+                    "\tserver string = Router share",
+                    "\tunix charset = UTF-8",
+                    "\tworkgroup = WORKGROUP",
+                    "\tbind interfaces only = yes",
+                    "\tdeadtime = 30",
+                    "\tenable core files = no",
+                    "\tinvalid users = root",
+                    "\tlocal master = no",
+                    "\tmap to guest = Bad User",
+                    "\tmax protocol = SMB2",
+                    "\tmin receivefile size = 16384",
+                    "\tnull passwords = yes",
+                    "\tpassdb backend = smbpasswd",
+                    "\tsecurity = user",
+                    "\tsmb passwd file = /etc/samba/smbpasswd",
+                    "\tuse sendfile = yes",
+                    "\tforce user = root"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

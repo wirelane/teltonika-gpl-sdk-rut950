@@ -1,0 +1,42 @@
+{
+    "system/admin/certificates/generation": {
+        "description": "certificates generation",
+        "read": {
+            "api": [
+                "/certificates/config/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/certificates/actions/*"
+            ]
+        }
+    },
+    "system/admin/certificates/manager": {
+        "description": "certificate manager",
+        "read": {
+            "api": [
+                "/certificates/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/certificates/*"
+            ]
+        }
+    },
+    "system/admin/certificates/root_ca": {
+        "description": "certificates root ca",
+        "read": {
+            "api": [
+                "/root_ca/*",
+				"/certificates/config/ca/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/root_ca/*"
+            ]
+        }
+    }
+}

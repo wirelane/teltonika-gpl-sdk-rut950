@@ -1,0 +1,521 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SSTP",
+    "description": "SSTP api documentation",
+    "contact": {},
+    "version": "1"
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "SSTP"
+    }
+  ],
+  "paths": {
+    "/sstp/config": {
+      "get": {
+        "summary": "Get sstp configurations",
+        "description": "Gets sstp configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_sstp_multi"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "get-sstp-general"
+      },
+      "post": {
+        "summary": "Create sstp configuration",
+        "description": "Creates sstp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_sstp_one"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "post-sstp-general",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {
+                      "id": ""
+                    }
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sstp_options_multi"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update sstp configurations",
+        "description": "Updates sstp configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_sstp_multi"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_sstp_multi"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "put-sstp-general"
+      },
+      "delete": {
+        "summary": "Delete sstp configurations",
+        "description": "Deletes sstp configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "delete-sstp-general"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "SSTP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/sstp/config/{sid}": {
+      "get": {
+        "summary": "Get sstp configuration",
+        "description": "Gets sstp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_sstp_one"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "get-sstp-general-sid"
+      },
+      "put": {
+        "summary": "Update sstp configuration",
+        "description": "Updates sstp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_sstp_one"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "put-sstp-general-sid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sstp_options"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete sstp configuration",
+        "description": "Deletes sstp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          }
+        },
+        "tags": [
+          "SSTP"
+        ],
+        "operationId": "delete-sstp-general-sid"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true,
+          "description": "Configuration name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "SSTP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/sstp/options": {
+      "get": {
+        "summary": "Get sstp options",
+        "tags": [
+          "SSTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_sstp_options"
+          }
+        },
+        "operationId": "get-services-sstp-options",
+        "description": "Gets sstp options"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "SSTP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_sstp_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/sstp_options"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        }
+      },
+      "200_sstp_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/sstp_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_sstp_options": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sstp_options": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "sstp_options": [
+                      "noauth",
+                      "refuse-pap",
+                      "refuse-eap",
+                      "refuse-chap",
+                      "refuse-mschap"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "sstp_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable SSTP tunnel"
+          },
+          "server": {
+            "x-web": {
+              "pretty": "Server IP adddress or host name",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Server IP address or host name"
+          },
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "User name"
+          },
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Password"
+          },
+          "_device_files": {
+            "type": "string",
+            "description": "Choose this option if you want to select certificate files from device."
+          },
+          "ca": {
+            "x-web": {
+              "pretty": "CA cert",
+              "input-type": "input"
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Upload CA certificate in PEM format"
+          },
+          "defaultroute": {
+            "x-web": {
+              "pretty": "Default route",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "When set, this connection will become the device's default route."
+          },
+          "sstp_options": {
+            "x-web": {
+              "pretty": "Auth options",
+              "input-type": "select"
+            },
+            "type": "array",
+            "description": "Extra options.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "noauth",
+                "refuse-pap",
+                "refuse-eap",
+                "refuse-chap",
+                "refuse-mschap"
+              ]
+            }
+          }
+        }
+      },
+      "req_body_sstp_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {
+                "id": ""
+              }
+            ]
+          }
+        },
+        "title": "",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/sstp_options_multi"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_delete_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              ""
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "sstp_options_multi": {
+        "title": "sstp_options_multi",
+        "x-stoplight": {
+          "id": "irfs5kox699o9"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/sstp_options"
+          }
+        ]
+      }
+    }
+  }
+}

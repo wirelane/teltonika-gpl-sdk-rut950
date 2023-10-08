@@ -1,0 +1,690 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile status API documentation",
+    "version": "1.0"
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "Modems"
+    }
+  ],
+  "paths": {
+    "/mobile/modems/status_basic": {
+      "get": {
+        "summary": "Returns basic status of all modems",
+        "tags": [
+          "Modems"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/mobile_status_basic_multiple"
+          }
+        },
+        "operationId": "get-network-mobile-modems-status_basic"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/status_basic/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns basic status of one modems",
+        "tags": [
+          "Modems"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/mobile_status_basic_one"
+          }
+        },
+        "operationId": "get-network-mobile-modems-status_basic-id"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/status_full": {
+      "get": {
+        "summary": "Returns full status of all modems",
+        "tags": [
+          "Modems"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/mobile_status_full_multiple"
+          }
+        },
+        "operationId": "get-network-mobile-modems-status_full"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/status_full/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns full status of one modem",
+        "tags": [
+          "Modems"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/mobile_status_full_one"
+          }
+        },
+        "operationId": "get-network-mobile-modems-status_full-id"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "status_basic": {
+        "title": "status_basic",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "imei": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "cell_info": {
+            "type": "object",
+            "properties": {
+              "mcc": {
+                "type": "string"
+              },
+              "mnc": {
+                "type": "string"
+              },
+              "pcid": {
+                "type": "string"
+              },
+              "earfcn": {
+                "type": "string"
+              },
+              "arfcn": {
+                "type": "string"
+              },
+              "uarfcn": {
+                "type": "string"
+              }
+            }
+          },
+          "dynamic_mtu": {
+            "type": "boolean"
+          },
+          "service_modes": {
+            "type": "object",
+            "properties": {
+              "2G": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "3G": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "4G": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "NB": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "5G_NSA": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "lac": {
+            "type": "string",
+            "description": "The Location Area Code is a unique number given to each location area within the network. The served area of a cellular radio access network is usually divided into location areas, consisting of one or several radio cells."
+          },
+          "name": {
+            "type": "string",
+            "enum": [
+              "Primary modem",
+              "Secondary modem",
+              "External modem",
+              "Internal modem",
+              "Unknown modem"
+            ]
+          },
+          "ca_signal": {
+            "type": "array",
+            "description": "Carrier aggregation signal values",
+            "items": {
+              "type": "object",
+              "properties": {
+                "band": {
+                  "type": "string"
+                },
+                "bandwidth": {
+                  "type": "string"
+                },
+                "sinr": {
+                  "type": "number"
+                },
+                "rsrq": {
+                  "type": "number"
+                },
+                "rsrp": {
+                  "type": "number"
+                },
+                "pcid": {
+                  "type": "number"
+                },
+                "frequency": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "index": {
+            "type": "number"
+          },
+          "sim_count": {
+            "type": "number"
+          },
+          "version": {
+            "type": "string"
+          },
+          "builtin": {
+            "type": "boolean"
+          },
+          "mode": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "primary": {
+            "type": "number"
+          },
+          "multi_apn": {
+            "type": "boolean"
+          },
+          "ipv6": {
+            "type": "boolean"
+          },
+          "volte_supported": {
+            "type": "boolean"
+          },
+          "operators_scan": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "imei",
+          "model",
+          "active_sim",
+          "name",
+          "sim_count",
+          "version",
+          "builtin",
+          "primary"
+        ]
+      },
+      "status_full": {
+        "title": "status_full",
+        "type": "object",
+        "properties": {
+          "conntype": {
+            "type": "string"
+          },
+          "simstate": {
+            "type": "string",
+            "enum": [
+              "Inserted",
+              "Not inserted"
+            ]
+          },
+          "simstate_id": {
+            "type": "number",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "Connected",
+              "Disconnected",
+              "Unknown"
+            ]
+          },
+          "state_id": {
+            "type": "number",
+            "minLength": 1,
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          },
+          "txbytes": {
+            "type": "number"
+          },
+          "rxbytes": {
+            "type": "number"
+          },
+          "baudrate": {
+            "type": "number"
+          },
+          "is_busy": {
+            "type": "number"
+          },
+          "active_sim": {
+            "type": "number",
+            "description": "Currently active SIM card."
+          },
+          "busy_state": {
+            "type": "string"
+          },
+          "busy_state_id": {
+            "type": "number"
+          },
+          "pinstate": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "Inserted",
+              "Not ready",
+              "Required PIN, X attempts left",
+              "Required PUK, X attempts left",
+              "Not inserted",
+              "SIM failure",
+              "Busy",
+              "PUK"
+            ]
+          },
+          "pinstate_id": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2,
+              4,
+              5,
+              10,
+              13,
+              14,
+              15
+            ]
+          },
+          "netstate": {
+            "type": "string",
+            "enum": [
+              "Not registered",
+              "Registered, home",
+              "Searching",
+              "Denied",
+              "Unknown",
+              "Roaming"
+            ]
+          },
+          "netstate_id": {
+            "type": "number",
+            "minLength": 1,
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "signal": {
+            "type": "number"
+          },
+          "oper": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "ntype": {
+            "type": "string"
+          },
+          "imsi": {
+            "type": "string"
+          },
+          "iccid": {
+            "type": "string"
+          },
+          "cellid": {
+            "type": "string"
+          },
+          "rscp": {
+            "type": "string"
+          },
+          "ecio": {
+            "type": "string"
+          },
+          "rsrp": {
+            "type": "number"
+          },
+          "rsrq": {
+            "type": "number"
+          },
+          "sinr": {
+            "type": "number"
+          },
+          "pinleft": {
+            "type": "number"
+          },
+          "volte": {
+            "type": "boolean"
+          },
+          "sc_band_av": {
+            "type": "string",
+            "enum": [
+              "Single",
+              "Dual",
+              "Triple",
+              "Multi"
+            ],
+            "description": "Carrier aggregation type"
+          },
+          "ca_signal": {
+            "type": "array",
+            "description": "Carrier aggregation signal values",
+            "items": {
+              "type": "object",
+              "properties": {
+                "band": {
+                  "type": "string"
+                },
+                "bandwidth": {
+                  "type": "string"
+                },
+                "sinr": {
+                  "type": "number"
+                },
+                "rsrq": {
+                  "type": "number"
+                },
+                "rsrp": {
+                  "type": "number"
+                },
+                "pcid": {
+                  "type": "number"
+                },
+                "frequency": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "temperature": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "pinstate",
+          "state",
+          "txbytes",
+          "rxbytes",
+          "baudrate",
+          "is_busy",
+          "busy_state",
+          "busy_state_id",
+          "simstate",
+          "netstate",
+          "signal",
+          "oper",
+          "provider",
+          "ntype",
+          "imsi",
+          "iccid",
+          "cellid",
+          "rscp",
+          "ecio",
+          "rsrp",
+          "rsrq",
+          "sinr",
+          "pinleft",
+          "volte"
+        ]
+      },
+      "status_offline": {
+        "title": "status_offline",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Offline modem id"
+          },
+          "name": {
+            "type": "string",
+            "enum": [
+              "Primary modem",
+              "Secondary modem",
+              "Internal modem"
+            ],
+            "description": "Offline modem name"
+          },
+          "offline": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Modem state"
+          },
+          "blocked": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Modem block state"
+          },
+          "builtin": {
+            "type": "boolean",
+            "description": "Modem type"
+          },
+          "primary": {
+            "type": "boolean",
+            "description": "Modem type"
+          },
+          "sim_count": {
+            "type": "number",
+            "description": "Modem SIM count"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "offline",
+          "builtin",
+          "primary",
+          "sim_count"
+        ]
+      }
+    },
+    "responses": {
+      "mobile_status_basic_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/status_basic"
+                    },
+                    {
+                      "$ref": "#/components/schemas/status_offline"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "mobile_status_basic_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/status_basic"
+                      },
+                      {
+                        "$ref": "#/components/schemas/status_offline"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      },
+      "mobile_status_full_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/status_basic"
+                          },
+                          {
+                            "$ref": "#/components/schemas/status_full"
+                          }
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/status_offline"
+                      }
+                    ]
+                  },
+                  "type": "array"
+                }
+              }
+            }
+          }
+        }
+      },
+      "mobile_status_full_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "anyOf": [
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/status_basic"
+                        },
+                        {
+                          "$ref": "#/components/schemas/status_full"
+                        }
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/status_offline"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

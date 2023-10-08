@@ -1,0 +1,26 @@
+{
+	"network/routes/dynamic_routes/proto_nhrp": {
+		"description": "dynamic nhrp routes configuraiton",
+		"read": {
+			"api": [
+				"/routes/dynamic/nhrp/*",
+				"/devices/status/*",
+				"/ipsec/config/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/routes/dynamic/nhrp/*"
+			]
+		}
+	},
+	
+	"status/routes/dynamic/nhrp": {
+		"description": "nhrp routes",
+		"read": {
+			"api": [
+				"/routes/dynamic/nhrp/*"
+			]
+		}
+	}
+}

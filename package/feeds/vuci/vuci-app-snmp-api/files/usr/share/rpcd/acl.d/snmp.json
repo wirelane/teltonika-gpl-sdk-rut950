@@ -1,0 +1,66 @@
+{
+  "services/snmp/snmp_settings": {
+    "description": "snmp settings",
+    "read": {
+      "api": [
+        "/snmp/settings/*",
+        "/snmp/system/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/snmp/settings/*",
+        "/snmp/system/*",
+        "/profinet/actions/update_status/*"
+      ]
+    }
+  },
+  "services/snmp/snmpv3": {
+    "description": "snmp v3 users",
+    "read": {
+      "api": [
+        "/snmp/v3/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/snmp/v3/*",
+        "/profinet/actions/update_status/*"
+      ]
+    }
+  },
+  "services/snmp/community": {
+    "description": "snmp communities",
+    "read": {
+      "api": [
+        "/snmp/communities/*",
+        "/snmp/communities_v6/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/snmp/communities/*",
+        "/snmp/communities_v6/*",
+        "/profinet/actions/update_status/*"
+      ]
+    }
+  },
+  "services/snmp/traps": {
+    "description": "trap settings",
+    "read": {
+      "api": [
+        "/snmp/trap_settings/*",
+        "/snmp/trap_rules/*",
+        "/io/status/config/*",
+        "/mobile/modems/status_basic/*",
+        "/events_reporting/options/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/snmp/trap_settings/*",
+        "/snmp/trap_rules/*"
+      ]
+    }
+  }
+}

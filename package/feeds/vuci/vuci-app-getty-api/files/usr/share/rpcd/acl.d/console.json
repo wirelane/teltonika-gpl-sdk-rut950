@@ -1,0 +1,17 @@
+{
+	"services/serial_utilities/console": {
+		"description": "Console",
+		"read": {
+			"api": [
+				"/console/*",
+				"/serial/*",
+				"/device/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/console/*"
+			]
+		}
+	}
+}

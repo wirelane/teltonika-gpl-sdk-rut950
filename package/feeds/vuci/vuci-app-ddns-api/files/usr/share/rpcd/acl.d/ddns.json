@@ -1,0 +1,24 @@
+{
+    "services/ddns": {
+        "description": "ddns configuration",
+        "read": {
+            "uci": [
+                "ddns",
+                "dhcp",
+                "network"
+            ],
+            "api": [
+                "/ddns/*",
+                "/interfaces/config/*"
+            ]
+        },
+        "write": {
+            "uci": [
+                "ddns",
+                "dhcp",
+                "network"
+            ],
+            "api": ["/ddns/*"]
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+	"system/packages": {
+		"title": "Package Manager",
+		"index": 30
+	},
+		"system/packages/packages": {
+			"title": "Packages",
+			"index": 1,
+			"view": "services/PackagesDownload",
+			"acls": [ "system/packages/packages" ]
+		},
+		"system/packages/upload": {
+			"title": "Upload",
+			"index": 2,
+			"view": "services/PackagesUpload",
+			"acls": [ "system/packages/upload" ]
+		}
+}

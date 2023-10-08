@@ -1,0 +1,362 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Profiles"
+    }
+  ],
+  "paths": {
+    "/profiles/config": {
+      "get": {
+        "summary": "Returns all profiles configurations",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ProfMulti"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates profile configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200Prof"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/profiles_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified profiles configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Profiles"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Profiles"
+        ]
+      }
+    },
+    "/profiles/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns specified profiles configuration",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Prof"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specified profiles configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Profiles"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Profiles"
+        ]
+      }
+    },
+    "/profiles/actions/apply_profile": {
+      "post": {
+        "summary": "Applies provided profile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status",
+                      "default": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "lan_ip": {
+                          "type": "string",
+                          "description": "LAN IP address of the profile.",
+                          "default": "192.168.1.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Profiles"
+        ]
+      }
+    },
+    "/profiles/status": {
+      "get": {
+        "summary": "Get current profile in use",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "current_profile": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Profiles"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Prof": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/profiles_options_get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ProfMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "array of of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/profiles_options_get"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "profiles_options": {
+        "title": "Profiles options",
+        "type": "object",
+        "properties": {
+          "id": {
+            "x-web": {
+              "pretty": "Profile name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Profile configuration identifier (ID).",
+            "maxLength": 20
+          },
+          "from_current_profile": {
+            "x-web": {
+              "pretty": "Profile from current configuration",
+              "input-type": "switch"
+            },
+            "description": "Creates new profile from current profile.",
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ]
+          }
+        }
+      },
+      "profiles_options_get": {
+        "title": "Profiles GET options",
+        "type": "object",
+        "properties": {
+          "id": {
+            "x-web": {
+              "pretty": "Profile name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Profile configuration identifier (ID).",
+            "readOnly": true
+          },
+          "updated": {
+            "x-web": {
+              "pretty": "Created / Updated"
+            },
+            "type": "string",
+            "description": "Timestamp of profile creation date or last profile update.",
+            "readOnly": true
+          },
+          "profile_id": {
+            "x-web": {
+              "pretty": "Profile ID"
+            },
+            "type": "string",
+            "description": "ID of a profile.",
+            "readOnly": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+	"status/realtime": {
+		"title": "Realtime Data",
+		"index": 50
+	},
+	"status/realtime/load": {
+		"title": "Load",
+		"acls": [
+			"status/realtime/load"
+		],
+		"index": 10,
+		"view": "status/LoadRealtime"
+	}
+}

@@ -1,0 +1,1441 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/juggler/config/general/actions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "I/O Juggler Action Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Returns the specified I/O Juggler Action configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerAction"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Updates the specified I/O Juggler Action configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerAction"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_action_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Deletes the specified I/O Juggler Action configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Uploads I/O Juggler Action certificate files or script file",
+        "operationId": "post-services-dafdafg-config-cfg",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Uploaded file path."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "enum": [
+                      "cafile",
+                      "certfile",
+                      "keyfile",
+                      "upload"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "Actions"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/juggler/config/general/actions": {
+      "get": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Returns all I/O Juggler Action configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerActionMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Creates a new I/O Juggler Action configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200IoJugglerAction"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_action_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Updates the specified I/O Juggler Action configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerActionMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_juggler_action_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "summary": "Deletes the specified I/O Juggler Action configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "Actions"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/juggler/options/general/actions": {
+      "get": {
+        "summary": "Returns options needed for I/O juggler action configuration",
+        "tags": [
+          "I/O Juggler Actions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "params": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/device_param"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-io-juggler-options-general-actions"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "Actions"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoJugglerAction": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_juggler_action_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoJugglerActionMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_juggler_action_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_juggler_action_single_options": {
+        "type": "object",
+        "properties": {
+          "ui_name": {
+            "type": "string",
+            "description": "WebUI name of the action.",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of action.",
+            "enum": [
+              "email",
+              "dout",
+              "http",
+              "script",
+              "reboot",
+              "profile",
+              "mqtt",
+              "rms"
+            ],
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "mobile": true,
+                    "dual_sim": true,
+                    "wifi": false
+                  },
+                  "values": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "mqtt",
+                    "rms",
+                    "sms",
+                    "sim_switch"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": true,
+                    "dual_sim": false,
+                    "wifi": true
+                  },
+                  "values": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "mqtt",
+                    "rms",
+                    "wifi",
+                    "sms"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": true,
+                    "dual_sim": true,
+                    "wifi": true
+                  },
+                  "values": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "mqtt",
+                    "rms",
+                    "wifi",
+                    "sms",
+                    "sim_switch"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false,
+                    "dual_sim": false,
+                    "wifi": true
+                  },
+                  "values": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "mqtt",
+                    "rms",
+                    "wifi"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false,
+                    "dual_sim": false,
+                    "wifi": false
+                  },
+                  "values": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "mqtt",
+                    "rms"
+                  ]
+                }
+              ],
+              "enum-pretty": {
+                "email": "Email",
+                "dout": "Output",
+                "http": "HTTP",
+                "script": "Script",
+                "reboot": "Reboot",
+                "profile": "Profile",
+                "mqtt": "MQTT",
+                "rms": "RMS",
+                "wifi": "WiFi",
+                "sms": "SMS",
+                "sim_switch": "SIM Switch"
+              }
+            }
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of an email.",
+            "format": "subject_rule",
+            "pattern": "^[a-zA-Z0-9!@#$%%&*+-/=?^_`{|}~. ]+$",
+            "x-web": {
+              "pretty": "Subject",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "email"
+                }
+              ]
+            }
+          },
+          "post": {
+            "type": "string",
+            "description": "Http request type.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Method",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "http"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Get",
+                "1": "Post"
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to send parameters to.",
+            "format": "url",
+            "example": "example.com",
+            "x-web": {
+              "pretty": "URL",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "http"
+                }
+              ]
+            }
+          },
+          "verify": {
+            "type": "string",
+            "description": "Verifies the validity of certificates, only works for https.",
+            "x-web": {
+              "pretty": "Verify",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "http"
+                }
+              ]
+            }
+          },
+          "ui_params": {
+            "type": "string",
+            "description": "Choose a different way to pass parameters. If method is POST parameters are passed in request body. If method is GET parameters are passed throught the URL.",
+            "x-web": {
+              "pretty": "Alt. parameter mode",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "http"
+                }
+              ]
+            }
+          },
+          "text": {
+            "type": "string",
+            "description": "Message to send.",
+            "format": "string",
+            "default": "Router name - %rn; Time stamp - %ts",
+            "x-web": {
+              "pretty": "Text message",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": [
+                    "email",
+                    "sms",
+                    "mqtt"
+                  ]
+                },
+                {
+                  "type": "http",
+                  "ui_params": "1"
+                }
+              ]
+            }
+          },
+          "topic": {
+            "type": "string",
+            "description": "Topic to publish to",
+            "x-web": {
+              "pretty": "Topic",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "params": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "regex",
+              "pattern": "^[^=]+=(ts|ut|it|rn|lm|li|sn|fc|ms|in|si|ex|ci|rq|sr|rp|st|ps|md|ni|im|is|ns|cs|ct|mi|on|ss|ie|ic|nb|sv|cp|ec|su|wi|wm)$"
+            },
+            "description": "Parameters and their value for usage for Post or Get methods.",
+            "x-web": {
+              "pretty": "Parameters",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "http",
+                  "ui_params": "0"
+                }
+              ]
+            }
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "string"
+            },
+            "description": "Allows to add custom headers to the HTTP requests.",
+            "x-web": {
+              "pretty": "Custom headers",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "http"
+                }
+              ]
+            }
+          },
+          "delay": {
+            "type": "string",
+            "description": "How many seconds will pass before the action is executed after it's triggered.",
+            "format": "uinteger",
+            "maxLength": 8,
+            "x-web": {
+              "pretty": "Execution delay",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "rms",
+                    "sms",
+                    "sim_switch",
+                    "wifi"
+                  ]
+                }
+              ]
+            }
+          },
+          "info_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to get information from.",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              },
+              "depends": [
+                {
+                  "type": [
+                    "email",
+                    "sms",
+                    "http",
+                    "script"
+                  ]
+                }
+              ]
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to send information from.",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              },
+              "depends": [
+                {
+                  "type": "sms"
+                }
+              ]
+            }
+          },
+          "ui_recipient_format": {
+            "type": "string",
+            "description": "Choose between single numbers in a list or usage a phone group list.",
+            "enum": [
+              "single",
+              "group"
+            ],
+            "x-web": {
+              "pretty": "Recipients",
+              "input-type": "select",
+              "enum-pretty": {
+                "single": "Single",
+                "group": "Group"
+              },
+              "depends": [
+                {
+                  "type": "sms"
+                }
+              ]
+            }
+          },
+          "phone": {
+            "type": "string",
+            "description": "For whom you want to send a SMS to, e.g. +37000000000.",
+            "format": "phonedigit",
+            "x-web": {
+              "pretty": "Recipient's phone number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ui_recipient_format": "single"
+                }
+              ]
+            }
+          },
+          "phone_group": {
+            "type": "string",
+            "description": "A recipient's phone number users group.",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "select",
+              "depends": [
+                {
+                  "ui_recipient_format": "group"
+                }
+              ]
+            }
+          },
+          "rms_on": {
+            "type": "string",
+            "description": "Enable/Disable RMS functionality.",
+            "x-web": {
+              "pretty": "Enable RMS",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "rms"
+                }
+              ]
+            }
+          },
+          "wifi_on": {
+            "type": "string",
+            "description": "Enable/Disable all WiFi interfaces.",
+            "x-web": {
+              "pretty": "Enable WiFi",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "wifi"
+                }
+              ]
+            }
+          },
+          "dest": {
+            "type": "string",
+            "description": "Specifies the output/relay of which the state will be changed.",
+            "x-web": {
+              "pretty": "Control",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "dout"
+                }
+              ],
+              "enum-depends": {
+                "$ref": "#/x-schemas/out_pin_options_select"
+              }
+            }
+          },
+          "revert": {
+            "type": "string",
+            "description": "After how many seconds the state will revert. If left 0 or empty the state will not revert.",
+            "format": "uinteger",
+            "default": "0",
+            "x-web": {
+              "pretty": "Revert",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "dout"
+                }
+              ]
+            }
+          },
+          "maintain": {
+            "type": "string",
+            "description": "Maintain this IO state after reboot.",
+            "default": "1",
+            "x-web": {
+              "pretty": "Maintain",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "dout"
+                }
+              ]
+            }
+          },
+          "invert": {
+            "type": "string",
+            "description": "On action inverts pin state.",
+            "x-web": {
+              "pretty": "Invert",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "dout"
+                }
+              ]
+            }
+          },
+          "ui_mirroring": {
+            "type": "string",
+            "description": "Copies the state from selected input to selected output.",
+            "x-web": {
+              "pretty": "State copying",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "dout"
+                }
+              ]
+            }
+          },
+          "state": {
+            "type": "string",
+            "description": "Specifies what state the output pin will be set to.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "State",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "dout",
+                  "invert": "0",
+                  "ui_mirroring": "0"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Low/Open",
+                "1": "High/Closed"
+              }
+            }
+          },
+          "copy": {
+            "type": "string",
+            "description": "Specifies the input/relay from which state is copied.",
+            "x-web": {
+              "pretty": "Source",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "dout",
+                  "ui_mirroring": "1"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "din1": true
+                  },
+                  "values": [
+                    "din1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "din2": true
+                  },
+                  "values": [
+                    "din2"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio0": true
+                  },
+                  "values": [
+                    "dio0"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio1": true
+                  },
+                  "values": [
+                    "dio1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio2": true
+                  },
+                  "values": [
+                    "dio2"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "iio": true
+                  },
+                  "values": [
+                    "iio"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "relay0": true
+                  },
+                  "values": [
+                    "relay0"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "relay1": true
+                  },
+                  "values": [
+                    "relay1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dwi0": true
+                  },
+                  "values": [
+                    "dwi0"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dwi1": true
+                  },
+                  "values": [
+                    "dwi1"
+                  ]
+                }
+              ]
+            }
+          },
+          "email_group": {
+            "type": "string",
+            "description": "Choose non empty email configuration from email accounts.",
+            "x-web": {
+              "pretty": "Email account",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "email"
+                }
+              ]
+            }
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "For whom you want to send an email to.",
+            "x-web": {
+              "pretty": "Recipient's email address",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "email"
+                }
+              ]
+            }
+          },
+          "ui_file_path": {
+            "type": "string",
+            "description": "Choose to upload a script or specify its absolute path in router.",
+            "enum": [
+              "upload",
+              "path"
+            ],
+            "x-web": {
+              "pretty": "Specify path",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "script"
+                }
+              ],
+              "enum-pretty": {
+                "upload": "Upload a script",
+                "path": "Specify a path"
+              }
+            }
+          },
+          "upload": {
+            "type": "string",
+            "description": "An uploaded script file which is run when pin triggers, can accept arguments. Limit 100Kb.",
+            "format": "path",
+            "x-web": {
+              "pretty": "Custom script",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "script",
+                  "ui_file_path": "upload"
+                }
+              ]
+            }
+          },
+          "path": {
+            "type": "string",
+            "description": "A script which is run when pin triggers, can accept arguments.",
+            "format": "string",
+            "x-web": {
+              "pretty": "Script file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "script",
+                  "ui_file_path": "path"
+                }
+              ]
+            }
+          },
+          "arguments": {
+            "type": "string",
+            "description": "Optional arguments which can be provided for the script.",
+            "format": "string",
+            "x-web": {
+              "pretty": "Arguments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "script"
+                }
+              ]
+            }
+          },
+          "profile": {
+            "type": "string",
+            "description": "Choose a profile that will be applied when the action triggers.",
+            "x-web": {
+              "pretty": "Profile",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "profile"
+                }
+              ]
+            }
+          },
+          "flip": {
+            "type": "string",
+            "description": "Switches to a different inserted SIM card.",
+            "x-web": {
+              "pretty": "Flip",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "sim_switch"
+                }
+              ]
+            }
+          },
+          "write_to_config": {
+            "type": "string",
+            "description": "Enables simd service to change primary card while switching sims.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable primary option transfer",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "sim_switch"
+                }
+              ]
+            }
+          },
+          "target": {
+            "type": "string",
+            "description": "A SIM to switch to.",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "Target",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "sim_switch",
+                  "flip": "0"
+                }
+              ]
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specifies global conditions for this pin. Actions will trigger only if the conditions are met. Conditions are optional.",
+            "x-web": {
+              "pretty": "Add conditions",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": [
+                    "email",
+                    "dout",
+                    "http",
+                    "script",
+                    "reboot",
+                    "profile",
+                    "rms",
+                    "sms",
+                    "sim_switch",
+                    "wifi"
+                  ]
+                }
+              ]
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Specify address of the MQTT broker",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "remote_port": {
+            "type": "string",
+            "description": "Port of the MQTT broker",
+            "format": "port",
+            "default": "1883",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "keepalive": {
+            "type": "string",
+            "description": "The number of seconds after which the broker should send a PING message to the client if no other messages have been exchanged in that time",
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Keepalive",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "qos": {
+            "type": "string",
+            "description": "Quality of Service to be used for the message.",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "QoS",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ],
+              "enum-pretty": {
+                "0": "At most once (0)",
+                "1": "At least once (1)",
+                "2": "Exactly once (2)"
+              }
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of remote host.",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of remote host",
+            "format": "credentials_validate",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "tls": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "x-web": {
+              "pretty": "TLS",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "mqtt"
+                }
+              ]
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "description": "Type of TLS connection",
+            "x-web": {
+              "pretty": "TLS Type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1"
+                }
+              ],
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              }
+            }
+          },
+          "tls_insecure": {
+            "type": "string",
+            "description": "Allow not verifying server authenticity",
+            "x-web": {
+              "pretty": "Allow insecure connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "_device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "cafile": {
+            "type": "string",
+            "description": "CA file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "certfile": {
+            "type": "string",
+            "description": "Certificate file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "keyfile": {
+            "type": "string",
+            "description": "Key file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading “0x”",
+            "format": "hexstring",
+            "maxLength": 128,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "identity": {
+            "type": "string",
+            "description": "The identity",
+            "format": "uciname",
+            "maxLength": 128,
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "mqtt",
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "url",
+          "topic",
+          "phone",
+          "upload",
+          "path",
+          "remote_addr",
+          "remote_port",
+          "keepalive",
+          "psk",
+          "identity"
+        ]
+      },
+      "io_juggler_action_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "I/O Juggler Action Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/io_juggler_action_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

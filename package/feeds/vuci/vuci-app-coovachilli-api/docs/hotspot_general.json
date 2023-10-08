@@ -1,0 +1,1421 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Hotspot General"
+    }
+  ],
+  "paths": {
+    "/hotspot/general/options/{id}": {
+      "get": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Returns specified profile options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotGeneral"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Profile name"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Profile name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "General"
+        ],
+        "hw_tags": {
+          "has_hotspot": true
+        }
+      }
+    },
+    "/hotspot/general/config/{id}": {
+      "get": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Returns the specified Hotspot General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotGeneral"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot General Configuration identifier (ID)"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Updates the specified Hotspot General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotGeneral"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot General Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_general_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Deletes the specified Hotspot General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot General Configuration identifier (ID)"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot General Configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "General"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/general/config": {
+      "get": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Returns all Hotspot General configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotGeneralMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Updates specified Hotspot General configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotGeneralMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/hotspot_general_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Creates Hotspot General configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200HotspotGeneral"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_general_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Deletes specified Hotspot General configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "General"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/general/logs": {
+      "get": {
+        "tags": [
+          "Hotspot General"
+        ],
+        "summary": "Fetches logs of hotspot from Database",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLogs"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Hotspot Log"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/general/status": {
+      "get": {
+        "summary": "Returns hotspot status",
+        "tags": [
+          "Hotspot General"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean",
+                          "description": "Hotspot is enabled/disabled."
+                        },
+                        "rx_bytes": {
+                          "type": "integer",
+                          "description": "Hotspot bytes received."
+                        },
+                        "tx_bytes ": {
+                          "type": "integer",
+                          "description": "Hotspot bytes sent."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-hotspot-general-status"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "General"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HotspotGeneral": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/hotspot_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotGeneralMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/hotspot_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotLogs": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/hotspot_general_log_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "hotspot_general_single_options": {
+        "type": "object",
+        "properties": {
+          "network": {
+            "type": "string",
+            "description": "Interface to be used for hotspot.",
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "_profile": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration profile",
+              "input-type": "input",
+              "group": "General settings General"
+            },
+            "description": "Configuration profile."
+          },
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "General settings General"
+            },
+            "description": "Enable/disable Hotspot General configuration.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "net": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Hotspot network",
+              "input-type": "input",
+              "group": "General settings General"
+            },
+            "description": "Hotspot Network.",
+            "format": "ipmask4"
+          },
+          "uamlisten": {
+            "type": "string",
+            "x-web": {
+              "pretty": "IP address",
+              "input-type": "input",
+              "group": "General settings General"
+            },
+            "description": "Hotspot IP address.",
+            "format": "ipaddr"
+          },
+          "_mode": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Authentication mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "local": "Local users",
+                "radius": "Radius",
+                "mac_auth": "MAC auth",
+                "sms_otp": "SMS OTP"
+              },
+              "group": "General settings General"
+            },
+            "description": "Specifies the method used to authenticate users.",
+            "enum": [
+              "local",
+              "radius",
+              "mac_auth",
+              "sms_otp"
+            ]
+          },
+          "duplicateusers": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Allow password duplicates",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "_mode": "sms_otp"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Allows more than one user to login with a same password.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "registerusers": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Allow signup",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "_mode": "local"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Allows users to sign up to hotspot.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "_enable_macpass": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Require password",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "_mode": "mac_auth"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Enables password requirement for MAC authentication.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "macpass": {
+            "type": "string",
+            "x-web": {
+              "pretty": "MAC auth password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_enable_macpass": "1"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Password for MAC authentication.",
+            "format": "credentials_validate"
+          },
+          "dynexpirationtime": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Expiration time",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "sms_otp"
+                },
+                {
+                  "registerusers": "1"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "User expiration time in sec (0 means unlimited).",
+            "format": "uinteger"
+          },
+          "_dyn_users_group": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Users group",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "sms_otp"
+                },
+                {
+                  "registerusers": "1"
+                },
+                {
+                  "_mode": "mac_auth"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Specifies the group of dynamically created users."
+          },
+          "modemid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "input",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "depends": [
+                {
+                  "_mode": "sms_otp"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "SMS gateway to send one time passwords (OTP)."
+          },
+          "_landingpage": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Landing page",
+              "input-type": "select",
+              "enum-pretty": {
+                "int": "Internal",
+                "ext": "External"
+              },
+              "group": "General settings General"
+            },
+            "description": "Location of the landing page.",
+            "enum": [
+              "int",
+              "ext"
+            ]
+          },
+          "withchallenge": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Landing page address",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Password encoding with the challenge.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "uamserver": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Landing page address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "External landing page address (http://www.example.com).",
+            "format": "protourl"
+          },
+          "uamport": {
+            "type": "string",
+            "x-web": {
+              "pretty": "UAM port",
+              "input-type": "input",
+              "group": "General settings General"
+            },
+            "description": "Port to bind for authenticating clients.",
+            "format": "port"
+          },
+          "uamsecret": {
+            "type": "string",
+            "x-web": {
+              "pretty": "UAM secret",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext",
+                  "nochallenge": true
+                }
+              ],
+              "group": "General settings General"
+            },
+            "description": "Shared secret between uamserver and hotspot.",
+            "format": "credentials_validate"
+          },
+          "_success": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Success page",
+              "input-type": "select",
+              "enum-pretty": {
+                "uam": "Success page",
+                "original": "Original URL",
+                "custom": "Custom"
+              },
+              "group": "General settings General"
+            },
+            "description": "Location to return to after successful authentication.",
+            "enum": [
+              "uam",
+              "original",
+              "custom"
+            ]
+          },
+          "_success_url": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Custom URL",
+              "input-type": "input",
+              "group": "General settings General",
+              "depends": [
+                {
+                  "_success": "custom"
+                }
+              ]
+            },
+            "description": "Address must contain protocol (http://www.example.com).",
+            "format": "protourl"
+          },
+          "moreif": {
+            "type": "array",
+            "x-web": {
+              "pretty": "Additional interfaces",
+              "input-type": "input",
+              "group": "General settings Advanced"
+            },
+            "items": {
+              "type": "string"
+            },
+            "description": "Choose additional the interfaces you want to attach to this hotspot instance."
+          },
+          "uamlogoutip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Logout address",
+              "input-type": "input",
+              "group": "General settings Advanced"
+            },
+            "description": "IP address to instantly logout a client accessing it.",
+            "format": "ip4addr"
+          },
+          "_protocol": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "select",
+              "depends": [
+                {
+                  "_landingpage": "int"
+                }
+              ],
+              "enum-pretty": {
+                "http": "HTTP",
+                "https": "HTTPS"
+              },
+              "group": "General settings Advanced"
+            },
+            "description": "Protocol to be used for landing page.",
+            "enum": [
+              "http",
+              "https"
+            ]
+          },
+          "tos": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable TOS",
+              "input-type": "switch",
+              "group": "General settings Advanced"
+            },
+            "description": "Enables Terms of Service (ToS) requirement. Client device will be able to access the Internet only after agreeing TOS.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "trialusers": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Trial access",
+              "input-type": "switch",
+              "group": "General settings Advanced"
+            },
+            "description": "Enables trial internet access.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "_trial_users_group": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Group",
+              "input-type": "input",
+              "depends": [
+                {
+                  "trialusers": "1"
+                }
+              ],
+              "group": "General settings Advanced"
+            },
+            "description": "Specifies the group of trial users."
+          },
+          "_https": {
+            "type": "string",
+            "x-web": {
+              "pretty": "HTTPS to landing page redirect",
+              "input-type": "switch",
+              "group": "General settings Advanced"
+            },
+            "description": "Redirect initial pre-landing page HTTPS requests to hotspot landing page.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "_device_files": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Certificate files from device",
+              "input-type": "switch",
+              "group": "General settings Advanced",
+              "depends": [
+                {
+                  "_https": "1"
+                }
+              ]
+            },
+            "description": "Choose this option if you want to select certificate files from device.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "sslkeyfile": {
+            "type": "string",
+            "format": "path",
+            "x-web": {
+              "pretty": "SSL key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_https": "1",
+                  "_device_files": "0"
+                }
+              ],
+              "group": "General settings Advanced"
+            },
+            "description": "SSL key file."
+          },
+          "_device_sslkeyfile": {
+            "type": "string",
+            "x-web": {
+              "pretty": "SSL key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_https": "1",
+                  "_device_files": "1"
+                }
+              ],
+              "group": "General settings Advanced"
+            },
+            "description": "SSL key file from device."
+          },
+          "sslcertfile": {
+            "type": "string",
+            "format": "path",
+            "x-web": {
+              "pretty": "SSL certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_https": "1",
+                  "_device_files": "0"
+                }
+              ],
+              "group": "General settings Advanced"
+            },
+            "description": "SSL certificate file."
+          },
+          "_device_sslcertfile": {
+            "type": "string",
+            "x-web": {
+              "pretty": "SSL certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_https": "1",
+                  "_device_files": "1"
+                }
+              ],
+              "group": "General settings Advanced"
+            },
+            "description": "SSL certificate file from device."
+          },
+          "dns1": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Primary DNS server",
+              "input-type": "input",
+              "group": "General settings Advanced"
+            },
+            "description": "Primary DNS server.",
+            "format": "ipaddr"
+          },
+          "dns2": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Secondary DNS server",
+              "input-type": "input",
+              "group": "General settings Advanced"
+            },
+            "description": "Secondary DNS server.",
+            "format": "ipaddr"
+          },
+          "radiusserver1": {
+            "type": "string",
+            "x-web": {
+              "pretty": "RADIUS server #1",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "The IP address of the first RADIUS server that is to be used to authenticate your wireless clients.",
+            "format": "host"
+          },
+          "radiusserver2": {
+            "type": "string",
+            "x-web": {
+              "pretty": "RADIUS server #2",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "The IP address of the second RADIUS server that is to be used to authenticate your wireless clients.",
+            "format": "host"
+          },
+          "radiusauthport": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Authentication port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "RADIUS server authentication port.",
+            "format": "port"
+          },
+          "radiusacctport": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Accounting port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "RADIUS server accounting port.",
+            "format": "port"
+          },
+          "radiusnasid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "NAS identifier",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "NAS Identifier.",
+            "format": "credentials_validate"
+          },
+          "radiussecret": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Radius secret key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "The secret key is used for authentication with the RADIUS server.",
+            "format": "credentials_validate"
+          },
+          "swapoctets": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Swap octets",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "Swap the meaning of input octets and output octets as it is related to RADIUS attributes.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "locationname": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Location name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "Location name.",
+            "format": "default_validation"
+          },
+          "radiuslocationid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Location ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_mode": "radius"
+                }
+              ],
+              "group": "General settings Radius"
+            },
+            "description": "Location ID.",
+            "format": "default_validation"
+          },
+          "uamdomainfile": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Address list",
+              "input-type": "input",
+              "group": "General settings Wallen garden"
+            },
+            "description": "List of addresses the client can access without first authenticating. One record per line. See placeholder for accepted formats.",
+            "format": "hostname"
+          },
+          "paramuamip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "UAM IP",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The IP Address of the Captive Portal gateway.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramuamport": {
+            "type": "string",
+            "x-web": {
+              "pretty": "UAM port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The port on which the Captive Portal will serve web content.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramcalled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Called",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The MAC address of the IP Address of the Captive Portal gateway.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "parammac": {
+            "type": "string",
+            "x-web": {
+              "pretty": "MAC",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The MAC address of the client trying to gain Internet access.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "IP",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The IP Address of the client trying to gain Internet access.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramnasid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "NAS id",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "An identification for the Captive Portal used in the RADIUS request.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramsessionid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "NAS id",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The unique identifier for session.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramuserurl": {
+            "type": "string",
+            "x-web": {
+              "pretty": "User url",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "The URL which the user tried to access before he were redirected to the Captive Portal's URL's pages.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "paramchallenge": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Challenge",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext",
+                  "nochallenge": true
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "A challenge that should be used together with the user's password to create an encrypted phrase used to log on.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "param1": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Custom 1",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "Add custom name and custom value which will be displayed in url parameters.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "param1value": {
+            "type": "string",
+            "x-web": {
+              "pretty": " ",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "Custom name.",
+            "format": "credentials_validate"
+          },
+          "param2": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Custom 2",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "Add custom name and custom value which will be displayed in url parameters.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_!]+$"
+          },
+          "param2value": {
+            "type": "string",
+            "x-web": {
+              "pretty": " ",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_landingpage": "ext"
+                }
+              ],
+              "group": "General settings URL parameters"
+            },
+            "description": "Custom name.",
+            "format": "credentials_validate"
+          },
+          "conup": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Session up",
+              "input-type": "input",
+              "group": "General settings User scripts"
+            },
+            "description": "Script executed after a session is authorized."
+          },
+          "condown": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Session down",
+              "input-type": "input",
+              "group": "General settings User scripts"
+            },
+            "description": "Script executed after a session has moved from authorized state to unauthorized."
+          },
+          "usersignup": {
+            "type": "string",
+            "x-web": {
+              "pretty": "User signup",
+              "input-type": "input",
+              "group": "General settings User scripts"
+            },
+            "description": "Script executed after a new user has been created during signup process."
+          }
+        },
+        "required": [
+          "network"
+        ]
+      },
+      "hotspot_general_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "description": "Hotspot General Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/hotspot_general_single_options"
+          }
+        ]
+      },
+      "hotspot_general_log_options": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mac": "FF-FF-FF-FF-FF-FF",
+            "input_octets": "132844",
+            "ip": "192.168.2.1",
+            "username": "string",
+            "terminate_cause": "0",
+            "output_octets": "165072",
+            "start_time": "01/01/22 00:00:00",
+            "session": "0",
+            "sessiontime": "100"
+          }
+        },
+        "properties": {
+          "mac": {
+            "type": "string"
+          },
+          "input_octets": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "terminate_cause": {
+            "type": "string"
+          },
+          "output_octets": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "session": {
+            "type": "string"
+          },
+          "sessiontime": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

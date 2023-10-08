@@ -1,0 +1,12 @@
+{
+    "system/maintenance": {
+        "title": "Maintenance",
+        "index": 20
+    },
+    "system/maintenance/speedtest": {
+        "title": "Speed Test",
+        "index": 80,
+        "view": "services/SpeedTest_aeaafe",
+        "acls": [ "system/maintenance/speedtest" ]
+    }
+}

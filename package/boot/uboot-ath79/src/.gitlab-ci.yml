@@ -1,0 +1,207 @@
+stages:
+  - parent
+
+variables:
+  CI_PIPELINE_SOURCE_PARENT: $CI_PIPELINE_SOURCE
+
+otd140:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/otd140.yml
+    strategy: depend
+
+rut14x:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut14x.yml
+    strategy: depend
+
+rut2m:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut2m.yml
+    strategy: depend
+
+rut2xx:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut2xx.yml
+      - local: .gitlab/ci/rut2xx-vboot.yml
+      - local: .gitlab/ci/rut2xx-vboot-64k.yml
+    strategy: depend
+
+rut300:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut300.yml
+    strategy: depend
+  
+rut301:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut301.yml
+    strategy: depend
+
+rut360:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut360.yml
+    strategy: depend
+
+rut952:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut952.yml
+      - local: .gitlab/ci/rut9xx-vboot.yml
+      - local: .gitlab/ci/rut9xx-vboot-64k.yml
+    strategy: depend
+
+rut9m:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut9m.yml
+    strategy: depend
+
+rut9xx:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut9xx.yml
+      - local: .gitlab/ci/rut9xx-vboot.yml
+      - local: .gitlab/ci/rut9xx-vboot-64k.yml
+    strategy: depend
+
+tap100:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/tap100.yml
+    strategy: depend
+
+tcr1xx:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/tcr1xx.yml
+    strategy: depend
+
+trb24x:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/trb24x.yml
+    strategy: depend
+
+trb2m:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/trb2m.yml
+    strategy: depend

@@ -1,0 +1,565 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "STunnel",
+    "description": "API documentation for STunnel",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "STunnel"
+    }
+  ],
+  "paths": {
+    "/stunnel/interfaces/config": {
+      "get": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Returns all stunnel configuration sections",
+        "description": "Returns all sections with their parameters form stunnel configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnelMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Creates stunnel section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnel"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/stunnel_id_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Deletes specified stunnel configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Update all section options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnelMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/stunnel_id_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "STunnel"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/stunnel/interfaces/config/{sid}": {
+      "get": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Returns specified stunnel section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnel"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration stunnel section identifier"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Deletes specified stunnel configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration stunnel section identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "STunnel"
+        ],
+        "summary": "Updates specified stunnel configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnel"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration stunnel section identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/stunnel_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "STunnel"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200stunnel": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/stunnel_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200stunnelMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/stunnel_id_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "stunnel_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable Stunnel"
+          },
+          "client": {
+            "x-web": {
+              "pretty": "Operating Mode",
+              "enum-pretty": {
+                "0": "Server",
+                "1": "Client"
+              },
+              "input-type": "select"
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Operating Mode. 0"
+          },
+          "accept_host": {
+            "x-web": {
+              "pretty": "Listen IP",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP which server will be listening to"
+          },
+          "accept_port": {
+            "x-web": {
+              "pretty": "Listen Port",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Port number which server will be listenting to (range 0:65535)"
+          },
+          "connect": {
+            "x-web": {
+              "pretty": "Connect IP's",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Connect IP",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_cipher_type": {
+            "x-web": {
+              "pretty": "TLS Cipher",
+              "enum-pretty": {
+                "none": "None",
+                "dhe_rsa": "Secure",
+                "custom": "Custom"
+              },
+              "input-type": "select"
+            },
+            "type": "string",
+            "enum": [
+              "none",
+              "dhe_rsa",
+              "custom"
+            ],
+            "description": "Packet encryption algorithm (cipher)"
+          },
+          "ciphers": {
+            "x-web": {
+              "pretty": "Allowed TLS Ciphers",
+              "input-type": "input",
+              "depends": [
+                {
+                  "_cipher_type": "custom"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "Allowed TLS Ciphers",
+            "items": {
+              "type": "string"
+            }
+          },
+          "protocol": {
+            "x-web": {
+              "pretty": "Application Protocol",
+              "enum-pretty": {
+                "": "Not specified",
+                "connect": "Connect",
+                "smtp": "SMTP"
+              },
+              "input-type": "select"
+            },
+            "type": "string",
+            "enum": [
+              "connect",
+              "smtp"
+            ],
+            "description": "Applicaton Protocol"
+          },
+          "protocolAuthentication": {
+            "x-web": {
+              "pretty": "Protocol Authentication",
+              "enum-pretty": {
+                "connect": "Connect",
+                "smtp": "SMTP"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "protocol": "connect"
+                },
+                {
+                  "protocol": "smtp"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "plain",
+              "login",
+              "basic",
+              "ntlm"
+            ],
+            "description": "Packet encryption algorithm (cipher)"
+          },
+          "protocolDomain": {
+            "x-web": {
+              "pretty": "Protocol Domain",
+              "input-type": "input",
+              "depends": [
+                {
+                  "protocol": "connect",
+                  "client": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Domain for the protocol negotiations"
+          },
+          "protocolHost": {
+            "x-web": {
+              "pretty": "Protocol Host",
+              "input-type": "input",
+              "depends": [
+                {
+                  "protocol": "connect",
+                  "client": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Specifies the final TLS server to be connected to by the proxy, and not the proxy server directly connected by stunnel"
+          },
+          "protocolUsername": {
+            "x-web": {
+              "pretty": "Protocol Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "protocol": "connect",
+                  "client": "1"
+                },
+                {
+                  "protocol": "smtp",
+                  "client": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Username for the protocol negotiations"
+          },
+          "protocolPassword": {
+            "x-web": {
+              "pretty": "Protocol Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "protocol": "connect",
+                  "client": "1"
+                },
+                {
+                  "protocol": "smtp",
+                  "client": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Password for the protocol negotiations"
+          },
+          "cert": {
+            "x-web": {
+              "pretty": "Certificate File",
+              "input-type": "input",
+              "depends": [
+                {
+                  "client": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "format":"binary",
+            "description": "Certificate file path"
+          },
+          "key": {
+            "x-web": {
+              "pretty": "Private Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "client": "0"
+                }
+              ]
+            },
+            "format":"binary",
+            "type": "string",
+            "description": "Private Key file path"
+          },
+          "CAfile": {
+            "x-web": {
+              "pretty": "Remote server certificate",
+              "input-type": "input",
+              "depends": [
+                {
+                  "client": "1"
+                }
+              ]
+            },
+            "format":"binary",
+            "type": "string",
+            "description": "Remote server certificate file path"
+          }
+        }
+      },
+      "stunnel_id_options": {
+        "title": "stunnel_id_options",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                    "pretty": "Tunnel name",
+                    "input-type": "input",
+                    "unique": true
+                },
+                "type": "string",
+                "description": "Tunnel name (ID)"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/stunnel_options"
+          }
+        ]
+      }
+    }
+  }
+}

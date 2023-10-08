@@ -1,0 +1,34 @@
+{
+	"services/mqtt/publisher": {
+		"read": {
+			"api": ["/mqtt_pub/*", "/certificates/config/*", "/mobile/modems/status_basic/*"]
+		},
+		"write": {
+			"api": ["/mqtt_pub/*"]
+		}
+	},
+	"services/mqtt/broker": {
+		"description": "mqtt broker configuration",
+		"read": {
+			"uci": [
+				"mosquitto",
+				"firewall"
+			],
+			"ubus": {
+				"vuci.system.certificates": [
+					"get_keys",
+					"get_ca_files",
+					"get_only_certificates"
+				]
+			},
+			"api": ["/mqtt_broker/*", "/certificates/config/*"]
+		},
+		"write": {
+			"uci": [
+				"mosquitto",
+				"firewall"
+			],
+			"api": ["/mqtt_broker/*"]
+		}
+	}
+}

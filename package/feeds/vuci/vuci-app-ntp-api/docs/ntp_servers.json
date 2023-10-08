@@ -1,0 +1,377 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "NTP"
+    }
+  ],
+  "paths": {
+    "/administration/ntp/remote_servers/config": {
+      "description": "This section is used to specify which time servers the device will use for time synchronization. To add more time servers to the list, click the 'Add' button",
+      "summary": "Time Servers",
+      "get": {
+        "tags": [
+          "NTP"
+        ],
+        "summary": "Returns all NTP Remote Server configurations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ntp_remote_server_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ntpser-0"
+      },
+      "put": {
+        "tags": [
+          "NTP"
+        ],
+        "summary": "Updates specified NTP Remote Server configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ntp_remote_server_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ntp_remote_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ntp-ser1"
+      },
+      "delete": {
+        "tags": [
+          "NTP"
+        ],
+        "summary": "Deletes specified NTP Remote Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section names",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ntpser2"
+      },
+      "post": {
+        "summary": "Creates a new NTP Remote Server configuration",
+        "operationId": "post-services-ntp-remote_servers-config",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntp_remote_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntp_remote_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "NTP"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTP"
+        ]
+      }
+    },
+    "/administration/ntp/remote_servers/config/{id}": {
+      "description": "This section is used to specify which time servers the device will use for time synchronization. To add more time servers to the list, click the 'Add' button",
+      "summary": "Time Servers",
+      "get": {
+        "summary": "Returns the specified NTP Remote Server configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntp_remote_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "NTP Remote Server Configuration identifier (ID)"
+          }
+        ],
+        "tags": [
+          "NTP"
+        ],
+        "operationId": "ntpser4"
+      },
+      "put": {
+        "summary": "Updates the specified NTP Remote Server configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntp_remote_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "NTP Remote Server Configuration identifier (ID)"
+          }
+        ],
+        "tags": [
+          "NTP"
+        ],
+        "operationId": "ntpser5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntp_remote_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NTP"
+        ],
+        "summary": "Deletes the specified NTP Remote Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "NTP Remote Server Configuration identifier (ID)"
+          }
+        ],
+        "operationId": "ntpser6"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTP"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "ntp_remote_server_single_options": {
+        "type": "object",
+        "properties": {
+          "hostname": {
+            "type": "string",
+            "description": "NTP (Network Time Protocol) server's hostname",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input",
+              "unique": true
+            }
+          }
+        }
+      },
+      "ntp_remote_server_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "NTP Remote Server Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/ntp_remote_server_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

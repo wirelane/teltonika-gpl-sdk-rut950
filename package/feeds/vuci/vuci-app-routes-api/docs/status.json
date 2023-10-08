@@ -1,0 +1,224 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/status": {
+      "get": {
+        "summary": "Returns all routes info",
+        "description": "Returns all routes info with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/arp": {
+      "get": {
+        "summary": "Returns arp tables",
+        "description": "Returns arp tables with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/routes4": {
+      "get": {
+        "summary": "Returns IPv4 routes",
+        "description": "Returns IPv4 routes with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/routes6": {
+      "get": {
+        "summary": "Returns IPv6 routes",
+        "description": "Returns IPv6 routes with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/routes6_neighbors": {
+      "get": {
+        "summary": "Returns IPv6 neighbors",
+        "description": "Returns IPv6 neighbors with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/mac_hints": {
+      "get": {
+        "summary": "Returns MACs",
+        "description": "Returns MACs with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/ipv4_hints": {
+      "get": {
+        "summary": "Returns IPv4 addresses",
+        "description": "Returns IPv4 addresses with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/ip_addrs": {
+      "get": {
+        "summary": "Returns IP addresses",
+        "description": "Returns IP addresses with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    },
+    "/routes/status/routes_tables": {
+      "get": {
+        "summary": "Returns all route tables",
+        "description": "Returns route tables with their parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "routes_status"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Routing"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {}
+  }
+}

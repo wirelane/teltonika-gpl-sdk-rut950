@@ -1,0 +1,452 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/vlan/interface_based/config": {
+      "get": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "GET All Interface based vlan",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseMulti"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "DELETE All Interface based vlan",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "CREATE All Interface based vlan",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBase"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/interface_based_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "UPDATE All Interface based vlan",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/interface_based_options_put_multiple"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Interface Based"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/vlan/interface_based/config/{id}": {
+      "get": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "GET Interface based vlan",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBase"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section identifier"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "DELETE Interface based vlan",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "UPDATE Interface based vlan",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBase"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/interface_based_options_put"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Interface Based"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/vlan/interface_based/devices": {
+      "get": {
+        "tags": [
+          "Interface based vlan"
+        ],
+        "summary": "GET All Interface based childs of parents",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseMulti"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Interface Based"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200InteBase": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/interface_based_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200InteBaseMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/interface_based_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "interface_based_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the device. Used for easier tunnels management purpose only",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "vid": {
+            "type": "string",
+            "description": "802.1 tag",
+            "x-web": {
+              "pretty": "Tag",
+              "input-type": "input"
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "8021ad",
+              "8021q"
+            ],
+            "description": "Device type",
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "8021ad": "802.1AD",
+                "8021q": "802.1Q"
+              }
+            }
+          },
+          "ifname": {
+            "type": "string",
+            "description": "Name of parent/base interface, i.e. eth0. To assign created instance to the interface, you need to do it manually in interfaces page.",
+            "x-web": {
+              "pretty": "Parent interface",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "interface_based_options_put": {
+        "title": "",
+        "type": "object",
+        "properties": {
+          "vid": {
+            "type": "string",
+            "description": "802.1 tag",
+            "x-web": {
+              "pretty": "Tag",
+              "input-type": "input"
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "8021ad",
+              "8021q"
+            ],
+            "description": "Device type",
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "8021ad": "802.1AD",
+                "8021q": "802.1Q"
+              }
+            }
+          },
+          "ifname": {
+            "type": "string",
+            "description": "Name of parent/base interface, i.e. eth0. To assign created instance to the interface, you need to do it manually in interfaces page.",
+            "x-web": {
+              "pretty": "Parent interface",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "interface_based_options_put_multiple": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "vid": {
+            "type": "string",
+            "description": "802.1 tag",
+            "x-web": {
+              "pretty": "802.1 tag",
+              "input-type": "input"
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "8021ad",
+              "8021q"
+            ],
+            "description": "Device type",
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "8021ad": "802.1AD",
+                "8021q": "802.1Q"
+              }
+            }
+          },
+          "ifname": {
+            "type": "string",
+            "description": "Name of parent/base interface, i.e. eth0. To assign created instance to the interface, you need to do it manually in interfaces page.",
+            "x-web": {
+              "pretty": "Parent interface",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+	"services/events_reporting": {
+		"description": "events reporting configuration",
+		"read": {
+			"api": [
+				"/recipients/*",
+				"/events_reporting/*",
+				"/mobile/modems/*",
+				"/devices/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/events_reporting/*"
+			]
+		}
+	}
+}

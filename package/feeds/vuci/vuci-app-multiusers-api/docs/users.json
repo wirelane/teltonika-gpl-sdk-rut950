@@ -1,0 +1,426 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Users",
+    "version": "1.0.0",
+    "description": "Users configuration API documentation"
+  },
+  "tags": [
+    {
+      "name": "Users"
+    }
+  ],
+  "paths": {
+    "/users/config": {
+      "get": {
+        "summary": "Returns all users configurations",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UserMulti"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UserMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/user_options_put"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates users configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200User"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/user_options_post"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "User Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/users/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "User configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified users configuration",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200User"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200User"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/user_options_put_single"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the specified users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "User Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200User": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/user_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200UserMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/user_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "user_options": {
+        "title": "Users options",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User Configuration identifier (ID)."
+          },
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Username of the user."
+          },
+          "group": {
+            "x-web": {
+              "pretty": "Group",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "A group to which the current user belongs.",
+            "enum": [
+              "admin",
+              "user"
+            ]
+          }
+        }
+      },
+      "user_options_put": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Username",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "User Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/user_options_put_single"
+          }
+        ]
+      },
+      "user_options_post": {
+        "title": "Users options POST",
+        "type": "object",
+        "properties": {
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Username of the new user."
+          },
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Password of the user.",
+            "format": "root_password",
+            "maxLength": 4094
+          },
+          "group": {
+            "x-web": {
+              "pretty": "Group",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "A group to which the current user belongs.",
+            "enum": [
+              "admin",
+              "user"
+            ]
+          }
+        },
+        "required": [
+          "username",
+          "password",
+          "group"
+        ]
+      },
+      "user_options_put_single": {
+        "title": "User options PUT single",
+        "type": "object",
+        "properties": {
+          "group": {
+            "x-web": {
+              "pretty": "Group",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "A group to which the current user belongs.",
+            "enum": [
+              "admin",
+              "user"
+            ]
+          },
+          "current_password": {
+            "x-web": {
+              "pretty": "Current password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Current password of the user."
+          },
+          "password": {
+            "x-web": {
+              "pretty": "New password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "New password of the user.",
+            "format": "root_password",
+            "maxLength": 4094
+          },
+          "password_confirm": {
+            "x-web": {
+              "pretty": "Confirm new password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "New password of the user.",
+            "format": "root_password",
+            "maxLength": 4094
+          }
+        }
+      }
+    }
+  }
+}

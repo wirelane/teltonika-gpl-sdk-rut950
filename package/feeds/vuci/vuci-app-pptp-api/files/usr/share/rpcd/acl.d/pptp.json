@@ -1,0 +1,14 @@
+{
+	"services/vpn/pptp": {
+		"description": "pptp configuration",
+		"read": {
+			"api": [
+				"/pptp/*",
+				"/interfaces/*"
+			]
+		},
+		"write": {
+			"api": ["/pptp/*"]
+		}
+	}
+}

@@ -1,0 +1,10 @@
+{
+    "services/opcua": {
+        "title": "OPC UA",
+        "index": 140,
+        "view": "services/Opcua_aeaafe",
+        "acls": [ "services/opcua" ],
+        "files": [ "/etc/config/opcua_client" ],
+        "i18nfile": true
+    }
+}

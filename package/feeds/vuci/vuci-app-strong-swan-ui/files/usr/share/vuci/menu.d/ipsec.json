@@ -1,0 +1,16 @@
+{
+    "services/vpn": {
+		"title": "VPN",
+		"index": 20
+	},
+    "services/vpn/ipsec": {
+        "title": "IPsec",
+        "index": 30,
+        "view": "services/StrongSwan",
+        "acls": [ "services/vpn/ipsec" ],
+        "files": [
+            "/etc/config/ipsec",
+            "/etc/config/xl2tpd"
+        ]
+    }
+}

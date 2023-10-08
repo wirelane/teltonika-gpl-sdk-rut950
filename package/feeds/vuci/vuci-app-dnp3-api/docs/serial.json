@@ -1,0 +1,956 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DNP3 Serial"
+    }
+  ],
+  "paths": {
+    "/dnp3/serial/config/{id}": {
+      "put": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Updates specified DNP3 Serial configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3Serial"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration DNP3 TCP configuration indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/DNP3_serial_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Returns specified DNP3 Serial configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3Serial"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration DNP3 configuration indetifier"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Deletes specified DNP3 Serial configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration DNP3 TCP configuration indetifier"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    },
+    "/dnp3/serial/config": {
+      "post": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Creates DNP3 Serial configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3Serial"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/DNP3_serial_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Updates specified DNP3 Serial configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3SerialMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DNP3_serial"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Returns all DNP3 Serial configuration",
+        "description": "Returns all configurations with their parameters form DNP3 TCP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3SerialMulti"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DNP3 Serial"
+        ],
+        "summary": "Deletes specified DNP3 Serial configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects",
+                    "items": {
+                      "type": "string",
+                      "description": "configuration id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    },
+    "/dnp3/serial/actions/test_request": {
+      "post": {
+        "deprecated": true,
+        "tags": [
+          "DNP3"
+        ],
+        "summary": "Test request configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RequestActionSerial"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {
+                      "local_addr": "65519",
+                      "timeout": "0",
+                      "remote_addr": "65519",
+                      "count": "30",
+                      "name": "piotras",
+                      "data_type": "3",
+                      "index": "20",
+                      "baud_rate": "300",
+                      "time_duration": "60",
+                      "flow_control": "0",
+                      "data_bits": "5",
+                      "parity": "1",
+                      "device": "/dev/rs232",
+                      "stop_bits": ""
+                    }
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "local_addr": {
+                        "type": "string"
+                      },
+                      "timeout": {
+                        "type": "string"
+                      },
+                      "remote_addr": {
+                        "type": "string"
+                      },
+                      "count": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "data_type": {
+                        "type": "string"
+                      },
+                      "index": {
+                        "type": "string"
+                      },
+                      "baudrate": {
+                        "type": "string"
+                      },
+                      "time_duration": {
+                        "type": "string"
+                      },
+                      "flowcontrol": {
+                        "type": "string"
+                      },
+                      "databits": {
+                        "type": "string"
+                      },
+                      "parity": {
+                        "type": "string"
+                      },
+                      "device": {
+                        "type": "string"
+                      },
+                      "stopbits": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RequestActionSerial": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DNP3Serial": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/DNP3_serial"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DNP3SerialMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configuration objects",
+                  "items": {
+                    "$ref": "#/components/schemas/DNP3_serial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "DNP3_serial_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Check to enable this serial client configuration",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the serial client",
+            "maxlength": 32,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "local_addr": {
+            "type": "string",
+            "description": "Client Link-Layer address",
+            "format": "irange(1, 65519)",
+            "x-web": {
+              "pretty": "Local address",
+              "input-type": "input"
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Outstation Link-Layer address",
+            "format": "irange(0, 65519)",
+            "x-web": {
+              "pretty": "Remote address",
+              "input-type": "input"
+            }
+          },
+          "integrity_period": {
+            "type": "string",
+            "description": "Period for sending data requests",
+            "format": "irange(1, 60)",
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "input"
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Request timeout",
+            "format": "irange(1, 60)",
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input"
+            }
+          },
+          "save_to_flash": {
+            "type": "string",
+            "description": "Check to enable saving to flash",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Save to flash",
+              "input-type": "switch"
+            }
+          },
+          "device": {
+            "type": "string",
+            "description": "Which serial port will be used for serial communication",
+            "x-web": {
+              "pretty": "Device",
+              "input-type": "select",
+              "enum-pretty": {
+                "/dev/rs232": "rs232",
+                "/dev/rs485": "rs485",
+                "/dev/rsconsole": "Console"
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "rs232": true,
+                    "rs485": true
+                  },
+                  "values": [
+                    "/dev/rs232",
+                    "/dev/rs485"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "rs232": true,
+                    "rs485": false
+                  },
+                  "values": [
+                    "/dev/rs232"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "rs232": false,
+                    "rs485": true
+                  },
+                  "values": [
+                    "/dev/rs485"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "console": true
+                  },
+                  "values": [
+                    "/dev/rsconsole"
+                  ]
+                }
+              ]
+            }
+          },
+          "baudrate": {
+            "type": "string",
+            "enum": [
+              "300",
+              "1200",
+              "2400",
+              "4800",
+              "9600",
+              "19200",
+              "38400",
+              "57600",
+              "115200"
+            ],
+            "default": "9600",
+            "description": "Select supported baud rate",
+            "x-web": {
+              "pretty": "Baud rate",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "baudrate_115200": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "baudrate_3000000": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400",
+                    "460800",
+                    "921600",
+                    "1000000",
+                    "3000000"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "baudrate_230400": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400"
+                  ]
+                }
+              ]
+            }
+          },
+          "databits": {
+            "type": "string",
+            "enum": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "default": "8",
+            "description": "Select how many bits will be used for character",
+            "x-web": {
+              "pretty": "Data bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": "/dev/rs232"
+                  },
+                  "hw_tags": {
+                    "databits_full": true
+                  },
+                  "values": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "databits_half": true
+                  },
+                  "values": [
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "databits_8": true
+                  },
+                  "values": [
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "databits_full": true
+                  },
+                  "values": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "databits_half": true
+                  },
+                  "values": [
+                    "7",
+                    "8"
+                  ]
+                }
+              ]
+            }
+          },
+          "stopbits": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "default": "1",
+            "description": "Select how many stop bits will be used to detect the end of character",
+            "x-web": {
+              "pretty": "Stop bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "stopbits_2": true
+                  },
+                  "values": [
+                    "1",
+                    "2"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "stopbits_1": true
+                  },
+                  "values": [
+                    "1"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "stopbits_2": true
+                  },
+                  "values": [
+                    "1",
+                    "2"
+                  ]
+                }
+              ]
+            }
+          },
+          "parity": {
+            "type": "string",
+            "enum": [
+              "odd",
+              "even",
+              "none"
+            ],
+            "description": "Select what kind of parity bit to use for error detection",
+            "x-web": {
+              "pretty": "Parity",
+              "enum-pretty": {
+                "odd": "Odd",
+                "even": "Even",
+                "mark": "Mark",
+                "space": "Space",
+                "none": "None"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "parity_max": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "mark",
+                    "space",
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "parity_min": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "parity_max": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "mark",
+                    "space",
+                    "none"
+                  ]
+                }
+              ]
+            }
+          },
+          "flowcontrol": {
+            "type": "string",
+            "enum": [
+              "none",
+              "xon/xoff",
+              "rts/cts"
+            ],
+            "description": "Select what kind of characters to use for flow control",
+            "x-web": {
+              "pretty": "Flow control",
+              "enum-pretty": {
+                "none": "None",
+                "rts/cts": "RTS/CTS",
+                "xon/xoff": "Xon/Xoff"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "flowcontrol_3": true
+                  },
+                  "values": [
+                    "rts/cts",
+                    "xon/xoff",
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "flowcontrol_none": true
+                  },
+                  "values": [
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485",
+                    "full_duplex_enabled": "1"
+                  },
+                  "hw_tags": {
+                    "flowcontrol_2": true
+                  },
+                  "values": [
+                    "none",
+                    "xon/xoff"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485",
+                    "full_duplex_enabled": "0"
+                  },
+                  "hw_tags": {
+                    "flowcontrol_none": true
+                  },
+                  "values": [
+                    "none"
+                  ]
+                }
+              ]
+            }
+          },
+          "time_duration": {
+            "type": "string",
+            "description": "Ome physical layers need time to 'settle' so that the first tx isn't lost",
+            "format": "irange(1, 10000)",
+            "x-web": {
+              "pretty": "Open delay",
+              "input-type": "input"
+            }
+          },
+          "full_duplex_enabled": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Check to enable rs485 Full-Duplex",
+            "x-web": {
+              "pretty": "Full duplex",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "device": "/dev/rs485"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "device",
+          "baudrate",
+          "databits",
+          "stopbits",
+          "parity",
+          "flowcontrol"
+        ]
+      },
+      "DNP3_serial": {
+        "title": "DNP3_serial",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/DNP3_serial_options"
+          }
+        ]
+      }
+    }
+  }
+}

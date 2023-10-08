@@ -1,0 +1,470 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "bgp_route_maps",
+    "version": "1.0",
+    "description": "Route-maps configuration"
+  },
+  "servers": [],
+  "paths": {
+    "/routes/dynamic/bgp/maps/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns specified bgp route maps configuration",
+        "tags": [
+          "bgp_route_maps"
+        ],
+        "operationId": "",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "string"
+                        },
+                        ".type": {
+                          "type": "string"
+                        },
+                        "action": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "local_preference": {
+                          "type": "string"
+                        },
+                        "metric": {
+                          "type": "string"
+                        },
+                        "sequence": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "enabled": "1",
+                        ".type": "bgp_route_maps",
+                        "action": "permit",
+                        "id": "rmap",
+                        "local_preference": "2",
+                        "metric": "4",
+                        "sequence": "10"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified bgp route maps configuration",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bgp_route_maps_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_maps"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified bgp route maps configuration",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "bgp_route_maps"
+        ],
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "BGP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/bgp/maps/config": {
+      "post": {
+        "summary": "Creates bgp route maps configuration",
+        "operationId": "",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_maps_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        },
+                        {
+                          "$ref": "#/components/schemas/bgp_route_maps_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_maps"
+        ]
+      },
+      "parameters": [],
+      "get": {
+        "summary": "Returns all bgp route maps configurations",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "enabled": {
+                            "type": "string"
+                          },
+                          ".type": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "local_preference": {
+                            "type": "string"
+                          },
+                          "metric": {
+                            "type": "string"
+                          },
+                          "sequence": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "enabled": "1",
+                          ".type": "bgp_route_maps",
+                          "action": "permit",
+                          "id": "rmap",
+                          "local_preference": "2",
+                          "metric": "4",
+                          "sequence": "10"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_maps"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified bgp route maps configurations",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_maps_options_id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        },
+                        {
+                          "$ref": "#/components/schemas/bgp_route_maps_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_maps"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified bgp route maps configurations",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "bgp_route_maps"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "BGP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "bgp_route_maps_options": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "action": "permit",
+            "id": "rmap",
+            "local_preference": "2",
+            "metric": "4",
+            "sequence": "10"
+          }
+        },
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Enable/Disable BGP route map.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+                 "enum-pretty": {
+                "permit": "Permit",
+                "deny": "Deny"
+              }
+            },
+            "description": "Denies or permits matched entry.",
+            "enum": [
+              "permit",
+              "deny"
+            ]
+          },
+          "local_preference": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Local preference",
+              "input-type": "input"
+            },
+            "description": "Used to determine best route towards a certain destination",
+            "format": "irange(0, 4294967295)"
+          },
+          "metric": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Metric",
+              "input-type": "input"
+            },
+            "description": "Sets a metric value for determining the preferred path into an AS",
+            "format": "irange(0, 4294967295)"
+          },
+          "sequence": {
+            "type": "string",
+            "description": "Sequence number for the route map.",
+            "format": "irange(1, 65535)"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "bgp_route_maps_options_id": {
+        "title": "bgp_route_maps_options_id",
+        "x-stoplight": {
+          "id": "c4my1wizvh4cs"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/bgp_route_maps_options"
+          }
+        ]
+      }
+    }
+  }
+}

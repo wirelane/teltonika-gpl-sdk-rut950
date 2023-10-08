@@ -1,0 +1,238 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "NTP"
+    }
+  ],
+  "paths": {
+    "/administration/ntp/server/config": {
+      "get": {
+        "summary": "Returns NTP Server configuration in an array",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ntp_server_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "NTP"
+        ],
+        "operationId": "ntp_ser1"
+      },
+      "put": {
+        "summary": "Updates NTP Server configuration in an array",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ntp_server_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "NTP"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ntp_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ntp_ser2"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/administration/ntp/server/config/general": {
+      "get": {
+        "summary": "Returns NTP Server configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntp_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "NTP"
+        ],
+        "operationId": "ntp_ser3"
+      },
+      "put": {
+        "summary": "Updates NTP Server configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntp_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "NTP"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntp_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ntp_ser4"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "ntp_server_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable NTP Server. Turns NTP server on or off.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable NTP server",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "ntp_server_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "NTP Server Configuration identifier (ID).",
+                "enum": [
+                  "general"
+                ]
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/ntp_server_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/advanced_static/table/config/{id}/ipv6/{idIPv6}": {
+      "get": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Returns specified route table ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          },
+          {
+            "name": "idIPv6",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration IPv6 route identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Updates specified route table ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          },
+          {
+            "name": "idIPv6",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration IPv6 route identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_route_ipv6_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Deletes specified route table ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          },
+          {
+            "name": "idIPv6",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration IPv6 route identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration route table identifier"
+        },
+        {
+          "name": "idIPv6",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration IPv6 route identifier"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Policy based routing"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/advanced_static/table/config/{id}/ipv6": {
+      "get": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Returns all route table ipv6 route configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6Multi"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Creates route table ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_route_ipv6_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Updates specified route table ipv6 route configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6Multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/static_route_ipv6_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Deletes specified route table ipv6 route configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configuration objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Configuration ID"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Policy based routing"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {}
+  }
+}

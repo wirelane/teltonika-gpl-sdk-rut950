@@ -1,0 +1,48 @@
+{
+    "system/flashops/general": {
+        "read": {
+            "api": [
+                "/firmware/*"
+            ],
+            "ubus": {
+                "vuci.system.firmware": [
+                    "get_current_info",
+                    "check_fw",
+                    "get_fw_info"
+                ]
+            }
+        },
+        "write": {
+            "api": [
+                "/firmware/*"
+            ],
+            "ubus": {
+                "vuci.system.firmware": [
+                    "prepare_modem_upgrade",
+                    "validate_firmware",
+                    "validate_modem_firmware",
+                    "download_device_fw",
+                    "download_module_fw",
+                    "continue_download",
+                    "check_modem_fw_install_status",
+                    "remove_fw",
+                    "upgrade_firmware",
+                    "modem_upgrade_trb14",
+                    "modem_upgrade"
+                ],
+                "vuci.system": [
+                    "reboot"
+                ],
+                "rpc-sys": [
+                    "upgrade_clean"
+                ],
+                "rut_fota": [
+                    "get_process"
+                ]
+            },
+            "cgi-io": [
+                "upload"
+            ]
+        }
+    }
+}

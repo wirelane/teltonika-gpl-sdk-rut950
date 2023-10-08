@@ -1,0 +1,440 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Utilities email to sms api documentation.",
+    "version": "1.0",
+    "description": "Mobile utitlities email to sms api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_gateway/email_to_sms/config": {
+      "get": {
+        "summary": "Returns Email to SMS configuration in an array",
+        "tags": [
+          "Email to SMS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/email_to_sms_many"
+          }
+        },
+        "operationId": "get-email_to_sms-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Email to SMS configuration in an array",
+        "tags": [
+          "Email to SMS"
+        ],
+        "operationId": "put-email_to_sms-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/email_to_sms_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_email_to_sms_many"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "Email to SMS"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_gateway/email_to_sms/config/general": {
+      "get": {
+        "summary": "Returns Email to SMS configuration",
+        "tags": [
+          "Email to SMS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/email_to_sms_one"
+          }
+        },
+        "operationId": "get-email_to_sms-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Email to SMS configuration",
+        "tags": [
+          "Email to SMS"
+        ],
+        "operationId": "put-email_to_sms-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/email_to_sms_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_email_to_sms_one"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "Email to SMS"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "email_to_sms": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable email forwarding to SMS",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "host": {
+            "type": "string",
+            "description": "POP3 server",
+            "format": "hostname",
+            "x-web": {
+              "pretty": "POP3 server",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Server port",
+            "x-web": {
+              "pretty": "Server port",
+              "input-type": "input"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "User name for authentication on POP3 server. All characters are allowed except ` and space",
+            "format": "credentials_validate",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for authentication on POP3 server. All characters are allowed except ` and space",
+            "format": "credentials_validate",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            }
+          },
+          "ssl": {
+            "type": "string",
+            "description": "Accepting TLS 1.2 and up",
+            "x-web": {
+              "pretty": "Secure connection (TLS)",
+              "input-type": "switch"
+            }
+          },
+          "ssl_verify": {
+            "type": "string",
+            "description": "Verifies the validity of the POP3 server certificate",
+            "x-web": {
+              "pretty": "Verify TLS certificate validity",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "ssl": "1"
+                }
+              ]
+            }
+          },
+          "limit": {
+            "type": "string",
+            "description": "Longer email text will be sent in multiple PDUs (Protocol Data Units), each of them is approximately 130 characters. Specify maximum allowed PDU count.",
+            "format": "irange(1,10)",
+            "x-web": {
+              "pretty": "SMS PDU limit",
+              "input-type": "input"
+            }
+          },
+          "time": {
+            "type": "string",
+            "description": "Type of time interval",
+            "enum": [
+              "min",
+              "hour",
+              "day"
+            ],
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "select",
+              "enum-pretty": {
+                "min": "Minutes",
+                "hour": "Hours",
+                "day": "Days"
+              }
+            }
+          },
+          "min": {
+            "type": "string",
+            "description": "Step in minutes to how often check email",
+            "enum": [
+              "1",
+              "2",
+              "5",
+              "10",
+              "15",
+              "20",
+              "30"
+            ],
+            "x-web": {
+              "pretty": "Check email every",
+              "input-type": "select",
+              "depends": [
+                {
+                  "time": "min"
+                }
+              ]
+            }
+          },
+          "hour": {
+            "type": "string",
+            "description": "Step in hours to how often check email",
+            "enum": [
+              "1",
+              "2",
+              "4",
+              "6",
+              "8",
+              "12"
+            ],
+            "x-web": {
+              "pretty": "Check email every",
+              "input-type": "select",
+              "depends": [
+                {
+                  "time": "hour"
+                }
+              ]
+            }
+          },
+          "day": {
+            "type": "string",
+            "description": "Step in days to how often check email",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "5",
+              "10",
+              "15"
+            ],
+            "x-web": {
+              "pretty": "Check email every",
+              "input-type": "select",
+              "depends": [
+                {
+                  "time": "day"
+                }
+              ]
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to send information from",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "username",
+          "password"
+        ]
+      },
+      "req_body_email_to_sms_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/email_to_sms"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_email_to_sms_many": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/email_to_sms"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "email_to_sms_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/email_to_sms"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "email_to_sms_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/email_to_sms"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Email to SMS"
+    }
+  ]
+}

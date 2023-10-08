@@ -1,0 +1,212 @@
+#!/bin/sh /etc/rc.common
+
+. /lib/functions/network.sh
+
+START=42
+STOP=1
+USE_PROCD=1
+
+BIN=/usr/sbin/tincd
+TMP_TINC="/tmp/tinc"
+
+SELF_NAME=""
+
+append_net_params() {
+	s="$1"
+	shift
+
+	for i in "$@"; do
+		config_get val "$s" "$i"
+		[ -z "$val" ] && continue
+		[ "$i" = "subnet" ] && {
+			echo "Subnet = $val" >> "$TMP_TINC/$s/hosts/$SELF_NAME"
+			continue
+		}
+		[ "$i" = "privatekeyfile" ] && {
+			cp "$val" "$TMP_TINC/$s/rsa_key.priv"
+			continue
+		}
+		[ "$i" = "publickeyfile" ] && {
+			cat "$val" >> "$TMP_TINC/$s/hosts/$SELF_NAME"
+			continue
+		}
+		[ "$i" = "bindtointerface" ] && {
+			network_get_device l3_device "$val"
+			trigger_interface="$val"
+			echo "${i} = ${l3_device}" >> "$TMP_TINC/$s/hosts/$SELF_NAME"
+			continue
+		}
+		echo "$i = $val" >> "$TMP_TINC/$s/tinc.conf"
+	done
+	echo "Interface = tinc_${SELF_NAME}" >> "$TMP_TINC/$s/tinc.conf"
+}
+
+prepare_net() {
+	local s="$1"
+	SELF_NAME="$s"
+
+	config_get enabled "$s" enabled
+	[ "$enabled" = "0" ] && return
+
+	[ -d "$TMP_TINC/$s" ] && rm -rf "$TMP_TINC/$s"
+	mkdir -p "$TMP_TINC/$s"
+	mkdir -p "$TMP_TINC/$s/hosts"
+	[ -d "/etc/tinc/$s" ] && cp -r "/etc/tinc/$s" "$TMP_TINC/"
+
+	append_net_params "$s" \
+		addressfamily \
+		bindtoaddress \
+		bindtointerface \
+		broadcast \
+		broadcastsubnet \
+		connectto \
+		device \
+		devicetype \
+		ed25519privatekeyfile \
+		ecdsapublickey \
+		forwarding \
+		interface \
+		listenaddress \
+		localdiscoveryaddress \
+		mode \
+		keyexpire \
+		macexpire \
+		maxconnectionburst \
+		name \
+		pinginterval \
+		pingtimeout \
+		privatekey \
+		privatekeyfile \
+		processpriority \
+		proxy \
+		replaywindow \
+		udprcvbuf \
+		udpsndbuf \
+		address \
+		cipher \
+		compression \
+		digest \
+		maclength \
+		pmtu \
+		port \
+		publickey \
+		publickeyfile \
+		subnet \
+		weight
+}
+
+append_host_params() {
+	n="$1"
+	shift
+	s="$1"
+	shift
+
+	for i in "$@"; do
+		config_get val "$s" "$i"
+		[ -z "$val" ] && continue
+		[ "$i" = "PublicKeyFile" ] && {
+			cat "$val" >> "$TMP_TINC/$n/hosts/$s"
+			continue
+		}
+		echo "$i = $val" >> "$TMP_TINC/$n/hosts/$s"
+	done
+}
+
+setup_up() {
+	config_get network "$SELF_NAME" subnet
+	address="${network%.*}"
+
+	echo '
+#!/bin/sh
+ip link set $INTERFACE up
+ip addr add '"$network"' dev $INTERFACE
+ip route add '"${address}.0/24"' dev $INTERFACE
+	' >> "$TMP_TINC/${SELF_NAME}/tinc-up"
+	chmod +x "$TMP_TINC/${SELF_NAME}/tinc-up"
+}
+
+setup_down() {
+	config_get network "$SELF_NAME" subnet
+	address="${network%.*}"
+
+	echo '
+#!/bin/sh
+ip route del '"${address}.0/24"' dev $INTERFACE
+ip addr del '"$network"' dev $INTERFACE
+ip link set $INTERFACE down
+	' >> "$TMP_TINC/${SELF_NAME}/tinc-down"
+	chmod +x "$TMP_TINC/${SELF_NAME}/tinc-down"
+}
+
+prepare_host() {
+	local s="$1"
+
+	config_get net "$s" net
+	[ -z "$net" ] && return
+	append_host_params "$net" "$s" \
+		address \
+		cipher \
+		compression \
+		digest \
+		ed25519publickey \
+		maclength \
+		name \
+		pmtu \
+		port \
+		publickey \
+		publickeyfile \
+		subnet
+}
+
+start_instance() {
+	local s="$1"
+
+	config_get enabled "$s" enabled
+	[ "$enabled" = "0" ] && return
+
+	SERVICE_PID_FILE="/var/run/tinc.$s.pid"
+
+	procd_open_instance
+	procd_set_param command $BIN -c "$TMP_TINC/$s" -n "$s" -D -d1 --pidfile="$SERVICE_PID_FILE"
+	procd_set_param stderr 1
+	procd_set_param respawn
+	procd_set_param file $TMP_TINC/$s/tinc.conf
+	procd_add_reload_trigger tinc
+	procd_close_instance
+}
+
+stop_instance() {
+	local s="$1"
+
+	SERVICE_PID_FILE="/var/run/tinc.$s.pid"
+	service_stop $BIN
+
+	rm -rf "$TMP_TINC/$s/"
+}
+
+start_service() {
+	config_load 'tinc'
+	config_foreach prepare_net 'tinc-net'
+	config_foreach prepare_host 'tinc-host'
+
+	setup_up
+	setup_down
+
+	config_foreach start_instance 'tinc-net'
+}
+
+stop_service() {
+	config_load 'tinc'
+	config_foreach stop_instance 'tinc-net'
+	rm -rf /tmp/tinc/
+}
+
+reload_service() {
+	stop
+	start
+}
+
+service_triggers() {
+	procd_add_reload_trigger 'tinc'
+	procd_add_reload_interface_trigger "$trigger_interface"
+}

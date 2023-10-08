@@ -1,0 +1,394 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "RMS"
+    }
+  ],
+  "paths": {
+    "/cloud_solutions/rms/status": {
+      "get": {
+        "summary": "Returns RMS Status",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rmsStatus"
+          }
+        },
+        "tags": [
+          "RMS"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/cloud_solutions/rms/config/general": {
+      "get": {
+        "summary": "Returns RMS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms"
+          }
+        },
+        "tags": [
+          "RMS"
+        ]
+      },
+      "put": {
+        "summary": "Updates RMS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rms_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "RMS"
+        ]
+      },
+      "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
+      "summary": "RMS settings",
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/cloud_solutions/rms/config": {
+      "get": {
+        "summary": "Returns RMS configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rmsMulti"
+          }
+        },
+        "tags": [
+          "RMS"
+        ]
+      },
+      "put": {
+        "summary": "Updates RMS configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rmsMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/rms_response_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "RMS"
+        ]
+      },
+      "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
+      "summary": "RMS settings",
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/cloud_solutions/rms/actions/unregister": {
+      "post": {
+        "summary": "Unregister from RMS",
+        "operationId": "post-services-cloud_solutions-rms-actions-disconnect",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "RMS"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/cloud_solutions/rms/actions/connect": {
+      "post": {
+        "summary": "Connect to RMS",
+        "operationId": "post-services-cloud_solutions-rms-actions-connect",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "RMS"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200rmsStatus": {
+        "description": "Returns RMS status",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/rms_status_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200rms": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/rms_response_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200rmsMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/rms_response_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "rms_options": {
+        "type": "object",
+        "properties": {
+          "enable": {
+            "type": "string",
+            "description": "Enabled - RMS functionality is always on. When disconnected from RMS, the router will try connecting every 2-5 minutes (every 2 minutes the first hour; then every 5 minutes). If the router is disconnected from RMS for 14 days, it will go into Standby mode. When trying to connect to rms without internet connection, the router will try to reestablish connection every 10 seconds.\nStandby - The router tries to establish a connection with the server infrequently (6 hours in-between attempts). This is done in order to reduce mobile traffic. In order to start using RMS, user intervention is not necessary from the router's side. Worst case scenario - RMS connection will be established 6 hours after the router was added to RMS.\nDisabled - RMS functionality is completely disabled; therefore, no connection attempts are made. In order to start using RMS, the user must enable the service on the router's side",
+            "enum": [
+              "1",
+              "2",
+              "0"
+            ],
+            "default": "2",
+            "x-web": {
+              "pretty": "Connection type",
+              "input-type": "select",
+              "enum-pretty": {
+                "1": "Enabled",
+                "2": "Standby",
+                "0": "Disabled"
+              }
+            }
+          },
+          "remote": {
+            "type": "string",
+            "description": "RMS server hostname. Unless you are hosting your own RMS server, you should leave the default value.",
+            "format": "ipv4host",
+            "default": "rms.teltonika-networks.com",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "RMS server port. Unless you are hosting your own RMS server, you should leave the default value.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "rms_response_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/rms_options"
+          }
+        ]
+      },
+      "rms_status_options": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "number",
+            "description": "Describes if connection is successful"
+          },
+          "next_try": {
+            "type": "number",
+            "description": "Describes the next time when the connection will be retried"
+          },
+          "error_text": {
+            "type": "string",
+            "description": "Descriptive error"
+          },
+          "error_code": {
+            "type": "number",
+            "description": "Specific error code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Describes if RMS is turned on"
+          },
+          "connection_state": {
+            "type": "string",
+            "description": "Describes the current state of the connection."
+          },
+          "lan_mac": {
+            "type": "string",
+            "description": "Device's IMEI."
+          },
+          "serial_nbr": {
+            "type": "string",
+            "description": "A unique 10-digit device identifier."
+          }
+        }
+      }
+    }
+  }
+}

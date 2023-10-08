@@ -1,0 +1,342 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Networkmap",
+    "version": "1.0",
+    "description": "Networkmap API documentation",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Topology"
+    }
+  ],
+  "servers": [],
+  "paths": {
+    "/topology/interfaces": {
+      "get": {
+        "summary": "Get interfaces information for devices scanning",
+        "tags": [
+          "Topology"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_networkmap_interfaces"
+          }
+        },
+        "operationId": "get-status-networkmap-interfaces",
+        "description": "Interfaces information for devices scanning"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Network",
+          "Topology"
+        ]
+      }
+    },
+    "/topology/devices": {
+      "get": {
+        "summary": "Get all scanned devices",
+        "tags": [
+          "Topology"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_networkmap_devices"
+          }
+        },
+        "operationId": "get-status-networkmap-devices",
+        "description": "All scanned devices"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Network",
+          "Topology"
+        ]
+      }
+    },
+    "/topology/devices_lan": {
+      "get": {
+        "summary": "Get LAN scanned devices",
+        "tags": [
+          "Topology"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_networkmap_devices"
+          }
+        },
+        "operationId": "get-status-networkmap-devices_lan",
+        "description": "Scanned devices in lan side"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Network",
+          "Topology"
+        ]
+      }
+    },
+    "/topology/devices_wan": {
+      "get": {
+        "summary": "Get WAN scanned devices",
+        "tags": [
+          "Topology"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_networkmap_devices"
+          }
+        },
+        "operationId": "get-status-networkmap-devices_wan",
+        "description": "Scanned devices in wan side"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Network",
+          "Topology"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "networkmap_devices": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mac": "00:1e:42:41:cd:c8",
+            "type": "wan",
+            "hostname": "",
+            "interface": "wan",
+            "vendor": "Teltonika",
+            "ip": "192.168.81.114"
+          }
+        },
+        "properties": {
+          "mac": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string"
+          },
+          "interface": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          }
+        }
+      },
+      "networkmap_interface": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "proto": "static",
+            "disabled": "0",
+            "ip": "192.168.1.1/24",
+            "status": "true",
+            "device": "br-lan",
+            "type": "lan",
+            "interface": "lan"
+          }
+        },
+        "properties": {
+          "proto": {
+            "type": "string"
+          },
+          "disabled": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "device": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "interface": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200_networkmap_devices": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/networkmap_devices"
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "devices": [
+                      {
+                        "mac": "00:1e:42:41:cd:c8",
+                        "type": "wan",
+                        "hostname": "",
+                        "interface": "wan",
+                        "vendor": "Teltonika",
+                        "ip": "192.168.81.114"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_networkmap_interfaces": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "interfaces": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/networkmap_interface"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "interfaces": [
+                      {
+                        "proto": "static",
+                        "disabled": "0",
+                        "ip": "192.168.1.1/24",
+                        "status": "true",
+                        "device": "br-lan",
+                        "type": "lan",
+                        "interface": "lan"
+                      },
+                      {
+                        "proto": "dhcp",
+                        "disabled": "0",
+                        "ip": "192.168.81.160/24",
+                        "status": "true",
+                        "device": "eth1",
+                        "type": "wan",
+                        "interface": "wan"
+                      },
+                      {
+                        "proto": "wwan",
+                        "disabled": "0",
+                        "ip": "10.0.44.2/32",
+                        "status": "true",
+                        "device": "wwan0",
+                        "type": "wan",
+                        "interface": "mob1s1a1_4"
+                      },
+                      {
+                        "proto": "wwan",
+                        "disabled": "0",
+                        "ip": "",
+                        "status": "false",
+                        "device": "",
+                        "type": "wan",
+                        "interface": "mob1s2a1_4"
+                      },
+                      {
+                        "proto": "static",
+                        "disabled": "0",
+                        "ip": "192.168.5.1/24",
+                        "status": "true",
+                        "device": "wlan0-1",
+                        "type": "lan",
+                        "interface": "guestwifi"
+                      },
+                      {
+                        "proto": "static",
+                        "disabled": "0",
+                        "ip": "192.168.10.1/24",
+                        "status": "true",
+                        "device": "eth0.3",
+                        "type": "vlan",
+                        "interface": "vlanas"
+                      },
+                      {
+                        "proto": "",
+                        "disabled": "0",
+                        "ip": "",
+                        "status": "true",
+                        "device": "wlan0",
+                        "type": "wifi",
+                        "interface": "RUT_69B3_2G"
+                      },
+                      {
+                        "proto": "",
+                        "disabled": "0",
+                        "ip": "",
+                        "status": "true",
+                        "device": "wlan1",
+                        "type": "wifi",
+                        "interface": "RUT_69B4_5G"
+                      },
+                      {
+                        "proto": "",
+                        "disabled": "0",
+                        "ip": "",
+                        "status": "true",
+                        "device": "wlan0-1",
+                        "type": "wifi",
+                        "interface": "test as"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,651 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/snmp/trap_rules/config/{id}": {
+      "summary": "Modify trap rule",
+      "description": "This section is used to configure the settings of the SNMP trap rule. Scroll your mouse pointer over field names in order to see helpful hints.",
+      "get": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Returns the specified SNMP trap rules configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SNMP trap rules instance identifier (ID)."
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Deletes the specified SNMP trap rules configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SNMP trap rules instance identifier (ID)."
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Updates the specified SNMP trap rules configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SNMP trap rules instance identifier (ID)."
+          }
+        ],
+        "requestBody": {
+          "description": "Update specified configuration options",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_trap_rules_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration ID"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "Trap Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/snmp/trap_rules/config": {
+      "summary": "Modify trap rule",
+      "description": "This section is used to configure the settings of the SNMP trap rule. Scroll your mouse pointer over field names in order to see helpful hints.",
+      "get": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Returns all SNMP trap rules configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_rules_multi"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Creates a new SNMP trap rules configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200snmp_trap_rules"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data of configuration options which be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_trap_rules_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Deletes the specified SNMP trap rules configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "put": {
+        "tags": [
+          "SNMP trap rules"
+        ],
+        "summary": "Updates the specified SNMP trap rules configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_trap_rules_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configurations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configurations to update",
+                    "items": {
+                      "$ref": "#/components/schemas/snmp_trap_rules_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "Trap Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200snmp_trap_rules": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/snmp_trap_rules_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200snmp_trap_rules_multi": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configurations objects",
+                  "items": {
+                    "$ref": "#/components/schemas/snmp_trap_rules_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "snmp_trap_rules_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable SNMP trap rule.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "gsm",
+              "iotrap",
+              "eventtrap",
+              "chilli"
+            ],
+            "description": "Trap type",
+            "x-web": {
+              "pretty": "Trap type",
+              "input-type": "select",
+              "enum-pretty": {
+                "gsm": "GSM",
+                "iotrap": "Input/Output",
+                "eventtrap": "Events log",
+                "chilli": "Hotspot client"
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "mobile": true,
+                    "ios": true
+                  },
+                  "values": [
+                    "gsm",
+                    "iotrap",
+                    "eventtrap",
+                    "chilli"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false,
+                    "ios": true
+                  },
+                  "values": [
+                    "iotrap",
+                    "eventtrap",
+                    "chilli"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": true,
+                    "ios": false
+                  },
+                  "values": [
+                    "gsm",
+                    "eventtrap",
+                    "chilli"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false,
+                    "ios": false
+                  },
+                  "values": [
+                    "eventtrap",
+                    "chilli"
+                  ]
+                }
+              ],
+              "unique": true
+            }
+          },
+          "modem": {
+            "type": "string",
+            "description": "Trap will be set for selected modem.",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "depends": [
+                {
+                  "type": "gsm"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The trigger which invokes the rule.",
+            "x-web": {
+              "pretty": "Trigger",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "type": "gsm"
+                  },
+                  "values": [
+                    "signalstrtrap",
+                    "conntypetrap"
+                  ]
+                },
+                {
+                  "depends": {
+                    "type": "chilli"
+                  },
+                  "values": [
+                    "connectedtrap",
+                    "disconnectedtrap"
+                  ]
+                },
+                { "hw_tags": { "din1": true }, "values": ["din1"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "din2": true }, "values": ["din2"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dout1": true }, "values": ["dout1"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dout2": true }, "values": ["dout2"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dio0": true }, "values": ["dio0"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dio1": true }, "values": ["dio1"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dio2": true }, "values": ["dio2"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "iio": true }, "values": ["iio"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "relay0": true }, "values": ["relay0"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "relay1": true }, "values": ["relay1"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "adc0": true }, "values": ["adc0"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "acl0": true }, "values": ["acl0"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dwi0": true }, "values": ["dwi0"], "depends": { "type": "iotrap" } },
+                { "hw_tags": { "dwi1": true }, "values": ["dwi1"], "depends": { "type": "iotrap" } }
+              ],
+              "enum-pretty": {
+                "signalstrtrap": "Signal strength",
+                "conntypetrap": "Network type",
+                "connectedtrap": "Connected",
+                "disconnectedtrap": "Disconnected"
+              }
+            }
+          },
+          "signal": {
+            "type": "string",
+            "description": "GSM signal strength value. If the routers signal strength falls below this threshold it will trigger the SNMP trap.",
+            "format": "irange(-130, 0)",
+            "x-web": {
+              "pretty": "Signal strength",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": "signalstrtrap"
+                }
+              ]
+            }
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "open",
+              "closed",
+              "rising",
+              "falling",
+              "both",
+              "in_range",
+              "out_of_range"
+            ],
+            "description": "Selects which pin state will trigger the SNMP trap.",
+            "x-web": {
+              "pretty": "State change",
+              "input-type": "select",
+              "depends": [
+                {
+                  "name": "iotrap"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "depends": {
+                    "name": [
+                      "din1",
+                      "din2",
+                      "dout1",
+                      "dout2",
+                      "iio",
+                      "dio0",
+                      "dio1",
+                      "dio2"
+                    ]
+                  },
+                  "values": [
+                    "both",
+                    "active",
+                    "inactive"
+                  ]
+                },
+                {
+                  "depends": {
+                    "name": [
+                      "relay0",
+                      "relay1"
+                    ]
+                  },
+                  "values": [
+                    "both",
+                    "open",
+                    "closed"
+                  ]
+                },
+                {
+                  "depends": {
+                    "name": [
+                      "dwi0",
+                      "dwi1"
+                    ]
+                  },
+                  "values": [
+                    "both",
+                    "rising",
+                    "falling"
+                  ]
+                },
+                {
+                  "depends": {
+                    "name": [
+                      "adc0",
+                      "acl0"
+                    ]
+                  },
+                  "values": [
+                    "both",
+                    "in_range",
+                    "out_of_range"
+                  ]
+                }
+              ],
+              "enum-pretty": {
+                "active": "High level",
+                "inactive": "Low level",
+                "open": "Open",
+                "closed": "Closed",
+                "rising": "Rising",
+                "falling": "Falling",
+                "both": "Both",
+                "in_range": "In range",
+                "out_of_range": "Out of range"
+              }
+            }
+          },
+          "from": {
+            "type": "string",
+            "description": "Specifies minimum voltage/current of the range.",
+            "format": "ufloat",
+            "x-web": {
+              "pretty": "Min voltage/current",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": [
+                    "adc0",
+                    "acl0"
+                  ]
+                }
+              ]
+            }
+          },
+          "to": {
+            "type": "string",
+            "description": "Specifies maximum voltage/current of the range.",
+            "format": "ufloat",
+            "x-web": {
+              "pretty": "Max voltage/current",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": [
+                    "adc0",
+                    "acl0"
+                  ]
+                }
+              ]
+            }
+          },
+          "event": {
+            "type": "string",
+            "description": "Event that will trigger the rule",
+            "enum": [
+              "Config",
+              "DHCP",
+              "Reboot",
+              "Startup",
+              "SSH",
+              "Web UI",
+              "WiFi",
+              "Mobile Data",
+              "Failover",
+              "SMS",
+              "Signal strength",
+              "SIM switch",
+              "Switch Events",
+              "Switch Topology",
+              "GPS"
+            ],
+            "x-web": {
+              "pretty": "Event type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "eventtrap"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/event_names"
+              },
+              "unique": true
+            }
+          },
+          "eventMark": {
+            "type": "string",
+            "description": "More specific event type that will trigger the rule",
+            "x-web": {
+              "pretty": "Event subtype",
+              "input-type": "select",
+              "depends": [
+                {
+                  "type": "eventtrap"
+                }
+              ],
+              "enum-depends": {
+                "$ref": "#/x-schemas/event_mark_select"
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/event_mark_names"
+              },
+              "unique": true
+            }
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "signal",
+          "from",
+          "to"
+        ]
+      },
+      "snmp_trap_rules_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "SNMP Trap Rules Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/snmp_trap_rules_options"
+          }
+        ]
+      }
+    }
+  }
+}

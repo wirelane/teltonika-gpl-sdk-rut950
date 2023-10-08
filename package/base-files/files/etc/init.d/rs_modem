@@ -1,0 +1,39 @@
+#!/bin/sh /etc/rc.common
+
+. /lib/functions/teltonika-functions.sh
+
+USE_PROCD=1
+START=99
+STOP=99
+
+CONFIG="rs_modem"
+PROGRAM="/usr/sbin/sodog"
+
+start_application() {
+	local section="$1"
+
+	config_get ENABLED "$section" "enabled"
+	[ "$ENABLED" != "1" ] && return 1
+
+	procd_open_instance
+	procd_set_param command $PROGRAM -s $section -m
+	procd_append_param file "/etc/config/$CONFIG"
+	procd_set_param term_timeout 180
+	procd_set_param respawn 3600 10 0
+	procd_close_instance
+}
+
+start_service() {
+	config_load "$CONFIG"
+	config_foreach start_application
+	uci_commit "$CONFIG"
+}
+
+reload_service() {
+	stop
+	start
+}
+
+service_triggers() {
+	procd_add_reload_trigger "$CONFIG"
+}

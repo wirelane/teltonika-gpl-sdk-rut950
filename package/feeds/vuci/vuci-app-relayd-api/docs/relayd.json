@@ -1,0 +1,287 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Relayd",
+      "description": "Relayd configuration API"
+    }
+  ],
+  "paths": {
+    "/relayd/config": {
+      "get": {
+        "tags": ["Relayd"],
+        "summary": "GET All Relayd",
+        "description": "Returns all sections with their parameters form relayd configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/relayd_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-relayd"
+      },
+      "put": {
+        "tags": ["Relayd"],
+        "summary": "UPDATE All Relayd",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/relayd_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/relayd_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-relayd"
+      },
+      "x-web": {
+        "menu": ["Network", "Wireless", "Relayd"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/relayd/config/general": {
+      "get": {
+        "tags": ["Relayd"],
+        "summary": "GET Relayd",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/relayd_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-relayd-id"
+      },
+      "put": {
+        "tags": ["Relayd"],
+        "summary": "UPDATE Relayd",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/relayd_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/relayd_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-relayd-id"
+      },
+      "x-web": {
+        "menu": ["Network", "Wireless", "Relayd"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "relayd_options_name_index": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Section name",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Enable relay",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "network": {
+            "type": "string",
+            "description": "Wireless interface",
+            "x-web": {
+              "pretty": "Wireless interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "lan_mark": {
+            "type": "string",
+            "description": "Interface",
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "relayd_options_index": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable relay",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "network": {
+            "type": "string",
+            "description": "Wireless interface",
+            "x-web": {
+              "pretty": "Wireless interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "lan_mark": {
+            "type": "string",
+            "description": "Interface",
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

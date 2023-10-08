@@ -1,0 +1,20 @@
+stages:
+  - build
+
+build-mipsel-otd140:
+  stage: build
+  image: ${CI_REGISTRY}/docker/toolchain-mips/mipsel:2.0.1
+  rules:
+    - if: '$CI_COMMIT_REF_NAME =~ /^develop$/ || $CI_COMMIT_REF_NAME =~ /^master$/'
+    - if: '$CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/ || $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/ || $CI_COMMIT_REF_NAME =~ /^release\/.*$/'
+      when: manual
+      allow_failure: false
+  artifacts:
+    name: "u-boot_mod-mipsel-otd140-${CI_COMMIT_REF_SLUG}-${CI_RUNNER_ID}-${CI_JOB_ID}"
+    when: always
+    paths:
+      - bin/u-boot*
+  script:
+    - make tlt-otd140
+  tags:
+    - compile

@@ -1,0 +1,258 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/snmp/settings/config/general": {
+      "get": {
+        "tags": [
+          "SNMP settings"
+        ],
+        "summary": "Returns the general SNMP settings configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_settings"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SNMP settings"
+        ],
+        "summary": "Updates the general SNMP settings configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_settings"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "SNMP Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/snmp/settings/config": {
+      "get": {
+        "tags": [
+          "SNMP settings"
+        ],
+        "summary": "Returns the general SNMP settings configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_settings_multi"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SNMP settings"
+        ],
+        "summary": "Updates the general SNMP settings configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_settings_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configurations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configurations to update",
+                    "items": {
+                      "$ref": "#/components/schemas/snmp_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "SNMP Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200snmp_settings": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/snmp_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200snmp_settings_multi": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configurations objects",
+                  "items": {
+                    "$ref": "#/components/schemas/snmp_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "snmp_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable SNMP (Simple Network Management Protocol) service on systems startup.",
+            "x-web": {
+              "pretty": "Enable SNMP service",
+              "input-type": "switch"
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Create a firewall rule that allows access to SNMP for remote hosts.",
+            "x-web": {
+              "pretty": "Enable remote access",
+              "input-type": "switch"
+            }
+          },
+          "ip_type": {
+            "type": "string",
+            "enum": [
+              "ipv4",
+              "ipv6",
+              "ipv4v6"
+            ],
+            "description": "IP type used by SNMP.",
+            "default": "ipv4",
+            "x-web": {
+              "pretty": "IP type",
+              "input-type": "select",
+              "enum-pretty": {
+                "ipv4": "IPv4",
+                "ipv6": "IPv6",
+                "ipv4v6": "IPv4v6"
+              }
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "TCP/UDP port number used for the connection.",
+            "format": "port",
+            "default": "161",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "v1mode": {
+            "type": "string",
+            "description": "Enable SNMP v1 compatibility.",
+            "x-web": {
+              "pretty": "SNMP v1 mode",
+              "input-type": "switch"
+            }
+          },
+          "v2cmode": {
+            "type": "string",
+            "description": "Enable SNMP v2 compatibility.",
+            "x-web": {
+              "pretty": "SNMP v2c mode",
+              "input-type": "switch"
+            }
+          },
+          "v3mode": {
+            "type": "string",
+            "description": "Enable SNMP v3 compatibility.",
+            "x-web": {
+              "pretty": "SNMP v3 mode",
+              "input-type": "switch"
+            }
+          }
+        },
+        "required": [
+          "port"
+        ]
+      },
+      "snmp_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "SNMP Settings Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/snmp_options"
+          }
+        ]
+      }
+    }
+  }
+}

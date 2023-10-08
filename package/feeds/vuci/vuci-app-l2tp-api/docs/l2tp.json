@@ -1,0 +1,1475 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "L2TP",
+    "description": "L2TP documentation",
+    "version": "3.0.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "L2TP Client"
+    },
+    {
+      "name": "L2TP Server"
+    },
+    {
+      "name": "L2TP Users"
+    }
+  ],
+  "paths": {
+    "/l2tp/client/config": {
+      "get": {
+        "description": "Gets l2tp client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_multi"
+          }
+        },
+        "summary": "Get l2tp client configurations",
+        "tags": ["L2TP Client"],
+        "operationId": "get-services-l2tp-client-config"
+      },
+      "post": {
+        "description": "Creates l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_one"
+          }
+        },
+        "summary": "Create l2tp client configuration",
+        "tags": ["L2TP Client"],
+        "operationId": "post-services-l2tp-client-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_client_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates l2tp client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_multi"
+          }
+        },
+        "summary": "Update l2tp client configurations",
+        "tags": ["L2TP Client"],
+        "operationId": "put-services-l2tp-client-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tp_client_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes l2tp client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "summary": "Delete l2tp client configurations",
+        "tags": ["L2TP Client"],
+        "operationId": "delete-services-l2tp-client-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/client/config/{sid}": {
+      "get": {
+        "description": "Gets l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_one"
+          }
+        },
+        "summary": "Get l2tp client configuration",
+        "tags": ["L2TP Client"],
+        "operationId": "get-services-l2tp-client-config-sid"
+      },
+      "put": {
+        "description": "Updates l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_one"
+          }
+        },
+        "summary": "Update l2tp client configuration",
+        "tags": ["L2TP Client"],
+        "operationId": "put-services-l2tp-client-config-sid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_client_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "summary": "Delete l2tp client configuration",
+        "tags": ["L2TP Client"],
+        "operationId": "delete-services-l2tp-client-config-sid"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/server/config": {
+      "get": {
+        "description": "Gets l2tp server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_multi"
+          }
+        },
+        "summary": "Get l2tp server configurations",
+        "tags": ["L2TP Server"],
+        "operationId": "get-l2tp-server-config"
+      },
+      "post": {
+        "description": "Creates l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_one"
+          }
+        },
+        "summary": "Create l2tp server configuration",
+        "tags": ["L2TP Server"],
+        "operationId": "post-l2tp-server-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_server_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates l2tp server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_multi"
+          }
+        },
+        "summary": "Update l2tp server configurations",
+        "tags": ["L2TP Server"],
+        "operationId": "put-l2tp-server-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tp_server_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes l2tp server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "summary": "Delete l2tp server configurations",
+        "tags": ["L2TP Server"],
+        "operationId": "delete-l2tp-server-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/server/config/{sid}": {
+      "get": {
+        "description": "Gets l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_one"
+          }
+        },
+        "summary": "Get l2tp server configuration",
+        "operationId": "get-l2tp-server-config-sid",
+        "tags": ["L2TP Server"]
+      },
+      "put": {
+        "description": "Updates l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_one"
+          }
+        },
+        "summary": "Update l2tp server configuration",
+        "operationId": "put-l2tp-server-config-sid",
+        "tags": ["L2TP Server"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_server_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "summary": "Delete l2tp server configuration",
+        "operationId": "delete-l2tp-server-config-sid",
+        "tags": ["L2TP Server"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/users/config": {
+      "get": {
+        "description": "Gets l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_multi"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "summary": "Get l2tp user configurations",
+        "operationId": "get-l2tp-users-config"
+      },
+      "post": {
+        "description": "Creates l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_one"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "summary": "Create l2tp user configurations",
+        "operationId": "post-l2tp-users-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_user_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_multi"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "summary": "Update l2tp user configurations",
+        "operationId": "put-l2tp-users-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tp_user_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "summary": "Delete l2tp user configurations",
+        "operationId": "delete-l2tp-users-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/users/config/{sid}": {
+      "get": {
+        "description": "Gets user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_one"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "operationId": "get-l2tp-users-config-sid",
+        "summary": "Get user configuration"
+      },
+      "put": {
+        "description": "Updates user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_one"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "operationId": "put-l2tp-users-config-sid",
+        "summary": "Update user configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_user_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "tags": ["L2TP Users"],
+        "operationId": "delete-l2tp-users-config-sid",
+        "summary": "Delete user configuration"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/status": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "cli": {
+                          "username": "test",
+                          "status": "0",
+                          "server": "1.1.1.1"
+                        },
+                        "srv": {
+                          "rx": "4124",
+                          "local_ip": "192.168.0.1",
+                          "tx": "2792",
+                          "end_ip": "192.168.0.30",
+                          "uptime": "01h 20m 30s",
+                          "clients_connected": 2,
+                          "status": "2",
+                          "start_ip": "192.168.0.20",
+                          "clients_all": 2,
+                          "peers": [
+                            [
+                              {
+                                "username": "user",
+                                "remote_ip": "192.168.0.21",
+                                "uptime": "00h 56m 59s",
+                                "tx": "830",
+                                "rx": "794",
+                                "local_ip": "192.168.0.1"
+                              },
+                              {
+                                "username": "user2",
+                                "remote_ip": "192.168.0.20",
+                                "uptime": "01h 20m 30s",
+                                "tx": "1962",
+                                "rx": "3330",
+                                "local_ip": "192.168.0.1"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "client": {
+                          "type": "object",
+                          "properties": {
+                            "username": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "server": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "server": {
+                          "type": "object",
+                          "properties": {
+                            "rx": {
+                              "type": "string"
+                            },
+                            "local_ip": {
+                              "type": "string"
+                            },
+                            "tx": {
+                              "type": "string"
+                            },
+                            "end_ip": {
+                              "type": "string"
+                            },
+                            "uptime": {
+                              "type": "string"
+                            },
+                            "clients_connected": {
+                              "type": "integer"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "start_ip": {
+                              "type": "string"
+                            },
+                            "clients_all": {
+                              "type": "integer"
+                            },
+                            "peers": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "username": {
+                                    "type": "string"
+                                  },
+                                  "remote_ip": {
+                                    "type": "string"
+                                  },
+                                  "uptime": {
+                                    "type": "string"
+                                  },
+                                  "tx": {
+                                    "type": "string"
+                                  },
+                                  "rx": {
+                                    "type": "string"
+                                  },
+                                  "local_ip": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-l2tp-status",
+        "description": "Status of all l2tp instances"
+      },
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/status/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "rx": {
+                          "type": "string"
+                        },
+                        "local_ip": {
+                          "type": "string"
+                        },
+                        "tx": {
+                          "type": "string"
+                        },
+                        "end_ip": {
+                          "type": "string"
+                        },
+                        "uptime": {
+                          "type": "string"
+                        },
+                        "clients_connected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "start_ip": {
+                          "type": "string"
+                        },
+                        "clients_all": {
+                          "type": "integer"
+                        },
+                        "peers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "username": {
+                                "type": "string"
+                              },
+                              "remote_ip": {
+                                "type": "string"
+                              },
+                              "uptime": {
+                                "type": "string"
+                              },
+                              "tx": {
+                                "type": "string"
+                              },
+                              "rx": {
+                                "type": "string"
+                              },
+                              "local_ip": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "rx": "4312",
+                        "local_ip": "192.168.0.1",
+                        "tx": "2880",
+                        "end_ip": "192.168.0.30",
+                        "uptime": "01h 24m 04s",
+                        "clients_connected": 2,
+                        "status": "2",
+                        "start_ip": "192.168.0.20",
+                        "clients_all": 2,
+                        "peers": [
+                          [
+                            {
+                              "username": "user",
+                              "remote_ip": "192.168.0.21",
+                              "uptime": "01h 00m 33s",
+                              "tx": "830",
+                              "rx": "794",
+                              "local_ip": "192.168.0.1"
+                            },
+                            {
+                              "username": "user2",
+                              "remote_ip": "192.168.0.20",
+                              "uptime": "01h 24m 04s",
+                              "tx": "2050",
+                              "rx": "3518",
+                              "local_ip": "192.168.0.1"
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-l2tp-status-sid",
+        "description": "L2TP status of the instance"
+      },
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tp/log": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "response": "Thu Apr 13 06:53:37 2023 daemon.notice xl2tpd[3224]: Connecting to host 1.1.1.1, port 1701\n"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-l2tp-log",
+        "description": "Logs of all l2tp instances"
+      },
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "l2tp_client_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["id"]
+                    },
+                    {
+                      "$ref": "#/components/schemas/l2tp_client_options"
+                    }
+                  ]
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "l2tp_client_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      {
+                        "$ref": "#/components/schemas/l2tp_client_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "l2tp_server_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "x-web": {
+                            "input-type": "input",
+                            "pretty": "Configuration Name"
+                          },
+                          "type": "string"
+                        }
+                      },
+                      "required": ["id"]
+                    },
+                    {
+                      "$ref": "#/components/schemas/l2tp_server_options"
+                    }
+                  ]
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "l2tp_server_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      {
+                        "$ref": "#/components/schemas/l2tp_server_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "l2tp_user_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["id"]
+                    },
+                    {
+                      "$ref": "#/components/schemas/l2tp_user_options"
+                    }
+                  ]
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "l2tp_user_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      {
+                        "$ref": "#/components/schemas/l2tp_user_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "delete_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id"]
+                }
+              },
+              "required": ["success", "data"],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "",
+                      ".index": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["id"]
+                  }
+                }
+              },
+              "required": ["success", "data"]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "l2tp_client_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns the L2TP instance on or off."
+          },
+          "server": {
+            "x-web": {
+              "pretty": "Server",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "L2TP server's IP address or hostname."
+          },
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Username used for authentication to the L2TP server."
+          },
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Password used for authentication to the L2TP server."
+          },
+          "auth": {
+            "x-web": {
+              "pretty": "CHAP secret",
+              "input-type": "input"
+            },
+            "minlength": 5,
+            "type": "string",
+            "description": "A secret used for L2TP Tunnel Authentication."
+          },
+          "defaultroute": {
+            "x-web": {
+              "pretty": "Default route",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "When set, this connection will become the device's default route."
+          },
+          "mtu": {
+            "type": "string",
+            "x-web": {
+              "pretty": "MTU",
+              "input-type": "input"
+            },
+            "description": "Sets the maximum transmission unit (MTU) size. It is the largest size of a protocol data unit (PDU) that can be transmitted in a single network layer transaction.",
+            "format": "irange(68, 9200)"
+          },
+          "auth_chap": {
+            "x-web": {
+              "pretty": "Allow CHAP",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allows CHAP authentication method to be used",
+            "format": "is_bool"
+          },
+          "auth_pap": {
+            "x-web": {
+              "pretty": "Allow PAP",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allow PAP authentication method to be used",
+            "format": "is_bool"
+          },
+          "auth_mschap2": {
+            "x-web": {
+              "pretty": "Allow MSCHAP-v2",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allow MSCHAP-v2 authentication method to be used",
+            "format": "is_bool"
+          }
+        }
+      },
+      "l2tp_client_options_id": {
+        "title": "l2tp_client_id",
+        "x-stoplight": {
+          "id": "ddmy4knd9ovmx"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Configuration name",
+                  "input-type": "input"
+                }
+              }
+            },
+            "required": ["id"]
+          },
+          {
+            "$ref": "#/components/schemas/l2tp_client_options"
+          }
+        ]
+      },
+      "l2tp_server_options": {
+        "type": "object",
+        "title": "",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Turns the L2TP instance on or off"
+          },
+          "localip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Local IP",
+              "input-type": "input"
+            },
+            "description": "IP Address of this L2TP network interface."
+          },
+          "start": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Remote IP range begin",
+              "input-type": "input"
+            },
+            "description": "L2TP IP address leases will begin from the address specified in this field."
+          },
+          "limit": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Remote IP range end",
+              "input-type": "input"
+            },
+            "description": "L2TP IP address leases will end with the address specified in this field."
+          },
+          "chap": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable CHAP",
+              "input-type": "switch"
+            },
+            "description": "Challenge-Handshake Authentication Protocol for L2TP."
+          },
+          "auth": {
+            "type": "string",
+            "x-web": {
+              "pretty": "CHAP Secret",
+              "input-type": "input",
+              "depends": [
+                {
+                  "chap": "1"
+                }
+              ]
+            },
+            "description": "A secret used for L2TP Tunnel Authentication"
+          },
+          "auth_chap": {
+            "type": "string",
+            "x-web": {
+              "pretty": "CHAP authentication",
+              "input-type": "switch"
+            },
+            "description": "When turned on it requires CHAP authentication method to be used, when turned off it refuses CHAP authentication method",
+            "format": "is_bool"
+          },
+          "auth_pap": {
+            "type": "string",
+            "x-web": {
+              "pretty": "PAP authentication",
+              "input-type": "switch"
+            },
+            "description": "When turned on it requires PAP authentication method to be used, when turned off it refuses PAP authentication method",
+            "format": "is_bool"
+          },
+          "auth_mschap2": {
+            "type": "string",
+            "x-web": {
+              "pretty": "MSCHAP-v2 authentication",
+              "input-type": "switch"
+            },
+            "description": "When turned on it requires MSCHAP-v2 authentication method to be used, when turned off it refuses MSCHAP-v2 authentication method",
+            "format": "is_bool"
+          }
+        }
+      },
+      "l2tp_server_options_id": {
+        "title": "",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration Name",
+                  "input-type": "input",
+                  "unique": true
+                },
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/l2tp_server_options"
+          }
+        ]
+      },
+      "l2tp_user_options": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "unique": true
+            },
+            "description": "User username"
+          },
+          "password": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "description": "User password"
+          },
+          "remoteip": {
+            "type": "string",
+            "x-web": {
+              "pretty": "L2TP client's IP",
+              "input-type": "input"
+            },
+            "description": "Remote ip"
+          }
+        }
+      },
+      "l2tp_user_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/l2tp_user_options"
+          }
+        ]
+      }
+    }
+  }
+}

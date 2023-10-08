@@ -1,0 +1,2186 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/openvpn/config/{cfg}": {
+      "put": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Updates specified openvpn configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Openvpn"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration openvpn section identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/openvpn_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Deletes specified openvpn configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Openvpn"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration openvpn section identifier"
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Returns specified openvpn section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Openvpn"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration openvpn section identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Uci configuration openvpn section identifier"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "OpenVPN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/openvpn/config": {
+      "put": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Updates specified openvpn configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpenvpnMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/openvpn_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Deletes specified openvpn child configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Openvpn"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Returns all openvpn configuration sections",
+        "description": "Returns all sections with their parameters from openvpn configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpenvpnMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OpenVPN"
+        ],
+        "summary": "Creates openvpn section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Openvpn"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/openvpn_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "OpenVPN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/openvpn/status/{cfg}": {
+      "get": {
+        "tags": [
+          "OpenVPN Status"
+        ],
+        "summary": "Returns specified openvpn section status",
+        "parameters": [
+          {
+            "name": "cfg",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration openvpn section identifier"
+          }
+        ],
+        "description": "Returns statuses of the instance",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "type": "1",
+                        "protocol": "tun",
+                        "tx": "5575",
+                        "rx": "6136",
+                        "uptime": "00h 12m 23s",
+                        "clients_connected": "1",
+                        "status": "2",
+                        "clients": [
+                          {
+                            "tx": "5575",
+                            "uptime": "00h 05m 42s",
+                            "vpn_ip": "10.0.0.6",
+                            "last_ref": "2023-06-08 11:14:15",
+                            "name": "client1",
+                            "rx": "6136",
+                            "ip": "192.168.10.119:60396"
+                          }
+                        ],
+                        "clients_all": "1",
+                        "ipaddress": "10.0.0.1"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "protocol": {
+                          "type": "string"
+                        },
+                        "tx": {
+                          "type": "string"
+                        },
+                        "rx": {
+                          "type": "string"
+                        },
+                        "uptime": {
+                          "type": "string"
+                        },
+                        "clients_connected": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "clients": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "tx": {
+                                "type": "string"
+                              },
+                              "uptime": {
+                                "type": "string"
+                              },
+                              "vpn_ip": {
+                                "type": "string"
+                              },
+                              "last_ref": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "rx": {
+                                "type": "string"
+                              },
+                              "ip": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "clients_all": {
+                          "type": "string"
+                        },
+                        "ipaddress": {
+                          "type": "string"
+                        },
+                        "updated": {
+                          "type": "string"
+                        },
+                        "ipaddress_remote": {
+                          "type": "string"
+                        },
+                        "server": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Uci configuration openvpn section identifier"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "OpenVPN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/openvpn/status/": {
+      "get": {
+        "tags": [
+          "OpenVPN Status"
+        ],
+        "summary": "Returns all openvpn configuration sections statuses",
+        "description": "Returns all sections statuses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "cli": {
+                          "type": "0",
+                          "protocol": "tun",
+                          "updated": "2023-03-29 09:10:47",
+                          "rx": "0",
+                          "tx": "660",
+                          "status": "0",
+                          "ipaddress_remote": "10.1.0.2",
+                          "ipaddress": "10.1.0.1",
+                          "server": "1.1.1.1"
+                        },
+                        "srv": {
+                          "type": "1",
+                          "protocol": "tun",
+                          "tx": "110130",
+                          "updated": "2023-03-29 09:10:52",
+                          "rx": "109907",
+                          "uptime": "02h 20m 51s",
+                          "clients_conected": "2",
+                          "status": "2",
+                          "clients": [
+                            [
+                              {
+                                "tx": "55037",
+                                "uptime": "2023-03-29 06:52:04",
+                                "vpn_ip": "10.0.0.8",
+                                "last_ref": "2023-03-29 06:52:05",
+                                "name": "client2",
+                                "rx": "54840",
+                                "ip": "192.168.10.2:35302"
+                              },
+                              {
+                                "tx": "55093",
+                                "uptime": "2023-03-29 06:52:04",
+                                "vpn_ip": "10.0.0.6",
+                                "last_ref": "2023-03-29 06:52:04",
+                                "name": "client1",
+                                "rx": "55067",
+                                "ip": "192.168.10.119:44884"
+                              }
+                            ]
+                          ],
+                          "clients_all": "2",
+                          "ipaddress": "10.0.0.1"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "client_name": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "protocol": {
+                              "type": "string"
+                            },
+                            "updated": {
+                              "type": "string"
+                            },
+                            "rx": {
+                              "type": "string"
+                            },
+                            "tx": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "ipaddress_remote": {
+                              "type": "string"
+                            },
+                            "ipaddress": {
+                              "type": "string"
+                            },
+                            "server": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "server_name": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "protocol": {
+                              "type": "string"
+                            },
+                            "tx": {
+                              "type": "string"
+                            },
+                            "updated": {
+                              "type": "string"
+                            },
+                            "rx": {
+                              "type": "string"
+                            },
+                            "uptime": {
+                              "type": "string"
+                            },
+                            "clients_conected": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "string"
+                            },
+                            "clients": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "tx": {
+                                    "type": "string"
+                                  },
+                                  "uptime": {
+                                    "type": "string"
+                                  },
+                                  "vpn_ip": {
+                                    "type": "string"
+                                  },
+                                  "last_ref": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "rx": {
+                                    "type": "string"
+                                  },
+                                  "ip": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "clients_all": {
+                              "type": "string"
+                            },
+                            "ipaddress": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "OpenVPN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/openvpn/log/{cfg}": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "response": ""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-openvpn-log-cfg",
+        "description": "Returns logs of the instance"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cfg",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "OpenVPN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Openvpn": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/openvpn_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OpenvpnMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/openvpn_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "openvpn_single_options": {
+        "type": "object",
+        "properties": {
+          "_name": {
+            "x-web": {
+              "pretty": "Name of the tunnel",
+              "input-type": "input",
+              "virtual": true
+            },
+            "type": "string",
+            "description": "Name of the tunnel. Used for easier tunnels management purpose only"
+          },
+          "type": {
+            "x-web": {
+              "pretty": "Role",
+              "input-type": "select",
+              "enum-pretty": {
+                "client": "Client",
+                "server": "Server"
+              }
+            },
+            "enum": [
+              "client",
+              "server"
+            ],
+            "type": "string",
+            "description": "Type of tunnel instance"
+          },
+          "enable": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable current configuration"
+          },
+          "enable_external": {
+            "x-web": {
+              "pretty": "Enable external services",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "client"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "type": "client"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Enable external VPN services"
+          },
+          "external_service": {
+            "x-web": {
+              "depends": [
+                {
+                  "enable_external": "1"
+                }
+              ],
+              "pretty": "VPN providers",
+              "enum-pretty": {
+                "express": "Express VPN",
+                "nord": "Nord VPN"
+              }
+            },
+            "enum": [
+              "express",
+              "nord"
+            ],
+            "type": "string",
+            "description": "Choose from a list of available VPN providers"
+          },
+          "server_list": {
+            "x-web": {
+              "depends": [
+                {
+                  "enable_external": "1"
+                }
+              ],
+              "pretty": "VPN providers",
+              "enum-pretty": {
+                "uk": "United Kingdom",
+                "usa": "USA",
+                "aus": "Australia",
+                "sa": "South Africa",
+                "custom": "Custom"
+              }
+            },
+            "enum": [
+              "uk",
+              "usa",
+              "aus",
+              "sa",
+              "custom"
+            ],
+            "type": "string",
+            "description": "Choose from a list of available VPN servers"
+          },
+          "enable_custom": {
+            "x-web": {
+              "pretty": "Enable OpenVPN config from file",
+              "depends": [
+                {
+                  "enable_external": "0"
+                }
+              ],
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable custom OpenVPN configuration from file"
+          },
+          "config": {
+            "x-web": {
+              "pretty": "OpenVPN configuration file",
+              "depends": [
+                {
+                  "enable_custom": "1"
+                },
+                {
+                  "server_list": "custom"
+                }
+              ],
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "OpenVPN configuration file. Warning! This will overwrite your current configuration."
+          },
+          "upload_files": {
+            "x-web": {
+              "pretty": "Upload OpenVPN authentication files",
+              "depends": [
+                {
+                  "enable_custom": "1"
+                }
+              ],
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Upload OpenVPN authentication files, which will be automatically included in configuration"
+          },
+          "dev": {
+            "type": "string",
+            "description": "Virtual VPN interface type",
+            "x-web": {
+              "enum-pretty": {
+                "tun": "TUN (tunnel)",
+                "tap": "TAP (bridged)"
+              },
+              "pretty": "TUN/TAP",
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "enum": [
+              "tun",
+              "tap"
+            ]
+          },
+          "proto": {
+            "x-web": {
+              "pretty": "Protocol",
+              "enum-pretty": {
+                "udp": "UDP",
+                "udp6": "UDP6",
+                "tcp-client": "TCP client",
+                "tcp-server": "TCP server",
+                "tcp6-client": "TCP6 client",
+                "tcp6-server": "TCP6 server"
+              },
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "enum": [
+              "udp",
+              "udp6",
+              "tcp-client",
+              "tcp-server",
+              "tcp6-client",
+              "tcp6-server"
+            ],
+            "type": "string",
+            "description": "A transport protocol used for connection. You can choose here between TCP and UDP"
+          },
+          "port": {
+            "x-web": {
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ],
+              "pretty": "Port",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "TCP/UDP port for both local and remote endpoint. Make sure that this port is open in firewall"
+          },
+          "comp_lzo": {
+            "x-web": {
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ],
+              "pretty": "LZO",
+              "input-type": "select",
+              "enum-pretty": {
+                "yes": "Yes",
+                "no": "No",
+                "": "None"
+              }
+            },
+            "enum": [
+              "yes",
+              "no",
+              ""
+            ],
+            "type": "string",
+            "description": "Use fast LZO compression. With LZO compression your VPN connection will generate less network traffic"
+          },
+          "_auth": {
+            "type": "string",
+            "description": "Authentication mode used to secure data session",
+            "enum": [
+              "skey",
+              "tls",
+              "tls/pass",
+              "pass"
+            ],
+            "x-web": {
+              "pretty": "Authentication",
+              "enum-pretty": {
+                "skey": "Static key",
+                "tls": "TLS",
+                "tls/pass": "TLS/Password",
+                "pass": "Password"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "upload_files": "1"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            }
+          },
+          "cipher": {
+            "x-web": {
+              "enum-pretty": {
+                "DES-CBC": "DES-CBC 64",
+                "RC2-CBC": "RC2-CBC 128",
+                "DES-EDE-CBC": "DES-EDE-CBC 128",
+                "DES-EDE3-CBC": "DES-EDE3-CBC 192",
+                "DESX-CBC": "DESX-CBC 192",
+                "BF-CBC": "BF-CBC 128",
+                "RC2-40-CBC": "RC2-40-CBC 40",
+                "CAST5-CBC": "CAST5-CBC 128",
+                "RC2-64-CBC": "RC2-64-CBC 64",
+                "AES-128-CBC": "AES-128-CBC 128",
+                "AES-128-CFB": "AES-128-CFB 128",
+                "AES-128-CFB1": "AES-128-CFB1 128",
+                "AES-128-CFB8": "AES-128-CFB8 128",
+                "AES-128-OFB": "AES-128-OFB 128",
+                "AES-128-GCM": "AES-128-GCM 128",
+                "AES-192-CFB": "AES-192-CFB 192",
+                "AES-192-CFB1": "AES-192-CFB1 192",
+                "AES-192-CFB8": "AES-192-CFB8 192",
+                "AES-192-OFB": "AES-192-OFB 192",
+                "AES-192-CBC": "AES-192-CBC 192",
+                "AES-192-GCM": "AES-192-GCM 192",
+                "AES-256-GCM": "AES-256-GCM 256",
+                "AES-256-CFB": "AES-256-CFB 256",
+                "AES-256-CFB1": "AES-256-CFB1 256",
+                "AES-256-CFB8": "AES-256-CFB8 256",
+                "AES-256-OFB": "AES-256-OFB 256",
+                "AES-256-CBC": "AES-256-CBC 256 (default)",
+                "none": "None"
+              },
+              "pretty": "Encryption",
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ],
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "Packet encryption algorithm (cipher)",
+            "enum": [
+                "DES-CBC",
+                "RC2-CBC",
+                "DES-EDE-CBC",
+                "DES-EDE3-CBC",
+                "DESX-CBC",
+                "BF-CBC",
+                "RC2-40-CBC",
+                "CAST5-CBC",
+                "RC2-64-CBC",
+                "AES-128-CBC",
+                "AES-128-CFB",
+                "AES-128-CFB1",
+                "AES-128-CFB8",
+                "AES-128-OFB",
+                "AES-128-GCM",
+                "AES-192-CFB",
+                "AES-192-CFB1",
+                "AES-192-CFB8",
+                "AES-192-OFB",
+                "AES-192-CBC",
+                "AES-192-GCM",
+                "AES-256-GCM",
+                "AES-256-CFB",
+                "AES-256-CFB1",
+                "AES-256-CFB8",
+                "AES-256-OFB",
+                "AES-256-CBC",
+                "none"                      
+              ]
+          },
+          "_tls_cipher": {
+            "x-web": {
+              "enum-pretty": {
+                "all": "All",
+                "dhe_rsa": "DHE + RSA",
+                "custom": "Custom"
+              },
+              "pretty": "TLS cipher",
+              "depends": [
+                {
+                  "_auth": "tls",
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                },
+                {
+                  "_auth": "tls/pass",
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "enum": [
+              "all",
+              "dhe_rsa",
+              "custom"
+            ],
+            "type": "string",
+            "description": "Packet encryption algorithm (cipher)"
+          },
+          "tls_cipher": {
+            "x-web": {
+              "pretty": "Allowed TLS ciphers",
+              "depends": [
+                {
+                  "_tls_cipher": "dhe_rsa"
+                }
+              ],
+              "input-type": "multiselect"
+            },
+            "enum": [
+              "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384",
+              "TLS-DHE-RSA-WITH-AES-256-CBC-SHA",
+              "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256",
+              "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA",
+              "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA",
+              "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256",
+              "TLS-DHE-RSA-WITH-AES-128-CBC-SHA",
+              "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256",
+              "TLS-DHE-RSA-WITH-SEED-CBC-SHA",
+              "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA",
+              "TLS-DHE-RSA-WITH-DES-CBC-SHA"
+            ],
+            "type": "array",
+            "description": "Specific cyphers to use. Only 6 can be selected at a time",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_cipher_custom": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Allowed TLS ciphers",
+              "depends": [
+                {
+                  "_tls_cipher": "custom"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "Specific cyphers to use. Only 6 can be specified at a time",
+            "items": {
+              "type": "string"
+            }
+          },
+          "remote": {
+            "x-web": {
+              "pretty": "Remote host/IP address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IP address or domain name of OpenVPN server"
+          },
+          "resolv_retry": {
+            "x-web": {
+              "pretty": "Resolve retry",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Try to resolve server hostname for x seconds before giving up"
+          },
+          "keepalive": {
+            "x-web": {
+              "pretty": "Keep alive",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Try to keep a connection alive. Two values are required: ping_interval and ping_restart, e.g. 10 120"
+          },
+          "client_to_client": {
+            "x-web": {
+              "pretty": "Client to client",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "type": "server",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "type": "server",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "type": "server",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Allow client"
+          },
+          "local_ip": {
+            "x-web": {
+              "pretty": "Local tunnel endpoint IP",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "skey"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IP address of virtual local network interface"
+          },
+          "remote_ip": {
+            "x-web": {
+              "pretty": "Remote tunnel endpoint IP",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "skey",
+                  "dev": "tun"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IP address of virtual remote network interface"
+          },
+          "network_ip": {
+            "x-web": {
+              "pretty": "Remote network IP address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "skey",
+                  "dev": "tun"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IP address of remote LAN network"
+          },
+          "network_mask": {
+            "x-web": {
+              "pretty": "Remote network netmask",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "skey",
+                  "dev": "tun"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Subnet mask of remote LAN network"
+          },
+          "route_ipv6": {
+            "x-web": {
+              "pretty": "Remote network IPv6 address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "client",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "proto": "udp6"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "proto": "tcp6-client"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "proto": "tcp6-server"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IPv6 address of the remote network"
+          },
+          "server_ip": {
+            "x-web": {
+              "pretty": "Virtual network IP address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tun"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IP address used for virtual network"
+          },
+          "server_netmask": {
+            "x-web": {
+              "depends": [
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "pass"
+                }
+              ],
+              "pretty": "Virtual network netmask",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Subnet mask used for virtual network"
+          },
+          "server_ipv6": {
+            "x-web": {
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls",
+                  "proto": "udp6"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls",
+                  "proto": "tcp6-client"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls",
+                  "proto": "tcp6-server"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls/pass",
+                  "proto": "udp6"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls/pass",
+                  "proto": "tcp6-client"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "_auth": "tls/pass",
+                  "proto": "tcp6-server"
+                }
+              ],
+              "pretty": "Virtual network IPv6 address",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IPv6 address used for virtual network"
+          },
+          "push": {
+            "x-web": {
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                }
+              ],
+              "pretty": "Push option",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Push a configuration option back to the client for remote execution",
+            "items": {
+              "type": "string"
+            }
+          },
+          "duplicate_cn": {
+            "x-web": {
+              "pretty": "Allow duplicate certificates",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                }
+              ],
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allow duplicate certificates. All clients can have same certificates"
+          },
+          "auth": {
+            "x-web": {
+              "pretty": "Authentication algorithm",
+              "input-type": "select",
+              "enum-pretty": {
+                "none": "None",
+                "md5": "MD5",
+                "sha1": "SHA1 (default)",
+                "sha256": "SHA256",
+                "sha384": "SHA384",
+                "sha512": "SHA512"
+              },
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "enum": [
+              "none",
+              "md5",
+              "sha1",
+              "sha256",
+              "sha384",
+              "sha512"
+            ],
+            "type": "string",
+            "description": "Authentication algorithm"
+          },
+          "_tls_auth": {
+            "x-web": {
+              "pretty": "Additional HMAC authentication",
+              "input-type": "select",
+              "enum-pretty": {
+                "none": "None",
+                "tls-auth": "Authentication only (tls-auth)",
+                "tls-crypt": "Authentication and encryption (tls-crypt)"
+              },
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "enum": [
+              "none",
+              "tls-auth",
+              "tls-crypt"
+            ],
+            "type": "string",
+            "description": "Add an additional layer of HMAC authentication on top of the TLS control channel to protect against DoS attacks."
+          },
+          "tls_auth": {
+            "x-web": {
+              "pretty": "HMAC authentication key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "HMAC authentication key"
+          },
+          "tls_crypt": {
+            "x-web": {
+              "pretty": "HMAC key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-crypt",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-crypt",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-crypt",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-crypt",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-crypt",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-crypt",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "HMAC key"
+          },
+          "key_direction": {
+            "x-web": {
+              "pretty": "HMAC key direction",
+              "input-type": "select",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "pass"
+                }
+              ]
+            },
+            "enum": [
+              "0",
+              "1"
+            ],
+            "type": "string",
+            "description": "HMAC authentication key direction value is arbitrary and must be opposite between communicating parties (or omitted entirely"
+          },
+          "user": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls/pass"
+                },
+                {
+                    "enable_custom": "0",
+                    "upload_files": "0",
+                    "_tls_auth": "tls-auth",
+                    "_auth": "pass"
+                  },
+                  {
+                    "enable_custom": "0",
+                    "upload_files": "0",
+                    "_tls_auth": "tls-auth",
+                    "_auth": "tls/pass"
+                  }
+              ]
+            },
+            "type": "string",
+            "description": "VPN client user name"
+          },
+          "pass": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_custom": "1",
+                  "upload_files": "1",
+                  "_tls_auth": "tls-auth",
+                  "_auth": "tls/pass"
+                },
+                {
+                    "enable_custom": "0",
+                    "upload_files": "0",
+                    "_tls_auth": "tls-auth",
+                    "_auth": "pass"
+                  },
+                  {
+                    "enable_custom": "0",
+                    "upload_files": "0",
+                    "_tls_auth": "tls-auth",
+                    "_auth": "tls/pass"
+                  }
+              ]
+            },
+            "type": "string",
+            "description": "VPN client password"
+          },
+          "_extra": {
+            "x-web": {
+              "pretty": "Extra options",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_custom": "0",
+                  "enable_external": "0"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "Enter any additional options to be added to the OpenVPN configuration.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_device_files": {
+            "type": "string",
+            "description": "Choose this option if you want to select certificate files from device. Certificate files can be generated in system/administration/certificates"
+          },
+          "ca": {
+            "x-web": {
+              "pretty": "Certificate authority",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass",
+                  "use_pkcs": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "The digital certificate verifies the ownership of a public key by the named subject of the certificate"
+          },
+          "cert": {
+            "x-web": {
+              "pretty": "Client certificate",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass",
+                  "use_pkcs": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Identify a client or a user, authenticating the client to the server and establishing precisely who they are"
+          },
+          "key": {
+            "x-web": {
+              "pretty": "Client key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass",
+                  "use_pkcs": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "It has been generated for the same purpose as client certificate"
+          },
+          "decrypt": {
+            "x-web": {
+              "pretty": "Private key decryption password (optional)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Decrypt private key with password.(Optional)"
+          },
+          "secret": {
+            "x-web": {
+              "pretty": "Static pre-shared key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "skey"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "skey"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Pre"
+          },
+          "userpass": {
+            "x-web": {
+              "pretty": "Usernames & Passwords",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "File containing usernames and passwords against which the server can authenticate clients. Each username and password pair should be placed on a single line and separated by a space."
+          },
+          "dh": {
+            "x-web": {
+              "pretty": "Diffle Hellman parameters",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Diffie"
+          },
+          "crl_verify": {
+            "x-web": {
+              "pretty": "CRL file (optional)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "_auth": "tls"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "upload_files": "1",
+                  "enable_custom": "1",
+                  "_auth": "tls"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Revoking a certificate means to invalidate a previously signed certificate so that it can no longer be used for authentication purposes. Upload a .pem revocation file"
+          },
+          "use_pkcs": {
+            "x-web": {
+              "pretty": "Use PKCS #12 format",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "_auth": "pass"
+                },
+                {
+                  "_auth": "tls/pass"
+                },
+                {
+                  "_auth": "tls"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Use PKCS #12 archive file format to bundle all the members of a chain of trust."
+          },
+          "askpass": {
+            "x-web": {
+              "pretty": "PKCS #12 passphrase",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_pkcs": "1",
+                  "_auth": "pass"
+                },
+                {
+                  "use_pkcs": "1",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "use_pkcs": "1",
+                  "_auth": "tls"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Passphrase to decrypt PKCS #12 certificates."
+          },
+          "pkcs12": {
+            "x-web": {
+              "pretty": "PKCS #12 certificate chain",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_pkcs": "1",
+                  "_auth": "pass"
+                },
+                {
+                  "use_pkcs": "1",
+                  "_auth": "tls/pass"
+                },
+                {
+                  "use_pkcs": "1",
+                  "_auth": "tls"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Uploads PKCS #12 certificate chain file."
+          }
+        }
+      },
+      "openvpn_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration Name",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Name of a section"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/openvpn_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

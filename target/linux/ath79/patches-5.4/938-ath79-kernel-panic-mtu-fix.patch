@@ -1,0 +1,37 @@
+--- a/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
++++ b/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
+@@ -1516,7 +1516,7 @@ static int ag71xx_probe(struct platform_
+ 	struct resource *res;
+ 	struct ag71xx *ag;
+ 	const void *mac_addr;
+-	u32 max_frame_len, idx;
++	u32 idx;
+ 	int tx_size, err;
+ 
+ 	if (!np)
+@@ -1615,23 +1615,9 @@ static int ag71xx_probe(struct platform_
+ 	tx_size = AG71XX_TX_RING_SIZE_DEFAULT;
+ 	ag->rx_ring.order = ag71xx_ring_size_order(AG71XX_RX_RING_SIZE_DEFAULT);
+ 
+-	if (of_device_is_compatible(np, "qca,ar9340-eth") ||
+-	    of_device_is_compatible(np, "qca,qca9530-eth") ||
+-	    of_device_is_compatible(np, "qca,qca9550-eth") ||
+-	    of_device_is_compatible(np, "qca,qca9560-eth"))
+-		ag->desc_pktlen_mask = SZ_16K - 1;
+-	else
+-		ag->desc_pktlen_mask = SZ_4K - 1;
+-
+-	if (ag->desc_pktlen_mask == SZ_16K - 1 &&
+-	    !of_device_is_compatible(np, "qca,qca9550-eth") &&
+-	    !of_device_is_compatible(np, "qca,qca9560-eth"))
+-		max_frame_len = ag->desc_pktlen_mask;
+-	else
+-		max_frame_len = 1540;
+-
++	ag->desc_pktlen_mask = SZ_4K - 1;
+ 	dev->min_mtu = 68;
+-	dev->max_mtu = max_frame_len - ag71xx_max_frame_len(0);
++	dev->max_mtu = 1500;
+ 
+ 	if (of_device_is_compatible(np, "qca,ar7240-eth") ||
+ 	    of_device_is_compatible(np, "qca,ar7241-eth") ||

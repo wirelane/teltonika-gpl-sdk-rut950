@@ -1,0 +1,352 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/hotspot/users/config/{id}": {
+      "put": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Updates the specified Hotspot Users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUsers"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot User Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_users_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Deletes the specified Hotspot Users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot User Configuration identifier (ID)"
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Returns the specified Hotspot Users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUsers"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot User Configuration identifier (ID)"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot User Configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "Local users"
+        ],
+        "hw_tags": {
+          "has_hotspot": true
+        }
+      }
+    },
+    "/hotspot/users/config": {
+      "put": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Updates specified Hotspot Users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUsersMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/hotspot_users_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Creates Hotspot Users configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200HotspotUsers"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_users_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Deletes specified Hotspot Users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Hotspot Users"
+        ],
+        "summary": "Returns all Hotspot Users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUsersMulti"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "Local users"
+        ],
+        "hw_tags": {
+          "has_hotspot": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HotspotUsers": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/hotspot_users_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotUsersMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/hotspot_users_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "hotspot_users_single_options": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Username of a user.",
+            "maxLength": 8
+          },
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Warning: remember the password because it will be hashed and you will not be able to view it again.",
+            "writeOnly": true
+          },
+          "group": {
+            "x-web": {
+              "pretty": "Group",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Group for user to belong."
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "hotspot_users_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Hotspot User Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/hotspot_users_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

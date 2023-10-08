@@ -1,0 +1,34 @@
+{
+    "system/admin": {
+        "title": "Administration",
+        "index": 10
+    },
+    "system/admin/certificates": {
+        "title": "Certificates",
+        "index": 60
+    },
+    "system/admin/certificates/generation": {
+        "title": "Certificates Generation",
+        "acls": [
+            "system/admin/certificates/generation"
+        ],
+        "view": "system/CertGeneration",
+        "index": 10
+    },
+    "system/admin/certificates/manager": {
+        "title": "Certificates Manager",
+        "acls": [
+            "system/admin/certificates/manager"
+        ],
+        "view": "system/CertManager",
+        "index": 20
+    },
+    "system/admin/certificates/root_ca": {
+        "title": "Root CA",
+        "acls": [
+            "system/admin/certificates/root_ca"
+        ],
+        "view": "system/CertRootCa",
+        "index": 30
+    }
+}

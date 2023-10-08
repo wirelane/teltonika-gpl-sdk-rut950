@@ -1,0 +1,449 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Utilities sms storage",
+    "version": "1.0",
+    "description": "Mobile utitlities sms storage api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_storage/config": {
+      "get": {
+        "summary": "Returns all SMS storage configurations",
+        "tags": [
+          "SMS storage"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_storage_many"
+          }
+        },
+        "operationId": "get-services-mobile_utilities-sms_storage-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected SMS storage configurations",
+        "operationId": "put-services-mobile_utilities-sms_storage-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_storage_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_sms_storage_many"
+              }
+            }
+          }
+        },
+        "tags": [
+          "SMS storage"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Storage"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_storage/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns the selected SMS storage configuration",
+        "tags": [
+          "SMS storage"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_storage_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-mobile_utilities-sms_storage-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected SMS storage configuration",
+        "operationId": "put-services-mobile_utilities-sms_storage-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_storage_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_sms_storage_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "SMS storage"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Storage"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_storage/status": {
+      "get": {
+        "summary": "Returns SMS storage status",
+        "tags": [
+          "SMS storage"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/storage_status"
+          }
+        },
+        "operationId": "get-services-mobile_utilities-sms_storage-status",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Storage"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "req_body_sms_storage_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/sms_storage"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_sms_storage_many": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/sms_storage"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "sms_storage": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "msg_storage": {
+            "type": "string",
+            "description": "Set location where to save messages. sm - SIM card, me - modem storage",
+            "enum": [
+              "sm",
+              "me"
+            ],
+            "x-web": {
+              "pretty": "Save messages to",
+              "input-type": "select",
+              "enum-pretty": {
+                "sm": "SIM Card",
+                "me": "Modem storage"
+              }
+            }
+          },
+          "free": {
+            "type": "string",
+            "description": "How much memory (number of messages) should be left free",
+            "default": "1",
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Leave free space",
+              "input-type": "input"
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Modem ID",
+            "readOnly": true,
+            "x-web": {
+              "pretty": "Modem ID",
+              "input-type": "select",
+              "unique": true,
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "storage_status": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "used": "N/A",
+                      "total": "N/A",
+                      "modem_id": "3-1"
+                    },
+                    {
+                      "used": "3",
+                      "total": "20",
+                      "modem_id": "1-1.2"
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "total": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "storage_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "alt_total": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "alt_used": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "alt_storage_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sim_inserted": {
+                        "type": "string",
+                        "format": "is_bool"
+                      },
+                      "modem_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "modem_type": {
+                        "type": "string",
+                        "enum": [
+                          "Internal",
+                          "External",
+                          "Primary",
+                          "Secondary"
+                        ]
+                      },
+                      "modem_index": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "used",
+                      "total",
+                      "storage_id",
+                      "alt_used",
+                      "alt_total",
+                      "alt_storage_id",
+                      "sim_inserted",
+                      "modem_id",
+                      "modem_type"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "sms_storage_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/sms_storage"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "sms_storage_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/sms_storage"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SMS storage"
+    }
+  ]
+}

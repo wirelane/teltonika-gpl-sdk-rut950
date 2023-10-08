@@ -1,0 +1,57 @@
+{
+    "network": {
+        "mobile": {
+            "operators": true
+        },
+        "vlan": true,
+        "firewall": {
+            "zones": true,
+            "rules": true,
+            "custom": true,
+            "helpers": true,
+            "nat_rules": true
+        },
+        "routes": true,
+        "interfaces": true,
+        "dns": true,
+        "nat_rules": true
+    },
+    "status": {
+        "routes": true,
+        "firewall": {
+            "ipv4": true,
+            "ipv6": true
+        },
+        "logs": {
+            "hotspot": true,
+            "dmesg": true,
+            "syslog": true
+        }
+    },
+    "services": {
+        "webfilter": true,
+        "snmp": true,
+        "hotspot2": true,
+        "wol": true,
+        "modbus": true,
+        "data_sender": true,
+        "vrrp": true,
+        "samba": true,
+        "dnp3": true,
+        "traffic_shaping": true,
+        "igmp_proxy": true
+    },
+    "system": {
+        "flashops": {
+            "fota": true
+        },
+        "admin": {
+            "logging": true,
+            "root_ca": true
+        },
+        "multiusers": {
+            "users_configuration": true
+        },
+        "cli": true
+    }
+}

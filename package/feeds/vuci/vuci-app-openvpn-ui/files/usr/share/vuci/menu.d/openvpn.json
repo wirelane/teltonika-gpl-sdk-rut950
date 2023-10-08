@@ -1,0 +1,13 @@
+{
+	"services/vpn": {
+		"title": "VPN",
+		"index": 20
+	},
+	"services/vpn/openvpn": {
+		"title": "OPENVPN",
+		"index": 40,
+		"view": "services/OpenVPN",
+		"acls": [ "services/vpn/openvpn" ],
+		"files": [ "/etc/config/openvpn" ]
+	}
+}

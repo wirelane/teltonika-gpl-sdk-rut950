@@ -1,0 +1,272 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SideWidget API",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "SideWidget"
+    }
+  ],
+  "paths": {
+    "/widget/config": {
+      "get": {
+        "summary": "Returns all Side Widget configurations",
+        "tags": [
+          "SideWidget"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/sidewidget_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified SideWidget configurations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/sidewidget_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/sidewidget_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SideWidget"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Side widget",
+          "Side widget"
+        ]
+      }
+    },
+    "/widget/config/{sidewidget_id}": {
+      "get": {
+        "summary": "Returns the specified SideWidget configuration",
+        "tags": [
+          "SideWidget"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sidewidget_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified SideWidget configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sidewidget_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sidewidget_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SideWidget"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sidewidget_id",
+          "in": "path",
+          "required": true,
+          "description": "SideWidget configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Side widget",
+          "Side widget"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sidewidget_options": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/sidewidget_single_options"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "SideWidget configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "sidewidget_single_options": {
+        "title": "SideWidget options",
+        "type": "object",
+        "properties": {
+          "card_id": {
+            "type": "string",
+            "description": "Group of the Side Widget card.",
+            "readOnly": true
+          },
+          "position": {
+            "x-web": {
+              "pretty": "Position",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Position of the Side Widget card.",
+            "format": "uinteger"
+          },
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "description": "Enables/disables Side Widget card."
+          },
+          "section_name": {
+            "type": "string",
+            "description": "Name of the Side Widget card.",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "position"
+        ]
+      }
+    }
+  }
+}

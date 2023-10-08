@@ -1,0 +1,11 @@
+{
+	"services/cloud_solutions/rms": {
+		"description": "cloud solutions configuration",
+		"read": {
+			"api": ["/cloud_solutions/rms/*"]
+		},
+		"write": {
+			"api": ["/cloud_solutions/rms/*"]
+		}
+	}
+}

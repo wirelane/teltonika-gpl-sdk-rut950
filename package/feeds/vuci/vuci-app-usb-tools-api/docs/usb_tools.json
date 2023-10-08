@@ -1,0 +1,422 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "USB tools"
+    }
+  ],
+  "paths": {
+    "/usb_tools/general/mounts": {
+      "get": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Returns mounted devices",
+        "description": "Returns mounted USB devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usbMounts"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/general/config": {
+      "get": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Returns all usb tools configuration sections",
+        "description": "Returns all sections with their parameters form usb tools configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usbMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Update all sections options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usbMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/usb_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/general/config/{id}": {
+      "get": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Returns specified usb tools section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usb"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Update specified sections options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usb"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ],
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/usb_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/general/actions/safe_remove": {
+      "post": {
+        "summary": "Safe remove",
+        "operationId": "post-services-usb_tools-general-actions-safe_remove",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usb_action"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "USB Tools"
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/usb_mounts_action_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/general/actions/format": {
+      "post": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Formats selected USB device",
+        "operationId": "post-services-usb_tools-general-actions-format",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usb_action"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/usb_mounts_action_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200usb": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/usb_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200usb_action": {
+        "description": "Returns result of action",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200usbMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/usb_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200usbMounts": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/usb_mounts_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "usb_options": {
+        "type": "object",
+        "properties": {
+          "auto_sync": {
+            "type": "string",
+            "description": "Enables that all changes to the according filesystem are immediately flushed to disk. This will drastically lower the life expectancy of your USB device.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Synchronous write",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "usb_mounts_action_options": {
+        "type": "object",
+        "properties": {
+          "fs": {
+            "type": "string",
+            "description": "Specifies mounted device path",
+            "x-web": {
+              "pretty": "Device",
+              "input-type": "input",
+              "unique": true
+            }
+          }
+        }
+      },
+      "usb_mounts_options": {
+        "type": "object",
+        "properties": {
+          "fs": {
+            "type": "string",
+            "description": "File System device",
+            "x-web": {
+              "pretty": "Device",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "used": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Used",
+              "input-type": "input"
+            }
+          },
+          "available": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Available",
+              "input-type": "input"
+            }
+          },
+          "mountpoint": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Mount point",
+              "input-type": "input"
+            }
+          },
+          "system_format": {
+            "type": "string"
+          },
+          "in_use": {
+            "type": "string",
+            "description": "Specifies a service that is using the current USB device",
+            "x-web": {
+              "pretty": "In use",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

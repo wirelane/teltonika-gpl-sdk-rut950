@@ -1,0 +1,753 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Backup",
+    "description": "Backup API documentation",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Backup"
+    }
+  ],
+  "paths": {
+    "/backup/status": {
+      "get": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Returns all backup information",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200backup"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Backup data identifier (default, backup)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      },
+      "parameters": []
+    },
+    "/backup/actions/create_default": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Creates default backup configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200backup_defaults"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/actions/remove_default": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Removes default configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200backup_defaults"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/actions/generate_backup": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Generates backup configuration to download",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200backup_checksums"
+          },
+          "422": {
+            "description": "Unprocessable Entity (WebDAV)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "source": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "integer"
+                          },
+                          "error": {
+                            "type": "string"
+                          },
+                          "section": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": false,
+                      "errors": [
+                        {
+                          "source": "Validation",
+                          "code": 106,
+                          "error": " Generation of backup failed.",
+                          "section": "generate_backup"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": false,
+                      "errors": [
+                        {
+                          "source": "Validation",
+                          "code": 106,
+                          "error": " Generation of backup failed.",
+                          "section": "generate_backup"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_encrypt_info"
+              },
+              "examples": {}
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/files": {
+      "get": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Download generated backup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-targz": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404backup_doesnt_exist"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/files_encrypted": {
+      "get": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Download generated encrypted backup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-7z-compressed": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404backup_doesnt_exist"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      },
+      "parameters": []
+    },
+    "/backup/actions/validate_backup": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Validates uploaded/generated backup",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200backup_checksums"
+          },
+          "422": {
+            "description": "Unprocessable Entity (WebDAV)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "integer"
+                          },
+                          "error": {
+                            "type": "string"
+                          },
+                          "section": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": false,
+                      "errors": [
+                        {
+                          "code": 120,
+                          "error": "Invalid password provided.",
+                          "section": "validate_backup"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": false,
+                      "errors": [
+                        {
+                          "code": 120,
+                          "error": "Invalid password provided.",
+                          "section": "validate_backup"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_encrypt_info"
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/actions/remove_backup": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Removes backup file from router",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "md5": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "sha256": "-",
+                        "md5": "-"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": {
+                        "sha256": "-",
+                        "md5": "-"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404backup_doesnt_exist"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/actions/apply_backup": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Applies backup from backup file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200backup_apply"
+          },
+          "404": {
+            "$ref": "#/components/responses/404backup_doesnt_exist"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_encrypt_info"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    },
+    "/backup/config": {
+      "post": {
+        "tags": [
+          "Backup"
+        ],
+        "summary": "Upload backup into router to apply",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "Upload backup file.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Backup"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200backup": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "description": "Date of user created default backup."
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "description": "SHA256 Hash of created backup."
+                    },
+                    "md5": {
+                      "type": "string",
+                      "description": "MD5 Hash of created backup."
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "date": "-",
+                    "sha256": "8db04d9cbbca782da064942b95442d774b56f5a67f180578419a3ceb0cfd2378",
+                    "md5": "abb33e3ebd43b3e91faa3468c919b9f0"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200backup_defaults": {
+        "description": "Returns data object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "description": "Date of user created default backup."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200backup_apply": {
+        "description": "Returns data object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "description": "LAN IP of router after backup apply."
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "response": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200backup_checksums": {
+        "description": "Returns data object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "sha256": {
+                      "type": "string",
+                      "description": "SHA256 Hash of created backup."
+                    },
+                    "md5": {
+                      "type": "string",
+                      "description": "MD5 Hash of created backup."
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "sha256": "ff2b409ff05609579c8df9c8bbc66e7ea1bf5eff8e33ffa5d1e386163f5a9463",
+                    "md5": "de22c665398d350aa7800a039ae5f9e2"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "path": "/tmp/backup.tar.gz"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_download": {
+        "description": "Success",
+        "content": {
+          "application/octet-stream": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "404backup_doesnt_exist": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "source": {
+                        "type": "string"
+                      },
+                      "error": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": false,
+                  "errors": [
+                    {
+                      "source": "Request",
+                      "error": "Backup not found.",
+                      "code": 122
+                    }
+                  ]
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "errors": [
+                    {
+                      "source": "Request.",
+                      "error": "Backup not found.",
+                      "code": 122
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {},
+    "schemas": {
+      "req_encrypt_info": {
+        "title": "req_encrypt_info",
+        "x-stoplight": {
+          "id": "41mn3l6cgb05n"
+        },
+        "type": "object",
+        "properties": {
+          "encrypt": {
+            "type": "string",
+            "description": "Specifies if backup is encrypted.",
+            "x-web": {
+              "pretty": "Encrypt",
+              "input-type": "switch"
+            },
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            },
+            "description": "Password for encrypted archive."
+          }
+        }
+      }
+    }
+  }
+}

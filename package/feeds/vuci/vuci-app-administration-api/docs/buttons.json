@@ -1,0 +1,277 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Administration Buttons",
+    "description": "Administration Buttons API documentation",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "Administration Buttons"
+    }
+  ],
+  "paths": {
+    "/administration/buttons/config/{id}": {
+      "put": {
+        "tags": [
+          "Administration Buttons"
+        ],
+        "summary": "Updates Button configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminButtons"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/administration_buttons_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administration Buttons"
+        ],
+        "summary": "Returns specified Button configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminButtons"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    },
+    "/administration/buttons/config": {
+      "get": {
+        "tags": [
+          "Administration Buttons"
+        ],
+        "summary": "Returns all Button configuration sections",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminButtonsMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Administration Buttons"
+        ],
+        "summary": "Updates specified Buttons configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminButtonsMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/administration_buttons_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdminButtons": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/administration_buttons_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminButtonsMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/administration_buttons_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "administration_buttons_single_options": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "x-web": {
+              "pretty": "Min time",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Minimum time to press the button for action to trigger.",
+            "format": "range(0, 60)",
+            "minLength": 1,
+            "maxLength": 2
+          },
+          "max": {
+            "x-web": {
+              "pretty": "Max time",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Maximum time to press the button for action to trigger.",
+            "format": "range(0, 60)",
+            "minLength": 1,
+            "maxLength": 2
+          },
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ],
+            "description": "Enable/disable button rule."
+          },
+          "action": {
+            "type": "string",
+            "description": "Button trigger mode.",
+            "readOnly": true
+          },
+          "handler": {
+            "x-web": {
+              "pretty": "Action",
+              "enum-pretty": {
+                "reboot": "Reboot",
+                "default": "User's defaults configuration",
+                "firstboot": "Factory defaults configuration"
+              },
+              "unique": true
+            },
+            "type": "string",
+            "description": "What happens when the action triggers.",
+            "enum": [
+              "reboot",
+              "default",
+              "firstboot"
+            ],
+            "readOnly": true
+          }
+        }
+      },
+      "administration_buttons_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Administration Buttons Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/administration_buttons_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile utilities auto reply",
+    "version": "1.0",
+    "description": "Mobile utitlities auto reply api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_gateway/auto_reply/config": {
+      "get": {
+        "summary": "Returns Auto reply configuration in an array",
+        "tags": [
+          "Auto reply"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/auto_reply_many"
+          }
+        },
+        "operationId": "get-auto_reply-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Auto reply configuration in an array",
+        "tags": [
+          "Auto reply"
+        ],
+        "operationId": "put-auto_reply-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/auto_reply_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/auto_reply_many"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "Auto Reply"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_gateway/auto_reply/config/general": {
+      "get": {
+        "summary": "Returns Auto reply configuration",
+        "tags": [
+          "Auto reply"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/auto_reply"
+          }
+        },
+        "operationId": "get-auto_reply-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Auto reply configuration",
+        "tags": [
+          "Auto reply"
+        ],
+        "operationId": "put-auto_reply-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/auto_reply"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/auto_reply"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "Auto Reply"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "auto_reply_opts": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Set to enable auto reply",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "every_sms": {
+            "type": "string",
+            "description": "It will reply to SMS rules, from SMS-Utilities",
+            "x-web": {
+              "pretty": "Reply SMS-Utilities rules",
+              "input-type": "switch"
+            }
+          },
+          "delete_sms": {
+            "type": "string",
+            "description": "If enabled, the router will delete received SMS messages",
+            "x-web": {
+              "pretty": "Don't save received message",
+              "input-type": "switch"
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to send information from",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "To whom the configuration applies to",
+            "enum": [
+              "everyone",
+              "list_number",
+              "user_group"
+            ],
+            "default": "everyone",
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "everyone": "Everyone",
+                "list_number": "Listed numbers",
+                "user_group": "From phone group"
+              }
+            }
+          },
+          "tel": {
+            "type": "array",
+            "description": "Recipient's phone number",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            },
+            "x-web": {
+              "pretty": "Recipient's phone number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "list_number"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A recipient's phone number users group",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "select",
+              "depends": [
+                {
+                  "mode": "user_group"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "type": "string",
+            "description": "Message to be sent",
+            "x-web": {
+              "pretty": "Message text",
+              "input-type": "select",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "msg"
+        ]
+      },
+      "auto_reply": {
+        "title": "auto_reply",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/auto_reply_opts"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "auto_reply": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/auto_reply"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "auto_reply_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/components/schemas/auto_reply"
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "auto_reply": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/auto_reply_opts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "auto_reply_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/auto_reply"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auto reply"
+    }
+  ]
+}

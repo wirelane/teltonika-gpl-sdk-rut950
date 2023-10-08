@@ -1,0 +1,69 @@
+{
+  "system/admin/admin": {
+    "description": "administration general",
+    "read": {
+      "api": [
+        "/administration/general/config/*",
+        "/administration/system/config/*",
+        "/administration/led/config/*",
+        "/administration/buttons/config/*",
+        "/packages/config/language/*"
+      ],
+      "uci": [
+        "system",
+        "vuci",
+        "buttons"
+      ],
+      "ubus": {
+        "vuci.system": [
+          "check_config"
+        ],
+        "vuci.services.packages": [
+          "get_available_language_packages",
+          "install_package",
+          "remove_pending_package"
+        ],
+        "vuci.firmware": [
+          "user_defaults"
+        ]
+      }
+    },
+    "write": {
+      "api": [
+        "/administration/general/config/*",
+        "/administration/system/config/*",
+        "/administration/led/config/*",
+        "/administration/buttons/config/*"
+      ],
+      "uci": [
+        "system",
+        "vuci",
+        "buttons"
+      ],
+      "vuci.firmware": [
+        "factory_reset"
+      ]
+    }
+  },
+  "system/reboot": {
+    "description": "reboot",
+    "read": {
+      "api": [
+        "/administration/general/actions/*"
+      ],
+      "uci": [
+        " "
+      ]
+    },
+    "write": {
+      "api": [
+        "/administration/general/actions/*"
+      ],
+      "ubus": {
+        "vuci.system": [
+          "reboot"
+        ]
+      }
+    }
+  }
+}

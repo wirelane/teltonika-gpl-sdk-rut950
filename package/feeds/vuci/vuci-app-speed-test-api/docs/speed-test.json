@@ -1,0 +1,511 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Speed Test",
+    "version": "1.0",
+    "description": "Speed test api documentation",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Speed test"
+    }
+  ],
+  "paths": {
+    "/speedtest/status": {
+      "get": {
+        "summary": "Get speed test status",
+        "tags": [
+          "Speed test"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_speedtest_status"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Speed Test"
+        ]
+      }
+    },
+    "/speedtest/wan": {
+      "get": {
+        "summary": "Get WAN interface",
+        "tags": [
+          "Speed test"
+        ],
+        "operationId": "get-services-speedtest",
+        "description": "Get current main WAN interface and it's IP address",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sid": {
+                          "type": "string"
+                        },
+                        "ip": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Speed Test"
+        ]
+      }
+    },
+    "/speedtest/servers": {
+      "get": {
+        "summary": "Get speed test server list",
+        "tags": [
+          "Speed test"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_speedtest_server_list"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Speed Test"
+        ]
+      }
+    },
+    "/speedtest/actions/get_ip": {
+      "post": {
+        "summary": "Get ip from server url",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_get_ip"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/speedtest_get_ip"
+        },
+        "tags": [
+          "Speed test"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Speed Test"
+        ]
+      }
+    },
+    "/speedtest/actions/refresh": {
+      "post": {
+        "summary": "Refresh server lists on the device",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_speedtest_server_list"
+          }
+        },
+        "tags": [
+          "Speed test"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Speed Test"
+        ]
+      }
+    },
+    "/speedtest/actions/start": {
+      "post": {
+        "summary": "Start speed test",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_start"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/speedtest_start"
+        },
+        "tags": [
+          "Speed test"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Speed Test"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "speedtest_server_list": {
+        "type": "array",
+        "description": "",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "required": [
+            "lon",
+            "country",
+            "id",
+            "distance",
+            "preferred",
+            "host",
+            "cc",
+            "https_functional",
+            "name",
+            "url",
+            "sponsor",
+            "lat"
+          ],
+          "properties": {
+            "lon": {
+              "type": "string",
+              "description": "Longitude of the server."
+            },
+            "country": {
+              "type": "string",
+              "description": "Country of the server."
+            },
+            "id": {
+              "type": "string",
+              "description": "ID of the server."
+            },
+            "distance": {
+              "type": "number",
+              "description": "Distance of the server."
+            },
+            "preferred": {
+              "type": "number",
+              "description": "Preference of the server depending on current router location."
+            },
+            "host": {
+              "type": "string",
+              "description": "Host of the server."
+            },
+            "cc": {
+              "type": "string",
+              "description": "Country code of the server."
+            },
+            "https_functional": {
+              "type": "number",
+              "description": "HTTPS support of the server."
+            },
+            "name": {
+              "type": "string",
+              "description": "City of the server."
+            },
+            "url": {
+              "type": "string",
+              "description": "URL of the server."
+            },
+            "sponsor": {
+              "type": "string",
+              "description": "Sponsor of the server."
+            },
+            "lat": {
+              "type": "string",
+              "description": "Latitude of the server."
+            }
+          }
+        },
+        "x-examples": {
+          "example-1": [
+            {
+              "lon": "",
+              "country": "",
+              "id": "",
+              "distance": 0,
+              "preferred": 0,
+              "host": "",
+              "cc": "",
+              "https_functional": 1,
+              "name": "",
+              "url": "",
+              "sponsor": "",
+              "lat": ""
+            }
+          ]
+        }
+      }
+    },
+    "responses": {
+      "200_speedtest_status": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "state": "",
+                    "avgUploadSpeed": 0,
+                    "downloaded": 0,
+                    "avgDownloadSpeed": 0,
+                    "serverURL": "",
+                    "uploaded": 0
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "state",
+                    "avgUploadSpeed",
+                    "downloaded",
+                    "avgDownloadSpeed",
+                    "serverURL",
+                    "uploaded"
+                  ],
+                  "properties": {
+                    "state": {
+                      "type": "string",
+                      "description": "Current state of the speed test."
+                    },
+                    "avgUploadSpeed": {
+                      "type": "string",
+                      "description": "Average upload speed in bytes per second."
+                    },
+                    "downloaded": {
+                      "type": "string",
+                      "description": "Total downloaded bytes."
+                    },
+                    "avgDownloadSpeed": {
+                      "type": "string",
+                      "description": "Average download speed in bytes per second."
+                    },
+                    "serverURL": {
+                      "type": "string",
+                      "description": "URL or ip address of the server used for the speed test."
+                    },
+                    "uploaded": {
+                      "type": "string",
+                      "description": "Total uploaded bytes."
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_speedtest_server_list": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "lon": "",
+                      "country": "",
+                      "id": "",
+                      "distance": 2,
+                      "preferred": 0,
+                      "host": "",
+                      "cc": "",
+                      "https_functional": 1,
+                      "name": "",
+                      "url": "",
+                      "sponsor": "",
+                      "lat": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/speedtest_server_list"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_get_ip": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_start": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                }
+              },
+              "required": [
+                "success"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "speedtest_get_ip": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {
+                    "url": "www.example.com"
+                  }
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "url"
+                  ],
+                  "properties": {
+                    "url": {
+                      "x-web": {
+                        "pretty": "Url",
+                        "input-type": "input",
+                        "group": "General Settings"
+                      },
+                      "type": "string",
+                      "description": "Url to get ip from",
+                      "format": "url"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "speedtest_start": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {
+                    "url": "www.example.com"
+                  }
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "x-web": {
+                        "pretty": "Url",
+                        "input-type": "input",
+                        "group": "General Settings"
+                      },
+                      "type": "string",
+                      "description": "Server Url or ip address",
+                      "format": "url"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

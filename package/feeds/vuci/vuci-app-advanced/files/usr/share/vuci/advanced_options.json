@@ -1,0 +1,159 @@
+{
+    "simcard": {
+        "sim": [
+            "band",
+            "gsm",
+            "umts",
+            "lte"
+        ]
+    },
+
+    "wireless": {
+        "wifi-device": [
+            "advanced"
+        ],
+
+        "wifi-iface": [
+            "advanced",
+            "80211u",
+            "wmm",
+            "mode",
+            "network",
+            "bssid"
+        ]
+    },
+
+    "network": {
+        "interface": [
+            "broadcast",
+            "force_link",
+            "delegate",
+            "clientid",
+            "vendorid",
+            "ip6assign",
+            "ip6addr",
+            "ip6gw",
+            "ip6prefix",
+            "ip6ifaceid",
+            "ip4table",
+            "_keepalive_failure",
+            "_keepalive_interval",
+            "host_uniq",
+            "demand",
+            "ac",
+            "service",
+            "pdptype",
+            "mtu",
+
+            "okey",
+            "ikey",
+            "df",
+            "ttl",
+
+            "cookie",
+            "peer_cookie",
+            "bridge_to",
+            "encap",
+            "l2spec_type"
+        ]
+    },
+
+    "firewall": {
+        "redirect": [
+            "reflection",
+            "proto",
+            "src",
+            "src_mac",
+            "src_ip",
+            "src_port",
+            "src_dip",
+            "extra"
+        ],
+        "zone": [
+            "advanced"
+        ],
+        "defaults": [
+            "offload_advice",
+            "flow_offloading",
+            "flow_offloading_hw"
+        ]
+    },
+
+    "chilli": {
+        "chilli": [
+			"moreif",
+			"_protocol",
+			"trialusers",
+			"https",
+            "userscripts"
+        ]
+    },
+
+    "fstab": {
+        "global": [
+            "*"
+        ]
+    },
+
+    "dhcp": {
+        "dhcp": [
+            "advanced"
+        ]
+    },
+
+    "ipsec": {
+        "remote": [
+            "advanced",
+            "_multiple_secrets"
+        ],
+        "connection": [
+            "advanced",
+            "mode"
+        ]
+    },
+
+    "xl2tpdv3": {
+        "service": [
+        ]
+    },
+
+    "upnpd": {
+        "upnpd": [
+            "advanced"
+        ]
+    },
+
+    "openvpn": {
+        "openvpn": [
+            "dev",
+            "proto",
+            "port",
+            "comp_lzo",
+            "cipher",
+            "_tls_cipher",
+            "client_to_client",
+            "crl_verify",
+            "resolv_retry",
+            "keepalive",
+            "auth",
+            "_tls_auth",
+            "_extra",
+            "push",
+            "duplicate_cn",
+            "decrypt"
+        ]
+    },
+
+    "stunnel": {
+        "service": [
+            "_cipher_type",
+            "protocol"
+        ]
+    },
+
+    "mwan3": {
+        "rule": [
+            "*"
+        ]
+    }
+}

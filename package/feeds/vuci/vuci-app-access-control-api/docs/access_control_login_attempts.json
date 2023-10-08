@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Login attempts"
+    }
+  ],
+  "paths": {
+    "/access_control/security/attempts/config": {
+      "get": {
+        "summary": "Returns all login attempts configurations",
+        "tags": [
+          "Login attempts"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_login_attempts"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specified login attempts configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "tags": [
+          "Login attempts"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "Security"
+        ]
+      }
+    },
+    "/access_control/security/attempts/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "description": "Access control login attempt unique identifier (ID)",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified login attempts configuration",
+        "tags": [
+          "Login attempts"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_login_attempts_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the specified login attempts configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Login attempts"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "Security"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_login_attempts": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/login_attempts"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "ip": "string",
+                      "destination_ip": "string",
+                      "port": "string",
+                      "counter": "string",
+                      "proto": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_login_attempts_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/login_attempts"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "ip": "string",
+                    "destination_ip": "string",
+                    "port": "string",
+                    "counter": "string",
+                    "proto": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "login_attempts": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "ip": "",
+            "destination_ip": "",
+            "port": "",
+            "counter": ""
+          }
+        },
+        "properties": {
+          "ip": {
+            "x-web": {
+              "pretty": "Source address"
+            },
+            "readOnly": true,
+            "type": "string",
+            "description": "Source address."
+          },
+          "destination_ip": {
+            "x-web": {
+              "pretty": "Destination address"
+            },
+            "readOnly": true,
+            "type": "string",
+            "description": "Destination address."
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Device port"
+            },
+            "readOnly": true,
+            "type": "string",
+            "description": "Device port."
+          },
+          "counter": {
+            "x-web": {
+              "pretty": "Failed attempts"
+            },
+            "readOnly": true,
+            "type": "string",
+            "description": "Failed attempts."
+          },
+          "proto": {
+            "x-web": {
+              "pretty": "Protocol"
+            },
+            "readOnly": true,
+            "type": "string",
+            "description": "Protocol"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,534 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "OPC UA Value Groups"
+    }
+  ],
+  "paths": {
+    "/opcua/group/config/{id}": {
+      "get": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Returns the specified OPC UA Value Group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValueGroup"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OPC UA Value Group Configuration identifier (ID)"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Updates the specified OPC UA Value Group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValueGroup"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OPC UA Value Group Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_value_group_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Deletes the specified OPC UA Value Group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OPC UA Value Group Configuration identifier (ID)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/group/config": {
+      "get": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Returns all OPC UA Value Group configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValueGroupMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Creates OPC UA Value Group configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200opcuaValueGroup"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_value_group_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Updates specified OPC UA Value Group configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValueGroupMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/opcua_value_group_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Deletes specified OPC UA Value Group configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/group/actions/test": {
+      "post": {
+        "deprecated": true,
+        "tags": [
+          "OPC UA Value Groups"
+        ],
+        "summary": "Test OPC UA Value Group",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValueGroupTestResponse"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_value_group_test_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200opcuaValueGroup": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/opcua_value_group_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200opcuaValueGroupMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/opcua_value_group_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200opcuaValueGroupTestResponse": {
+        "description": "Returns test response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/opcua_value_group_test_response_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "opcua_value_group_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables/disables OPC UA Value Group configuration.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the value group (no functional use).",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "scheduling_type": {
+            "type": "string",
+            "description": "Method of scheduling data retrievals.",
+            "enum": [
+              "0"
+            ],
+            "x-web": {
+              "pretty": "Scheduling type",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "Period"
+              }
+            }
+          },
+          "period": {
+            "type": "string",
+            "description": "Time duration between data retrievals (s).",
+            "format": "irange(1, 86400)",
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "input"
+            }
+          },
+          "fail_mode": {
+            "type": "string",
+            "description": "When to consider retrieval a failure.",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "Failure mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "None",
+                "1": "Any",
+                "2": "All"
+              }
+            }
+          },
+          "fail_store": {
+            "type": "string",
+            "description": "Whether to store results of a failure.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Failure storage",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "fail_mode": [
+                    "1",
+                    "2"
+                  ]
+                }
+              ]
+            }
+          },
+          "replacement": {
+            "type": "string",
+            "description": "String to replace results of a failure.",
+            "x-web": {
+              "pretty": "Failure replacement",
+              "input-type": "input"
+            }
+          },
+          "prefix": {
+            "type": "string",
+            "description": "String going before all the values.",
+            "x-web": {
+              "pretty": "Prefix",
+              "input-type": "input"
+            }
+          },
+          "midfix": {
+            "type": "string",
+            "description": "String going between all the values.",
+            "x-web": {
+              "pretty": "Midfix",
+              "input-type": "input"
+            }
+          },
+          "postfix": {
+            "type": "string",
+            "description": "String going after all the values.",
+            "x-web": {
+              "pretty": "Postfix",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "opcua_value_group_test_options": {
+        "type": "object",
+        "properties": {
+          "fail_mode": {
+            "type": "string",
+            "description": "When to consider retrieval a failure.",
+            "format": "range(0, 2)",
+            "minLength": 1,
+            "maxLength": 1
+          },
+          "replacement": {
+            "type": "string",
+            "description": "String to replace results of a failure."
+          },
+          "prefix": {
+            "type": "string",
+            "description": "String going before all the values."
+          },
+          "midfix": {
+            "type": "string",
+            "description": "String going between all the values."
+          },
+          "postfix": {
+            "type": "string",
+            "description": "String going after all the values."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Values of group to test."
+          }
+        }
+      },
+      "opcua_value_group_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "OPC UA Value Group Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/opcua_value_group_single_options"
+          }
+        ]
+      },
+      "opcua_value_group_test_response_options": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string",
+            "description": "Response of the test."
+          }
+        }
+      }
+    }
+  }
+}

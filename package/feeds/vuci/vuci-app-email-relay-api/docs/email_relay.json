@@ -1,0 +1,640 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/email_relay/config/{email_relay_id}": {
+      "put": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Updates the specified Email Relay configuration.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Email_Relay"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "email_relay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email Relay Configuration identifier (ID)."
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter configuration.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/email_relay_options_single"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "email_relay_put"
+      },
+      "get": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Returns the specified Email Relay configuration.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Email_Relay"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "email_relay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email Relay Configuration identifier (ID)."
+          }
+        ],
+        "operationId": "email_relay_get"
+      },
+      "delete": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Deletes the specified Email Relay configuration.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "email_relay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email Relay Configuration identifier (ID)."
+          }
+        ],
+        "operationId": "email_relay_delete"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "email_relay_id",
+          "in": "path",
+          "required": true,
+          "description": "Email Relay Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Email Relay",
+          "Email Relay"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/email_relay/config": {
+      "get": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Returns all Email Relay configurations.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Email_Relay_Multi"
+          }
+        },
+        "operationId": "email_relay_get_all"
+      },
+      "post": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Creates Email Relay configuration.",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201Email_Relay"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/email_relay_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Deletes specified Email Relay configurations.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects.",
+                    "items": {
+                      "type": "string",
+                      "description": "Configuration identifier (ID)."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "email_relay_delete_all"
+      },
+      "put": {
+        "tags": [
+          "Email Relay"
+        ],
+        "summary": "Updates specified Email Relay configurations.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Email_Relay_Multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects.",
+                    "items": {
+                      "$ref": "#/components/schemas/email_relay_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "email_relay_put_all"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Email Relay",
+          "Email Relay"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Email_Relay": {
+        "description": "Returns configuration.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/email_relay_options_multi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "201Email_Relay": {
+        "description": "Returns configurations.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configuration objects.",
+                  "items": {
+                    "$ref": "#/components/schemas/email_relay_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200Email_Relay_Multi": {
+        "description": "Returns configurations.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configuration objects.",
+                  "items": {
+                    "$ref": "#/components/schemas/email_relay_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "email_relay_options_single": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable or disable Email Relay service.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "Enable",
+                "input-type": "switch"
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "Instance mode (server or proxy or cmdline).",
+            "format": "uciname",
+            "x-web": {
+                "pretty": "Instance mode",
+                "input-type": "select",
+                "enum-pretty": {
+                    "server": "Server",
+                    "proxy": "Proxy",
+                    "cmdline": "Command line"
+                }
+            },
+            "enum": [
+                "server",
+                "proxy",
+                "cmdline"
+            ]
+          },
+          "smtp_port": {
+            "type": "string",
+            "description": "SMTP Port to listen incoming connections.",
+            "format": "irange(1, 65535)",
+            "x-web": {
+                "pretty": "SMTP port",
+                "input-type": "input",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "pop_port": {
+            "type": "string",
+            "description": "POP Port to listen incoming connections.",
+            "format": "irange(1, 65535)",
+            "x-web": {
+                "pretty": "POP port",
+                "input-type": "input",
+                "depends": [
+                    { "mode": "server" }
+                ]
+            }
+          },
+          "remote_clients": {
+            "type": "string",
+            "description": "To allow connections from anywhere. By default only local allowed.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "Remote clients",
+                "input-type": "switch",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "address_verifier": {
+            "type": "string",
+            "description": "Runs the specified external program to verify a message recipient's e-mail address.",
+            "format": "string",
+            "x-web": {
+                "pretty": "Address verifier",
+                "input-type": "input",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "domain": {
+            "type": "string",
+            "description": "Specifies the network name that is used in SMTP EHLO. The default is derived from a DNS lookup of the local hostname.",
+            "format": "regex",
+	    "pattern": "(?!^[0-9.]+$)^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])(\\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9]))*$",
+            "x-web": {
+                "pretty": "Domain",
+                "input-type": "input",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "anonymous": {
+            "type": "string",
+            "description": "Disables the server's SMTP VRFY command.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "Anonymous",
+                "input-type": "switch",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "server_tls": {
+            "type": "string",
+            "description": "Enables TLS for incoming SMTP and POP connections.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "Server TLS",
+                "input-type": "switch",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "server_tls_certificate": {
+            "type": "string",
+	    "format": "binary",
+            "description": "Specifies a PEM-format file containing a X.509 certificate and private key.",
+            "x-web": {
+                "pretty": "TLS certificate",
+                "input-type": "input",
+                "depends": [
+                    { "mode": [ "server", "proxy" ], "server_tls": "1" }
+                ]
+            }
+          },
+          "server_auth": {
+            "type": "string",
+            "description": "Enables SMTP server authentication of remote SMTP clients.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "SMTP authentication",
+                "input-type": "switch",
+                "depends": [
+                    { "mode": [ "server", "proxy" ] }
+                ]
+            }
+          },
+          "server_username": {
+            "type": "string",
+            "description": "Username for authentication with the SMTP server.",
+            "format": "credentials_validate",
+	    "maxLength": 512,
+            "x-web": {
+                "pretty": "SMTP Username",
+                "input-type": "input",
+                "depends": [
+                    { "mode": [ "server", "proxy" ], "server_auth": "1" }
+                ]
+            }
+          },
+          "server_password": {
+            "type": "string",
+            "description": "Password for authentication with the SMTP server.",
+            "format": "credentials_validate",
+	    "maxLength": 512,
+            "x-web": {
+                "pretty": "SMTP Password",
+                "input-type": "input",
+                "depends": [
+                    { "mode": [ "server", "proxy" ], "server_auth": "1" }
+                ]
+            }
+          },
+          "smarthost": {
+            "type": "string",
+            "description": "Specify the SMTP to forward emails.",
+            "format": "hostport",
+            "x-web": {
+                "pretty": "Smarthost",
+                "input-type": "input",
+                "depends": [ { "mode": "proxy" } ]
+            }
+          },
+          "client_tls": {
+            "type": "string",
+            "description": "Enables negotiated TLS for outgoing SMTP connections.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "Client TLS",
+                "input-type": "switch",
+                "depends": [
+                    { "mode": "proxy" }
+                ]
+            }
+          },
+          "client_auth": {
+            "type": "string",
+            "description": "Enables SMTP client authentication with the remote server, using the client account details specified.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+                "pretty": "Client authentication",
+                "input-type": "switch",
+                "depends": [
+                    { "mode": "proxy" }
+                ]
+            }
+          },
+          "client_username": {
+            "type": "string",
+            "description": "Username for authentication with the remote server.",
+            "format": "credentials_validate",
+	    "maxLength": 512,
+            "x-web": {
+                "pretty": "Username",
+                "input-type": "input",
+                "depends": [ { "mode": "proxy", "client_auth": "1" } ]
+            }
+          },
+          "client_password": {
+            "type": "string",
+            "description": "Password for authentication with the remote server.",
+            "format": "credentials_validate",
+	    "maxLength": 512,
+            "x-web": {
+                "pretty": "Password",
+                "input-type": "input",
+                "depends": [ { "mode": "proxy", "client_auth": "1" } ]
+            }
+          },
+          "pop_username": {
+            "x-web": {
+                "pretty": "POP Username",
+                "input-type": "input",
+                "depends": [ { "mode": "server" } ]
+            },
+            "type": "string",
+	    "maxLength": 512,
+            "description": "Username for authentication with the POP server.",
+            "format": "credentials_validate"
+          },
+          "pop_password": {
+            "x-web": {
+                "pretty": "POP Password",
+                "input-type": "input",
+                "depends": [ { "mode": "server" } ]
+            },
+            "type": "string",
+	    "maxLength": 512,
+            "description": "Password for authentication with the POP server.",
+            "format": "credentials_validate"
+          },
+          "extra_cmdline": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Extra command line options.",
+            "x-web": {
+                "pretty": "Extra command line",
+                "input-type": "input",
+                "depends": [ { "mode": "cmdline" } ]
+            }
+          },
+          "server_tls_certificate:file_size": {
+            "type": "number",
+            "description": "Size of server tls certificate.",
+            "readOnly": true,
+            "format": "range(0, 16777216)"
+          }
+        }
+      },
+      "email_relay_options_multi": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "x-web": {
+                    "pretty": "Instance name",
+                    "input-type": "input",
+                    "unique": true
+                },
+                "description": "Email Relay configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/email_relay_options_single"
+          }
+        ]
+      }
+    }
+  }
+}

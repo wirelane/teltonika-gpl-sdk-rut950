@@ -1,0 +1,8 @@
+{
+	"system/maintenance/cli": {
+		"description": "Command Line Interface",
+		"read": {
+			"uci": []
+		}
+	}
+}

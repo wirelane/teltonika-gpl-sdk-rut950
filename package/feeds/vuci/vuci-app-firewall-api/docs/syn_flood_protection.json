@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/attack_prevention/syn_flood_protection/config": {
+      "get": {
+        "summary": "GET All Firewall SYN Flood Protection Settings",
+        "description": "Returns all firewall SYN flood protection settings with their options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200SynFlPrMulti"
+          }
+        },
+        "tags": [
+          "Firewall SYN Flood Protection Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall SYN Flood Protection Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200SynFlPrMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/syn_flood_protection_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall SYN Flood Protection Settings"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/attack_prevention/syn_flood_protection/config/general": {
+      "get": {
+        "summary": "GET Firewall SYN Flood Protection Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200SynFlPr"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firewall SYN Flood Protection Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall SYN Flood Protection Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200SynFlPr"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/syn_flood_protection_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall SYN Flood Protection Settings"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200SynFlPr": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/syn_flood_protection_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200SynFlPrMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/syn_flood_protection_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "syn_flood_protection_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "syn_flood": {
+            "type": "string",
+            "description": "Enables protection from SYN flood type attacks",
+            "x-web": {
+              "pretty": "SYN flood",
+              "input-type": "switch"
+            }
+          },
+          "synflood_rate": {
+            "type": "string",
+            "description": "Set rate limit (packets/second) for SYN packets above which the traffic is considered a flood",
+            "x-web": {
+              "pretty": "SYN flood rate",
+              "input-type": "input"
+            }
+          },
+          "synflood_burst": {
+            "type": "string",
+            "description": "Set burst limit for SYN packets above which the traffic is considered a flood if it exceeds the allowed rate",
+            "x-web": {
+              "pretty": "SYN flood burst",
+              "input-type": "input"
+            }
+          },
+          "tcp_syncookies": {
+            "type": "string",
+            "description": "Enable the use of SYN cookies",
+            "x-web": {
+              "pretty": "TCP SYN cookies",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "syn_flood_protection_options_single_put": {
+        "type": "object",
+        "properties": {
+          "syn_flood": {
+            "type": "string",
+            "description": "Enables protection from SYN flood type attacks",
+            "x-web": {
+              "pretty": "SYN flood",
+              "input-type": "switch"
+            }
+          },
+          "synflood_rate": {
+            "type": "string",
+            "description": "Set rate limit (packets/second) for SYN packets above which the traffic is considered a flood",
+            "x-web": {
+              "pretty": "SYN flood rate",
+              "input-type": "input"
+            }
+          },
+          "synflood_burst": {
+            "type": "string",
+            "description": "Set burst limit for SYN packets above which the traffic is considered a flood if it exceeds the allowed rate",
+            "x-web": {
+              "pretty": "SYN flood burst",
+              "input-type": "input"
+            }
+          },
+          "tcp_syncookies": {
+            "type": "string",
+            "description": "Enable the use of SYN cookies",
+            "x-web": {
+              "pretty": "TCP SYN cookies",
+              "input-type": "switch"
+            }
+          }
+        }
+      }
+    }
+  }
+}

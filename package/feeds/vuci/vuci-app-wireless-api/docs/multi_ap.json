@@ -1,0 +1,446 @@
+  {
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Wireless Multi AP"
+    }
+  ],
+  "paths": {
+    "/wireless/multi_ap/access_points/config": {
+      "get": {
+        "summary": "GET All Wireless Multi AP Access Points",
+        "tags": [
+          "Wireless Multi AP Access Points"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/multi_ap_access_point_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-wireless-multi_ap-access_points"
+      },
+      "post": {
+        "summary": "CREATE All Wireless Multi AP Access Points",
+        "operationId": "post-network-wireless-multi_ap-access_points",
+        "responses": {
+        "200": {
+          "$ref": "#/components/responses/access_point_config"
+        },
+        "201": {
+          "description": "Created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "description": "Operation status."
+                  },
+                  "data": {
+                    "$ref": "#/components/schemas/multi_ap_access_point_name_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "422": {
+          "$ref": "#/components/responses/422response"
+        }
+        },
+        "tags": [
+          "Wireless Multi AP Access Points"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/access_point_config"
+        }
+      },
+      "put": {
+        "summary": "UPDATE All Wireless Multi AP Access Points",
+        "operationId": "put-network-wireless-multi_ap-access_points",
+        "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                  "type": "boolean",
+                  "description": "Operation status."
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/multi_ap_access_point_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "404": {
+          "$ref": "#/components/responses/404response"
+        },
+        "422": {
+          "$ref": "#/components/responses/422response"
+        }
+        },
+        "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/multi_ap_access_point_name_index"
+                  }
+                }
+              }
+            }
+          }
+        }
+        },
+        "tags": [
+        "Wireless Multi AP Access Points"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Wireless Multi AP Access Points",
+        "operationId": "delete-network-wireless-multi_ap-access_points",
+        "responses": {
+        "200": {
+          "$ref": "#/components/responses/200deleted_multi"
+        },
+        "404": {
+          "$ref": "#/components/responses/404response"
+        }
+        },
+        "description": "",
+        "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "Section names to delete",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+        },
+        "tags": [
+          "Wireless Multi AP Access Points"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Wireless",
+          "SSIDs"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/wireless/multi_ap/access_points/config/{id}": {
+      "get": {
+        "summary": "GET Wireless Multi AP Access Points",
+        "tags": [
+          "Wireless Multi AP Access Points"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/multi_ap_access_point_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-wireless-multi_ap-access_points-id"
+      },
+      "put": {
+        "summary": "UPDATE Wireless Multi AP Access Points",
+        "operationId": "put-network-wireless-multi_ap-access_points-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/multi_ap_access_point_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/multi_ap_access_point_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Wireless Multi AP Access Points"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Wireless Multi AP Access Points",
+        "operationId": "delete-network-wireless-multi_ap-access_points-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Wireless Multi AP Access Points"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Wireless",
+          "SSIDs"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "access_point_config": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                "type": "boolean",
+                "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                    "ssid": {
+                      "type": "string",
+                      "description": "SSID of the access point."
+                    },
+                    "id": {
+                      "type": "string",
+                      "description": "AP id."
+                    },
+                    "priority": {
+                      "type": "string",
+                      "description": "Priority of the AP (lower value means higher priority). The order in which the wifi interface will try to connect to the access points."
+                    },
+                    "enabled": {
+                      "type": "string",
+                      "description": "If disabled, wifi interface won't try to connect to this AP."
+                    }
+                    },
+                    "required": [
+                      "ssid",
+                      "id",
+                      "priority",
+                      "enabled"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "multi_ap_access_point_name_index": {
+        "allOf": [
+          {
+            "title": "multi_ap_access_point",
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Section name.",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/multi_ap_access_point_index"
+          }
+        ]
+      },
+      "multi_ap_access_point_index": {
+        "title": "multi_ap_access_point",
+        "type": "object",
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "description": "SSID of the access point.",
+            "x-web": {
+              "unique": true,
+              "pretty": "SSID",
+              "input-type": "input"
+            }
+          },
+          "key": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "description": "Password of the access point.",
+            "x-web": {
+              "pretty": "Key",
+              "input-type": "input"
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "If disabled, wifi interface won't try to connect to this AP.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "priority": {
+            "type": "string",
+            "description": "Priority of the AP (lower value means higher priority). The order in which the wifi interface will try to connect to the access points.",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "access_point_config": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "format": "binary",
+                  "description": "Multi AP file."
+                }
+              },
+              "required": [
+                "file"
+              ]
+            }
+          },
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                "$ref": "#/components/schemas/multi_ap_access_point_index"
+                }
+              }
+            }
+          }
+        },
+        "description": "If content-type is multipart/form-data then a file is uploaded with a list of access points. File format example:  \n\nssid: my_ssid\n\nenable: 0\n\nkey: my_password\n\nssid: ssid with no key\n\nssid: another_ssid\n\nkey: another_pass"
+      }
+    }
+  }
+  }

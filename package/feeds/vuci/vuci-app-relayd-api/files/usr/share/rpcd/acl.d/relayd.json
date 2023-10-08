@@ -1,0 +1,10 @@
+{
+	"network/wireless/relayd": {
+		"read": {
+			"api": ["/relayd/*", "/interfaces/config/*", "/wireless/interfaces/config/*"]
+		},
+		"write": {
+			"api": ["/relayd/*"]
+		}
+	}
+}

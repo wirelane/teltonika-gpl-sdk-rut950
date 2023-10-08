@@ -1,0 +1,13 @@
+{
+	"network/failover": {
+		"title": "Failover",
+		"index": 50
+	},
+	"network/failover/mwan": {
+		"title": "Multiwan",
+		"index": 10,
+		"view": "network/MultiWan",
+		"acls": [ "network/failover/mwan" ],
+		"files": [ "/etc/config/mwan3" ]
+	}
+}

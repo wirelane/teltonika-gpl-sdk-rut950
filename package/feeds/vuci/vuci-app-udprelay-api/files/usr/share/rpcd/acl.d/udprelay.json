@@ -1,0 +1,10 @@
+{
+	"network/other/udprelay": {
+		"read": {
+			"api": ["/udprelay/*", "/interfaces/config/*"]
+		},
+		"write": {
+			"api": ["/udprelay/*"]
+		}
+	}
+}

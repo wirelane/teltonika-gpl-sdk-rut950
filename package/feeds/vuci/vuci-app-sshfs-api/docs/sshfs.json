@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/sshfs/config/general": {
+      "get": {
+        "tags": [
+          "SSHFS"
+        ],
+        "summary": "Returns sshfs config options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sshfs"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SSHFS"
+        ],
+        "summary": "Update sshfs options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sshfs"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sshfs_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
+          "SSHFS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/sshfs/config": {
+      "put": {
+        "tags": [
+          "SSHFS"
+        ],
+        "summary": "Update sshfs sections options (sshfs hold only one named section - sshfs)",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sshfs"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "type": "object",
+                      "description": "section id",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "section unique identifier"
+                        },
+                        "null": {
+                          "$ref": "#/components/schemas/sshfs_options"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
+          "SSHFS"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200sshfs": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/sshfs_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "sshfs_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "section enabling",
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "hostname": {
+            "type": "string",
+            "description": "sshfs hostname",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "port": {
+            "type": "number",
+            "description": "connection port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "username": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "password": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "mount_point": {
+            "type": "string",
+            "description": "a folder in device.",
+            "x-web": {
+              "pretty": "Mount point",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "mount_path": {
+            "type": "string",
+            "description": "A remote mount path that will be mounted",
+            "x-web": {
+              "pretty": "Mount path",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

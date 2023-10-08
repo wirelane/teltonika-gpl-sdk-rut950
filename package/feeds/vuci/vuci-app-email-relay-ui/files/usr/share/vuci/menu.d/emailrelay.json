@@ -1,0 +1,9 @@
+{
+	"services/email_relay": {
+		"title": "Email Relay",
+		"index": 230,
+		"view": "services/EmailRelay_aeaafe",
+		"acls": [ "services/email_relay" ],
+		"files": [ "/etc/config/emailrelay" ]
+	}
+}

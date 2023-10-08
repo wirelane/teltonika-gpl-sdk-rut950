@@ -1,0 +1,544 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/hotspot/themes/status/{hotspot_theme_id}": {
+      "get": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Returns specified hotspot theme section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Themes"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_theme_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot Themes Configuration identifier (ID)."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "hotspot_theme_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot Themes Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/themes/status": {
+      "get": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Returns all hotspot themes configuration sections",
+        "description": "Returns all sections with their parameters from hotspot themes configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemesMulti"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/themes/options": {
+      "get": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Returns all path configuration sections",
+        "description": "Returns all sections with their parameters from path configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemesOptions"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/themes/config/{type}/{hotspot_theme_file_name}": {
+      "get": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Returns specified theme file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemeFile"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_theme_file_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Theme file."
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Theme name."
+          }
+        ]
+      },
+      "put": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Updates specified theme file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemeFile"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_theme_file_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Theme file."
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Theme name."
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/file_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "hotspot_theme_file_name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Theme file."
+        },
+        {
+          "name": "type",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Theme name."
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/themes/export/{hotspot_theme_id}": {
+      "get": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Download specified theme file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_download"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_theme_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot Themes Configuration identifier (ID)."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "hotspot_theme_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot Themes Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": { "wifi": true, "is_access_point": false }
+      }
+    },
+    "/hotspot/themes/config": {
+      "post": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Upload custom theme file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "x-web": {
+                      "pretty": "Theme file"
+                    },
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/themes/config/{hotspot_theme_id}": {
+      "delete": {
+        "tags": ["Hotspot Themes"],
+        "summary": "Delete custom theme",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_theme_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot Themes Configuration identifier (ID)."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "hotspot_theme_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot Themes Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/services/hotspot/themes/actions/{type}/reset": {
+      "post": {
+        "tags": [
+          "Hotspot Themes"
+        ],
+        "summary": "Resets specified theme file to default",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemeFile"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Theme name."
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/themes_options_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "type",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Theme name."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "Landing page"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Themes": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/themes_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ThemesMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/themes_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ThemesOptions": {
+        "description": "Returns files",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/themes_options_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ThemeFile": {
+        "description": "Returns file",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/file_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_download": {
+        "description": "Success",
+        "content": {
+          "application/octet-stream": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "themes_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Hotspot Themes Configuration identifier (ID)."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the theme."
+          }
+        }
+      },
+      "file_options": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "data of the file"
+          }
+        }
+      },
+      "themes_options_options": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Name of the file."
+          }
+        }
+      }
+    }
+  }
+}

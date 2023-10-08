@@ -1,0 +1,32 @@
+{
+	"status/system": {
+		"description": "system status",
+		"read": {
+			"api": [
+				"/device/*",
+				"/devices/*",
+				"/mobile/modems/*"
+			],
+			"uci": [
+				"system"
+			],
+			"ubus": {
+				"gsmd": [
+					"get_modems"
+				],
+				"mnfinfo": [
+					"get"
+				],
+				"system": [
+					"info",
+					"board"
+				],
+				"vuci.system": [
+					"version",
+					"df",
+					"get_networks_devices"
+				]
+			}
+		}
+	}
+}

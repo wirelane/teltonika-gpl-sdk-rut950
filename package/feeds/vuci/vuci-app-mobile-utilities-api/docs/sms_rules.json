@@ -1,0 +1,1012 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Utilities sms rules",
+    "version": "1.0",
+    "description": "Mobile utitlities sms rules api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_rules/config": {
+      "get": {
+        "summary": "Returns all SMS rules configurations",
+        "tags": [
+          "SMS rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_rules_many"
+          }
+        },
+        "operationId": "get-sms_rules-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected SMS rules configurations",
+        "tags": [
+          "SMS rules"
+        ],
+        "operationId": "put-sms_rules-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_rules_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_rules_many"
+        }
+      },
+      "post": {
+        "summary": "Creates a new SMS rule configuration",
+        "operationId": "post-services-mobile_utilities-sms_rules-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/sms_rules"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "SMS rules"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_rules"
+        }
+      },
+      "delete": {
+        "summary": "Deletes the selected SMS rules configurations",
+        "operationId": "delete-services-mobile_utilities-sms_rules-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "tags": [
+          "SMS rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns the selected SMS rule configuration",
+        "tags": [
+          "SMS rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-sms_rules-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected SMS rule configuration",
+        "tags": [
+          "SMS rules"
+        ],
+        "operationId": "put-sms_rules-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_rules"
+        }
+      },
+      "delete": {
+        "summary": "Deletes the selected SMS rule configuration",
+        "operationId": "delete-services-mobile_utilities-sms_rules-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "SMS rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_rules/options": {
+      "get": {
+        "summary": "Returns SMS rules options",
+        "tags": [
+          "SMS rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_rules_options"
+          }
+        },
+        "operationId": "get-services-mobile_utilities-sms_rules-options",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sms_rules_opts": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns the rule on or off",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "General"
+            }
+          },
+          "action": {
+            "type": "string",
+            "description": "Action that will happen when the rule is triggered",
+            "enum": [
+              "reboot",
+              "send_status",
+              "vpnstatus",
+              "mobile",
+              "change_mobile_settings",
+              "reset_conn",
+              "list_of_profile",
+              "vpn",
+              "change_profile",
+              "ssh_access",
+              "web_access",
+              "ip_unblock",
+              "firstboot",
+              "userdefaults",
+              "fw_upgrade",
+              "monitoring_status",
+              "uci",
+              "rms_status",
+              "rms_action",
+              "rms_connect",
+              "more",
+              "iostatus",
+              "io_set",
+              "switch_sim",
+              "gps",
+              "gps_coordinates",
+              "wol",
+              "data_usage_reset",
+              "data_limit",
+              "wifi",
+              "exec",
+              "config_reload",
+              "api"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "select",
+              "group": "General",
+              "enum-pretty": {
+                "reboot": "Reboot",
+                "send_status": "Send status",
+                "vpnstatus": "OpenVPN status",
+                "mobile": "Switch mobile data",
+                "change_mobile_settings": "Change mobile settings",
+                "reset_conn": "Reset mobile connection",
+                "list_of_profile": "Get list of profiles",
+                "vpn": "Manage OpenVPN",
+                "change_profile": "Change profile",
+                "ssh_access": "SSH access control",
+                "web_access": "Web access control",
+                "ip_unblock": "IP unblock",
+                "firstboot": "Restore to default",
+                "userdefaults": "Restore to user defaults",
+                "fw_upgrade": "FW upgrade from server",
+                "monitoring_status": "Monitoring status",
+                "uci": "UCI API",
+                "rms_status": "RMS status",
+                "rms_action": "RMS action",
+                "rms_connect": "RMS connect",
+                "more": "More",
+                "iostatus": "I/O status",
+                "io_set": "Change I/O state",
+                "switch_sim": "Force SIM switch",
+                "gps": "GPS control",
+                "gps_coordinates": "GPS coordinates",
+                "wol": "Wake on LAN",
+                "data_usage_reset": "Mobile Data usage reset",
+                "data_limit": "Mobile Data limit status",
+                "wifi": "Switch WiFi",
+                "exec": "Execute custom script",
+                "config_reload": "Reload config",
+                "api": "API"
+              }
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to receive the message",
+            "x-web": {
+              "pretty": "Receiving modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "io": {
+            "type": "string",
+            "description": "I/O",
+            "x-web": {
+              "pretty": "I/O",
+              "input-type": "select",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "io_set"
+                }
+              ]
+            }
+          },
+          "value": {
+            "type": "string",
+            "description": "State of the rule or I/O or relay. It can be turned on or off",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "State",
+              "input-type": "select",
+              "group": "General",
+              "enum-pretty": {
+                "0": "Off / Low / Closed",
+                "1": "On / High / Open"
+              }
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Rule active for a specified time",
+            "x-web": {
+              "pretty": "Active timeout",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "io_set"
+                }
+              ]
+            }
+          },
+          "seconds": {
+            "type": "string",
+            "description": "Rule active for a specified time, format seconds",
+            "format": "irange(1,999999)",
+            "default": "5",
+            "x-web": {
+              "pretty": "Active timeout",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "timeout": "1"
+                }
+              ]
+            }
+          },
+          "smstext": {
+            "type": "string",
+            "description": "Text that will trigger the rule. Enter this text in your message preceded by the selected 'Authorization Method' (router's password, custom password, serial number or nothing if no authorization is selected) and send it to the router in order to trigger the rule. Allowed characters are: (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
+            "maxLength": 160,
+            "x-web": {
+              "pretty": "SMS text",
+              "input-type": "input",
+              "group": "General",
+              "unique": true
+            }
+          },
+          "status_sms": {
+            "type": "string",
+            "description": "Turn on if you wish to receive an SMS message about the router's status after it is rebooted using the rule (you will not receive messages when it is rebooted using other methods)",
+            "x-web": {
+              "pretty": "Get status via SMS after reboot",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "reboot"
+                }
+              ]
+            }
+          },
+          "write_config": {
+            "type": "string",
+            "description": "Indicates whether the changes will be written to config",
+            "x-web": {
+              "pretty": "Write to config",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "io_set"
+                }
+              ]
+            }
+          },
+          "write_wifi": {
+            "type": "string",
+            "description": "Permanently save wireless network state to configuration",
+            "x-web": {
+              "pretty": "Write to config",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "wifi"
+                }
+              ]
+            }
+          },
+          "write_mobile": {
+            "type": "string",
+            "description": "Permanently save mobile network state to configuration",
+            "x-web": {
+              "pretty": "Write to config",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "mobile"
+                }
+              ]
+            }
+          },
+          "to_other_phone": {
+            "type": "string",
+            "description": "If set, command response will we be sent to specified numbers",
+            "x-web": {
+              "pretty": "Message forwarding",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": [
+                    "send_status",
+                    "vpnstatus",
+                    "list_of_profile",
+                    "monitoring_status",
+                    "iostatus",
+                    "uci",
+                    "rms_status",
+                    "gps_coordinates"
+                  ]
+                },
+                {
+                  "status_sms": "1"
+                }
+              ]
+            }
+          },
+          "to_number": {
+            "type": "array",
+            "description": "The response message will get forwarded to the specified number(s). Allowed characters: (0-9#*+).",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            },
+            "x-web": {
+              "pretty": "Phone number(s)",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "to_other_phone": "1"
+                }
+              ]
+            }
+          },
+          "info_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to get information from or managed for change mobile settings action",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "group": "General",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "depends": [
+                {
+                  "action": [
+                    "send_status",
+                    "change_mobile_settings",
+                    "reset_conn",
+                    "switch_sim",
+                    "mobile"
+                  ]
+                },
+                {
+                  "status_sms": "1"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to send information from",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "group": "General",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "depends": [
+                {
+                  "action": [
+                    "send_status",
+                    "vpnstatus",
+                    "list_of_profile",
+                    "monitoring_status",
+                    "iostatus",
+                    "uci",
+                    "gps_coordinates",
+                    "data_limit",
+                    "rms_status",
+                    "more",
+                    "ip_unblock",
+                    "wol"
+                  ]
+                },
+                {
+                  "status_sms": "1"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Message to send",
+            "format": "string",
+            "x-web": {
+              "pretty": "Text message",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "action": [
+                    "send_status",
+                    "iostatus"
+                  ]
+                },
+                {
+                  "status_sms": "1"
+                }
+              ]
+            }
+          },
+          "simcard": {
+            "type": "string",
+            "description": "SIM card for which mobile data settings will be changed",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "SIM card",
+              "input-type": "select",
+              "group": "General",
+              "hw_tags": {
+                "dual_sim": true
+              },
+              "depends": [
+                {
+                  "action": "change_mobile_settings"
+                }
+              ]
+            }
+          },
+          "ssh_access_enabled": {
+            "type": "string",
+            "description": "Selects whether the rule should turn SSH access from LAN on or off",
+            "x-web": {
+              "pretty": "Enable SSH access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "ssh_access"
+                }
+              ]
+            }
+          },
+          "ssh_access_remote": {
+            "type": "string",
+            "description": "Selects whether the rule should turn SSH access from WAN on or off",
+            "x-web": {
+              "pretty": "Enable remote SSH access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "ssh_access",
+                  "ssh_access_enabled": "1"
+                }
+              ]
+            }
+          },
+          "web_access_enabled": {
+            "type": "string",
+            "description": "Selects whether the rule should turn HTTP access from LAN on or off",
+            "x-web": {
+              "pretty": "Enable HTTP access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "web_access"
+                }
+              ]
+            }
+          },
+          "webs_access_enabled": {
+            "type": "string",
+            "description": "Possibility to reach router via HTTPS from LAN (Local Area Network)",
+            "x-web": {
+              "pretty": "Enable HTTPS access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "web_access"
+                }
+              ]
+            }
+          },
+          "web_access_http": {
+            "type": "string",
+            "description": "Selects whether the rule should turn HTTP access from WAN on or off",
+            "x-web": {
+              "pretty": "Enable remote HTTP access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "web_access",
+                  "web_access_enabled": "1"
+                }
+              ]
+            }
+          },
+          "web_access_https": {
+            "type": "string",
+            "description": "Selects whether the rule should turn HTTPS access from WAN on or off",
+            "x-web": {
+              "pretty": "Enable remote HTTPS access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "web_access",
+                  "webs_access_enabled": "1"
+                }
+              ]
+            }
+          },
+          "redirect_https": {
+            "type": "string",
+            "description": "Force HTTPS by redirecting HTTP to HTTPS",
+            "x-web": {
+              "pretty": "Redirect to HTTPS",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "web_access"
+                }
+              ]
+            }
+          },
+          "mac": {
+            "type": "string",
+            "description": "MAC address of the device that will be 'woken up'",
+            "format": "macaddr",
+            "x-web": {
+              "pretty": "MAC address",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "wol"
+                }
+              ]
+            }
+          },
+          "script": {
+            "type": "string",
+            "pattern": "#!/bin/sh\\n.*",
+            "example": "#!/bin/sh\\n echo hello world \\n exit 0",
+            "description": "Script to be executed.",
+            "x-web": {
+              "pretty": "Custom script",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "exec"
+                }
+              ]
+            }
+          },
+          "methods": {
+            "type": "array",
+            "description": "Accessible API methods. All methods are allowed if a list is empty.",
+            "items": {
+              "type": "string"
+            },
+            "enum": [
+              "get",
+              "post",
+              "put",
+              "delete"
+            ],
+            "x-web": {
+              "pretty": "Methods",
+              "input-type": "multiselect",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "api"
+                }
+              ],
+              "enum-pretty": {
+                "get": "GET",
+                "post": "POST",
+                "put": "PUT",
+                "delete": "DELETE"
+              }
+            }
+          },
+          "acl_mode": {
+            "type": "string",
+            "description": "Mode that allows or denies selected API methods.",
+            "enum": [
+              "allowed",
+              "denied"
+            ],
+            "x-web": {
+              "pretty": "ACL mode",
+              "input-type": "select",
+              "group": "General",
+              "depends": [
+                {
+                  "action": "api"
+                }
+              ],
+              "enum-pretty": {
+                "allowed": "Allowed",
+                "denied": "Denied"
+              }
+            }
+          },
+          "authorization": {
+            "type": "string",
+            "description": "When a message is received, its authenticity will be checked based on the selection in this field. 'SMS Rules' can be authorized either by the router's password, custom password, serial number or not at all.",
+            "enum": [
+              "no",
+              "serial",
+              "password",
+              "local"
+            ],
+            "default": "password",
+            "x-web": {
+              "pretty": "Authorization method",
+              "input-type": "select",
+              "group": "Authorization",
+              "enum-pretty": {
+                "no": "No authorization",
+                "serial": "By serial",
+                "password": "By router admin password",
+                "local": "By password"
+              }
+            }
+          },
+          "password": {
+            "type": "string",
+            "format": "root_password",
+            "description": "Password to use with authorization == \"local\".",
+            "minLength": 8,
+            "maxLength": 80,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "group": "Authorization",
+              "depends": [
+                {
+                  "authorization": "local"
+                }
+              ]
+            }
+          },
+          "allowed_phone": {
+            "type": "string",
+            "description": "Which phone numbers are allowed to trigger the rule",
+            "format": "(group)requires(group), (single)requires(tel)",
+            "enum": [
+              "all",
+              "group",
+              "single"
+            ],
+            "x-web": {
+              "pretty": "Allowed number(s)",
+              "input-type": "select",
+              "group": "Authorization",
+              "enum-pretty": {
+                "all": "From all numbers",
+                "group": "From group",
+                "single": "From single number"
+              }
+            }
+          },
+          "tel": {
+            "type": "string",
+            "description": "A phone number that will be allowed to trigger the rule. The number must be specified in full format, country code included. e.g., +37000000000.",
+            "format": "phonedigit",
+            "x-web": {
+              "pretty": "Sender's phone number",
+              "input-type": "select",
+              "group": "Authorization",
+              "depends": [
+                {
+                  "allowed_phone": "single"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A list of whitelisted phone numbers",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "select",
+              "group": "Authorization",
+              "depends": [
+                {
+                  "allowed_phone": "group"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "smstext",
+          "message",
+          "mac"
+        ]
+      },
+      "sms_rules": {
+        "title": "sms_rules",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/sms_rules_opts"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "sms_rules": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/sms_rules"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_rules_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_rules"
+                  }
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        }
+      },
+      "sms_rules_options": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "actions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "params": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/device_param"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "sms_rules": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/sms_rules_opts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_rules_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_rules"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SMS rules"
+    }
+  ]
+}

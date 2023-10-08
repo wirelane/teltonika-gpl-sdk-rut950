@@ -1,0 +1,39 @@
+--- a/drivers/tty/serial/ar933x_uart.c
++++ b/drivers/tty/serial/ar933x_uart.c
+@@ -52,6 +52,7 @@ struct ar933x_uart_port {
+ 	struct clk		*clk;
+ 	struct mctrl_gpios	*gpios;
+ 	struct gpio_desc	*rts_gpiod;
++	unsigned char		sp_bit_fix;
+ };
+ 
+ static inline unsigned int ar933x_uart_read(struct ar933x_uart_port *up,
+@@ -295,8 +296,13 @@ static void ar933x_uart_set_termios(stru
+ 	new->c_cflag &= ~CSIZE;
+ 	new->c_cflag |= CS8;
+ 
++	/* 2nd stop bit workaround */
++	if(new->c_cflag & CSTOPB)
++		up->sp_bit_fix = 1;
++	else
++		up->sp_bit_fix = 0;
+ 	/* Only one stop bit is supported */
+-	new->c_cflag &= ~CSTOPB;
++	/* new->c_cflag &= ~CSTOPB; */
+ 
+ 	cs = 0;
+ 	if (new->c_cflag & PARENB) {
+@@ -408,7 +414,12 @@ static void ar933x_uart_tx_chars(struct
+ 		half_duplex_send = true;
+ 	}
+ 
+-	count = up->port.fifosize;
++	if(up->sp_bit_fix) {	/* 2nd stop bit fix workaround */
++		count = 1;	/* fifo size 1 byte */
++		ar933x_uart_wait_tx_complete(up);
++		/* wait for last bit shifted out */
++	 } else
++		count = up->port.fifosize;
+ 	do {
+ 		unsigned int rdata;
+ 

@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Routes"
+    }
+  ],
+  "paths": {
+    "/routes/connections_realtime": {
+      "get": {
+        "summary": "Returns real time information about network connections",
+        "tags": [
+          "Routes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of network connection entries.",
+                      "items": {
+                        "type": "array",
+                        "description": "Network connection entry. Values:\na[0] - timestamp when it was recorded.\na[1] - UDP connections.\na[2] - TCP connections.\na[3] - other connections.",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-routes-connections-realtime"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Realtime Data",
+          "Connections"
+        ]
+      }
+    },
+    "/routes/connections": {
+      "get": {
+        "summary": "Returns current network connections",
+        "tags": [
+          "Routes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "type": "string",
+                        "required": [
+                          "layer3",
+                          "timeout",
+                          "zone",
+                          "dst",
+                          "dst_hostname",
+                          "layer4",
+                          "src",
+                          "sport",
+                          "mark",
+                          "packets",
+                          "dport",
+                          "bytes",
+                          "use"
+                        ],
+                        "properties": {
+                          "layer3": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "timeout": {
+                            "type": "number"
+                          },
+                          "zone": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "dst": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "dst_hostname": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "layer4": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "src": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "sport": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "mark": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "packets": {
+                            "type": "number"
+                          },
+                          "dport": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "bytes": {
+                            "type": "number"
+                          },
+                          "use": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "33658",
+                          "mark": "0",
+                          "packets": 480,
+                          "dport": "22",
+                          "bytes": 46631,
+                          "use": "2"
+                        },
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "60060",
+                          "mark": "0",
+                          "packets": 5,
+                          "dport": "80",
+                          "bytes": 736,
+                          "use": "2"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": [
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "33658",
+                          "mark": "0",
+                          "packets": 480,
+                          "dport": "22",
+                          "bytes": 46631,
+                          "use": "2"
+                        },
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "60060",
+                          "mark": "0",
+                          "packets": 5,
+                          "dport": "80",
+                          "bytes": 736,
+                          "use": "2"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-routes-connections"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Realtime Data",
+          "Connections"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {}
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "modbus client"
+    }
+  ],
+  "paths": {
+    "/modbus/main/config/general": {
+      "get": {
+        "tags": [
+          "modbus client"
+        ],
+        "summary": "Returns the specified Modbus client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200modbusClient"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "modbus client"
+        ],
+        "summary": "Updates the specified Modbus client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200modbusClient"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_client_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Main"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/main/config": {
+      "get": {
+        "tags": [
+          "modbus client"
+        ],
+        "summary": "Returns all Modbus client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200modbusClientMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "modbus client"
+        ],
+        "summary": "Updates specified Modbus client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200modbusClientMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_client_multiple_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Main"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200modbusClient": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_client_multiple_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200modbusClientMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_client_multiple_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_client_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable Modbus client.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "modbus_client_multiple_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus client Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_client_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

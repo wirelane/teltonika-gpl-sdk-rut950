@@ -1,0 +1,13 @@
+{
+	"services/vpn": {
+		"title": "VPN",
+		"index": 20
+	},
+	"services/vpn/stunnel": {
+		"title": "STunnel",
+		"index": 90,
+		"view": "services/STunnel_aeaafe",
+		"acls": [ "services/vpn/stunnel" ],
+		"files": [ "/etc/config/stunnel" ]
+	}
+}

@@ -1,0 +1,1693 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MQTT",
+    "description": "MQTT api documentation",
+    "version": "3.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "MQTT Publisher"
+    },
+    {
+      "name": "MQTT Broker"
+    },
+    {
+      "name": "MQTT Broker Bridge Topics"
+    }
+  ],
+  "paths": {
+    "/mqtt_pub/config": {
+      "get": {
+        "tags": [
+          "MQTT Publisher"
+        ],
+        "summary": "Returns  MQTT publisher configuration in an array",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqttMulti"
+          }
+        },
+        "operationId": "get-mqtt-pub-config"
+      },
+      "put": {
+        "tags": [
+          "MQTT Publisher"
+        ],
+        "summary": "Updates MQTT publisher configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqttMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/mqtt_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "operationId": "put-mqtt-pub-config"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Publisher"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/mqtt_pub/config/general": {
+      "get": {
+        "tags": [
+          "MQTT Publisher"
+        ],
+        "summary": "Returns MQTT publisher configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqtt"
+          }
+        },
+        "description": "",
+        "operationId": "get-mqtt-pub-config-general"
+      },
+      "put": {
+        "tags": [
+          "MQTT Publisher"
+        ],
+        "summary": "Updates MQTT publisher configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqtt"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/mqtt_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "operationId": "put-mqtt-pub-config-general"
+      },
+      "post": {
+        "summary": "Uploads MQTT publisher certificate files",
+        "operationId": "post-services-MQTTpublisher-config-cfg",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Uploaded file path."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "MQTT Publisher"
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "enum": [
+                      "ca_file",
+                      "cert_file",
+                      "key_file"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Publisher"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/mqtt_broker/config": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "get": {
+        "summary": "Returns MQTT Broker configuration in an array",
+        "tags": [
+          "MQTT Broker"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_multi"
+          }
+        },
+        "operationId": "get-services-mqtt_broker-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates MQTT Broker configuration in an array",
+        "operationId": "put-services-mqtt_broker-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_multi"
+              }
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "MQTT Broker"
+        ]
+      }
+    },
+    "/mqtt_broker/config/general": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "get": {
+        "summary": "Returns MQTT Broker configuration",
+        "tags": [
+          "MQTT Broker"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_one"
+          }
+        },
+        "operationId": "get-services-mqtt_broker-config-general",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates MQTT Broker configuration",
+        "operationId": "put-services-mqtt_broker-config-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "MQTT Broker"
+        ]
+      },
+      "post": {
+        "summary": "Uploads MQTT broker files",
+        "operationId": "post-services-MQTTbroker-config-cfg",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Uploaded file path."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "MQTT Broker"
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "enum": [
+                      "cafile",
+                      "certfile",
+                      "keyfile",
+                      "acl_file_path",
+                      "password_file"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mqtt_broker/bridge/config/{id}/topics": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration MQTT broker bridge identifier"
+        }
+      ],
+      "get": {
+        "summary": "Returns MQTT Broker Bridge Topics configurations",
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_topic_multi"
+          }
+        },
+        "operationId": "get-services-mqtt_broker-topics-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected MQTT Broker Bridge Topics configurations",
+        "operationId": "put-services-mqtt_broker-topics-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_topic_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_topic_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ]
+      },
+      "post": {
+        "summary": "Creates a new MQTT Broker Bridge Topic configuration",
+        "operationId": "post-services-mqtt_broker-topics-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200_mqtt_broker_topic_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_topic_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected MQTT Broker Bridge Topics configurations",
+        "operationId": "delete-services-mqtt_broker-topics-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/mqtt_broker/bridge/config/{id}/topics/{topic_id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration MQTT broker bridge identifier"
+        },
+        {
+          "name": "topic_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration MQTT broker bridge topic identifier"
+        }
+      ],
+      "get": {
+        "summary": "Returns the selected MQTT Broker Bridge Topic configuration",
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_topic_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-mqtt_broker-topics-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected MQTT Broker Bridge Topic configuration",
+        "operationId": "put-services-mqtt_broker-topics-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_topic_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_topic_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected MQTT Broker Bridge Topic configuration",
+        "operationId": "delete-services-mqtt_broker-topics-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "Deletes MQTT Broker Bridge Topics configuration",
+        "tags": [
+          "MQTT Broker Bridge Topics"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200mqtt": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mqtt_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200mqttMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/mqtt_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_mqtt_broker_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration ID"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/mqtt_broker"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mqtt_broker_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/mqtt_broker"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mqtt_broker_topic_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration ID"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/mqtt_broker_topic"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mqtt_broker_topic_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/mqtt_broker_topic"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "delete_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Configuration ID"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Configuration ID"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "mqtt_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/mqtt_options"
+          }
+        ]
+      },
+      "mqtt_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Select to enable MQTT publisher",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Specify address of the MQTT broker",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "remote_port": {
+            "type": "string",
+            "description": "Port of the MQTT broker",
+            "format": "port",
+            "default": "1883",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "client_id": {
+            "type": "string",
+            "description": "Client ID to send with the data.",
+            "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Client ID",
+              "input-type": "input"
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Select which modem to use when getting information",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of remote host.",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of remote host",
+            "format": "credentials_validate",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            }
+          },
+          "tls": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "x-web": {
+              "pretty": "TLS",
+              "input-type": "switch"
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "description": "Type of TLS connection",
+            "x-web": {
+              "pretty": "TLS Type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "tls": "1"
+                }
+              ],
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              }
+            }
+          },
+          "tls_insecure": {
+            "type": "string",
+            "description": "Allow not verifying server authenticity",
+            "x-web": {
+              "pretty": "Allow insecure connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "_device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "cafile": {
+            "type": "string",
+            "description": "CA file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "certfile": {
+            "type": "string",
+            "description": "Certificate file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "keyfile": {
+            "type": "string",
+            "description": "Key file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading “0x”",
+            "format": "hexstring",
+            "maxLength": 128,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "identity": {
+            "type": "string",
+            "description": "The identity",
+            "format": "uciname",
+            "maxLength": 128,
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "pub_prefix": {
+            "type": "string",
+            "description": "Prefix of the topic to be used during publish",
+            "format": "regex",
+            "pattern": "^[^#+]+$",
+            "x-web": {
+              "pretty": "Publish topic prefix",
+              "input-type": "input"
+            }
+          },
+          "sub_prefix": {
+            "type": "string",
+            "description": "Prefix of the topic to be used during subscription",
+            "format": "string",
+            "x-web": {
+              "pretty": "Subscribe topic prefix",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "remote_addr",
+          "remote_port",
+          "tls_type",
+          "psk",
+          "identity",
+          "cafile",
+          "modem_id"
+        ]
+      },
+      "mqtt_broker": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "",
+            "local_port": "",
+            "allow_ra": "",
+            "use_tls_ssl": "",
+            "tls_type": "",
+            "tls_version": "",
+            "psk": "",
+            "identity": "",
+            "persistence": "",
+            "anonymous_access": "",
+            "_device_sec_files": "",
+            "ca_file": "",
+            "cert_file": "",
+            "key_file": "",
+            "acl_file_path": "",
+            "password_file": ""
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Select to enable MQTT",
+            "x-web": {
+              "pretty": "MQTT broker",
+              "input-type": "switch",
+              "group": "General"
+            }
+          },
+          "local_port": {
+            "type": "array",
+            "description": "Specify local port which the MQTT will be listen to",
+            "default": [
+              "1883"
+            ],
+            "items": {
+              "type": "string",
+              "format": "port"
+            },
+            "x-web": {
+              "pretty": "Local port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ],
+              "group": "General"
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Set to enable remote access",
+            "x-web": {
+              "pretty": "Enable remote access",
+              "input-type": "switch",
+              "group": "General"
+            }
+          },
+          "use_tls_ssl": {
+            "type": "string",
+            "description": "Enable to use TLS/SSL for connection",
+            "x-web": {
+              "pretty": "Use TLS/SSL",
+              "input-type": "switch",
+              "group": "Security"
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "description": "Select the type of TLS encryption",
+            "x-web": {
+              "pretty": "TLS type",
+              "input-type": "select",
+              "group": "Security",
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              },
+              "depends": [
+                {
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "require_certificate": {
+            "type": "string",
+            "description": "Demand client certificate and key from the client.",
+            "x-web": {
+              "pretty": "Require certificate",
+              "input-type": "switch",
+              "group": "Security",
+              "depends": [
+                {
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "_device_sec_files": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Choose this option if you want to select certificate files from device."
+          },
+          "ca_file": {
+            "type": "string",
+            "description": "Upload CA file",
+            "format": "path",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "cert_file": {
+            "type": "string",
+            "description": "Upload certificate file",
+            "format": "path",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "key_file": {
+            "type": "string",
+            "description": "Upload key file",
+            "format": "path",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "tls_version": {
+            "type": "string",
+            "enum": [
+              "tlsv1",
+              "tlsv1.1",
+              "tlsv1.2",
+              "tlsv1.3",
+              "all"
+            ],
+            "description": "Used TLS version",
+            "default": "all",
+            "x-web": {
+              "pretty": "TLS version",
+              "input-type": "select",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1"
+                }
+              ],
+              "enum-pretty": {
+                "all": "Support all"
+              }
+            }
+          },
+          "psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading 0x",
+            "format": "['no_prefix(\"0x\")', 'hexstring']",
+            "maxLength": 128,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "psk",
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "identity": {
+            "type": "string",
+            "description": "Specify the Identity",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "psk",
+                  "use_tls_ssl": "1"
+                }
+              ]
+            }
+          },
+          "acl_file_path": {
+            "type": "string",
+            "description": "Select ACL file",
+            "format": "path",
+            "x-web": {
+              "pretty": "ACL file",
+              "input-type": "input",
+              "group": "Miscellaneous"
+            }
+          },
+          "password_file": {
+            "type": "string",
+            "description": "Upload passwords/users file",
+            "format": "path",
+            "x-web": {
+              "pretty": "Password file",
+              "input-type": "input",
+              "group": "Miscellaneous"
+            }
+          },
+          "persistence": {
+            "type": "string",
+            "description": "If set, connection, subscription and message data will be written to the disk",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Persistence",
+              "input-type": "switch",
+              "group": "Miscellaneous"
+            }
+          },
+          "anonymous_access": {
+            "type": "string",
+            "description": "Allow anonymous access",
+            "default": "1",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Allow anonymous",
+              "input-type": "switch",
+              "group": "Miscellaneous"
+            }
+          },
+          "max_queued_messages": {
+            "type": "string",
+            "description": "The maximum number of QoS 1 and 2 messages to hold in a queue per client above those that are currently in-flight. Set to 0 for no maximum (not recommended).",
+            "format": "irange(0, 65535)",
+            "default": "1000",
+            "minLength": 1,
+            "maxLength": 5,
+            "x-web": {
+              "pretty": "Max queued messages",
+              "input-type": "input",
+              "group": "Miscellaneous"
+            }
+          },
+          "max_packet_size": {
+            "type": "string",
+            "description": "Maximum size of packet before it will be dropped",
+            "default": "1048576",
+            "format": "irange(1, 268435456)",
+            "x-web": {
+              "pretty": "Maximum packet size",
+              "input-type": "input",
+              "group": "Miscellaneous"
+            }
+          },
+          "custom_enabled": {
+            "type": "string",
+            "description": "Enables reading of custom configuration",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Custom configuration",
+              "input-type": "switch"
+            }
+          },
+          "custom_section_id": {
+            "type": "string",
+            "description": "Upload configuration file path",
+            "format": "path",
+            "x-web": {
+              "pretty": "Custom Configuration file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "custom_enabled": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "custom_section_id",
+          "local_port",
+          "tls_type",
+          "tls_version",
+          "psk",
+          "identity",
+          "ca_file",
+          "cert_file",
+          "key_file"
+        ]
+      },
+      "mqtt_broker_topic": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "topic": "",
+            "direction": "",
+            "qos": ""
+          }
+        },
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "Topic name",
+            "maxLength": 65536,
+            "x-web": {
+              "pretty": "Topic name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "direction": {
+            "type": "string",
+            "description": "The direction that the messages will be shared in",
+            "default": "out",
+            "enum": [
+              "out",
+              "in",
+              "both"
+            ],
+            "x-web": {
+              "pretty": "Direction",
+              "input-type": "select",
+              "enum-pretty": {
+                "out": "OUT",
+                "in": "IN",
+                "both": "BOTH"
+              }
+            }
+          },
+          "qos": {
+            "type": "string",
+            "description": "The publish/subscribe QoS level used for this topic",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "QoS",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "At most once (0)",
+                "1": "At least once (1)",
+                "2": "Exactly once (2)"
+              }
+            }
+          }
+        },
+        "required": [
+          "topic",
+          "direction",
+          "qos"
+        ]
+      },
+      "req_body_mqtt_broker_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mqtt_broker"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mqtt_broker_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {
+                "id": ""
+              }
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Configuration ID"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/mqtt_broker"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mqtt_broker_topic_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mqtt_broker_topic"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mqtt_broker_topic_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {
+                "id": ""
+              }
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Configuration ID"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/mqtt_broker_topic"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_delete_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": []
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    }
+  }
+}

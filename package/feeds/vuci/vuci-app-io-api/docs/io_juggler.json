@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/juggler/config/general": {
+      "get": {
+        "tags": [
+          "I/O Juggler"
+        ],
+        "summary": "Returns general I/O Juggler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJuggler"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler"
+        ],
+        "summary": "Updates general I/O Juggler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJuggler"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "General"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/juggler/config": {
+      "get": {
+        "tags": [
+          "I/O Juggler"
+        ],
+        "summary": "Returns general I/O Juggler configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler"
+        ],
+        "summary": "Updates general I/O Juggler configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_juggler_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "General"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoJuggler": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_juggler_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoJugglerMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_juggler_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_juggler_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/Disable the I/O juggler configuration.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "io_juggler_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "I/O Juggler Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/io_juggler_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

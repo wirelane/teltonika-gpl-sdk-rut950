@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Services status"
+    }
+  ],
+  "paths": {
+    "/services/status": {
+      "get": {
+        "summary": "Returns the status of installed services",
+        "tags": [
+          "Services status"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "enabled": {
+                            "type": "string",
+                            "description": "Service enabled/disabled.",
+                            "enum": [
+                              "0",
+                              "1"
+                            ]
+                          },
+                          "service": {
+                            "type": "string",
+                            "description": "Service's name."
+                          },
+                          "path": {
+                            "type": "string",
+                            "description": "Service's URL in the WebUI."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-status-services-status",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Status",
+          "Services",
+          "Services"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {}
+  }
+}

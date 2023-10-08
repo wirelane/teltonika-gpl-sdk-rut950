@@ -1,0 +1,23 @@
+{
+  "system/maintenance/troubleshoot": {
+    "description": "troubleshoot",
+    "read": {
+      "api": [
+        "/logging/*",
+        "/troubleshoot/*",
+        "/diagnostics/*",
+        "/usb_tools/general/mounts/*",
+        "/interfaces/status/*",
+        "/mobile/modems/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/logging/*",
+        "/troubleshoot/*",
+        "/diagnostics/*",
+        "/mobile/modems/*"
+      ]
+    }
+  }
+}

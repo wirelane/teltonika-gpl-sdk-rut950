@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 12px;">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@4eccf2cf93856a69c7c982df04ae8b91b43aac52/en/v6.4.3/css/ol.css" type="text/css">
+    <title>Teltonika Networks</title>
+    <style>
+      @font-face {
+        font-family: 'Oswald';
+        src: url('/fonts/Oswald-Medium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
+      }
+      
+      @font-face {
+        font-family: 'Oswald';
+        src: url('/fonts/Oswald-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      .btn {
+        border: 1px solid #0054A6;
+        border-radius: 7px;
+        padding: 0.2em 1em;
+        background-color: #FFFFFF;
+        font-family: "Oswald", sans-serif;
+        font-size: 1.167em;
+        font-weight: 400;
+        letter-spacing: .11em;
+        text-transform: uppercase !important;
+        color: #0054A6;
+        cursor: pointer;
+        transition: border 0.2s linear, color 0.2s linear;
+      }
+      
+      .btn:active {
+        color: #afafaf;
+        border-color: #afafaf;
+      }
+      .overlay-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        border: 1px solid #0054A6;
+        border-radius: 7px;
+        padding: 50px;
+        max-width: calc(100vw - 50px);
+        font-family: "Oswald", sans-serif;
+        font-size: 1.167em;
+        text-transform: uppercase;
+        color: #77807F;
+      }
+      
+      .tlt-404-error {
+        max-width: 520px;
+        display: flex;
+        align-items: center;
+        color: #0054A6;
+      }
+      
+      h1 {
+        width: 80%;
+        font-weight: 500;
+        font-size: 17em;
+        letter-spacing: -.03em;
+        text-align: left;
+        margin: 0;
+      }
+      
+      h2 {
+        width: 30%;
+        font-weight: 500;
+        font-size: 4.625em;
+        line-height: 109.7%;
+        letter-spacing: -.01em;
+        text-align: left;
+        margin: 0;
+        margin-top: 18px;
+      }
+      
+      h4 {
+        font-weight: 300;
+        font-size: 1.625em;
+        margin: 0;
+        margin-bottom: 10%;
+      }
+      @media screen and (max-width: 650px) {
+        h1 {
+          width: 65%;
+          font-size: 6em;
+          padding-right: 20px;
+        }
+        h2 {
+          width: 20%;
+          font-size: 1.625em;
+          margin-top: 10px;
+        }
+        h4 {
+          font-size: 1.325em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay-content">
+      <div class="tlt-404-error">
+        <h1>404</h1>
+        <h2>PAGE NOT FOUND</h2>
+      </div>
+      <h4>Click the button below.</h4>
+      <a href="/">
+        <button class="btn">Return to Overview</button>
+      </a>
+    </div>
+  </body>
+</html>

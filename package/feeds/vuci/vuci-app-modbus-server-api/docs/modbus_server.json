@@ -1,0 +1,380 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Modbus TCP Server"
+    }
+  ],
+  "paths": {
+    "/modbus/tcp_server/config/general": {
+      "get": {
+        "tags": [
+          "Modbus TCP Server"
+        ],
+        "summary": "Returns the specified Modbus TCP Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusServerGet"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Modbus TCP Server"
+        ],
+        "summary": "Updates the specified Modbus TCP Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/tcp_server/config": {
+      "get": {
+        "tags": [
+          "Modbus TCP Server"
+        ],
+        "summary": "Returns all Modbus TCP Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusServerMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Modbus TCP Server"
+        ],
+        "summary": "Updates specified Modbus TCP Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ModbusServer": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_server_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ModbusServerGet": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_server_get_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ModbusServerMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_server_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_server_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable Modbus TCP Server.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Port number.",
+            "format": "port",
+            "default": "1",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "device_id": {
+            "type": "string",
+            "description": "Modbus server ID that this device will respond to (1-255, set 0 to respond to any ID).",
+            "format": "irange(0, 255)",
+            "default": "1",
+            "x-web": {
+              "pretty": "Device ID",
+              "input-type": "input"
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Allow access through WAN.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Allow remote",
+              "input-type": "switch"
+            }
+          },
+          "keepconn": {
+            "type": "string",
+            "description": "Do not close the connection after each completed Modbus request.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Keep persistent connection",
+              "input-type": "switch"
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Timeout in seconds (1-60) after which the connection is forcefully closed (0 for default value provided by the OS).",
+            "format": "irange(0, 60)",
+            "default": "0",
+            "x-web": {
+              "pretty": "Connection timeout",
+              "input-type": "switch"
+            }
+          },
+          "clientregs": {
+            "type": "string",
+            "description": "Allow custom register block.",
+            "format": "is_bool, requires(regfile, regfilestart, regfilesize)",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable custom register block",
+              "input-type": "switch"
+            }
+          },
+          "regfile": {
+            "type": "string",
+            "default": "/tmp/regfile",
+            "description": "Path to file in which the custom register block will be stored. Files inside /tmp or /var are stored in RAM. They vanish after reboot, but do not degrade flash memory. Files elsewhere are stored in flash memory. They remain after reboot, but degrade flash memory (severely, if operations are frequent)",
+            "x-web": {
+              "pretty": "Register file path",
+              "input-type": "input",
+              "depends": [
+                {
+                  "clientregs": "1"
+                }
+              ]
+            }
+          },
+          "regfilestart": {
+            "type": "string",
+            "description": "First register in custom register block (1025-65536).",
+            "format": "irange(1025, 65536)",
+            "default": "1025",
+            "x-web": {
+              "pretty": "Register file number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "clientregs": "1"
+                }
+              ]
+            }
+          },
+          "regfilesize": {
+            "type": "string",
+            "description": "Register count in custom register block (1-64512).",
+            "default": "128",
+            "format": "irange(1, 64512)",
+            "x-web": {
+              "pretty": "Register count",
+              "input-type": "input",
+              "depends": [
+                {
+                  "clientregs": "1"
+                }
+              ]
+            }
+          },
+          "md_data_type": {
+            "type": "string",
+            "description": "Selects mobile data unit representation type (bytes/kilobytes/megabytes).",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "Mobile data type",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "Bytes",
+                "1": "Kilobytes",
+                "2": "Megabytes"
+              }
+            }
+          }
+        }
+      },
+      "modbus_server_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus TCP server Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_server_single_options"
+          }
+        ]
+      },
+      "modbus_server_get_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus Server Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/modbus_server_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

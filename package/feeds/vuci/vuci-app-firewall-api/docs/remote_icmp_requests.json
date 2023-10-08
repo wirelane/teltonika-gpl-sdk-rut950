@@ -1,0 +1,324 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/attack_prevention/remote_icmp_requests/config": {
+      "get": {
+        "summary": "GET All Firewall Remote ICMP Request Settings",
+        "description": "Returns all firewall remote ICMP requests settings with their options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RemIcmpReqMulti"
+          }
+        },
+        "tags": [
+          "Firewall Remote ICMP Request Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall Remote ICMP Request Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RemIcmpReqMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/remote_icmp_requests_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Remote ICMP Request Settings"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/attack_prevention/remote_icmp_requests/config/general": {
+      "get": {
+        "summary": "GET Firewall Remote ICMP Request Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RemIcmpReq"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firewall Remote ICMP Request Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall Remote ICMP Request Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RemIcmpReq"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/remote_icmp_requests_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Remote ICMP Request Settings"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RemIcmpReq": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/remote_icmp_requests_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200RemIcmpReqMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/remote_icmp_requests_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "remote_icmp_requests_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Allows remote ICMP echo",
+            "x-web": {
+              "pretty": "Enable ICMP requests",
+              "input-type": "switch"
+            }
+          },
+          "icmp_limit": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable ICMP limit",
+              "input-type": "switch"
+            }
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day"
+            ],
+            "x-web": {
+              "pretty": "Limit period",
+              "input-type": "select",
+              "enum-pretty": {
+                "second": "Second",
+                "minute": "Minute",
+                "hour": "Hour",
+                "day": "Day"
+              },
+              "depends": [
+                {
+                  "icmp_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit": {
+            "type": "string",
+            "description": "Maximum average matching rate",
+            "x-web": {
+              "pretty": "Limit",
+              "input-type": "input",
+              "depends": [
+                {
+                  "icmp_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit_burst": {
+            "type": "string",
+            "description": "Maximum initial number of packets to match",
+            "x-web": {
+              "pretty": "Limit burst",
+              "input-type": "input",
+              "depends": [
+                {
+                  "icmp_limit": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "remote_icmp_requests_options_single_put": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Allows remote ICMP echo",
+            "x-web": {
+              "pretty": "Enable ICMP requests",
+              "input-type": "switch"
+            }
+          },
+          "icmp_limit": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable ICMP limit",
+              "input-type": "switch"
+            }
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day"
+            ],
+            "x-web": {
+              "pretty": "Limit period",
+              "input-type": "select",
+              "enum-pretty": {
+                "second": "Second",
+                "minute": "Minute",
+                "hour": "Hour",
+                "day": "Day"
+              },
+              "depends": [
+                {
+                  "icmp_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit": {
+            "type": "string",
+            "description": "Maximum average matching rate",
+            "x-web": {
+              "pretty": "Limit",
+              "input-type": "input",
+              "depends": [
+                {
+                  "icmp_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit_burst": {
+            "type": "string",
+            "description": "Maximum initial number of packets to match",
+            "x-web": {
+              "pretty": "Limit burst",
+              "input-type": "input",
+              "depends": [
+                {
+                  "icmp_limit": "1"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

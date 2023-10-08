@@ -1,0 +1,492 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/hotspot/user_management/config/{id}": {
+      "get": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Returns the specified Hotspot registered user entry from database",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUserManagement"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot registered users database user ID identifier"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Deletes the specified Hotspot registered user entry from database",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_user_database_delete_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot registered users database user ID identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot registered users database user ID identifier"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "User management"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/user_management/config": {
+      "get": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Returns all Hotspot User Management registered users from database",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUserManagementMulti"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Deletes specified Hotspot User Management registered users from database",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/hotspot_user_database_multiple_delete_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "User management"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/user_management/actions/logout_user": {
+      "post": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Logouts user identified by his mac address",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_user_management_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "User management"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/user_management/status": {
+      "get": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Returns all Hotspot User Management active users",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUserManagementMultiGET"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "User management"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/user_management/status/{id}": {
+      "get": {
+        "tags": [
+          "Hotspot User Management"
+        ],
+        "summary": "Returns the specified Hotspot User Management active user",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotUserManagementGET"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot registered user ID."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "User management"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HotspotUserManagement": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/hotspot_user_database_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotUserManagementGET": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/hotspot_user_management_get_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotUserManagementMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "Array of section objects",
+                  "properties": {
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/hotspot_user_database_options"
+                      }
+                    },
+                    "sms_users": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/hotspot_user_database_options"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotUserManagementMultiGET": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/hotspot_user_management_get_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "hotspot_user_management_options": {
+        "type": "object",
+        "properties": {
+          "macaddress": {
+            "type": "string",
+            "description": "Mac address of user."
+          }
+        }
+      },
+      "hotspot_user_management_get_options": {
+        "type": "object",
+        "properties": {
+          "accounting": {
+            "type": "object",
+            "properties": {
+              "idleTime": {
+                "type": "string",
+                "description": "Idle time of client."
+              },
+              "sessionTime": {
+                "type": "string",
+                "description": "Session time of client."
+              },
+              "outputOctets": {
+                "type": "string",
+                "description": "Client instance output octets."
+              },
+              "inputOctets": {
+                "type": "string",
+                "description": "Client instance input octets."
+              }
+            }
+          },
+          "session": {
+            "type": "object",
+            "description": "Object of connected client session information",
+            "properties": {
+              "userName": {
+                "type": "string",
+                "description": "User name of client."
+              },
+              "sessionId": {
+                "type": "string",
+                "description": "Session ID of client."
+              },
+              "startTime": {
+                "type": "string",
+                "description": "Start time of client."
+              }
+            }
+          },
+          "macAddress": {
+            "type": "string",
+            "description": "Mac address of user."
+          },
+          "clientState": {
+            "type": "boolean",
+            "description": "Client state."
+          },
+          "ipAddress": {
+            "type": "string",
+            "description": "IP address of a user."
+          },
+          "url": {
+            "type": "string",
+            "description": "users url.",
+            "readOnly": true
+          }
+        }
+      },
+      "hotspot_user_database_options": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username of a user."
+          },
+          "expiration": {
+            "type": "string",
+            "description": "Expiration date of user account."
+          },
+          "created": {
+            "type": "string",
+            "description": "User registration date."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identification of user."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Mobile phone address of a user."
+          },
+          "mac": {
+            "type": "string",
+            "description": "Mac address of user."
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of user."
+          }
+        }
+      },
+      "hotspot_user_database_delete_options": {
+        "type": "object",
+        "properties": {
+          "user_type": {
+            "type": "string",
+            "description": "Type of a user. [ sms_user,user ]"
+          }
+        }
+      },
+      "hotspot_user_database_multiple_delete_options": {
+        "type": "object",
+        "properties": {
+          "user_type": {
+            "type": "string",
+            "description": "Type of a user. [ sms_user,user ]"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identification number of user."
+          }
+        }
+      }
+    }
+  }
+}

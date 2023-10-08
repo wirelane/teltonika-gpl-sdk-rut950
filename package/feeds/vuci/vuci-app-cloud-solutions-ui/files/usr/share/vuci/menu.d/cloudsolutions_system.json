@@ -1,0 +1,9 @@
+{
+	"system/rms": {
+		"title": "RMS",
+		"index": 42,
+		"view": "services/RMS",
+		"acls": [ "system/rms" ],
+		"files": [ "/etc/config/rms_mqtt" ]
+	}
+}

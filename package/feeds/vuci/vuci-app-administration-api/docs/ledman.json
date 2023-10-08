@@ -1,0 +1,218 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Administration LED",
+    "version": "1.0.0",
+    "description": "Administration LED API documentation"
+  },
+  "tags": [
+    {
+      "name": "Administration LED"
+    }
+  ],
+  "paths": {
+    "/administration/led/config/general": {
+      "put": {
+        "tags": [
+          "Administration LED"
+        ],
+        "summary": "Updates the specified Administration Led configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminLed"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/administration_ledman_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administration LED"
+        ],
+        "summary": "Returns the specified Administration led configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminLed"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    },
+    "/administration/led/config": {
+      "get": {
+        "tags": [
+          "Administration LED"
+        ],
+        "summary": "Returns all LED configuration configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminLedMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Administration LED"
+        ],
+        "summary": "Updates specified LED configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminLedMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/administration_ledman_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdminLed": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/administration_ledman_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminLedMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/administration_ledman_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "administration_ledman_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ],
+            "description": "Enable/disable LEDs"
+          }
+        }
+      },
+      "administration_ledman_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Administration LED Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/administration_ledman_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,6482 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vuci API",
+    "description": "API documentation for accessing various router services and their configurations",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "SIM switch"
+    },
+    {
+      "name": "SIM cards"
+    },
+    {
+      "name": "Operator Lists"
+    },
+    {
+      "name": "Modems"
+    }
+  ],
+  "paths": {
+    "/mobile/modems/config/{modem_id}/sim_switch": {
+      "x-web": {
+        "hidden": true,
+        "menu": [
+          "Network",
+          "Mobile",
+          "SIM Switch"
+        ],
+        "hw_tags": {
+          "dual_sim": true
+        }
+      },
+      "get": {
+        "tags": [
+          "Modem SIM Switch"
+        ],
+        "summary": "GET Modem SIM Switch",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/sim_switch_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          }
+        ],
+        "operationId": "mobile18"
+      },
+      "put": {
+        "tags": [
+          "Modem SIM Switch"
+        ],
+        "summary": "UPDATE Modem SIM Switch",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile19"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ]
+    },
+    "/mobile/modems/config/{modem_id}/sim_switch/{id}": {
+      "x-web": {
+        "hidden": true,
+        "menu": [
+          "Network",
+          "Mobile",
+          "SIM Switch"
+        ],
+        "hw_tags": {
+          "dual_sim": true
+        }
+      },
+      "get": {
+        "tags": [
+          "Modem SIM Switch"
+        ],
+        "summary": "GET Modem SIM Switch",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM switch section name"
+          }
+        ],
+        "operationId": "mobile20"
+      },
+      "put": {
+        "tags": [
+          "Modem SIM Switch"
+        ],
+        "summary": "UPDATE Modem SIM Switch",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM switch section name"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sim_switch_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile21"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "SIM switch section name"
+        }
+      ]
+    },
+    "/mobile/sim_switch/config": {
+      "get": {
+        "tags": [
+          "SIM switch"
+        ],
+        "summary": "GET All SIM switch",
+        "description": "",
+        "operationId": "mobile22",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SIM switch"
+        ],
+        "summary": "UPDATE All SIM switch",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/sim_switch_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile23"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "SIM Switch"
+        ],
+        "hw_tags": {
+          "dual_sim": true
+        }
+      }
+    },
+    "/mobile/sim_switch/config/{id}": {
+      "get": {
+        "tags": [
+          "SIM switch"
+        ],
+        "summary": "GET SIM switch",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM switch section name"
+          }
+        ],
+        "operationId": "mobile1"
+      },
+      "put": {
+        "tags": [
+          "SIM switch"
+        ],
+        "summary": "UPDATE SIM switch",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/sim_switch_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM switch section name"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sim_switch_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile2"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section  name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "SIM Switch"
+        ],
+        "hw_tags": {
+          "dual_sim": true
+        }
+      }
+    },
+    "/mobile/operator_lists/config": {
+      "get": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "GET All Operator Lists",
+        "description": "",
+        "operationId": "mobile3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "x-web": {
+                                  "pretty": "Configuration ID",
+                                  "input-type": "input"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/operator_lists_options_post"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "UPDATE All Operator Lists",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "x-web": {
+                                  "pretty": "Configuration ID",
+                                  "input-type": "input"
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/operator_lists_options_put"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "x-web": {
+                                "pretty": "Configuration ID",
+                                "input-type": "input"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/operator_lists_options_put"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile5"
+      },
+      "delete": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "DELETE All Operator Lists",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "List of section names",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile6"
+      },
+      "post": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "CREATE All Operator Lists",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/operator_lists_options_post"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/operator_lists_options_post"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile4"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/operator_lists/config/{id}": {
+      "get": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "GET Operator Lists",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/operator_lists_options_post"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ],
+        "operationId": "mobile7"
+      },
+      "put": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "UPDATE Operator Lists",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/operator_lists_options_put"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ],
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/operator_lists_options_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile8"
+      },
+      "delete": {
+        "tags": [
+          "Operator Lists"
+        ],
+        "summary": "DELETE Operator Lists",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Operator lists section name"
+          }
+        ],
+        "operationId": "mobile9"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/config/{modem_id}/simcards": {
+      "x-web": {
+        "hidden": true,
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      },
+      "get": {
+        "tags": [
+          "Modem SIM Cards"
+        ],
+        "summary": "GET Modem SIM Cards",
+        "description": "",
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          }
+        ],
+        "operationId": "mobile10",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/simcard_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Modem SIM Cards"
+        ],
+        "summary": "UPDATE Modem SIM Cards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/simcard_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile11"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ]
+    },
+    "/mobile/modems/config/{modem_id}/simcards/{id}": {
+      "x-web": {
+        "hidden": true,
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      },
+      "get": {
+        "tags": [
+          "Modem SIM Cards"
+        ],
+        "summary": "GET Modem SIM Cards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM card configuration id"
+          }
+        ],
+        "operationId": "mobile12"
+      },
+      "put": {
+        "tags": [
+          "Modem SIM Cards"
+        ],
+        "summary": "UPDATE Modem SIM Cards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM card configuration id"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/simcard_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile13"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card configuration id"
+        }
+      ]
+    },
+    "/mobile/simcards/config": {
+      "get": {
+        "tags": [
+          "SIM Cards"
+        ],
+        "summary": "GET All SIM Cards",
+        "description": "",
+        "operationId": "mobile14",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/simcard_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SIM Cards"
+        ],
+        "summary": "UPDATE All SIM Cards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/simcard_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile15"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/simcards/config/{id}": {
+      "get": {
+        "tags": [
+          "SIM Cards"
+        ],
+        "summary": "GET SIM Cards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM card configuration id"
+          }
+        ],
+        "operationId": "mobile16"
+      },
+      "put": {
+        "tags": [
+          "SIM Cards"
+        ],
+        "summary": "UPDATE SIM Cards",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SIM card configuration id"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/simcard_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile17"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/simcards/status": {
+      "get": {
+        "summary": "GET SIM Cards Status",
+        "tags": [
+          "Modem SIM Cards"
+        ],
+        "operationId": "get-network-mobile-simcards-status",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/simcards_status"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/simcards/actions/send_ussd": {
+      "post": {
+        "summary": "SEND USSD",
+        "tags": [
+          "USSD"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string",
+                          "description": "USSD response"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-network-mobile-simcards-actions-send_ussd",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "simcard_section": {
+                        "type": "string",
+                        "description": "SIM card configuration id"
+                      },
+                      "ussd": {
+                        "type": "string",
+                        "description": "USSD code"
+                      }
+                    },
+                    "required": [
+                      "simcard_section",
+                      "ussd"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/simcards/actions/clear_sms_limit": {
+      "post": {
+        "summary": "SEND SMS Limit Clear",
+        "tags": [
+          "SMS Limit Clear"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-network-mobile-simcards-actions-send_ussd-id",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "simcard_section": {
+                        "type": "string",
+                        "description": "SIM card configuration id"
+                      }
+                    },
+                    "required": [
+                      "simcard_section"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/actions/scan_network": {
+      "post": {
+        "summary": "SEND Modem Network Scan",
+        "operationId": "post-network-mobile-modems-actions-scan_network",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "net_access_type",
+                          "status_code",
+                          "status",
+                          "op_name",
+                          "short_name",
+                          "num_name"
+                        ],
+                        "properties": {
+                          "net_access_type": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "status_code": {
+                            "type": "number"
+                          },
+                          "status": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "op_name": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "short_name": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "num_name": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "net_access_type": "3G/4G",
+                          "status_code": 1,
+                          "status": "Available",
+                          "op_name": "Tele2 LT",
+                          "short_name": "Tele2 LT",
+                          "num_name": "24603"
+                        },
+                        {
+                          "net_access_type": "3G/4G",
+                          "status_code": 3,
+                          "status": "Forbidden",
+                          "op_name": "OMNITEL LT",
+                          "short_name": "OMT",
+                          "num_name": "24601"
+                        },
+                        {
+                          "net_access_type": "3G/4G",
+                          "status_code": 3,
+                          "status": "Forbidden",
+                          "op_name": "LT BITE GSM",
+                          "short_name": "BITE",
+                          "num_name": "24602"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem_id": {
+                        "type": "string",
+                        "description": "Modem ID of the specified modem.",
+                        "x-web": {
+                          "unique": true,
+                          "pretty": "Modem",
+                          "input-type": "select",
+                          "enum-depends": {
+                            "$ref": "#/x-schemas/modem_select"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "modem_id"
+                    ]
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "data": {
+                      "modem_id": "3-1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Modem Network Scan"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/actions/reboot": {
+      "post": {
+        "summary": "SEND Modem Reboot",
+        "operationId": "post-network-mobile-modems-actions-reboot",
+        "description": "",
+        "tags": [
+          "Modem Reboot"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem_id": {
+                        "type": "string",
+                        "description": "Modem ID",
+                        "x-web": {
+                          "unique": true,
+                          "pretty": "Modem",
+                          "input-type": "select",
+                          "enum-depends": {
+                            "$ref": "#/x-schemas/modem_select"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "modem_id"
+                    ]
+                  }
+                }
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/actions/exec_at": {
+      "post": {
+        "summary": "Execute modem AT command",
+        "operationId": "post-network-mobile-modems-actions-exec-at",
+        "description": "",
+        "tags": [
+          "Execute Modem AT"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem_id": {
+                        "type": "string",
+                        "description": "Modem ID",
+                        "x-web": {
+                          "unique": true,
+                          "pretty": "Modem",
+                          "input-type": "select",
+                          "enum-depends": {
+                            "$ref": "#/x-schemas/modem_select"
+                          }
+                        }
+                      },
+                      "command": {
+                        "type": "string",
+                        "description": "AT command to execute",
+                        "x-web": {
+                          "pretty": "AT Command",
+                          "input-type": "input"
+                        }
+                      }
+                    },
+                    "required": [
+                      "modem_id",
+                      "command"
+                    ]
+                  }
+                }
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/exec_at_post"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/actions/sim_unblock": {
+      "post": {
+        "summary": "Unblock SIM with PUK and set new PIN",
+        "operationId": "post-network-mobile-modems-actions-sim-unblock",
+        "description": "",
+        "tags": [
+          "Modems"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sim_unblock"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sim_unblock"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/actions/restart_connection": {
+      "post": {
+        "summary": "Restarts the connection of the selected modem",
+        "operationId": "post-network-mobile-rr-actions-reboot",
+        "description": "",
+        "tags": [
+          "Modems"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem_id": {
+                        "type": "string",
+                        "description": "Modem ID",
+                        "x-web": {
+                          "unique": true,
+                          "pretty": "Modem",
+                          "input-type": "select",
+                          "enum-depends": {
+                            "$ref": "#/x-schemas/modem_select"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "modem_id"
+                    ]
+                  }
+                }
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      },
+      "parameters": []
+    },
+    "/mobile/modems/apns": {
+      "get": {
+        "summary": "Returns APN values for all modems",
+        "tags": [
+          "Modems"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/modem_apns_multiple"
+          }
+        },
+        "operationId": "get-network-mobile-modems-apns"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/apns/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem id"
+        }
+      ],
+      "get": {
+        "summary": "Returns APN values for specified modem",
+        "tags": [
+          "Modems"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/modem_apns_single"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-network-mobile-modems-apns-id"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sim_switch_options_name_index": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Section name.",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "modem": {
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "unique": true,
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            },
+            "type": "string",
+            "description": "Modem which the SIM switch configuration belongs to.",
+            "readOnly": true
+          },
+          "position": {
+            "type": "string",
+            "description": "SIM card position inside the modem.",
+            "x-web": {
+              "pretty": "SIM Position",
+              "unique": true,
+              "virtual": true,
+              "enum-pretty": {
+                "$ref": "#/x-schemas/simcard_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/simcard_select"
+              }
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Automatically switch between default and non-default SIM cards based on the various rules and criterias defined below",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable automatic switching",
+              "input-type": "switch"
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Check interval in seconds",
+            "x-web": {
+              "pretty": "Check interval",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "retry_count": {
+            "type": "string",
+            "description": "Attempts before SIM switch. Fail count before switching to other SIM",
+            "x-web": {
+              "pretty": "Attempts before SIM switch",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "on_signal": {
+            "type": "string",
+            "description": "On weak signal. Perform a SIM card switch when a signal's strength drops below a certain threshold",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On weak signal",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "weak_signal": {
+            "type": "string",
+            "description": "Signal strength (dBm). Lowest signal's strength value in dBm below which a SIM card switch should occur",
+            "x-web": {
+              "pretty": "Signal strength (dBm)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "on_signal": "1"
+                }
+              ]
+            }
+          },
+          "data_limit": {
+            "type": "string",
+            "description": "On data limit. Perform a SIM card switch when mobile data limit for your current SIM card is exceeded",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On data limit",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "sms_limit": {
+            "type": "string",
+            "description": "On SMS limit. Perform a SIM card switch when sent SMS limit for your current SIM card is exceeded",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On SMS limit",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "roaming": {
+            "type": "string",
+            "description": "On roaming. Perform a SIM card switch when roaming is detected",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On roaming",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "no_network": {
+            "type": "string",
+            "description": "No network. Perform a SIM card switch when network isn't detected",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "No network",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "denied": {
+            "type": "string",
+            "description": "On network denied. Perform a SIM card switch when network is denied",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On network denied",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "fail_flag": {
+            "type": "string",
+            "description": "On data connection fail. Perform a SIM card switch when data connection fails",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On data connection fail",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "data_fail": {
+            "type": "string",
+            "description": "Method. '1",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "Method",
+              "enum-pretty": {
+                "1": "LCP echo",
+                "2": "ICMP echo"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "fail_flag": "1"
+                }
+              ]
+            }
+          },
+          "data_fail_host": {
+            "type": "string",
+            "description": "Health monitor ICMP host. A remote host to ping (send an ICMP (Internet Control Message Protocol) packet to) and determine when connection goes down",
+            "x-web": {
+              "pretty": "Health monitor ICMP host",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "data_fail": "2"
+                }
+              ]
+            }
+          },
+          "data_fail_timeout": {
+            "type": "string",
+            "description": "Health monitor ICMP timeout. A timeout value for ICMP (Internet Control Message Protocol) packet",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "10"
+            ],
+            "x-web": {
+              "pretty": "Health monitor ICMP timeout",
+              "enum-pretty": {
+                "1": "1 sec.",
+                "2": "2 sec.",
+                "3": "3 sec.",
+                "4": "4 sec.",
+                "5": "5 sec.",
+                "10": "10 sec."
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "data_fail": "2"
+                }
+              ]
+            }
+          },
+          "enable_back": {
+            "type": "string",
+            "description": "Switch back to default SIM card after timeout. Switch back to default SIM card after timeout has been reached",
+            "x-web": {
+              "pretty": "Switch back to default SIM card after timeout",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "switch_back": {
+            "type": "string",
+            "description": "An initial timeout value in minutes after which a SIM card's switch-back to default SIM card should occur",
+            "x-web": {
+              "pretty": "Initial timeout (min)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "enable_back": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "interval",
+          "retry_count",
+          "weak_signal",
+          "data_fail",
+          "data_fail_host",
+          "data_fail_timeout"
+        ]
+      },
+      "sim_switch_options_index": {
+        "type": "object",
+        "properties": {
+          "modem": {
+            "x-web": {
+              "pretty": "Modem",
+              "unique": true,
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            },
+            "type": "string",
+            "description": "Modem which the SIM switch configuration belongs to.",
+            "readOnly": true
+          },
+          "position": {
+            "type": "string",
+            "description": "SIM card section position inside the modem.",
+            "x-web": {
+              "pretty": "SIM Position",
+              "unique": true,
+              "virtual": true,
+              "enum-pretty": {
+                "$ref": "#/x-schemas/simcard_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/simcard_select"
+              }
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Automatically switch between default and non-default SIM cards based on the various rules and criterias defined below",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable automatic switching",
+              "input-type": "switch"
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Check interval in seconds",
+            "x-web": {
+              "pretty": "Check interval",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "retry_count": {
+            "type": "string",
+            "description": "Attempts before SIM switch. Fail count before switching to other SIM",
+            "x-web": {
+              "pretty": "Attempts before SIM switch",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "on_signal": {
+            "type": "string",
+            "description": "On weak signal. Perform a SIM card switch when a signal's strength drops below a certain threshold",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On weak signal",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "weak_signal": {
+            "type": "string",
+            "description": "Signal strength (dBm). Lowest signal's strength value in dBm below which a SIM card switch should occur",
+            "x-web": {
+              "pretty": "Signal strength (dBm)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "on_signal": "1"
+                }
+              ]
+            }
+          },
+          "data_limit": {
+            "type": "string",
+            "description": "On data limit. Perform a SIM card switch when mobile data limit for your current SIM card is exceeded",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On data limit",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "sms_limit": {
+            "type": "string",
+            "description": "On SMS limit. Perform a SIM card switch when sent SMS limit for your current SIM card is exceeded",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On SMS limit",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "roaming": {
+            "type": "string",
+            "description": "On roaming. Perform a SIM card switch when roaming is detected",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On roaming",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "no_network": {
+            "type": "string",
+            "description": "No network. Perform a SIM card switch when network isn't detected",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "No network",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "denied": {
+            "type": "string",
+            "description": "On network denied. Perform a SIM card switch when network is denied",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On network denied",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "fail_flag": {
+            "type": "string",
+            "description": "On data connection fail. Perform a SIM card switch when data connection fails",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "On data connection fail",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "data_fail": {
+            "type": "string",
+            "description": "Method",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "Method",
+              "enum-pretty": {
+                "1": "LCP echo",
+                "2": "ICMP echo"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "fail_flag": "1"
+                }
+              ]
+            }
+          },
+          "data_fail_host": {
+            "type": "string",
+            "description": "Health monitor ICMP host. A remote host to ping (send an ICMP (Internet Control Message Protocol) packet to) and determine when connection goes down",
+            "x-web": {
+              "pretty": "Health monitor ICMP host",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "data_fail": "2"
+                }
+              ]
+            }
+          },
+          "data_fail_timeout": {
+            "type": "string",
+            "description": "Health monitor ICMP timeout. A timeout value for ICMP (Internet Control Message Protocol) packet",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "10"
+            ],
+            "x-web": {
+              "pretty": "Health monitor ICMP timeout",
+              "enum-pretty": {
+                "1": "1 sec.",
+                "2": "2 sec.",
+                "3": "3 sec.",
+                "4": "4 sec.",
+                "5": "5 sec.",
+                "10": "10 sec."
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "data_fail": "2"
+                }
+              ]
+            }
+          },
+          "enable_back": {
+            "type": "string",
+            "description": "Switch back to default SIM card after timeout. Switch back to default SIM card after timeout has been reached",
+            "x-web": {
+              "pretty": "Switch back to default SIM card after timeout",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "switch_back": {
+            "type": "string",
+            "description": "An initial timeout value in minutes after which a SIM card's switch-back to default SIM card should occur",
+            "x-web": {
+              "pretty": "Initial timeout (min)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "enable_back": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "interval",
+          "retry_count",
+          "weak_signal",
+          "data_fail",
+          "data_fail_host",
+          "data_fail_timeout"
+        ]
+      },
+      "operator_lists_options_put": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "List name. Only used for easier management",
+            "readOnly": true,
+            "x-web": {
+              "unique": true,
+              "pretty": "Name",
+              "input-type": "input"
+            }
+          },
+          "mcc_mnc": {
+            "type": "array",
+            "description": "Operator's code used to identify a network operator. Allowed characters: (0-9)",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Operator code",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "operator_lists_options_post": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "List name. Only used for easier management",
+            "x-web": {
+              "unique": true,
+              "pretty": "Name",
+              "input-type": "input"
+            }
+          },
+          "mcc_mnc": {
+            "type": "array",
+            "description": "Operator's code used to identify a network operator. Allowed characters: (0-9)",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Operator code",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "simcard_options_name_index": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Section name.",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "modem": {
+            "x-web": {
+              "pretty": "Modem",
+              "unique": true,
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            },
+            "type": "string",
+            "description": "Modem which the SIM card section belongs to.",
+            "readOnly": true
+          },
+          "position": {
+            "type": "string",
+            "description": "SIM card section position inside the modem.",
+            "x-web": {
+              "pretty": "SIM Position",
+              "unique": true,
+              "virtual": true,
+              "enum-pretty": {
+                "$ref": "#/x-schemas/simcard_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/simcard_select"
+              }
+            }
+          },
+          "primary": {
+            "type": "string",
+            "description": "Default SIM. Enables the specified SIM card as a default",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Default SIM",
+              "input-type": "switch"
+            }
+          },
+          "deny_roaming": {
+            "type": "string",
+            "description": "Deny data roaming. Deny data connection on roaming",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Deny data roaming",
+              "input-type": "switch"
+            }
+          },
+          "volte": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "on",
+              "off"
+            ],
+            "description": "VoLTE (Voice over LTE) is a digital packet technology that uses 4G LTE networks to route voice traffic and transmit data. (Only available for devices with 4G modems)",
+            "x-web": {
+              "pretty": "VoLTE",
+              "input-type": "select",
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUTL",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-AU",
+                "EC25-A",
+                "EC25-V",
+                "EC25-J",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "EC21-AUV",
+                "EC21-AUX",
+                "EC21-AUT",
+                "EC21-AU",
+                "EC21-A",
+                "EC21-V",
+                "EC21-J",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "EG25-G",
+                "BG96",
+                "RG500Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EU",
+                "RG501Q-EA",
+                "SLM750-VE",
+                "SLM750-VJ",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA"
+              ]
+            }
+          },
+          "service": {
+            "type": "string",
+            "description": "Service mode. If your local mobile network supports 2G/3G/4G/5G you can specify to which network you prefer to connect to",
+            "enum": [
+              "2g",
+              "3g_pref",
+              "3g",
+              "lte_pref",
+              "lte",
+              "nr5g_pref"
+            ],
+            "x-web": {
+              "pretty": "Service mode",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC25-E",
+                    "EC25-EU",
+                    "EC25-EUX",
+                    "EC25-AUX",
+                    "EC25-AU",
+                    "EC200A-EU",
+                    "EC200A-AU",
+                    "EC200A-CN",
+                    "EC21-EC",
+                    "EC21-EU",
+                    "EC21-E",
+                    "EC21-AUX",
+                    "EC21-AU",
+                    "EG25-G",
+                    "SLM750-VE",
+                    "SLM750-VSA",
+                    "SLM750-VAU",
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "2g",
+                    "3g_pref",
+                    "3g",
+                    "lte_pref",
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUTL",
+                    "EC25-V",
+                    "EC21-V",
+                    "EC21-J"
+                  ],
+                  "values": [
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUT",
+                    "EC25-AFX",
+                    "EC25-AFF",
+                    "EC25-AF",
+                    "EC25-A",
+                    "EC25-J",
+                    "EC21-AUV",
+                    "EC21-AUT",
+                    "EC21-A",
+                    "EG06-E",
+                    "EG06-A",
+                    "EG12-EA",
+                    "SLM750-VJ"
+                  ],
+                  "values": [
+                    "3g",
+                    "lte_pref",
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "BG96"
+                  ],
+                  "values": [
+                    "2g",
+                    "lte_pref",
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EU",
+                    "RG500Q-EA",
+                    "RG501Q-EU",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "3g",
+                    "lte_pref",
+                    "lte",
+                    "nr5g_perf"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-A"
+                  ],
+                  "values": [
+                    "3g"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-E",
+                    "UC20-G"
+                  ],
+                  "values": [
+                    "2g",
+                    "3g_pref",
+                    "3g"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUX",
+                "EC25-AU",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "EC21-AUX",
+                "EC21-AU",
+                "EG25-G",
+                "SLM750-VE",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA",
+                "EC25-AUTL",
+                "EC25-V",
+                "EC21-V",
+                "EC21-J",
+                "EC25-AUT",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-A",
+                "EC25-J",
+                "EC21-AUV",
+                "EC21-AUT",
+                "EC21-A",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "SLM750-VJ",
+                "BG96",
+                "RG500Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EU",
+                "RG501Q-EA",
+                "UC20-A",
+                "UC20-E",
+                "UC20-G"
+              ]
+            }
+          },
+          "category_lte": {
+            "type": "string",
+            "description": "Network Category. In LTE (4G) only you can specify network category: LTE Cat M1, LTE Cat NB1 or LTE Cat M1 + LTE Cat NB1",
+            "enum": [
+              "m1",
+              "nb",
+              "m1_nb"
+            ],
+            "x-web": {
+              "pretty": "Network category",
+              "enum-pretty": {
+                "m1": "M1 only",
+                "nb": "NB only",
+                "m1_nb": "M1+NB auto"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "service": "lte"
+                },
+                {
+                  "service": "lte_pref"
+                }
+              ],
+              "modems": [
+                "BG96",
+                "BG95-M3",
+                "BG95-M4"
+              ]
+            }
+          },
+          "pincode": {
+            "type": "string",
+            "description": "SIM card's PIN (Personal Identification Number) is a secret numeric password shared between a user and a system that can be used to authenticate the user.",
+            "x-web": {
+              "pretty": "PIN",
+              "input-type": "input"
+            }
+          },
+          "pukcode": {
+            "type": "string",
+            "description": "SIM card's PUK (Personal Unblocking Key) is a code consisting of 8 digits that can be used to unblock your SIM card when you entered 3 times a wrong PIN code.",
+            "x-web": {
+              "pretty": "PUK"
+            }
+          },
+          "band": {
+            "type": "string",
+            "description": "Band selection. Network band selection",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "x-web": {
+              "pretty": "Band selection",
+              "input-type": "select"
+            }
+          },
+          "gsm": {
+            "type": "array",
+            "description": "GSM bands. Manual 2G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "gsm_850",
+                "gsm_900",
+                "gsm_1800",
+                "gsm_1900"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "GSM bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "2g"
+                },
+                {
+                  "band": "manual",
+                  "service": "2g_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "3g_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC25-E",
+                    "EC25-EU",
+                    "EC25-EUX",
+                    "EC200A-EU",
+                    "EC200A-CN",
+                    "EC21-EC",
+                    "EC21-EU",
+                    "EC21-E",
+                    "SLM750-VE"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1800",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUX",
+                    "EC25-AU",
+                    "EC200A-AU",
+                    "EC21-AUX",
+                    "EC21-AU",
+                    "EG25-G",
+                    "BG96",
+                    "UC20-E",
+                    "UC20-G"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1800",
+                    "gsm_1900",
+                    "gsm_850",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VSA"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1900",
+                    "gsm_850",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VAU"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1800",
+                    "gsm_850",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1900",
+                    "gsm_850"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC200A-EU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "SLM750-VE",
+                "EC25-AUX",
+                "EC25-AU",
+                "EC200A-AU",
+                "EC21-AUX",
+                "EC21-AU",
+                "EG25-G",
+                "BG96",
+                "UC20-E",
+                "UC20-G",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA"
+              ]
+            }
+          },
+          "umts": {
+            "type": "array",
+            "description": "UMTS bands. Manual 3G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "wcdma_800",
+                "wcdma_850",
+                "wcdma_900",
+                "wcdma_1700",
+                "wcdma_1800",
+                "wcdma_1900",
+                "wcdma_2100"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "UMTS bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "3g"
+                },
+                {
+                  "band": "manual",
+                  "service": "3g_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC25-EU",
+                    "EC25-EUX",
+                    "EC21-EC",
+                    "EC21-EU",
+                    "EC21-AUT",
+                    "UC20-E"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-E",
+                    "EC200A-EU",
+                    "EC200A-CN",
+                    "EC21-E",
+                    "EC21-AUV",
+                    "RG500Q-EU",
+                    "RG501Q-EU",
+                    "SLM750-VE",
+                    "SLM750-VAU"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUT"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUX",
+                    "EC200A-AU",
+                    "EC21-AUX"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AFX",
+                    "EC25-AFF",
+                    "EC25-AF",
+                    "EC25-A",
+                    "EG06-A",
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AU",
+                    "EC21-AU"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-J"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_800",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-A"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG06-E",
+                    "EG12-EA",
+                    "RG500Q-EA",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1800",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG25-G"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_800",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-A"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-G"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_800",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VSA"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-AUT",
+                "UC20-E",
+                "EC25-E",
+                "EC200A-EU",
+                "EC200A-CN",
+                "EC21-E",
+                "EC21-AUV",
+                "RG500Q-EU",
+                "RG501Q-EU",
+                "SLM750-VE",
+                "SLM750-VAU",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC200A-AU",
+                "EC21-AUX",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-A",
+                "EG06-A",
+                "SLM750-VA",
+                "EC25-AU",
+                "EC21-AU",
+                "EC25-J",
+                "EC21-A",
+                "EG06-E",
+                "EG12-EA",
+                "RG500Q-EA",
+                "RG501Q-EA",
+                "EG25-G",
+                "UC20-A",
+                "UC20-G",
+                "SLM750-VSA"
+              ]
+            }
+          },
+          "lte": {
+            "type": "array",
+            "description": "LTE bands. Manual 4G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "lte_b1",
+                "lte_b2",
+                "lte_b3",
+                "lte_b4",
+                "lte_b5",
+                "lte_b7",
+                "lte_b8",
+                "lte_b12",
+                "lte_b13",
+                "lte_b14",
+                "lte_b17",
+                "lte_b18",
+                "lte_b19",
+                "lte_b20",
+                "lte_b25",
+                "lte_b26",
+                "lte_b28",
+                "lte_b29",
+                "lte_b30",
+                "lte_b32",
+                "lte_b34",
+                "lte_b38",
+                "lte_b39",
+                "lte_b40",
+                "lte_b41",
+                "lte_b42",
+                "lte_b43",
+                "lte_b48",
+                "lte_b66",
+                "lte_b71"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "LTE bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "lte"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC21-EC",
+                    "EC21-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-E"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-EU",
+                    "EC25-EUX"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUTL"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUT"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUX",
+                    "EC25-AU",
+                    "EC21-AUX",
+                    "EC21-AU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b2",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AFX",
+                    "EC25-AFF",
+                    "EC25-AF"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b14",
+                    "lte_b2",
+                    "lte_b4",
+                    "lte_b5",
+                    "lte_b66",
+                    "lte_b71"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-A",
+                    "EC21-A"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b2",
+                    "lte_b4"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-V",
+                    "EC21-V"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b13",
+                    "lte_b4"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-J"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b26",
+                    "lte_b3",
+                    "lte_b41",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC200A-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC200A-AU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b2",
+                    "lte_b3",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b66",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC200A-CN"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b3",
+                    "lte_b34",
+                    "lte_b38",
+                    "lte_b39",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-E"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-AUV"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-AUT"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-J"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b26",
+                    "lte_b3",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG06-E"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b32",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG06-A"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b2",
+                    "lte_b25",
+                    "lte_b26",
+                    "lte_b29",
+                    "lte_b30",
+                    "lte_b4",
+                    "lte_b5",
+                    "lte_b66",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG12-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG25-G"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b2",
+                    "lte_b20",
+                    "lte_b25",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b39",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "BG96"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b2",
+                    "lte_b20",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b39",
+                    "lte_b4",
+                    "lte_b5",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EU",
+                    "RG501Q-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b32",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b42",
+                    "lte_b43",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EA",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b20",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b32",
+                    "lte_b34",
+                    "lte_b38",
+                    "lte_b39",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b42",
+                    "lte_b43",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VE"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b3",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VJ"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b39",
+                    "lte_b41",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VSA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b2",
+                    "lte_b28",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VAU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b17",
+                    "lte_b2",
+                    "lte_b25",
+                    "lte_b26",
+                    "lte_b4",
+                    "lte_b41",
+                    "lte_b5"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC21-EC",
+                "EC21-EU",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUTL",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC25-AU",
+                "EC21-AUX",
+                "EC21-AU",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-A",
+                "EC21-A",
+                "EC25-V",
+                "EC21-V",
+                "EC25-J",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-E",
+                "EC21-AUV",
+                "EC21-AUT",
+                "EC21-J",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "EG25-G",
+                "BG96",
+                "RG500Q-EU",
+                "RG501Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EA",
+                "SLM750-VE",
+                "SLM750-VJ",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA"
+              ]
+            }
+          },
+          "lte_nb": {
+            "type": "array",
+            "description": "LTE narrow bands. Manual 4G NB selection",
+            "items": {
+              "enum": [
+                "all",
+                "lte_nb1",
+                "lte_nb2",
+                "lte_nb3",
+                "lte_nb4",
+                "lte_nb5",
+                "lte_nb8",
+                "lte_nb12",
+                "lte_nb13",
+                "lte_nb18",
+                "lte_nb19",
+                "lte_nb20",
+                "lte_nb26",
+                "lte_nb28"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "LTE narrow bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "lte"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "modems": [
+                "BG96",
+                "BG95-M3",
+                "BG95-M4"
+              ]
+            }
+          },
+          "nr5g": {
+            "type": "array",
+            "description": "Manual 5G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "7",
+                "8",
+                "12",
+                "20",
+                "25",
+                "28",
+                "38",
+                "40",
+                "41",
+                "48",
+                "66",
+                "71",
+                "77",
+                "78",
+                "79",
+                "257",
+                "258",
+                "260",
+                "261"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "5G bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "RG500Q-EU",
+                    "RG501Q-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "1",
+                    "3",
+                    "5",
+                    "7",
+                    "8",
+                    "20",
+                    "28",
+                    "38",
+                    "40",
+                    "41",
+                    "77",
+                    "78"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EA",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "1",
+                    "3",
+                    "5",
+                    "7",
+                    "8",
+                    "20",
+                    "28",
+                    "38",
+                    "40",
+                    "41",
+                    "77",
+                    "78",
+                    "79"
+                  ]
+                }
+              ],
+              "modems": [
+                "RG500Q-EU",
+                "RG501Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EA"
+              ]
+            }
+          },
+          "signal_reset_enabled": {
+            "type": "string",
+            "description": "Enables modem operator connection resetting based on signal threshold",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable low signal reconnect",
+              "input-type": "switch"
+            }
+          },
+          "signal_reset_threshold": {
+            "type": "string",
+            "description": "Signal threshold in dB for the connection. When signal is under this value modem resets connection",
+            "x-web": {
+              "pretty": "Reset threshold",
+              "input-type": "input",
+              "depends": [
+                {
+                  "signal_reset_enabled": "1"
+                }
+              ]
+            }
+          },
+          "signal_reset_timeout": {
+            "type": "string",
+            "description": "Wait this long in seconds before trying to reset the connection again",
+            "x-web": {
+              "pretty": "Reset timeout",
+              "input-type": "input",
+              "depends": [
+                {
+                  "signal_reset_enabled": "1"
+                }
+              ]
+            }
+          },
+          "operlist": {
+            "type": "string",
+            "description": "Enable operator list",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable operator list",
+              "input-type": "switch"
+            }
+          },
+          "opermode": {
+            "type": "string",
+            "description": "Mode. blacklist or whitelist",
+            "enum": [
+              "whitelist",
+              "blacklist"
+            ],
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "depends": [
+                {
+                  "operlist": "1"
+                }
+              ]
+            }
+          },
+          "operlist_name": {
+            "type": "string",
+            "description": "Operator list. Operator's code list name. You can get/add them in /mobile/operator_lists",
+            "x-web": {
+              "pretty": "Operator list",
+              "input-type": "input",
+              "depends": [
+                {
+                  "operlist": "1"
+                }
+              ]
+            }
+          },
+          "enable_sms_limit": {
+            "type": "string",
+            "description": "Enable SMS limit",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable SMS limit",
+              "input-type": "switch"
+            }
+          },
+          "sms_limit_num": {
+            "description": "SMS limit count. Disable SMS sending after limit value is reached",
+            "type": "string",
+            "x-web": {
+              "pretty": "SMS limit count",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_sms_limit": "1"
+                }
+              ]
+            }
+          },
+          "sms_limit": {
+            "type": "string",
+            "description": "Period for which SMS limiting should apply (day, week or month)",
+            "enum": [
+              "day",
+              "week",
+              "month"
+            ],
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "select",
+              "depends": [
+                {
+                  "enable_sms_limit": "1"
+                }
+              ],
+              "enum-pretty": {
+                "day": "Day (hours)",
+                "week": "Week (days)",
+                "month": "Month (days)"
+              }
+            }
+          },
+          "period": {
+            "type": "string",
+            "description": "Start day/weekday/hour. A starting day/weekday/hour for mobile data limiting period",
+            "x-web": {
+              "pretty": "Start limiting",
+              "input-type": "input",
+              "depends": [
+                {
+                  "sms_limit": "day",
+                  "enable_sms_limit": "1"
+                },
+                {
+                  "sms_limit": "month",
+                  "enable_sms_limit": "1"
+                },
+                {
+                  "sms_limit": "week",
+                  "enable_sms_limit": "1"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "depends": {
+                    "sms_limit": "day"
+                  },
+                  "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23"
+                  ]
+                },
+                {
+                  "depends": {
+                    "sms_limit": "week"
+                  },
+                  "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                },
+                {
+                  "depends": {
+                    "sms_limit": "month"
+                  },
+                  "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                    "25",
+                    "26",
+                    "27",
+                    "28",
+                    "29",
+                    "30",
+                    "31"
+                  ]
+                }
+              ]
+            }
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operator selection. 'auto', 'manual' or 'manual-auto",
+            "enum": [
+              "auto",
+              "manual",
+              "manual-auto"
+            ],
+            "x-web": {
+              "pretty": "Operator selection",
+              "input-type": "select",
+              "enum-pretty": {
+                "auto": "Auto",
+                "manual": "Manual",
+                "manual-auto": "Manual-Auto"
+              }
+            }
+          },
+          "opernum": {
+            "type": "string",
+            "description": "Operator number",
+            "x-web": {
+              "pretty": "Operator number",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "signal_reset_threshold",
+          "signal_reset_timeout",
+          "opermode",
+          "operlist_name",
+          "sms_limit_num",
+          "sms_limit",
+          "period"
+        ]
+      },
+      "simcard_options_index": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "modem": {
+            "x-web": {
+              "pretty": "Modem",
+              "unique": true,
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            },
+            "type": "string",
+            "description": "Modem which the SIM card section belongs to.",
+            "readOnly": true
+          },
+          "position": {
+            "type": "string",
+            "description": "SIM card position inside the modem.",
+            "x-web": {
+              "pretty": "SIM Position",
+              "unique": true,
+              "virtual": true,
+              "enum-pretty": {
+                "$ref": "#/x-schemas/simcard_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/simcard_select"
+              }
+            }
+          },
+          "primary": {
+            "type": "string",
+            "description": "Default SIM. Enables the specified SIM card as a default",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Default SIM",
+              "input-type": "switch"
+            }
+          },
+          "deny_roaming": {
+            "type": "string",
+            "description": "Deny data roaming. Deny data connection on roaming",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Deny data roaming",
+              "input-type": "switch"
+            }
+          },
+          "volte": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "on",
+              "off"
+            ],
+            "description": "VoLTE (Voice over LTE) is a digital packet technology that uses 4G LTE networks to route voice traffic and transmit data. (Only available for devices with 4G modems)",
+            "x-web": {
+              "pretty": "VoLTE",
+              "input-type": "select",
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUTL",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-AU",
+                "EC25-A",
+                "EC25-V",
+                "EC25-J",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "EC21-AUV",
+                "EC21-AUX",
+                "EC21-AUT",
+                "EC21-AU",
+                "EC21-A",
+                "EC21-V",
+                "EC21-J",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "EG25-G",
+                "BG96",
+                "RG500Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EU",
+                "RG501Q-EA",
+                "SLM750-VE",
+                "SLM750-VJ",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA"
+              ]
+            }
+          },
+          "service": {
+            "type": "string",
+            "description": "Service mode. If your local mobile network supports 2G/3G/4G/5G you can specify to which network you prefer to connect to",
+            "enum": [
+              "2g",
+              "3g_pref",
+              "3g",
+              "lte_pref",
+              "lte",
+              "nr5g_pref"
+            ],
+            "x-web": {
+              "pretty": "Service mode",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC25-E",
+                    "EC25-EU",
+                    "EC25-EUX",
+                    "EC25-AUX",
+                    "EC25-AU",
+                    "EC200A-EU",
+                    "EC200A-AU",
+                    "EC200A-CN",
+                    "EC21-EC",
+                    "EC21-EU",
+                    "EC21-E",
+                    "EC21-AUX",
+                    "EC21-AU",
+                    "EG25-G",
+                    "SLM750-VE",
+                    "SLM750-VSA",
+                    "SLM750-VAU",
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "2g",
+                    "3g_pref",
+                    "3g",
+                    "lte_pref",
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUTL",
+                    "EC25-V",
+                    "EC21-V",
+                    "EC21-J"
+                  ],
+                  "values": [
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUT",
+                    "EC25-AFX",
+                    "EC25-AFF",
+                    "EC25-AF",
+                    "EC25-A",
+                    "EC25-J",
+                    "EC21-AUV",
+                    "EC21-AUT",
+                    "EC21-A",
+                    "EG06-E",
+                    "EG06-A",
+                    "EG12-EA",
+                    "SLM750-VJ"
+                  ],
+                  "values": [
+                    "3g",
+                    "lte_pref",
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "BG96"
+                  ],
+                  "values": [
+                    "2g",
+                    "lte_pref",
+                    "lte"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EU",
+                    "RG500Q-EA",
+                    "RG501Q-EU",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "3g",
+                    "lte_pref",
+                    "lte",
+                    "nr5g_perf"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-A"
+                  ],
+                  "values": [
+                    "3g"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-E",
+                    "UC20-G"
+                  ],
+                  "values": [
+                    "2g",
+                    "3g_pref",
+                    "3g"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUX",
+                "EC25-AU",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "EC21-AUX",
+                "EC21-AU",
+                "EG25-G",
+                "SLM750-VE",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA",
+                "EC25-AUTL",
+                "EC25-V",
+                "EC21-V",
+                "EC21-J",
+                "EC25-AUT",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-A",
+                "EC25-J",
+                "EC21-AUV",
+                "EC21-AUT",
+                "EC21-A",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "SLM750-VJ",
+                "BG96",
+                "RG500Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EU",
+                "RG501Q-EA",
+                "UC20-A",
+                "UC20-E",
+                "UC20-G"
+              ]
+            }
+          },
+          "category_lte": {
+            "type": "string",
+            "description": "Network Category. In LTE (4G) only you can specify network category: LTE Cat M1, LTE Cat NB1 or LTE Cat M1 + LTE Cat NB1",
+            "enum": [
+              "m1",
+              "nb",
+              "m1_nb"
+            ],
+            "x-web": {
+              "pretty": "Network category",
+              "enum-pretty": {
+                "m1": "M1 only",
+                "nb": "NB only",
+                "m1_nb": "M1+NB auto"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "service": "lte"
+                },
+                {
+                  "service": "lte_pref"
+                }
+              ],
+              "modems": [
+                "BG96",
+                "BG95-M3",
+                "BG95-M4"
+              ]
+            }
+          },
+          "pincode": {
+            "type": "string",
+            "description": "SIM card's PIN (Personal Identification Number) is a secret numeric password shared between a user and a system that can be used to authenticate the user.",
+            "x-web": {
+              "pretty": "PIN",
+              "input-type": "input"
+            }
+          },
+          "pukcode": {
+            "type": "string",
+            "description": "SIM card's PUK (Personal Unblocking Key) is a code consisting of 8 digits that can be used to unblock your SIM card when you entered 3 times a wrong PIN code.",
+            "x-web": {
+              "pretty": "PUK"
+            }
+          },
+          "band": {
+            "type": "string",
+            "description": "Band selection. Network band selection",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "x-web": {
+              "pretty": "Band selection",
+              "input-type": "select"
+            }
+          },
+          "gsm": {
+            "type": "array",
+            "description": "GSM bands. Manual 2G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "gsm_850",
+                "gsm_900",
+                "gsm_1800",
+                "gsm_1900"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "GSM bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "2g"
+                },
+                {
+                  "band": "manual",
+                  "service": "2g_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "3g_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC25-E",
+                    "EC25-EU",
+                    "EC25-EUX",
+                    "EC200A-EU",
+                    "EC200A-CN",
+                    "EC21-EC",
+                    "EC21-EU",
+                    "EC21-E",
+                    "SLM750-VE"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1800",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUX",
+                    "EC25-AU",
+                    "EC200A-AU",
+                    "EC21-AUX",
+                    "EC21-AU",
+                    "EG25-G",
+                    "BG96",
+                    "UC20-E",
+                    "UC20-G"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1800",
+                    "gsm_1900",
+                    "gsm_850",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VSA"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1900",
+                    "gsm_850",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VAU"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1800",
+                    "gsm_850",
+                    "gsm_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "all",
+                    "gsm_1900",
+                    "gsm_850"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC200A-EU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "SLM750-VE",
+                "EC25-AUX",
+                "EC25-AU",
+                "EC200A-AU",
+                "EC21-AUX",
+                "EC21-AU",
+                "EG25-G",
+                "BG96",
+                "UC20-E",
+                "UC20-G",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA"
+              ]
+            }
+          },
+          "umts": {
+            "type": "array",
+            "description": "UMTS bands. Manual 3G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "wcdma_800",
+                "wcdma_850",
+                "wcdma_900",
+                "wcdma_1700",
+                "wcdma_1800",
+                "wcdma_1900",
+                "wcdma_2100"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "UMTS bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "3g"
+                },
+                {
+                  "band": "manual",
+                  "service": "3g_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC25-EU",
+                    "EC25-EUX",
+                    "EC21-EC",
+                    "EC21-EU",
+                    "EC21-AUT",
+                    "UC20-E"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-E",
+                    "EC200A-EU",
+                    "EC200A-CN",
+                    "EC21-E",
+                    "EC21-AUV",
+                    "RG500Q-EU",
+                    "RG501Q-EU",
+                    "SLM750-VE",
+                    "SLM750-VAU"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUT"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUX",
+                    "EC200A-AU",
+                    "EC21-AUX"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AFX",
+                    "EC25-AFF",
+                    "EC25-AF",
+                    "EC25-A",
+                    "EG06-A",
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AU",
+                    "EC21-AU"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-J"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_2100",
+                    "wcdma_800",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-A"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG06-E",
+                    "EG12-EA",
+                    "RG500Q-EA",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1800",
+                    "wcdma_2100",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG25-G"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1700",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_800",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-A"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_850"
+                  ]
+                },
+                {
+                  "modems": [
+                    "UC20-G"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_2100",
+                    "wcdma_800",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VSA"
+                  ],
+                  "values": [
+                    "all",
+                    "wcdma_1900",
+                    "wcdma_850",
+                    "wcdma_900"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-AUT",
+                "UC20-E",
+                "EC25-E",
+                "EC200A-EU",
+                "EC200A-CN",
+                "EC21-E",
+                "EC21-AUV",
+                "RG500Q-EU",
+                "RG501Q-EU",
+                "SLM750-VE",
+                "SLM750-VAU",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC200A-AU",
+                "EC21-AUX",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-A",
+                "EG06-A",
+                "SLM750-VA",
+                "EC25-AU",
+                "EC21-AU",
+                "EC25-J",
+                "EC21-A",
+                "EG06-E",
+                "EG12-EA",
+                "RG500Q-EA",
+                "RG501Q-EA",
+                "EG25-G",
+                "UC20-A",
+                "UC20-G",
+                "SLM750-VSA"
+              ]
+            }
+          },
+          "lte": {
+            "type": "array",
+            "description": "LTE bands. Manual 4G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "lte_b1",
+                "lte_b2",
+                "lte_b3",
+                "lte_b4",
+                "lte_b5",
+                "lte_b7",
+                "lte_b8",
+                "lte_b12",
+                "lte_b13",
+                "lte_b14",
+                "lte_b17",
+                "lte_b18",
+                "lte_b19",
+                "lte_b20",
+                "lte_b25",
+                "lte_b26",
+                "lte_b28",
+                "lte_b29",
+                "lte_b30",
+                "lte_b32",
+                "lte_b34",
+                "lte_b38",
+                "lte_b39",
+                "lte_b40",
+                "lte_b41",
+                "lte_b42",
+                "lte_b43",
+                "lte_b48",
+                "lte_b66",
+                "lte_b71"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "LTE bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "lte"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "EC25-EC",
+                    "EC21-EC",
+                    "EC21-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-E"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-EU",
+                    "EC25-EUX"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUTL"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUT"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AUX",
+                    "EC25-AU",
+                    "EC21-AUX",
+                    "EC21-AU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b2",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-AFX",
+                    "EC25-AFF",
+                    "EC25-AF"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b14",
+                    "lte_b2",
+                    "lte_b4",
+                    "lte_b5",
+                    "lte_b66",
+                    "lte_b71"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-A",
+                    "EC21-A"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b2",
+                    "lte_b4"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-V",
+                    "EC21-V"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b13",
+                    "lte_b4"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC25-J"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b26",
+                    "lte_b3",
+                    "lte_b41",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC200A-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC200A-AU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b2",
+                    "lte_b3",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b66",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC200A-CN"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b3",
+                    "lte_b34",
+                    "lte_b38",
+                    "lte_b39",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-E"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-AUV"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-AUT"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b5",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EC21-J"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b26",
+                    "lte_b3",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG06-E"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b32",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG06-A"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b2",
+                    "lte_b25",
+                    "lte_b26",
+                    "lte_b29",
+                    "lte_b30",
+                    "lte_b4",
+                    "lte_b5",
+                    "lte_b66",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG12-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7"
+                  ]
+                },
+                {
+                  "modems": [
+                    "EG25-G"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b2",
+                    "lte_b20",
+                    "lte_b25",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b38",
+                    "lte_b39",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "BG96"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b2",
+                    "lte_b20",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b39",
+                    "lte_b4",
+                    "lte_b5",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EU",
+                    "RG501Q-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b32",
+                    "lte_b38",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b42",
+                    "lte_b43",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EA",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b20",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b32",
+                    "lte_b34",
+                    "lte_b38",
+                    "lte_b39",
+                    "lte_b40",
+                    "lte_b41",
+                    "lte_b42",
+                    "lte_b43",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VE"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b20",
+                    "lte_b3",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VJ"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b18",
+                    "lte_b19",
+                    "lte_b26",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b39",
+                    "lte_b41",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VSA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b2",
+                    "lte_b28",
+                    "lte_b4",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VAU"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b1",
+                    "lte_b28",
+                    "lte_b3",
+                    "lte_b40",
+                    "lte_b5",
+                    "lte_b7",
+                    "lte_b8"
+                  ]
+                },
+                {
+                  "modems": [
+                    "SLM750-VA"
+                  ],
+                  "values": [
+                    "all",
+                    "lte_b12",
+                    "lte_b13",
+                    "lte_b17",
+                    "lte_b2",
+                    "lte_b25",
+                    "lte_b26",
+                    "lte_b4",
+                    "lte_b41",
+                    "lte_b5"
+                  ]
+                }
+              ],
+              "modems": [
+                "EC25-EC",
+                "EC21-EC",
+                "EC21-EU",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUTL",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC25-AU",
+                "EC21-AUX",
+                "EC21-AU",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-A",
+                "EC21-A",
+                "EC25-V",
+                "EC21-V",
+                "EC25-J",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-E",
+                "EC21-AUV",
+                "EC21-AUT",
+                "EC21-J",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "EG25-G",
+                "BG96",
+                "RG500Q-EU",
+                "RG501Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EA",
+                "SLM750-VE",
+                "SLM750-VJ",
+                "SLM750-VSA",
+                "SLM750-VAU",
+                "SLM750-VA"
+              ]
+            }
+          },
+          "lte_nb": {
+            "type": "array",
+            "description": "LTE narrow bands. Manual 4G NB selection",
+            "items": {
+              "enum": [
+                "all",
+                "lte_nb1",
+                "lte_nb2",
+                "lte_nb3",
+                "lte_nb4",
+                "lte_nb5",
+                "lte_nb8",
+                "lte_nb12",
+                "lte_nb13",
+                "lte_nb18",
+                "lte_nb19",
+                "lte_nb20",
+                "lte_nb26",
+                "lte_nb28"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "LTE narrow bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "lte"
+                },
+                {
+                  "band": "manual",
+                  "service": "lte_pref"
+                },
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "modems": [
+                "BG96",
+                "BG95-M3",
+                "BG95-M4"
+              ]
+            }
+          },
+          "nr5g": {
+            "type": "array",
+            "description": "Manual 5G band selection",
+            "items": {
+              "enum": [
+                "all",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "7",
+                "8",
+                "12",
+                "20",
+                "25",
+                "28",
+                "38",
+                "40",
+                "41",
+                "48",
+                "66",
+                "71",
+                "77",
+                "78",
+                "79",
+                "257",
+                "258",
+                "260",
+                "261"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "5G bands",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "band": "manual",
+                  "service": "nr5g_pref"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "modems": [
+                    "RG500Q-EU",
+                    "RG501Q-EU"
+                  ],
+                  "values": [
+                    "all",
+                    "1",
+                    "3",
+                    "5",
+                    "7",
+                    "8",
+                    "20",
+                    "28",
+                    "38",
+                    "40",
+                    "41",
+                    "77",
+                    "78"
+                  ]
+                },
+                {
+                  "modems": [
+                    "RG500Q-EA",
+                    "RG501Q-EA"
+                  ],
+                  "values": [
+                    "all",
+                    "1",
+                    "3",
+                    "5",
+                    "7",
+                    "8",
+                    "20",
+                    "28",
+                    "38",
+                    "40",
+                    "41",
+                    "77",
+                    "78",
+                    "79"
+                  ]
+                }
+              ],
+              "modems": [
+                "RG500Q-EU",
+                "RG501Q-EU",
+                "RG500Q-EA",
+                "RG501Q-EA"
+              ]
+            }
+          },
+          "signal_reset_enabled": {
+            "type": "string",
+            "description": "Enables modem operator connection resetting based on signal threshold",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable low signal reconnect",
+              "input-type": "switch"
+            }
+          },
+          "signal_reset_threshold": {
+            "type": "string",
+            "description": "Signal threshold in dB for the connection. When signal is under this value modem resets connection",
+            "x-web": {
+              "pretty": "Reset threshold",
+              "input-type": "input",
+              "depends": [
+                {
+                  "signal_reset_enabled": "1"
+                }
+              ]
+            }
+          },
+          "signal_reset_timeout": {
+            "type": "string",
+            "description": "Wait this long in seconds before trying to reset the connection again",
+            "x-web": {
+              "pretty": "Reset timeout",
+              "input-type": "input",
+              "depends": [
+                {
+                  "signal_reset_enabled": "1"
+                }
+              ]
+            }
+          },
+          "operlist": {
+            "type": "string",
+            "description": "Enable operator list",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable operator list",
+              "input-type": "switch"
+            }
+          },
+          "opermode": {
+            "type": "string",
+            "description": "Mode. blacklist or whitelist",
+            "enum": [
+              "whitelist",
+              "blacklist"
+            ],
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "depends": [
+                {
+                  "operlist": "1"
+                }
+              ]
+            }
+          },
+          "operlist_name": {
+            "type": "string",
+            "description": "Operator list. Operator's code list name. You can get/add them in /mobile/operator_lists",
+            "x-web": {
+              "pretty": "Operator list",
+              "input-type": "input",
+              "depends": [
+                {
+                  "operlist": "1"
+                }
+              ]
+            }
+          },
+          "enable_sms_limit": {
+            "type": "string",
+            "description": "Enable SMS limit",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable SMS limit",
+              "input-type": "switch"
+            }
+          },
+          "sms_limit_num": {
+            "description": "SMS limit count. Disable SMS sending after limit value is reached",
+            "type": "string",
+            "x-web": {
+              "pretty": "SMS limit count",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_sms_limit": "1"
+                }
+              ]
+            }
+          },
+          "sms_limit": {
+            "type": "string",
+            "description": "Period for which SMS limiting should apply (day, week or month)",
+            "enum": [
+              "day",
+              "week",
+              "month"
+            ],
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "select",
+              "depends": [
+                {
+                  "enable_sms_limit": "1"
+                }
+              ],
+              "enum-pretty": {
+                "day": "Day (hours)",
+                "week": "Week (days)",
+                "month": "Month (days)"
+              }
+            }
+          },
+          "period": {
+            "type": "string",
+            "description": "Start day/weekday/hour. A starting day/weekday/hour for mobile data limiting period",
+            "x-web": {
+              "pretty": "Start limiting",
+              "input-type": "input",
+              "depends": [
+                {
+                  "sms_limit": "day",
+                  "enable_sms_limit": "1"
+                },
+                {
+                  "sms_limit": "month",
+                  "enable_sms_limit": "1"
+                },
+                {
+                  "sms_limit": "week",
+                  "enable_sms_limit": "1"
+                }
+              ],
+              "enum-depends": [
+                {
+                  "depends": {
+                    "sms_limit": "day"
+                  },
+                  "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23"
+                  ]
+                },
+                {
+                  "depends": {
+                    "sms_limit": "week"
+                  },
+                  "values": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                  ]
+                },
+                {
+                  "depends": {
+                    "sms_limit": "month"
+                  },
+                  "values": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "13",
+                    "14",
+                    "15",
+                    "16",
+                    "17",
+                    "18",
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23",
+                    "24",
+                    "25",
+                    "26",
+                    "27",
+                    "28",
+                    "29",
+                    "30",
+                    "31"
+                  ]
+                }
+              ]
+            }
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operator selection. 'auto', 'manual' or 'manual-auto",
+            "enum": [
+              "auto",
+              "manual",
+              "manual-auto"
+            ],
+            "x-web": {
+              "pretty": "Operator selection",
+              "input-type": "select",
+              "enum-pretty": {
+                "auto": "Auto",
+                "manual": "Manual",
+                "manual-auto": "Manual-Auto"
+              }
+            }
+          },
+          "opernum": {
+            "type": "string",
+            "description": "Operator number",
+            "x-web": {
+              "pretty": "Operator number",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "signal_reset_threshold",
+          "signal_reset_timeout",
+          "opermode",
+          "operlist_name",
+          "sms_limit_num",
+          "sms_limit",
+          "period"
+        ]
+      },
+      "modems_apns": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "password": "apn_password",
+            "apn": "wap",
+            "user": "username",
+            "carrier": "Test Internet",
+            "auth": "none"
+          }
+        },
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "APN password."
+          },
+          "apn": {
+            "type": "string",
+            "description": "APN name."
+          },
+          "user": {
+            "type": "string",
+            "description": "APN username."
+          },
+          "carrier": {
+            "type": "string",
+            "description": "APN carrier name."
+          },
+          "auth": {
+            "type": "string",
+            "enum": [
+              "none",
+              "pap",
+              "chap"
+            ],
+            "description": "APN auth type."
+          },
+          "pdptype": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "description": "APN pdp type."
+          }
+        },
+        "required": [
+          "password",
+          "apn",
+          "user",
+          "carrier",
+          "auth",
+          "pdptype"
+        ]
+      },
+      "sim_unblock": {
+        "type": "object",
+        "properties": {
+          "modem": {
+            "type": "string",
+            "description": "Modem ID that should set the PIN for active SIM",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "pin": {
+            "type": "string",
+            "description": "New PIN code",
+            "x-web": {
+              "pretty": "New PIN code",
+              "input-type": "input"
+            }
+          },
+          "puk": {
+            "type": "string",
+            "description": "SIM PUK code",
+            "x-web": {
+              "pretty": "SIM PUK code",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "modem",
+          "pin",
+          "puk"
+        ]
+      }
+    },
+    "responses": {
+      "simcards_status": {
+        "description": "SIM cards status response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "section_name": {
+                      "type": "string",
+                      "description": "SIM switch configuration ID"
+                    },
+                    "deny_roaming": {
+                      "type": "string",
+                      "description": "Deny data connection on roaming"
+                    },
+                    "sim": {
+                      "type": "string",
+                      "description": "SIM position"
+                    },
+                    "modem": {
+                      "type": "string",
+                      "description": "Modem ID"
+                    },
+                    "sms_limit_enabled": {
+                      "type": "string",
+                      "description": "SMS limit enabled"
+                    },
+                    "sms_limit_period": {
+                      "type": "string",
+                      "description": "SMS limit period"
+                    },
+                    "sms_sent": {
+                      "type": "string",
+                      "description": "Total sent SMS"
+                    },
+                    "sms_limit": {
+                      "type": "string",
+                      "description": "SMS limit count"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "modem_apns_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "modem": {
+                            "type": "string"
+                          },
+                          "apns": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/modems_apns"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "number",
+                            "description": "Error code."
+                          },
+                          "error": {
+                            "type": "string",
+                            "description": "Error message."
+                          },
+                          "modem": {
+                            "type": "string",
+                            "description": "Modem id that caused the error."
+                          }
+                        },
+                        "required": [
+                          "code",
+                          "error",
+                          "modem"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "modem_apns_single": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/modems_apns"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "exec_at_post": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "response": {
+                        "type": "string",
+                        "description": "AT Command response"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sim_unblock": {
+        "description": "SIM unblock response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "pin": {
+                      "type": "string",
+                      "description": "New SIM PIN code"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

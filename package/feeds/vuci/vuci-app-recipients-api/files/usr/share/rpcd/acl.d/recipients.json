@@ -1,0 +1,30 @@
+{
+  "system/admin/group/phone": {
+    "description": "phone groups",
+    "read": {
+      "api": [
+        "/recipients/phone_groups/*",
+        "/mobile/modems/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/recipients/phone_groups/*"
+      ]
+    }
+  },
+  "system/admin/group/email": {
+    "description": "email groups",
+    "read": {
+      "api": [
+        "/recipients/email_users/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/recipients/email_users/*",
+        "/recipients/send_email/*"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+	"services/upnp": {
+		"description": "UPnP",
+		"read": {
+			"api": [
+				"/upnp/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/upnp/*"
+			]
+		}
+	}
+}

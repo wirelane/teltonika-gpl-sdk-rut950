@@ -1,0 +1,58 @@
+{
+	"services/hotspot": {
+		"title": "Hotspot",
+		"index": 190
+	},
+		"services/hotspot/general": {
+			"title": "General",
+			"index": 10,
+			"view": "services/HotspotOverview_aeaafe",
+			"acls": [ "services/hotspot/general" ],
+			"files": [ "/etc/config/chilli" ]
+		},
+		"services/hotspot/users": {
+			"title": "Local Users",
+			"index": 20,
+			"view": "services/HotspotUsers_aeaafe",
+			"acls": [ "services/hotspot/users" ],
+			"files": [ "/etc/config/chilli" ]
+		},
+		"services/hotspot/landing": {
+			"title": "Landing Page",
+			"index": 30,
+			"view": "services/HotspotLandingpage_aeaafe",
+			"acls": [ "services/hotspot/landing" ],
+			"files": [ "/etc/config/landingpage" ]
+		},
+		"services/hotspot/groups": {
+			"title": "User Groups",
+			"index": 40,
+			"view": "services/HotspotGroups_aeaafe",
+			"acls": [ "services/hotspot/groups" ],
+			"files": [ "/etc/config/chilli" ]
+		},
+		"services/hotspot/user_management": {
+			"title": "User Management",
+			"index": 50
+		},
+			"services/hotspot/user_management/current": {
+				"title": "Current Users",
+				"index": 10,
+				"view": "services/HotspotCurrentUsers_aeaafe",
+				"acls": [ "services/hotspot/user_management" ],
+				"files": [ "/etc/config/chilli" ]
+			},
+			"services/hotspot/user_management/registered": {
+				"title": "Registered Users",
+				"index": 20,
+				"view": "services/HotspotRegisteredUsers_aeaafe",
+				"acls": [ "services/hotspot/user_management" ],
+				"files": [ "/etc/config/chilli" ]
+			},
+		"system/maintenance/hotspot": {
+			"title": "Hotspot Log",
+			"acls": [ "system/maintenance/hotspot" ],
+			"view": "status/HotspotLog",
+			"index": 60
+		}
+	}

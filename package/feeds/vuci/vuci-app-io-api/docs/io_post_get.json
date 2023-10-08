@@ -1,0 +1,245 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/post_get/config/general": {
+      "get": {
+        "tags": [
+          "I/O Post/Get"
+        ],
+        "summary": "Returns the I/O Post/Get configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoPostGet"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Post/Get"
+        ],
+        "summary": "Updates the I/O Post/Get configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoPostGet"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_post_get_single_put_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Post/Get"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/post_get/config": {
+      "get": {
+        "tags": [
+          "I/O Post/Get"
+        ],
+        "summary": "Returns the I/O Post/Get configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoPostGetMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Post/Get"
+        ],
+        "summary": "Updates the I/O Post/Get configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoPostGet"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_post_get_put_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Post/Get"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoPostGet": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_post_get_put_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoPostGetMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_post_get_put_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_post_get_single_put_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable SMS management functionality through POST/GET",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "allow": {
+            "type": "array",
+            "description": "Accessible methods. All methods are allowed if a list is empty.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "io_state",
+                "io_type",
+                "io_value"
+              ]
+            },
+            "x-web": {
+              "pretty": "Access",
+              "input-type": "select"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Username used for authorization. All characters are allowed except ` and space.",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password used for authorization. All characters are allowed except ` and space.",
+            "format": "credentials_validate",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            }
+          },
+          "password_confirm": {
+            "type": "string",
+            "description": "Password used for authorization. All characters are allowed except ` and space",
+            "writeOnly": true,
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Confirm password",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "username"
+        ]
+      },
+      "io_post_get_put_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "I/O Post/Get Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/io_post_get_single_put_options"
+          }
+        ]
+      }
+    }
+  }
+}

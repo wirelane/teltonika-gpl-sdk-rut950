@@ -1,0 +1,14 @@
+{
+    "services/opcua": {
+        "read": {
+            "api": [
+                "/opcua/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/opcua/*"
+            ]
+        }
+    }
+}

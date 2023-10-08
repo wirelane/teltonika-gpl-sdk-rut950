@@ -1,0 +1,236 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "P910ND"
+    }
+  ],
+  "paths": {
+    "/usb_tools/p910nd/config/general": {
+      "get": {
+        "tags": [
+          "P910ND"
+        ],
+        "summary": "Returns specified p910nd section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200p910nd"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "P910ND"
+        ],
+        "summary": "Update specified sections options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200p910nd"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ],
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/p910nd_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Printer server"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/p910nd/config/": {
+      "get": {
+        "tags": [
+          "P910ND"
+        ],
+        "summary": "Returns all p910nd configuration sections",
+        "description": "Returns all sections with their parameters form p910nd configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200p910ndMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "P910ND"
+        ],
+        "summary": "Update all sections options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200p910ndMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/p910nd_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Printer server"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200p910nd": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/p910nd_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200p910ndMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/p910nd_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "p910nd_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turn printer service on or off",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "device": {
+            "type": "array",
+            "description": "Location of the device file to which the printer is connected to",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Device",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "TCP listener port",
+            "enum": [
+              "9100",
+              "9101",
+              "9102",
+              "9103",
+              "9104",
+              "9105",
+              "9106",
+              "9107",
+              "9108",
+              "9109"
+            ],
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "select"
+            }
+          },
+          "bidirectional": {
+            "type": "string",
+            "description": "Allows printer to send status back to the router",
+            "x-web": {
+              "pretty": "Bidirectional mode",
+              "input-type": "switch"
+            }
+          }
+        }
+      }
+    }
+  }
+}

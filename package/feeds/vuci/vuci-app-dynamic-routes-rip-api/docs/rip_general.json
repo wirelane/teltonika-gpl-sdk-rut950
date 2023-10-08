@@ -1,0 +1,195 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/rip/general/config/general": {
+      "get": {
+        "tags": [
+          "rip_general"
+        ],
+        "summary": "Returns rip general configuration",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "rip_general"
+        ],
+        "summary": "Updates specified rip general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rip_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "RIP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/rip/general/rip_info": {
+      "get": {
+        "summary": "Fetches data about rip neighbors",
+        "tags": [
+          "rip_general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "operationId": "get-network-dynamic-rip-general-actions-rip_info"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "RIP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RiGe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/rip_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200RiGeMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/rip_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "rip_general_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable RIP protocol."
+          },
+          "enabled_vty": {
+            "x-web": {
+              "pretty": "Enable VTY",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable vty access from LAN."
+          },
+          "ripd_custom_conf": {
+            "x-web": {
+              "pretty": "Import config",
+              "input-type": "input"
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Use imported RIP configuration."
+          },
+          "version": {
+            "x-web": {
+              "pretty": "Version",
+              "input-type": "select",
+              "enum-pretty": {
+                "1": "1",
+                "2": "2"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "description": "Specify the version of RIP."
+          },
+          "neighbors": {
+            "x-web": {
+              "pretty": "Neighbor",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Specify RIP neighbor.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/eigrp/general/config/general": {
+      "get": {
+        "tags": [
+          "eigrp_general"
+        ],
+        "summary": "Returns eigrp general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200EiGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "eigrp_general"
+        ],
+        "summary": "Updates  eigrp general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200EiGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/eigrp_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "EIGRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/eigrp/general/eigrp_info": {
+      "get": {
+        "summary": "Fetches data about eigrp neighbors",
+        "tags": [
+          "eigrp_general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "operationId": "get-network-routes-dynamic-eigrp-general"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "EIGRP"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200EiGe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/eigrp_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200EiGeMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/eigrp_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "eigrp_general_options": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "0",
+            "debug": "1",
+            "as": "1",
+            "router_id": "192.168.0.1",
+            "network": "string",
+            "redistribute": "string",
+            "neighbor": "string"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Toggles EIGRP network ON or OFF.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "debug": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable logging",
+              "input-type": "switch"
+            },
+            "description": "Enable logging of EIGRP.",
+            "enum": [
+              "1",
+              "0"
+            ]
+          },
+          "as": {
+            "type": "string",
+            "x-web": {
+              "pretty": "AS",
+              "input-type": "input"
+            },
+            "description": "EIGRP uses this number so that it makes sure it only talks to other EIGRP speakers that are in the same AS. For instance, if you have two routers, one with 'router eigrp 1' and one with 'router eigrp 2,' then they would not form an adjacency.",
+            "format": "irange(1, 65535)"
+          },
+          "router_id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Router ID",
+              "input-type": "input"
+            },
+            "description": "EIGRP Router-ID in IP address format.",
+            "format": "ipv4"
+          },
+          "network": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Network",
+              "input-type": "input"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Add the announcement network.",
+            "format": "ipmask4"
+          },
+            "redistribute": {
+            "x-web": {
+              "pretty": "Redistribution options",
+              "input-type": "input"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Redistribute information from another routing protocol."
+          },
+          "neighbor": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Neighbors",
+              "input-type": "input"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Add neighbor IP addresses.",
+            "format": "ipmask4"
+          }
+        }
+      }
+    }
+  }
+}

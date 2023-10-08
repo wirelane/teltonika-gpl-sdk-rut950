@@ -1,0 +1,4411 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "GPS Documentation",
+    "version": "1.0",
+    "contact": {},
+    "description": "GPS api documentation"
+  },
+  "tags": [
+    {
+      "name": "GPS General"
+    },
+    {
+      "name": "GPS NMEA"
+    },
+    {
+      "name": "GPS NMEA Rules"
+    },
+    {
+      "name": "GPS Geofencing"
+    },
+    {
+      "name": "GPS HTTPS General"
+    },
+    {
+      "name": "GPS HTTPS"
+    },
+    {
+      "name": "GPS AVL IO"
+    },
+    {
+      "name": "GPS AVL General"
+    },
+    {
+      "name": "GPS TAVL Rules"
+    },
+    {
+      "name": "GPS AVL Main"
+    },
+    {
+      "name": "GPS AVL Rules"
+    }
+  ],
+  "paths": {
+    "/gps/general/config": {
+      "get": {
+        "summary": "Get GPS General configurations",
+        "tags": [
+          "GPS General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_general_multi"
+          }
+        },
+        "operationId": "get-services-gps-general",
+        "description": "Gets all GPS General configurations"
+      },
+      "put": {
+        "summary": "Update GPS General configurations",
+        "operationId": "put-services-gps-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_general_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_general_put_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS General"
+        ],
+        "description": "Updates all GPS General configurations"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/general/status": {
+      "get": {
+        "summary": "Get GPS General function status",
+        "tags": [
+          "GPS General"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Function status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "dpo_support": {
+                          "type": "boolean",
+                          "description": "Enable dynamic power optimization (requires modem reboot)."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Gets all GPS functions"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/general/config/general": {
+      "get": {
+        "summary": "Get GPS General configuration",
+        "tags": [
+          "GPS General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_general"
+          }
+        },
+        "operationId": "get-services-gps-general-sid",
+        "description": "Gets one GPS General configuration"
+      },
+      "put": {
+        "summary": "Update GPS General configuration",
+        "operationId": "put-services-gps-general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_general"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_general_put"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS General"
+        ],
+        "description": "Updates one GPS General configuration"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/nmea/config": {
+      "get": {
+        "summary": "Get GPS NMEA configurations",
+        "tags": [
+          "GPS NMEA"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea_multi"
+          }
+        },
+        "operationId": "get-services-gps-nmea",
+        "description": "Gets GPS NMEA configurations"
+      },
+      "put": {
+        "summary": "Update GPS NMEA configurations",
+        "operationId": "put-services-gps-nmea",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea_multi"
+          }
+        },
+        "description": "Updates GPS NMEA configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_nmea_put_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS NMEA"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/nmea/config/general": {
+      "get": {
+        "summary": "Get GPS NMEA configuration",
+        "tags": [
+          "GPS NMEA"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea"
+          }
+        },
+        "operationId": "get-services-gps-nmea-sid",
+        "description": "Gets GPS NMEA configuration"
+      },
+      "put": {
+        "summary": "Update GPS NMEA configuration",
+        "operationId": "put-services-gps-nmea-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_nmea_put"
+              }
+            }
+          }
+        },
+        "description": "Update GPS NMEA configuration",
+        "tags": [
+          "GPS NMEA"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/nmea_rules/config": {
+      "get": {
+        "summary": "Get GPS NMEA Rules configurations",
+        "tags": [
+          "GPS NMEA Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea_rules_multi"
+          }
+        },
+        "operationId": "get-services-gps-nmea_rules",
+        "description": "Gets GPS NMEA Rules configurations"
+      },
+      "put": {
+        "summary": "Update GPS NMEA Rules configurations",
+        "operationId": "put-services-gps-nmea_rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea_rules_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_nmea_rules_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS NMEA Rules configurations",
+        "tags": [
+          "GPS NMEA Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/nmea_rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS NMEA Rule configuration",
+        "tags": [
+          "GPS NMEA Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea_rules"
+          }
+        },
+        "operationId": "get-services-gps-nmea_rules-sid",
+        "description": "Gets GPS NMEA Rule configuration"
+      },
+      "put": {
+        "summary": "Update GPS NMEA Rule configuration",
+        "operationId": "put-services-gps-nmea_rules-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_nmea_rules"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_nmea_rules_put"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS NMEA Rule configuration",
+        "tags": [
+          "GPS NMEA Rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/geofencing/config": {
+      "get": {
+        "summary": "Get GPS Geofencing configurations",
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_geofencing_multi"
+          }
+        },
+        "operationId": "get-services-gps-geofencing",
+        "description": "Gets GPS Geofencing configurations"
+      },
+      "post": {
+        "summary": "Create GPS Geofencing configuration",
+        "operationId": "post-services-gps-geofencing",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_geofencing"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_geofencing_post"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "description": "Creates new GPS Geofencing configuration"
+      },
+      "put": {
+        "summary": "Update GPS Geofencing configurations",
+        "operationId": "put-services-gps-geofencing",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_geofencing_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_geofencing_put_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "description": "Updates GPS Geofencing configurations"
+      },
+      "delete": {
+        "summary": "Delete GPS Geofencing configurations",
+        "operationId": "delete-services-gps-geofencing",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "description": "Deletes GPS Geofencing configurations"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/geofencing/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS Geofencing configuration",
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_geofencing"
+          }
+        },
+        "operationId": "get-services-gps-geofencing-sid",
+        "description": "Gets GPS Geofencing configuration"
+      },
+      "put": {
+        "summary": "Update GPS Geofencing configuration",
+        "operationId": "put-services-gps-geofencing-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_geofencing"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_geofencing_put"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "description": "Updates GPS Geofencing configuration"
+      },
+      "delete": {
+        "summary": "Delete GPS Geofencing configuration",
+        "operationId": "delete-services-gps-geofencing-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "tags": [
+          "GPS Geofencing"
+        ],
+        "description": "Deletes GPS Geofencing configuration"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/https_general/config": {
+      "get": {
+        "summary": "Get GPS HTTP General configurations",
+        "tags": [
+          "GPS HTTPS General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_general_multi"
+          }
+        },
+        "operationId": "get-services-gps-https_general",
+        "description": "Gets GPS HTTP General configurations"
+      },
+      "put": {
+        "summary": "Update GPS HTTP General configurations",
+        "operationId": "put-services-gps-https_general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_general_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_https_general_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS HTTP General configurations",
+        "tags": [
+          "GPS HTTPS General"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/https_general/config/general": {
+      "get": {
+        "summary": "Get GPS HTTP General configuration",
+        "tags": [
+          "GPS HTTPS General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_general"
+          }
+        },
+        "operationId": "get-services-gps-https_general-sid",
+        "description": "Gets GPS HTTP General configuration"
+      },
+      "put": {
+        "summary": "Update GPS HTTP General configuration",
+        "operationId": "put-services-gps-https_general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_general"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_https_general_put"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS HTTP General configuration",
+        "tags": [
+          "GPS HTTPS General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/https/config": {
+      "get": {
+        "summary": "Get GPS HTTP configurations",
+        "tags": [
+          "GPS HTTPS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_multi"
+          }
+        },
+        "operationId": "get-services-gps-https",
+        "description": "Gets GPS HTTP configurations"
+      },
+      "put": {
+        "summary": "Update GPS HTTP configurations",
+        "operationId": "put-services-gps-https",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_https_put_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS HTTPS"
+        ],
+        "description": "Updates GPS HTTP configurations"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/https/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS HTTP configuration",
+        "tags": [
+          "GPS HTTPS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https"
+          }
+        },
+        "operationId": "get-services-gps-https-sid",
+        "description": "Gets GPS HTTP configuration"
+      },
+      "put": {
+        "summary": "Update GPS HTTP configuration",
+        "operationId": "put-services-gps-https-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_https_put"
+              }
+            }
+          }
+        },
+        "tags": [
+          "GPS HTTPS"
+        ],
+        "description": "Updates GPS HTTP configuration"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/avl_io/config": {
+      "get": {
+        "summary": "Get GPS AVL IO configurations",
+        "tags": [
+          "GPS AVL IO"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_io_multi"
+          }
+        },
+        "operationId": "get-services-gps-avl_io",
+        "description": "Gets GPS AVL IO configurations"
+      },
+      "post": {
+        "summary": "Create GPS AVL IO configuration",
+        "operationId": "post-services-gps-avl_io",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_io"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_io"
+              }
+            }
+          }
+        },
+        "description": "Creates GPS AVL IO configuration",
+        "tags": [
+          "GPS AVL IO"
+        ]
+      },
+      "put": {
+        "summary": "Update GPS AVL IO configurations",
+        "operationId": "put-services-gps-avl_io",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_io_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_io_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL IO configurations",
+        "tags": [
+          "GPS AVL IO"
+        ]
+      },
+      "delete": {
+        "summary": "Delete GPS AVL IO configurations",
+        "operationId": "delete-services-gps-avl_io",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "description": "Deletes GPS AVL IO configurations",
+        "tags": [
+          "GPS AVL IO"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true,
+          "ios": true
+        }
+      }
+    },
+    "/gps/avl_io/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS AVL IO configuration",
+        "tags": [
+          "GPS AVL IO"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_io"
+          }
+        },
+        "operationId": "get-services-gps-avl_io-sid",
+        "description": "Gets GPS AVL IO configuration"
+      },
+      "put": {
+        "summary": "Update GPS AVL IO configuration",
+        "operationId": "put-services-gps-avl_io-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_io"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_io"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL IO configuration",
+        "tags": [
+          "GPS AVL IO"
+        ]
+      },
+      "delete": {
+        "summary": "Delete GPS AVL IO configuration",
+        "operationId": "delete-services-gps-avl_io-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "description": "Deletes GPS AVL IO configuration",
+        "tags": [
+          "GPS AVL IO"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true,
+          "ios": true
+        }
+      }
+    },
+    "/gps/avl/config": {
+      "get": {
+        "summary": "Get GPS AVL General configurations",
+        "tags": [
+          "GPS AVL General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_general_multi"
+          }
+        },
+        "operationId": "get-services-gps-avl",
+        "description": "Gets GPS AVL General configurations"
+      },
+      "put": {
+        "summary": "Update GPS AVL General configurations",
+        "operationId": "put-services-gps-avl",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_general_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_general_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL General configuration",
+        "tags": [
+          "GPS AVL General"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/avl/config/general": {
+      "get": {
+        "summary": "Get GPS AVL General configuration",
+        "tags": [
+          "GPS AVL General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_general"
+          }
+        },
+        "operationId": "get-services-gps-avl-sid",
+        "description": "Gets GPS AVL General configuration"
+      },
+      "put": {
+        "summary": "Update GPS AVL General configuration",
+        "operationId": "put-services-gps-avl-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_general"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_general_put"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL General configuration",
+        "tags": [
+          "GPS AVL General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/tavl_rules/config": {
+      "get": {
+        "summary": "Get GPS TAVL Rules configurations",
+        "tags": [
+          "GPS TAVL Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_tavl_multi"
+          }
+        },
+        "operationId": "get-services-gps-tavl_rules",
+        "description": "Gets GPS TAVL Rules configurations"
+      },
+      "put": {
+        "summary": "Update GPS TAVL Rules configurations",
+        "operationId": "put-services-gps-tavl_rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_tavl_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_tavl_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS TAVL Rules configurations",
+        "tags": [
+          "GPS TAVL Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/tavl_rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS TAVL Rules configuration",
+        "tags": [
+          "GPS TAVL Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_tavl"
+          }
+        },
+        "operationId": "get-services-gps-tavl_rules-sid",
+        "description": "Gets GPS TAVL Rules configuration"
+      },
+      "put": {
+        "summary": "Update GPS TAVL Rules configuration",
+        "operationId": "put-services-gps-tavl_rules-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_tavl_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_tavl_put"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS TAVL Rules configuration",
+        "tags": [
+          "GPS TAVL Rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/avl_main/config": {
+      "get": {
+        "summary": "Get GPS AVL Main configurations",
+        "tags": [
+          "GPS AVL Main"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_main_multi"
+          }
+        },
+        "operationId": "get-services-gps-avl_main",
+        "description": "Gets GPS AVL Main configurations"
+      },
+      "put": {
+        "summary": "Update GPS AVL Main configurations",
+        "operationId": "put-services-gps-avl_main",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_main_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_main_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL Main configurations",
+        "tags": [
+          "GPS AVL Main"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/avl_main/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS AVL Main configuration",
+        "tags": [
+          "GPS AVL Main"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_main"
+          }
+        },
+        "operationId": "get-services-gps-avl_main-sid",
+        "description": "Gets GPS AVL Main configuration"
+      },
+      "put": {
+        "summary": "Update GPS AVL Main configuration",
+        "operationId": "put-services-gps-avl_main-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_main"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_main_put"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL Main configuration",
+        "tags": [
+          "GPS AVL Main"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/avl_rules/config": {
+      "get": {
+        "summary": "Get GPS AVL Rules configurations",
+        "tags": [
+          "GPS AVL Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_rules_multi"
+          }
+        },
+        "operationId": "get-services-gps-avl_rules",
+        "description": "Gets GPS AVL Rules configurations"
+      },
+      "post": {
+        "summary": "Create GPS AVL Rules configuration",
+        "operationId": "post-services-gps-avl_rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_rules"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_rules"
+              }
+            }
+          }
+        },
+        "description": "Creates GPS AVL Rules configuration",
+        "tags": [
+          "GPS AVL Rules"
+        ]
+      },
+      "put": {
+        "summary": "Update GPS AVL Rules configurations",
+        "operationId": "put-services-gps-avl_rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_rules_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_rules_put_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL Rules configurations",
+        "tags": [
+          "GPS AVL Rules"
+        ]
+      },
+      "delete": {
+        "summary": "Delete GPS AVL Rules configurations",
+        "operationId": "delete-services-gps-avl_rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "description": "Deletes GPS AVL Rules configurations",
+        "tags": [
+          "GPS AVL Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/avl_rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get GPS AVL Rules configuration",
+        "tags": [
+          "GPS AVL Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_rules"
+          }
+        },
+        "operationId": "get-services-gps-avl_rules-sid",
+        "description": "Gets GPS AVL Rules configuration"
+      },
+      "put": {
+        "summary": "Update GPS AVL Rules configuration",
+        "operationId": "put-services-gps-avl_rules-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_avl_rules"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_avl_rules"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS AVL Rules configuration",
+        "tags": [
+          "GPS AVL Rules"
+        ]
+      },
+      "delete": {
+        "summary": "Delete GPS AVL Rules configuration",
+        "operationId": "delete-services-gps-avl_rules-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "description": "Deletes GPS AVL Rules configuration",
+        "tags": [
+          "GPS AVL Rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/general/position": {
+      "get": {
+        "summary": "Get GPS position",
+        "tags": [
+          "GPS General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_general_position"
+          }
+        },
+        "operationId": "get-services-gps-general-position",
+        "description": "Gets GPS position"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "gps_general": {
+        "description": "GPS service needs to be enabled to use GPS related functionality. You can micromanage this service using configuration options inside the sections to the left.",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns the GPS service on or off. This field has to be enabled in order to use any GPS related functions.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "galileo_sup": {
+            "type": "string",
+            "description": "Turns support for Galileo satellites on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "!modems": [
+                "SLM770-A",
+                "BG95-M4"
+              ],
+              "pretty": "Galileo NMEA support",
+              "input-type": "switch"
+            }
+          },
+          "glonass_sup": {
+            "type": "string",
+            "description": "Turns support for Glonass satellites on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "!modems": [
+                "SLM770-A",
+                "BG95-M4"
+              ],
+              "pretty": "Glonass NMEA support",
+              "input-type": "switch"
+            }
+          },
+          "beidou_sup": {
+            "type": "string",
+            "description": "Turns support for BeiDou satellites on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "!modems": [
+                "SLM770-A",
+                "BG95-M4"
+              ],
+              "pretty": "BeiDou NMEA support",
+              "input-type": "switch"
+            }
+          },
+          "dpo_enabled": {
+            "type": "string",
+            "description": "Turns DPO mode on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "modems": [
+                "EC25-EC",
+                "EC25-E",
+                "EC25-EU",
+                "EC25-EUX",
+                "EC25-AUTL",
+                "EC25-AUT",
+                "EC25-AUX",
+                "EC25-AFX",
+                "EC25-AFF",
+                "EC25-AF",
+                "EC25-AU",
+                "EC25-A",
+                "EC25-V",
+                "EC25-J",
+                "EC20-CE",
+                "EC200A-EU",
+                "EC200A-AU",
+                "EC200A-CN",
+                "EC21-EC",
+                "EC21-EU",
+                "EC21-E",
+                "EC21-AUV",
+                "EC21-AUX",
+                "EC21-AUT",
+                "EC21-AU",
+                "EC21-A",
+                "EC21-V",
+                "EC21-J",
+                "EG06-E",
+                "EG06-A",
+                "EG12-EA",
+                "EG25-G",
+                "BG96",
+                "BG95-M3",
+                "BG95-M4",
+                "RG500Q-EU",
+                "RG500Q-EA",
+                "RG500U-EA",
+                "RG501Q-EU",
+                "RG501Q-EA",
+                "RG520N-NA",
+                "RG520N-EU",
+                "UC20-A",
+                "UC20-E",
+                "UC20-G"
+              ],
+              "pretty": "DPO enabled",
+              "input-type": "switch"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "galileo_sup",
+          "glonass_sup",
+          "beidou_sup",
+          "dpo_enabled"
+        ]
+      },
+      "nmea": {
+        "description": "This section is used to configure NMEA forwarding settings",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns NMEA forwarding on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "hostname": {
+            "type": "string",
+            "description": "IP address or hostname of the server to which NMEA data will be forwarded.",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "proto": {
+            "type": "string",
+            "description": "Communication protocol used for NMEA sentence forwarding.",
+            "enum": [
+              "tcp",
+              "udp"
+            ],
+            "x-web": {
+              "pretty": "Protocol",
+              "enum-pretty": {
+                "tcp": "TCP",
+                "udp": "UDP"
+              },
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "TCP/UDP port number of the server.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "con_contain": {
+            "type": "string",
+            "description": "Contain active session with a remote server",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Contain connection",
+              "input-type": "switch"
+            }
+          },
+          "send_prefix": {
+            "type": "string",
+            "description": "Prefix is added to the NMEA sentence before it is transmitted. Example: 0012345567_$GPRMC....",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Select prefix",
+              "input-type": "input"
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Set which type of memory will be used for storing NMEA forwarding cache.",
+            "enum": [
+              "ram",
+              "flash"
+            ],
+            "x-web": {
+              "pretty": "Save cache in",
+              "enum-pretty": {
+                "ram": "RAM memory",
+                "flash": "Flash memory"
+              },
+              "input-type": "select"
+            }
+          },
+          "sentences_max": {
+            "type": "string",
+            "description": "Maximum amount of NMEA sentences that will be saved in the cache before older entries are replaced by new ones.",
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Maximum sentences",
+              "input-type": "input"
+            }
+          },
+          "location": {
+            "type": "string",
+            "description": "Location of the file where NMEA forwarding cache information will be stored.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_\\.]+$",
+            "x-web": {
+              "pretty": "File",
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "flash"
+                }
+              ]
+            }
+          },
+          "collecting_enabled": {
+            "type": "string",
+            "description": "Turns NMEA sentence collecting on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "collecting_location": {
+            "type": "string",
+            "description": "Location of the file where collected NMEA sentences will be stored.",
+            "maxlength": 128,
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9-_\\.]+$",
+            "x-web": {
+              "pretty": "File",
+              "input-type": "input",
+              "depends": [
+                {
+                  "collecting_enabled": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "hostname",
+          "proto",
+          "port",
+          "con_contain",
+          "type",
+          "sentences_max",
+          "location",
+          "collecting_enabled",
+          "collecting_location"
+        ]
+      },
+      "nmea_rules": {
+        "description": "This section is used to select how and where the NMEA forwarding cache data should be stored",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "forwarding_enabled": {
+            "type": "string",
+            "description": "Enable forwarding for a sentence.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Forwarding interval",
+              "input-type": "switch"
+            }
+          },
+          "forwarding_interval": {
+            "type": "string",
+            "description": "Set interval of seconds for sentence forwarding.",
+            "x-web": {
+              "pretty": "Forwarding enabled",
+              "input-type": "input"
+            }
+          },
+          "collecting_enabled": {
+            "type": "string",
+            "description": "Enable collecting for a sentence.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Collecting enabled",
+              "input-type": "switch"
+            }
+          },
+          "collecting_interval": {
+            "type": "string",
+            "description": "Set interval of seconds for sentence collecting.",
+            "x-web": {
+              "pretty": "Collecting interval",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "forwarding_enabled",
+          "forwarding_interval",
+          "collecting_interval",
+          "collecting_enabled"
+        ]
+      },
+      "geofencing": {
+        "description": "This section is used to configure the geofence area. Scroll your mouse pointer over field names in order to see helpful hints.",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns the geofence instance on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "longitude": {
+            "type": "string",
+            "description": "East-west position of a point on the Earth's surface. Combining this and the Latitude information will produce a point on the world map that will serve as the center of the geofence area.",
+            "x-web": {
+              "pretty": "Longtitude (X)",
+              "input-type": "input"
+            }
+          },
+          "latitude": {
+            "type": "string",
+            "description": "North-south position of a point on the Earth's surface. Combining this and the Longitude information will produce a point on the world map that will serve as the center of the geofence area",
+            "x-web": {
+              "pretty": "Latitude (X)",
+              "input-type": "input"
+            }
+          },
+          "radius": {
+            "type": "string",
+            "description": "Radius (in meters) of this geofence area.",
+            "format": "irange(1,9999999)",
+            "default": "200",
+            "x-web": {
+              "pretty": "Radius",
+              "input-type": "input"
+            }
+          },
+          "generate_event": {
+            "type": "string",
+            "description": "Specifies whether the rule should be triggered when the device enters the geofence area, leaves it or on both events.",
+            "enum": [
+              "on_exit",
+              "on_enter",
+              "on_both"
+            ],
+            "x-web": {
+              "pretty": "Generate event on",
+              "enum-pretty": {
+                "on_exit": "Exit",
+                "on_enter": "Enter",
+                "on_both": "Enter/exit"
+              },
+              "input-type": "select"
+            }
+          },
+          "switch_profile": {
+            "type": "string",
+            "description": "Select a profile to switch to on this geofencing event",
+            "x-web": {
+              "pretty": "Switch profile",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "longitude",
+          "latitude",
+          "radius",
+          "generate_event"
+        ]
+      },
+      "https_general": {
+        "description": "HTTPS/HTTP Server Settings",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable NMEA forwarding to remote server in HTTPS protocol",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "hostname": {
+            "type": "string",
+            "description": "URL of the remote server (ex. example.com/xxxx)",
+            "format": "url",
+            "x-web": {
+              "pretty": "URL",
+              "input-type": "input"
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Interval on which collected NMEA sentences should be forwarded",
+            "format": "irange(1,4294967296)",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "hostname",
+          "interval"
+        ]
+      },
+      "gps_https": {
+        "description": "TAVL Settings",
+        "title": "gps_https",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Set to enable https tavl rule",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "avl_io": {
+        "description": "AVL Input Rule Data Configuration",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Set to enable input configuration.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "io_name": {
+            "type": "string",
+            "description": "Select type on your own intended configuration.",
+            "x-web": {
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "din1": true
+                  },
+                  "values": [
+                    "din1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "din1": true,
+                    "din2": true,
+                    "iio": true,
+                    "adc0": true,
+                    "acl0": true
+                  },
+                  "values": [
+                    "din1",
+                    "din2",
+                    "iio",
+                    "adc0",
+                    "acl0"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio1": true,
+                    "dio2": true,
+                    "adc0": true,
+                    "acl0": true
+                  },
+                  "values": [
+                    "adc0",
+                    "dio1",
+                    "dio2",
+                    "acl0"
+                  ]
+                }
+              ],
+              "pretty": "Input type",
+              "unique": true,
+              "input-type": "select"
+            }
+          },
+          "acl": {
+            "type": "string",
+            "description": "Select which property - ampere or percentage the condition listens to.",
+            "enum": [
+              "current",
+              "percent"
+            ],
+            "default": "current",
+            "x-web": {
+              "pretty": "ACL Property",
+              "input-type": "select",
+              "hw_tags": {
+                "acl0": true
+              },
+              "enum-pretty": {
+                "current": "Current",
+                "percent": "Percent"
+              }
+            }
+          },
+          "min": {
+            "type": "string",
+            "description": "Minimum range",
+            "x-web": {
+              "pretty": "Min value",
+              "input-type": "input",
+              "hw_tags": {
+                "adc0": true,
+                "acl0": true
+              }
+            }
+          },
+          "max": {
+            "type": "string",
+            "description": "Maximum range",
+            "x-web": {
+              "pretty": "Max value",
+              "input-type": "input",
+              "hw_tags": {
+                "adc0": true,
+                "acl0": true
+              }
+            }
+          },
+          "event": {
+            "type": "string",
+            "description": "Set trigger event.",
+            "enum": [
+              "no",
+              "nc",
+              "both",
+              "in",
+              "out"
+            ],
+            "x-web": {
+              "pretty": "Trigger",
+              "enum-pretty": {
+                "no": "Input active",
+                "nc": "Input low",
+                "both": "Both",
+                "in": "Inside range",
+                "out": "Outside range"
+              },
+              "input-type": "select"
+            }
+          },
+          "priority": {
+            "type": "string",
+            "description": "Set priority.",
+            "enum": [
+              "low",
+              "high",
+              "panic",
+              "security"
+            ],
+            "x-web": {
+              "pretty": "Priority",
+              "enum-pretty": {
+                "low": "Low",
+                "high": "High",
+                "panic": "Panic",
+                "security": "Security"
+              },
+              "input-type": "select"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "io_name",
+          "min",
+          "max",
+          "event",
+          "priority"
+        ]
+      },
+      "avl_general": {
+        "description": "This section is used to configure the main data sending parameters to an AVL server.",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns data sending to an AVL server on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "send_retry": {
+            "type": "string",
+            "description": "In case of a failed attempt, retry to send the same data to server later (Retry until successful)",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Retry on fail",
+              "input-type": "switch"
+            }
+          },
+          "hostname": {
+            "type": "string",
+            "description": "Hostname of the remote server",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "proto": {
+            "type": "string",
+            "description": "Protocol to be used for sending AVL to the remote server",
+            "enum": [
+              "tcp",
+              "udp"
+            ],
+            "x-web": {
+              "pretty": "Protocol",
+              "enum-pretty": {
+                "tcp": "TCP",
+                "udp": "UDP"
+              },
+              "input-type": "select"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Port of the remote server",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "con_contain": {
+            "type": "string",
+            "description": "Set to handle each AVL packet iteration as a new connection",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Don't contain connection",
+              "input-type": "switch"
+            }
+          },
+          "static_navigation": {
+            "type": "string",
+            "description": "Set to stop collecting NMEA data if object is stationary.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Static navigation",
+              "input-type": "switch"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "send_retry",
+          "hostname",
+          "proto",
+          "port",
+          "con_contain",
+          "static_navigation"
+        ]
+      },
+      "tavl": {
+        "title": "tavl",
+        "description": "This section is used to select which router information should be sent to the AVL server.",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Set to enable rule.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "avl_main": {
+        "description": "The Main rule section defines how and when GPS data will be collected and sent to a specified AVL server.",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "priority": {
+            "type": "string",
+            "description": "The rule's priority. Different priority settings add different flags to event packets, so they can be displayed differently in the receiving system. The router sends data of higher priority first.",
+            "enum": [
+              "low",
+              "high",
+              "panic",
+              "security"
+            ],
+            "x-web": {
+              "pretty": "Priority",
+              "enum-pretty": {
+                "low": "Low",
+                "high": "High",
+                "panic": "Panic",
+                "security": "Security"
+              },
+              "input-type": "select"
+            }
+          },
+          "collect_period": {
+            "type": "string",
+            "description": "Period (in seconds) for data collection",
+            "format": "irange(1,999999)",
+            "default": "5",
+            "x-web": {
+              "pretty": "Collect period",
+              "input-type": "input"
+            }
+          },
+          "distance": {
+            "type": "string",
+            "description": "Minimal distance (in meters) change in saved records to send",
+            "format": "irange(1,999999)",
+            "default": "200",
+            "x-web": {
+              "pretty": "Min distance",
+              "input-type": "input"
+            }
+          },
+          "angle": {
+            "type": "string",
+            "description": "Minimal angle change in Degrees",
+            "format": "irange(1,360)",
+            "default": "30",
+            "x-web": {
+              "pretty": "Min angle",
+              "input-type": "input"
+            }
+          },
+          "saved_records": {
+            "type": "string",
+            "description": "Minimal saved records count to send",
+            "format": "irange(1,32)",
+            "default": "20",
+            "x-web": {
+              "pretty": "Min saved records",
+              "input-type": "input"
+            }
+          },
+          "send_period": {
+            "type": "string",
+            "description": "Send period (in seconds) for data sending",
+            "format": "irange(1,999999)",
+            "default": "50",
+            "x-web": {
+              "pretty": "Send period",
+              "input-type": "input"
+            }
+          },
+          "accuracy": {
+            "type": "string",
+            "description": "Minimum accuracy (in meters) required before saving record. The lower the accuracy value, the better.",
+            "format": "irange(1,999999)",
+            "default": "10",
+            "x-web": {
+              "pretty": "Min accuracy",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "priority",
+          "collect_period",
+          "distance",
+          "angle",
+          "saved_records",
+          "send_period",
+          "accuracy"
+        ]
+      },
+      "avl_rules": {
+        "description": "",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns the configuration on or off",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "wan_status": {
+            "type": "string",
+            "description": "Select wan interface for GPS rule",
+            "enum": [
+              "mobile_both",
+              "mobile_home",
+              "mobile_roaming",
+              "wired"
+            ],
+            "x-web": {
+              "unique": true,
+              "pretty": "WAN",
+              "enum-pretty": {
+                "mobile_both": "Mobile both",
+                "mobile_home": "Mobile home",
+                "mobile_roaming": "Mobile roaming",
+                "wired": "Wired",
+                "wifi": "WiFi"
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "wifi": true
+                  },
+                  "values": [
+                    "mobile_both",
+                    "mobile_home",
+                    "mobile_roaming",
+                    "wifi",
+                    "wired"
+                  ]
+                }
+              ],
+              "input-type": "select"
+            }
+          },
+          "ignore": {
+            "type": "string",
+            "description": "Enable to ignore the state of input",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Ignore",
+              "input-type": "switch"
+            }
+          },
+          "din_status": {
+            "type": "string",
+            "description": "Select input state for GPS rule.",
+            "enum": [
+              "low",
+              "high",
+              "both"
+            ],
+            "x-web": {
+              "pretty": "IO level",
+              "enum-pretty": {
+                "low": "Low level",
+                "high": "High level",
+                "both": "Both"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "ignore": "0"
+                }
+              ]
+            }
+          },
+          "io_type": {
+            "type": "string",
+            "description": "Select input/output type",
+            "enum": [
+              "gpio"
+            ],
+            "x-web": {
+              "pretty": "IO type",
+              "enum-pretty": {
+                "gpio": "GPIO"
+              },
+              "input-type": "select",
+              "depends": [
+                {
+                  "ignore": "0"
+                }
+              ]
+            }
+          },
+          "io_name": {
+            "type": "string",
+            "description": "Select input/output name",
+            "x-web": {
+              "pretty": "IO name",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "din1": true
+                  },
+                  "values": [
+                    "din1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "din1": true,
+                    "din2": true,
+                    "iio": true
+                  },
+                  "values": [
+                    "din1",
+                    "din2",
+                    "iio"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "dio1": true,
+                    "dio2": true
+                  },
+                  "values": [
+                    "dio1",
+                    "dio2"
+                  ]
+                }
+              ],
+              "input-type": "select",
+              "depends": [
+                {
+                  "ignore": "0"
+                }
+              ]
+            }
+          },
+          "priority": {
+            "type": "string",
+            "description": "The rule's priority. Different priority settings add different flags to event packets, so they can be displayed differently in the receiving system. The router sends data of higher priority first.",
+            "enum": [
+              "low",
+              "high",
+              "panic",
+              "security"
+            ],
+            "x-web": {
+              "pretty": "Priority",
+              "enum-pretty": {
+                "low": "Low",
+                "high": "High",
+                "panic": "Panic",
+                "security": "Security"
+              },
+              "input-type": "select"
+            }
+          },
+          "collect_period": {
+            "type": "string",
+            "description": "Period (in seconds) for data collection",
+            "format": "irange(1,999999)",
+            "default": "5",
+            "x-web": {
+              "pretty": "Collect period",
+              "input-type": "input"
+            }
+          },
+          "distance": {
+            "type": "string",
+            "description": "Minimal distance (in meters) change in saved records to send",
+            "format": "irange(1,999999)",
+            "default": "200",
+            "x-web": {
+              "pretty": "Min distance",
+              "input-type": "input"
+            }
+          },
+          "angle": {
+            "type": "string",
+            "description": "Minimal angle change in Degrees",
+            "format": "irange(1,360)",
+            "default": "30",
+            "x-web": {
+              "pretty": "Min angle",
+              "input-type": "input"
+            }
+          },
+          "saved_records": {
+            "type": "string",
+            "description": "Minimal saved records count to send",
+            "format": "irange(1,32)",
+            "default": "20",
+            "x-web": {
+              "pretty": "Min saved records",
+              "input-type": "input"
+            }
+          },
+          "send_period": {
+            "type": "string",
+            "description": "Send period (in seconds) for data sending",
+            "format": "irange(1,999999)",
+            "default": "50",
+            "x-web": {
+              "pretty": "Send period",
+              "input-type": "input"
+            }
+          },
+          "accuracy": {
+            "type": "string",
+            "description": "Minimum accuracy (in meters) required before saving record. The lower the accuracy value, the better.",
+            "format": "irange(1,999999)",
+            "default": "10",
+            "x-web": {
+              "pretty": "Min accuracy",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "wan_status",
+          "ignore",
+          "din_status",
+          "io_type",
+          "io_name",
+          "priority",
+          "collect_period",
+          "distance",
+          "angle",
+          "saved_records",
+          "send_period",
+          "accuracy"
+        ]
+      },
+      "req_body_gps_general_put": {
+        "description": "",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/gps_general"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_general_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": []
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/gps_general"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_nmea_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/nmea"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_nmea_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/nmea"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_nmea_rules_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/nmea_rules"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_nmea_rules_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/nmea_rules"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_geofencing_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/geofencing"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_geofencing_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/geofencing"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_geofencing_post": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "x-web": {
+                      "pretty": "Device ID",
+                      "unique": true,
+                      "input-type": "input"
+                    }
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/schemas/geofencing"
+              }
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_delete_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              ""
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_https_general_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/https_general"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_https_general_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/https_general"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_https_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/gps_https"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_https_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/gps_https"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_io": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/avl_io"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_io_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/avl_io"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_general_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/avl_general"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_general_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/avl_general"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_tavl_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/tavl"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_tavl_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/tavl"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_main_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/avl_main"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_main_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/avl_main"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_rules": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/avl_rules"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_gps_avl_rules_put_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/avl_rules"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "gps_general_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": []
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/gps_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_general_position": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "accuracy": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "fix_status": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "altitude": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "speed": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "satellites": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "longitude": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "latitude": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "angle": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "utc_timestamp": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "accuracy",
+                    "fix_status",
+                    "altitude",
+                    "speed",
+                    "timestamp",
+                    "satellites",
+                    "longitude",
+                    "latitude",
+                    "angle",
+                    "utc_timestamp"
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "accuracy": "0",
+                    "fix_status": "0",
+                    "altitude": "0",
+                    "speed": "0",
+                    "timestamp": "0",
+                    "satellites": "0",
+                    "longitude": "0",
+                    "latitude": "0",
+                    "angle": "0",
+                    "utc_timestamp": "0"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "gps_general": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/gps_general"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_nmea": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nmea"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_nmea_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/nmea"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_nmea_rules": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nmea_rules"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_nmea_rules_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/nmea_rules"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_geofencing": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/geofencing"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_geofencing_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Name",
+                              "input-type": "input"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/geofencing"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "delete_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "status": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "status"
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": "testing",
+                    "status": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "id",
+                      "status"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "status": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "testing",
+                      "status": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "gps_https_general": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/https_general"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_https_general_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/https_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_https": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Type of Tavl rule",
+                          "x-web": {
+                            "pretty": "Type",
+                            "input-type": "input",
+                            "group": "General Settings"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Name of Tavl rule",
+                          "x-web": {
+                            "pretty": "Name",
+                            "input-type": "input",
+                            "group": "General Settings"
+                          }
+                        },
+                        "acl": {
+                          "type": "string",
+                          "description": "Select which property to use",
+                          "enum": [
+                            "percent",
+                            "current"
+                          ],
+                          "x-web": {
+                            "pretty": "ACL property",
+                            "input-type": "select",
+                            "enum-pretty": {
+                              "percent": "Percent",
+                              "current": "Current"
+                            },
+                            "enum-depends": [
+                              {
+                                "type": "acl"
+                              }
+                            ],
+                            "hw_tags": {
+                              "acl0": true
+                            },
+                            "group": "General Settings"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/gps_https"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_https_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "Type of Tavl rule",
+                            "x-web": {
+                              "pretty": "Type",
+                              "input-type": "input",
+                              "group": "General Settings"
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of Tavl rule",
+                            "x-web": {
+                              "pretty": "Name",
+                              "input-type": "input",
+                              "group": "General Settings"
+                            }
+                          },
+                          "acl": {
+                            "type": "string",
+                            "description": "Select which property to use",
+                            "enum": [
+                              "percent",
+                              "current"
+                            ],
+                            "x-web": {
+                              "pretty": "ACL property",
+                              "input-type": "select",
+                              "enum-pretty": {
+                                "percent": "Percent",
+                                "current": "Current"
+                              },
+                              "enum-depends": [
+                                {
+                                  "type": "acl"
+                                }
+                              ],
+                              "hw_tags": {
+                                "acl0": true
+                              },
+                              "group": "General Settings"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/gps_https"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_io": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/avl_io"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_io_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/avl_io"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_general": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/avl_general"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_general_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/avl_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_tavl": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "Type of Tavl rule",
+                          "x-web": {
+                            "pretty": "Type",
+                            "input-type": "input",
+                            "group": "General Settings"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Name of Tavl rule",
+                          "x-web": {
+                            "pretty": "Name",
+                            "input-type": "input",
+                            "group": "General Settings"
+                          }
+                        },
+                        "acl": {
+                          "type": "string",
+                          "description": "Select which property to use",
+                          "enum": [
+                            "percent",
+                            "current"
+                          ],
+                          "x-web": {
+                            "pretty": "ACL property",
+                            "input-type": "select",
+                            "enum-pretty": {
+                              "percent": "Percent",
+                              "current": "Current"
+                            },
+                            "enum-depends": [
+                              {
+                                "type": "acl"
+                              }
+                            ],
+                            "hw_tags": {
+                              "acl0": true
+                            },
+                            "group": "General Settings"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/tavl"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_tavl_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "Type of Tavl rule",
+                            "x-web": {
+                              "pretty": "Type",
+                              "input-type": "input",
+                              "group": "General Settings"
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of Tavl rule",
+                            "x-web": {
+                              "pretty": "Name",
+                              "input-type": "input",
+                              "group": "General Settings"
+                            }
+                          },
+                          "acl": {
+                            "type": "string",
+                            "description": "Select which property to use",
+                            "enum": [
+                              "percent",
+                              "current"
+                            ],
+                            "x-web": {
+                              "pretty": "ACL property",
+                              "input-type": "select",
+                              "enum-pretty": {
+                                "percent": "Percent",
+                                "current": "Current"
+                              },
+                              "enum-depends": [
+                                {
+                                  "type": "acl"
+                                }
+                              ],
+                              "hw_tags": {
+                                "acl0": true
+                              },
+                              "group": "General Settings"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/tavl"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_main": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/avl_main"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_main_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/avl_main"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_rules": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/avl_rules"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_avl_rules_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/avl_rules"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

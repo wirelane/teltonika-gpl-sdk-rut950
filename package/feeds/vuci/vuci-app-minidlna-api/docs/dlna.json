@@ -1,0 +1,537 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Minidlna",
+    "description": "Minidlna API documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "DLNA"
+    }
+  ],
+  "paths": {
+    "/minidlna/config": {
+      "get": {
+        "summary": "Returns minidlna configurations",
+        "tags": [
+          "DLNA"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_minidlna_multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-services-minidlna-config",
+        "description": "Returns minidlna configurations"
+      },
+      "put": {
+        "summary": "Updates minidlna configurations",
+        "operationId": "put-services-minidlna-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_minidlna_multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "Updates minidlna configurations",
+        "tags": [
+          "DLNA"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": [
+                      {
+                        "id": ""
+                      }
+                    ]
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/minidlna_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "DLNA"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/minidlna/config/general": {
+      "get": {
+        "tags": [
+          "DLNA"
+        ],
+        "summary": "Returns minidlna configurations",
+        "description": "Returns minidlna configurations",
+        "operationId": "services-minidlna-config-general-get",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_minidlna_one"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DLNA"
+        ],
+        "summary": "Updates minidlna configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_minidlna_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "services-minidlna-config-general-put",
+        "description": "Updates minidlna configurations",
+        "requestBody": {
+          "description": "Sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/minidlna_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "DLNA"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/minidlna/status": {
+      "get": {
+        "summary": "Get minidlna status",
+        "tags": [
+          "DLNA"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/minidlna_get_status"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-services-minidlna-status",
+        "description": "Gets minidlna status"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "USB Tools",
+          "DLNA"
+        ],
+        "hw_tags": {
+          "usb": true,
+          "ethernet": true
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "minidlna_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "General Settings"
+            },
+            "description": "Set to enable or disable dlna",
+            "format": "is_bool"
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Port for HTTP (descriptions, SOAP, media transfer) traffic",
+            "format": "irange(1, 65535)"
+          },
+          "friendly_name": {
+            "x-web": {
+              "pretty": "Friendly name",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Set this if you want to customize the name that shows up on your clients",
+            "maxLength": 255
+          },
+          "root_container": {
+            "x-web": {
+              "pretty": "Root container",
+              "enum-pretty": {
+                ".": "Standart Container",
+                "B": "Browse Directory",
+                "M": "Music",
+                "V": "Video",
+                "P": "Pictures"
+              },
+              "input-type": "select",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Root container",
+            "enum": [
+              ".",
+              "B",
+              "M",
+              "V",
+              "P"
+            ]
+          },
+          "media_dir": {
+            "x-web": {
+              "pretty": "Media directories",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "array",
+            "description": "Set this to the directory you want scanned. If you want to restrict the directory to a specific content type, you can prepend the type (A for audio, V for video, P for images), followed by a comma, to the directory (eg. A,/mnt/media/Music)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "album_art_names": {
+            "x-web": {
+              "pretty": "Album art names",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "array",
+	    "format": "regex",
+	    "pattern": "^[^\\/]+$",
+            "description": "This is a list of file names to check for when searching for album art",
+            "items": {
+              "type": "string",
+	      "maxLength": 256
+            }
+          },
+          "interface": {
+            "x-web": {
+              "pretty": "Interfaces",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "array",
+            "description": "Network interfaces to serve",
+            "items": {
+              "type": "string"
+            }
+          },
+          "inotify": {
+            "x-web": {
+              "pretty": "Enable inotify",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Set this to enable inotify monitoring to automatically discover new files",
+            "format": "is_bool"
+          },
+          "enable_tivo": {
+            "x-web": {
+              "pretty": "Enable TIVO",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Set this to enable support for streaming .jpg and .mp3 files to a TiVo supporting HMO",
+            "format": "is_bool"
+          },
+          "strict_dlna": {
+            "x-web": {
+              "pretty": "Strict to DLNA standart",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Set this to strictly adhere to DLNA standards",
+            "format": "is_bool"
+          },
+          "notify_interval": {
+            "x-web": {
+              "pretty": "Notify interval",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+	    "format": "uinteger",
+            "description": "Notify interval in seconds"
+          }
+        },
+	"required": ["interface", "port", "media_dir"]
+      },
+      "minidlna_get_status": {
+        "type": "object",
+        "properties": {
+          "running": {
+            "type": "boolean",
+            "description": "DLNA state"
+          },
+          "image": {
+            "type": "integer",
+            "description": "Image files"
+          },
+          "audio": {
+            "type": "integer",
+            "description": "Audio files"
+          },
+          "video": {
+            "type": "integer",
+            "description": "Video files"
+          },
+          "connections": {
+            "type": "integer",
+            "description": "Number of connections"
+          },
+          "clients": {
+            "type": "array",
+            "description": "Array of connected clients.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Client ID"
+                },
+                "mac": {
+                  "type": "string",
+                  "description": "Client MAC address"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Client type"
+                },
+                "connections": {
+                  "type": "string",
+                  "description": "Number of connections from this client"
+                },
+                "ip": {
+                  "type": "string",
+                  "description": "Client IP address"
+                }
+              }
+            }
+          }
+        }
+      },
+      "default_error": {
+        "title": "default_error",
+        "type": "object",
+        "description": "Default error object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Error code"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "source": {
+            "type": "string",
+            "description": "Error source"
+          }
+        }
+      }
+    },
+    "responses": {
+      "422response": {
+        "description": "Error appeared while parsing request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status",
+                  "default": false
+                },
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/default_error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_minidlna_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "",
+                      ".index": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/minidlna_options"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_minidlna_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/minidlna_options"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

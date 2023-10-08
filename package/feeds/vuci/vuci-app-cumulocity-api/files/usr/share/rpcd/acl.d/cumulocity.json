@@ -1,0 +1,28 @@
+{
+	"services/cloud_solutions/cumulocity": {
+		"description": "cumulocity configuration",
+		"read": {
+			"api": [
+				"/cloud_solutions/cumulocity/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/cloud_solutions/cumulocity/*"
+			]
+		}
+	},
+	"services/cloud_solutions/cot": {
+		"description": "cloud of things configuration",
+		"read": {
+			"api": [
+				"/cloud_solutions/cot/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/cloud_solutions/cot/*"
+			]
+		}
+	}
+}

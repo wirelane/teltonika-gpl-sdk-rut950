@@ -1,0 +1,1053 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Utilities sms forwarding",
+    "version": "1.0",
+    "description": "Mobile utitlities sms forwarding api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_forwarding/to_http/config": {
+      "get": {
+        "summary": "Returns SMS forwarding to HTTP configuration in an array",
+        "tags": [
+          "SMS forwarding to HTTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_http_many"
+          }
+        },
+        "operationId": "get-sms_forwarding_to_http-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates SMS forwarding to HTTP configuration in an array",
+        "tags": [
+          "SMS forwarding to HTTP"
+        ],
+        "operationId": "put-sms_forwarding_to_http-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_http_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_forwarding_to_http_many"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "SMS Forwarding",
+          "SMS Forwarding to HTTP"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_forwarding/to_http/config/general": {
+      "get": {
+        "summary": "Returns SMS forwarding to HTTP configuration",
+        "tags": [
+          "SMS forwarding to HTTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_http"
+          }
+        },
+        "operationId": "get-sms_forwarding_to_http-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates SMS forwarding to HTTP configuration",
+        "tags": [
+          "SMS forwarding to HTTP"
+        ],
+        "operationId": "put-sms_forwarding_to_http-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_http"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_forwarding_to_http"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "SMS Forwarding",
+          "SMS Forwarding to HTTP"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_forwarding/to_sms/config": {
+      "get": {
+        "summary": "Returns SMS forwarding to SMS configuration in an array",
+        "tags": [
+          "SMS forwarding to SMS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_sms_many"
+          }
+        },
+        "operationId": "get-sms_forwarding_to_sms-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates SMS forwarding to SMS configuration in an array",
+        "tags": [
+          "SMS forwarding to SMS"
+        ],
+        "operationId": "put-sms_forwarding_to_sms-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_sms_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_forwarding_to_sms_many"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "SMS Forwarding",
+          "SMS Forwarding to SMS"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_forwarding/to_sms/config/general": {
+      "get": {
+        "summary": "Returns SMS forwarding to SMS configuration",
+        "tags": [
+          "SMS forwarding to SMS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_sms"
+          }
+        },
+        "operationId": "get-sms_forwarding_to_sms-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates SMS forwarding to SMS configuration",
+        "tags": [
+          "SMS forwarding to SMS"
+        ],
+        "operationId": "put-sms_forwarding_to_sms-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_sms"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_forwarding_to_sms"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "SMS Forwarding",
+          "SMS Forwarding to SMS"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_forwarding/to_smtp/config": {
+      "get": {
+        "summary": "Returns SMS forwarding to SMTP configuration in an array",
+        "tags": [
+          "SMS forwarding to SMTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_smtp_many"
+          }
+        },
+        "operationId": "get-sms_forwarding_to_smtp-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates SMS forwarding to SMTP configuration in an array",
+        "tags": [
+          "SMS forwarding to SMTP"
+        ],
+        "operationId": "put-sms_forwarding_to_smtp-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_smtp_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_forwarding_to_smtp_many"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "SMS Forwarding",
+          "SMS Forwarding to SMTP"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_forwarding/to_smtp/config/general": {
+      "get": {
+        "summary": "Returns SMS forwarding to SMTP configuration",
+        "tags": [
+          "SMS forwarding to SMTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_smtp"
+          }
+        },
+        "operationId": "get-sms_forwarding_to_smtp-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates SMS forwarding to SMTP configuration",
+        "tags": [
+          "SMS forwarding to SMTP"
+        ],
+        "operationId": "put-sms_forwarding_to_smtp-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_forwarding_to_smtp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/sms_forwarding_to_smtp"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "SMS Forwarding",
+          "SMS Forwarding to SMTP"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sms_forwarding_to_http_opts": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable SMS forwarding to HTTP",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "every_sms": {
+            "type": "string",
+            "description": "Enable/disable SMS-utilities rules forwarding",
+            "x-web": {
+              "pretty": "Forward SMS-Utilities rules",
+              "input-type": "switch"
+            }
+          },
+          "delete_sms": {
+            "type": "string",
+            "description": "Don't save received message",
+            "x-web": {
+              "pretty": "Don't save received message",
+              "input-type": "switch"
+            }
+          },
+          "sender_num": {
+            "type": "string",
+            "description": "Enable/disable adding original message sender phone number",
+            "x-web": {
+              "pretty": "Include sender's number",
+              "input-type": "switch"
+            }
+          },
+          "number_name": {
+            "type": "string",
+            "description": "Sender phone number codename for query string name/value pair",
+            "maxLength": 16,
+            "x-web": {
+              "pretty": "Number value name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "sender_num": "1"
+                }
+              ]
+            }
+          },
+          "message_encode_b64": {
+            "type": "string",
+            "description": "Message text will be encoded to a Base64 string. Enable this to preserve Unicode characters in the message text.",
+            "x-web": {
+              "pretty": "Encode message text to Base64",
+              "input-type": "switch"
+            }
+          },
+          "verify_cert": {
+            "type": "string",
+            "description": "Select whether to ignore or verify server certificate",
+            "enum": [
+              "ignore",
+              "verify"
+            ],
+            "default": "ignore",
+            "x-web": {
+              "pretty": "HTTPS certificate verification",
+              "input-type": "select",
+              "enum-pretty": {
+                "ignore": "ignore",
+                "verify": "Verify"
+              }
+            }
+          },
+          "method": {
+            "type": "string",
+            "description": "Witch HTTP request method will be used",
+            "enum": [
+              "get",
+              "post"
+            ],
+            "default": "get",
+            "x-web": {
+              "pretty": "Method",
+              "input-type": "select",
+              "enum-pretty": {
+                "get": "Get",
+                "post": "Post"
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to which message is going to be forwarded",
+            "format": "url",
+            "x-web": {
+              "pretty": "URL",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "message_name": {
+            "type": "string",
+            "description": "Message codename for query string name/value pair",
+            "maxLength": 16,
+            "x-web": {
+              "pretty": "Message value name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "extra_name1": {
+            "type": "string",
+            "description": "Extra html query name.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Extra name 1",
+              "input-type": "input"
+            }
+          },
+          "extra_value1": {
+            "type": "string",
+            "description": "Extra html query value.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Extra value 1",
+              "input-type": "input"
+            }
+          },
+          "extra_name2": {
+            "type": "string",
+            "description": "Extra html query name.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Extra name 2",
+              "input-type": "input"
+            }
+          },
+          "extra_value2": {
+            "type": "string",
+            "description": "Extra html query value.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Extra value 2",
+              "input-type": "input"
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "Choose which messages are going to be forwarded",
+            "enum": [
+              "everyone",
+              "list_number",
+              "user_group"
+            ],
+            "default": "everyone",
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "everyone": "Everyone",
+                "list_number": "Listed numbers",
+                "user_group": "From phone group"
+              }
+            }
+          },
+          "tel": {
+            "type": "array",
+            "description": "Number(s) from which received messages will be forwarded to HTTP",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            },
+            "x-web": {
+              "pretty": "Sender's phone number(s)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "list_number",
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A recipient's phone number users group",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "user_group"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "number_name",
+          "url",
+          "message_name",
+          "tel"
+        ]
+      },
+      "sms_forwarding_to_sms_opts": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable SMS forwarding",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "every_sms": {
+            "type": "string",
+            "description": "Enable/disable SMS-utilities rules forwarding",
+            "x-web": {
+              "pretty": "Forward SMS-Utilities rules",
+              "input-type": "switch"
+            }
+          },
+          "delete_sms": {
+            "type": "string",
+            "description": "Set to do not save received message",
+            "x-web": {
+              "pretty": "Don't save received message",
+              "input-type": "switch"
+            }
+          },
+          "sender_num": {
+            "type": "string",
+            "description": "Enable/disable adding original message sender phone number at the end of message text. Only added if total message length is up to 480 characters",
+            "x-web": {
+              "pretty": "Add sender number",
+              "input-type": "switch"
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem id, which is used to send information from",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "Choose which messages are going to be forwarded",
+            "enum": [
+              "everyone",
+              "list_number",
+              "user_group"
+            ],
+            "default": "everyone",
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "everyone": "Everyone",
+                "list_number": "Listed numbers",
+                "user_group": "From phone group"
+              }
+            }
+          },
+          "tel": {
+            "type": "array",
+            "description": "Number(s) from which received messages will be forwarded",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            },
+            "x-web": {
+              "pretty": "Sender's phone number(s)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "list_number",
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A recipient's phone number users group",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "user_group"
+                }
+              ]
+            }
+          },
+          "fwd_number": {
+            "type": "array",
+            "description": "Number(s) to which received messages will be forwarded to",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            },
+            "x-web": {
+              "pretty": "Recipients phone numbers",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "tel",
+          "fwd_number"
+        ]
+      },
+      "sms_forwarding_to_smtp_opts": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable SMS forwarding",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "every_sms": {
+            "type": "string",
+            "description": "Enable/disable SMS-utilities rules forwarding",
+            "x-web": {
+              "pretty": "Forward SMS-Utilities rules",
+              "input-type": "switch"
+            }
+          },
+          "delete_sms": {
+            "type": "string",
+            "description": "Set to do not save received message",
+            "x-web": {
+              "pretty": "Don't save received message",
+              "input-type": "switch"
+            }
+          },
+          "sender_num": {
+            "type": "string",
+            "description": "Enable/disable adding sender phone number at the end of email text body",
+            "x-web": {
+              "pretty": "Add sender number",
+              "input-type": "switch"
+            }
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject of an email. Allowed characters (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
+            "maxLength": 255,
+            "format": "subject_rule",
+            "x-web": {
+              "pretty": "Subject",
+              "input-type": "input"
+            }
+          },
+          "email_name": {
+            "type": "string",
+            "description": "Sender's email configuration",
+            "x-web": {
+              "pretty": "Sender's email",
+              "input-type": "select"
+            }
+          },
+          "recipemail": {
+            "type": "array",
+            "description": "For whom you want to send an email to. Allowed characters (a-zA-Z0-9._%+-)",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "x-web": {
+              "pretty": "Recipient's email address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "Choose which messages are going to be forwarded",
+            "enum": [
+              "everyone",
+              "list_number",
+              "user_group"
+            ],
+            "default": "everyone",
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "everyone": "Everyone",
+                "list_number": "Listed numbers",
+                "user_group": "From phone group"
+              }
+            }
+          },
+          "tel": {
+            "type": "array",
+            "description": "Number(s) from which received messages will be forwarded",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            },
+            "x-web": {
+              "pretty": "Sender's phone number(s)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "list_number",
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A recipient's phone number users group",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "user_group"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "recipemail",
+          "tel"
+        ]
+      },
+      "sms_forwarding_to_http": {
+        "title": "sms_forwarding_to_http",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/sms_forwarding_to_http_opts"
+          }
+        ]
+      },
+      "sms_forwarding_to_sms": {
+        "title": "sms_forwarding_to_sms",
+        "x-stoplight": {
+          "id": "pb59rm43pxgeb"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/sms_forwarding_to_sms_opts"
+          }
+        ]
+      },
+      "sms_forwarding_smtp": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/sms_forwarding_to_smtp_opts"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "sms_forwarding_to_http": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/sms_forwarding_to_http"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_http_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_forwarding_to_http"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_sms": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/sms_forwarding_to_sms"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_sms_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_forwarding_to_sms"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_smtp": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/sms_forwarding_smtp"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_smtp_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_forwarding_smtp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "sms_forwarding_to_http": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/sms_forwarding_to_http_opts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_http_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_forwarding_to_http"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_sms": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/sms_forwarding_to_sms_opts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_sms_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_forwarding_to_sms"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_smtp": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/sms_forwarding_to_smtp_opts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "sms_forwarding_to_smtp_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sms_forwarding_smtp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SMS forwarding to HTTP"
+    },
+    {
+      "name": "SMS forwarding to SMS"
+    },
+    {
+      "name": "SMS forwarding to SMTP"
+    }
+  ]
+}

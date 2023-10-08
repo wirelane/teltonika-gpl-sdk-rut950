@@ -1,0 +1,9 @@
+{
+    "network/dns": {
+        "title": "DNS",
+        "index": 120,
+        "view": "network/DNS",
+        "acls": [ "network/dns" ],
+        "files": [ "/etc/config/dhcp" ]
+    }
+}

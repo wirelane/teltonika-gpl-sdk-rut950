@@ -1,0 +1,369 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "bgp_route_map_filters",
+    "version": "1.0",
+    "description": "Route map filters configuration"
+  },
+  "servers": [],
+  "paths": {
+    "/routes/dynamic/bgp/map_filters/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns specified bgp map filters configuration",
+        "tags": [
+          "bgp_route_map_filters"
+        ],
+        "operationId": "",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "string"
+                        },
+                        "direction": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        ".type": {
+                          "type": "string"
+                        },
+                        "route_map": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "enabled": "1",
+                        "direction": "in",
+                        "target": "peer",
+                        "id": "cfg058581",
+                        ".type": "bgp_route_map_filters",
+                        "route_map": "rmap"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified bgp map filters configuration",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_map_filters_options"
+                  }
+                }
+              },
+              "examples": {}
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "bgp_route_map_filters"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified bgp map filters configuration",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_map_filters"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "BGP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/bgp/map_filters/config": {
+      "post": {
+        "summary": "Creates bgp map filters configuration",
+        "operationId": "",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_map_filters_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_map_filters"
+        ]
+      },
+      "parameters": [],
+      "get": {
+        "summary": "Returns all bgp map filters configurations",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "enabled": {
+                            "type": "string"
+                          },
+                          "direction": {
+                            "type": "string"
+                          },
+                          "target": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          ".type": {
+                            "type": "string"
+                          },
+                          "route_map": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "enabled": "1",
+                          "direction": "in",
+                          "target": "peer",
+                          "id": "cfg058581",
+                          ".type": "bgp_route_map_filters",
+                          "route_map": "rmap"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_map_filters"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified bgp map filters configurations",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_map_filters_options_id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_map_filters"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified bgp map filters configurations",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "bgp_route_map_filters"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "BGP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "bgp_route_map_filters_options": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "direction": "in",
+            "target": "peer",
+            "route_map": "test"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Enable/Disable BGP route map filter.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "direction": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Direction",
+              "input-type": "select"
+            },
+            "description": "If direction is Inbound, the access list is applied to input routes. If direction is Outbound the access list is applied to advertised routes.",
+            "enum": [
+              "in",
+              "out"
+            ]
+          },
+          "target": {
+            "x-web": {
+              "pretty": "Peer",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Applies the filter for the specified peer."
+          },
+          "route_map": {
+            "x-web": {
+              "pretty": "Route map",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Route-map filter to apply."
+          }
+        },
+        "required": [
+          "direction",
+          "target",
+          "route_map"
+        ]
+      },
+      "bgp_route_map_filters_options_id": {
+        "title": "bgp_route_map_filters_options_id",
+        "x-stoplight": {
+          "id": "uvjx5xksgjj95"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/bgp_route_map_filters_options"
+          }
+        ]
+      }
+    }
+  }
+}

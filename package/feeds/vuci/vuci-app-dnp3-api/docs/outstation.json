@@ -1,0 +1,300 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DNP3 Outstation"
+    }
+  ],
+  "paths": {
+    "/dnp3/outstation/config/general": {
+      "get": {
+        "tags": [
+          "DNP3 Outstation"
+        ],
+        "summary": "Returns all DNP3 Outstation configuration",
+        "description": "Returns all configuration with their parameters form NP3 Outstation configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3OutstationMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DNP3 Outstation"
+        ],
+        "summary": "Updates specified DNP3 Outstation configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3Outstation"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dnp3_outstation_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dnp3/outstation/config": {
+      "get": {
+        "tags": [
+          "DNP3 Outstation"
+        ],
+        "summary": "Returns specified DNP3 Outstation configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3Outstation"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": ""
+      },
+      "put": {
+        "tags": [
+          "DNP3 Outstation"
+        ],
+        "summary": "Updates specified DNP3 Outstation configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3Outstation"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dnp3_outstation_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200DNP3Outstation": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/dnp3_outstation_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DNP3OutstationMulti": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configuration objects",
+                  "items": {
+                    "$ref": "#/components/schemas/dnp3_outstation_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "dnp3_outstation_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Check to enable this DNP3 outstation",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "local_addr": {
+            "type": "string",
+            "description": "Outstation Link-Layer Address",
+            "format": "irange(0, 65519)",
+            "x-web": {
+              "pretty": "Local address",
+              "input-type": "input"
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Client Link-Layer address",
+            "format": "irange(0, 65519)",
+            "x-web": {
+              "pretty": "Remote address",
+              "input-type": "input"
+            }
+          },
+          "unsolicited_enabled": {
+            "type": "string",
+            "description": "Enable the transmission of unsolicited messages",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Unsolicited enabled",
+              "input-type": "switch"
+            }
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "tcp",
+              "udp"
+            ],
+            "description": "Protocol",
+            "x-web": {
+              "pretty": "Protocol",
+              "enum-pretty": {
+                "tcp": "TCP",
+                "udp": "UDP"
+              },
+              "input-type": "select"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Port",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "udp_response_port": {
+            "description": "UDP response port",
+            "type": "string",
+            "format": "ipaddr",
+            "x-web": {
+              "pretty": "UDP response address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "protocol": "udp"
+                }
+              ]
+            }
+          },
+          "udp_response_ip": {
+            "type": "string",
+            "description": "UDP response address",
+            "format": "ipaddr",
+            "x-web": {
+              "pretty": "UDP response port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "protocol": "udp"
+                }
+              ]
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Allow access through WAN",
+            "x-web": {
+              "pretty": "Allow Remote Access",
+              "input-type": "switch"
+            }
+          }
+        },
+        "required": [
+          "unsolicited_enabled",
+          "port",
+          "protocol",
+          "remote_addr",
+          "local_addr"
+        ]
+      }
+    }
+  }
+}

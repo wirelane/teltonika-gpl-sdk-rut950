@@ -1,0 +1,290 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Utilities sms",
+    "version": "1.0",
+    "description": "Mobile utitlities sms api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_messages/read/config": {
+      "get": {
+        "summary": "Returns all SMS messages",
+        "tags": [
+          "SMS messages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sms_read"
+          }
+        },
+        "operationId": "get-services-mobile_utilities-sms-read-config",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Read Messages"
+        ],
+        "hidden": true
+      }
+    },
+    "/mobile_utilities/sms_messages/read/config/{modem_id}/{sms_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "enum": ["1", "2"]
+          },
+          "name": "sms_id",
+          "in": "path",
+          "required": true,
+          "description": "SMS ID"
+        }
+      ],
+      "delete": {
+        "summary": "Deletes the selected SMS message",
+        "operationId": "delete-services-mobile_utilities-sms-read-modem_id-sms_id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "SMS messages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Read Messages"
+        ],
+        "hidden": true
+      }
+    },
+    "/mobile_utilities/sms_messages/read/config/{modem_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
+      "delete": {
+        "summary": "Deletes the selected SMS messages",
+        "operationId": "delete-services-mobile_utilities-sms-read-modem_id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "description": "",
+        "tags": [
+          "SMS messages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Read Messages"
+        ],
+        "hidden": true
+      }
+    },
+    "/mobile_utilities/sms_messages/send/actions/send": {
+      "post": {
+        "summary": "Sends SMS message",
+        "operationId": "post-services-mobile_utilities-sms-send-actions-send",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sms_used": {
+                          "type": "integer",
+                          "description": "The number of used SMS messages.",
+                          "example": 1,
+                          "minimum": 1,
+                          "maximum": 3
+                        }
+                      },
+                      "required": ["sms_used"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_send_sms"
+              }
+            }
+          }
+        },
+        "tags": [
+          "SMS messages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Messages",
+          "Send Messages"
+        ],
+        "hidden": true
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sms_send": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "modem": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "modem",
+          "message",
+          "number"
+        ]
+      },
+      "req_body_send_sms": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/sms_send"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "sms_read": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "message",
+                      "sender",
+                      "id",
+                      "modem_id",
+                      "status",
+                      "date"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      },
+                      "sender": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "modem_id": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SMS messages"
+    }
+  ]
+}

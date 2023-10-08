@@ -1,0 +1,267 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Overview",
+    "description": "Overview API documentation",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Overview"
+    }
+  ],
+  "paths": {
+    "/overview/config": {
+      "get": {
+        "summary": "Returns all Overview configurations",
+        "tags": [
+          "Overview"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/overview_section"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the selected Overview configurations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/overview_section"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/overview_section"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Overview"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Status",
+          "Overview",
+          "Overview"
+        ]
+      }
+    },
+    "/overview/config/{overview_id}": {
+      "get": {
+        "summary": "Returns the selected Overview configuration",
+        "tags": [
+          "Overview"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/overview_section"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the selected Overview configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/overview_section"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/overview_section_no_id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Overview"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "overview_id",
+          "in": "path",
+          "required": true,
+          "description": "Overview configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Status",
+          "Overview",
+          "Overview"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "overview_section": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/overview_section_no_id"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Overview configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "overview_section_no_id": {
+        "title": "overview",
+        "type": "object",
+        "properties": {
+          "card_id": {
+            "type": "string",
+            "description": "Name of the overview card.",
+            "readOnly": true
+          },
+          "position": {
+            "x-web": {
+              "pretty": "Position",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Position of the overview card.",
+            "format": "uinteger"
+          },
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "description": "Overview card is enabled."
+          }
+        },
+        "required": [
+          "position"
+        ]
+      }
+    }
+  }
+}

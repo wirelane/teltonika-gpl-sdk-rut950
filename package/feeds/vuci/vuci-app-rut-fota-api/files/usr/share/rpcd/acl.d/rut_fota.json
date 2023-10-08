@@ -1,0 +1,16 @@
+{
+    "system/flashops/fota": {
+        "read": {
+			"api": ["/fota/*"],
+            "uci": [
+                "rut_fota"
+            ]
+        },
+        "write": {
+			"api": ["/fota/*"],
+            "uci": [
+                "rut_fota"
+            ]
+        }
+    }
+}

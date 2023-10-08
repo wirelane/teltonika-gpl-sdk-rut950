@@ -1,0 +1,916 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ULog",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Traffic logging"
+    },
+    {
+      "name": "Traffic logging FTP"
+    }
+  ],
+  "servers": [],
+  "paths": {
+    "/ulog/general/config": {
+      "get": {
+        "summary": "Returns the Traffic logging configuration in an array",
+        "tags": [
+          "Traffic logging"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_many"
+          }
+        },
+        "operationId": "get-services-ulog-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the Traffic logging configuration in an array",
+        "operationId": "put-services-ulog-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_many"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ulog_many"
+        },
+        "description": "",
+        "tags": [
+          "Traffic logging"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Traffic logging",
+          "Traffic logging"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/ulog/general/config/general": {
+      "get": {
+        "summary": "Returns the Traffic logging configuration",
+        "tags": [
+          "Traffic logging"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_one"
+          }
+        },
+        "operationId": "get-services-ulog-config-sid",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the Traffic logging configuration",
+        "operationId": "put-services-ulog-config-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_one"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ulog_one"
+        },
+        "description": "",
+        "tags": [
+          "Traffic logging"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Traffic logging",
+          "Traffic logging"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/ulog/general/status": {
+      "get": {
+        "summary": "Returns Traffic logging status",
+        "tags": [
+          "Traffic logging"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_status"
+          }
+        },
+        "operationId": "get-services-ulog-status",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Traffic Log"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/ulog/general/options": {
+      "get": {
+        "summary": "Returns Traffic logging options",
+        "tags": [
+          "Traffic logging"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_options"
+          }
+        },
+        "operationId": "get-services-ulog-options",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Traffic logging",
+          "Traffic logging"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/ulog/ftp/config": {
+      "get": {
+        "summary": "Returns the Traffic logging FTP configuration",
+        "tags": [
+          "Traffic logging FTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_ftp_many"
+          }
+        },
+        "operationId": "get-services-ulog_ftp-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the Traffic logging FTP configuration",
+        "operationId": "put-services-ulog_ftp-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_ftp_many"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ulog_ftp_many"
+        },
+        "description": "",
+        "tags": [
+          "Traffic logging FTP"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Traffic logging",
+          "Traffic logging"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/ulog/ftp/config/general": {
+      "get": {
+        "summary": "Returns the Traffic logging FTP configuration",
+        "tags": [
+          "Traffic logging FTP"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_ftp_one"
+          }
+        },
+        "operationId": "get-services-ulog_ftp-config-sid",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the Traffic logging FTP configuration",
+        "operationId": "put-services-ulog_ftp-config-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_ftp_one"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ulog_ftp_one"
+        },
+        "description": "",
+        "tags": [
+          "Traffic logging FTP"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Traffic logging",
+          "Traffic logging"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ulog": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable traffic logging",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "network": {
+            "type": "array",
+            "description": "Networks",
+            "enum": [
+              "lan",
+              "hotspot"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Networks",
+              "input-type": "select"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "network"
+        ]
+      },
+      "ulog_ftp": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The domain name or IP address of the server",
+            "format": "host",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "The user name of the FTP server that will be used for logs uploading",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "The password of the FTP server that will be used for logs uploading",
+            "format": "credentials_validate",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "The TCP/IP port of the server",
+            "format": "port",
+            "default": "21",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "remote_file_path": {
+            "type": "string",
+            "description": "FTP server's subfolder in which received file will be stored. Entry should end with a slash (either \"\/\" or \"\\\")",
+            "format": "string",
+            "x-web": {
+              "pretty": "Subfolder",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "extra_name_info": {
+            "type": "string",
+            "description": "Extra information to be added to file name",
+            "enum": [
+              "none",
+              "mac",
+              "serial",
+              "custom"
+            ],
+            "x-web": {
+              "pretty": "File name extras",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "enum-pretty": {
+                "none": "No extra information",
+                "mac": "MAC address",
+                "serial": "Serial number",
+                "custom": "Custom string"
+              }
+            }
+          },
+          "custom_string": {
+            "type": "string",
+            "description": "Custom string to be added to ftp file name",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9_+.-]+$",
+            "x-web": {
+              "pretty": "Custom string",
+              "input-type": "input",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "extra_name_info": "custom"
+                }
+              ]
+            }
+          },
+          "fixed": {
+            "type": "string",
+            "description": "The schedule mode to be used for uploading to FTP server",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "enum-pretty": {
+                "0": "Interval",
+                "1": "Fixed"
+              }
+            }
+          },
+          "hours": {
+            "type": "string",
+            "description": "Uploading will be performed on this specific time of the day. Range [0 - 23]",
+            "format": "irange(0,23)",
+            "x-web": {
+              "pretty": "Hours",
+              "input-type": "input",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "fixed": "1"
+                }
+              ]
+            }
+          },
+          "minutes": {
+            "type": "string",
+            "description": "Uploading will be performed on this specific time of the day. Range [0 - 59]",
+            "format": "irange(0,59)",
+            "x-web": {
+              "pretty": "Minutes",
+              "input-type": "input",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "fixed": "1"
+                }
+              ]
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Upload logs to server every x hours",
+            "default": "1",
+            "enum": [
+              "1",
+              "2",
+              "4",
+              "8",
+              "12",
+              "24"
+            ],
+            "x-web": {
+              "pretty": "Upload interval",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "fixed": "0"
+                }
+              ],
+              "enum-pretty": {
+                "1": "1 hour",
+                "2": "2 hours",
+                "4": "4 hours",
+                "8": "8 hours",
+                "12": "12 hours",
+                "24": "24 hours"
+              }
+            }
+          },
+          "weekdays": {
+            "type": "array",
+            "description": "Uploading will be performed on these days only",
+            "items": {
+              "type": "string",
+              "enum": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun"
+              ]
+            },
+            "x-web": {
+              "pretty": "Days",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "enum-pretty": {
+                "mon": "Monday",
+                "tue": "Tuesday",
+                "wed": "Wednesday",
+                "thu": "Thursday",
+                "fri": "Friday",
+                "sat": "Saturday",
+                "sun": "Sunday"
+              }
+            }
+          }
+        },
+        "required": [
+          "weekdays"
+        ]
+      },
+      "ulog_status": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "string",
+            "traffic_log": "string",
+            "ftp_enabled": "string"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Ulog enabled or disabled"
+          },
+          "traffic_log": {
+            "type": "string",
+            "description": "Log data"
+          },
+          "ftp_enabled": {
+            "type": "string",
+            "minLength": 1,
+            "description": "FTP enabled or disabled"
+          }
+        },
+        "required": [
+          "enabled",
+          "traffic_log",
+          "ftp_enabled"
+        ]
+      },
+      "ulog_options": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "network": [
+              "lan",
+              "hotspot"
+            ]
+          }
+        },
+        "properties": {
+          "network": {
+            "type": "array",
+            "description": "Available networks for ulog",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "network"
+        ]
+      }
+    },
+    "requestBodies": {
+      "ulog_one": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/ulog"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/ulog"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_ftp_one": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/ulog_ftp"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_ftp_many": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/ulog_ftp"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "ulog_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration ID"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/ulog"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/ulog"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_ftp_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/ulog_ftp"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_ftp_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration ID"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/ulog_ftp"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_status": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "enabled": "0",
+                    "data": "",
+                    "ftp_enabled": "1"
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ulog_status"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ulog_options": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ulog_options"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

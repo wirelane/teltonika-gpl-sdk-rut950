@@ -1,0 +1,12 @@
+{
+	"network/dhcp_servers": {
+		"title": "DHCP",
+		"index": 110
+	},
+	"network/dhcp_servers/static_leases": {
+		"title": "Static Leases",
+		"acls": ["network/dhcp_servers/static_leases"],
+		"view": "network/StaticLeases",
+		"index": 20
+	}
+}

@@ -1,0 +1,611 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Troubleshoot"
+    }
+  ],
+  "paths": {
+    "/troubleshoot/config": {
+      "get": {
+        "summary": "Returns all troubleshoot configurations",
+        "tags": [
+          "Troubleshoot"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TrblMulti"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified troubleshoot configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TrblMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/troubleshoot_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Troubleshoot"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/troubleshoot/config/general": {
+      "get": {
+        "summary": "Returns the specified troubleshoot configuration",
+        "tags": [
+          "Troubleshoot"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Trbl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified troubleshoot configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Trbl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/troubleshoot_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Troubleshoot"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/troubleshoot/system_log": {
+      "get": {
+        "summary": "Show system log",
+        "tags": [
+          "Troubleshoot"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/troubleshoot/kernel_log": {
+      "get": {
+        "summary": "Show kernel log",
+        "tags": [
+          "Troubleshoot"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/troubleshoot/files/troubleshoot": {
+      "get": {
+        "summary": "Download generated troubleshoot archive",
+        "tags": [
+          "Troubleshoot"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-targz": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/x-7z-compressed": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/troubleshoot/files/tcpdump": {
+      "get": {
+        "summary": "Download TCP dump archive",
+        "tags": [
+          "Troubleshoot"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-targz": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/troubleshoot/actions/generate_troubleshoot": {
+      "parameters": [],
+      "post": {
+        "summary": "Generate troubleshoot archive",
+        "operationId": "post-system-troubleshoot-actions-files",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "description": "Unprocessable Entity (WebDAV)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "source": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "integer"
+                          },
+                          "error": {
+                            "type": "string"
+                          },
+                          "section": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": false,
+                      "errors": [
+                        {
+                          "source": "encrypt",
+                          "code": 103,
+                          "error": "Missing required field: password",
+                          "section": "generate_troubleshoot"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": false,
+                      "errors": [
+                        {
+                          "source": "encrypt",
+                          "code": 103,
+                          "error": "Missing required field: password",
+                          "section": "generate_troubleshoot"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {
+                      "encrypt": "1",
+                      "password": "Password001"
+                    }
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "encrypt": {
+                        "type": "string",
+                        "description": "Enables encryption.",
+                        "x-web": {
+                          "pretty": "Encrypt",
+                          "input-type": "switch"
+                        },
+                        "enum": [
+                          "1",
+                          "0"
+                        ]
+                      },
+                      "password": {
+                        "type": "string",
+                        "x-web": {
+                          "pretty": "Password",
+                          "input-type": "input"
+                        },
+                        "description": "Password to encrypt with."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Troubleshoot"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Trbl": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/troubleshoot_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200TrblMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/troubleshoot_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "troubleshoot_single_options": {
+        "title": "troubleshoot_options",
+        "type": "object",
+        "properties": {
+          "tcp_dump": {
+            "x-web": {
+              "pretty": "Enable TCP dump",
+              "input-type": "switch",
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Turns TCP dump packet capture on or off."
+          },
+          "tcp_dump_interface": {
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tcp_dump": "1"
+                }
+              ],
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "description": "Only captures packets that move through the specified network interface."
+          },
+          "tcp_dump_filter": {
+            "x-web": {
+              "pretty": "Protocol filter",
+              "input-type": "select",
+              "depends": [
+                {
+                  "tcp_dump": "1"
+                }
+              ],
+              "enum-pretty": {
+				"": "All",
+                "icmp": "ICMP",
+                "tcp": "TCP",
+                "udp": "UDP",
+                "arp": "ARP"
+              },
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "enum": [
+			  "",
+              "icmp",
+              "tcp",
+              "udp",
+              "arp"
+            ],
+            "description": "Only captures packets that match the specified protocol."
+          },
+          "tcp_inout": {
+            "x-web": {
+              "pretty": "Packet direction",
+              "input-type": "select",
+              "depends": [
+                {
+                  "tcp_dump": "1"
+                }
+              ],
+              "enum-pretty": {
+                "inout": "Incoming/Outgoing",
+                "in": "Incoming",
+                "out": "Outgoing"
+              },
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "inout",
+              "in",
+              "out"
+            ],
+            "description": "Only captures packets coming from the specified direction."
+          },
+          "tcp_host": {
+            "x-web": {
+              "pretty": "Host",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tcp_dump": "1"
+                }
+              ],
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "format": "host",
+            "description": "Only captures packets related to the specified host."
+          },
+          "tcp_port": {
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tcp_dump": "1"
+                }
+              ],
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "format": "port",
+            "description": "Only captures packets related to the specified port."
+          },
+          "tcp_mount": {
+            "x-web": {
+              "pretty": "Storage",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tcp_dump": "1"
+                }
+              ],
+              "hw_tags": {
+                "is_access_point": false
+              }
+            },
+            "type": "string",
+            "description": "Specifies where the TCP dump file will be stored."
+          }
+        }
+      },
+      "troubleshoot_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Troubleshoot Configuration identifier (ID).",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                }
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/troubleshoot_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

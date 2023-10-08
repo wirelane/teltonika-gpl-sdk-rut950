@@ -1,0 +1,986 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Utilities call utilities",
+    "version": "1.0",
+    "description": "Mobile utitlities call utilities api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/call_utilities/general/config": {
+      "get": {
+        "summary": "Returns Call utilities general configuration in an array",
+        "tags": [
+          "Call utilities general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_general_many"
+          }
+        },
+        "operationId": "get-call_general-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Call utilities general configuration in an array",
+        "tags": [
+          "Call utilities general"
+        ],
+        "operationId": "put-call_general-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_general_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_call_general_many"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Call Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false,
+          "modem_low_power": false,
+          "modem_data_only": false
+        }
+      }
+    },
+    "/mobile_utilities/call_utilities/general/config/general": {
+      "get": {
+        "summary": "Returns the Call utilities general configuration",
+        "tags": [
+          "Call utilities general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_general_one"
+          }
+        },
+        "operationId": "get-call_general-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the Call utilities general configuration",
+        "tags": [
+          "Call utilities general"
+        ],
+        "operationId": "put-call_general-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_general_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "Updates call general configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_call_general_one"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Call Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false,
+          "modem_low_power": false,
+          "modem_data_only": false
+        }
+      }
+    },
+    "/mobile_utilities/call_utilities/rules/config": {
+      "get": {
+        "summary": "Returns all Call utilities rules configurations",
+        "tags": [
+          "Call utilities rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_rules_many"
+          }
+        },
+        "operationId": "get-call_rules-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected Call utilities rules configurations",
+        "tags": [
+          "Call utilities rules"
+        ],
+        "operationId": "put-call_rules-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_rules_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_call_rules_many"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new Call utilities rule configuration",
+        "operationId": "post-services-mobile_utilities-call_utilities-rules-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/call_rules_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_call_rules_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Call utilities rules"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected Call utilities rules configurations",
+        "operationId": "delete-services-mobile_utilities-call_utilities-rules-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "tags": [
+          "Call utilities rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Call Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false,
+          "modem_low_power": false,
+          "modem_data_only": false
+        }
+      }
+    },
+    "/mobile_utilities/call_utilities/rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns the selected Call utilities rule configuration",
+        "tags": [
+          "Call utilities rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_rules_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-call_rules-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected Call utilities rule configuration",
+        "tags": [
+          "Call utilities rules"
+        ],
+        "operationId": "put-call_rules-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_rules_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_call_rules_one"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the selected Call utilities rule configuration",
+        "operationId": "delete-services-mobile_utilities-call_utilities-rules-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Call utilities rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Call Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false,
+          "modem_low_power": false,
+          "modem_data_only": false
+        }
+      }
+    },
+    "/mobile_utilities/call_utilities/rules/options": {
+      "get": {
+        "summary": "Returns Call utilities options",
+        "tags": [
+          "Call utilities rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/call_rules_options"
+          }
+        },
+        "operationId": "get-services-mobile_utilities-call_utilities-rules-options",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "Call Utilities"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false,
+          "modem_low_power": false,
+          "modem_data_only": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "call_general": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "The action to be performed on incoming calls. Call utilities rules will keep getting executed while the call is active.",
+            "enum": [
+              "reject",
+              "answer",
+              "ignore"
+            ],
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "reject": "Reject",
+                "answer": "Answer",
+                "ignore": "Ignore"
+              }
+            }
+          },
+          "line_close_time": {
+            "type": "string",
+            "description": "Time interval (seconds) until line will be closed after answering the call. (0-100)",
+            "format": "irange(0,100)",
+            "x-web": {
+              "pretty": "Answer and hangup after time period (s)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "answer"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "action",
+          "line_close_time"
+        ]
+      },
+      "call_rules": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Turns the rule on or off.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "action": {
+            "type": "string",
+            "description": "Action that will happen when the rule is triggered",
+            "enum": [
+              "reboot",
+              "send_status",
+              "mobile",
+              "dout",
+              "wifi",
+              "relay"
+            ],
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "reboot": "Reboot",
+                "send_status": "Get status",
+                "mobile": "Turn mobile data on/off",
+                "dout": "Turn digital output on/off",
+                "wifi": "Open/Close relays",
+                "relay": "Turn WiFi on/off"
+              },
+              "unique": true
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to receive the message",
+            "x-web": {
+              "pretty": "Receiving modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "value": {
+            "type": "string",
+            "description": "Indicates whether the rule should turn the service on or off.",
+            "x-web": {
+              "pretty": "State",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": [
+                    "wifi",
+                    "mobile",
+                    "dout",
+                    "relay"
+                  ]
+                }
+              ]
+            }
+          },
+          "write_config": {
+            "type": "string",
+            "description": "Indicates whether the changes will be written to config",
+            "x-web": {
+              "pretty": "Write to config",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": [
+                    "dout",
+                    "relay"
+                  ]
+                }
+              ]
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Rule active for a specified time",
+            "x-web": {
+              "pretty": "Active timeout",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": [
+                    "dout",
+                    "relay"
+                  ]
+                }
+              ]
+            }
+          },
+          "seconds": {
+            "type": "string",
+            "description": "Rule active for a specified time, format seconds",
+            "format": "irange(1,999999)",
+            "default": "5",
+            "x-web": {
+              "pretty": "Seconds",
+              "input-type": "input",
+              "depends": [
+                {
+                  "timeout": "1"
+                }
+              ]
+            }
+          },
+          "status_sms": {
+            "type": "string",
+            "description": "Receive router status information via SMS after reboot",
+            "x-web": {
+              "pretty": "Get status via SMS after reboot",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": "reboot"
+                }
+              ]
+            }
+          },
+          "info_modem_id": {
+            "type": "string",
+            "description": "Modem id, which is used to get information from or managed for switch mobile data action",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "depends": [
+                {
+                  "action": [
+                    "send_status",
+                    "mobile"
+                  ]
+                },
+                {
+                  "status_sms": "1"
+                }
+              ],
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem id, which is used to send information from",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "depends": [
+                {
+                  "action": "send_status"
+                },
+                {
+                  "status_sms": "1"
+                }
+              ],
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "write_wifi": {
+            "type": "string",
+            "description": "Indicates whether the action should save the changed wireless state permanently by writing a new value into the wireless configuration. When turned off, the rule will switch the state temporarily meaning what WiFi will return to its previous state if the device or the wireless service restarts",
+            "x-web": {
+              "pretty": "Write to config",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": "wifi"
+                }
+              ]
+            }
+          },
+          "write_mobile": {
+            "type": "string",
+            "description": "Permanently save mobile network state to configuration",
+            "x-web": {
+              "pretty": "Write to config",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "action": "mobile"
+                }
+              ]
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "Compose the contents of the 'status' message. Use the helpers found below this field if you wish to include more router information. e.g., if you include the code %ss in the text, it will be replaced with the router's current signal strength value when the message is sent to the recipient(s).",
+            "default": "Router name - %rn; WAN IP - %wi; Data Connection state - %cs; Network type - %ct; Signal strength - %ss;",
+            "x-web": {
+              "pretty": "Message text",
+              "input-type": "input",
+              "depends": [
+                {
+                  "action": "send_status"
+                },
+                {
+                  "status_sms": "1"
+                }
+              ]
+            }
+          },
+          "pin": {
+            "type": "string",
+            "description": "The output or relay which will be changed",
+            "x-web": {
+              "pretty": "Output/Relay",
+              "input-type": "select",
+              "depends": [
+                {
+                  "action": [
+                    "relay",
+                    "dout"
+                  ]
+                }
+              ],
+              "enum-depends": [
+                { "hw_tags": { "relay0": true }, "values": ["relay0"], "depends": { "action": "relay" } },
+                { "hw_tags": { "relay1": true }, "values": ["relay1"], "depends": { "action": "relay" } },
+
+                { "hw_tags": { "dout1": true }, "values": ["dout1"], "depends": { "action": "dout" } },
+                { "hw_tags": { "dout2": true }, "values": ["dout2"], "depends": { "action": "dout" } },
+                { "hw_tags": { "dio0": true }, "values": ["dio0"], "depends": { "action": "dout" } },
+                { "hw_tags": { "dio1": true }, "values": ["dio1"], "depends": { "action": "dout" } },
+                { "hw_tags": { "dio2": true }, "values": ["dio2"], "depends": { "action": "dout" } },
+                { "hw_tags": { "iio": true }, "values": ["iio"], "depends": { "action": "dout" } }
+              ]
+            }
+          },
+          "allowed_phone": {
+            "type": "string",
+            "description": "Which users (based on phone numbers) are allowed to trigger the rule",
+            "enum": [
+              "all",
+              "group",
+              "single"
+            ],
+            "x-web": {
+              "pretty": "Allowed users",
+              "input-type": "select",
+              "enum-pretty": {
+                "all": "From all numbers",
+                "group": "From group",
+                "single": "From single number"
+              }
+            }
+          },
+          "tel": {
+            "type": "string",
+            "description": "A whitelisted phone number",
+            "format": "phonedigit",
+            "x-web": {
+              "pretty": "Caller's phone number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "allowed_phone": "single"
+                }
+              ]
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "A list of whitelisted phone numbers",
+            "x-web": {
+              "pretty": "Phone group",
+              "input-type": "select",
+              "depends": [
+                {
+                  "allowed_phone": "group"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "tel"
+        ]
+      },
+      "req_body_call_general_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/call_general"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_call_general_many": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/call_general"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_call_rules_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/call_rules"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_call_rules_many": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/call_rules"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "call_general_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/call_general"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "call_general_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/call_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "call_rules_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/call_rules"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "call_rules_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/call_rules"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "call_rules_options": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "actions"
+                  ],
+                  "properties": {
+                    "actions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "params": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/device_param"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Call utilities general"
+    },
+    {
+      "name": "Call utilities rules"
+    }
+  ]
+}

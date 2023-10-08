@@ -1,0 +1,13 @@
+{
+    "network/traffic_shaping": {
+        "title": "Traffic Shaping",
+        "index": 90
+    },
+        "network/traffic_shaping/sqm": {
+            "title": "SQM",
+            "index": 20,
+            "view": "services/Sqm_aeaafe",
+            "acls": [ "network/traffic_shaping/sqm" ],
+            "files": [ "/etc/config/sqm" ]
+        }
+}

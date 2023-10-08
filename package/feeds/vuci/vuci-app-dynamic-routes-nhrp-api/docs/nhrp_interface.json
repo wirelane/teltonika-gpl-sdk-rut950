@@ -1,0 +1,388 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/nhrp/interface/config/{id}": {
+      "get": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Returns specified nhrp interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhIn"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Updates specified nhrp interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhIn"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_interface_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Deletes specified nhrp interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration nhrp interface identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "NHRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/nhrp/interface/config": {
+      "get": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Returns all nhrp interface configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhInMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Creates nhrp interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhIn"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_interface_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Updates specified nhrp interface configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhInMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/nhrp_interface_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "nhrp_interface"
+        ],
+        "summary": "Deletes specified nhrp interface configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "NHRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200NhIn": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nhrp_interface_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NhInMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/nhrp_interface_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "nhrp_interface_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Enables client.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "interface": {
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Interface which will be using NHRP."
+          },
+          "network_id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Network ID",
+              "input-type": "input"
+            },
+            "description": "Network ID of NHRP.",
+            "format": "irange(1, 4294967295)"
+          },
+          "auth": {
+            "type": "string",
+            "x-web": {
+              "pretty": "NHRP authentication key",
+              "input-type": "input"
+            },
+            "description": "NHRP authentication key",
+            "maxLength": 8
+          },
+          "proto_address": {
+            "x-web": {
+              "pretty": "NHS",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address of Next-Hop Server. NHS must be an IP address or 'dynamic'."
+          },
+          "nbma_address": {
+            "type": "string",
+            "x-web": {
+              "pretty": "NBMA",
+              "input-type": "input"
+            },
+            "description": "Non-Broadcast Multi-Access(NBMA) network IP address."
+          },
+          "holdtime": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Hold-time",
+              "input-type": "input"
+            },
+            "description": "Specifies the holding time for NHRP Registration Requests and Resolution Replies sent from this interface or shortcut-target. The holdtime is specified in seconds and defaults to two hours.",
+            "format": "irange(1, 65000)"
+          },
+          "ipsec_support": {
+            "type": "string",
+            "x-web": {
+              "pretty": "IPsec support",
+              "input-type": "switch"
+            },
+            "description": "Use NHRP over IPsec.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "ipsec_instance": {
+            "x-web": {
+              "pretty": "IPsec instance",
+              "input-type": "input",
+              "depends": [
+                {
+                  "ipsec_support": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Select IPsec instance name."
+          }
+        }
+      }
+    }
+  }
+}

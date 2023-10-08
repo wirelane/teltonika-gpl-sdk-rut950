@@ -1,0 +1,10 @@
+{
+  "network/mobile/apn_database": {
+    "read": {
+      "api": ["/mobile/apn_database/*"]
+    },
+    "write": {
+      "api": ["/mobile/apn_database/*"]
+    }
+  }
+}

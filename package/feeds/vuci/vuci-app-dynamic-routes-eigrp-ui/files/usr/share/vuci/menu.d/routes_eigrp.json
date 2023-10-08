@@ -1,0 +1,43 @@
+{
+	"network/routes": {
+		"title": "Routing",
+		"index": 80
+	},
+		"network/routes/dynamic_routes": {
+			"title": "Dynamic routes",
+			"index": 30,
+			"orfiles": [
+				"/usr/lib/opkg/info/frr-eigrpd.control",
+				"/usr/lib/opkg/info/frr5-eigrpd.control"
+			]
+		},
+			"network/routes/dynamic_routes/proto_eigrp": {
+				"title": "EIGRP",
+				"index": 40,
+				"view": "network/ProtoEigrp_aeaafe",
+				"acls": [ "network/routes/dynamic_routes/proto_eigrp"],
+				"files": [ "/etc/config/eigrp"],
+				"orfiles": [ "/usr/lib/opkg/info/frr5-eigrpd.control", "/usr/lib/opkg/info/frr-eigrpd.control" ]
+			},
+	"status/routes": {
+		"title": "Routes",
+		"index": 35
+	},
+		"status/routes/dynamic": {
+			"title": "Dynamic",
+			"index": 20,
+			"files": [ "/etc/config/network" ],
+			"orfiles": [
+				"/usr/lib/opkg/info/frr-eigrpd.control",
+				"/usr/lib/opkg/info/frr5-eigrpd.control"
+			]
+		},
+			"status/routes/dynamic/eigrp": {
+				"title": "EIGRP",
+				"index": 40,
+				"view": "status/ProtoEigrp_aeaafe",
+				"acls": [ "status/routes/dynamic/eigrp"],
+				"files": [ "/etc/config/eigrp" ],
+				"orfiles": [ "/usr/lib/opkg/info/frr5-eigrpd.control", "/usr/lib/opkg/info/frr-eigrpd.control" ]
+			}
+}

@@ -1,0 +1,16 @@
+{
+    "network/dns": {
+        "description": "dns configuration",
+        "read": {
+            "api": [
+                "/dns/*",
+                "/interfaces/*"
+            ],
+            "uci": [ "dhcp"]
+        },
+        "write": {
+            "api": ["/dns/*"],
+            "uci": [ "dhcp"]
+        }
+    }
+}

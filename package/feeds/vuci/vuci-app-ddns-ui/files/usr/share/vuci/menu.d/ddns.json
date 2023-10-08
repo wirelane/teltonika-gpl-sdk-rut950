@@ -1,0 +1,9 @@
+{
+    "services/ddns": {
+        "title": "Dynamic DNS",
+        "index": 210,
+        "view": "services/DynamicDNS_aeaafe",
+        "acls": [ "services/ddns" ],
+        "files": [ "/etc/config/ddns" ]
+    }
+}

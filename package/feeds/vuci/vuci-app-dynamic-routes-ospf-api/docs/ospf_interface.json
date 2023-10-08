@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/ospf/interface/config/{id}": {
+      "get": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Returns specified ospf interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsIn"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf interface identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Updates specified ospf interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsIn"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_interface_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Deletes specified ospf interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf interface identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "OSPF"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/ospf/interface/config": {
+      "get": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Returns all ospf interface configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsInMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Creates ospf interface configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsIn"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_interface_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Updates specified ospf interface configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsInMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/ospf_interface_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ospf_interface"
+        ],
+        "summary": "Deletes specified ospf interface configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "OSPF"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200OsIn": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ospf_interface_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OsInMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/ospf_interface_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ospf_interface_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable."
+          },
+          "cost": {
+            "x-web": {
+              "pretty": "Cost",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The cost value is set to router-LSA’s metric field and used for SPF calculation."
+          },
+          "hello_interval": {
+            "x-web": {
+              "pretty": "Hello Interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "This value controls how frequently (every n seconds) a 'Hello' packet is sent out on the specified interface."
+          },
+          "dead_interval": {
+            "x-web": {
+              "pretty": "Dead Interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "This value must be the same for all routers attached to a common network."
+          },
+          "retransmit_interval": {
+            "x-web": {
+              "pretty": "Retransmit Interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "This value is used when retransmitting Database Description and Link State Request packets."
+          },
+          "priority": {
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The router with the highest priority will be more eligible to become Designated Router. Setting the value to 0, makes the router ineligible to become Designated Router."
+          },
+          "type": {
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "broadcast": "Broadcast",
+                "non-broadcast": "Non-Broadcast",
+                "point-to-point": "Point-to-Point",
+                "point-to-multipoint": "Point-to-Multipoint"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "broadcast",
+              "non-broadcast",
+              "point-to-point",
+              "point-to-multipoint"
+            ],
+            "description": "You can choose different type of configuration."
+          },
+          "ptp_dmvpn": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Enable DMVPN",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "type": "point-to-point"
+                }
+              ]
+            },
+            "type": "switch"
+          },
+          "authentication": {
+            "x-web": {
+              "pretty": "Authentication",
+              "input-type": "select",
+              "enum-pretty": {
+                "none": "None",
+                "pass": "Password",
+                "md5_hmac": "MD5 HMAC"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "none",
+              "pass",
+              "md5_hmac"
+            ],
+            "description": "Connection authentification methods."
+          },
+          "router_id": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "ID",
+              "depends": [
+                {
+                  "authentication": "md5_hmac"
+                }
+              ]
+            },
+            "type": "string"
+          },
+          "password": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Password",
+              "depends": [
+                {
+                  "authentication": "md5_hmac"
+                },
+                {
+                  "authentication": "pass"
+                }
+              ]
+            },
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

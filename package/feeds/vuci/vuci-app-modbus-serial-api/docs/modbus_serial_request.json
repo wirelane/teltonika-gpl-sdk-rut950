@@ -1,0 +1,657 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Modbus Serial Client Server Requests"
+    }
+  ],
+  "paths": {
+    "/modbus/serial/servers/config/{modbus_serial_client_server_cfg_id}/requests/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_serial_client_server_cfg_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus Serial Client Server Request Configuration identifier (ID)"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus Serial Client server Request Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified Modbus Serial Client Server Request configuration",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the specified Modbus Serial Client Server Request configuration",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_request_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the specified Modbus Serial Client Server Request configuration",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Serial Client"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    },
+    "/modbus/serial/servers/config/{modbus_serial_client_server_cfg_id}/requests": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_serial_client_server_cfg_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus Serial Client Server Request Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns all Modbus Serial Client Server Requests configurations",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialRequestMulti"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates Modbus Serial Client Server Request configuration",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ModbusSerialRequest"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_request_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified Modbus Serial Client Server Requests configurations",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialRequestMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_request_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specified Modbus Serial Client Server Requests configurations",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Serial Client"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    },
+    "/modbus/serial/servers/actions/{modbus_serial_client_server_cfg_id}/requests/test_request": {
+      "deprecated": true,
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_serial_client_server_cfg_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus Serial Client Server Request Configuration identifier (ID)"
+        }
+      ],
+      "post": {
+        "summary": "Test Modbus Serial Client Server Request configuration",
+        "tags": [
+          "Modbus Serial Client Server Requests"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_request_test_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Serial Client"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ModbusSerialRequest": {
+        "description": "Returns Configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_serial_request_options"
+                }
+              }
+            },
+            "examples": {}
+          }
+        }
+      },
+      "200ModbusSerialRequestMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_serial_request_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_serial_request_single_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of this request (only used for easier identification of the request or its meaning).",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Enables/disables Modbus Serial Client Request.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "8bit_int",
+              "8bit_uint",
+              "16bit_int_hi_first",
+              "16bit_int_low_first",
+              "16bit_uint_hi_first",
+              "16bit_uint_low_first",
+              "32bit_float1234",
+              "32bit_float4321",
+              "32bit_float2143",
+              "32bit_float3412",
+              "32bit_int1234",
+              "32bit_int4321",
+              "32bit_int2143",
+              "32bit_int3412",
+              "32bit_uint1234",
+              "32bit_uint4321",
+              "32bit_uint2143",
+              "32bit_3412",
+              "ascii",
+              "hex",
+              "bool"
+            ],
+            "description": "Select data type that will be used for storing the response data (only for read requests).",
+            "x-web": {
+              "pretty": "Data type",
+              "enum-pretty": {
+                "8bit_int": "8bit INT",
+                "8bit_uint": "8bit UINT",
+                "16bit_int_hi_first": "16bit INT, high byte first",
+                "16bit_int_low_first": "16bit INT, low byte first",
+                "16bit_uint_hi_first": "16bit UINT, high byte first",
+                "16bit_uint_low_first": "16bit UINT, low byte first",
+                "32bit_float1234": "32bit float, Byte order 1,2,3,4",
+                "32bit_float4321": "32bit float, Byte order 4,3,2,1",
+                "32bit_float2143": "32bit float, Byte order 2,1,4,3",
+                "32bit_float3412": "32bit float, Byte order 3,4,1,2",
+                "32bit_int1234": "32bit INT, Byte order 1,2,3,4",
+                "32bit_int4321": "32bit INT, Byte order 4,3,2,1",
+                "32bit_int2143": "32bit INT, Byte order 2,1,4,3",
+                "32bit_int3412": "32bit INT, Byte order 3,4,1,2",
+                "32bit_uint1234": "32bit UINT, Byte order 1,2,3,4",
+                "32bit_uint4321": "32bit UINT, Byte order 4,3,2,1",
+                "32bit_uint2143": "32bit UINT, Byte order 2,1,4,3",
+                "32bit_uint3412": "32bit UINT, Byte order 3,4,1,2",
+                "ascii": "ASCII",
+                "hex": "Hex",
+                "bool": "Bool",
+                "pdu": "PDU"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "function": [
+                      "1",
+                      "2",
+                      "3",
+                      "4"
+                    ]
+                  },
+                  "values": [
+                    "8bit_int",
+                    "8bit_uint",
+                    "16bit_int_hi_first",
+                    "16bit_int_low_first",
+                    "16bit_uint_hi_first",
+                    "16bit_uint_low_first",
+                    "32bit_float1234",
+                    "32bit_float4321",
+                    "32bit_float2143",
+                    "32bit_float3412",
+                    "32bit_int1234",
+                    "32bit_int4321",
+                    "32bit_int2143",
+                    "32bit_int3412",
+                    "32bit_uint1234",
+                    "32bit_uint4321",
+                    "32bit_uint2143",
+                    "32bit_3412",
+                    "ascii",
+                    "hex",
+                    "bool",
+                    "pdu"
+                  ]
+                },
+                {
+                  "depends": {
+                    "function": "5"
+                  },
+                  "values": [
+                    "bool"
+                  ]
+                },
+                {
+                  "depends": {
+                    "function": "6"
+                  },
+                  "values": [
+                    "8bit_int",
+                    "8bit_uint",
+                    "16bit_int_hi_first",
+                    "16bit_int_low_first",
+                    "16bit_uint_hi_first",
+                    "16bit_uint_low_first",
+                    "ascii",
+                    "hex",
+                    "bool"
+                  ]
+                }
+              ]
+            }
+          },
+          "function": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "15",
+              "16"
+            ],
+            "description": "Select Modbus function code for the request.",
+            "x-web": {
+              "pretty": "Function",
+              "enum-pretty": {
+                "1": "Read coils (1)",
+                "2": "Read input coils (2)",
+                "3": "Read holding registers (3)",
+                "4": "Read input registers (4)",
+                "5": "Set single coil (5)",
+                "6": "Set single holding register (6)",
+                "15": "Set multiple coils (15)",
+                "16": "Set multiple holding registers (16)"
+              },
+              "input-type": "select"
+            }
+          },
+          "first_reg": {
+            "type": "string",
+            "format": "irange(1, 65536)",
+            "description": "Start Register/Coil/Input (1-65536).",
+            "x-web": {
+              "pretty": "First register number",
+              "input-type": "input"
+            }
+          },
+          "reg_count": {
+            "type": "string",
+            "description": "Number of Registers/Coils/Inputs or actual values to be written (Multiple values must be separated by space character).",
+            "x-web": {
+              "pretty": "Register count / values",
+              "input-type": "input"
+            }
+          },
+          "no_brackets": {
+            "type": "string",
+            "description": "Removes the starting and ending brackets from the request (only for read requests).",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ],
+            "x-web": {
+              "pretty": "Brackets",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "modbus_serial_request_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus Serial Client Server Request Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_serial_request_single_options"
+          }
+        ]
+      },
+      "modbus_serial_request_test_options": {
+        "type": "object",
+        "properties": {
+          "server_id": {
+            "type": "string",
+            "format": "range(1, 255)",
+            "minLength": 1,
+            "maxLength": 3,
+            "description": "Serial server ID number."
+          },
+          "timeout": {
+            "type": "string",
+            "format": "range(1, 30)",
+            "minLength": 1,
+            "maxLength": 2,
+            "description": "Time period for waiting of the Serial device response (in seconds, 1-30)."
+          },
+          "function": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "15",
+              "16"
+            ],
+            "description": "Select Modbus function code for the request."
+          },
+          "first_reg": {
+            "type": "string",
+            "format": "range(1, 65536)",
+            "minLength": 1,
+            "maxLength": 5,
+            "description": "Start Register/Coil/Input (1-65536)."
+          },
+          "reg_count": {
+            "type": "string",
+            "description": "Number of Registers/Coils/Inputs or actual values to be written (Multiple values must be separated by space character)."
+          },
+          "data_type": {
+            "type": "string",
+            "enum": [
+              "8bit_int",
+              "8bit_uint",
+              "16bit_int_hi_first",
+              "16bit_int_low_first",
+              "16bit_uint_hi_first",
+              "16bit_uint_low_first",
+              "32bit_float1234",
+              "32bit_float4321",
+              "32bit_float2143",
+              "32bit_float3412",
+              "32bit_int1234",
+              "32bit_int4321",
+              "32bit_int2143",
+              "32bit_int3412",
+              "32bit_uint1234",
+              "32bit_uint4321",
+              "32bit_uint2143",
+              "32bit_3412",
+              "ascii",
+              "hex",
+              "bool"
+            ],
+            "description": "Select data type that will be used for storing the response data (only for read requests)."
+          },
+          "no_brackets": {
+            "type": "string",
+            "description": "Removes the starting and ending brackets from the request (only for read requests)."
+          },
+          "baudrate": {
+            "type": "string",
+            "description": "Serial device baudrate."
+          },
+          "databits": {
+            "type": "string",
+            "description": "Serial device databits."
+          },
+          "stopbits": {
+            "type": "string",
+            "format": "range(1, 2)",
+            "minLength": 1,
+            "maxLength": 1,
+            "description": "Serial device stopbits."
+          },
+          "parity": {
+            "type": "string",
+            "enum": [
+              "odd",
+              "even",
+              "none"
+            ],
+            "description": "Serial device parity."
+          },
+          "flowcontrol": {
+            "type": "string",
+            "enum": [
+              "none",
+              "xon/xoff",
+              "rts/cts"
+            ],
+            "description": "Select what kind of characters to use for flow control"
+          }
+        },
+        "required": [
+          "server_id",
+          "timeout",
+          "function",
+          "first_reg",
+          "reg_count",
+          "data_type",
+          "no_brackets",
+          "baudrate",
+          "databits",
+          "stopbits",
+          "parity",
+          "flowcontrol"
+        ]
+      }
+    }
+  }
+}

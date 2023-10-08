@@ -1,0 +1,486 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "UDP Broadcast Relay",
+      "description": "UDP Broadcast Relay configuration API"
+    }
+  ],
+  "paths": {
+    "/udprelay/config": {
+      "get": {
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "GET All UDP Broadcast Relay",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/udprelay_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-udprelay"
+      },
+      "put": {
+        "deprecated": true,
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "UPDATE All UDP Broadcast Relay",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/udprelay_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/udprelay_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-services-udprelay",
+        "description": ""
+      },
+      "post": {
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "CREATE All UDP Broadcast Relay",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/udprelay_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/udprelay_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-services-udprelay",
+        "description": ""
+      },
+      "delete": {
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "DELETE All UDP Broadcast Relay",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section names\n",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-services-udprelay",
+        "description": ""
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Other",
+          "UDP Broadcast Relay"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/udprelay/config/{id}": {
+      "get": {
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "GET UDP Broadcast Relay",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/udprelay_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ],
+        "operationId": "get-services-udprelay-id",
+        "description": ""
+      },
+      "put": {
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "UPDATE UDP Broadcast Relay",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/udprelay_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration section name"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/udprelay_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-services-udprelay-id",
+        "description": ""
+      },
+      "delete": {
+        "tags": [
+          "UDP Broadcast Relay"
+        ],
+        "summary": "DELETE UDP Broadcast Relay",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration udprelay section indetifier"
+          }
+        ],
+        "operationId": "delete-services-udprelay-id",
+        "description": ""
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Other",
+          "UDP Broadcast Relay"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "udprelay_options_name_index": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Section name.",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Enable UDP broadcast relay",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Specify a port which the UDP broadcast relay will listen on for incoming packets to relay.",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "interfaces": {
+            "type": "array",
+            "description": "UDP broadcast relay destination interfaces. Open port 137 in firewall so LAN could be reachable from WAN",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Destination interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "interface_mark": {
+            "type": "string",
+            "description": "Source network interface.",
+            "x-web": {
+              "pretty": "Source interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "udprelay_options_index": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable UDP broadcast relay",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Specify a port which the UDP broadcast relay will listen on for incoming packets to relay.",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "interfaces": {
+            "type": "array",
+            "description": "UDP broadcast relay destination interfaces. Open port 137 in firewall so LAN could be reachable from WAN",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Destination interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "interface_mark": {
+            "type": "string",
+            "description": "Source network interface.",
+            "x-web": {
+              "pretty": "Source interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

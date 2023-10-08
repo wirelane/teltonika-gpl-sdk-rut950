@@ -1,0 +1,13 @@
+{
+    "network/traffic_shaping": {
+        "title": "Traffic Shaping",
+        "index": 90
+    },
+        "network/traffic_shaping/qos": {
+            "title": "QoS",
+            "index": 10,
+            "view": "services/Qos_aeaafe",
+            "acls": [ "network/traffic_shaping/qos" ],
+            "files": [ "/etc/config/qos" ]
+        }
+}

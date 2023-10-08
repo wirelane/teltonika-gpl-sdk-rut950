@@ -1,0 +1,8 @@
+{
+    "system/license": {
+        "title": "License",
+        "view": "system/License",
+        "index": 50,
+        "acls": ["system/license" ]
+    }
+}

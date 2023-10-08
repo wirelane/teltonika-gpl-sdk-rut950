@@ -1,0 +1,11 @@
+{
+	"system/admin/access_control/pam": {
+		"description": "access control pam",
+		"read": {
+		  "api": ["/access_control/security/pam/*"]
+		},
+		"write": {
+		  "api": ["/access_control/security/pam/*"]
+		}
+	}
+}

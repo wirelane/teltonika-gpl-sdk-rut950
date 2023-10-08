@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# Copyright (c) 2015 The Linux Foundation. All rights reserved.
+# Copyright (c) 2011-2015 OpenWrt.org
+#
+
+. /lib/functions/uci-defaults.sh
+. /lib/functions/system.sh
+
+CFG=/etc/board.json
+
+# do not run on preinit/early init
+[ "$EARLY_INIT" ] && return
+
+#~ Get model name for RUTX products
+setup_modem() {
+	local key="$1"
+	local object_num="$2"
+	local id gps boudrate type desc control product vendor stop_bits
+
+	json_select "$object_num"
+	json_get_vars id product
+
+	if [ "$id" = "$id_from_unhandler" ]; then
+
+		[ -z "$product" ] || \
+		{
+			[ -f "/sys/bus/usb/devices/$id/idVendor" ] && [ -f "/sys/bus/usb/devices/$id/idProduct" ] || {
+				json_select ..
+				return 1
+			}
+		}
+
+		vendor="$(cat "/sys/bus/usb/devices/$id/idVendor")"
+		product="$(cat "/sys/bus/usb/devices/$id/idProduct")"
+
+		[ -f "/lib/network/wwan/$vendor:$product" ] && {
+			devicename="$id"
+
+			json_set_namespace defaults old_cb
+			json_load "$(cat /lib/network/wwan/$vendor:$product)"
+			json_get_vars gps boudrate type desc control stop_bits
+			json_set_namespace "$old_cb"
+
+			[ "${devicename%%:*}" = "$devicename" ] && {
+				json_add_string vendor "$vendor"
+				json_add_string product "$product"
+				json_add_string gps "$gps"
+				json_add_string stop_bits "$stop_bits"
+				json_add_string boudrate "$boudrate"
+				json_add_string type "$type"
+				json_add_string desc "$desc"
+				json_add_string control "$control"
+				json_add_string	revision "${revision_from_unhandler}"
+			}
+		}
+	fi
+	json_select ..
+}
+
+[ -s "${CFG}" ] || exit 1
+
+id_from_unhandler="$1"
+revision_from_unhandler="$2"
+
+lock /var/run/board_modem.lock
+
+board_config_update
+json_for_each_item setup_modem modems
+board_config_flush
+
+lock -u /var/run/board_modem.lock
+
+exit 0

@@ -1,0 +1,132 @@
+--- a/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
++++ b/drivers/net/ethernet/atheros/ag71xx/ag71xx_main.c
+@@ -1254,6 +1254,8 @@ static int ag71xx_tx_packets(struct ag71
+ 	int sent = 0;
+ 	int bytes_compl = 0;
+ 	int n = 0;
++	struct pcpu_sw_netstats *stats64 = this_cpu_ptr(ag->stats64);
++	unsigned long flags;
+ 
+ 	DBG("%s: processing TX ring\n", ag->dev->name);
+ 
+@@ -1297,8 +1299,10 @@ static int ag71xx_tx_packets(struct ag71
+ 	if (!sent)
+ 		return 0;
+ 
+-	ag->dev->stats.tx_bytes += bytes_compl;
+-	ag->dev->stats.tx_packets += sent;
++	flags = u64_stats_update_begin_irqsave(&stats64->syncp);
++	stats64->tx_packets += sent;
++	stats64->tx_bytes += bytes_compl;
++	u64_stats_update_end_irqrestore(&stats64->syncp, flags);
+ 
+ 	netdev_completed_queue(ag->dev, sent, bytes_compl);
+ 	if ((ring->curr - ring->dirty) < (ring_size * 3) / 4)
+@@ -1332,6 +1336,8 @@ static int ag71xx_rx_packets(struct ag71
+ 		struct ag71xx_desc *desc = ag71xx_ring_desc(ring, i);
+ 		int pktlen;
+ 		int err = 0;
++		struct pcpu_sw_netstats *stats64 = this_cpu_ptr(ag->stats64);
++		unsigned long flags;
+ 
+ 		if (ag71xx_desc_empty(desc))
+ 			break;
+@@ -1349,8 +1355,10 @@ static int ag71xx_rx_packets(struct ag71
+ 		dma_unmap_single(&ag->pdev->dev, ring->buf[i].dma_addr,
+ 				 ag->rx_buf_size, DMA_FROM_DEVICE);
+ 
+-		dev->stats.rx_packets++;
+-		dev->stats.rx_bytes += pktlen;
++		flags = u64_stats_update_begin_irqsave(&stats64->syncp);
++		stats64->rx_packets++;
++		stats64->rx_bytes += pktlen;
++		u64_stats_update_end_irqrestore(&stats64->syncp, flags);
+ 
+ 		skb = build_skb(ring->buf[i].rx_buf, ag71xx_buffer_size(ag));
+ 		if (!skb) {
+@@ -1498,6 +1506,36 @@ static int ag71xx_change_mtu(struct net_
+ 	return 0;
+ }
+ 
++void ag71xx_get_stats64(struct net_device *net, struct rtnl_link_stats64 *stats)
++{
++	struct ag71xx *ag = netdev_priv(net);
++	unsigned int start;
++	int cpu;
++
++	netdev_stats_to_stats64(stats, &net->stats);
++
++	for_each_possible_cpu(cpu) {
++		struct pcpu_sw_netstats *stats64;
++		u64 rx_packets, rx_bytes;
++		u64 tx_packets, tx_bytes;
++
++		stats64 = per_cpu_ptr(ag->stats64, cpu);
++
++		do {
++			start = u64_stats_fetch_begin_irq(&stats64->syncp);
++			rx_packets = stats64->rx_packets;
++			rx_bytes = stats64->rx_bytes;
++			tx_packets = stats64->tx_packets;
++			tx_bytes = stats64->tx_bytes;
++		} while (u64_stats_fetch_retry_irq(&stats64->syncp, start));
++
++		stats->rx_packets += rx_packets;
++		stats->rx_bytes += rx_bytes;
++		stats->tx_packets += tx_packets;
++		stats->tx_bytes += tx_bytes;
++	}
++}
++
+ static const struct net_device_ops ag71xx_netdev_ops = {
+ 	.ndo_open		= ag71xx_open,
+ 	.ndo_stop		= ag71xx_stop,
+@@ -1507,6 +1545,7 @@ static const struct net_device_ops ag71x
+ 	.ndo_change_mtu		= ag71xx_change_mtu,
+ 	.ndo_set_mac_address	= eth_mac_addr,
+ 	.ndo_validate_addr	= eth_validate_addr,
++	.ndo_get_stats64	= ag71xx_get_stats64,
+ };
+ 
+ static int ag71xx_probe(struct platform_device *pdev)
+@@ -1710,6 +1749,13 @@ static int ag71xx_probe(struct platform_
+ 	if (err)
+ 		return err;
+ 
++	
++	ag->stats64 = netdev_alloc_pcpu_stats(struct pcpu_sw_netstats);
++	if (!ag->stats64) {
++		dev_err(&pdev->dev, "failed to allocate per-cpu statistics counters\n");
++		goto err_free;
++	}
++
+ 	err = ag71xx_debugfs_init(ag);
+ 	if (err)
+ 		goto err_phy_disconnect;
+@@ -1735,6 +1781,8 @@ static int ag71xx_probe(struct platform_
+ 
+ 	return 0;
+ 
++err_free:
++	free_percpu(ag->stats64);
+ err_phy_disconnect:
+ 	ag71xx_phy_disconnect(ag);
+ 	return err;
+@@ -1749,6 +1797,7 @@ static int ag71xx_remove(struct platform
+ 		return 0;
+ 
+ 	ag = netdev_priv(dev);
++	free_percpu(ag->stats64);
+ 	ag71xx_debugfs_exit(ag);
+ 	ag71xx_phy_disconnect(ag);
+ 	unregister_netdev(dev);
+--- a/drivers/net/ethernet/atheros/ag71xx/ag71xx.h
++++ b/drivers/net/ethernet/atheros/ag71xx/ag71xx.h
+@@ -166,6 +166,7 @@ struct ag71xx {
+ 	spinlock_t		lock;
+ 	struct napi_struct	napi;
+ 	u32			msg_enable;
++	struct pcpu_sw_netstats __percpu *stats64;
+ 
+ 	/*
+ 	 * From this point onwards we're not looking at per-packet fields.

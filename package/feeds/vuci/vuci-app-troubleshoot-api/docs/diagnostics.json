@@ -1,0 +1,251 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Diagnostics"
+    }
+  ],
+  "paths": {
+    "/diagnostics/actions/ping": {
+      "post": {
+        "summary": "Send ping command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "proto": {
+                        "x-web": {
+                          "pretty": "Protocol",
+                          "input-type": "select",
+                          "enum-pretty": {
+                            "ipv4": "IPv4",
+                            "ipv6": "IPv6"
+                          }
+                        },
+                        "type": "string",
+                        "description": "Selects the IP (Internet Protocol) version.",
+                        "enum": [
+                          "ipv4",
+                          "ipv6"
+                        ]
+                      },
+                      "host": {
+                        "x-web": {
+                          "pretty": "Address",
+                          "input-type": "input"
+                        },
+                        "type": "string",
+                        "format": "host",
+                        "description": "IP address or hostname to perform the diagnostic test on."
+                      }
+                    },
+                    "required": [
+                      "proto",
+                      "host"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Diagnostics"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/diagnostics/actions/traceroute": {
+      "post": {
+        "summary": "Send traceroute command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "proto": {
+                        "x-web": {
+                          "pretty": "Protocol",
+                          "input-type": "select",
+                          "enum-pretty": {
+                            "ipv4": "IPv4",
+                            "ipv6": "IPv6"
+                          }
+                        },
+                        "type": "string",
+                        "description": "Selects the IP (Internet Protocol) version.",
+                        "enum": [
+                          "ipv4",
+                          "ipv6"
+                        ]
+                      },
+                      "host": {
+                        "x-web": {
+                          "pretty": "Address",
+                          "input-type": "input"
+                        },
+                        "type": "string",
+                        "format": "host",
+                        "description": "IP address or hostname to perform the diagnostic test on."
+                      }
+                    },
+                    "required": [
+                      "proto",
+                      "host"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Diagnostics"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    },
+    "/diagnostics/actions/nslookup": {
+      "post": {
+        "summary": "Send nslookup command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "host": {
+                        "x-web": {
+                          "pretty": "Address",
+                          "input-type": "input"
+                        },
+                        "type": "string",
+                        "format": "host",
+                        "description": "IP address or hostname to perform the diagnostic test on."
+                      }
+                    },
+                    "required": [
+                      "host"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Diagnostics"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Troubleshoot"
+        ]
+      }
+    }
+  }
+}

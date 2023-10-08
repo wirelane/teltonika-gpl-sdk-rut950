@@ -1,0 +1,31 @@
+{
+	"services/modbus/modbus_server": {
+		"description": "modbus tcp server configuration",
+		"read": {
+			"api": [
+				"/modbus/tcp_server/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/modbus/tcp_server/*"
+			]
+		}
+	},
+	"services/modbus/modbus_serial_server": {
+		"description": "modbus serial server configuration",
+		"read": {
+			"api": [
+				"/modbus/serial_server/*",
+				"/serial/*",
+				"/device/*",
+				"/modbus/tcp_server/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/modbus/serial_server/*"
+			]
+		}
+	}
+}

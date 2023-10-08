@@ -1,0 +1,34 @@
+{
+	"services/dnp3": {
+		"title": "DNP3",
+		"index": 130
+	},
+		"services/dnp3/tcp_client": {
+			"title": "TCP Client",
+			"index": 10,
+			"view": "services/DNP3TcpClient_aeaafe",
+			"acls": [ "services/dnp3/tcp_client" ],
+			"files": [ "/etc/config/dnp3_client" ]
+		},
+		"services/dnp3/serial_client": {
+			"title": "Serial Client",
+			"index": 20,
+			"view": "services/DNP3SerialClient_aeaafe",
+			"acls": [ "services/dnp3/serial_client" ],
+			"files": [ "/etc/config/dnp3_client" ]
+		},
+		"services/dnp3/dnp_outstation": {
+			"title": "DNP3 Outstation",
+			"index": 30,
+			"view": "services/DNP3Outstation_aeaafe",
+			"acls": [ "services/dnp3/dnp_outstation" ],
+			"files": [ "/etc/config/dnp3_outstation" ]
+		},
+		"services/dnp3/dnp3_serial_outstation": {
+			"title": "DNP3 Serial Outstation",
+			"index": 40,
+			"view": "services/DNP3SerialOutstation_aeaafe",
+			"acls": [ "services/dnp3/dnp3_serial_outstation" ],
+			"files": [ "/etc/config/dnp3_outstation" ]
+		}
+}

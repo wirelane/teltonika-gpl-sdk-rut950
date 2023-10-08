@@ -1,0 +1,959 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Recipients",
+    "version": "1.0",
+    "description": "Recipients API documentation."
+  },
+  "tags": [
+    {
+      "name": "Email users"
+    },
+    {
+      "name": "Phone groups"
+    }
+  ],
+  "paths": {
+    "/recipients/phone_groups/config": {
+      "get": {
+        "summary": "Returns all phone group configurations",
+        "tags": [
+          "Phone groups"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_phone_groups_multiple"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates phone group configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200_phone_groups"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/phone_group"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Phone groups"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified phone group configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_phone_groups_multiple"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "x-web": {
+                                "pretty": "Configuration ID",
+                                "input-type": "input"
+                              },
+                              "type": "string",
+                              "description": "Phone group Configuration identifier (ID)."
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        },
+                        {
+                          "$ref": "#/components/schemas/phone_group"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Phone groups"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes specified phone group configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": [
+                      ""
+                    ]
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Phone groups"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Recipients"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/recipients/email_users/config": {
+      "get": {
+        "summary": "Returns all email users configurations",
+        "tags": [
+          "Email users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_email_users_multiple"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates email users configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200_email_users"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/email_user"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Email users"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified email users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_email_users_multiple"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "x-web": {
+                                "pretty": "Configuration ID",
+                                "input-type": "input"
+                              },
+                              "type": "string",
+                              "description": "Email user Configuration identifier (ID)."
+                            }
+                          },
+                          "required": [
+                            "id"
+                          ]
+                        },
+                        {
+                          "$ref": "#/components/schemas/email_user"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Email users"
+        ],
+        "description": "Updates email users configurations"
+      },
+      "delete": {
+        "summary": "Deletes specified email users configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": [
+                      ""
+                    ]
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Email users"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Recipients"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/recipients/email_users/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified email users configuration",
+        "tags": [
+          "Email users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_email_users"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified email users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_email_users"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/email_user"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Email users"
+        ],
+        "description": "Updates email users configuration"
+      },
+      "delete": {
+        "summary": "Deletes the specified email users configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Email users"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Recipients"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/recipients/phone_groups/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Phone group configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified phone groups configuration",
+        "tags": [
+          "Phone groups"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_phone_groups"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified phone group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_phone_groups"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/phone_group"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Phone groups"
+        ],
+        "description": "Updates phone group configuration"
+      },
+      "delete": {
+        "summary": "Deletes the specified phone group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Phone groups"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Recipients"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/recipients/send_email/actions/send_email": {
+      "post": {
+        "summary": "Send test email",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_test_email"
+          }
+        },
+        "tags": [
+          "Test email"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {}
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/test_email"
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "data": {
+                      "secure": "string",
+                      "smtp_ip": "string",
+                      "smtp_port": "string",
+                      "sender_email": "string",
+                      "username": "string",
+                      "password": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Recipients"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "email_user": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "username": "",
+            "credentials": "",
+            "name": "",
+            "secure_conn": "",
+            "senderemail": "",
+            "smtp_port": "",
+            "password": "",
+            "smtp_ip": ""
+          }
+        },
+        "properties": {
+          "name": {
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Account Name.",
+            "format": "default_validation",
+            "maxLength": 16
+          },
+          "secure_conn": {
+            "x-web": {
+              "pretty": "Secure Connection",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Use only if server supports SSL or TLS.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "smtp_ip": {
+            "x-web": {
+              "pretty": "SMTP server",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "SMTP (Simple Mail Transfer Protocol) server.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%%&*+/=?^_`{|}~. -]+$",
+            "maxLength": 64
+          },
+          "smtp_port": {
+            "x-web": {
+              "pretty": "SMTP server Port",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "SMTP (Simple Mail Transfer Protocol) server port.",
+            "format": "port"
+          },
+          "credentials": {
+            "x-web": {
+              "pretty": "Credentials",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "This options allows you to set username and password of email account.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "username": {
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "credentials": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Username for authentication on SMTP (Simple Mail Transfer Protocol) server.",
+            "format": "credentials_validate, regex",
+            "pattern": "^[^']*$",
+            "maxLength": 64
+          },
+          "password": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "credentials": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Password for authentication on SMTP (Simple Mail Transfer Protocol) server.",
+            "format": "credentials_validate, regex",
+            "pattern": "^[^']*$",
+            "maxLength": 64
+          },
+          "senderemail": {
+            "x-web": {
+              "pretty": "Sender's email address",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "An address that will be used to send your email from.",
+            "format": "email"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "phone_group": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "string",
+            "tel": [
+              "string"
+            ]
+          }
+        },
+        "properties": {
+          "name": {
+            "x-web": {
+              "pretty": "Group name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Name of grouped phone numbers.",
+            "format": "default_validation",
+            "maxLength": 16
+          },
+          "tel": {
+            "x-web": {
+              "pretty": "Phone number",
+              "input-type": "input"
+            },
+            "description": "Phone numbers belonging to a group.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "phonedigit"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "tel"
+        ]
+      },
+      "test_email": {
+        "title": "Test Email options",
+        "type": "object",
+        "properties": {
+          "secure_conn": {
+            "type": "string",
+            "description": "Use only if server supports SSL or TLS.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "smtp_ip": {
+            "type": "string",
+            "description": "SMTP (Simple Mail Transfer Protocol) server.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%%&*+/=?^_`{|}~. -]+$",
+            "maxLength": 64
+          },
+          "smtp_port": {
+            "type": "string",
+            "description": "SMTP (Simple Mail Transfer Protocol) server port.",
+            "format": "port"
+          },
+          "senderemail": {
+            "type": "string",
+            "description": "An address that will be used to send your email from.",
+            "format": "email"
+          },
+          "username": {
+            "type": "string",
+            "description": "Username for authentication on SMTP (Simple Mail Transfer Protocol) server.",
+            "format": "credentials_validate"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password for authentication on SMTP (Simple Mail Transfer Protocol) server.",
+            "format": "credentials_validate"
+          }
+        },
+        "required": [
+          "senderemail",
+          "secure_conn"
+        ]
+      }
+    },
+    "responses": {
+      "200_email_users": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/email_user"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_email_users_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/email_user"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_phone_groups": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/phone_group"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_phone_groups_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/phone_group"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_test_email": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

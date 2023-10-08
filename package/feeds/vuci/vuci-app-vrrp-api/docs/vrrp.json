@@ -1,0 +1,690 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VRRP",
+    "description": "VRRP api documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "VRRP"
+    }
+  ],
+  "paths": {
+    "/vrrp/config": {
+      "get": {
+        "summary": "Get vrrp configurations",
+        "description": "Gets vrrp configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200vrrpMulti"
+          }
+        },
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "get-services-vrrp-config"
+      },
+      "post": {
+        "summary": "Create vrrp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200vrrp"
+          }
+        },
+        "description": "Creates vrrp configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_vrrp_one_post"
+              }
+            }
+          }
+        },
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "post-services-vrrp-config"
+      },
+      "put": {
+        "summary": "Update vrrp configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200vrrpMulti"
+          }
+        },
+        "description": "Updates vrrp configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_vrrp_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "put-services-vrrp-config"
+      },
+      "delete": {
+        "summary": "Delete vrrp configurations",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configurations objects",
+                    "items": {
+                      "type": "string",
+                      "description": "VRRP configuration name"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Deletes vrrp configurations",
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "delete-services-vrrp-config",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "VRRP configuration name",
+                            "x-web": {
+                              "pretty": "VRRP configuration name",
+                              "input-type": "input"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "VRRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/vrrp/config/{id}": {
+      "get": {
+        "summary": "Get vrrp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200vrrp"
+          }
+        },
+        "description": "Gets vrrp configuration",
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "get-services-vrrp-config-sid"
+      },
+      "put": {
+        "summary": "Update vrrp configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200vrrp"
+          }
+        },
+        "description": "Updates vrrp configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_vrrp_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "put-services-vrrp-config-sid"
+      },
+      "delete": {
+        "summary": "Delete vrrp configuration",
+        "description": "Deletes vrrp configuration",
+        "tags": [
+          "VRRP"
+        ],
+        "operationId": "delete-services-vrrp-config-sid",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "VRRP configuration name",
+                          "x-web": {
+                            "pretty": "VRRP configuration name",
+                            "input-type": "input"
+                          }
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "VRRP configuration name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "VRRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/vrrp/status": {
+      "parameters": [],
+      "get": {
+        "summary": "Get vrrp status",
+        "operationId": "get-services-vrrp-actions-status",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200vrrp_status"
+          }
+        },
+        "description": "Gets vrrp status",
+        "tags": [
+          "VRRP"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "VRRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "vrrp_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable VRRP (Virtual Router Redundancy Protocol) for interface.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "virtual_mac": {
+            "description": "Allow VRRP to use virtualized MAC for interface.",
+            "type": "string",
+            "x-web": {
+              "pretty": "Virtualize MAC",
+              "input-type": "switch"
+            }
+          },
+          "virtual_id": {
+            "description": "Routers with same IDs will be grouped in the same VRRP (Virtual Router Redundancy Protocol) cluster, range [1 - 255].",
+            "type": "string",
+            "x-web": {
+              "pretty": "Virtualize ID",
+              "input-type": "input"
+            }
+          },
+          "priority": {
+            "description": "Router with highest priority value on the same VRRP (Virtual Router Redundancy Protocol) cluster will act as a main one, range [1 - 255].",
+            "type": "string",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          },
+          "delay": {
+            "description": "Time interval in seconds between advertisements, range [1 - 255].",
+            "type": "string",
+            "x-web": {
+              "pretty": "Advertisement interval",
+              "input-type": "input"
+            }
+          },
+          "interface": {
+            "type": "string",
+            "description": "Select which interface VRRP will operate on.",
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input"
+            }
+          },
+          "virtual_ip": {
+            "description": "Virtual IP address(es) for interface's VRRP (Virtual Router Redundancy Protocol) cluster.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "IP address",
+              "input-type": "input"
+            }
+          },
+          "ping_enabled": {
+            "description": "Enable connection checking.",
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "host": {
+            "type": "string",
+            "description": "IP address or hostname to ping, e.g. 192.168.1.1 or www.host.com.",
+            "x-web": {
+              "pretty": "IP address or hostname",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "interval": {
+            "description": "Time interval between two pings (seconds).",
+            "type": "string",
+            "x-web": {
+              "pretty": "Ping interval",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "time_out": {
+            "type": "string",
+            "description": "Time to receive ping response (seconds).",
+            "x-web": {
+              "pretty": "Ping timeout",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "packet_size": {
+            "type": "string",
+            "description": "Ping packet size (bytes).",
+            "x-web": {
+              "pretty": "Ping packet size",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "ping_attempts": {
+            "type": "string",
+            "description": "Number of ping packets to send.",
+            "x-web": {
+              "pretty": "Ping attempts",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          },
+          "retry": {
+            "type": "string",
+            "description": "Number of pings to retry, before switching to backup router mode.",
+            "x-web": {
+              "pretty": "Ping retry count",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            }
+          }
+        },
+        "x-examples": {}
+      },
+      "vrrp_action": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "main_ip": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "state",
+          "main_ip"
+        ],
+        "x-examples": {}
+      },
+      "req_body_vrrp_one": {
+        "description": "",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/vrrp_options"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_vrrp_one_post": {
+        "description": "",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "VRRP configuration name",
+                    "x-web": {
+                      "pretty": "VRRP configuration name",
+                      "input-type": "input"
+                    }
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              {
+                "$ref": "#/components/schemas/vrrp_options"
+              }
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_vrrp_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "x-web": {
+                        "pretty": "VRRP configuration name",
+                        "input-type": "input"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/vrrp_options"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "200vrrp": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/vrrp_options"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200vrrpMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/vrrp_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200vrrp_status": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/vrrp_action"
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

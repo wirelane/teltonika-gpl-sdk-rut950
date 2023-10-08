@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/hotspot/images/config/{hotspot_images_id}": {
+      "get": {
+        "tags": [
+          "Hotspot Theme Images"
+        ],
+        "summary": "Returns specified hotspot theme images",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemeImagesGETMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_images_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot theme name."
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Hotspot Theme Images"
+        ],
+        "summary": "Deletes specified hotspot theme images",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ThemeImagesGETMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "hotspot_images_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hotspot theme name."
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/theme_images_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "hotspot_images_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Hotspot theme name."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "Landing page"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ThemeImagesMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/theme_images_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ThemeImagesGETMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/theme_images_get_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "theme_images_options": {
+        "type": "object",
+        "properties": {
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file."
+          },
+          "path": {
+            "type": "string",
+            "description": "File full path."
+          }
+        }
+      },
+      "theme_images_get_options": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "File type."
+          },
+          "path": {
+            "type": "string",
+            "description": "File full path."
+          },
+          "file_name": {
+            "type": "string",
+            "description": "Name of the file."
+          },
+          "file_path": {
+            "type": "string",
+            "description": "File short path."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name with extension of the file."
+          }
+        }
+      }
+    }
+  }
+}

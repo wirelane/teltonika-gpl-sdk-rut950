@@ -1,0 +1,197 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/scheduler/config/general": {
+      "get": {
+        "tags": [
+          "I/O Scheduler"
+        ],
+        "summary": "Returns the general I/O Scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoScheduler"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Scheduler"
+        ],
+        "summary": "Updates the general I/O Scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoScheduler"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_scheduler_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Scheduler"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/scheduler/config": {
+      "get": {
+        "tags": [
+          "I/O Scheduler"
+        ],
+        "summary": "Returns the general I/O Scheduler configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoSchedulerMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Scheduler"
+        ],
+        "summary": "Updates the general I/O Scheduler configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoScheduler"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_scheduler_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Scheduler"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoScheduler": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_scheduler_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoSchedulerMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_scheduler_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_scheduler_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables/disables the I/O Scheduler.",
+            "x-web": {
+              "pretty": "Enable Scheduler",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "io_scheduler_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "I/O Scheduler Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/io_scheduler_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

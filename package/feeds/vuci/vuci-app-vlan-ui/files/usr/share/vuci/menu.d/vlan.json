@@ -1,0 +1,13 @@
+{
+	"network/vlan": {
+		"title": "VLAN",
+		"index": 70
+	},
+	"network/vlan/interface_based": {
+		"title": "Interface Based",
+		"index": 20,
+		"view": "network/VlanInterface",
+		"acls": [ "network/vlan/interface_based" ],
+		"files": [ "/etc/config/network" ]
+	}
+}

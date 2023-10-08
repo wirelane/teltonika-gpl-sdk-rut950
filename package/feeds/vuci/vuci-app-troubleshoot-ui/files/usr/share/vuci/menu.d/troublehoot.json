@@ -1,0 +1,14 @@
+{
+    "system/maintenance": {
+        "title": "Maintenance",
+        "index": 20
+    },
+    "system/maintenance/troubleshoot": {
+        "title": "Troubleshoot",
+        "acls": [
+            "system/maintenance/troubleshoot"
+        ],
+        "view": "system/Troubleshoot",
+        "index": 30
+    }
+}

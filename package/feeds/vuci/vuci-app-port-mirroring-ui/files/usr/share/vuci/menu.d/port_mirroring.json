@@ -1,0 +1,13 @@
+{
+	"network/ports": {
+		"title": "Ports",
+		"index": 100
+	},
+	"network/ports/port_mirroring": {
+		"title": "Port Mirroring",
+		"index": 20,
+		"view": "network/PortMirroring",
+		"acls": [ "network/ports/port_mirroring" ],
+		"files": [ "/etc/config/network" ]
+	}
+}

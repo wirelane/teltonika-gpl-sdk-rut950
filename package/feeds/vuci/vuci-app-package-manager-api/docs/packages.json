@@ -1,0 +1,702 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/packages/actions/update_package": {
+      "post": {
+        "tags": [
+          "packages"
+        ],
+        "summary": "Update package from a server if possible",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpdatePackage"
+          },
+          "422": {
+            "$ref": "#/components/responses/422Package"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/update_package_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/actions/install_package": {
+      "post": {
+        "tags": [
+          "packages"
+        ],
+        "summary": "Install package",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "400": {
+            "$ref": "#/components/responses/400InstallPackage"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/install_package_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/actions/delete_install_files": {
+      "post": {
+        "summary": "Deletes uploaded package data from device",
+        "operationId": "post-services-packages-actions-delete_install_files",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "packages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/config/{id}": {
+      "delete": {
+        "tags": [
+          "packages"
+        ],
+        "summary": "Deletes specified package manager package",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Package name"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hidden": true
+      }
+    },
+    "/packages/config": {
+      "get": {
+        "tags": [
+          "packages"
+        ],
+        "summary": "Returns all package manager configuration sections",
+        "description": "Returns all sections with their parameters from package manager configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PackagesData"
+          }
+        }
+      },
+      "post": {
+        "summary": "Upload zipped package to device",
+        "operationId": "post-services-packages-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UploadZipped"
+          },
+          "422": {
+            "$ref": "#/components/responses/422Package"
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File to upload"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "tags": [
+          "packages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hidden": true
+      }
+    },
+    "/packages/config/available": {
+      "get": {
+        "summary": "Returns available packages section",
+        "tags": [
+          "packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PackagesData"
+          }
+        },
+        "operationId": "get-services-packages-config-available",
+        "description": "Returns available sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/config/language": {
+      "get": {
+        "summary": "Returns language packages section",
+        "tags": [
+          "packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PackagesData"
+          }
+        },
+        "operationId": "get-services-packages-config-language",
+        "description": "Returns language sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/config/installed": {
+      "get": {
+        "summary": "Returns installed packages section",
+        "tags": [
+          "packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InstalledPackages"
+          }
+        },
+        "operationId": "get-services-packages-config-installed",
+        "description": "Returns installed sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/config/pending": {
+      "get": {
+        "summary": "Returns pending packages section",
+        "tags": [
+          "packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PackagesData"
+          }
+        },
+        "operationId": "get-services-packages-config-pending",
+        "description": "Returns pending sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/packages/status": {
+      "get": {
+        "tags": [
+          "packages"
+        ],
+        "summary": "Returns information about packages",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PackagesPaths"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200UploadZipped": {
+        "description": "Returns data about uploaded zipped package to device",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/uploaded_package_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200PackagesPaths": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "packages_url": {
+                      "type": "string",
+                      "description": "URL which contains packages available to download for the current device."
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "packages_url": "http://opkg.teltonika-networks.com/1e844272737d9fa9587b0832b852448b7b2dc568b20b925fcfd33369ef018a0e/wiki"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200PackagesData": {
+        "description": "Returns data about packages",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of packages data",
+                  "items": {
+                    "$ref": "#/components/schemas/packages_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200InstalledPackages": {
+        "description": "Returns installed packages",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of fetch packages",
+                  "items": {
+                    "$ref": "#/components/schemas/installed_packages_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "422Package": {
+        "description": "Returns error when try update package",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "errors": {
+                  "type": "array",
+                  "description": "Array of errors",
+                  "items": {
+                    "$ref": "#/components/schemas/errormessages"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400InstallPackage": {
+        "description": "Returns error when try install package",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "errors": {
+                  "type": "array",
+                  "description": "Array of errors",
+                  "items": {
+                    "$ref": "#/components/schemas/errormessages"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200UpdatePackage": {
+        "description": "Returns error when try update package",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "messages": {
+                  "type": "array",
+                  "description": "Array of messages",
+                  "items": {
+                    "$ref": "#/components/schemas/update"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "update_package_options": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "type": "string",
+            "description": "Name of package to be updated"
+          }
+        }
+      },
+      "errormessages": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "description": "Error number"
+          },
+          "source": {
+            "type": "string",
+            "description": "Error source"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      },
+      "update": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Status number"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message"
+          }
+        }
+      },
+      "installed_packages_info": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of package"
+          },
+          "Package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "tlt_name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "installedVersion": {
+            "type": "string",
+            "description": "Package Version"
+          }
+        }
+      },
+      "uploaded_package_info": {
+        "type": "object",
+        "properties": {
+          "checksum": {
+            "type": "string",
+            "description": "Package checksum"
+          },
+          "code": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "network_restart": {
+            "type": "boolean",
+            "description": "Flag is need to restart network, when package is installed"
+          },
+          "reboot": {
+            "type": "boolean",
+            "description": "Flag is need to reboot device, when package is installed"
+          },
+          "package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "sha": {
+            "type": "string",
+            "description": "SHA checksum"
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Is package verified"
+          }
+        }
+      },
+      "packages_info": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "Description": {
+            "type": "string",
+            "description": "Description of package"
+          },
+          "Package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "Filename": {
+            "type": "string",
+            "description": "Filename for package"
+          },
+          "Depends": {
+            "type": "string",
+            "description": "Depends to package"
+          },
+          "Size": {
+            "type": "string",
+            "description": "Size of package"
+          },
+          "SHA256sum": {
+            "type": "string",
+            "description": "SHA256 checksum"
+          },
+          "Installed-Size": {
+            "type": "string",
+            "description": "Package size when installed"
+          },
+          "Version": {
+            "type": "string",
+            "description": "Package Version"
+          },
+          "Router": {
+            "type": "string",
+            "description": "Package dedicated Router"
+          },
+          "Architecture": {
+            "type": "string",
+            "description": "Chipset architecture"
+          },
+          "Section": {
+            "type": "string",
+            "description": "For which section is deicated package"
+          },
+          "tlt_name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "Firmware": {
+            "type": "string",
+            "description": "The package is for firmware"
+          },
+          "License": {
+            "type": "string",
+            "description": "Package License"
+          }
+        }
+      },
+      "install_package_options": {
+        "type": "object",
+        "properties": {
+          "custom": {
+            "type": "string",
+            "description": "Specifies if package is from server or not"
+          },
+          "language": {
+            "type": "string",
+            "description": "Specifies if package is language pack."
+          },
+          "package": {
+            "type": "string",
+            "description": "Name of package to be installed. Needs to be specified if package is being installed from online server."
+          }
+        }
+      }
+    }
+  }
+}

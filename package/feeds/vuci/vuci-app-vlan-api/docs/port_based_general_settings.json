@@ -1,0 +1,228 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/vlan/port_based_general_settings/config": {
+      "get": {
+        "tags": [
+          "Port based vlan general settings"
+        ],
+        "summary": "GET All Port based vlan general settings",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PortBaseGeneSettMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Port based vlan general settings"
+        ],
+        "summary": "UPDATE All Port based vlan general settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PortBaseGeneSettMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/port_based_general_settings_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Port Based"
+        ],
+        "hidden": true
+      }
+    },
+    "/vlan/port_based_general_settings/config/{id}": {
+      "get": {
+        "tags": [
+          "Port based vlan general settings"
+        ],
+        "summary": "GET Port based vlan general settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PortBaseGeneSett"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration port based vlan general settings section indetifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Port based vlan general settings"
+        ],
+        "summary": "UPDATE Port based vlan general settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PortBaseGeneSett"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration port based vlan general settings section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/port_based_general_settings_options_put"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Port Based"
+        ],
+        "hidden": true
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200PortBaseGeneSett": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/port_based_general_settings_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200PortBaseGeneSettMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/port_based_general_settings_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "port_based_general_settings_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "enable_vlan": {
+            "x-web": {
+              "pretty": "Enable Port Based VLAN",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable Port Based VLAN functionality"
+          }
+        }
+      },
+      "port_based_general_settings_options_put": {
+        "type": "object",
+        "properties": {
+          "enable_vlan": {
+            "x-web": {
+              "pretty": "Enable Port Based VLAN",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable Port Based VLAN functionality"
+          }
+        }
+      }
+    }
+  }
+}

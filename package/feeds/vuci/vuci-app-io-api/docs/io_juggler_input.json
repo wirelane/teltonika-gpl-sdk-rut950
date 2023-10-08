@@ -1,0 +1,521 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/juggler/config/general/inputs": {
+      "get": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Returns all I/O Juggler Input configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerInputMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Creates a new I/O Juggler Input configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200IoJugglerInput"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_input_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Updates the specified I/O Juggler Input configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerInputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_juggler_input_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Deletes the specified I/O Juggler Input configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "General"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/juggler/config/general/inputs/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "I/O Juggler Input Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Returns the specified I/O Juggler Input configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerInput"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Updates the specified I/O Juggler Input configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoJugglerInput"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_juggler_input_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "I/O Juggler Inputs"
+        ],
+        "summary": "Deletes the specified I/O Juggler Input configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "I/O Juggler",
+          "General"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoJugglerInput": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_juggler_input_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoJugglerInputMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_juggler_input_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_juggler_input_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable or disable I/O juggler for this pin",
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Specifies I/O Input name",
+            "x-web": {
+              "pretty": "Role",
+              "input-type": "select",
+              "unique": true,
+              "enum-depends": [
+                { "hw_tags": { "din1": true }, "values": ["din1"] },
+                { "hw_tags": { "din2": true }, "values": ["din2"] },
+                { "hw_tags": { "dio0": true }, "values": ["dio0"] },
+                { "hw_tags": { "dio1": true }, "values": ["dio1"] },
+                { "hw_tags": { "dio2": true }, "values": ["dio2"] },
+                { "hw_tags": { "iio": true }, "values": ["iio"] },
+                { "hw_tags": { "adc0": true }, "values": ["adc0"] },
+                { "hw_tags": { "acl0": true }, "values": ["acl0"] },
+                { "hw_tags": { "dwi0": true }, "values": ["dwi0"] },
+                { "hw_tags": { "dwi1": true }, "values": ["dwi1"] }
+              ]
+            }
+          },
+          "wait": {
+            "type": "string",
+            "description": "Specifies what is the shortest amount of seconds between triggers. Trigger interval and action's Execution delay values are summed up when calculating total interval between I/O triggers.",
+            "format": "uinteger",
+            "maxLength": 8,
+            "default": "1",
+            "x-web": {
+              "pretty": "Trigger interval",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": [
+                    "din1",
+                    "din2",
+                    "dio0",
+                    "dio1",
+                    "dio2",
+                    "iio",
+                    "dwi0",
+                    "dwi1"
+                  ]
+                }
+              ]
+            }
+          },
+          "inside": {
+            "type": "string",
+            "description": "Specifies to react when voltage is within specified min max range, otherwise react when voltage is out of range.",
+            "x-web": {
+              "pretty": "Inside range",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "name": ["adc0", "acl0"]
+                }
+              ]
+            }
+          },
+          "trigger": {
+            "type": "string",
+            "description": "Specifies the reaction trigger.",
+            "enum": [
+              "rising",
+              "falling",
+              "both"
+            ],
+            "x-web": {
+              "pretty": "Trigger",
+              "input-type": "select",
+              "depends": [
+                {
+                  "name": [
+                    "din1",
+                    "din2",
+                    "dio0",
+                    "dio1",
+                    "dio2",
+                    "iio",
+                    "dwi0",
+                    "dwi1"
+                  ]
+                }
+              ],
+              "enum-pretty": {
+                "rising": "Rising",
+                "falling": "Falling",
+                "both": "Both"
+              }
+            }
+          },
+          "min": {
+            "type": "string",
+            "description": "Specifies minimum voltage of the range.",
+            "format": "ufloat",
+            "x-web": {
+              "pretty": "Min voltage",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": [
+                    "adc0"
+                  ]
+                }
+              ]
+            }
+          },
+          "max": {
+            "type": "string",
+            "description": "Specifies maximum voltage of the range.",
+            "format": "ufloat",
+            "x-web": {
+              "pretty": "Max voltage",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": [
+                    "adc0"
+                  ]
+                }
+              ]
+            }
+          },
+          "acl": {
+            "type": "string",
+            "description": "Select which property - ampere or percentage the condition listens to.",
+            "enum": [
+              "current",
+              "percent"
+            ],
+            "default": "current",
+            "x-web": {
+              "pretty": "ACL Property",
+              "input-type": "select",
+              "depends": [
+                {
+                  "name": "acl0"
+                }
+              ],
+              "enum-pretty": {
+                "current": "Current",
+                "percent": "Percent"
+              }
+            }
+          },
+          "min_curr": {
+            "type": "string",
+            "description": "Specifies minimum current of the range. Values between 4-20mA",
+            "format": "range(4, 20)",
+            "minLength": 1,
+            "maxLength": 2,
+            "x-web": {
+              "pretty": "Min current",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": "acl0",
+                  "acl": "current"
+                }
+              ]
+            }
+          },
+          "max_curr": {
+            "type": "string",
+            "description": "Specifies maximum current of the range.",
+            "format": "range(4, 20)",
+            "minLength": 1,
+            "maxLength": 2,
+            "x-web": {
+              "pretty": "Max current",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": "acl0",
+                  "acl": "current"
+                }
+              ]
+            }
+          },
+          "min_perc": {
+            "type": "string",
+            "description": "Specifies minimum percent of the range.",
+            "format": "range(0, 100)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "Min percent",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": "acl0",
+                  "acl": "percent"
+                }
+              ]
+            }
+          },
+          "max_perc": {
+            "type": "string",
+            "description": "Specifies maximum percent of the range.",
+            "format": "range(0, 100)",
+            "minLength": 1,
+            "maxLength": 3,
+            "x-web": {
+              "pretty": "Max percent",
+              "input-type": "input",
+              "depends": [
+                {
+                  "name": "acl0",
+                  "acl": "percent"
+                }
+              ]
+            }
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specifies actions which will occur when the pin is triggered.",
+            "x-web": {
+              "pretty": "Add actions",
+              "input-type": "select"
+            }
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specifies global conditions for this pin. Actions will trigger only if the conditions are met. Conditions are optional.",
+            "x-web": {
+              "pretty": "Add conditions",
+              "input-type": "select"
+            }
+          }
+        },
+        "required": [
+          "min",
+          "max",
+          "min_perc",
+          "max_perc",
+          "min_curr",
+          "max_curr",
+          "actions"
+        ]
+      },
+      "io_juggler_input_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "I/O Juggler Input Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/io_juggler_input_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

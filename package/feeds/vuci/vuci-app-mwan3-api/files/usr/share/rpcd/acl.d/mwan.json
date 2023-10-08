@@ -1,0 +1,11 @@
+{
+	"network/failover/mwan": {
+		"description": "MultiWan configuration",
+		"read": {
+			"api": ["/mwan3/*"]
+		},
+		"write": {
+			"api": ["/mwan3/*"]
+		}
+	}
+}

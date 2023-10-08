@@ -1,0 +1,412 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/opcua/server/config/{id}": {
+      "get": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Returns the specified OPC UA Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OPC UA Server Instance identifier (ID)"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Updates the specified OPC UA Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OPC UA Server Instance identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Deletes the specified OPC UA Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OPC UA Server Instance identifier (ID)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/server/config": {
+      "get": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Returns all OPC UA Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Updates specified OPC UA Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/opcua_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Creates OPC UA Server configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200opcuaServer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Deletes specified OPC UA Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/server/actions/test": {
+      "post": {
+        "deprecated": true,
+        "tags": [
+          "OPC UA Servers"
+        ],
+        "summary": "Test OPC UA Server",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_test_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "OPC",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200opcuaServer": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/opcua_server_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200opcuaServerMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/opcua_server_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "opcua_server_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables/disables OPC UA Server instance.",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the server (no functional use).",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "url": {
+            "type": "string",
+            "description": "OPC UA endpoint URL.",
+            "format": "url",
+            "x-web": {
+              "pretty": "URL",
+              "input-type": "input"
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Server timeout (ms).",
+            "format": "irange(10, 3600000)",
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "opcua_server_test_options": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "OPC UA endpoint URL.",
+            "format": "url"
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Server timeout (ms).",
+            "format": "range(10, 3600000)",
+            "minLength": 2,
+            "maxLength": 7
+          }
+        },
+        "required": [
+          "url",
+          "timeout"
+        ]
+      },
+      "opcua_server_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "OPC UA Server Instance identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/opcua_server_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

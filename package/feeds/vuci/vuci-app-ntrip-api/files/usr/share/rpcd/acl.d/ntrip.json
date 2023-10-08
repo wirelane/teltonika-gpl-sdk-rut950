@@ -1,0 +1,17 @@
+{
+	"services/ntrip": {
+		"description": "NTRIP acls",
+		"read": {
+			"api": [
+				"/ntrip/*",
+				"/device/info/*",
+				"/serial/status/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/ntrip/*"
+			]
+		}
+	}
+}

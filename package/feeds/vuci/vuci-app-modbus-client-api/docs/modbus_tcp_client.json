@@ -1,0 +1,460 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Modbus TCP Client"
+    }
+  ],
+  "paths": {
+    "/modbus/tcp/config/{modbus_tcp_client_id}": {
+      "get": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Returns the specified Modbus TCP Client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClient"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modbus_tcp_client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modbus TCP Client Configuration identifier (ID)"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Updates the specified Modbus TCP Client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClient"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modbus_tcp_client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modbus TCP Client Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_client_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Deletes the specified Modbus TCP Client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "modbus_tcp_client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modbus TCP Client Configuration identifier (ID)"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_tcp_client_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus TCP Client Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/tcp/config": {
+      "get": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Returns all Modbus TCP Client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClientMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Creates Modbus TCP Client configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ModbusTcpClient"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_tcp_client_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Updates specified Modbus TCP Client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusTcpClientMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_tcp_client_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Modbus TCP Client"
+        ],
+        "summary": "Deletes specified Modbus TCP Client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus TCP Client"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ModbusTcpClient": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_tcp_client_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ModbusTcpClientMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_tcp_client_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_tcp_client_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable Modbus client configuration.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the server device. Used for easier device management purposes only.",
+            "maxLength": 32,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "server_id": {
+            "type": "string",
+            "description": "Modbus server ID number.",
+            "format": "irange(1, 255)",
+            "default": "1",
+            "x-web": {
+              "pretty": "Server ID",
+              "input-type": "input"
+            }
+          },
+          "dev_ipaddr": {
+            "type": "string",
+            "description": "IP address or hostname of the server device.",
+            "format": "ip4addr",
+            "x-web": {
+              "pretty": "Address",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Server device Port.",
+            "format": "port",
+            "default": "502",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          },
+          "period": {
+            "type": "string",
+            "description": "Interval for sending requests to this device.",
+            "format": "irange(1, 99999)",
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "input",
+              "depends": [
+                {
+                  "frequency": "period"
+                }
+              ]
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Time period for waiting of the TCP device response (in seconds, 1-30)",
+            "format": "irange(1, 30)",
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input"
+            }
+          },
+          "reconnect": {
+            "type": "string",
+            "description": "Create new connection after every modbus request.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Always reconnect",
+              "input-type": "switch"
+            }
+          },
+          "skip_on_many_tmos": {
+            "type": "string",
+            "description": "Skip pending request and reset connection after number of request failures.",
+            "format": "irange(0, 10)",
+            "default": "0",
+            "x-web": {
+              "pretty": "Number of timeouts",
+              "input-type": "input",
+              "depends": [
+                {
+                  "reconnect": "0"
+                }
+              ]
+            }
+          },
+          "frequency": {
+            "type": "string",
+            "description": "Select which timing method will be used to send requests.",
+            "enum": [
+              "period",
+              "schedule"
+            ],
+            "x-web": {
+              "pretty": "Frequency",
+              "enum-pretty": {
+                "period": "Period",
+                "schedule": "Schedule"
+              },
+              "input-type": "select"
+            }
+          },
+          "delay": {
+            "type": "string",
+            "description": "Wait in milliseconds after connection initialization.",
+            "format": "irange(0, 999)",
+            "default": "0",
+            "x-web": {
+              "pretty": "Delay",
+              "input-type": "input"
+            }
+          },
+          "schedule": {
+            "type": "array",
+            "description": "Schedule request time in format: Hours:Minutes:Seconds",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Schedule requests",
+              "input-type": "input",
+              "depends": [
+                {
+                  "frequency": "schedule"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "dev_ipaddr",
+          "port"
+        ]
+      },
+      "modbus_tcp_client_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus TCP Client Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_tcp_client_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

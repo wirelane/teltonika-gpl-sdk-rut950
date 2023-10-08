@@ -1,0 +1,15 @@
+{
+	"services/cloud_solutions/azure_iothub": {
+		"description": "Azure IoT hub",
+		"read": {
+			"api": [
+				"/cloud_solutions/azure_iothub/*",
+				"/interfaces/*",
+				"/mobile/modems/status_basic/*"
+			]
+		},
+		"write": {
+			"api": ["/cloud_solutions/azure_iothub/*"]
+		}
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"status/wireless/channel_analysis": {
+		"description": "wireless channel analysis",
+		"read": {
+			"api": [
+				"/wireless/devices/config/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/wireless/devices/actions/wifi_scan/*"
+			]
+		}
+	}
+}

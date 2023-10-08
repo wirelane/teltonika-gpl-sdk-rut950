@@ -1,0 +1,291 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Cumulocity"
+    }
+  ],
+  "paths": {
+    "/cloud_solutions/cumulocity/config/general": {
+      "put": {
+        "tags": [
+          "Cumulocity"
+        ],
+        "summary": "Updates Cumulocity configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Cumulocity"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/cumulocity_single_options"
+                  }
+                }
+              },
+              "examples": {
+                "Single instance": {
+                  "value": {
+                    "data": {
+                      "enabled": "1",
+                      "ssl": "1",
+                      "server": "www.hostname.com",
+                      "interval": "200"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Cumulocity"
+        ],
+        "summary": "Returns Cumulocity configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Cumulocity"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cumulocity"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/cloud_solutions/cumulocity/config": {
+      "put": {
+        "tags": [
+          "Cumulocity"
+        ],
+        "summary": "Updates Cumulocity configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CumulocityMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/cumulocity_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "get": {
+        "tags": [
+          "Cumulocity"
+        ],
+        "summary": "Returns Cumulocity configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CumulocityMulti"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cumulocity"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/cloud_solutions/cumulocity/actions/reset_auth": {
+      "post": {
+        "tags": [
+          "Cumulocity"
+        ],
+        "summary": "Resets authentication data",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Cumulocity"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "Used to reset saved internal Authentication data"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cumulocity"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Cumulocity": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/cumulocity_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CumulocityMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/cumulocity_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "cumulocity_single_options": {
+        "type": "object",
+        "title": "",
+        "description": "Options required to configure a working cumulocity service.",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable cumulocity application",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "ssl": {
+            "type": "string",
+            "description": "Use SSL/TLS Protocol",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Use SSL/TLS",
+              "input-type": "switch"
+            }
+          },
+          "server": {
+            "type": "string",
+            "description": "Cumulocity Server Address",
+            "format": "host",
+            "example": "www.hostname.com",
+            "minLength": 0,
+            "maxLength": 254,
+            "x-web": {
+              "pretty": "Server Address",
+              "input-type": "input"
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Push connection interval in minutes",
+            "format": "irange(1, 32767)",
+            "minLength": 1,
+            "maxLength": 5,
+            "example": "200",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "server",
+          "interval"
+        ]
+      },
+      "cumulocity_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Cumulocity Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/cumulocity_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

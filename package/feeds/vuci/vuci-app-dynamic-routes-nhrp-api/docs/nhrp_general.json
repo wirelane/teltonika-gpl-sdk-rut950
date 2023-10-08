@@ -1,0 +1,157 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/nhrp/general/config/general": {
+      "get": {
+        "tags": [
+          "nhrp_general"
+        ],
+        "summary": "Returns nhrp general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "nhrp_general"
+        ],
+        "summary": "Updates specified nhrp general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhGe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "NHRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/nhrp/general/nhrp_info": {
+      "get": {
+        "summary": "Fetches data about nhrp neighbors",
+        "tags": [
+          "nhrp_general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "operationId": "get-network-routes-dynamic-nhrp-general-nhrp_info"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "NHRP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200NhGe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nhrp_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NhGeMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/nhrp_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "nhrp_general_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable service",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable service."
+          },
+          "debug": {
+            "x-web": {
+              "pretty": "Enable logging",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable logging of NHRP."
+          }
+        }
+      }
+    }
+  }
+}

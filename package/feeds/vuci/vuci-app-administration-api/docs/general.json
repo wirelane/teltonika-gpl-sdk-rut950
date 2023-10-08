@@ -1,0 +1,285 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Administration general",
+    "version": "1.0",
+    "description": "Administration general API documentation"
+  },
+  "tags": [
+    {
+      "name": "Administration general"
+    }
+  ],
+  "paths": {
+    "/administration/general/actions/reboot": {
+      "post": {
+        "tags": [
+          "Administration general"
+        ],
+        "summary": "Reboots device",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminReboot"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    },
+    "/administration/general/config/general": {
+      "put": {
+        "tags": [
+          "Administration general"
+        ],
+        "summary": "Updates the specified Administration general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneral"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/administration_general_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administration general"
+        ],
+        "summary": "Returns the specified administration general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneral"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/administration/general/config": {
+      "get": {
+        "tags": [
+          "Administration general"
+        ],
+        "summary": "Returns all administration configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneralMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Administration general"
+        ],
+        "summary": "Updates specified administration configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneralMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/administration_general_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdminReboot": {
+        "description": "Reboots device",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminGeneral": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/administration_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminGeneralMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/administration_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "administration_general_single_options": {
+        "type": "object",
+        "properties": {
+          "lang": {
+            "x-web": {
+              "pretty": "Language",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Sets current language of Web interface."
+          },
+          "advanced": {
+            "x-web": {
+              "pretty": "Configuration mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "Basic",
+                "1": "Advanced"
+              }
+            },
+            "type": "string",
+            "description": "Turn between basic and advanced modes in Web Interface.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "firstlogin": {
+            "x-web": {
+              "pretty": "First login"
+            },
+            "type": "string",
+            "description": "Indicates status of a first login.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "readOnly": true
+          }
+        }
+      },
+      "administration_general_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Administration General Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/administration_general_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

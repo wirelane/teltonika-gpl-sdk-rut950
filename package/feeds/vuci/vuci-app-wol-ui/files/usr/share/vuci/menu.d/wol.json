@@ -1,0 +1,9 @@
+{
+	"services/wol": {
+		"title": "Wake on LAN",
+		"index": 240,
+		"view": "services/Wol_aeaafe",
+		"acls": [ "services/wol" ],
+		"files": [ "/etc/config/etherwake" ]
+	}
+}

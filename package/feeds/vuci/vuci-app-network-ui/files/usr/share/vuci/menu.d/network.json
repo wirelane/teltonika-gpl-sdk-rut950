@@ -1,0 +1,30 @@
+{
+	"network/wan": {
+		"title": "WAN",
+		"acls": [ "network/wan" ],
+		"files": [ "/etc/config/network" ],
+		"view": "network/WanInterfaces",
+		"index": 20
+	},
+	"network/lan": {
+		"title": "LAN",
+		"acls": [ "network/lan" ],
+		"files": [ "/etc/config/network" ],
+		"view": "network/LanInterfaces",
+		"index": 30
+	},
+	"status/network": {
+		"title": "Network",
+		"index": 30
+	},
+	"status/wireless": {
+		"title": "Wireless",
+		"index": 35
+	},
+	"status/network/lan": {
+		"title": "LAN",
+		"acls": [ "status/network/lan" ],
+		"view": "status/Lan",
+		"index": 30
+	}
+}

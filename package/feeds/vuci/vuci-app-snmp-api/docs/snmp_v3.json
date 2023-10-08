@@ -1,0 +1,439 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/snmp/v3/config/{id}": {
+      "get": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Returns the specified SNMP V3 user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_v3"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SNMP V3 instance identifier (ID)"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Deletes the specified SNMP V3 user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SNMP V3 instance identifier (ID)."
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Updates the specified SNMP V3 user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_v3"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SNMP V3 instance identifier (ID)."
+          }
+        ],
+        "requestBody": {
+          "description": "Data to update configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_v3_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration ID"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "SNMP V3 Users"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/snmp/v3/config": {
+      "get": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Returns all SNMP V3 user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_v3_multi"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Creates a new SNMP V3 user configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200snmp_v3"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_v3_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Deletes the specified SNMP V3 user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "put": {
+        "tags": [
+          "SNMP V3 users"
+        ],
+        "summary": "Updates the specified SNMP V3 user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_v3_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configurations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configurations to update",
+                    "items": {
+                      "$ref": "#/components/schemas/snmp_v3_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "SNMP V3 Users"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200snmp_v3": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/snmp_v3_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200snmp_v3_multi": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configurations objects",
+                  "items": {
+                    "$ref": "#/components/schemas/snmp_v3_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "snmp_v3_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable SNMP user configuration.'",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Name of the SNMP user configuration.",
+            "maxLength": 32,
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "rights": {
+            "type": "string",
+            "enum": [
+              "ro",
+              "rw"
+            ],
+            "description": "Access mode specifies which access the host has in the community and if they are allowed to retrieve and modify MIB variables from a specific SNMP agent.",
+            "x-web": {
+              "pretty": "Access mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "ro": "Read-Only",
+                "rw": "Read-Write"
+              }
+            }
+          },
+          "mibaccess": {
+            "type": "string",
+            "description": "Leave empty to access full MIB tree.",
+            "maxLength": 16,
+            "format": "string",
+            "x-web": {
+              "pretty": "MIB subtree",
+              "input-type": "input"
+            }
+          },
+          "seclevel": {
+            "type": "string",
+            "enum": [
+              "noauth",
+              "auth",
+              "priv"
+            ],
+            "description": "A security level is an authentication strategy that is set up for the user. No authentication, no privacy - authenticates with a username.\nAuthentication - provides MD5 or SHA algorithms for authentication.\nPrivacy - Provides DES or AES encryption.",
+            "x-web": {
+              "pretty": "Security level",
+              "input-type": "select",
+              "enum-pretty": {
+                "noauth": "No authentication, no privacy",
+                "auth": "Authentication, no privacy",
+                "priv": "Authentication and privacy"
+              }
+            }
+          },
+          "authtype": {
+            "type": "string",
+            "enum": [
+              "SHA",
+              "MD5"
+            ],
+            "description": "Set authentication type to use with SNMPv3.",
+            "x-web": {
+              "pretty": "Authentication type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "seclevel": "auth"
+                },
+                {
+                  "seclevel": "priv"
+                }
+              ]
+            }
+          },
+          "authpass": {
+            "type": "string",
+            "description": "Set authentication passphrase to generate key for SNMPv3.",
+            "format": "dashname",
+            "minLength": 8,
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Authentication passphrase",
+              "input-type": "input",
+              "depends": [
+                {
+                  "seclevel": "auth"
+                },
+                {
+                  "seclevel": "priv"
+                }
+              ]
+            }
+          },
+          "privtype": {
+            "type": "string",
+            "enum": [
+              "DES",
+              "AES"
+            ],
+            "description": "Set privacy type to use with SNMPv3.",
+            "x-web": {
+              "pretty": "Privacy type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "seclevel": "priv"
+                }
+              ],
+              "enum-pretty": {
+                "AES": "AES128"
+              }
+            }
+          },
+          "privpass": {
+            "type": "string",
+            "description": "Set privacy passpharse to generate key for SNMPv3.",
+            "format": "dashname",
+            "minLength": 8,
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Privacy passphrase",
+              "input-type": "select",
+              "depends": [
+                {
+                  "seclevel": "priv"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "username",
+          "authpass",
+          "privpass"
+        ]
+      },
+      "snmp_v3_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "SNMP V3 Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/snmp_v3_options"
+          }
+        ]
+      }
+    }
+  }
+}

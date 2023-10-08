@@ -1,0 +1,420 @@
+{
+    "openapi": "3.0.0",
+    "tags": [],
+    "paths": {
+        "/mobile/apn_database/config/{id}": {
+            "get": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Returns the specified APN database entry",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200apn"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "APN database entry identificator (ID)"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Updates the specified APN database entry",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200apn"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422response"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "APN database entry identificator (ID)"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/apn_single_options"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Deletes the specified APN database entry",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200deleted"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "APN database entry identificator (ID)"
+                    }
+                ]
+            },
+            "x-web": {
+                "menu": [
+                    "Network",
+                    "Mobile",
+                    "APN Database"
+                ],
+                "hw_tags": {
+                    "mobile": true
+                }
+            }
+        },
+        "/mobile/apn_database/config": {
+            "get": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Returns all APN database entries",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200apnMulti"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Creates APN database entry",
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/200apn"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422response"
+                    }
+                },
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/apn_single_options"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Updates specified APN database entries",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200apnMulti"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422response"
+                    }
+                },
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "description": "Array of section objects",
+                                        "items": {
+                                            "$ref": "#/components/schemas/apn_options"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "APN Database"
+                ],
+                "summary": "Deletes specified APN database entries",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200deleted_multi"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    }
+                },
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "description": "Array of section objects",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "Database entry id"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "x-web": {
+                "menu": [
+                    "Network",
+                    "Mobile",
+                    "APN Database"
+                ],
+                "hw_tags": {
+                    "mobile": true
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "200apn": {
+                "description": "Returns database entry",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "description": "Operation status"
+                                },
+                                "data": {
+                                    "$ref": "#/components/schemas/apn_options"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "200apnMulti": {
+                "description": "Returns database entries",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "boolean",
+                                    "description": "Operation status"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "description": "Array of section objects",
+                                    "items": {
+                                        "$ref": "#/components/schemas/apn_options"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "apn_single_options": {
+                "type": "object",
+                "properties": {
+                    "carrier": {
+                        "type": "string",
+                        "description": "Name of a company that sells wireless connectivity to customers for cellphone data and telephone calls. It may also be called a mobile network operator, a mobile carrier, cellular company or wireless service provider.",
+                        "maxLength": 32,
+                        "x-web": {
+                            "pretty": "Carrier name",
+                            "input-type": "input"
+                        }
+                    },
+                    "mcc": {
+                        "type": "string",
+                        "description": "A mobile code consisting of three digits used to identify GSM networks. MCC is also used along with the International Mobile Subscriber Identity (IMSI) to identify the region from which mobile subscriber belongs.",
+                        "format": "regex",
+                        "pattern": "^[0-9]+$",
+                        "minLength": 3,
+                        "maxLength": 3,
+                        "x-web": {
+                            "pretty": "Mobile Country Code (MCC)",
+                            "input-type": "input"
+                        }
+                    },
+                    "mnc": {
+                        "type": "string",
+                        "description": "Mobile Network Code (MNC) is a unique two- or three-digit number used to identify a home Public Land Mobile Network (PLMN) to. MNC is allocated by the national regulator.",
+                        "format": "regex",
+                        "pattern": "^[0-9]+$",
+                        "minLength": 1,
+                        "maxLength": 3,
+                        "x-web": {
+                            "pretty": "Mobile Network Code (MNC)",
+                            "input-type": "input"
+                        }
+                    },
+                    "apn": {
+                        "type": "string",
+                        "description": "APN (Access Point Name) is configurable network identifier used by a mobile device when connecting to a carrier",
+                        "maxLength": 62,
+                        "format": "regex",
+                        "pattern": "(^[a-zA-Z0-9]$)|(^([a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9])$)",
+                        "x-web": {
+                            "pretty": "APN (Access Point Name)",
+                            "input-type": "input"
+                        }
+                    },
+                    "user": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "description": "Username to connect to GSM carrier's network.",
+                        "x-web": {
+                            "pretty": "Username",
+                            "input-type": "input"
+                        }
+                    },
+                    "password": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "description": "Password to connect to GSM carrier's network.",
+                        "x-web": {
+                            "pretty": "Password",
+                            "input-type": "input"
+                        }
+                    },
+                    "authtype": {
+                        "type": "string",
+                        "description": "Authentication method that GSM carrier uses to authenticate new connections on it's network.",
+                        "enum": [
+                            "0",
+                            "1",
+                            "2"
+                        ],
+                        "default": "0",
+                        "x-web": {
+                            "pretty": "Authentication type",
+                            "enum-pretty": {
+                                "0": "None",
+                                "1": "PAP",
+                                "2": "CHAP"
+                            },
+                            "input-type": "select"
+                        }
+                    },
+                    "pdptype": {
+                        "type": "string",
+                        "description": "Address type that is requested from the operator.",
+                        "enum": [
+                            "0",
+                            "1",
+                            "2"
+                        ],
+                        "default": "0",
+                        "x-web": {
+                            "pretty": "PDP Type",
+                            "enum-pretty": {
+                                "0": "IPv4v6",
+                                "1": "IPv4",
+                                "2": "IPv6"
+                            },
+                            "input-type": "select"
+                        }
+                    },
+                    "country": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Operator country name.",
+                        "default": "Other",
+                        "x-web": {
+                            "pretty": "Country name"
+                        }
+                    }
+                },
+                "required": [
+                    "carrier",
+                    "mcc",
+                    "mnc",
+                    "apn"
+                ]
+            },
+            "apn_options": {
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "APN database entry identificator (ID)."
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ]
+                    },
+                    {
+                        "$ref": "#/components/schemas/apn_single_options"
+                    }
+                ]
+            }
+        }
+    }
+}

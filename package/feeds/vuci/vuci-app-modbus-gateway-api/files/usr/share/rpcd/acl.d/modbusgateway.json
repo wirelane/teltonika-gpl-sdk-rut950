@@ -1,0 +1,20 @@
+{
+	"services/modbus/modbus_gateway": {
+		"description": "modbus gateway configuration",
+		"read": {
+			"api": [
+				"/modbus/gateway/*",
+				"/modbus/serial_gateway/*",
+				"/serial/*",
+				"/device/*",
+				"/certificates/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/modbus/gateway/*",
+				"/modbus/serial_gateway/*"
+			]
+		}
+	}
+}

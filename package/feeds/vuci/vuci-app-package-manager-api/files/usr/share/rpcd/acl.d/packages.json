@@ -1,0 +1,39 @@
+{
+	"system/packages/packages": {
+		"description": "Package Manager",
+		"read": {
+			"uci": ["rut_fota"],
+			"api": [
+				"/packages/*",
+				"/package_restore/*"
+			]
+		},
+		"write": {
+			"uci": ["rut_fota"],
+			"ubus": {
+				"vuci.system": [
+					"reboot"
+				]
+			},
+			"api": ["/package_restore/*"]
+		}
+	},
+
+	"system/packages/upload": {
+		"description": "package manager upload",
+		"read": {
+			"uci": [" "]
+		},
+		"write": {
+			"ubus": {
+				"vuci.system": [
+					"reboot"
+				]
+			},
+			"cgi-io": [
+				"upload"
+			],
+			"api": ["/packages/*"]
+		}
+	}
+}

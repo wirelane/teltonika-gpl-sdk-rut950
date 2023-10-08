@@ -1,0 +1,1430 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DHCP",
+      "description": "DHCP configuration API"
+    }
+  ],
+  "paths": {
+    "/dhcp/static_leases/config": {
+      "get": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Returns all static lease configuration sections",
+        "description": "",
+        "operationId": "get-static-leases",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/static_leases_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Updates the selected static lease sections",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/static_leases_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/static_leases_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-static-leases"
+      },
+      "post": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Creates a new static lease section",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/static_leases_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_leases_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-static-leases"
+      },
+      "delete": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Deletes the specified static lease sections",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "delete-static-leases"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/dhcp/static_leases/config/{id}": {
+      "get": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Returns the  specified static lease section",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/static_leases_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration name"
+          }
+        ],
+        "description": "",
+        "operationId": "get-static-leases-id"
+      },
+      "put": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Updates the specified static lease section",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/static_leases_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration name"
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_leases_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "put-static-leases-id"
+      },
+      "delete": {
+        "tags": [
+          "DHCP"
+        ],
+        "summary": "Deletes specified static_leases configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration static_leases section indetifier"
+          }
+        ],
+        "description": "",
+        "operationId": "delete-static-leases-id"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Section id"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/dhcp/servers/config": {
+      "get": {
+        "summary": "Returns all DHCP server configuration sections",
+        "tags": [
+          "DHCP"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/dhcp_section_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-dhcp",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected DHCP server configuration sections",
+        "operationId": "put-network-dhcp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/dhcp_section_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DHCP"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected DHCP server configuration sections",
+        "operationId": "delete-network-dhcp",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Names of sections to delete",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DHCP"
+        ]
+      },
+      "post": {
+        "summary": "Creates a new DHCP server configuration section",
+        "operationId": "post-network-dhcp",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "DHCP"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dhcp_section_name_index"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/dhcp/servers/config/{id}": {
+      "get": {
+        "summary": "Returns the selected DHCP server configuration section",
+        "tags": [
+          "DHCP"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-network-dhcp-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates the selected DHCP server configuration section",
+        "operationId": "put-network-dhcp-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dhcp_section_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DHCP"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected DHCP server configuration section",
+        "operationId": "delete-network-dhcp-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "DHCP"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/dhcp/servers/status": {
+      "get": {
+        "summary": "Returns all DHCP server leases",
+        "tags": [
+          "DHCP"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/dhp_leases"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "static_leases_options_name_index": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "x-web": {
+              "pretty": "Interface name",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Configuration name"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Description",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Name of the static lease"
+          },
+          "mac": {
+            "x-web": {
+              "pretty": "MAC",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "MAC address. This defines the MAC address of the device."
+          },
+          "ip": {
+            "x-web": {
+              "pretty": "IP",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address. This defines the IP address that you want to associate to a specific device."
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "static_leases_options_index": {
+        "type": "object",
+        "title": "",
+        "properties": {
+          "name": {
+            "x-web": {
+              "pretty": "Description",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Name of the static lease"
+          },
+          "mac": {
+            "x-web": {
+              "pretty": "MAC",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "MAC address. This defines the MAC address of the device."
+          },
+          "ip": {
+            "x-web": {
+              "pretty": "IP",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address. This defines the IP address that you want to associate to a specific device."
+          }
+        }
+      },
+      "dhcp_section_name_index": {
+        "title": "dhcp_section",
+        "type": "object",
+        "description": "DHCP configuration section",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Interface name",
+            "x-web": {
+              "pretty": "Interface name",
+              "input-type": "input"
+            }
+          },
+          "ignore": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Enable DHCP",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "enum": [
+              "enable",
+              "disable",
+              "relay"
+            ],
+            "description": "Enable DHCP for this interface (or relay mode)."
+          },
+          "interface": {
+            "type": "string",
+            "readOnly": true
+          },
+          "server_relay": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "DHCP server",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "relay"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "DHCP server. Specifies DHCP server's IP address, which directs any requests into server."
+          },
+          "start_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Start IP",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Start IP address. Lowest leased address."
+          },
+          "end_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "End IP",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "End IP address. Highest leased address."
+          },
+          "leasetime": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Lease time",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Lease time. Expiry time of leased addresses."
+          },
+          "dynamicdhcp": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Dynamic DHCP",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "1",
+            "description": "Dynamic DHCP. Dynamically allocate DHCP addresses for clients. If disabled, only   clients having static leases will be served."
+          },
+          "force": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Force",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Force. Force DHCP on this network even if another server is detected."
+          },
+          "netmask": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "IPv4-Netmask",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IPv4-Netmask. Override the netmask sent to clients. Normally it is calculated from the subnet that is served"
+          },
+          "dhcp_option": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "DHCP-Options",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "DHCP-Options. Define additional DHCP options, for example \"6,192.168.2.1, 192.168.2.2\" which advertises different DNS servers to clients",
+            "items": {
+              "type": "string"
+            }
+          },
+          "force_options": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Force DHCP options",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Force DHCP options to be sent even if it's not requested."
+          },
+          "ra": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Router Advertisement-Service",
+              "group": "IPv6 Settings",
+              "enum-pretty": {
+                "": "Disabled",
+                "server": "Server mode",
+                "relay": "Relay mode",
+                "hybrid": "Hybrid mode"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "",
+              "server",
+              "relay",
+              "hybrid"
+            ],
+            "description": "Router Advertisement-Service. Specifies whether Router Advertisements should be enabled (server), relayed (relay) or disabled (disabled)."
+          },
+          "dhcpv6": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "DHCPv6-Service",
+              "group": "IPv6 Settings",
+              "enum-pretty": {
+                "": "Disabled",
+                "server": "Server mode",
+                "relay": "Relay mode",
+                "hybrid": "Hybrid mode"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "",
+              "server",
+              "relay",
+              "hybrid"
+            ],
+            "description": "DHCPv6-Service. Specifies whether DHCPv6 server should be enabled (server), relayed (relay), hybrid or disabled (disabled)."
+          },
+          "ndp": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "NDP-Proxy",
+              "group": "IPv6 Settings",
+              "enum-pretty": {
+                "": "Disabled",
+                "relay": "Relay mode",
+                "hybrid": "Hybrid mode"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "",
+              "relay",
+              "hybrid"
+            ],
+            "description": "NDP-Proxy. Specifies whether NDP should be relayed (relay), hybrid or disabled (disabled)"
+          },
+          "ra_management": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "DHCPv6-Mode",
+              "group": "IPv6 Settings",
+              "depends": [
+                {
+                  "dhcpv6": "server"
+                },
+                {
+                  "dhcpv6": "hybrid"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Stateless",
+                "1": "Stateless + stateful",
+                "2": "Stateful-only"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "description": "DHCPv6-Mode. Default is Stateless + stateful.\n\"0\" - Stateless.\n\"1\" - Stateless + stateful.\n\"2\" - Stateful-only."
+          },
+          "ra_default": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Always announce default router",
+              "group": "IPv6 Settings",
+              "depends": [
+                {
+                  "ra": "server"
+                },
+                {
+                  "ra": "hybrid"
+                }
+              ],
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Always announce default router. Announce as default router even if no public prefix is available"
+          },
+          "dns": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Announced DNS servers",
+              "group": "IPv6 Settings",
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "array",
+            "description": "Announced DNS servers",
+            "items": {
+              "type": "string"
+            }
+          },
+          "domain": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Announced DNS domains",
+              "group": "IPv6 Settings",
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "array",
+            "description": "Announced DNS domains",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "dhcp_section_index": {
+        "title": "dhcp_section",
+        "type": "object",
+        "description": "DHCP configuration section",
+        "properties": {
+          "ignore": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Enable DHCP",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "enum": [
+              "enable",
+              "disable",
+              "relay"
+            ],
+            "description": "Enable DHCP for this interface (or relay mode)."
+          },
+          "interface": {
+            "type": "string",
+            "readOnly": true
+          },
+          "server_relay": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "DHCP server",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "relay"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "DHCP server. Specifies DHCP server's IP address, which directs any requests into server."
+          },
+          "start_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Start IP",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Start IP address. Lowest leased address."
+          },
+          "end_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "End IP",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "End IP address. Highest leased address."
+          },
+          "leasetime": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Lease time",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Lease time. Expiry time of leased addresses."
+          },
+          "dynamicdhcp": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Dynamic DHCP",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "1",
+            "description": "Dynamic DHCP. Dynamically allocate DHCP addresses for clients. If disabled, only   clients having static leases will be served."
+          },
+          "force": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Force",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Force. Force DHCP on this network even if another server is detected."
+          },
+          "netmask": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "IPv4-Netmask",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IPv4-Netmask. Override the netmask sent to clients. Normally it is calculated from the subnet that is served"
+          },
+          "dhcp_option": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "DHCP-Options",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "DHCP-Options. Define additional DHCP options, for example \"6,192.168.2.1, 192.168.2.2\" which advertises different DNS servers to clients",
+            "items": {
+              "type": "string"
+            }
+          },
+          "force_options": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Force DHCP options",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Force DHCP options to be sent even if it's not requested."
+          },
+          "ra": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Router Advertisement-Service",
+              "group": "IPv6 Settings",
+              "enum-pretty": {
+                "": "Disabled",
+                "server": "Server mode",
+                "relay": "Relay mode",
+                "hybrid": "Hybrid mode"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "",
+              "server",
+              "relay",
+              "hybrid"
+            ],
+            "description": "Router Advertisement-Service. Specifies whether Router Advertisements should be enabled (server), relayed (relay) or disabled (disabled)."
+          },
+          "dhcpv6": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "DHCPv6-Service",
+              "group": "IPv6 Settings",
+              "enum-pretty": {
+                "": "Disabled",
+                "server": "Server mode",
+                "relay": "Relay mode",
+                "hybrid": "Hybrid mode"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "",
+              "server",
+              "relay",
+              "hybrid"
+            ],
+            "description": "DHCPv6-Service. Specifies whether DHCPv6 server should be enabled (server), relayed (relay), hybrid or disabled (disabled)."
+          },
+          "ndp": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "NDP-Proxy",
+              "group": "IPv6 Settings",
+              "enum-pretty": {
+                "": "Disabled",
+                "relay": "Relay mode",
+                "hybrid": "Hybrid mode"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "",
+              "relay",
+              "hybrid"
+            ],
+            "description": "NDP-Proxy. Specifies whether NDP should be relayed (relay), hybrid or disabled (disabled)"
+          },
+          "ra_management": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "DHCPv6-Mode",
+              "group": "IPv6 Settings",
+              "depends": [
+                {
+                  "dhcpv6": "server"
+                },
+                {
+                  "dhcpv6": "hybrid"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Stateless",
+                "1": "Stateless + stateful",
+                "2": "Stateful-only"
+              },
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "description": "DHCPv6-Mode. Default is Stateless + stateful.\n\"0\" - Stateless.\n\"1\" - Stateless + stateful.\n\"2\" - Stateful-only."
+          },
+          "ra_default": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Always announce default router",
+              "group": "IPv6 Settings",
+              "depends": [
+                {
+                  "ra": "server"
+                },
+                {
+                  "ra": "hybrid"
+                }
+              ],
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Always announce default router. Announce as default router even if no public prefix is available"
+          },
+          "dns": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Announced DNS servers",
+              "group": "IPv6 Settings",
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "array",
+            "description": "Announced DNS servers",
+            "items": {
+              "type": "string"
+            }
+          },
+          "domain": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Announced DNS domains",
+              "group": "IPv6 Settings",
+              "hw_tags": {
+                "is_switch": false
+              }
+            },
+            "type": "array",
+            "description": "Announced DNS domains",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "dhp_leases": {
+        "type": "object",
+        "properties": {
+          "expires": {
+            "type": "string",
+            "description": "Amount of time left for DHCP lease to expire."
+          },
+          "macaddr": {
+            "type": "string",
+            "description": "Mac address of DHCP lease."
+          },
+          "ipaddr": {
+            "type": "string",
+            "description": "IP address of DHCP lease."
+          },
+          "hostname": {
+            "type": "string",
+            "description": "Host name of DHCP lease."
+          }
+        }
+      }
+    }
+  }
+}

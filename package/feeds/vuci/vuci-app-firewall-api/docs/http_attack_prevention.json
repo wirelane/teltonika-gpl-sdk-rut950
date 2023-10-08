@@ -1,0 +1,308 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/attack_prevention/http_attack_prevention/config": {
+      "get": {
+        "summary": "GET All Firewall HTTP Attack Prevention Settings",
+        "description": "Returns all firewall HTTP attack prevention settings with their options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HttpAtPrMulti"
+          }
+        },
+        "tags": [
+          "Firewall HTTP Attack Prevention Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall HTTP Attack Prevention Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HttpAtPrMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/http_attack_prevention_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall HTTP Attack Prevention Settings"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/attack_prevention/http_attack_prevention/config/general": {
+      "get": {
+        "summary": "GET Firewall HTTP Attack Prevention Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HttpAtPr"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firewall HTTP Attack Prevention Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall HTTP Attack Prevention Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HttpAtPr"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/http_attack_prevention_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall HTTP Attack Prevention Settings"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HttpAtPr": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/http_attack_prevention_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HttpAtPrMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/http_attack_prevention_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "http_attack_prevention_options": {
+        "type": "object",
+        "properties": {
+          "http_limit": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day"
+            ],
+            "x-web": {
+              "pretty": "Limit period",
+              "input-type": "select",
+              "enum-pretty": {
+                "second": "Second",
+                "minute": "Minute",
+                "hour": "Hour",
+                "day": "Day"
+              },
+              "depends": [
+                {
+                  "http_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit": {
+            "type": "string",
+            "description": "Maximum average matching rate",
+            "x-web": {
+              "pretty": "Limit",
+              "input-type": "input",
+              "depends": [
+                {
+                  "http_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit_burst": {
+            "type": "string",
+            "description": "Maximum initial number of packets to match",
+            "x-web": {
+              "pretty": "Limit burst",
+              "input-type": "input",
+              "depends": [
+                {
+                  "http_limit": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "http_attack_prevention_options_single_put": {
+        "type": "object",
+        "properties": {
+          "http_limit": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "second",
+              "minute",
+              "hour",
+              "day"
+            ],
+            "x-web": {
+              "pretty": "Limit period",
+              "input-type": "select",
+              "enum-pretty": {
+                "second": "Second",
+                "minute": "Minute",
+                "hour": "Hour",
+                "day": "Day"
+              },
+              "depends": [
+                {
+                  "http_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit": {
+            "type": "string",
+            "description": "Maximum average matching rate",
+            "x-web": {
+              "pretty": "Limit",
+              "input-type": "input",
+              "depends": [
+                {
+                  "http_limit": "1"
+                }
+              ]
+            }
+          },
+          "limit_burst": {
+            "type": "string",
+            "description": "Maximum initial number of packets to match",
+            "x-web": {
+              "pretty": "Limit burst",
+              "input-type": "input",
+              "depends": [
+                {
+                  "http_limit": "1"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

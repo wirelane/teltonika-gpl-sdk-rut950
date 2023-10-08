@@ -1,0 +1,10 @@
+{
+	"services/vpn/wireguard": {
+		"read": {
+			"api": ["/wireguard/*"]
+		},
+		"write": {
+			"api": ["/wireguard/*"]
+		}
+	}
+}

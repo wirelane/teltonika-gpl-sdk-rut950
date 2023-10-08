@@ -1,0 +1,362 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Access Control Telnet"
+    }
+  ],
+  "paths": {
+    "/access_control/telnet/config": {
+      "get": {
+        "summary": "Returns all Telnet access control configurations",
+        "tags": [
+          "Access Control Telnet"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_telnet"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified Telnet access control configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_telnet"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/telnet_multi"
+        },
+        "tags": [
+          "Access Control Telnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "General"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/access_control/telnet/config/general": {
+      "get": {
+        "summary": "Returns the specified Telnet access control configuration",
+        "tags": [
+          "Access Control Telnet"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_telnet_one"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified Telnet access control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_telnet_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/telnet"
+        },
+        "tags": [
+          "Access Control Telnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "General"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_telnet": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/telnet"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "enable": "string",
+                      "_telnetWanAccess": "string",
+                      "port": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_telnet_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/telnet"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "enable": "string",
+                    "_telnetWanAccess": "string",
+                    "port": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "telnet": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enable": "",
+            "_telnetWanAccess": "",
+            "port": ""
+          }
+        },
+        "properties": {
+          "enable": {
+            "x-web": {
+              "pretty": " Enable Telnet access",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns Telnet access from the local network (LAN) on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "_telnetWanAccess": {
+            "x-web": {
+              "pretty": "Enable remote Telnet access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enable": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Set to access the router via Telnet from the outside (WAN).",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Telnet port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Port to listen for Telnet access.",
+            "format": "port"
+          }
+        },
+        "required": [
+          "enable",
+          "_telnetWanAccess",
+          "port"
+        ]
+      }
+    },
+    "requestBodies": {
+      "telnet": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/telnet"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "telnet_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            },
+                            "description": "Access Control Telnet configuration identifier (ID)",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/telnet"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

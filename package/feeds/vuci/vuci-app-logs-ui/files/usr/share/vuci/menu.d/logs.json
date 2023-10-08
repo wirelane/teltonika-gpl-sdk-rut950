@@ -1,0 +1,50 @@
+{
+	"system/maintenance": {
+        "title": "Maintenance",
+        "index": 20
+    },
+	"system/maintenance/eventlog": {
+		"title": "Events Log",
+		"index": 40
+	},
+	"system/maintenance/eventlog/all": {
+		"title": "All Events",
+		"acls": [
+			"system/maintenance/eventlog/all"
+		],
+		"view": "status/EventsLog",
+		"index": 11
+	},
+	"system/maintenance/eventlog/general": {
+		"title": "General Events",
+		"acls": [
+			"system/maintenance/eventlog/general"
+		],
+		"view": "status/EventsLog",
+		"index": 12
+	},
+	"system/maintenance/eventlog/system": {
+		"title": "System Events",
+		"acls": [
+			"system/maintenance/eventlog/system"
+		],
+		"view": "status/EventsLog",
+		"index": 13
+	},
+	"system/maintenance/eventlog/network": {
+		"title": "Network Events",
+		"acls": [
+			"system/maintenance/eventlog/network"
+		],
+		"view": "status/EventsLog",
+		"index": 14
+	},
+	"system/maintenance/eventlog/connections": {
+		"title": "Connections Events",
+		"acls": [
+			"system/maintenance/eventlog/connections"
+		],
+		"view": "status/EventsLog",
+		"index": 15
+	}
+}

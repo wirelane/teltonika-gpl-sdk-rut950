@@ -1,0 +1,32 @@
+
+{
+	"system/admin/profiles/config": {
+		"read": {
+			"api": [
+				"/profiles/*",
+				"/administration/ntp/client/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/profiles/*"
+			]
+		}
+	},
+
+	"system/admin/profiles/scheduler": {
+		"read": {
+			"api": [
+				"/profiles_scheduler_general/*",
+				"/profiles_scheduler/*",
+				"/profiles/config/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/profiles_scheduler_general/*",
+				"/profiles_scheduler/*"
+			]
+		}
+	}
+}

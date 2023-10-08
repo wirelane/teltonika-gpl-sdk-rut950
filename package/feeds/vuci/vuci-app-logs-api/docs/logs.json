@@ -1,0 +1,170 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Events Logs",
+    "version": "1.0.0",
+    "description": "Events Logs API documentation"
+  },
+  "tags": [
+    {
+      "name": "Events Logs"
+    }
+  ],
+  "paths": {
+    "/events_log/log/{id}": {
+      "get": {
+        "tags": [
+          "Events Logs"
+        ],
+        "summary": "Returns specified Events Log group.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200events_log"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Event log type ( Available types: [system, events, connections, network] ) identifier (ID)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Limit number of items returned."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "number"
+          }
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Events Log"
+        ]
+      }
+    },
+    "/events_log/log": {
+      "get": {
+        "tags": [
+          "Events Logs"
+        ],
+        "summary": "Returns all Events log groups.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200events_log"
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Limit number of items returned."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "number"
+          }
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "System",
+          "Maintenance",
+          "Events Log"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200events_log": {
+        "description": "Returns events log",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of events",
+                  "items": {
+                    "$ref": "#/components/schemas/events_log_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "events_log_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of a log."
+          },
+          "e": {
+            "type": "string",
+            "description": "Event description."
+          },
+          "d": {
+            "type": "string",
+            "description": "Date and time of the event."
+          },
+          "s": {
+            "type": "string",
+            "description": "Sender."
+          }
+        }
+      }
+    }
+  }
+}

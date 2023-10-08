@@ -1,0 +1,396 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Modbus Serial Client Server"
+    }
+  ],
+  "paths": {
+    "/modbus/serial/servers/config": {
+      "get": {
+        "summary": "Returns all Modbus Serial Client Server configurations",
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialClientServerMulti"
+          }
+        },
+        "operationId": "get-services-modbus-serial-servers-config"
+      },
+      "post": {
+        "summary": "Creates Modbus Serial Client Server configuration",
+        "operationId": "post-services-modbus-serial-servers-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ModbusSerialClientServer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_client_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified Modbus Serial Client Server configurations",
+        "operationId": "put-services-modbus-serial-servers-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialClientServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_client_server_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes specified Modbus Serial Client Server configurations",
+        "operationId": "delete-services-modbus-serial-servers-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Serial Client"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    },
+    "/modbus/serial/servers/config/{modbus_serial_client_server_cfg_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modbus_serial_client_server_cfg_id",
+          "in": "path",
+          "required": true,
+          "description": "Modbus Serial Client Server Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Returns the specified Modbus Serial Client Server configuration",
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialClientServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-modbus-serial-servers-config-modbus_serial_client_server_cfg_id"
+      },
+      "put": {
+        "summary": "Updates the specified Modbus Serial Client Server configuration",
+        "operationId": "put-services-modbus-serial-servers-config-modbus_serial_client_server_cfg_id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialClientServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_client_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the specified Modbus Serial Client Server configuration",
+        "operationId": "delete-services-modbus-serial-servers-config-modbus_serial_client_server_cfg_id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Modbus Serial Client Server"
+        ],
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Modbus Serial Client"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ModbusSerialClientServer": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/modbus_serial_client_server_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ModbusSerialClientServerMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/modbus_serial_client_server_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "modbus_serial_client_server_single_options": {
+        "title": "modbus_serial_client_server_single_options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables/Disables Modbus Serial Client Server.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the server device. Used for easier device management purposes only",
+            "maxLength": 200,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "server_id": {
+            "type": "string",
+            "description": "Modbus server ID number",
+            "format": "irange(1, 255)",
+            "default": "1",
+            "x-web": {
+              "pretty": "Server ID",
+              "input-type": "input"
+            }
+          },
+          "period": {
+            "type": "string",
+            "description": "Interval for sending requests to this device.",
+            "format": "irange(1, 99999)",
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "input",
+              "depends": [
+                {
+                  "frequency": "period"
+                }
+              ]
+            }
+          },
+          "skip_on_many_tmos": {
+            "type": "string",
+            "description": "Skip pending request and reset connection after number of request failures.",
+            "format": "irange(0, 10)",
+            "default": "0",
+            "x-web": {
+              "pretty": "Number of timeouts",
+              "input-type": "input"
+            }
+          },
+          "frequency": {
+            "type": "string",
+            "description": "Select witch timing method will be used to send requests.",
+            "enum": [
+              "period",
+              "schedule"
+            ],
+            "x-web": {
+              "pretty": "Frequency",
+              "enum-pretty": {
+                "period": "Period",
+                "schedule": "Schedule"
+              },
+              "input-type": "select"
+            }
+          },
+          "schedule": {
+            "type": "string",
+            "description": "Schedule request time in format: Hours:Minutes:Seconds.",
+            "format": "regex",
+            "pattern": "^[0-9, *]*$",
+            "x-web": {
+              "pretty": "Schedule requests",
+              "input-type": "input",
+              "depends": [
+                {
+                  "frequency": "schedule"
+                }
+              ]
+            }
+          },
+          "rtu_device": {
+            "type": "string",
+            "description": "Serial device for rtu server.",
+            "x-web": {
+              "pretty": "Serial device",
+              "input-type": "input"
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Serial device response timeout.",
+            "format": "irange(1, 60)",
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "rtu_device",
+          "name"
+        ]
+      },
+      "modbus_serial_client_server_options": {
+        "title": "modbus_serial_client_server_options",
+        "x-stoplight": {
+          "id": "qj5pi2g1p85xp"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Modbus Serial Client Server Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/modbus_serial_client_server_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

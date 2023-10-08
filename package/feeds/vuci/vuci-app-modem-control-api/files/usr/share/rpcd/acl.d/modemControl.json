@@ -1,0 +1,18 @@
+{
+	"services/serial_utilities/modem_control": {
+		"description": "Modem configuration",
+		"read": {
+			"api": [
+				"/rs_modem/*",
+				"/device/info/*",
+				"/serial/status/*",
+				"/mobile/modems/status_basic/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/rs_modem/*"
+			]
+		}
+	}
+}

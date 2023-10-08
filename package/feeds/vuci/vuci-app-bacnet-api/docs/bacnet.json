@@ -1,0 +1,1237 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "BACnet"
+    }
+  ],
+  "paths": {
+    "/bacnet/general/config": {
+      "get": {
+        "summary": "Returns all BACnet configurations",
+        "tags": [
+          "BACnet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/bacnet_general"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-bacnet-general"
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates specified BACnet configurations",
+        "operationId": "put-services-bacnet-general-config",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/bacnet_general"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/bacnet_general"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BACnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "BACnet",
+          "BACnet"
+        ],
+        "hw_tags": {
+          "rs485": true
+        }
+      }
+    },
+    "/bacnet/general/config/general": {
+      "get": {
+        "summary": "Returns the specified BACnet configuration",
+        "tags": [
+          "BACnet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bacnet_general"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-bacnet-general1"
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates the specified BACnet configuration",
+        "operationId": "put-services-bacnet-general-config3",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bacnet_general"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bacnet_single_general"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BACnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "BACnet",
+          "BACnet"
+        ],
+        "hw_tags": {
+          "rs485": true
+        }
+      }
+    },
+    "/bacnet/bip/config": {
+      "get": {
+        "summary": "Returns all BACnet BIP configurations",
+        "tags": [
+          "BACnet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/bacnet_bip"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-bacnet-general2"
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates specified BACnet BIP configurations",
+        "operationId": "put-services-bacnet-general-config4",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/bacnet_bip"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/bacnet_bip"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BACnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "BACnet",
+          "BACnet"
+        ],
+        "hw_tags": {
+          "rs485": true
+        }
+      }
+    },
+    "/bacnet/bip/config/general": {
+      "get": {
+        "summary": "Returns the specified BACnet BIP configurations",
+        "tags": [
+          "BACnet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bacnet_bip"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-bacnet-general5"
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates the specified BACnet BIP configuration",
+        "operationId": "put-services-bacnet-general-config6",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bacnet_bip"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bacnet_single_bip"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BACnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "BACnet",
+          "BACnet"
+        ],
+        "hw_tags": {
+          "rs485": true
+        }
+      }
+    },
+    "/bacnet/mstp/config": {
+      "get": {
+        "summary": "Returns all BACnet MSTP configurations",
+        "tags": [
+          "BACnet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/bacnet_mstp"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-bacnet-general7"
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates specified BACnet MSTP configurations",
+        "operationId": "put-services-bacnet-general-config8",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/bacnet_mstp"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/bacnet_mstp"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BACnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "BACnet",
+          "BACnet"
+        ],
+        "hw_tags": {
+          "rs485": true
+        }
+      }
+    },
+    "/bacnet/mstp/config/general": {
+      "get": {
+        "summary": "Returns the specified BACnet MSTP configuration",
+        "tags": [
+          "BACnet"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bacnet_mstp"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-bacnet-general9"
+      },
+      "parameters": [],
+      "put": {
+        "summary": "Updates the specified BACnet MSTP configuration",
+        "operationId": "put-services-bacnet-general-config10",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/bacnet_mstp"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bacnet_single_mstp"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "BACnet"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "BACnet",
+          "BACnet"
+        ],
+        "hw_tags": {
+          "rs485": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "bacnet_general": {
+        "title": "bacnet_general",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "BACnet configuration identifier (ID)."
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Enables BACnet router function.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "bbmd_enabled": {
+            "type": "string",
+            "description": "Enables BACnet broadcast management function.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable BBMD",
+              "input-type": "switch"
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Creates port forward firewall rule to make application port in LAN reachable from selected BBMD interface",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Allow Remote Access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "bbmd_enabled": "1"
+                }
+              ]
+            }
+          },
+          "bbmd_interface": {
+            "type": "string",
+            "description": "Select interface for BBMD function. IP address of this interface should be reachable from WAN.",
+            "x-web": {
+              "pretty": "BBMD interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "bbmd_enabled": "1"
+                }
+              ]
+            }
+          },
+          "force_gateway": {
+            "type": "string",
+            "description": "Adds configured gateway IP address and port to bbmd packages sent.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Force gateway",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "bbmd_enabled": "1"
+                }
+              ]
+            }
+          },
+          "gateway_address": {
+            "type": "string",
+            "description": "Gateway IP address.",
+            "format": "ip4addr",
+            "x-web": {
+              "pretty": "Gateway address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "bbmd_enabled": "1",
+                  "force_gateway": "1"
+                }
+              ]
+            }
+          },
+          "gateway_port": {
+            "type": "string",
+            "description": "Gateway UDP port.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Gateway port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "bbmd_enabled": "1",
+                  "force_gateway": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "bacnet_single_general": {
+        "title": "bacnet_single_general",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables BACnet router function.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "bbmd_enabled": {
+            "type": "string",
+            "description": "Enables BACnet broadcast management function.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable BBMD",
+              "input-type": "switch"
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Creates port forward firewall rule to make application port in LAN reachable from selected BBMD interface",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Allow Remote Access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "bbmd_enabled": "1"
+                }
+              ]
+            }
+          },
+          "bbmd_interface": {
+            "type": "string",
+            "description": "Select interface for BBMD function. IP address of this interface should be reachable from WAN.",
+            "x-web": {
+              "pretty": "BBMD interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "bbmd_enabled": "1"
+                }
+              ]
+            }
+          },
+          "force_gateway": {
+            "type": "string",
+            "description": "Adds configured gateway IP address and port to bbmd packages sent.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Force gateway",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "bbmd_enabled": "1"
+                }
+              ]
+            }
+          },
+          "gateway_address": {
+            "type": "string",
+            "description": "Gateway IP address.",
+            "format": "ip4addr",
+            "x-web": {
+              "pretty": "Gateway address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "bbmd_enabled": "1",
+                  "force_gateway": "1"
+                }
+              ]
+            }
+          },
+          "gateway_port": {
+            "type": "string",
+            "description": "Gateway UDP port.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Gateway port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "bbmd_enabled": "1",
+                  "force_gateway": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "bacnet_bip": {
+        "title": "bacnet_bip",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "BACnet bip configuration identifier (ID)."
+          },
+          "port": {
+            "type": "string",
+            "description": "BIP UDP port.",
+            "format": "port",
+            "x-web": {
+              "pretty": "BIP port",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "bacnet_single_bip": {
+        "title": "bacnet_single_bip",
+        "type": "object",
+        "properties": {
+          "port": {
+            "type": "string",
+            "description": "BIP UDP port.",
+            "format": "port",
+            "x-web": {
+              "pretty": "BIP port",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "bacnet_mstp": {
+        "title": "bacnet_mstp",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "BACnet MSTP configuration identifier (ID)."
+          },
+          "mac": {
+            "type": "string",
+            "description": "Router MSTP MAC address.",
+            "format": "range(0, 127)",
+            "default": "127",
+            "x-web": {
+              "pretty": "MSTP MAC",
+              "input-type": "input"
+            }
+          },
+          "max_client": {
+            "type": "string",
+            "description": "Maximum client address in the MSTP network.",
+            "format": "range(1, 127)",
+            "x-web": {
+              "pretty": "MSTP MAC max",
+              "input-type": "input"
+            }
+          },
+          "baud": {
+            "type": "string",
+            "description": "Select supported baud rate",
+            "x-web": {
+              "pretty": "Baud rate",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "baudrate_3000000": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400",
+                    "460800",
+                    "921600",
+                    "1000000",
+                    "3000000"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "baudrate_230400": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400"
+                  ]
+                }
+              ]
+            }
+          },
+          "parity": {
+            "type": "string",
+            "description": "Select what kind of parity bit to use for error detection",
+            "x-web": {
+              "pretty": "Parity",
+              "enum-pretty": {
+                "odd": "Odd",
+                "even": "Even",
+                "mark": "Mark",
+                "space": "Space",
+                "none": "None"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "parity_min": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "none"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "parity_max": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "mark",
+                    "space",
+                    "none"
+                  ]
+                }
+              ]
+            }
+          },
+          "databits": {
+            "type": "string",
+            "description": "Select how many bits will be used for character",
+            "x-web": {
+              "pretty": "Data bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "databits_8": true
+                  },
+                  "values": [
+                    "8"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "databits_full": true
+                  },
+                  "values": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "databits_half": true
+                  },
+                  "values": [
+                    "7",
+                    "8"
+                  ]
+                }
+              ]
+            }
+          },
+          "stopbits": {
+            "type": "string",
+            "description": "Select how many stop bits will be used to detect the end of character",
+            "x-web": {
+              "pretty": "Stop bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "stopbits_1": true
+                  },
+                  "values": [
+                    "1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "stopbits_2": true
+                  },
+                  "values": [
+                    "1",
+                    "2"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "bacnet_single_mstp": {
+        "title": "bacnet_single_mstp",
+        "type": "object",
+        "properties": {
+          "mac": {
+            "type": "string",
+            "description": "Router MSTP MAC address.",
+            "format": "range(0, 127)",
+            "default": "127",
+            "x-web": {
+              "pretty": "MSTP MAC",
+              "input-type": "input"
+            }
+          },
+          "max_client": {
+            "type": "string",
+            "description": "Maximum client address in the MSTP network.",
+            "format": "range(1, 127)",
+            "x-web": {
+              "pretty": "MSTP MAC max",
+              "input-type": "input"
+            }
+          },
+          "baud": {
+            "type": "string",
+            "enum": [
+              "300",
+              "1200",
+              "2400",
+              "4800",
+              "9600",
+              "19200",
+              "38400",
+              "57600",
+              "115200"
+            ],
+            "default": "9600",
+            "description": "Select supported baud rate",
+            "x-web": {
+              "pretty": "Baud rate",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "baudrate_3000000": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400",
+                    "460800",
+                    "921600",
+                    "1000000",
+                    "3000000"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "baudrate_230400": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400"
+                  ]
+                }
+              ]
+            }
+          },
+          "parity": {
+            "type": "string",
+            "enum": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "description": "Select what kind of parity bit to use for error detection",
+            "x-web": {
+              "pretty": "Parity",
+              "enum-pretty": {
+                "odd": "Odd",
+                "even": "Even",
+                "mark": "Mark",
+                "space": "Space",
+                "none": "None"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "parity_min": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "none"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "parity_max": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "mark",
+                    "space",
+                    "none"
+                  ]
+                }
+              ]
+            }
+          },
+          "databits": {
+            "type": "string",
+            "enum": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "default": "8",
+            "description": "Select how many bits will be used for character",
+            "x-web": {
+              "pretty": "Data bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "databits_8": true
+                  },
+                  "values": [
+                    "8"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "databits_full": true
+                  },
+                  "values": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "databits_half": true
+                  },
+                  "values": [
+                    "7",
+                    "8"
+                  ]
+                }
+              ]
+            }
+          },
+          "stopbits": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "default": "1",
+            "description": "Select how many stop bits will be used to detect the end of character",
+            "x-web": {
+              "pretty": "Stop bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "stopbits_1": true
+                  },
+                  "values": [
+                    "1"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "stopbits_2": true
+                  },
+                  "values": [
+                    "1",
+                    "2"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/status/config": {
+      "get": {
+        "tags": [
+          "I/O Status"
+        ],
+        "summary": "Returns all I/O Status pin configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoStatusMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Status"
+        ],
+        "summary": "Updates the specified I/O Status pin configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoStatusMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/io_status_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Status"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    },
+    "/io/status/config/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "I/O Pin identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "I/O Status"
+        ],
+        "summary": "Returns the specified I/O Status pin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoStatus"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "I/O Status"
+        ],
+        "summary": "Updates the specified I/O Status pin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoStatus"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_status_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Status"
+        ],
+        "hw_tags": {
+          "ios": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoStatus": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_status_response_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IoStatusMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/io_status_response_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_status_options": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Pin value",
+            "x-web": {
+              "pretty": "Pin value",
+              "input-type": "switch"
+            }
+          },
+          "invert_input": {
+            "type": "string",
+            "description": "Enables pin inversion",
+            "x-web": {
+              "pretty": "Invert input",
+              "input-type": "switch"
+            }
+          },
+          "state": {
+            "type": "string",
+            "description": "Pin state",
+            "x-web": {
+              "pretty": "Pin state",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "values": ["dry", "wet"],
+                  "depends": {
+                    "name": ["dwi0", "dwi1"]
+                  }
+                },
+                {
+                  "values": ["active", "inactive"],
+                  "depends": {
+                    "name": ["acl0"]
+                  }
+                },
+                {
+                  "values": ["open", "closed"],
+                  "depends": {
+                    "name": ["relay0", "relay1"]
+                  }
+                }
+              ]
+            }
+          },
+          "direction": {
+            "type": "string",
+            "description": "Pin direction",
+            "enum": ["in", "out"],
+            "x-web": {
+              "pretty": "Pin direction",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "values": ["in", "out"],
+                  "depends": {
+                    "name": ["dio0", "dio1", "dio2"]
+                  }
+                }
+              ]
+            }
+          },
+          "custom_name": {
+            "type": "string",
+            "description": "Only available for 'acl' or 'adc' type pins. Analog input user defined name.",
+            "maxLength": 15
+          },
+          "custom_unit": {
+            "type": "string",
+            "description": "Only available for 'acl' or 'adc' type pins. User defined unit of measurement.",
+            "maxLength": 15
+          },
+          "custom_add": {
+            "type": "string",
+            "description": "Only available for 'acl' or 'adc' type pins. Voltage offset. Value of \"b\" in custom_value=a*((raw_value+b)/c)+d.",
+            "format": "float_scientific",
+            "maxLength": 15
+          },
+          "custom_mul": {
+            "type": "string",
+            "description": "Only available for 'acl' or 'adc' type pins. Sensor slope. Value of \"a\" in custom_value=a*((raw_value+b)/c)+d.",
+            "format": "float_scientific",
+            "maxLength": 15
+          },
+          "custom_div": {
+            "type": "string",
+            "description": "Only available for 'acl' or 'adc' type pins. Resistor value. Can not be 0. Value of \"c\" in custom_value=a*((raw_value+b)/c)+d.",
+            "format": "float_scientific",
+            "maxLength": 15
+          },
+          "custom_off": {
+            "type": "string",
+            "description": "Only available for 'acl' or 'adc' type pins. Sensor offset. Value of \"d\" in custom_value=a*((raw_value+b)/c)+d.",
+            "format": "float_scientific",
+            "maxLength": 15
+          }
+        }
+      },
+      "io_status_options_id": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/io_status_options"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "I/O Status Pin identifier (ID)."
+              }
+            }
+          }
+        ]
+      },
+      "io_status_response_options_id": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/io_status_options_id"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Pin ID.",
+                "readOnly": true,
+                "x-web": {
+                  "pretty": "Pin ID",
+                  "input-type": "input",
+                  "unique": true
+                }
+              },
+              "bi_dir": {
+                "type": "string",
+                "description": "Tells if pin is bidirectional.",
+                "readOnly": true
+              },
+              "io_name": {
+                "type": "string",
+                "description": "Input/Output pin pretty name",
+                "readOnly": true
+              },
+              "io_param": {
+                "type": "string",
+                "description": "Input/Ouput parameter.",
+                "readOnly": true
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of a pin.",
+                "readOnly": true
+              },
+              "block_type": {
+                "type": "string",
+                "description": "Block type of a pin.",
+                "readOnly": true
+              },
+              "block_pins": {
+                "type": "array",
+                "description": "Pin numbers of the pin block.",
+                "items": {
+                  "type": "integer"
+                },
+                "readOnly": true
+              },
+              "block_index": {
+                "description": "Index of a pin block.",
+                "type": "integer",
+                "readOnly": true
+              },
+              "custom_value": {
+                "description": "Only available for 'acl' or 'adc' type pins. Value calculated from input value and user defined values: custom_value=a*((raw_value+b)/c)+d. If value is too big, a string \"inf\" or \"-inf\" is used to represent positive or negative infinity.",
+                "oneOf": [
+                  {
+                    "type": "number",
+                    "format": "float",
+                    "readOnly": true
+                  },
+                  {
+                    "type": "string",
+                    "readOnly": true,
+                    "enum": [
+                      "inf",
+                      "-inf"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

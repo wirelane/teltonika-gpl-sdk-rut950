@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/general_settings/config": {
+      "get": {
+        "summary": "GET All Firewall General Settings",
+        "description": "Returns all firewall general settings with their options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200GenSetMulti"
+          }
+        },
+        "tags": [
+          "Firewall General Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall General Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200GenSetMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/general_settings_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall General Settings"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "General Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/general_settings/config/general": {
+      "get": {
+        "summary": "GET Firewall General Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200GenSet"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firewall General Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall General Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200GenSet"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/general_settings_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall General Settings"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "General Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200GenSet": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/general_settings_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200GenSetMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/general_settings_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "general_settings_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "drop_invalid": {
+            "type": "string",
+            "description": "If enabled, a 'Drop' action will be performed on packets that are determined to be invalid",
+            "x-web": {
+              "pretty": "Drop invalid packets",
+              "input-type": "switch"
+            }
+          },
+          "auto_helper": {
+            "type": "string",
+            "description": "Automatically assign conntrack helpers based on traffic protocol and port. If turned off, conntrack helpers can be selected for each zone.",
+            "x-web": {
+              "pretty": "Automatic helper assignment",
+              "input-type": "switch"
+            }
+          },
+          "input": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default action of the INPUT chain if a packet does not match any existing rule on that chain",
+            "x-web": {
+              "pretty": "Input",
+              "input-type": "select"
+            }
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default action of the OUTPUT chain if a packet does not match any existing rule on that chain",
+            "x-web": {
+              "pretty": "Output",
+              "input-type": "select"
+            }
+          },
+          "forward": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default action of the FORWARD chain if a packet does not match any existing rule on that chain",
+            "x-web": {
+              "pretty": "Forward",
+              "input-type": "select"
+            }
+          }
+        }
+      },
+      "general_settings_options_single_put": {
+        "type": "object",
+        "properties": {
+          "drop_invalid": {
+            "type": "string",
+            "description": "If enabled, a 'Drop' action will be performed on packets that are determined to be invalid",
+            "x-web": {
+              "pretty": "Drop invalid packets",
+              "input-type": "switch"
+            }
+          },
+          "auto_helper": {
+            "type": "string",
+            "description": "Automatically assign conntrack helpers based on traffic protocol and port. If turned off, conntrack helpers can be selected for each zone.",
+            "x-web": {
+              "pretty": "Automatic helper assignment",
+              "input-type": "switch"
+            }
+          },
+          "input": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default action of the INPUT chain if a packet does not match any existing rule on that chain",
+            "x-web": {
+              "pretty": "Input",
+              "input-type": "select"
+            }
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default action of the OUTPUT chain if a packet does not match any existing rule on that chain",
+            "x-web": {
+              "pretty": "Output",
+              "input-type": "select"
+            }
+          },
+          "forward": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default action of the FORWARD chain if a packet does not match any existing rule on that chain",
+            "x-web": {
+              "pretty": "Forward",
+              "input-type": "select"
+            }
+          }
+        }
+      }
+    }
+  }
+}

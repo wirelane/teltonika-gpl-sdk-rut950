@@ -1,0 +1,463 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/vlan/interface_based/config/{id}/devices": {
+      "get": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "GET Interface Based Devices",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseDeviMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "UPDATE Interface Based Devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseDeviMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/interface_based_device_options_put_multiple"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "CREATE Interface Based Devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseDevi"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/interface_based_device_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "DELETE Interface Based Devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Interface Based"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/vlan/interface_based/config/{id}/devices/{id_device}": {
+      "get": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "GET Interface Based Devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseDevi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          },
+          {
+            "name": "id_device",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan device section indetifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "UPDATE Interface Based Devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200InteBaseDevi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          },
+          {
+            "name": "id_device",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan device section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/interface_based_device_options_put"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Interface Based Devices"
+        ],
+        "summary": "DELETE Interface Based Devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan section indetifier"
+          },
+          {
+            "name": "id_device",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration interface based vlan device section indetifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id_device",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "VLAN",
+          "Interface Based"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200InteBaseDevi": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/interface_based_device_options"
+                }
+              }
+            },
+            "examples": {}
+          }
+        }
+      },
+      "200InteBaseDeviMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/interface_based_device_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "interface_based_device_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "name": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Device name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "vid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "802.1Q tag",
+              "input-type": "input"
+            }
+          },
+          "ifname": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Parent interface",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "interface_based_device_options_put": {
+        "type": "object",
+        "properties": {
+          "vid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "802.1Q tag",
+              "input-type": "input"
+            }
+          },
+          "ifname": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Parent interface",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "interface_based_device_options_put_multiple": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "vid": {
+            "type": "string",
+            "x-web": {
+              "pretty": "802.1Q tag",
+              "input-type": "input"
+            }
+          },
+          "ifname": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Parent interface",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

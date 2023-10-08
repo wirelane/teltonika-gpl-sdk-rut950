@@ -1,0 +1,16 @@
+{
+	"services/hotspot/hotspot2": {
+		"description": "hotspot 2.0 configuration",
+		"read": {
+			"uci": ["wireless"],
+			"ubus": { 
+				"iwinfo": ["info"]
+			},
+			"api": ["/hotspot2/*", "/wireless/interfaces/config/*"]
+		},
+		"write": {
+			"uci": ["wireless"],
+			"api": ["/hotspot2/*"]
+		}
+	}
+}

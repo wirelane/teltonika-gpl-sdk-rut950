@@ -1,0 +1,244 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/upnp/redirects/config/{upnp_redirect_id}": {
+      "get": {
+        "tags": [
+          "UPnP Redirects"
+        ],
+        "summary": "Returns the specified UPnP Redirect configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpRedirects"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "upnp_redirect_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UPnP Redirect Configuration identifier (ID)."
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "UPnP Redirects"
+        ],
+        "summary": "Deletes the specified UPnP Redirect configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "upnp_redirect_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "UPnP Redirect Configuration identifier (ID)."
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "upnp_redirect_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UPnP Redirect Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "UPNP",
+          "UPNP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/upnp/redirects/config": {
+      "get": {
+        "tags": [
+          "UPnP Redirects"
+        ],
+        "summary": "Returns all UPnP Redirects configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpRedirectsMulti"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UPnP Redirects"
+        ],
+        "summary": "Deletes specified UPnP Redirect configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "upnp_redirect_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UPnP Redirect Configuration identifier (ID)."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "UPNP",
+          "UPNP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200UpnpRedirects": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/upnp_redirects_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200UpnpRedirectsMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/upnp_redirects_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "upnp_redirects_options": {
+        "type": "object",
+        "properties": {
+          "intaddr": {
+            "x-web": {
+              "pretty": "Client address",
+              "input-type": "input",
+              "virtual": true,
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Client address."
+          },
+          "proto": {
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "input",
+              "virtual": true,
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Protocol."
+          },
+          "intport": {
+            "x-web": {
+              "pretty": "Client Port",
+              "input-type": "input",
+              "virtual": true,
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Client port."
+          },
+          "extport": {
+            "x-web": {
+              "pretty": "External Port",
+              "input-type": "input",
+              "virtual": true,
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "External port."
+          },
+          "num": {
+            "type": "string",
+            "description": "UPnP Redirect Configuration identifier (ID)."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+	"services/ntrip": {
+		"title": "NTRIP",
+		"index": 45,
+		"view": "services/Ntrip_aeaafe",
+		"acls": [ "services/ntrip" ],
+		"files": [ "/etc/config/rs_ntrip" ]
+	}
+}

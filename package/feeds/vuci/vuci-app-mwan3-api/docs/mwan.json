@@ -1,0 +1,1758 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Failover",
+    "version": "1.0",
+    "description": "Failover documentation",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "Failover General"
+    },
+    {
+      "name": "Failover Interfaces"
+    },
+    {
+      "name": "Failover Policies"
+    },
+    {
+      "name": "Failover Rules"
+    }
+  ],
+  "paths": {
+    "/mwan3/general/config": {
+      "get": {
+        "summary": "GET All Failover General",
+        "tags": [
+          "Failover General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_general_multi"
+          }
+        },
+        "operationId": "get-network-mwan3-general",
+        "description": "Gets MWAN general configurations"
+      },
+      "put": {
+        "summary": "UPDATE All Failover General",
+        "operationId": "put-network-mwan3-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_general_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_general_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN general configurations",
+        "tags": [
+          "Failover General"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/interfaces/config": {
+      "get": {
+        "summary": "GET All Failover Interfaces",
+        "operationId": "get-network-mwan3-interfaces",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_interface_multi"
+          }
+        },
+        "description": "Gets MWAN interface configurations",
+        "tags": [
+          "Failover Interfaces"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Failover Interfaces",
+        "operationId": "put-network-mwan3-interfaces",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_interface_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_interface_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN interface configurations",
+        "tags": [
+          "Failover Interfaces"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/policies/config": {
+      "get": {
+        "summary": "GET All Failover Policies",
+        "tags": [
+          "Failover Policies"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_policy_multi"
+          }
+        },
+        "operationId": "get-network-mwan3-policies",
+        "description": "Gets MWAN policy configurations"
+      },
+      "post": {
+        "summary": "CREATE All Failover Policies",
+        "operationId": "post-network-mwan3-policies",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_policy"
+          }
+        },
+        "description": "Creates MWAN policy configuration",
+        "tags": [
+          "Failover Policies"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Name"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_policy"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "put": {
+        "summary": "UPDATE All Failover Policies",
+        "operationId": "put-network-mwan3-policies",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_policy_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_policy_multi_put"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN policy configurations",
+        "tags": [
+          "Failover Policies"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Failover Policies",
+        "operationId": "delete-network-mwan3-policies",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "description": "Deletes MWAN policy configurations",
+        "tags": [
+          "Failover Policies"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/rules/config": {
+      "get": {
+        "summary": "GET All Failover Rules",
+        "tags": [
+          "Failover Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_rule_multi"
+          }
+        },
+        "operationId": "get-network-mwan3-rules",
+        "description": "Gets MWAN rule configurations"
+      },
+      "post": {
+        "summary": "CREATE All Failover Rules",
+        "operationId": "post-network-mwan3-rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_rule"
+          }
+        },
+        "description": "Creates MWAN rule configurations",
+        "tags": [
+          "Failover Rules"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Name",
+                              "unique": true
+                            }
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_rule"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "UPDATE All Failover Rules",
+        "operationId": "put-network-mwan3-rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_rule_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_rule_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN rule configurations",
+        "tags": [
+          "Failover Rules"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Failover Rules",
+        "operationId": "delete-network-mwan3-rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "description": "Deletes MWAN rule configurations",
+        "tags": [
+          "Failover Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/general/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Failover General",
+        "tags": [
+          "Failover General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_general"
+          }
+        },
+        "operationId": "get-network-mwan3-general-id",
+        "description": "Gets MWAN general configuration"
+      },
+      "put": {
+        "summary": "UPDATE Failover General",
+        "operationId": "put-network-mwan3-general-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_general"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_general"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN general configuration",
+        "tags": [
+          "Failover General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/interfaces/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Failover Interfaces",
+        "tags": [
+          "Failover Interfaces"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_interface"
+          }
+        },
+        "operationId": "get-network-mwan3-interfaces-id",
+        "description": "Gets MWAN interface configuration"
+      },
+      "put": {
+        "summary": "UPDATE Failover Interfaces",
+        "operationId": "put-network-mwan3-interfaces-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_interface"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_interface"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN interface configuration",
+        "tags": [
+          "Failover Interfaces"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/policies/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Failover Policies",
+        "tags": [
+          "Failover Policies"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_policy"
+          }
+        },
+        "operationId": "get-network-mwan3-policies-id",
+        "description": "Gets MWAN policy configuration"
+      },
+      "put": {
+        "summary": "UPDATE Failover Policies",
+        "operationId": "put-network-mwan3-policies-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_policy"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_policy_put"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN policy configuration",
+        "tags": [
+          "Failover Policies"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Failover Policies",
+        "operationId": "delete-network-mwan3-policies-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          }
+        },
+        "description": "Deletes MWAN policy configuration",
+        "tags": [
+          "Failover Policies"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "GET Failover Rules",
+        "tags": [
+          "Failover Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_rule"
+          }
+        },
+        "operationId": "get-network-mwan3-rules-id",
+        "description": "Gets MWAN rule configuration"
+      },
+      "put": {
+        "summary": "UPDATE Failover Rules",
+        "operationId": "put-network-mwan3-rules-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_rule"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_rule"
+              }
+            }
+          }
+        },
+        "description": "Updates MWAN rule configuration",
+        "tags": [
+          "Failover Rules"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Failover Rules",
+        "operationId": "delete-network-mwan3-rules-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          }
+        },
+        "description": "Deletes MWAN rule configuration",
+        "tags": [
+          "Failover Rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mwan3/general/status": {
+      "get": {
+        "summary": "GET All Failover Status",
+        "tags": [
+          "Failover Status"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_get_action_status"
+          }
+        },
+        "operationId": "get-network-mwan3-general-status",
+        "description": "Gets MWAN interface status"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "mwan_general": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mode": ""
+          }
+        },
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "mwan",
+              "balance"
+            ],
+            "description": "Failover mode",
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "mwan": "Failover",
+                "balance": "Load balancing"
+              }
+            }
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "mwan_interface": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "string",
+            "interval": "string",
+            "flush_conntrack": [
+              "connected"
+            ],
+            "group": "string",
+            "ratio": "string",
+            "metric": "string",
+            "track_method": "ping",
+            "track_ip": [
+              "string"
+            ],
+            "reliability": "string",
+            "count": "string",
+            "up": "string",
+            "down": "string",
+            "network_type": "string"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/Disable the configuration",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Number of seconds between each test",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          },
+          "flush_conntrack": {
+            "type": "array",
+            "description": "Flush connections on specified action to renew priority of configured interfaces.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "",
+                "connected",
+                "disconnected"
+              ]
+            },
+            "x-web": {
+              "pretty": "Flush connections on",
+              "input-type": "multiselect",
+              "enum-pretty": {
+                "connected": "Connected",
+                "disconnected": "Disconnected"
+              }
+            }
+          },
+          "group": {
+            "type": "string",
+            "description": "Group",
+            "x-web": {
+              "pretty": "Group",
+              "input-type": "input"
+            }
+          },
+          "ratio": {
+            "type": "string",
+            "description": "The ratio values represent a percentage of load that will go through an interface.",
+            "x-web": {
+              "pretty": "Ratio",
+              "input-type": "input"
+            }
+          },
+          "metric": {
+            "type": "string",
+            "description": "Metric",
+            "x-web": {
+              "pretty": "Metric",
+              "input-type": "input"
+            }
+          },
+          "track_method": {
+            "type": "string",
+            "enum": [
+              "ping",
+              "wgetping"
+            ],
+            "description": "Method, how internet connection will be tested.",
+            "x-web": {
+              "pretty": "Method",
+              "input-type": "select",
+              "enum-pretty": {
+                "ping": "Ping",
+                "wgetping": "Wget"
+              }
+            }
+          },
+          "track_ip": {
+            "type": "array",
+            "description": "The hosts to test if interface is still alive. If this value is missing the interface is always considered up",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Track IP / URL",
+              "input-type": "input"
+            }
+          },
+          "reliability": {
+            "type": "string",
+            "description": "Number of hosts that must reply for the test to be considered as successful. Ensure there are at least this many hosts defined or the interface will always be considered down.",
+            "x-web": {
+              "pretty": "Reliability",
+              "input-type": "input"
+            }
+          },
+          "count": {
+            "type": "string",
+            "description": "Number of pings to send to each host with each test",
+            "x-web": {
+              "pretty": "Count",
+              "input-type": "input"
+            }
+          },
+          "up": {
+            "type": "string",
+            "description": "Number of successful tests to considered link as alive",
+            "x-web": {
+              "pretty": "Up",
+              "input-type": "input"
+            }
+          },
+          "down": {
+            "type": "string",
+            "description": "Number of failed tests to considered link as dead",
+            "x-web": {
+              "pretty": "Down",
+              "input-type": "input"
+            }
+          },
+          "network_type": {
+            "type": "string",
+            "description": "Type of interface"
+          },
+          "family": {
+            "type": "string",
+            "description": "IP address family.",
+            "enum": [
+              "ipv6",
+              "ipv4"
+            ],
+            "x-web": {
+              "pretty": "Address family",
+              "input-type": "select",
+              "enum-pretty": {
+                "ipv4": "IPv4",
+                "ipv6": "IPv6"
+              },
+              "depends": [
+                {
+                  "track_method": "ping"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "interval",
+          "group",
+          "ratio",
+          "metric",
+          "track_method",
+          "family",
+          "track_ip",
+          "reliability",
+          "count",
+          "up",
+          "down"
+        ]
+      },
+      "mwan_policy": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mode": "",
+            "use_member": []
+          }
+        },
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "mwan",
+              "balance"
+            ],
+            "description": "Mode",
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "mwan": "Failover",
+                "balance": "Load balancing"
+              }
+            },
+            "writeOnly": true
+          },
+          "use_member": {
+            "type": "array",
+            "description": "Member used",
+            "x-web": {
+              "pretty": "Member used",
+              "input-type": "input"
+            },
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "mode",
+          "use_member"
+        ]
+      },
+      "mwan_policy_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {},
+        "properties": {
+          "use_member": {
+            "type": "array",
+            "description": "Member used",
+            "x-web": {
+              "pretty": "Member used",
+              "input-type": "input"
+            },
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "use_member"
+        ]
+      },
+      "mwan_rule": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "proto": "",
+            "src_ip": [],
+            "src_port": "",
+            "dest_ip": [],
+            "dest_port": "",
+            "sticky": "",
+            "timeout": "",
+            "use_policy": ""
+          }
+        },
+        "properties": {
+          "proto": {
+            "type": "string",
+            "enum": [
+              "all",
+              "tcp",
+              "udp",
+              "icmp",
+              "esp"
+            ],
+            "description": "View the content of /etc/protocols for protocol description",
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "select",
+              "enum-pretty": {
+                "all": "All",
+                "tcp": "TCP",
+                "udp": "UDP",
+                "icmp": "ICMP",
+                "esp": "ESP"
+              }
+            }
+          },
+          "src_ip": {
+            "type": "array",
+            "description": "Supports CIDR notation, e.g. 192.168.100.0/24",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Source address",
+              "input-type": "input"
+            }
+          },
+          "src_port": {
+            "type": "string",
+            "description": "May be entered as a single port or as portrange, e.g. 1024-2048",
+            "x-web": {
+              "pretty": "Source port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            }
+          },
+          "dest_ip": {
+            "type": "array",
+            "description": "Supports CIDR notation, e.g. 192.168.100.0/24",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Destination address",
+              "input-type": "input"
+            }
+          },
+          "dest_port": {
+            "type": "string",
+            "description": "May be entered as a single port or as portrange, e.g. 1024-2048",
+            "x-web": {
+              "pretty": "Destination port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            }
+          },
+          "sticky": {
+            "type": "string",
+            "description": "Traffic from the same source IP address that previously matched this rule within the sticky timeout period will use the same WAN interface",
+            "x-web": {
+              "pretty": "Sticky",
+              "input-type": "switch"
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Sticky timeout in seconds",
+            "x-web": {
+              "pretty": "Sticky timeout",
+              "input-type": "input",
+              "depends": [
+                {
+                  "sticky": "1"
+                }
+              ]
+            }
+          },
+          "use_policy": {
+            "type": "string",
+            "description": "Policy assigned",
+            "x-web": {
+              "pretty": "Policy assigned",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "req_body_mwan_general": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mwan_general"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_interface": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mwan_interface"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_policy": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mwan_policy"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_policy_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mwan_policy_put"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_rule": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mwan_rule"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_general_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/mwan_general"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_interface_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/mwan_interface"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_policy_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/mwan_policy_put"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_policy_multi_put": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/mwan_policy"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_rule_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "x-web": {
+                        "unique": true,
+                        "pretty": "Name"
+                      }
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/mwan_rule"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_delete_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              ""
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "200_mwan_general": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mwan_general"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_interface": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mwan_interface"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_policy": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mwan_policy"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_rule": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mwan_rule"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_general_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_interface_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_interface"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_policy_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_policy"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_rule_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Name",
+                              "unique": true
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_rule"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_get_action_status": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "": {
+                      "enabled": false,
+                      "score": 0,
+                      "up": false,
+                      "age": 0,
+                      "turn": 0,
+                      "online": 0,
+                      "uptime": 0,
+                      "track_ip": [],
+                      "lost": 0,
+                      "offline": 0,
+                      "running": false,
+                      "status": ""
+                    }
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "interface_name"
+                  ],
+                  "properties": {
+                    "interface_name": {
+                      "type": "object",
+                      "required": [
+                        "enabled",
+                        "score",
+                        "up",
+                        "age",
+                        "turn",
+                        "online",
+                        "uptime",
+                        "track_ip",
+                        "lost",
+                        "offline",
+                        "running",
+                        "status"
+                      ],
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "score": {
+                          "type": "number"
+                        },
+                        "up": {
+                          "type": "boolean"
+                        },
+                        "age": {
+                          "type": "number"
+                        },
+                        "turn": {
+                          "type": "number"
+                        },
+                        "online": {
+                          "type": "number"
+                        },
+                        "uptime": {
+                          "type": "number"
+                        },
+                        "track_ip": {
+                          "type": "array",
+                          "items": {}
+                        },
+                        "lost": {
+                          "type": "number"
+                        },
+                        "offline": {
+                          "type": "number"
+                        },
+                        "running": {
+                          "type": "boolean"
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

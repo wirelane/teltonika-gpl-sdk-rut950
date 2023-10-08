@@ -1,0 +1,210 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Scheduler general",
+    "description": "Scheduler general API documentation.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Profiles Scheduler General"
+    }
+  ],
+  "paths": {
+    "/profiles_scheduler_general/config": {
+      "get": {
+        "summary": "Returns all profile scheduler general configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200schgenMulti"
+          }
+        },
+        "tags": [
+          "Profiles Scheduler General"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified scheduler general configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200schgenMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/scheduler_general_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles Scheduler General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Scheduler"
+        ]
+      }
+    },
+    "/profiles_scheduler_general/config/general": {
+      "get": {
+        "summary": "Returns the specified profile scheduler general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200schgen"
+          }
+        },
+        "tags": [
+          "Profiles Scheduler General"
+        ]
+      },
+      "put": {
+        "summary": "Updates the specified scheduler general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200schgen"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/scheduler_general_options_single"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Profiles Scheduler General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Profiles",
+          "Scheduler"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200schgen": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/scheduler_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200schgenMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/scheduler_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "scheduler_general_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Scheduler general configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/scheduler_general_options_single"
+          }
+        ]
+      },
+      "scheduler_general_options_single": {
+        "title": "Scheduler general single put options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable scheduler",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/disable Scheduler",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

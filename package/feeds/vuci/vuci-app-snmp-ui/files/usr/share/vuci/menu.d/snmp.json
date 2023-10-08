@@ -1,0 +1,37 @@
+{
+    "services/snmp": {
+        "title": "SNMP",
+        "index": 170
+    },
+        "services/snmp/snmp_settings": {
+            "title": "SNMP Settings",
+            "acls": [ "services/snmp/snmp_settings" ],
+            "view": "services/Snmp_aeaafe",
+            "index": 1,
+            "files": [ "/etc/config/snmpd" ]
+        },
+        "services/snmp/snmpv3": {
+            "title": "SNMP V3 Users",
+            "acls": [ "services/snmp/snmpv3" ],
+            "view": "services/SnmpV3_aeaafe",
+            "index": 2,
+            "files": [ "/etc/config/snmpd" ]
+        },
+        "services/snmp/community": {
+            "title": "Communities",
+            "acls": [ "services/snmp/community" ],
+            "view": "services/Communities_aeaafe",
+            "index": 3,
+            "files": [ "/etc/config/snmpd" ]
+        },
+        "services/snmp/traps": {
+            "title": "Trap Settings",
+            "acls": [ "services/snmp/traps" ],
+            "view": "services/Trap_aeaafe",
+            "index": 4,
+            "files": [
+                "/etc/config/snmpd",
+                "/usr/lib/opkg/info/snmptrap.control"
+            ]
+        }
+}

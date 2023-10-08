@@ -1,0 +1,288 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DMZ"
+    }
+  ],
+  "paths": {
+    "/firewall/dmz/config/general": {
+      "get": {
+        "summary": "GET All DMZ General",
+        "tags": [
+          "DMZ General"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dmz_general_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-firewall-dmz-config-general"
+      },
+      "put": {
+        "summary": "UPDATE All DMZ General",
+        "operationId": "put-network-firewall-dmz-config-general",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dmz_general_id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "DMZ General"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dmz_general"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "DMZ"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/dmz/config": {
+      "get": {
+        "summary": "GET All DMZ",
+        "tags": [
+          "DMZ"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/dmz_general_id"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-firewall-dmz-config-general1"
+      },
+      "put": {
+        "summary": "UPDATE All DMZ",
+        "operationId": "put-network-firewall-dmz-config-general1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/dmz_general_id"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "DMZ"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/dmz_general_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "DMZ"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "dmz_general": {
+        "title": "dmz_general",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable"
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Enable/disable DMZ."
+          },
+          "host_ip": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Host IP",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "ipv4",
+            "description": "IP address of the DMZ host, it will redirect matched incoming traffic to the specified internal host."
+          },
+          "proto": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Protocol",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "port_range": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Ports",
+              "depends": [
+                {
+                  "enabled": "1",
+                  "proto": "tcp"
+                },
+                {
+                  "enabled": "1",
+                  "proto": "udp"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "or(port,portrange)",
+            "description": "Match incoming traffic directed at the given destination port or port range on DMZ host IP.",
+            "example": "80"
+          }
+        },
+        "required": [
+          "host_ip",
+          "proto"
+        ]
+      },
+      "dmz_general_id": {
+        "title": "dmz_general_id",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/dmz_general"
+          }
+        ]
+      }
+    }
+  }
+}

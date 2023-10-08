@@ -1,0 +1,127 @@
+{
+    "system/wizard/step_pwd": {
+        "description": "setup wizard general",
+        "read": {
+            "api": [
+                "/administration/ntp/client/*",
+                "/packages/config/language/*",
+                "/ui/config/languages/*",
+                "/administration/general/*"
+            ],
+            "uci": [
+                "system",
+                "vuci",
+                "firewall",
+                "ntpclient"
+            ],
+            "ubus": {
+                "vuci.system": [
+                    "clock_status"
+                ]
+            }
+        },
+        "write": {
+            "uci": [
+                "system",
+                "vuci",
+                "ntpclient"
+            ],
+            "api": [
+                "/administration/ntp/client/*",
+                "/administration/general/*"
+            ]
+        }
+    },
+    "system/wizard/step_lan": {
+        "description": "setup wizard lan",
+        "read": {
+            "api": [
+                "/mobile/modems/status*",
+                "/interfaces/config/*",
+                "/dhcp/servers/config/*"
+            ],
+            "uci": [
+                "network",
+                "dhcp"
+            ],
+            "ubus": {
+                "vuci.network.mobile": [
+                    "get_all_modems"
+                ]
+            }
+        },
+        "write": {
+            "api": [
+                "/interfaces/config/*",
+                "/dhcp/servers/config/*"
+            ],
+            "uci": [
+                "network",
+                "dhcp"
+            ]
+        }
+    },
+    "system/wizard/step_wan": {
+        "description": "setup wizard wan",
+        "read": {
+            "api": [
+                "/mobile/modems/status*",
+                "/interfaces/*",
+                "/mobile/simcards/*"
+            ],
+            "uci": [
+                "network",
+                "simcard"
+            ],
+            "ubus": {
+                "network.interface.*": [
+                    "status"
+                ]
+            }
+        },
+        "write": {
+            "api": [
+                "/interfaces/*",
+                "/mobile/simcards/*"
+            ],
+            "uci": [
+                "network",
+                "simcard"
+            ]
+        }
+    },
+    "system/wizard/step_wifi": {
+        "description": "setup wizard wifi",
+        "read": {
+            "api": [
+                "/wireless/*",
+                "/mobile/modems/status*"
+            ],
+            "uci": [
+                "wireless"
+            ]
+        },
+        "write": {
+            "api": [
+                "/wireless/interfaces/*"
+            ],
+            "uci": [
+                "wireless"
+            ]
+        }
+    },
+    "system/wizard/step_rms": {
+        "description": "setup wizard rms",
+        "read": {
+            "api": [
+                "/cloud_solutions/rms/*",
+                "/mobile/modems/status*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/cloud_solutions/rms/*"
+            ]
+        }
+    }
+}

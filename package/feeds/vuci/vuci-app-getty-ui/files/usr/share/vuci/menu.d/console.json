@@ -1,0 +1,14 @@
+
+{
+	"services/serial_utilities": {
+		"title": "Serial Utilities",
+		"index": 40
+	},
+	"services/serial_utilities/console": {
+		"title": "Console",
+		"index": 20,
+		"view": "services/Console",
+		"acls": [ "services/serial_utilities/console" ],
+		"files": [ "/etc/config/rs_console" ]
+	}
+}

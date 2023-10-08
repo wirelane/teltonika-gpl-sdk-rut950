@@ -1,0 +1,20 @@
+{
+	"services/usb_tools/samba": {
+		"title": "Network Shares",
+        "index": 30
+    },
+        "services/usb_tools/samba/general": {
+            "title": "General",
+            "acls": [ "services/usb_tools/samba/general" ],
+            "view": "services/Samba_aeaafe",
+            "index": 10,
+            "files": [ "/etc/config/samba" ]
+        },
+        "services/usb_tools/samba/users": {
+            "title": "Users",
+            "acls": [ "services/usb_tools/samba/users" ],
+            "view": "services/SambaUsers_aeaafe",
+            "index": 20,
+            "files": [ "/etc/config/samba" ]
+        }
+}

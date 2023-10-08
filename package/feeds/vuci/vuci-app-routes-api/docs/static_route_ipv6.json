@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/static/ipv6/config/{id}": {
+      "get": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Returns specified static ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration static ipv6 route identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Updates specified static ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration static ipv6 route identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_route_ipv6_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Deletes specified static ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration static ipv6 route identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Static Routes"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/static/ipv6/config": {
+      "get": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Returns all static ipv6 route configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6Multi"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Creates static ipv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_route_ipv6_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Updates specified static ipv6 route configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6Multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "x-web": {
+                                "pretty": "ID",
+                                "input-type": "input",
+                                "hw_tags": {
+                                  "is_switch": true
+                                }
+                              },
+                              "type": "string",
+                              "description": "Route ID."
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/static_route_ipv6_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "static_route_ipv6"
+        ],
+        "summary": "Deletes specified static ipv6 route configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Static Routes"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200StRoIPv6": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "x-web": {
+                            "pretty": "ID",
+                            "input-type": "input",
+                            "hw_tags": {
+                              "is_switch": true
+                            }
+                          },
+                          "type": "string",
+                          "description": "Route ID."
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/static_route_ipv6_options"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200StRoIPv6Multi": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "ID",
+                              "input-type": "input",
+                              "hw_tags": {
+                                "is_switch": true
+                              }
+                            },
+                            "type": "string",
+                            "description": "Route ID."
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/static_route_ipv6_options"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "static_route_ipv6_options": {
+        "type": "object",
+        "properties": {
+          "interface": {
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The zone where the target network resides."
+          },
+          "target": {
+            "x-web": {
+              "pretty": "Target",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Host-IP or Network."
+          },
+          "gateway": {
+            "x-web": {
+              "pretty": "IPv6 Gateway",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Defines where the router should send all the traffic that applies to the rule."
+          },
+          "metric": {
+            "x-web": {
+              "pretty": "Metric",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The metric value is used as a sorting measure. If a packet about to be routed fits two rules, the one with the lower metric is applied."
+          },
+          "mtu": {
+            "x-web": {
+              "pretty": "MTU",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Sets the maximum transmission unit (MTU) size. It is the largest size of a protocol data unit (PDU) that can be transmitted in a single network layer transaction."
+          },
+          "type": {
+            "x-web": {
+              "pretty": "Route Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "unicast": "Unicast",
+                "local": "Local",
+                "broadcast": "Broadcast",
+                "multicast": "Multicast",
+                "unreachable": "Unreachable",
+                "prohibit": "Prohibit",
+                "blackhole": "Blackhole",
+                "anycast": "Anycast"
+              }
+            },
+            "type": "string",
+            "description": "Selects route type. Each type specifies a different behavior for the route.",
+            "enum": [
+              "unicast",
+              "local",
+              "broadcast",
+              "multicast",
+              "unreachable",
+              "prohibit",
+              "blackhole",
+              "anycast"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

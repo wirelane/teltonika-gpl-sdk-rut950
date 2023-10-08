@@ -1,0 +1,9 @@
+{
+	"services/cloud_solutions/thingworx": {
+		"title": "ThingWorx",
+		"index": 60,
+		"view": "services/ThingWorx_aeaafe",
+		"acls": [ "services/cloud_solutions/thingworx" ],
+		"files": [ "/etc/config/iottw" ]
+	}
+}

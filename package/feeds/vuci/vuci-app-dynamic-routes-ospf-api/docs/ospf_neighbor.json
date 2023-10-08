@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/ospf/neighbor/config/{id}": {
+      "get": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Returns specified ospf neighbor configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf neighbor identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Updates specified ospf neighbor configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNe"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf neighbor identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_neighbor_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Deletes specified ospf neighbor configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf neighbor identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "OSPF"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/dynamic/ospf/neighbor/config": {
+      "get": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Returns all ospf neighbor configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNeMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Creates ospf neighbor configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNe"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_neighbor_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Updates specified ospf neighbor configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNeMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/ospf_neighbor_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ospf_neighbor"
+        ],
+        "summary": "Deletes specified ospf neighbor configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "OSPF"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200OsNe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ospf_neighbor_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OsNeMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/ospf_neighbor_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ospf_neighbor_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable."
+          },
+          "neighbor": {
+            "x-web": {
+              "pretty": "Neighbor",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "OSPF Neighbor IPv4 Address."
+          },
+          "priority": {
+            "x-web": {
+              "pretty": "Neighbor Priority",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Priority for this neighbor."
+          },
+          "polling_interval": {
+            "x-web": {
+              "pretty": "Polling Interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Dead Neighbor Polling interval in seconds."
+          }
+        }
+      }
+    }
+  }
+}

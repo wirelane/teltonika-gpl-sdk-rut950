@@ -1,0 +1,1069 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Firmware",
+    "version": "1.0",
+    "description": "Firmware API documentation"
+  },
+  "tags": [
+    {
+      "name": "Firmware"
+    },
+    {
+      "name": "Modem Firmware"
+    }
+  ],
+  "paths": {
+    "/firmware/device": {
+      "delete": {
+        "summary": "Delete device firmware file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firmware"
+        ]
+      },
+      "post": {
+        "summary": "Upload firmware file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_upload"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_fw_upgrade"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/modem": {
+      "post": {
+        "summary": "Upload modem firmware file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_upload_modem"
+          }
+        },
+        "tags": [
+          "Modem Firmware"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_fw_upgrade_modem"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete modem firmware file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Modem Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/status/device": {
+      "get": {
+        "summary": "Get firmware information",
+        "tags": [
+          "Firmware"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_info"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/status/modem": {
+      "get": {
+        "summary": "Get modem firmware information",
+        "tags": [
+          "Modem Firmware"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_info_modem"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/updates/device": {
+      "get": {
+        "summary": "Get firmware update information",
+        "tags": [
+          "Firmware"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_updates"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/updates/modem": {
+      "get": {
+        "summary": "Get modem firmware update information",
+        "tags": [
+          "Modem Firmware"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_updates_modem"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/downloads/device": {
+      "get": {
+        "summary": "Get device firmware download status",
+        "tags": [
+          "Firmware"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_download_status"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/downloads/modem": {
+      "get": {
+        "summary": "Get modem firmware download status",
+        "tags": [
+          "Modem Firmware"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_download_status_modem"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/upgrade": {
+      "post": {
+        "summary": "Start firmware upgrade",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_fw_upgrade_action"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/upgrade_modem": {
+      "post": {
+        "summary": "Start modem firmware upgrade",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "tags": [
+          "Modem Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/verify": {
+      "post": {
+        "summary": "Verify firmware file in device",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_upload"
+          }
+        },
+        "tags": [
+          "Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/verify_modem": {
+      "post": {
+        "summary": "Verify uploaded modem firmware file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_fw_upload_modem"
+          }
+        },
+        "tags": [
+          "Modem Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/download": {
+      "post": {
+        "summary": "Start firmware download",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "tags": [
+          "Firmware"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/download_modem": {
+      "post": {
+        "summary": "Start modem firmware download",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "tags": [
+          "Modem Firmware"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {
+                      "modem": "3-1"
+                    }
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    },
+    "/firmware/actions/factory_reset": {
+      "post": {
+        "summary": "Factory resets device configurations.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_fw_factory_reset"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firmware"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "lan_ip": {
+                          "type": "string",
+                          "description": "Default IP address of the device when resetting to user defaults."
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "lan_ip": "192.168.1.2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Firmware",
+          "Firmware utilities"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "fw_info": {
+        "type": "object",
+        "properties": {
+          "kernel_version": {
+            "type": "string",
+            "description": "Firmware kernel version."
+          },
+          "version": {
+            "type": "string",
+            "description": "Firmware version."
+          },
+          "build_date": {
+            "type": "string",
+            "description": "Firmware build date."
+          }
+        },
+        "required": [
+          "kernel_version",
+          "version",
+          "build_date"
+        ]
+      },
+      "fw_download_status": {
+        "type": "object",
+        "properties": {
+          "percents": {
+            "type": "string",
+            "description": "Download percents."
+          },
+          "process": {
+            "type": "string",
+            "description": "Download status."
+          }
+        }
+      },
+      "fw_upload": {
+        "type": "object",
+        "properties": {
+          "valid": {
+            "type": "string",
+            "description": "Firmware validation status."
+          },
+          "hw_support": {
+            "type": "string",
+            "description": "Firmware validation hardware support status."
+          },
+          "authorized": {
+            "type": "string",
+            "description": "Firmware authorization status."
+          },
+          "passwd_warning": {
+            "type": "string",
+            "description": "Firmware password change warning."
+          },
+          "md5": {
+            "type": "string",
+            "description": "Uploaded firmware file md5 hash."
+          },
+          "size": {
+            "type": "string",
+            "description": "Size of uploaded firmware file."
+          },
+          "newer": {
+            "type": "string",
+            "description": "Is set to '1' if the firmware uploaded is newer than current device firmware."
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA256 hash of uploaded firmware file."
+          },
+          "allow_backup": {
+            "type": "string",
+            "description": "Is set to '1' if its possible to keep the settings."
+          }
+        },
+        "required": [
+          "valid",
+          "hw_support",
+          "authorized",
+          "passwd_warning",
+          "md5",
+          "size",
+          "newer",
+          "sha256",
+          "allow_backup"
+        ]
+      },
+      "fw_upload_modem": {
+        "title": "fw_upload_modem",
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "string",
+            "description": "Size of uploaded modem firmware file."
+          },
+          "md5": {
+            "type": "string",
+            "description": "Uploaded firmware file md5 hash."
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA256 hash of uploaded firmware file."
+          }
+        },
+        "required": [
+          "size",
+          "md5",
+          "sha256"
+        ]
+      },
+      "fw_updates": {
+        "type": "object",
+        "properties": {
+          "device": {
+            "type": "object",
+            "required": [
+              "version",
+              "size"
+            ],
+            "description": "Device firmware updates.",
+            "properties": {
+              "version": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Version available to download from the server or 'newest' if its already up to date."
+              },
+              "size": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Size of firmware to download. -1 if firmware is up to date."
+              }
+            }
+          }
+        },
+        "required": [
+          "device"
+        ]
+      },
+      "fw_info_modem": {
+        "type": "object",
+        "properties": {
+          "modems": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "type",
+                "version"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID of the modem.",
+                  "minLength": 1
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Type of the modem.",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "description": "Firmware version of the modem.",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "modems"
+        ],
+        "x-examples": {
+          "example-1": {
+            "modems": [
+              {
+                "id": "3-1",
+                "type": "Internal modem",
+                "version": "VERSION"
+              }
+            ]
+          }
+        }
+      },
+      "fw_updates_modem": {
+        "type": "object",
+        "properties": {
+          "modems": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "update_exists"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID of the modem.",
+                  "minLength": 1
+                },
+                "update_exists": {
+                  "type": "string",
+                  "description": "Is set to '1' if modem firmware update is available.",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "modems"
+        ],
+        "x-examples": {
+          "example-1": {
+            "modems": [
+              {
+                "id": "3-1",
+                "update_exists": "0"
+              }
+            ]
+          }
+        }
+      },
+      "fw_download_status_modem": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "status": "failed",
+            "modems": [
+              {
+                "status": "failed",
+                "id": "3-1",
+                "forced": "0",
+                "error": "No update found!",
+                "error_code": "170"
+              }
+            ]
+          }
+        },
+        "properties": {
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "modems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "description": "Status of modem firmware download.",
+                  "minLength": 1
+                },
+                "id": {
+                  "type": "string",
+                  "description": "ID of modem.",
+                  "minLength": 1
+                },
+                "forced": {
+                  "type": "string",
+                  "description": "Set to '1' if modem firmware download is forced.",
+                  "enum": [
+                    "0",
+                    "1"
+                  ]
+                },
+                "error": {
+                  "type": "string",
+                  "description": "Error message.",
+                  "minLength": 1
+                },
+                "error_code": {
+                  "type": "string",
+                  "description": "Error code.",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "status",
+                "id",
+                "error",
+                "error_code"
+              ]
+            }
+          }
+        },
+        "required": [
+          "status",
+          "modems"
+        ]
+      },
+      "req_body_fw_upgrade": {
+        "type": "object",
+        "properties": {
+          "force_upgrade": {
+            "type": "string",
+            "description": "Set to start upgrade immediately."
+          },
+          "keep_settings": {
+            "type": "string",
+            "description": "Set to keep current settings."
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Firmware file."
+          }
+        }
+      },
+      "req_body_fw_upgrade_modem": {
+        "type": "object",
+        "properties": {
+          "force_upgrade": {
+            "type": "string",
+            "description": "Set to start upgrade immediately."
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Firmware file."
+          }
+        }
+      },
+      "req_body_fw_upgrade_action": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "keep_settings": {
+                "type": "string",
+                "description": "Set to keep current settings while updating firmware.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "keep_settings"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "x-examples": {
+          "example-1": {
+            "data": {
+              "keep_settings": "1"
+            }
+          }
+        }
+      },
+      "req_body_fw_factory_reset": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "user_defaults": {
+                "type": "string",
+                "description": "Set to '1' to reset to user defaults.",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "user_defaults"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "x-examples": {
+          "example-1": {
+            "data": {
+              "user_defaults": "1"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200_fw_upload": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_upload"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_download_status": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_download_status"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_download_status_modem": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_download_status_modem"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_info": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_info"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_info_modem": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_info_modem"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_updates": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_updates"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_updates_modem": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_updates_modem"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_fw_upload_modem": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "size": "39.00 MB"
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/fw_upload_modem"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

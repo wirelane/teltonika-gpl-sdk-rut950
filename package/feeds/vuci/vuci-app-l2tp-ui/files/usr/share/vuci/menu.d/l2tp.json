@@ -1,0 +1,20 @@
+{
+	"services/vpn": {
+		"title": "VPN",
+		"index": 20
+	},
+		"services/vpn/l2tp": {
+			"title": "L2TP",
+			"index": 50,
+			"view": "services/L2tp",
+			"acls": [ "services/vpn/l2tp" ],
+			"files": [ "/etc/config/xl2tpd" ]
+		},
+		"services/vpn/l2tpv3": {
+			"title": "L2TPv3",
+			"index": 60,
+			"view": "services/L2tpv3",
+			"acls": [ "services/vpn/l2tpv3" ],
+			"files": [ "/etc/config/xl2tpd" ]
+		}
+}

@@ -1,0 +1,51 @@
+{
+	"system/maintenance/eventlog/all": {
+		"description": "all events",
+		"read": {
+		  "api": ["/events_log/log/*"]
+		},
+		"write": {
+		  "uci": [" "]
+		}
+	  },
+	
+	  "system/maintenance/eventlog/general": {
+		"description": "general events",
+		"read": {
+		  "api": ["/events_log/log/events/*"]
+		},
+		"write": {
+		  "uci": [" "]
+		}
+	  },
+	
+	  "system/maintenance/eventlog/system": {
+		"description": "system events",
+		"read": {
+		  "api": ["/events_log/log/system/*"]
+		},
+		"write": {
+		  "uci": [" "]
+		}
+	  },
+	
+	  "system/maintenance/eventlog/network": {
+		"description": "network events",
+		"read": {
+		  "api": ["/events_log/log/network/*"]
+		},
+		"write": {
+		  "uci": [" "]
+		}
+	  },
+	
+	  "system/maintenance/eventlog/connections": {
+		"description": "connections events",
+		"read": {
+		  "api": ["/events_log/log/connections/*"]
+		},
+		"write": {
+		  "uci": [" "]
+		}
+	  }
+}

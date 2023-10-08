@@ -1,0 +1,24 @@
+{
+	"services/cloud_solutions/thingworx": {
+		"description": "ThingWorx",
+		"read": {
+			"uci": [
+				"iottw",
+				"network"
+			],
+			"ubus": {
+				"vuci.network.network": [
+					"get_modem_interfaces"
+				]
+			},
+			"api": [
+				"/cloud_solutions/thingworx/*",
+				"/interfaces/*"
+			]
+		},
+		"write": {
+			"uci": ["iottw"],
+			"api": ["/cloud_solutions/thingworx/*"]
+		}
+	}
+}

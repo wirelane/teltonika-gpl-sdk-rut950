@@ -1,0 +1,10 @@
+{
+	"services/vpn/zerotier": {
+		"read": {
+			"api": ["/zerotier/*", "/interfaces/config/*"]
+		},
+		"write": {
+			"api": ["/zerotier/*"]
+		}
+	}
+}

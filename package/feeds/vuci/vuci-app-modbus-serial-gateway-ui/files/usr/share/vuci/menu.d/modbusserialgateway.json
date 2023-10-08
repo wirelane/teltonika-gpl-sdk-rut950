@@ -1,0 +1,13 @@
+{
+	"services/modbus": {
+		"title": "Modbus",
+		"index": 120
+	},
+		"services/modbus/tcp_over_serial": {
+			"title": "Modbus TCP over Serial Gateway",
+			"index": 60,
+			"view": "services/ModbusTCPOverSerial",
+			"acls": [ "services/modbus/tcp_over_serial" ],
+			"files": [ "/etc/config/rs_modbus" ]
+		}
+}

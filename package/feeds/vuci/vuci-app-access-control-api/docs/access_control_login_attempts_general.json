@@ -1,0 +1,355 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Login attempts general"
+    }
+  ],
+  "paths": {
+    "/access_control/security/general/config": {
+      "get": {
+        "summary": "Returns all general access control security configurations",
+        "tags": [
+          "Login attempts general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_login_attempts_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified general access control security configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_login_attempts_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/login_attempts_general_multi"
+        },
+        "tags": [
+          "Login attempts general"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "Security"
+        ]
+      }
+    },
+    "/access_control/security/general/config/general": {
+      "get": {
+        "summary": "Returns the specified general access control security configuration",
+        "tags": [
+          "Login attempts general"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_login_attempts_general_one"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified general access control security configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_login_attempts_general_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/login_attempts_general"
+        },
+        "tags": [
+          "Login attempts general"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "Security"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_login_attempts_general": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            },
+                            "type": "string",
+                            "description": "Access Control Login Attempts General configuration identifier (ID)."
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/login_attempts_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "enabled": "string",
+                      "reboot_clear": "string",
+                      "enable_mac_filter": "string",
+                      "max_attempt_count": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_login_attempts_general_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "x-web": {
+                            "pretty": "Configuration ID",
+                            "input-type": "input"
+                          },
+                          "type": "string",
+                          "description": "Access Control Login Attempts General configuration identifier (ID)."
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/login_attempts_general"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "enabled": "string",
+                    "reboot_clear": "string",
+                    "enable_mac_filter": "string",
+                    "max_attempt_count": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "login_attempts_general": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "string",
+            "reboot_clear": "string",
+            "enable_mac_filter": "string",
+            "max_attempt_count": "string"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable or disable blocking IP's if they have reached the set amount of failed times.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "reboot_clear": {
+            "x-web": {
+              "pretty": "Clean after reboot",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Clean attempts after reboot.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "enable_mac_filter": {
+            "x-web": {
+              "pretty": "Enable MAC blocking",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable MAC blocking.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "max_attempt_count": {
+            "x-web": {
+              "pretty": "Fail count",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "An amount of times IP can try to access via SSH or WebUI before being blocked.",
+            "format": "irange(1, 1000)",
+            "minLength": 1,
+            "maxLength": 4
+          }
+        },
+        "required": [
+          "enabled",
+          "reboot_clear",
+          "enable_mac_filter",
+          "max_attempt_count"
+        ]
+      }
+    },
+    "requestBodies": {
+      "login_attempts_general": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/login_attempts_general"
+                }
+              }
+            }
+          }
+        }
+      },
+      "login_attempts_general_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            },
+                            "type": "string",
+                            "description": "Access Control Login Attempts General configuration identifier (ID)."
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/login_attempts_general"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Administration System",
+    "version": "1.0.0",
+    "description": "Administration System API documentation"
+  },
+  "tags": [
+    {
+      "name": "Administration System"
+    }
+  ],
+  "paths": {
+    "/administration/system/config/general": {
+      "put": {
+        "tags": [
+          "Administration System"
+        ],
+        "summary": "Updates the specified Administration System configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminSystem"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/administration_system_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Administration System"
+        ],
+        "summary": "Returns the specified Administration System configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminSystem"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    },
+    "/administration/system/config": {
+      "get": {
+        "tags": [
+          "Administration System"
+        ],
+        "summary": "Returns all System configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminSystemMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Administration System"
+        ],
+        "summary": "Updates specified System configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminSystemMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/administration_system_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "General"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdminSystem": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/administration_system_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminSystemMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/administration_system_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "administration_system_single_options": {
+        "type": "object",
+        "properties": {
+          "devicename": {
+            "x-web": {
+              "pretty": "Device name",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies device name, it will be seen in Status page.",
+            "maxLength": 20
+          },
+          "hostname": {
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies how device will be seen by other devices.",
+            "format": "host"
+          }
+        }
+      },
+      "administration_system_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Administration System Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/administration_system_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

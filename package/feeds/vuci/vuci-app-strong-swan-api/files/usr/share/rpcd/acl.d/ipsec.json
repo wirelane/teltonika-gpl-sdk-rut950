@@ -1,0 +1,17 @@
+{
+    "services/vpn/ipsec": {
+        "description": "ipsec configuration",
+        "read": {
+            "api": [
+                "/ipsec/*",
+                "/interfaces/config/*",
+                "/l2tp/client/config/*",
+                "/l2tp/server/config/*",
+                "/gre/config/*"
+            ]
+        },
+        "write": {
+            "api": ["/ipsec/*"]
+        }
+    }
+}

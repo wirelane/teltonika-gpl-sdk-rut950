@@ -1,0 +1,20 @@
+{
+    "services/mqtt": {
+        "title": "MQTT",
+        "index": 160
+    },
+    "services/mqtt/broker": {
+        "title": "Broker",
+        "index": 1,
+        "view": "services/MqttBroker_aeaafe",
+        "acls": [ "services/mqtt/broker" ],
+        "files": [ "/etc/config/mosquitto" ]
+    },
+    "services/mqtt/publisher": {
+        "title": "Publisher",
+        "index": 2,
+        "view": "services/MqttPub_aeaafe",
+        "acls": [ "services/mqtt/publisher" ],
+        "files": [ "/etc/config/mqtt_pub" ]
+    }
+}

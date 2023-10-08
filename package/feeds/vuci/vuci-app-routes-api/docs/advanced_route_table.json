@@ -1,0 +1,338 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/advanced_static/table/config/{id}": {
+      "get": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Returns specified advanced route table section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRu"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration advanced route table identifier"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Updates specified advanced route table configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRu"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration advanced route table identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/advanced_route_table_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Deletes specified advanced route table configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration advanced route table identifier"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Policy based routing"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/routes/advanced_static/table/config": {
+      "get": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Returns all advanced route table configuration sections",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRuMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Creates advanced route table section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRu"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/advanced_route_table_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Updates specified advanced route table configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoRuMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/advanced_route_table_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "advanced_route_table"
+        ],
+        "summary": "Deletes specified advanced route table configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Policy based routing"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdRoTa": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/advanced_route_table_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdRoTaMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/advanced_route_table_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "advanced_route_table_options": {
+        "type": "object",
+        "properties": {
+          "table_id": {
+            "x-web": {
+              "pretty": "Table ID",
+              "input-type": "input"
+            },
+            "type": "string",
+            "format": "irange(0, 65535)"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Table name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string"
+          }
+        }
+      },
+      "advanced_route_table_options_multi": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "table_id": {
+            "x-web": {
+              "pretty": "Table ID",
+              "input-type": "input"
+            },
+            "type": "string",
+            "format": "irange(0, 65535)"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Table name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

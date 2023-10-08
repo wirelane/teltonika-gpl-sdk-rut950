@@ -1,0 +1,72 @@
+{
+	"network/firewall": {
+		"title": "Firewall",
+		"index": 60
+	},
+	"network/firewall/zones": {
+		"title": "General Settings",
+		"index": 10,
+		"view": "network/Zones",
+		"acls": [ "network/firewall/zones" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"network/firewall/forwards": {
+		"title": "Port Forwards",
+		"index": 20,
+		"view": "network/Forwards",
+		"acls": [ "network/firewall/forwards" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"network/firewall/rules": {
+		"title": "Traffic Rules",
+		"index": 30,
+		"view": "network/Rules",
+		"acls": [ "network/firewall/rules" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"network/firewall/nat_rules": {
+		"title": "NAT Rules",
+		"index": 40,
+		"view": "network/NATRules",
+		"acls": [ "network/firewall/nat_rules" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"network/firewall/attack_prevention": {
+		"title": "Attack Prevention",
+		"index": 50,
+		"view": "network/AttackPrevention",
+		"acls": [ "network/firewall/attack_prevention" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"network/firewall/custom": {
+		"title": "Custom Rules",
+		"index": 60,
+		"view": "network/CustomRules",
+		"acls": [ "network/firewall/custom" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"network/firewall/dmz": {
+		"title": "DMZ",
+		"index": 70,
+		"view": "network/Dmz",
+		"acls": [ "network/firewall/dmz" ],
+		"files": [ "/etc/config/firewall" ]
+	},
+	"status/network/firewall": {
+		"title": "Firewall",
+		"acls": [ "status/network/firewall" ],
+		"index": 40
+	},
+	"status/network/firewall/ipv4": {
+		"title": "IPv4",
+		"acls": [ "status/network/firewall/ipv4" ],
+		"view": "status/IptablesIPv4",
+		"index": 10
+	},
+	"status/network/firewall/ipv6": {
+		"title": "IPv6",
+		"acls": [ "status/network/firewall/ipv6" ],
+		"view": "status/IptablesIPv6",
+		"index": 20
+	}
+}

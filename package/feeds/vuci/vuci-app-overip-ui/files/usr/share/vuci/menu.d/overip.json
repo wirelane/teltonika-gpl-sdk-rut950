@@ -1,0 +1,13 @@
+{
+	"services/serial_utilities": {
+		"title": "Serial Utilities",
+		"index": 40
+	},
+	"services/serial_utilities/overip": {
+		"title": "Over IP",
+		"index": 30,
+		"view": "services/OverIP",
+		"acls": [ "services/serial_utilities/overip" ],
+		"files": [ "/etc/config/rs_overip" ]
+	}
+}

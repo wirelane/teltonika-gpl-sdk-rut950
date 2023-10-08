@@ -1,0 +1,688 @@
+#!/bin/sh
+
+. /lib/functions.sh
+. /lib/functions/system.sh
+. /usr/share/libubox/jshn.sh
+
+# initialize defaults
+export MTD_ARGS=""
+export MTD_CONFIG_ARGS=""
+export INTERACTIVE=0
+export VERBOSE=1
+export SAVE_CONFIG=1
+export SAVE_OVERLAY=0
+export SAVE_OVERLAY_PATH=
+export SAVE_PARTITIONS=1
+export SAVE_INSTALLED_PKGS=0
+export SKIP_UNCHANGED=0
+export CONF_IMAGE=
+export CONF_BACKUP_LIST=0
+export CONF_BACKUP_VALIDATE=0
+export CONF_BACKUP=
+export CONF_RESTORE=
+export CONF_PASSWORD=
+export NEED_IMAGE=
+export HELP=0
+export FORCE=0
+export TEST=0
+export UMOUNT_ETCBACKUP_DIR=0
+
+# parse options
+while [ -n "$1" ]; do
+	case "$1" in
+		-i) export INTERACTIVE=1;;
+		-v) export VERBOSE="$(($VERBOSE + 1))";;
+		-q) export VERBOSE="$(($VERBOSE - 1))";;
+		-n) export SAVE_CONFIG=0;;
+		-c) export SAVE_OVERLAY=1 SAVE_OVERLAY_PATH=/etc;;
+		-o) export SAVE_OVERLAY=1 SAVE_OVERLAY_PATH=/;;
+		-p) export SAVE_PARTITIONS=0;;
+		-k) export SAVE_INSTALLED_PKGS=1;;
+		-u) export SKIP_UNCHANGED=1;;
+		-b|--create-backup) export CONF_BACKUP="$2" NEED_IMAGE=1; shift;;
+		-r|--restore-backup) export CONF_RESTORE="$2" NEED_IMAGE=1; shift;;
+		--password) export CONF_PASSWORD="$2"; shift;;
+		-l|--list-backup) export CONF_BACKUP_LIST=1;;
+		-V|--validate) export CONF_BACKUP_VALIDATE=1;;
+		-f) export CONF_IMAGE="$2"; shift;;
+		-F|--force) export FORCE=1;;
+		-T|--test) export TEST=1;;
+		-h|--help) export HELP=1; break;;
+		-*)
+			echo "Invalid option: $1" >&2
+			exit 1
+		;;
+		*) break;;
+	esac
+	shift;
+done
+
+export CONFFILES=/tmp/sysupgrade.conffiles
+export CONF_TAR=/tmp/sysupgrade.tgz
+export ETCBACKUP_DIR=/etc/backup
+export INSTALLED_PACKAGES=${ETCBACKUP_DIR}/installed_packages.txt
+
+IMAGE="$1"
+
+[ -z "$IMAGE" -a -z "$NEED_IMAGE" -a $CONF_BACKUP_LIST -eq 0 -o $HELP -gt 0 ] && {
+	cat <<EOF
+Usage: $0 [<upgrade-option>...] <image file or URL>
+       $0 [-q] [-i] [-c] [-u] [-o] [-k] <backup-command> <file>
+
+upgrade-option:
+	-f <config>  restore configuration from .tar.gz (file or url)
+	-i           interactive mode
+	-c           attempt to preserve all changed files in /etc/
+	-o           attempt to preserve all changed files in /, except those
+	             from packages but including changed confs.
+	-u           skip from backup files that are equal to those in /rom
+	-n           do not save configuration over reflash
+	-p           do not attempt to restore the partition table after flash.
+	-k           include in backup a list of current installed packages at
+	             $INSTALLED_PACKAGES
+	-T | --test
+	             Verify image and config .tar.gz but do not actually flash.
+	-F | --force
+	             Flash image/restore backup even if image checks fail, this is dangerous!
+	-q           less verbose
+	-v           more verbose
+	-h | --help  display this help
+
+backup-command:
+	-b | --create-backup <file>
+	             create .tar.gz of files specified in sysupgrade.conf
+	             then exit. Does not flash an image. If file is '-',
+	             i.e. stdout, verbosity is set to 0 (i.e. quiet). If --password flag is used,
+		     file should be provided as <filename>.tar.7z
+	-r | --restore-backup <file>
+	             restore a .tar.gz created with sysupgrade -b
+	             then exit. Does not flash an image. If file is '-',
+	             the archive is read from stdin. If --password flag is used,
+		     file should be provided as <filename>.tar.7z
+	--password <password>
+		     provide password that encrypts backup file with AES 256
+		     encryption and archives it as .tar.7z
+	-l | --list-backup
+	             list the files that would be backed up when calling
+	             sysupgrade -b. Does not create a backup file.
+	-V | --validate
+				 validate backup file set with -r option and exit.
+
+EOF
+	exit 1
+}
+
+[ -n "$IMAGE" -a -n "$NEED_IMAGE" ] && {
+	cat <<-EOF
+		-b|--create-backup and -r|--restore-backup do not perform a firmware upgrade.
+		Do not specify both -b|-r and a firmware image.
+	EOF
+	exit 1
+}
+
+# prevent messages from clobbering the tarball when using stdout
+[ "$CONF_BACKUP" = "-" ] && export VERBOSE=0
+
+
+list_conffiles() {
+	awk '
+		BEGIN { conffiles = 0 }
+		/^Conffiles:/ { conffiles = 1; next }
+		!/^ / { conffiles = 0; next }
+		conffiles == 1 { print }
+	' /usr/lib/opkg/status
+}
+
+list_changed_conffiles() {
+	# Cannot handle spaces in filenames - but opkg cannot either...
+	list_conffiles | while read file csum; do
+		[ -r "$file" ] || continue
+
+		echo "${csum}  ${file}" | busybox sha256sum -sc - || echo "$file"
+	done
+}
+
+list_static_conffiles() {
+	local filter=$1
+
+	find $(sed -ne '/^[[:space:]]*$/d; /^#/d; p' \
+		/etc/sysupgrade.conf /lib/upgrade/keep.d/* 2>/dev/null) \
+		\( -type f -o -type l \) $filter 2>/dev/null
+}
+
+add_conffiles() {
+	local file="$1"
+
+	( list_static_conffiles "$find_filter"; list_changed_conffiles ) |
+		sort -u > "$file"
+	return 0
+}
+
+add_overlayfiles() {
+	local file="$1"
+
+	local packagesfiles=$1.packagesfiles
+	touch "$packagesfiles"
+
+	if [ "$SAVE_OVERLAY_PATH" = / ]; then
+		local conffiles=$1.conffiles
+		local keepfiles=$1.keepfiles
+
+		list_conffiles | cut -f2 -d ' ' | sort -u > "$conffiles"
+
+		# backup files from /etc/sysupgrade.conf and /lib/upgrade/keep.d, but
+		# ignore those aready controlled by opkg conffiles
+		list_static_conffiles | sort -u |
+			grep -h -v -x -F -f $conffiles > "$keepfiles"
+
+		# backup conffiles, but only those changed if '-u'
+		[ $SKIP_UNCHANGED = 1 ] &&
+			list_changed_conffiles | sort -u > "$conffiles"
+
+		# do not backup files from packages, except those listed
+		# in conffiles and keep.d
+		{
+			find /usr/lib/opkg/info -type f -name "*.list" -exec cat {} \;
+			find /usr/lib/opkg/info -type f -name "*.control" -exec sed \
+				-ne '/^Alternatives/{s/^Alternatives: //;s/, /\n/g;p}' {} \; |
+				cut -f2 -d:
+		} |  grep -v -x -F -f $conffiles |
+		     grep -v -x -F -f $keepfiles | sort -u > "$packagesfiles"
+		rm -f "$keepfiles" "$conffiles"
+	fi
+
+	# busybox grep bug when file is empty
+	[ -s "$packagesfiles" ] || echo > $packagesfiles
+
+	( cd /overlay/upper/; find .$SAVE_OVERLAY_PATH \( -type f -o -type l \) $find_filter | sed \
+		-e 's,^\.,,' \
+		-e '\,^/etc/board.json$,d' \
+		-e '\,/[^/]*-opkg$,d' \
+		-e '\,^/etc/urandom.seed$,d' \
+		-e "\,^$INSTALLED_PACKAGES$,d" \
+		-e '\,^/usr/lib/opkg/.*,d' \
+	) | grep -v -x -F -f $packagesfiles > "$file"
+
+	rm -f "$packagesfiles"
+
+	return 0
+}
+
+if [ $SAVE_OVERLAY = 1 ]; then
+	[ ! -d /overlay/upper/etc ] && {
+		echo "Cannot find '/overlay/upper/etc', required for '-c'" >&2
+		exit 1
+	}
+	sysupgrade_init_conffiles="add_overlayfiles"
+else
+	sysupgrade_init_conffiles="add_conffiles"
+fi
+
+find_filter=""
+if [ $SKIP_UNCHANGED = 1 ]; then
+	[ ! -d /rom/ ] && {
+		echo "'/rom/' is required by '-u'"
+		exit 1
+	}
+	find_filter='( ( -exec test -e /rom/{} ; -exec cmp -s /{} /rom/{} ; ) -o -print )'
+fi
+
+include /lib/upgrade
+
+do_save_conffiles() {
+	local conf_tar="$1"
+
+	[ "$(rootfs_type)" = "tmpfs" ] && {
+		echo "Cannot save config while running from ramdisk." >&2
+		ask_bool 0 "Abort" && exit
+		rm -f "$conf_tar"
+		return 0
+	}
+	run_hooks "$CONFFILES" $sysupgrade_init_conffiles
+
+	# Request mdcolect to save the most recent version of its database.
+	# Try for at most 5 times, because call fails if there are other SQL queries being executed
+	ubus list mdcollect >/dev/null 2>/dev/null && {
+		for i in $(seq 1 5); do
+			ubus call mdcollect backup_db && break
+		done
+	}
+
+	# Save user modified apn list
+	[ -e /usr/bin/backup_apn_db ] && lua /usr/bin/backup_apn_db -b
+
+	{
+		[ -z "$CONF_BACKUP" ] && [ -d "/etc/api" ] && echo "/etc/api"
+		[ -z "$CONF_BACKUP" ] && [ -e "/etc/ssl/certs/tlt-pairing.crt" ] && echo "/etc/ssl/certs/tlt-pairing.crt"
+		[ -z "$CONF_BACKUP" ] && [ -e "/etc/umdns/tlt_pair.json" ] && echo "/etc/umdns/tlt_pair.json"
+		[ -e /usr/share/mobifd/apn_backup.json ] && echo "/usr/share/mobifd/apn_backup.json" # APN db user backuped values
+		[ -d /etc/profiles ] && echo "/etc/profiles"
+		[ -d /etc/certificates ] && echo "/etc/certificates"
+
+		cmp -s /etc/ssl/certs/ca-certificates.crt /rom/etc/ssl/certs/ca-certificates.crt || 
+				echo "/etc/ssl/certs/ca-certificates.crt"
+
+		[ -e /etc/privoxy/user_action_luci ] && echo "/etc/privoxy/user_action_luci"
+		[ -d /etc/openvpn ] && {
+			find "/etc/openvpn/" -name "auth_*"							# OpenVPN username and password files
+			find "/etc/openvpn/" -name "*.ovpn" | grep -v "template"	# OpenVPN configurations created from templates, excluding templates themselves
+		}
+		[ -d /greengrass/certs ] && {
+			find /greengrass/certs/ -name "*.cert.pem"					# AWS Greengrass certificate
+			find /greengrass/certs/ -name "*.key"						# AWS Greengrass private and public keys
+		}
+		[ -d /etc/hostapd ] && find "/etc/hostapd/" -name "*.psk"		# hostapd psk files
+	} >>"$CONFFILES"
+
+	ask_bool 0 "Edit config file list" && vi "$CONFFILES"
+
+	opkg_packets=$(grep -l "Router:" /usr/lib/opkg/info/*.control)
+	[ -f /etc/package_restore.txt ] && cp /etc/package_restore.txt /etc/package_restore.tmp
+
+	for i in $opkg_packets; do
+		tlt_name=$(grep "tlt_name:" "$i" | awk -F ": " '{print $2}')
+		pkg_name=$(grep "Package:" "$i" | awk -F ": " '{print $2}')
+		echo "$pkg_name - $tlt_name" >> /etc/package_restore.txt
+	done
+
+	[ -f /etc/package_restore.txt ] && {
+		sorted="$(sort -u /etc/package_restore.txt)"
+		echo "$sorted" > /etc/package_restore.txt
+		echo "/etc/package_restore.txt" >> "$CONFFILES"
+	}
+
+	if [ "$SAVE_INSTALLED_PKGS" -eq 1 ]; then
+		echo "${INSTALLED_PACKAGES}" >> "$CONFFILES"
+		mkdir -p "$ETCBACKUP_DIR"
+		# Avoid touching filesystem on each backup
+		RAMFS="$(mktemp -d -t sysupgrade.XXXXXX)"
+		mkdir -p "$RAMFS/upper" "$RAMFS/work"
+		mount -t overlay overlay -o lowerdir=$ETCBACKUP_DIR,upperdir=$RAMFS/upper,workdir=$RAMFS/work $ETCBACKUP_DIR &&
+			UMOUNT_ETCBACKUP_DIR=1 || {
+				echo "Cannot mount '$ETCBACKUP_DIR' as tmpfs to avoid touching disk while saving the list of installed packages." >&2
+				ask_bool 0 "Abort" && exit
+			}
+
+		# Format: pkg-name<TAB>{rom,overlay,unkown}
+		# rom is used for pkgs in /rom, even if updated later
+		find /usr/lib/opkg/info -name "*.control" \( \
+			\( -exec test -f /rom/{} \; -exec echo {} rom \; \) -o \
+			\( -exec test -f /overlay/upper/{} \; -exec echo {} overlay \; \) -o \
+			\( -exec echo {} unknown \; \) \
+			\) | sed -e 's,.*/,,;s/\.control /\t/' > ${INSTALLED_PACKAGES}
+	fi
+
+	v "Saving config files..."
+	[ "$VERBOSE" -gt 1 ] && TAR_V="v" || TAR_V=""
+
+	if [ -z "$CONF_PASSWORD" ]; then
+		tar c${TAR_V}zf "$conf_tar" -T "$CONFFILES" 2>/dev/null
+	else
+		local conf_tar_trimmed=$(echo "$conf_tar" | sed 's/\.7z$//')
+		tar -cf "$conf_tar_trimmed" -T "$CONFFILES" 2>/dev/null
+		which 7zr >/dev/null || {
+			echo "Could not create $conf_tar - 7zip package is not installed";
+			exit 1
+		}
+		7zr a -p"$CONF_PASSWORD" -mhe=on "$conf_tar" "$conf_tar_trimmed" >/dev/null 2>&1
+		rm "$conf_tar_trimmed"
+	fi
+
+	if [ "$?" -ne 0 ]; then
+		echo "Failed to create the configuration backup."
+		rm -f "$conf_tar"
+		exit 1
+	fi
+
+	[ "$UMOUNT_ETCBACKUP_DIR" -eq 1 ] && {
+		umount "$ETCBACKUP_DIR"
+		rm -rf "$RAMFS"
+	}
+
+	if [ -f /etc/package_restore.tmp ]; then
+		mv /etc/package_restore.tmp /etc/package_restore.txt
+	else
+	    rm -rf /etc/package_restore.txt
+	fi
+
+	rm -f "$CONFFILES"
+}
+
+if [ $CONF_BACKUP_LIST -eq 1 ]; then
+	run_hooks "$CONFFILES" $sysupgrade_init_conffiles
+	[ "$SAVE_INSTALLED_PKGS" -eq 1 ] && echo ${INSTALLED_PACKAGES} >> "$CONFFILES"
+	cat "$CONFFILES"
+	rm -f "$CONFFILES"
+	exit 0
+fi
+
+remove_section() {
+	local section="$1"
+	local config="$2"
+	local option="$3"
+	local value
+
+	config_get value "$section" "$option" ""
+	[ -n "$value" ] && uci_remove "$config" "$section"
+}
+
+remove_section_containing_option() {
+	CONFIG_PATH="${UCI_CONFIG_DIR:-"/etc/config"}"
+	TMP_CONFIG_PATH="/tmp/original_config"
+
+	local config="$1"
+	local section="$2"
+	local option="$3"
+
+	mkdir -p "$TMP_CONFIG_PATH"
+	cp "${CONFIG_PATH}/${config}" "${TMP_CONFIG_PATH}/"
+
+	config_load "$config"
+	config_foreach remove_section "$section" "$config" "$option"
+	uci_commit
+}
+
+restore_config() {
+	local config="$1"
+
+	mv -f "${TMP_CONFIG_PATH}/${config}" "${CONFIG_PATH}/"
+}
+
+missing_lines() {
+	local file1 file2 line
+	file1="$1"
+	file2="$2"
+	oIFS="$IFS"
+	IFS=":"
+	while read line; do
+		set -- $line
+		grep -q "^$1:" "$file2" || echo "$line"
+	done < "$file1"
+	IFS="$oIFS"
+}
+
+restore_sme_fstab() {
+	local rwm_device
+	local rwm_target
+	local overlay_uuid
+	local overlay_target
+	local overlay_sme
+	local log_enabled
+	local log_device
+
+	local rwm=$(uci -q get fstab.rwm)
+	local overlay=$(uci -q get fstab.overlay)
+	local log=$(uci -q get fstab.log)
+
+	if [ -n "$rwm" ] && [ -n "$overlay" ] && [ -n "$log" ]; then
+		config_load fstab
+		config_get rwm_device rwm device
+		config_get rwm_target rwm target
+		config_get overlay_uuid overlay uuid
+		config_get overlay_target overlay target
+		config_get overlay_sme overlay sme
+		config_get log_enabled log enabled
+		config_get log_device log device
+		uci -c "/tmp/new_config_dir/etc/config" batch <<-EOF
+			set fstab.rwm=$rwm
+			set fstab.rwm.device=$rwm_device
+			set fstab.rwm.target=$rwm_target
+			set fstab.overlay=$overlay
+			set fstab.overlay.uuid=$overlay_uuid
+			set fstab.overlay.target=$overlay_target
+			set fstab.overlay.sme=$overlay_sme
+			set fstab.log=$log
+			set fstab.log.enabled=$log_enabled
+			set fstab.log.device=$log_device
+			commit fstab
+		EOF
+	fi
+}
+
+apply_backup() {
+	restore_sme_fstab
+	/etc/init.d/mdcollectd stop
+	/etc/init.d/simcard reload >/dev/null 2>/dev/null
+	rm -f /tmp/new_config_dir/etc/config/hwinfo /tmp/new_config_dir/etc/inittab 2>/dev/null
+	cp -rf /tmp/new_config_dir/etc/ / 2>/dev/null
+	cp -rf /tmp/new_config_dir/usr/ / 2>/dev/null
+	cp -rf /tmp/new_config_dir/hotspotlogin/ / 2>/dev/null
+	cp -r /rom/etc/uci-defaults/* /etc/uci-defaults/ 2>/dev/null
+	rm -rf /tmp/new_config_dir
+	cp /rom/etc/shadow /rom/etc/passwd /rom/etc/group /tmp/
+	missing_lines /tmp/passwd /etc/passwd >> /etc/passwd
+	missing_lines /tmp/group /etc/group >> /etc/group
+	missing_lines /tmp/shadow /etc/shadow >> /etc/shadow
+	rm /tmp/passwd /tmp/shadow /tmp/group
+}
+
+backup_size_validation() {
+	local free_fmem=$(df -k | grep /overlay | awk '{print $4; exit}')
+
+	# Add aditional 40 KB for reserve
+	local file_size=$(zcat "$1" | wc -c | awk '{print ($1 / 1024) + 40 }')
+
+	local validation=$(echo "$file_size $free_fmem" | awk '{if ($1 < $2) print 0; else print 1}')
+	[ "$validation" -eq 0 ] || return 1
+
+	return 0
+}
+
+clean_tmp_dir() {
+	for file in /tmp/*.bin; do
+		if [ "$file" != "$IMAGE" ]; then
+			rm -f "$file"
+		fi
+	done
+	
+	rm -f /tmp/sysupgrade.meta
+	rm -f /tmp/sysupgrade.ucert
+}
+
+if [ -n "$CONF_BACKUP" ]; then
+	curr_profile=$(uci_get profiles general profile)
+	tarfile=$(uci_get profiles "$curr_profile" archive)
+	md5file=$(uci_get profiles "$curr_profile" md5file)
+	[ -z "$curr_profile" ] || [ -z "$tarfile" ] || [ -z "$md5file" ] || {
+		echo "Updating profile $curr_profile"
+		/usr/sbin/profile.sh -b "$tarfile"
+		/usr/sbin/profile.sh -m "$md5file"
+		uci_set profiles "$curr_profile" updated $(date +%s)
+		uci_commit profiles
+	}
+	remove_section_containing_option "network" "device" "macaddr"
+	do_save_conffiles "$CONF_BACKUP"
+	restore_config "network"
+	exit $?
+fi
+
+if [ -n "$CONF_RESTORE" ]; then
+	if [ "$CONF_RESTORE" != "-" ] && [ ! -f "$CONF_RESTORE" ]; then
+		echo "Backup archive '$CONF_RESTORE' not found." >&2
+		exit 1
+	fi
+
+	backup_size_validation $CONF_RESTORE || exit 1
+
+	[ "$VERBOSE" -gt 1 ] && TAR_V="v" || TAR_V=""
+
+	mkdir -p /tmp/new_config_dir
+	if [ -z "$CONF_PASSWORD" ]; then
+		echo 'etc/rc.d/*' > /tmp/exclusions
+		echo 'etc/profile' >> /tmp/exclusions
+		tar -C /tmp/new_config_dir -x${TAR_V}zf "$CONF_RESTORE" -X '/tmp/exclusions'
+		rm /tmp/exclusions
+	else
+		conf_tar_dirname=$(dirname "$CONF_RESTORE")
+		7zr e -aoa -p"$CONF_PASSWORD" "$CONF_RESTORE" -o"$conf_tar_dirname"
+		rm -rf /tmp/new_config_dir/etc/rc.d/*
+		rm -rf /tmp/new_config_dir/etc/profile
+		conf_tar_trimmed=$(echo "$CONF_RESTORE" | sed 's/\.7z$//')
+		tar -C /tmp/new_config_dir -x${TAR_V}f "$conf_tar_trimmed"
+	fi
+	ret=$?
+	[ "$ret" -ne 0 ] && {
+		v "Error restoring backup"
+		exit "$ret"
+	}
+	
+	fwtool_check_backup /tmp/new_config_dir
+	backup_valid=$?
+	#Just validate and exit
+	[ "$CONF_BACKUP_VALIDATE" -eq 1 ] && {
+		echo "$backup_valid"
+			
+		exit $backup_valid
+	}
+	[ "$backup_valid" -gt 0 ] && {
+		if [ $FORCE -eq 1 ]; then
+			v "Backup check failed but --force given - will restore anyway!" >&2
+		else
+			rm -rf /tmp/new_config_dir
+			v "Backup archive is not valid."
+			echo "$backup_valid"
+			
+			exit $backup_valid
+		fi
+	}
+
+	v "Restoring config files..."
+	apply_backup
+
+	exit "$ret"
+fi
+
+type platform_check_image >/dev/null 2>/dev/null || {
+	echo "Firmware upgrade is not implemented for this platform." >&2
+	exit 1
+}
+
+case "$IMAGE" in
+	http://*|\
+	https://*)
+		wget -O/tmp/sysupgrade.img "$IMAGE" || exit 1
+		IMAGE=/tmp/sysupgrade.img
+		;;
+esac
+
+IMAGE="$(readlink -f "$IMAGE")"
+
+case "$IMAGE" in
+	'')
+		echo "Image file not found." >&2
+		exit 1
+		;;
+	/tmp/*)	;;
+	*)
+		v "Image not in /tmp, copying..."
+		cp -f "$IMAGE" /tmp/sysupgrade.img
+		IMAGE=/tmp/sysupgrade.img
+		;;
+esac
+
+json_load "$(/usr/libexec/validate_firmware_image "$IMAGE")" || {
+	echo "Failed to check image"
+	clean_tmp_dir
+	exit 1
+}
+
+json_get_var hw_support "hw_support"
+[ "$hw_support" -eq 0 ] && {
+	if [ $FORCE -eq 1 ]; then
+		echo "This firmware is unsupported by hardware but --force given - will update anyway!" >&2
+	else
+		echo "This firmware is unsupported by hardware" >&2
+		echo "Image check failed." >&2
+		clean_tmp_dir
+		exit 2
+	fi
+}
+
+json_get_var valid "valid"
+[ "$valid" -eq 0 ] && {
+	if [ $FORCE -eq 1 ]; then
+		echo "Image check failed but --force given - will update anyway!" >&2
+	else
+		echo "Image check failed." >&2
+		clean_tmp_dir
+		exit 1
+	fi
+}
+
+json_get_var is_downgrade "is_downgrade"
+[ "$is_downgrade" -eq 1 ] && {
+	v "Detected firmware downgrade"
+}
+
+json_get_var allow_backup "allow_backup"
+[ "$allow_backup" -eq 0 ] && {
+	v "Cannot restore config due to firmware incompatibility"
+	export SAVE_CONFIG=0
+}
+
+if [ -n "$CONF_IMAGE" ]; then
+	case "$(get_magic_word $CONF_IMAGE cat)" in
+		# .gz files
+		1f8b) ;;
+		*)
+			echo "Invalid config file. Please use only .tar.gz files" >&2
+			clean_tmp_dir
+			exit 1
+		;;
+	esac
+	get_image "$CONF_IMAGE" "cat" > "$CONF_TAR"
+	export SAVE_CONFIG=1
+elif ask_bool $SAVE_CONFIG "Keep config files over reflash"; then
+	[ $TEST -eq 1 ] || do_save_conffiles "$CONF_TAR"
+	export SAVE_CONFIG=1
+else
+	[ $TEST -eq 1 ] || rm -f "$CONF_TAR"
+	export SAVE_CONFIG=0
+fi
+
+if [ $TEST -eq 1 ]; then
+	clean_tmp_dir
+	exit 0
+fi
+
+# allow init(procd) to handle watchdog in cpu intensive tasks
+[ -e "/usr/bin/renice" ] && /usr/bin/renice -20 -p 1
+
+run_hooks "" $fwtool_pre_upgrade
+
+# If ledman daemon is dead, this should not have any effect
+/usr/bin/ledman --clean >/dev/null 2>&1 &
+
+# reset SMS limit database
+if [ $SAVE_CONFIG -eq 0 ]; then
+	rm /log/sms.db &>/dev/null
+fi
+
+install_bin /sbin/upgraded
+v "Commencing upgrade. Closing all shell sessions."
+
+COMMAND='/lib/upgrade/do_stage2'
+
+if [ -n "$FAILSAFE" ]; then
+	printf '%s\x00%s\x00%s' "$RAM_ROOT" "$IMAGE" "$COMMAND" >/tmp/sysupgrade
+	lock -u /tmp/.failsafe
+else
+	ubus call log write_ext "{
+		\"event\": \"Request after FW upgrade\",
+		\"sender\": \"Reboot\",
+		\"table\": 1,
+		\"write_db\": 1,
+	}"
+
+	json_init
+	json_add_string prefix "$RAM_ROOT"
+	json_add_string path "$IMAGE"
+	[ $FORCE -eq 1 ] && json_add_boolean force 1
+	[ $SAVE_CONFIG -eq 1 ] && json_add_string backup "$CONF_TAR"
+	json_add_string command "$COMMAND"
+	json_add_object options
+	json_add_int save_partitions "$SAVE_PARTITIONS"
+	json_close_object
+
+	ubus call system sysupgrade "$(json_dump)"
+fi

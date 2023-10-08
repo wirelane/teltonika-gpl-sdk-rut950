@@ -1,0 +1,251 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/cloud_solutions/cot/actions/reset_auth": {
+      "post": {
+        "summary": "Resets authentication data",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoT"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Cloud of Things"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cloud of Things"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/cloud_solutions/cot/config/general": {
+      "put": {
+        "summary": "Updates Cloud of Things configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoT"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/cloud_of_things_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cloud of Things"
+        ]
+      },
+      "get": {
+        "summary": "Returns Cloud of Things configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoT"
+          }
+        },
+        "tags": [
+          "Cloud of Things"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cloud of Things"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/cloud_solutions/cot/config": {
+      "put": {
+        "summary": "Updates Cloud of Things configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoTMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/cloud_of_things_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Cloud of Things"
+        ]
+      },
+      "get": {
+        "summary": "Returns Cloud of Things configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoTMulti"
+          }
+        },
+        "tags": [
+          "Cloud of Things"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cloud of Things"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200CoT": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/cloud_of_things_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CoTMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/cloud_of_things_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "cloud_of_things_options_single_put": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable Cloud of Things application",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "server": {
+            "type": "string",
+            "description": "Cloud of Things Server Address",
+            "format": "host",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input"
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Push connection interval in minutes",
+            "format": "irange(1,32767)",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "server",
+          "interval"
+        ]
+      },
+      "cloud_of_things_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Cloud of Things Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/cloud_of_things_options_single_put"
+          }
+        ]
+      }
+    }
+  }
+}

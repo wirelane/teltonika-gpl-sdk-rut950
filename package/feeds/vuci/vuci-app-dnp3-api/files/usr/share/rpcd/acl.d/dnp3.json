@@ -1,0 +1,58 @@
+{
+	"services/dnp3/tcp_client": {
+		"description": "dnp3 tcp client",
+		"read": {
+			"api": [
+				"/dnp3/tcp/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/dnp3/tcp/*"
+			]
+		}
+	},
+	"services/dnp3/serial_client": {
+		"description": "dnp3 serial client",
+		"read": {
+			"api": [
+				"/dnp3/serial/*",
+				"/serial/*",
+				"/device/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/dnp3/serial/*"
+			]
+		}
+	},
+	"services/dnp3/dnp_outstation": {
+		"description": "dnp3 outstation",
+		"read": {
+			"api": [
+				"/dnp3/outstation/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/dnp3/outstation/*"
+			]
+		}
+	},
+	"services/dnp3/dnp3_serial_outstation": {
+		"description": "dnp3 serial outstation",
+		"read": {
+			"api": [
+				"/dnp3/serial_outstation/*",
+				"/serial/*",
+				"/device/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/dnp3/serial_outstation/*"
+			]
+		}
+	}
+}

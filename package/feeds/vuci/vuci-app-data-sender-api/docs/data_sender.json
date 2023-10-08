@@ -1,0 +1,2839 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/data_sender/collections/config/{cfg}": {
+      "get": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Returns the specified Data to Server collection configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderCollectionSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Updates the specified Data to Server collection configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderCollectionSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/data_sender_collections_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Deletes the specified Data to Server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Collections"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/collections/config": {
+      "get": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Returns all Data to Server collections configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderCollectionMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Creates a new Data to Server collection configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderCollectionSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/data_sender_collections_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Updates the selected Data to Server collections configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderCollectionMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/data_sender_collections_multi_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Data to Server collection"
+        ],
+        "summary": "Deletes the selected Data to Server collections configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Collections"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/inputs/config/{cfg}": {
+      "get": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Returns the specified Data to Server data plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/collections/config/{collection_id}/inputs/{cfg}": {
+      "get": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Returns the specified Data to Server data plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Updates the specified Data to Server data plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/data_sender_input_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Deletes the specified Data to Server data plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collection_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Data collection configuration ID."
+        },
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Data plugin configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/inputs/config": {
+      "get": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Returns all Data to Server data plugins configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/collections/config/{collection_id}/inputs": {
+      "get": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Returns all Data to Server data plugins configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Creates a new Data to Server data plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/data_sender_input_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Updates the selected Data to Server data plugins configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderInputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/data_sender_input_multi_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "summary": "Deletes the selected Data to Server data plugins configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "parameters": [
+        {
+          "name": "collection_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Data collection configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/inputs/options": {
+      "get": {
+        "summary": "Returns Data to Server all available data plugin names, description and tags",
+        "tags": [
+          "Data to Server data plugin"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/data_sender_available_plugin_names"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/outputs/config/{cfg}": {
+      "get": {
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "summary": "Returns the specified Data to Server server plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderOutputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Server Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/collections/config/{collection_id}/outputs/{cfg}": {
+      "get": {
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "summary": "Returns the specified Data to Server server plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderOutputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "summary": "Updates the specified Data to Server server plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderOutputSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/data_sender_output_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collection_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Data collection configuration ID."
+        },
+        {
+          "name": "cfg",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Data server configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Server Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/outputs/config": {
+      "get": {
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "summary": "Returns all Data to Server server plugins configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderOutputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Server Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/collections/config/{collection_id}/outputs": {
+      "get": {
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "summary": "Returns all Data to Server server plugins configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderOutputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "summary": "Updates the selected Data to Server server plugins configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dataSenderOutputMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/data_sender_output_multi_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "collection_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Data collection configuration ID."
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Server Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/data_sender/outputs/options": {
+      "get": {
+        "summary": "Returns Data to Server all available server plugin names, description and tags",
+        "tags": [
+          "Data to Server server plugin"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/data_sender_available_plugin_names"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Server Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "data_sender_available_plugin_names": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "plugins": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "params": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "info": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dataSenderCollectionSingle": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/data_sender_collections_multi_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dataSenderCollectionMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/data_sender_collections_multi_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dataSenderInputSingle": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/data_sender_input_multi_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dataSenderInputMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/data_sender_input_multi_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dataSenderOutputSingle": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/data_sender_output_multi_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200dataSenderOutputMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/data_sender_output_multi_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "data_sender_collections_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Check to enable this Data to Server.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Data to Server. Used for easier Data to Servers management purposes only.",
+            "format": "string",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "format": {
+            "type": "string",
+            "description": "Specifies custom format string.",
+            "enum": [
+              "custom",
+              "json"
+            ],
+            "x-web": {
+              "pretty": "Format",
+              "input-type": "select",
+              "enum-pretty": {
+                "custom": "Custom",
+                "json": "Json"
+              }
+            }
+          },
+          "format_str": {
+            "type": "string",
+            "description": "Specifies custom format string.",
+            "format": "string",
+            "x-web": {
+              "pretty": "Format string",
+              "input-type": "input",
+              "depends": [
+                {
+                  "format": "custom"
+                }
+              ]
+            }
+          },
+          "na_str": {
+            "type": "string",
+            "description": "A string which will be placed if any value cannot be received.",
+            "format": "string",
+            "x-web": {
+              "pretty": "Empty value",
+              "input-type": "input",
+              "depends": [
+                {
+                  "format": "custom"
+                }
+              ]
+            }
+          },
+          "period": {
+            "type": "string",
+            "description": "Interval in seconds for collecting/sending data to destination.",
+            "format": "irange(1,86400)",
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "input"
+            }
+          },
+          "retry": {
+            "type": "string",
+            "description": "In case of a failed attempt, retry to send the same data to destination later.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Retry",
+              "input-type": "switch"
+            }
+          },
+          "retry_count": {
+            "type": "string",
+            "description": "Retry to send the same data N times.",
+            "format": "irange(1,10)",
+            "x-web": {
+              "pretty": "Retry count",
+              "input-type": "input",
+              "depends": [
+                {
+                  "retry": "1"
+                }
+              ]
+            }
+          },
+          "retry_timeout": {
+            "type": "string",
+            "description": "Timeout in second between retry attempts.",
+            "format": "irange(1,60)",
+            "x-web": {
+              "pretty": "Retry timeout",
+              "input-type": "input",
+              "depends": [
+                {
+                  "retry": "1"
+                }
+              ]
+            }
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Data plugins.",
+            "readOnly": true
+          },
+          "output": {
+            "type": "string",
+            "description": "Server plugin.",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "name",
+          "input",
+          "output"
+        ]
+      },
+      "data_sender_collections_multi_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Name of the configuration."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_collections_single_options"
+          }
+        ]
+      },
+      "data_sender_input_single_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Plugin name.",
+            "format": "uciname",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "format": {
+            "type": "string",
+            "description": "Specifies custom format string.",
+            "enum": [
+              "custom",
+              "json"
+            ],
+            "x-web": {
+              "pretty": "Format",
+              "input-type": "select",
+              "enum-pretty": {
+                "custom": "Custom",
+                "json": "Json"
+              }
+            }
+          },
+          "format_str": {
+            "type": "string",
+            "description": "Specifies custom format string.",
+            "format": "string",
+            "x-web": {
+              "pretty": "Format string",
+              "input-type": "input",
+              "depends": [
+                {
+                  "format": "custom"
+                }
+              ]
+            }
+          },
+          "na_str": {
+            "type": "string",
+            "description": "A string which will be placed if any value cannot be received.",
+            "format": "string",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Empty value",
+              "input-type": "input",
+              "depends": [
+                {
+                  "format": "custom"
+                }
+              ]
+            }
+          },
+          "delimiter": {
+            "type": "string",
+            "description": "Specifies delimiters for multiple data segments.",
+            "minLength": 1,
+            "maxLength": 1,
+            "x-web": {
+              "pretty": "Delimiter",
+              "input-type": "input",
+              "depends": [
+                {
+                  "format": "custom"
+                }
+              ]
+            }
+          },
+          "plugin": {
+            "type": "string",
+            "description": "Data plugin module name.",
+            "enum": [
+              "base",
+              "bluetooth",
+              "dlms",
+              "dnp3",
+              "gsm",
+              "mbus",
+              "mdcollect",
+              "mnfinfo",
+              "modbus",
+              "mqtt",
+              "opcua",
+              "wifiscan"
+            ],
+            "x-web": {
+              "pretty": "Data Plugin",
+              "input-type": "select",
+              "enum-pretty": {
+                "base": "Base",
+                "bluetooth": "Bluetooth",
+                "dlms": "DLMS",
+                "dnp3": "DNP3",
+                "gsm": "GSM",
+                "mbus": "M-Bus data",
+                "mdcollect": "Mobile usage",
+                "mnfinfo": "MNFinfo",
+                "modbus": "Modbus",
+                "opcua": "OPC UA",
+                "wifiscan": "Wifi scanner"
+              }
+            }
+          },
+          "mdc_period": {
+            "type": "string",
+            "description": "Data period.",
+            "enum": [
+              "day",
+              "week",
+              "month"
+            ],
+            "x-web": {
+              "pretty": "Data period",
+              "input-type": "select",
+              "enum-pretty": {
+                "day": "Day",
+                "week": "Week",
+                "month": "Month"
+              },
+              "depends": [
+                {
+                  "plugin": "mdcollect"
+                }
+              ]
+            }
+          },
+          "mdc_current": {
+            "type": "string",
+            "description": "Current day/week/month.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Current",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mdcollect"
+                }
+              ]
+            }
+          },
+          "mdc_modem_id": {
+            "type": "string",
+            "description": "Modem ID.",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "depends": [
+                {
+                  "plugin": "mdcollect"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              }
+            }
+          },
+          "mdc_sim": {
+            "type": "string",
+            "description": "SIM card section position.",
+            "x-web": {
+              "pretty": "SIM number",
+              "hw_tags": {
+                "dual_sim": true
+              },
+              "depends": [
+                {
+                  "plugin": "mdcollect"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/simcard_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/simcard_select"
+              }
+            }
+          },
+          "bl_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "mac",
+              "name"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "bluetooth"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "mac": "Device mac address",
+                "name": "Device name"
+              }
+            }
+          },
+          "bl_filter_mac": {
+            "type": "string",
+            "description": "Filter data by device MAC address.",
+            "format": "macaddr",
+            "x-web": {
+              "pretty": "MAC address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "bluetooth",
+                  "bl_filter": "mac"
+                }
+              ]
+            }
+          },
+          "bl_filter_name": {
+            "type": "string",
+            "description": "Filter data by device name.",
+            "format": "string",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Device name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "bluetooth",
+                  "bl_filter": "name"
+                }
+              ]
+            }
+          },
+          "bl_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "bluetooth"
+                }
+              ]
+            }
+          },
+          "bl_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "bluetooth",
+                  "bl_segments": "1"
+                }
+              ]
+            }
+          },
+          "modbus_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "ip",
+              "id",
+              "name"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "modbus"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "ip": "Server IP address",
+                "id": "Server ID",
+                "name": "Request name"
+              }
+            }
+          },
+          "modbus_filter_server_id": {
+            "type": "string",
+            "description": "Filter data by defined server ID.",
+            "format": "irange(1,255)",
+            "x-web": {
+              "pretty": "Server ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus",
+                  "modbus_filter": "id"
+                }
+              ]
+            }
+          },
+          "modbus_filter_server_ip": {
+            "type": "string",
+            "description": "Filter data by defined server IP address.",
+            "format": "ip4addr",
+            "x-web": {
+              "pretty": "Server IP",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus",
+                  "modbus_filter": "ip"
+                }
+              ]
+            }
+          },
+          "modbus_filter_request": {
+            "type": "string",
+            "description": "Filter data by request name.",
+            "format": "string",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Request name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus",
+                  "modbus_filter": "name"
+                }
+              ]
+            }
+          },
+          "modbus_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus"
+                }
+              ]
+            }
+          },
+          "modbus_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "modbus",
+                  "modbus_segments": "1"
+                }
+              ]
+            }
+          },
+          "gsm_modem_id": {
+            "type": "string",
+            "description": "Modem ID.",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "depends": [
+                {
+                  "plugin": "gsm"
+                }
+              ],
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              }
+            }
+          },
+          "dnp3_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "address",
+              "ip"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "dnp3"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "address": "Address",
+                "ip": "IP"
+              }
+            }
+          },
+          "dnp3_filter_address": {
+            "type": "string",
+            "description": "Filter data by defined DNP3 address.",
+            "format": "irange(0,65519)",
+            "x-web": {
+              "pretty": "DNP3 address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "dnp3",
+                  "dnp3_filter": "address"
+                }
+              ]
+            }
+          },
+          "dnp3_filter_ip": {
+            "type": "string",
+            "description": "Filter data by defined IP address.",
+            "format": "ipaddr",
+            "x-web": {
+              "pretty": "IP address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "dnp3",
+                  "dnp3_filter": "ip"
+                }
+              ]
+            }
+          },
+          "dnp3_db": {
+            "type": "string",
+            "description": "Database location.",
+            "enum": [
+              "/tmp/dnp3.db",
+              "/usr/share/dnp3.db"
+            ],
+            "format": "string",
+            "x-web": {
+              "pretty": "Database",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "dnp3"
+                }
+              ],
+              "enum-pretty": {
+                "/tmp/dnp3.db": "RAM",
+                "/usr/share/dnp3.db": "Flash"
+              }
+            }
+          },
+          "dnp3_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "dnp3"
+                }
+              ]
+            }
+          },
+          "dnp3_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "dnp3",
+                  "dnp3_segments": "1"
+                }
+              ]
+            }
+          },
+          "mbus_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "name"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "mbus"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "name": "Name"
+              }
+            }
+          },
+          "mbus_filter_name": {
+            "type": "string",
+            "description": "Filter data by defined M-Bus record name",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "M-Bus record name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mbus",
+                  "mbus_filter": "name"
+                }
+              ]
+            }
+          },
+          "mbus_filter_invert": {
+            "type": "string",
+            "description": "Inverts filter condition.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Invert filter",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mbus",
+                  "mbus_filter": "name"
+                }
+              ]
+            }
+          },
+          "mbus_db": {
+            "type": "string",
+            "description": "Database location.",
+            "enum": [
+              "/tmp/mbus_db",
+              "/usr/share/mbus_db"
+            ],
+            "format": "string",
+            "x-web": {
+              "pretty": "Database",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "mbus"
+                }
+              ],
+              "enum-pretty": {
+                "/tmp/mbus_db": "RAM",
+                "/usr/share/mbus_db": "Flash"
+              }
+            }
+          },
+          "mbus_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mbus"
+                }
+              ]
+            }
+          },
+          "mbus_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mbus",
+                  "mbus_segments": "1"
+                }
+              ]
+            }
+          },
+          "opcua_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "name"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "opcua"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "name": "Name"
+              }
+            }
+          },
+          "opcua_filter_name": {
+            "type": "string",
+            "description": "Filter data by defined OPC UA value group name.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "OPC UA record name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "opcua",
+                  "opcua_filter": "name"
+                }
+              ]
+            }
+          },
+          "opcua_filter_invert": {
+            "type": "string",
+            "description": "Inverts filter condition.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Invert filter",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "opcua",
+                  "opcua_filter": "name"
+                }
+              ]
+            }
+          },
+          "opcua_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "opcua"
+                }
+              ]
+            }
+          },
+          "opcua_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "opcua",
+                  "opcua_segments": "1"
+                }
+              ]
+            }
+          },
+          "wifi_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "name",
+              "mac",
+              "singal"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "wifiscan"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "name": "Name",
+                "mac": "MAC address",
+                "singal": "Signal strength"
+              }
+            }
+          },
+          "wifi_filter_name": {
+            "type": "string",
+            "description": "Filter data by device hostname.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "WiFi record name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "wifiscan",
+                  "wifi_filter": "name"
+                }
+              ]
+            }
+          },
+          "wifi_filter_mac": {
+            "type": "string",
+            "description": "Filter data by device MAC address.",
+            "format": "macaddr",
+            "x-web": {
+              "pretty": "MAC address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "wifiscan",
+                  "wifi_filter": "mac"
+                }
+              ]
+            }
+          },
+          "wifi_filter_signal": {
+            "type": "string",
+            "description": "Filter data by signal.",
+            "format": "irange(-100,-1)",
+            "x-web": {
+              "pretty": "Signal strength",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "wifiscan",
+                  "wifi_filter": "mac"
+                }
+              ]
+            }
+          },
+          "wifi_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "wifiscan"
+                }
+              ]
+            }
+          },
+          "wifi_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "wifiscan",
+                  "opcua_segments": "1"
+                }
+              ]
+            }
+          },
+          "mqtt_in_host": {
+            "type": "string",
+            "format": "host",
+            "description": "Host address or IP address of MQTT broker to connect to.",
+            "x-web": {
+              "pretty": "MQTT Host",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_port": {
+            "type": "string",
+            "description": "Port of MQTT broker",
+            "format": "port",
+            "default": "1883",
+            "x-web": {
+              "pretty": "MQTT Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_keepalive": {
+            "type": "string",
+            "description": "Keepalive time in seconds",
+            "format": "irange(0,2147483647)",
+            "default": "60",
+            "x-web": {
+              "pretty": "Keepalive",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_topic": {
+            "type": "string",
+            "description": "Topic to subscribe",
+            "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Topic",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_client_id": {
+            "type": "string",
+            "description": "Client ID to send with the data.",
+            "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Client ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_qos": {
+            "type": "string",
+            "description": "Quality of Service to be used for the message",
+            "format": "string",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "QoS",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_tls": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "x-web": {
+              "pretty": "TLS",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_insecure": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "x-web": {
+              "pretty": "Allow insecure connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_in_tls_type": {
+            "type": "string",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "description": "Type of TLS connection",
+            "x-web": {
+              "pretty": "TLS Type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1"
+                }
+              ],
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              }
+            }
+          },
+          "mqtt_in_psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading “0x”",
+            "format": "hexstring",
+            "maxLength": 128,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "mqtt_in_identity": {
+            "type": "string",
+            "description": "The identity",
+            "format": "uciname",
+            "maxLength": 255,
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "mqtt_device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "mqtt_in_cafile": {
+            "type": "string",
+            "description": "CA file path",
+            "format": "path",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_in_certfile": {
+            "type": "string",
+            "description": "Certificate file path",
+            "format": "path",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_in_keyfile": {
+            "type": "string",
+            "description": "Key file path",
+            "format": "path",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_in_username": {
+            "type": "string",
+            "description": "Username for MQTT authentication",
+            "format": "credentials_validate",
+            "maxLength": 512,
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_in_password": {
+            "type": "string",
+            "description": "Password for MQTT authentication",
+            "format": "string",
+            "maxLength": 512,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "dlms_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "name"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "dlms"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "name": "Name"
+              }
+            }
+          },
+          "dlms_filter_name": {
+            "type": "string",
+            "description": "Filter data by defined DLMS record name.",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "DLMS record name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "dlms",
+                  "dlms_filter": "name"
+                }
+              ]
+            }
+          },
+          "dlms_filter_invert": {
+            "type": "string",
+            "description": "Inverts filter condition.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Invert filter",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "dlms",
+                  "dlms_filter": "name"
+                }
+              ]
+            }
+          },
+          "dlms_segments": {
+            "type": "string",
+            "description": "Number of data segments.",
+            "format": "irange(1,64)",
+            "x-web": {
+              "pretty": "Segments",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "dlms"
+                }
+              ]
+            }
+          },
+          "dlms_object": {
+            "type": "string",
+            "description": "Format segment as object and not as array element.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send as object",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "dlms",
+                  "dlms_segments": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "format_str",
+          "na_str",
+          "delimiter",
+          "bl_filter_mac",
+          "bl_filter_name",
+          "bl_segments",
+          "dlms_filter_name",
+          "dlms_segments",
+          "dnp3_filter_address",
+          "dnp3_filter_ip",
+          "dnp3_segments",
+          "gsm_modem_id",
+          "mbus_filter_name",
+          "mbus_segments",
+          "mdc_modem_id",
+          "mdc_period",
+          "mdc_sim",
+          "modbus_filter_request",
+          "modbus_filter_server_id",
+          "modbus_filter_server_ip",
+          "modbus_segments",
+          "mqtt_in_cafile",
+          "mqtt_in_host",
+          "mqtt_in_identity",
+          "mqtt_in_password",
+          "mqtt_in_psk",
+          "mqtt_in_qos",
+          "mqtt_in_tls_type",
+          "mqtt_in_topic",
+          "opcua_segments",
+          "wifi_filter_mac",
+          "wifi_filter_name",
+          "wifi_filter_signal",
+          "wifi_segments"
+        ]
+      },
+      "data_sender_input_multi_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Name of the configuration."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options"
+          }
+        ]
+      },
+      "data_sender_output_single_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Plugin name.",
+            "readOnly": true,
+            "x-web": {
+              "pretty": "Name"
+            }
+          },
+          "plugin": {
+            "type": "string",
+            "description": "Plugin type.",
+            "enum": [
+              "azure",
+              "http",
+              "mqtt"
+            ],
+            "x-web": {
+              "pretty": "Plugin type",
+              "input-type": "select",
+              "enum-pretty": {
+                "azure": "Azure",
+                "http": "HTTP",
+                "mqtt": "MQTT"
+              }
+            }
+          },
+          "http_host": {
+            "type": "string",
+            "description": "Server address.",
+            "format": "url",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "http"
+                }
+              ]
+            }
+          },
+          "http_header": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "string",
+              "maxLength": 128
+            },
+            "description": "Allows to add custom headers to the HTTP requests.",
+            "x-web": {
+              "pretty": "HTTP headers",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "http"
+                }
+              ]
+            }
+          },
+          "http_tls": {
+            "type": "string",
+            "description": "Enable secuire connection.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable secuire connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "http"
+                }
+              ]
+            }
+          },
+          "http_device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "http_cafile": {
+            "type": "string",
+            "description": "Certificate authority file.",
+            "format": "path",
+            "x-web": {
+              "pretty": "Certificate authority file'",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "http",
+                  "http_tls": "1"
+                }
+              ]
+            }
+          },
+          "http_certfile": {
+            "type": "string",
+            "description": "Client certificate.",
+            "format": "path",
+            "x-web": {
+              "pretty": "Client certificate",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "http",
+                  "http_tls": "1"
+                }
+              ]
+            }
+          },
+          "http_keyfile": {
+            "type": "string",
+            "description": "Client private keyfile.",
+            "format": "path",
+            "x-web": {
+              "pretty": "Client private keyfile",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "http",
+                  "http_tls": "1"
+                }
+              ]
+            }
+          },
+          "mqtt_host": {
+            "type": "string",
+            "description": "Hostname or ip address of the broker to connect to.",
+            "format": "host",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_port": {
+            "type": "string",
+            "description": "Port number.",
+            "format": "port",
+            "default": "1883",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_keepalive": {
+            "type": "string",
+            "description": "MQTT keepalive time in seconds.",
+            "format": "irange(1,640)",
+            "default": "60",
+            "x-web": {
+              "pretty": "Keepalive",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_topic": {
+            "type": "string",
+            "description": "MQTT topic to be used for publishing the data.",
+            "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Topic",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_client_id": {
+            "type": "string",
+            "description": "Client ID to send with the data.",
+            "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Client ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_qos": {
+            "type": "string",
+            "description": "MQTT Quality of Service. Allowed values:\n0 - when we prefer that the message will not arrive at all rather than arrive twice\n1 - when we want the message to arrive at least once but 't care if it arrives twice (or more)\n2 - when we want the message to arrive exactly once. A higher QoS value means a slower transfer.",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "x-web": {
+              "pretty": "QoS",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_tls": {
+            "type": "string",
+            "description": "Enable TLS connections.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Use TLS",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_insecure": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "x-web": {
+              "pretty": "Allow insecure connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_tls": "1",
+                  "mqtt_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_tls_type": {
+            "type": "string",
+            "description": "Choose TLS type.",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "x-web": {
+              "pretty": "TLS type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "tls_enabled": "1",
+                  "plugin": "mqtt"
+                }
+              ],
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              }
+            }
+          },
+          "mqtt_device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "mqtt_cafile": {
+            "type": "string",
+            "description": "Certificate authority file.",
+            "format": "path",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mqtt_tls": "1",
+                  "plugin": "mqtt",
+                  "mqtt_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_certfile": {
+            "type": "string",
+            "description": "Client certificate.",
+            "format": "path",
+            "x-web": {
+              "pretty": "Client certificate",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mqtt_tls": "1",
+                  "plugin": "mqtt",
+                  "mqtt_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_keyfile": {
+            "type": "string",
+            "description": "Client private keyfile.",
+            "format": "path",
+            "x-web": {
+              "pretty": "Private key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mqtt_tls": "1",
+                  "plugin": "mqtt",
+                  "mqtt_tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "mqtt_psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading “0x”.",
+            "format": "['no_prefix(\"0x\")', 'hexstring']",
+            "maxLength": 128,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mqtt_tls": "1",
+                  "plugin": "mqtt",
+                  "mqtt_tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "mqtt_identity": {
+            "type": "string",
+            "description": "The identity of this client.",
+            "maxLength": 128,
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mqtt_tls": "1",
+                  "plugin": "mqtt",
+                  "mqtt_tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "mqtt_use_credentials": {
+            "type": "string",
+            "description": "Enables use of username and password for authentication.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Use credentials",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_username": {
+            "type": "string",
+            "description": "Username for MQTT authentication.",
+            "format": "credentials_validate(512, 'allow-space')",
+            "maxLength": 512,
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_use_credentials": "1"
+                }
+              ]
+            }
+          },
+          "mqtt_password": {
+            "type": "string",
+            "description": "Password for MQTT authentication.",
+            "format": "credentials_validate(512, 'allow-space')",
+            "maxLength": 512,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_use_credentials": "1"
+                }
+              ]
+            }
+          },
+          "azure_connection_type": {
+            "type": "string",
+            "description": "Select the attestation method to connect to Azure IoT Cloud",
+            "enum": [
+              "iothub",
+              "provisioning"
+            ],
+            "x-web": {
+              "pretty": "Attestation method",
+              "input-type": "select",
+              "enum-pretty": {
+                "iothub": "Shared Access Signature (SAS) key",
+                "provisioning": "Device Provisioning Service (DPS)"
+              },
+              "depends": [
+                {
+                  "plugin": "azure"
+                }
+              ]
+            }
+          },
+          "azure_connection_string": {
+            "type": "string",
+            "description": "onnection string based on primary key used in API calls which allows device to communicate with IoT Hub.",
+            "format": "string",
+            "maxLength": 4096,
+            "x-web": {
+              "pretty": "Connection string",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "azure",
+                  "azure_connection_type": "iothub"
+                }
+              ]
+            }
+          },
+          "azure_id_scope": {
+            "type": "string",
+            "description": "Unique identifier that is assigned to an Azure IoT Hub during its creation and is used to uniquely identify the specific provisioning service the device will register through",
+            "format": "string",
+            "maxLength": 100,
+            "x-web": {
+              "pretty": "ID Scope",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "azure",
+                  "azure_connection_type": "provisioning"
+                }
+              ]
+            }
+          },
+          "azure_registration_id": {
+            "type": "string",
+            "description": "The registration ID is used to uniquely identify a device registration with the Device Provisioning Service. Registration ID is the X.509 certificate common name (CN) field of the individual device's certificate",
+            "format": "string",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Registration ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "azure",
+                  "azure_connection_type": "provisioning"
+                }
+              ]
+            }
+          },
+          "azure_x509certificate": {
+            "type": "string",
+            "description": "Upload the 'leaf' certificate file.",
+            "format": "path",
+            "x-web": {
+              "pretty": "X.509 Certificate",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "azure",
+                  "azure_connection_type": "provisioning"
+                }
+              ]
+            }
+          },
+          "azure_x509privatekey": {
+            "type": "string",
+            "description": "Upload the 'leaf' key file.",
+            "format": "path",
+            "x-web": {
+              "pretty": "X.509 Private Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "azure",
+                  "azure_connection_type": "provisioning"
+                }
+              ]
+            }
+          },
+          "azure_global_prov_uri": {
+            "type": "string",
+            "description": "Destination for messages sent by IoT devices to the Azure IoT Hub (will default to global.azure-devices-provisioning.net if not set)",
+            "format": "url",
+            "x-web": {
+              "pretty": "Global Device Endpoint",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "azure",
+                  "azure_connection_type": "provisioning"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "azure_connection_string",
+          "azure_connection_type",
+          "azure_id_scope",
+          "azure_registration_id",
+          "azure_x509certificate",
+          "azure_x509privatekey",
+          "http_cafile",
+          "http_certfile",
+          "http_host",
+          "http_keyfile",
+          "mqtt_cafile",
+          "mqtt_certfile",
+          "mqtt_host",
+          "mqtt_identity",
+          "mqtt_keyfile",
+          "mqtt_password",
+          "mqtt_psk",
+          "mqtt_qos",
+          "mqtt_tls_type",
+          "mqtt_topic",
+          "mqtt_username"
+        ]
+      },
+      "data_sender_output_multi_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Name of the configuration."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_output_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

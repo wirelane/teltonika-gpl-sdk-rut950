@@ -1,0 +1,24 @@
+{
+	"system/admin/datetime/ntpd": {
+		"description": "NTPD time synchronisation configuration module",
+		"read": {
+			"api": [
+				"/administration/ntpd/*",
+				"/administration/ntp/server/config/*"
+			],
+			"uci": [
+				"ntpd",
+				"ntpserver"
+			]
+		},
+		"write": {
+			"api": [
+				"/administration/ntpd/*"
+			],
+			"uci": [
+				"ntpd",
+				"ntpserver"
+			]
+		}
+	}
+}

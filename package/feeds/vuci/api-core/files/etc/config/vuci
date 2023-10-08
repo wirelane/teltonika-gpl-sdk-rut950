@@ -1,0 +1,7 @@
+config core main
+	option session_timeout '1800'
+	option lang 'en'
+	option firstlogin '1'
+
+config internal 'languages'
+	option en 'English'

@@ -1,0 +1,360 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/upnp/settings/config/general": {
+      "get": {
+        "tags": [
+          "UPnP Settings"
+        ],
+        "summary": "Returns the specified UPnP Settings configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpSettings"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UPnP Settings"
+        ],
+        "summary": "Updates the specified UPnP Settings configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpSettings"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/upnp_settings_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "UPNP",
+          "UPNP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/upnp/settings/config": {
+      "get": {
+        "tags": [
+          "UPnP Settings"
+        ],
+        "summary": "Returns all UPnP Settings configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpSettingsMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UPnP Settings"
+        ],
+        "summary": "Updates specified UPnP Settings configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UpnpSettings"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/upnp_settings_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "UPNP",
+          "UPNP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200UpnpSettings": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/upnp_settings_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200UpnpSettingsMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/upnp_settings_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "upnp_settings_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Enables/Disables UPnP.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "secure_mode": {
+            "x-web": {
+              "pretty": "Enable secure mode",
+              "input-type": "switch",
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Allow adding forwards only to requesting ip addresses.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "log_output": {
+            "x-web": {
+              "pretty": "Enable additional logging",
+              "input-type": "switch",
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Puts extra debugging information into the system log.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "download": {
+            "x-web": {
+              "pretty": "Downlink",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Value in KByte/s, informational only.",
+            "format": "uinteger"
+          },
+          "upload": {
+            "x-web": {
+              "pretty": "Uplink",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Value in KByte/s, informational only.",
+            "format": "uinteger"
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "type": "string",
+            "description": "Specifies UPnP port.",
+            "format": "port"
+          },
+          "system_uptime": {
+            "x-web": {
+              "pretty": "Report system instead of daemon uptime",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Choose if system or MINIUPNP service uptime is reported.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "uuid": {
+            "x-web": {
+              "pretty": "Device UUID",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Specify Universal unique ID of the device.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "serial_number": {
+            "x-web": {
+              "pretty": "Announced serial number",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Specifies serial number for XML Root Desc."
+          },
+          "model_number": {
+            "x-web": {
+              "pretty": "Announced model number",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Specifies model number for XML Root Desc."
+          },
+          "notify_interval": {
+            "x-web": {
+              "pretty": "Notify interval",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Interval in which UPnP capable devices send a message to announce their services.",
+            "format": "uinteger"
+          },
+          "clean_ruleset_threshold": {
+            "x-web": {
+              "pretty": "Clean rules threshold",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Minimum number of redirections before clearing rules table of old (active) redirections.",
+            "format": "uinteger"
+          },
+          "clean_ruleset_interval": {
+            "x-web": {
+              "pretty": "Clean rule interval",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Number of seconds before cleaning redirections.",
+            "format": "uinteger"
+          },
+          "presentation_url": {
+            "x-web": {
+              "pretty": "Presentation URL",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Presentation url used for the Root Desc.",
+            "format": "host"
+          },
+          "upnp_lease_file": {
+            "x-web": {
+              "pretty": "UPnP lease file",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Stores active UPnP redirects in a lease file (specified), like DHCP leases."
+          }
+        }
+      },
+      "upnp_settings_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "UPnP Settings Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/upnp_settings_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

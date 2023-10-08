@@ -1,0 +1,990 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Certificates",
+    "description": "Certificates API documentation",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Certificates"
+    }
+  ],
+  "paths": {
+    "/certificates/files/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of a file to download"
+          }
+        ],
+        "summary": "Download specified certificate file",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_download"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Name of a file to download"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/{file}": {
+      "delete": {
+        "parameters": [
+          {
+            "name": "file",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "File name"
+          }
+        ],
+        "summary": "Deletes specified certificate file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Certificates"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "file",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "File name"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config": {
+      "get": {
+        "summary": "Returns all generated certificates, keys, DH parameters and CAs",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertGet"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Certificates"
+        ]
+      },
+      "post": {
+        "summary": "Upload certificate",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_certificates"
+        },
+        "tags": [
+          "Certificates"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/actions/generate": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Generates certificates based on provided parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertGenerate"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/generation_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/actions/sign": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Signs certificate based on provided parameters",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertGenerate"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sign_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/keys": {
+      "get": {
+        "summary": "Returns generated keys",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertKeys"
+          }
+        },
+        "operationId": "get-system-certificates-keys"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/client": {
+      "get": {
+        "summary": "Returns generated client certificates",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertCertificates"
+          }
+        },
+        "operationId": "get-system-certificates-client"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/server": {
+      "get": {
+        "summary": "Returns generated server certificates",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertCertificates"
+          }
+        },
+        "operationId": "get-system-certificates-server"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/ca": {
+      "get": {
+        "summary": "Returns generated Certificate authorities",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertCertificates"
+          }
+        },
+        "operationId": "get-system-certificates-ca"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/dh": {
+      "get": {
+        "summary": "Returns generated DH parameters",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertDH"
+          }
+        },
+        "operationId": "get-system-certificates-dh"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/certificates/config/certificates": {
+      "get": {
+        "summary": "Returns generated signed certificates",
+        "tags": [
+          "Certificates"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CertCert"
+          }
+        },
+        "operationId": "get-system-certificates-certificates",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200CertGenerate": {
+        "description": "Returns process response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "number",
+                  "description": "Process status"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CertKeys": {
+        "description": "Returns process response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "key"
+                        ],
+                        "description": "File type."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of generated certificate."
+                      },
+                      "cert_type": {
+                        "type": "string",
+                        "description": "Certificate type.",
+                        "enum": [
+                          "client",
+                          "server",
+                          "ca"
+                        ]
+                      },
+                      "key_size": {
+                        "type": "string",
+                        "description": "Key size used to generate the certificate."
+                      },
+                      "fullname": {
+                        "type": "string",
+                        "description": "File name."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CertCert": {
+        "description": "Returns process response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "cert"
+                        ],
+                        "description": "File type."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of generated certificate."
+                      },
+                      "cert_type": {
+                        "type": "string",
+                        "description": "Certificate type.",
+                        "enum": [
+                          "client",
+                          "server",
+                          "ca"
+                        ]
+                      },
+                      "key_size": {
+                        "type": "string",
+                        "description": "Key size used to generate the certificate."
+                      },
+                      "fullname": {
+                        "type": "string",
+                        "description": "File name."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CertDH": {
+        "description": "Returns process response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "dh"
+                        ],
+                        "description": "File type."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of generated certificate."
+                      },
+                      "cert_type": {
+                        "type": "string",
+                        "description": "Certificate type.",
+                        "enum": [
+                          "dh"
+                        ]
+                      },
+                      "key_size": {
+                        "type": "string",
+                        "description": "Key size used to generate the certificate."
+                      },
+                      "fullname": {
+                        "type": "string",
+                        "description": "File name."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CertCertificates": {
+        "description": "Returns process response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "keys": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "key"
+                            ],
+                            "description": "File type."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of generated certificate."
+                          },
+                          "cert_type": {
+                            "type": "string",
+                            "description": "Certificate type.",
+                            "enum": [
+                              "client",
+                              "server",
+                              "ca"
+                            ]
+                          },
+                          "key_size": {
+                            "type": "string",
+                            "description": "Key size used to generate the certificate."
+                          },
+                          "fullname": {
+                            "type": "string",
+                            "description": "File name."
+                          }
+                        }
+                      }
+                    },
+                    "certificates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "cert"
+                            ],
+                            "description": "File type"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of generated certificate"
+                          },
+                          "cert_type": {
+                            "type": "string",
+                            "description": "Certificate type",
+                            "enum": [
+                              "client",
+                              "server",
+                              "ca"
+                            ]
+                          },
+                          "key_size": {
+                            "type": "string",
+                            "description": "Key size used to generate the certificate"
+                          },
+                          "fullname": {
+                            "type": "string",
+                            "description": "File name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200CertGet": {
+        "description": "Returns generated and generating certificates.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "generated": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "key",
+                              "cert",
+                              "dh"
+                            ],
+                            "description": "File type."
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of generated certificate."
+                          },
+                          "cert_type": {
+                            "type": "string",
+                            "description": "Certificate type.",
+                            "enum": [
+                              "client",
+                              "server",
+                              "ca"
+                            ]
+                          },
+                          "key_size": {
+                            "type": "string",
+                            "description": "Key size used to generate the certificate."
+                          },
+                          "fullname": {
+                            "type": "string",
+                            "description": "File name."
+                          }
+                        }
+                      }
+                    },
+                    "generating": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "key",
+                              "cert",
+                              "dh"
+                            ],
+                            "description": "File type"
+                          },
+                          "fullname": {
+                            "type": "string",
+                            "description": "File name"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "path": "/etc/certificates/filename"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_download": {
+        "description": "Example response",
+        "content": {
+          "application/octet-stream": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "generation_options": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "x-web": {
+              "pretty": "File Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "ca": "CA",
+                "client": "Client",
+                "server": "Server",
+                "simple": "Simple",
+                "dh": "DH Parameters"
+              }
+            },
+            "type": "string",
+            "description": "Type of file to be generated Select option 'Simple' to generate ca, server & client certificates & keys.",
+            "enum": [
+              "ca",
+              "client",
+              "server",
+              "simple",
+              "dh"
+            ]
+          },
+          "days": {
+            "x-web": {
+              "pretty": "Days",
+              "input-type": "input",
+              "depends": [
+                {
+                  "sign": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Days until certificate expires.",
+            "format": "uinteger"
+          },
+          "key_size": {
+            "x-web": {
+              "pretty": "Key Size",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "Certificate key size.",
+            "enum": [
+              "512",
+              "1024",
+              "2048",
+              "4096"
+            ]
+          },
+          "subject": {
+            "x-web": {
+              "pretty": "Subject information",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Subject information for certificate. format: /C=US/ST=CA/L=San Francisco/O=My Company/OU=My Unit/CN=My Common Name"
+          },
+          "ca": {
+            "x-web": {
+              "pretty": "CA File Name",
+              "input-type": "select",
+              "depends": [
+                {
+                  "sign": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Certificate authority file (Used for signing client and server certificates."
+          },
+          "ca_key": {
+            "x-web": {
+              "pretty": "CA Key",
+              "input-type": "select",
+              "depends": [
+                {
+                  "sign": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Certificate authority key for matching certificate authority file."
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Name (CN)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Common name and file name of the certificate."
+          },
+          "sign": {
+            "x-web": {
+              "pretty": "Sign The Certificate",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Check this to sign the generated certificate with CA file.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "delete": {
+            "x-web": {
+              "pretty": "Delete Signing Request",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "sign": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Delete certificate signing request after signing.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "pass": {
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "sign": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Private Key Decryption Password.",
+            "format": "credentials_validate"
+          }
+        }
+      },
+      "sign_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "x-web": {
+              "pretty": "Signed Certificate Name",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Common name and file name of the certificate."
+          },
+          "req_file": {
+            "x-web": {
+              "pretty": "Certificate Request File",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "Certificate signing request file."
+          },
+          "ca": {
+            "x-web": {
+              "pretty": "Certificate Authority File",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "Certificate authority file (Used for signing client and server certificates."
+          },
+          "ca_key": {
+            "x-web": {
+              "pretty": "Certificate Authority Key",
+              "input-type": "select"
+            },
+            "type": "string",
+            "description": "Certificate authority key for matching certificate authority file."
+          },
+          "days": {
+            "x-web": {
+              "pretty": "Days Valid",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Days until certificate expires.",
+            "format": "uinteger"
+          },
+          "delete": {
+            "x-web": {
+              "pretty": "Delete Signing Request",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Delete certificate signing request after signing.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "file_upload_certificates": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "x-web": {
+                    "pretty": "Certificate"
+                  },
+                  "type": "string",
+                  "format": "binary",
+                  "description": "File to upload."
+                }
+              },
+              "required": [
+                "file"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

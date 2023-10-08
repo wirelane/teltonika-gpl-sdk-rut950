@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/base/actions/change_password_firstlogin": {
+      "post": {
+        "tags": [
+          "System Utilities"
+        ],
+        "summary": "Changes password on first login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "response": {
+                      "type": "string",
+                      "description": "Status of action"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/change_password_firstlogin_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Status",
+          "System",
+          "Core"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "change_password_firstlogin_options": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "description": "New password to set",
+            "type": "string",
+            "format": "root_password"
+          },
+          "password_confirm": {
+            "description": "New Password to set confirmation",
+            "type": "string",
+            "format": "root_password"
+          }
+        },
+        "required": [
+          "password",
+          "password_confirm"
+        ]
+      }
+    }
+  },
+  "name": "",
+  "description": "",
+  "minimumCoreVersion": "",
+  "title": "",
+  "version": "",
+  "author": ""
+}

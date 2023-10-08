@@ -1,0 +1,377 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Access Control SSH"
+    }
+  ],
+  "paths": {
+    "/access_control/ssh/config": {
+      "get": {
+        "summary": "Returns all ssh access control configurations",
+        "tags": [
+          "Access Control SSH"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_ssh"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified ssh access control configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_ssh"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ssh_multi"
+        },
+        "tags": [
+          "Access Control SSH"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "General"
+        ]
+      }
+    },
+    "/access_control/ssh/config/general": {
+      "get": {
+        "summary": "Returns the specified ssh access control configuration",
+        "tags": [
+          "Access Control SSH"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_ssh_one"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified ssh access control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_ssh_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ssh"
+        },
+        "tags": [
+          "Access Control SSH"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "General"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_ssh": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/ssh"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "enable": "string",
+                      "_sshWanAccess": "string",
+                      "port": "string",
+                      "enable_key_ssh": "string",
+                      "ssh_keys": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_ssh_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/ssh"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "enable": "string",
+                    "_sshWanAccess": "string",
+                    "port": "string",
+                    "enable_key_ssh": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ssh": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enable": "",
+            "_sshWanAccess": "",
+            "port": "",
+            "enable_key_ssh": "",
+            "ssh_keys": ""
+          }
+        },
+        "properties": {
+          "enable": {
+            "x-web": {
+              "pretty": "Enable SSH access",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/disable SSH access.",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ]
+          },
+          "_sshWanAccess": {
+            "x-web": {
+              "hw_tags": {
+                "is_switch": false,
+                "is_access_point": false
+              },
+              "pretty": "Remote SSH access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enable": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Turns SSH access from remote networks (WAN) on or off.",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ]
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Selects which port to use for SSH access.",
+            "format": "port"
+          },
+          "enable_key_ssh": {
+            "x-web": {
+              "pretty": "Enable key-based authentication",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Use public keys for authentication.",
+            "format": "is_bool",
+            "enum": [
+              "1",
+              "0"
+            ]
+          },
+          "ssh_keys": {
+            "x-web": {
+              "pretty": "Public keys",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_key_ssh": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Public keys for ssh key-based authentication. Each individual key must be specified on a new line."
+          }
+        },
+        "required": [
+          "enable",
+          "port",
+          "enable_key_ssh"
+        ]
+      }
+    },
+    "requestBodies": {
+      "ssh": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/ssh"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "ssh_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            },
+                            "description": "Access Control SSH configuration identifier (ID)",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/ssh"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

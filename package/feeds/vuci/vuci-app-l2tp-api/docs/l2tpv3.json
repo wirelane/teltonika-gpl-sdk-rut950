@@ -1,0 +1,608 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "L2TPv3",
+    "description": "L2TPv3 documentation",
+    "version": "3.0.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "L2TPv3"
+    }
+  ],
+  "paths": {
+    "/l2tpv3/config": {
+      "get": {
+        "summary": "Get l2tpv3 configurations",
+        "description": "Gets l2tpv3 configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_l2tpv3_multi"
+          }
+        },
+        "operationId": "get-services-l2tpv3",
+        "tags": [
+          "L2TPv3"
+        ]
+      },
+      "post": {
+        "summary": "Create l2tpv3 configuration",
+        "description": "Creates l2tpv3 configuration",
+        "operationId": "post-services-l2tpv3",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_l2tpv3_one"
+          }
+        },
+        "tags": [
+          "L2TPv3"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tpv3_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update l2tpv3 configurations",
+        "description": "Updates l2tpv3 configurations",
+        "operationId": "put-services-l2tpv3",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_l2tpv3_multi"
+          }
+        },
+        "tags": [
+          "L2TPv3"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tpv3_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete l2tpv3 configurations",
+        "description": "Deletes l2tpv3 configurations",
+        "operationId": "delete-services-l2tpv3",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          }
+        },
+        "tags": [
+          "L2TPv3"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "L2TPv3"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/l2tpv3/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get l2tpv3 configuration",
+        "description": "Gets l2tpv3 configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_l2tpv3_one"
+          }
+        },
+        "operationId": "get-services-l2tpv3-sid",
+        "tags": [
+          "L2TPv3"
+        ]
+      },
+      "put": {
+        "summary": "Update l2tpv3 configuration",
+        "description": "Updates l2tpv3 configuration",
+        "operationId": "put-services-l2tpv3-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_l2tpv3_one"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tpv3_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "L2TPv3"
+        ]
+      },
+      "delete": {
+        "summary": "Delete l2tpv3 configuration",
+        "description": "Deletes l2tpv3 configuration",
+        "operationId": "delete-services-l2tpv3-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          }
+        },
+        "tags": [
+          "L2TPv3"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "L2TPv3"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_l2tpv3_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/l2tpv3_options"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_l2tpv3_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/l2tpv3_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "delete_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ],
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": "cfg010f15"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "",
+                      ".index": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "x-web": {
+                          "pretty": "Configuration name",
+                          "input-type": "input",
+                          "unique": true
+                        },
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "l2tpv3_options": {
+        "title": "l2tpv3_options",
+        "type": "object",
+        "description": "",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "General settings"
+            },
+            "description": "Turns the L2TPv3 instance on or off."
+          },
+          "localaddr": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Local address",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "description": "WAN or LAN interface IPv4 or IPv6 address"
+          },
+          "tunnel_id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Tunnel ID",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "description": "ID of tunnel is specified from 1 to 4294967295. The value used must match the peer tunnel ID value being used at the peer."
+          },
+          "session_id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Session ID",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "description": "ID of peer's session is specified from 1 to 4294967295. The value used must match the tunnel ID value being used at the peer."
+          },
+          "cookie": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Cookie",
+              "input-type": "input",
+              "group": "General settings"
+            },
+            "description": "Must be specified in hexidecimal form and be length of 8 or 16. eg.: 89ABCDEF"
+          },
+          "peeraddr": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Peer address",
+              "input-type": "input",
+              "group": "Peer settings"
+            },
+            "description": "Peer endpoint IPv4 or IPv6 address"
+          },
+          "peer_tunnel_id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Peer tunnel ID",
+              "input-type": "input",
+              "group": "Peer settings"
+            },
+            "description": "ID of peer's tunnel is specified from 1 to 4294967295. It must match other end tunnel ID"
+          },
+          "peer_session_id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Peer session ID",
+              "input-type": "input",
+              "group": "Peer settings"
+            },
+            "description": "ID of peer's session is specified from 1 to 4294967295. It must match other end session ID"
+          },
+          "peer_cookie": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Peer cookie",
+              "input-type": "input",
+              "group": "Peer settings"
+            },
+            "description": "Must be specified in hexidecimal form and be length of 8 or 16. eg.: 89ABCDEF. It must match other end Cookie"
+          },
+          "bridge_to": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Bridge to",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "Specify which interface to use when establishing pseudowire"
+          },
+          "ipaddr": {
+            "type": "string",
+            "x-web": {
+              "pretty": "IPv4 address",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "IP address of standalone L2TPv3 interface"
+          },
+          "ip6addr": {
+            "type": "string",
+            "x-web": {
+              "pretty": "IPv6 address",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "IPv6 address of standalone L2TPv3 interface. CIDR notation: address/prefix"
+          },
+          "netmask": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Netmask",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "Netmask of standalone L2TPv3 interface"
+          },
+          "mtu": {
+            "type": "string",
+            "x-web": {
+              "pretty": "MTU",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "Sets the maximum transmission unit (MTU) size. It is the largest size of a protocol data unit (PDU) that can be transmitted in a single network layer transaction.",
+            "format": "irange(68, 9200)"
+          },
+          "encap": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Encapsulation",
+              "enum-pretty": {
+                "ip": "IP",
+                "udp": "UDP"
+              },
+              "input-type": "select",
+              "group": "Instance settings"
+            },
+            "enum": [
+              "ip",
+              "udp"
+            ],
+            "description": "Specify technology to use when connecting to other end"
+          },
+          "udp_sport": {
+            "type": "string",
+            "x-web": {
+              "pretty": "UDP source port",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "UDP source port"
+          },
+          "udp_dport": {
+            "type": "string",
+            "x-web": {
+              "pretty": "UDP destination port",
+              "input-type": "input",
+              "group": "Instance settings"
+            },
+            "description": "UDP destination port"
+          },
+          "l2spec_type": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Encapsulation",
+              "enum-pretty": {
+                "none": "None",
+                "default": "Linux default"
+              },
+              "input-type": "select",
+              "group": "Instance settings"
+            },
+            "enum": [
+              "none",
+              "default"
+            ],
+            "description": "Layer 2 specific header type."
+          }
+        }
+      },
+      "l2tpv3_options_id": {
+        "title": "l2tpv3_options_id",
+        "x-stoplight": {
+          "id": "qvby4tfzp5jb9"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration Name",
+                  "input-type": "input",
+                  "unique": true
+                },
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/l2tpv3_options"
+          }
+        ]
+      }
+    }
+  }
+}

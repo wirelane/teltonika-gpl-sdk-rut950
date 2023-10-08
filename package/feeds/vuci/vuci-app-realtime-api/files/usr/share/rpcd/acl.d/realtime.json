@@ -1,0 +1,62 @@
+{
+	"status/realtime/load": {
+		"description": "realtime load status",
+		"read": {
+			"ubus": {
+				"vuci.system": [
+					"lucibwc"
+				]
+			}
+		}
+	},
+	"status/realtime/bandwidth": {
+		"description": "realtime bandwidth status",
+		"read": {
+			"api": ["/devices/traffic/*"],
+			"ubus": {
+				"vuci.system": [
+					"lucibwc"
+				]
+			}
+		}
+	},
+	"status/realtime/wireless": {
+		"description": "realtime wireless status",
+		"read": {
+			"api": ["/wireless/interfaces/signal/*"],
+			"ubus": {
+				"vuci.system": [
+					"lucibwc"
+				]
+			}
+		}
+	},
+	"status/realtime/mobile": {
+		"description": "mobile signal status",
+		"read": {
+			"api": ["/mobile/modems/*"],
+			"ubus": {
+				"vuci.system": [
+					"lucibwc"
+				]
+			}
+		}
+	},
+	"status/realtime/connections": {
+		"description": "realtime connections status",
+		"read": {
+			"api": ["/routes/connections_realtime/*", "/routes/connections/*"],
+			"ubus": {
+				"vuci.system": [
+					"lucibwc"
+				],
+				"network.rrdns": [
+					"lookup"
+				],
+				"vuci.network.network": [
+					"conntrack_table"
+				]
+			}
+		}
+	}
+}

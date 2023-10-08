@@ -1,0 +1,507 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "DNP3 TCP"
+    }
+  ],
+  "paths": {
+    "/dnp3/tcp/config/{id}": {
+      "put": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Updates specified DNP3 TCP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3TCP"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration DNP3 TCP indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/DNP3_tcp_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Returns specified DNP3 TCP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3TCP"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration DNP3 indetifier"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Deletes specified DNP3 TCP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration DNP3 TCP indetifier"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dnp3/tcp/config": {
+      "post": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Creates DNP3 TCP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3TCP"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/DNP3_tcp_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Updates specified DNP3 TCP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3TCPMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects",
+                    "items": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/DNP3_tcp_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Returns all DNP3 TCP configuration",
+        "description": "Returns all configuration with their parameters form DNP3 TCP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200DNP3TCPMulti"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DNP3 TCP"
+        ],
+        "summary": "Deletes specified DNP3 TCP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects",
+                    "items": {
+                      "type": "string",
+                      "description": "configuration id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dnp3/tcp/actions/test_request": {
+      "post": {
+        "deprecated": true,
+        "tags": [
+          "DNP3"
+        ],
+        "summary": "Test request configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RequestActionTCP"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "local_addr": {
+                        "type": "string"
+                      },
+                      "timeout": {
+                        "type": "string"
+                      },
+                      "ip": {
+                        "type": "string"
+                      },
+                      "remote_addr": {
+                        "type": "string"
+                      },
+                      "count": {
+                        "type": "string"
+                      },
+                      "port": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "data_type": {
+                        "type": "string"
+                      },
+                      "index": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "example-1": {
+                    "data": {
+                      "local_addr": "65519",
+                      "timeout": "0",
+                      "ip": "1.1.1.1",
+                      "remote_addr": "65519",
+                      "count": "30",
+                      "port": "666",
+                      "name": "piotras",
+                      "data_type": "3",
+                      "index": "20"
+                    }
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "DNP3",
+          "DNP3"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RequestActionTCP": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DNP3TCP": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/DNP3_tcp_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200DNP3TCPMulti": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of configuration objects",
+                  "items": {
+                    "$ref": "#/components/schemas/DNP3_tcp_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "DNP3_tcp_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Check to enable this TCP client configuration",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the TCP client",
+            "maxlength": 32,
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "local_addr": {
+            "type": "string",
+            "description": "Client Link-Layer address",
+            "format": "irange(1, 65519)",
+            "x-web": {
+              "pretty": "Local address",
+              "input-type": "input"
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Outstation Link-Layer address",
+            "format": "irange(0, 65519)",
+            "x-web": {
+              "pretty": "Remote address",
+              "input-type": "input"
+            }
+          },
+          "integrity_period": {
+            "type": "string",
+            "description": "Period for sending data requests",
+            "format": "irange(1, 60)",
+            "x-web": {
+              "pretty": "Period",
+              "input-type": "input"
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Request timeout",
+            "format": "irange(1, 60)",
+            "x-web": {
+              "pretty": "Timeout",
+              "input-type": "input"
+            }
+          },
+          "save_to_flash": {
+            "type": "string",
+            "description": "Check to enable saving to flash",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Save to flash",
+              "input-type": "switch"
+            }
+          },
+          "ip": {
+            "type": "string",
+            "description": "DNP3 Outstation IP address",
+            "format": "ipaddr",
+            "x-web": {
+              "pretty": "IP address",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "DNP3 Outstation Port",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

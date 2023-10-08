@@ -1,0 +1,15 @@
+{
+  "system/admin/memory_expansion/usb": {
+    "description": "memory expansion",
+    "read": {
+      "api": [
+        "/usb_tools/memory_expansion/*"
+      ]
+    },
+    "write": {
+      "api": [
+        "/usb_tools/memory_expansion/*"
+      ]
+    }
+  }
+}

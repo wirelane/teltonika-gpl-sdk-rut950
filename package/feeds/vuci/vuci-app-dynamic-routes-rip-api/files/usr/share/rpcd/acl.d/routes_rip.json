@@ -1,0 +1,26 @@
+{
+	"network/routes/dynamic_routes/proto_rip": {
+		"description": "dynamic rip routes configuration",
+		"read": {
+			"api": [
+				"/routes/dynamic/rip/*",
+				"/interfaces/config/*",
+				"/interfaces/status/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/routes/dynamic/rip/*"
+			]
+		}
+	},
+
+	"status/routes/dynamic/rip": {
+		"description": "rip routes",
+		"read": {
+			"api": [
+				"/routes/dynamic/rip/*"
+			]
+		}
+	}
+}

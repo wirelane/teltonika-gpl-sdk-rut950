@@ -1,0 +1,2341 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/overip/config/{id}": {
+      "get": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Returns the specified OverIP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Overip"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "schemas": {
+          "overip_single_options": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 200,
+                "description": "Name of serial device",
+                "x-web": {
+                  "pretty": "Name",
+                  "input-type": "input",
+                  "unique": true,
+                  "group": "Device configuration"
+                }
+              },
+              "enabled": {
+                "type": "string",
+                "description": "Enable/Disable OverIP configuration.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "Enable",
+                  "input-type": "switch",
+                  "group": "Device configuration"
+                }
+              },
+              "device": {
+                "type": "string",
+                "description": "Which serial port will be used for serial communication",
+                "x-web": {
+                  "pretty": "Device",
+                  "input-type": "select",
+                  "group": "Device configuration",
+                  "enum-pretty": {
+                    "/dev/rs232": "rs232",
+                    "/dev/rs485": "rs485",
+                    "/dev/rsconsole": "Console"
+                  },
+                  "enum-depends": [
+                    {
+                      "hw_tags": {
+                        "rs232": true,
+                        "rs485": true
+                      },
+                      "values": [
+                        "/dev/rs232",
+                        "/dev/rs485"
+                      ]
+                    },
+                    {
+                      "hw_tags": {
+                        "rs232": true,
+                        "rs485": false
+                      },
+                      "values": [
+                        "/dev/rs232"
+                      ]
+                    },
+                    {
+                      "hw_tags": {
+                        "rs232": false,
+                        "rs485": true
+                      },
+                      "values": [
+                        "/dev/rs485"
+                      ]
+                    },
+                    {
+                      "hw_tags": {
+                        "console": true
+                      },
+                      "values": [
+                        "/dev/rsconsole"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "baudrate": {
+                "type": "string",
+                "enum": [
+                  "300",
+                  "1200",
+                  "2400",
+                  "4800",
+                  "9600",
+                  "19200",
+                  "38400",
+                  "57600",
+                  "115200"
+                ],
+                "default": "9600",
+                "description": "Select supported baud rate",
+                "x-web": {
+                  "pretty": "Baud rate",
+                  "input-type": "select",
+                  "group": "Device configuration",
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "device": [
+                          "/dev/rs232",
+                          "/dev/rsconsole"
+                        ]
+                      },
+                      "hw_tags": {
+                        "baudrate_115200": true
+                      },
+                      "values": [
+                        "300",
+                        "600",
+                        "1200",
+                        "2400",
+                        "4800",
+                        "9600",
+                        "19200",
+                        "38400",
+                        "57600",
+                        "115200"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "baudrate_3000000": true
+                      },
+                      "values": [
+                        "300",
+                        "600",
+                        "1200",
+                        "2400",
+                        "4800",
+                        "9600",
+                        "19200",
+                        "38400",
+                        "57600",
+                        "115200",
+                        "230400",
+                        "460800",
+                        "921600",
+                        "1000000",
+                        "3000000"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "baudrate_230400": true
+                      },
+                      "values": [
+                        "300",
+                        "600",
+                        "1200",
+                        "2400",
+                        "4800",
+                        "9600",
+                        "19200",
+                        "38400",
+                        "57600",
+                        "115200",
+                        "230400"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "databits": {
+                "type": "string",
+                "enum": [
+                  "5",
+                  "6",
+                  "7",
+                  "8"
+                ],
+                "default": "8",
+                "description": "Select how many bits will be used for character",
+                "x-web": {
+                  "pretty": "Data bits",
+                  "input-type": "select",
+                  "group": "Device configuration",
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "device": "/dev/rs232"
+                      },
+                      "hw_tags": {
+                        "databits_full": true
+                      },
+                      "values": [
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": [
+                          "/dev/rs232",
+                          "/dev/rsconsole"
+                        ]
+                      },
+                      "hw_tags": {
+                        "databits_half": true
+                      },
+                      "values": [
+                        "7",
+                        "8"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "databits_8": true
+                      },
+                      "values": [
+                        "8"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "databits_full": true
+                      },
+                      "values": [
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "databits_half": true
+                      },
+                      "values": [
+                        "7",
+                        "8"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "stopbits": {
+                "type": "string",
+                "enum": [
+                  "1",
+                  "2"
+                ],
+                "default": "1",
+                "description": "Select how many stop bits will be used to detect the end of character",
+                "x-web": {
+                  "pretty": "Stop bits",
+                  "input-type": "select",
+                  "group": "Device configuration",
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "device": [
+                          "/dev/rs232",
+                          "/dev/rsconsole"
+                        ]
+                      },
+                      "hw_tags": {
+                        "stopbits_2": true
+                      },
+                      "values": [
+                        "1",
+                        "2"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "stopbits_1": true
+                      },
+                      "values": [
+                        "1"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "stopbits_2": true
+                      },
+                      "values": [
+                        "1",
+                        "2"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "parity": {
+                "type": "string",
+                "enum": [
+                  "odd",
+                  "even",
+                  "none"
+                ],
+                "description": "Select what kind of parity bit to use for error detection",
+                "x-web": {
+                  "pretty": "Parity",
+                  "enum-pretty": {
+                    "odd": "Odd",
+                    "even": "Even",
+                    "mark": "Mark",
+                    "space": "Space",
+                    "none": "None"
+                  },
+                  "input-type": "select",
+                  "group": "Device configuration",
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "device": [
+                          "/dev/rs232",
+                          "/dev/rsconsole"
+                        ]
+                      },
+                      "hw_tags": {
+                        "parity_max": true
+                      },
+                      "values": [
+                        "even",
+                        "odd",
+                        "mark",
+                        "space",
+                        "none"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "parity_min": true
+                      },
+                      "values": [
+                        "even",
+                        "odd",
+                        "none"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "parity_max": true
+                      },
+                      "values": [
+                        "even",
+                        "odd",
+                        "mark",
+                        "space",
+                        "none"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "flowcontrol": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "xon/xoff",
+                  "rts/cts"
+                ],
+                "description": "Select what kind of characters to use for flow control",
+                "x-web": {
+                  "pretty": "Flow control",
+                  "enum-pretty": {
+                    "none": "None",
+                    "rts/cts": "RTS/CTS",
+                    "xon/xoff": "Xon/Xoff"
+                  },
+                  "input-type": "select",
+                  "group": "Device configuration",
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "device": [
+                          "/dev/rs232",
+                          "/dev/rsconsole"
+                        ]
+                      },
+                      "hw_tags": {
+                        "flowcontrol_3": true
+                      },
+                      "values": [
+                        "rts/cts",
+                        "xon/xoff",
+                        "none"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485"
+                      },
+                      "hw_tags": {
+                        "flowcontrol_none": true
+                      },
+                      "values": [
+                        "none"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485",
+                        "full_duplex_enabled": "1"
+                      },
+                      "hw_tags": {
+                        "flowcontrol_2": true
+                      },
+                      "values": [
+                        "none",
+                        "xon/xoff"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "device": "/dev/rs485",
+                        "full_duplex_enabled": "0"
+                      },
+                      "hw_tags": {
+                        "flowcontrol_none": true
+                      },
+                      "values": [
+                        "none"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "full_duplex_enabled": {
+                "type": "string",
+                "format": "is_bool",
+                "example": "0",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "description": "Check to enable rs485 Full-Duplex",
+                "x-web": {
+                  "pretty": "Full duplex",
+                  "input-type": "switch",
+                  "group": "Device configuration",
+                  "depends": [
+                    {
+                      "device": "/dev/rs485"
+                    }
+                  ]
+                }
+              },
+              "echo": {
+                "type": "string",
+                "description": "Check to enable RS232 echo",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "Echo",
+                  "input-type": "switch",
+                  "group": "Device configuration",
+                  "depends": [
+                    {
+                      "hw_tags": {
+                        "rs232": true,
+                        "rs485": true
+                      },
+                      "full_duplex_enabled": "1"
+                    }
+                  ]
+                }
+              },
+              "protocol": {
+                "type": "string",
+                "description": "Select which protocol to use for data transmission",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "Protocol",
+                  "input-type": "select",
+                  "group": "General Over IP configuration",
+                  "enum-pretty": {
+                    "0": "TCP",
+                    "1": "UDP"
+                  },
+                  "enum-depends": [
+                    {
+                      "depends": {
+                        "mode": [
+                          "server",
+                          "client"
+                        ]
+                      },
+                      "values": [
+                        "0",
+                        "1"
+                      ]
+                    },
+                    {
+                      "depends": {
+                        "mode": "bidirect"
+                      },
+                      "values": [
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "raw": {
+                "type": "string",
+                "description": "Enable to transmit all data transparently.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "Raw mode",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration"
+                }
+              },
+              "mode": {
+                "type": "string",
+                "description": "Select mode for serial device.",
+                "enum": [
+                  "server",
+                  "client",
+                  "bidirect",
+                  "client_server"
+                ],
+                "x-web": {
+                  "pretty": "Mode",
+                  "input-type": "select",
+                  "group": "General Over IP configuration",
+                  "enum-pretty": {
+                    "server": "Server",
+                    "client": "Client",
+                    "bidirect": "Bidirect (legacy mode, not recommended)",
+                    "client_server": "Client + server"
+                  }
+                }
+              },
+              "no_leading_zeros": {
+                "type": "string",
+                "description": "Check this to skip hex first zeros.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "No leading zeros",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration"
+                }
+              },
+              "port_connect": {
+                "type": "string",
+                "description": "Specify port number for the connectivity establishment.",
+                "format": "port",
+                "x-web": {
+                  "pretty": "Port",
+                  "input-type": "input",
+                  "group": "Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "client",
+                        "bidirect"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "timeout": {
+                "type": "string",
+                "description": "Disconnect client if connection is not active.",
+                "format": "irange(0, 36000)",
+                "default": "300",
+                "x-web": {
+                  "pretty": "Inactivity timeout",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "client",
+                        "server",
+                        "client_server"
+                      ],
+                      "protocol": "0"
+                    }
+                  ]
+                }
+              },
+              "read_duration": {
+                "type": "string",
+                "description": "Specifies the maximum milliseconds to wait for serial data",
+                "format": "irange(0, 1000)",
+                "default": "5",
+                "x-web": {
+                  "pretty": "Serial timeout",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration"
+                }
+              },
+              "max_clients": {
+                "type": "string",
+                "description": "Specify (1-32) how many clients are allowed to connect simultaneously",
+                "format": "irange(1, 32)",
+                "enum": [
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14",
+                  "15",
+                  "16",
+                  "17",
+                  "18",
+                  "19",
+                  "20",
+                  "21",
+                  "22",
+                  "23",
+                  "24",
+                  "25",
+                  "26",
+                  "27",
+                  "28",
+                  "29",
+                  "30",
+                  "31",
+                  "32"
+                ],
+                "default": "32",
+                "x-web": {
+                  "pretty": "Max clients",
+                  "input-type": "select",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "bidirect",
+                        "client_server"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "close_connections": {
+                "type": "string",
+                "description": "Close TCP connections everytime data is sent or received (might result in serial data loss)",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "Close connections",
+                  "input-type": "switch",
+                  "group": "Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0",
+                      "mode": [
+                        "client",
+                        "server",
+                        "client_server"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "connect_on_data": {
+                "type": "string",
+                "description": "Only attempt to connect to server when data is received from serial device",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "Connect on data",
+                  "input-type": "switch",
+                  "group": "Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0",
+                      "mode": [
+                        "client",
+                        "client_server"
+                      ],
+                      "close_connections": "0"
+                    }
+                  ]
+                }
+              },
+              "max_connection_attempts": {
+                "type": "string",
+                "description": "Connection retry count before dropping serial data",
+                "format": "irange(1,24)",
+                "x-web": {
+                  "pretty": "Connection retry count",
+                  "input-type": "input",
+                  "group": "Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0",
+                      "mode": [
+                        "client",
+                        "client_server"
+                      ],
+                      "connect_on_data": "1"
+                    }
+                  ]
+                }
+              },
+              "address_connect": {
+                "type": "string",
+                "description": "Specify server address and port for client to connect to. E.g 192.168.1.1:80.",
+                "format": "host",
+                "x-web": {
+                  "pretty": "Destination address",
+                  "input-type": "input",
+                  "group": "General Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "client",
+                        "bidirect",
+                        "client_server"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "recon_interval": {
+                "type": "string",
+                "description": "Specify intervals connection to server if it fails.",
+                "format": "uinteger",
+                "x-web": {
+                  "pretty": "Reconnect interval",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "client",
+                        "client_server",
+                        "bidirect"
+                      ],
+                      "protocol": "0"
+                    }
+                  ]
+                }
+              },
+              "keepalive_time": {
+                "type": "string",
+                "description": "The interval between last data packet sent",
+                "format": "irange(0, 32000)",
+                "x-web": {
+                  "pretty": "Keep alive time",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0"
+                    }
+                  ]
+                }
+              },
+              "keepalive_interval": {
+                "type": "string",
+                "description": "The interval between subsequential keepalive probes",
+                "format": "irange(0, 32000)",
+                "x-web": {
+                  "pretty": "Keep alive interval",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0"
+                    }
+                  ]
+                }
+              },
+              "keepalive_probes": {
+                "type": "string",
+                "description": "The number of unacknowledged probes",
+                "format": "irange(0, 32000)",
+                "x-web": {
+                  "pretty": "Keep alive probes",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0"
+                    }
+                  ]
+                }
+              },
+              "port_listen": {
+                "type": "string",
+                "description": "Specify port number for server to listen.",
+                "format": "port",
+                "x-web": {
+                  "pretty": "Port",
+                  "input-type": "input",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "client_server",
+                        "bidirect"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "tcp_echo_enabled": {
+                "type": "string",
+                "description": "Enable software TCP echo.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "TCP echo",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration",
+                  "depends": [
+                    {
+                      "protocol": "0"
+                    }
+                  ]
+                }
+              },
+              "cd_enable": {
+                "type": "string",
+                "description": "Enable connection indication on CD pin.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "CD enable",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration",
+                  "hw_tags": {
+                    "pin_inversion": true
+                  },
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "client"
+                      ],
+                      "protocol": "0",
+                      "device": "/dev/rs232"
+                    }
+                  ]
+                }
+              },
+              "dsr_enable": {
+                "type": "string",
+                "description": "Enable connection indication on DSR pin.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "DSR enable",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration",
+                  "hw_tags": {
+                    "pin_inversion": true
+                  },
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "client"
+                      ],
+                      "protocol": "0",
+                      "device": "/dev/rs232"
+                    }
+                  ]
+                }
+              },
+              "cd_invert": {
+                "type": "string",
+                "description": "Invert default CD pin level for indication.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "CD invert",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration",
+                  "hw_tags": {
+                    "pin_inversion": true
+                  },
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "client"
+                      ],
+                      "protocol": "0",
+                      "device": "/dev/rs232",
+                      "cd_enable": "1"
+                    }
+                  ]
+                }
+              },
+              "dsr_invert": {
+                "type": "string",
+                "description": "Invert default DSR pin level for indication.",
+                "format": "is_bool",
+                "enum": [
+                  "0",
+                  "1"
+                ],
+                "x-web": {
+                  "pretty": "DSR invert",
+                  "input-type": "switch",
+                  "group": "Advanced Over IP configuration",
+                  "hw_tags": {
+                    "pin_inversion": true
+                  },
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "client"
+                      ],
+                      "protocol": "0",
+                      "device": "/dev/rs232",
+                      "dsr_enable": "1"
+                    }
+                  ]
+                }
+              },
+              "predefined_address": {
+                "type": "string",
+                "description": "Set predefined IP and port for UDP connection. E.g 192.168.1.1:80",
+                "x-web": {
+                  "pretty": "Predefined addresses",
+                  "input-type": "input",
+                  "group": "General Over IP configuration",
+                  "depends": [
+                    {
+                      "mode": [
+                        "server",
+                        "client_server"
+                      ],
+                      "protocol": "1"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "device"
+            ]
+          },
+          "description": "OverIP Configuration identifier (ID)"
+        }
+      },
+      "put": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Updates the specified OverIP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Overip"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OverIP Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/overip_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Deletes the specified OverIP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "OverIP Configuration identifier (ID)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Serial Utilities",
+          "OverIP"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    },
+    "/overip/config": {
+      "get": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Returns all OverIP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OveripMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Creates OverIP configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200Overip"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/overip_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Updates specified OverIP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OveripMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/overip_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OverIP"
+        ],
+        "summary": "Deletes specified OverIP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Serial Utilities",
+          "OverIP"
+        ],
+        "hw_tags": {
+          "serial": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Overip": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/overip_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OveripMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/overip_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "overip_single_options": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Name of serial device",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true,
+              "group": "Device configuration"
+            }
+          },
+          "enabled": {
+            "type": "string",
+            "description": "Enable/Disable OverIP configuration.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "Device configuration"
+            }
+          },
+          "device": {
+            "type": "string",
+            "description": "Which serial port will be used for serial communication",
+            "x-web": {
+              "pretty": "Device",
+              "input-type": "select",
+              "enum-pretty": {
+                "/dev/rs232": "rs232",
+                "/dev/rs485": "rs485",
+                "/dev/rsconsole": "Console"
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "rs232": true,
+                    "rs485": true
+                  },
+                  "values": [
+                    "/dev/rs232",
+                    "/dev/rs485"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "rs232": true,
+                    "rs485": false
+                  },
+                  "values": [
+                    "/dev/rs232"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "rs232": false,
+                    "rs485": true
+                  },
+                  "values": [
+                    "/dev/rs485"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "console": true
+                  },
+                  "values": [
+                    "/dev/rsconsole"
+                  ]
+                }
+              ]
+            }
+          },
+          "baudrate": {
+            "type": "string",
+            "enum": [
+              "300",
+              "1200",
+              "2400",
+              "4800",
+              "9600",
+              "19200",
+              "38400",
+              "57600",
+              "115200"
+            ],
+            "default": "9600",
+            "description": "Select supported baud rate",
+            "x-web": {
+              "pretty": "Baud rate",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "baudrate_115200": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "baudrate_3000000": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400",
+                    "460800",
+                    "921600",
+                    "1000000",
+                    "3000000"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "baudrate_230400": true
+                  },
+                  "values": [
+                    "300",
+                    "600",
+                    "1200",
+                    "2400",
+                    "4800",
+                    "9600",
+                    "19200",
+                    "38400",
+                    "57600",
+                    "115200",
+                    "230400"
+                  ]
+                }
+              ]
+            }
+          },
+          "databits": {
+            "type": "string",
+            "enum": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ],
+            "default": "8",
+            "description": "Select how many bits will be used for character",
+            "x-web": {
+              "pretty": "Data bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": "/dev/rs232"
+                  },
+                  "hw_tags": {
+                    "databits_full": true
+                  },
+                  "values": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "databits_half": true
+                  },
+                  "values": [
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "databits_8": true
+                  },
+                  "values": [
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "databits_full": true
+                  },
+                  "values": [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "databits_half": true
+                  },
+                  "values": [
+                    "7",
+                    "8"
+                  ]
+                }
+              ]
+            }
+          },
+          "stopbits": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ],
+            "default": "1",
+            "description": "Select how many stop bits will be used to detect the end of character",
+            "x-web": {
+              "pretty": "Stop bits",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "stopbits_2": true
+                  },
+                  "values": [
+                    "1",
+                    "2"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "stopbits_1": true
+                  },
+                  "values": [
+                    "1"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "stopbits_2": true
+                  },
+                  "values": [
+                    "1",
+                    "2"
+                  ]
+                }
+              ]
+            }
+          },
+          "parity": {
+            "type": "string",
+            "enum": [
+              "odd",
+              "even",
+              "none"
+            ],
+            "description": "Select what kind of parity bit to use for error detection",
+            "x-web": {
+              "pretty": "Parity",
+              "enum-pretty": {
+                "odd": "Odd",
+                "even": "Even",
+                "mark": "Mark",
+                "space": "Space",
+                "none": "None"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "parity_max": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "mark",
+                    "space",
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "parity_min": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "parity_max": true
+                  },
+                  "values": [
+                    "even",
+                    "odd",
+                    "mark",
+                    "space",
+                    "none"
+                  ]
+                }
+              ]
+            }
+          },
+          "flowcontrol": {
+            "type": "string",
+            "enum": [
+              "none",
+              "xon/xoff",
+              "rts/cts"
+            ],
+            "description": "Select what kind of characters to use for flow control",
+            "x-web": {
+              "pretty": "Flow control",
+              "enum-pretty": {
+                "none": "None",
+                "rts/cts": "RTS/CTS",
+                "xon/xoff": "Xon/Xoff"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "device": [
+                      "/dev/rs232",
+                      "/dev/rsconsole"
+                    ]
+                  },
+                  "hw_tags": {
+                    "flowcontrol_3": true
+                  },
+                  "values": [
+                    "rts/cts",
+                    "xon/xoff",
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485"
+                  },
+                  "hw_tags": {
+                    "flowcontrol_none": true
+                  },
+                  "values": [
+                    "none"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485",
+                    "full_duplex_enabled": "1"
+                  },
+                  "hw_tags": {
+                    "flowcontrol_2": true
+                  },
+                  "values": [
+                    "none",
+                    "xon/xoff"
+                  ]
+                },
+                {
+                  "depends": {
+                    "device": "/dev/rs485",
+                    "full_duplex_enabled": "0"
+                  },
+                  "hw_tags": {
+                    "flowcontrol_none": true
+                  },
+                  "values": [
+                    "none"
+                  ]
+                }
+              ]
+            }
+          },
+          "full_duplex_enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "example": "0",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Check to enable rs485 Full-Duplex",
+            "x-web": {
+              "pretty": "Full duplex",
+              "input-type": "switch",
+              "group": "Device configuration",
+              "depends": [
+                {
+                  "device": "/dev/rs485"
+                }
+              ]
+            }
+          },
+          "protocol": {
+            "type": "string",
+            "description": "Select which protocol to use for data transmission",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "select",
+              "group": "Over IP configuration",
+              "enum-pretty": {
+                "0": "TCP",
+                "1": "UDP"
+              },
+              "enum-depends": [
+                {
+                  "depends": {
+                    "mode": [
+                      "server",
+                      "client"
+                    ]
+                  },
+                  "values": [
+                    "0",
+                    "1"
+                  ]
+                },
+                {
+                  "depends": {
+                    "mode": "bidirect"
+                  },
+                  "values": [
+                    "0"
+                  ]
+                }
+              ]
+            }
+          },
+          "raw": {
+            "type": "string",
+            "description": "Enable to transmit all data transparently.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Raw mode",
+              "input-type": "switch",
+              "group": "Over IP configuration"
+            }
+          },
+          "mode": {
+            "type": "string",
+            "description": "Select mode for serial device.",
+            "enum": [
+              "server",
+              "client",
+              "bidirect"
+            ],
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "group": "Over IP configuration",
+              "enum-pretty": {
+                "server": "Server",
+                "client": "Client",
+                "bidirect": "Bidirect"
+              }
+            }
+          },
+          "no_leading_zeros": {
+            "type": "string",
+            "description": "Check this to skip hex first zeros.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "No leading zeros",
+              "input-type": "switch",
+              "group": "Over IP configuration"
+            }
+          },
+          "port_connect": {
+            "type": "string",
+            "description": "Specify port number for the connectivity establishment.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": [
+                    "client",
+                    "bidirect"
+                  ]
+                }
+              ]
+            }
+          },
+          "timeout": {
+            "type": "string",
+            "description": "Disconnect client if connection is not active.",
+            "format": "irange(0, 36000)",
+            "default": "300",
+            "x-web": {
+              "pretty": "Timeout (s)",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": [
+                    "client",
+                    "bidirect"
+                  ]
+                },
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "read_duration": {
+            "type": "string",
+            "description": "Specify custom read time for the serial device (0-900ms)",
+            "format": "irange(0, 900)",
+            "x-web": {
+              "pretty": "Specify device read time",
+              "input-type": "input",
+              "group": "Over IP configuration"
+            }
+          },
+          "echo": {
+            "type": "string",
+            "description": "Check to enable RS232 echo",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Echo",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "device": "/dev/rs232"
+                }
+              ]
+            }
+          },
+          "max_clients": {
+            "type": "string",
+            "description": "How many clients are allowed to connect simultaneously.",
+            "format": "irange(1, 32)",
+            "default": "32",
+            "x-web": {
+              "pretty": "Max clients",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "bidirect"
+                },
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "close_connections": {
+            "type": "string",
+            "description": "Close TCP connections everytime data is sent or received (might result in serial data loss)",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Close connections",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "connect_on_data": {
+            "type": "string",
+            "description": "Only attempt to connect to server when data is received from serial device",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Connect on data",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "protocol": "0",
+                  "mode": [
+                    "client",
+                    "client_server"
+                  ],
+                  "close_connections": "0"
+                }
+              ]
+            }
+          },
+          "max_connection_attempts": {
+            "type": "string",
+            "description": "Connection retry count before dropping serial data",
+            "format": "irange(1,24)",
+            "x-web": {
+              "pretty": "Connection retry count",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "protocol": "0",
+                  "mode": [
+                    "client",
+                    "client_server"
+                  ],
+                  "connect_on_data": "1"
+                }
+              ]
+            }
+          },
+          "ip_connect": {
+            "type": "string",
+            "description": "Specify server address which client have to connect.",
+            "format": "host",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": [
+                    "client",
+                    "bidirect"
+                  ]
+                }
+              ]
+            }
+          },
+          "recon_interval": {
+            "type": "string",
+            "description": "Specify intervals connection to server if it fails.",
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Reconnect interval (s)",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "client",
+                  "protocol": "0"
+                },
+                {
+                  "mode": "bidirect"
+                }
+              ]
+            }
+          },
+          "keepalive_time": {
+            "type": "string",
+            "description": "The interval between last data packet sent",
+            "format": "irange(0, 32000)",
+            "x-web": {
+              "pretty": "Keep alive time",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": [
+                    "client",
+                    "bidirect"
+                  ],
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "keepalive_interval": {
+            "type": "string",
+            "description": "The interval between subsequential keepalive probes",
+            "format": "irange(0, 32000)",
+            "x-web": {
+              "pretty": "Keep alive interval",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": [
+                    "client",
+                    "bidirect"
+                  ],
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "keepalive_probes": {
+            "type": "string",
+            "description": "The number of unacknowledged probes",
+            "format": "irange(0, 32000)",
+            "x-web": {
+              "pretty": "Keep alive probes",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": [
+                    "client",
+                    "bidirect"
+                  ],
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "port_listen": {
+            "type": "string",
+            "description": "Specify port number for server to listen.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server"
+                },
+                {
+                  "mode": "bidirect"
+                }
+              ]
+            }
+          },
+          "tcp_echo_enabled": {
+            "type": "string",
+            "description": "Enable software TCP echo.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "TCP echo",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                }
+              ]
+            }
+          },
+          "cd_enable": {
+            "type": "string",
+            "description": "Enable connection indication on CD pin.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "CD enable",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "hw_tags": {
+                "pin_inversion": true
+              },
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                },
+                {
+                  "mode": "client"
+                }
+              ]
+            }
+          },
+          "dsr_enable": {
+            "type": "string",
+            "description": "Enable connection indication on DSR pin.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "DSR enable",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "hw_tags": {
+                "pin_inversion": true
+              },
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                },
+                {
+                  "mode": "client"
+                }
+              ]
+            }
+          },
+          "cd_invert": {
+            "type": "string",
+            "description": "Invert default CD pin level for indication.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "CD invert",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "hw_tags": {
+                "pin_inversion": true
+              },
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                },
+                {
+                  "mode": "client"
+                }
+              ]
+            }
+          },
+          "dsr_invert": {
+            "type": "string",
+            "description": "Invert default DSR pin level for indication.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "DSR invert",
+              "input-type": "switch",
+              "group": "Over IP configuration",
+              "hw_tags": {
+                "pin_inversion": true
+              },
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "0"
+                },
+                {
+                  "mode": "client"
+                }
+              ]
+            }
+          },
+          "udp_client_count": {
+            "type": "string",
+            "description": "Select how many UDP clients will be supported simultaneously (Predefined clients does not count towards this limit)",
+            "format": "integer",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10"
+            ],
+            "x-web": {
+              "pretty": "Number of clients",
+              "input-type": "select",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "1"
+                }
+              ]
+            }
+          },
+          "predefined_addr1": {
+            "type": "string",
+            "description": "Set first predefined IP for UDP connection.",
+            "format": "ipaddr",
+            "x-web": {
+              "pretty": "Predefined client1 ip",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "1"
+                }
+              ]
+            }
+          },
+          "predefined_port1": {
+            "type": "string",
+            "description": "Set first predefined port for UDP connection.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Predefined client1 port",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "1"
+                }
+              ]
+            }
+          },
+          "predefined_addr2": {
+            "type": "string",
+            "description": "Set second predefined client ip for UDP connection.",
+            "format": "ipaddr",
+            "x-web": {
+              "pretty": "Predefined client2 ip",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "1"
+                }
+              ]
+            }
+          },
+          "predefined_port2": {
+            "type": "string",
+            "description": "Set second predefined client port for UDP connection.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Predefined client2 port",
+              "input-type": "input",
+              "group": "Over IP configuration",
+              "depends": [
+                {
+                  "mode": "server",
+                  "protocol": "1"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "device"
+        ]
+      },
+      "overip_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "OverIP Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id",
+              "device"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/overip_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+	"services/events_reporting": {
+		"title": "Events Reporting",
+		"index": 100,
+		"view": "services/EventsReporting",
+		"acls": [ "services/events_reporting" ],
+		"files": [ "/etc/config/events_reporting" ]
+	}
+}

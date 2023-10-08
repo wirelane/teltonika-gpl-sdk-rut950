@@ -1,0 +1,17 @@
+{
+	"services/wol": {
+		"description": "Wake on LAN",
+		"read": {
+			"api": [
+				"/wol_setup/*",
+				"/wol_devices/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/wol_setup/*",
+				"/wol_devices/*"
+			]
+		}
+	}
+}

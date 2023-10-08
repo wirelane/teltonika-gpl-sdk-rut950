@@ -1,0 +1,224 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/hotspot/landing/config/general": {
+      "get": {
+        "tags": [
+          "Hotspot Landing Page"
+        ],
+        "summary": "Returns the specified Hotspot Landing Page configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLandingPage"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Hotspot Landing Page"
+        ],
+        "summary": "Updates the specified Hotspot Landing Page configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLandingPage"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_landing_page_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "Landing page"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/hotspot/landing/config": {
+      "get": {
+        "tags": [
+          "Hotspot Landing Page"
+        ],
+        "summary": "Returns all Hotspot Landing Page configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLandingPageMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Hotspot Landing Page"
+        ],
+        "summary": "Updates specified Hotspot Landing Page configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLandingPageMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/hotspot_landing_page_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Hotspot",
+          "Landing page"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HotspotLandingPage": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/hotspot_landing_page_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200HotspotLandingPageMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/hotspot_landing_page_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "hotspot_landing_page_single_options": {
+        "type": "object",
+        "properties": {
+          "auth_proto": {
+            "x-web": {
+              "pretty": "Authentication protocol",
+              "input-type": "select",
+              "enum-pretty": {
+                "pap": "PAP"
+              }
+            },
+            "type": "string",
+            "description": "Authentication protocol.",
+            "enum": [
+              "pap"
+            ]
+          },
+          "theme": {
+            "x-web": {
+              "pretty": "Theme",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Currently active theme. More themes can be installed using the Package Manager."
+          }
+        }
+      },
+      "hotspot_landing_page_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Hotspot Landing Page Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/hotspot_landing_page_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

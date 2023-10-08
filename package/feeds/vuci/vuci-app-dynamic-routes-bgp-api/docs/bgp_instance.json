@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/routes/dynamic/bgp/instance/config/general": {
+      "get": {
+        "tags": [
+          "bgp_instance"
+        ],
+        "summary": "Returns bgp instance configuration",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgIn"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "bgp_instance"
+        ],
+        "summary": "Updates bgp instance configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgInMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+               "description": "Parameter section",
+               "content": {
+                 "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                         "data": {
+                           "$ref": "#/components/schemas/bgp_instance_options"
+                         }
+                      }
+                    }
+                 }
+               }
+            }
+          },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Dynamic Routes",
+          "BGP"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200BgIn": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/bgp_instance_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200BgInMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/bgp_instance_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "bgp_instance_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable BGP instance."
+          },
+          "as": {
+            "x-web": {
+              "pretty": "AS",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "AS number is an identification of an autonomous system. BGP protocol uses the AS number for detecting whether the BGP connection is an internal one or external one."
+          },
+          "router_id": {
+            "x-web": {
+              "pretty": "BGP Router ID",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The router id is used by BGP to identify the routing device from which a packet originated. Default router ID value is selected as the largest IP Address of the interface."
+          },
+          "network": {
+            "x-web": {
+              "pretty": "Network",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Add the announcement network.",
+               "items": {
+                    "type": "string"
+               }
+          },
+          "redistribute": {
+            "x-web": {
+              "pretty": "Redistribution Options",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Route redistribution is a process that allows a network to use a routing protocol to dynamically route traffic based on information learned from a different routing protocol.",
+               "items": {
+                    "type": "string"
+               }
+          },
+          "deterministic_med": {
+            "x-web": {
+              "pretty": "Deterministic MED",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Compare MED between same AS ignoring their age."
+          }
+        }
+      }
+    }
+  }
+}

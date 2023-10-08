@@ -1,0 +1,17 @@
+{
+	"services/cloud_solutions/cumulocity": {
+		"title": "Cumulocity",
+		"index": 40,
+		"view": "services/Cumulocity_aeaafe",
+		"acls": [ "services/cloud_solutions/cumulocity" ],
+		"files": [ "/etc/config/iot" ],
+		"plugin": true
+	},
+	"services/cloud_solutions/cot": {
+		"title": "Cloud of Things",
+		"index": 50,
+		"view": "services/CloudOfThings_aeaafe",
+		"acls": [ "services/cloud_solutions/cot" ],
+		"files": [ "/etc/config/iot" ]
+	}
+}

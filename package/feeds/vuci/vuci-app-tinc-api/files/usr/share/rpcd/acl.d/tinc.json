@@ -1,0 +1,11 @@
+{
+	"services/vpn/tinc": {
+		"description": "Tinc VPN",
+		"read": {
+			"api": ["/tinc/*", "/interfaces/config/*"]
+		},
+		"write": {
+			"api": ["/tinc/*"]
+		}
+	}
+}

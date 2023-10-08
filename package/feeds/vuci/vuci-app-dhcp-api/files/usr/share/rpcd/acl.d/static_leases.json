@@ -1,0 +1,29 @@
+{
+  "network/dhcp_servers/static_leases": {
+    "description": "",
+    "read": {
+      "api": ["/dhcp/static_leases/*"]
+    },
+    "write": {
+      "api": ["/dhcp/static_leases/*"]
+    }
+  },
+  "network/dhcp_servers/general": {
+    "description": "",
+    "read": {
+      "api": ["/dhcp/servers/*", "/interfaces/config/*"]
+    },
+    "write": {
+      "api": ["/dhcp/servers/*"]
+    }
+  },
+  "status/network/dhcp_leases": {
+    "description": "",
+    "read": {
+      "api": ["/dhcp/*"]
+    },
+    "write": {
+      "api": ["/dhcp/*"]
+    }
+  }
+}

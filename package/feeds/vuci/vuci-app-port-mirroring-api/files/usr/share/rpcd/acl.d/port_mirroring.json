@@ -1,0 +1,13 @@
+{
+	"network/ports/port_mirroring": {
+		"description": "port mirroring configuration",
+		"read": {
+			"uci": ["network"],
+			"api": ["/port_mirroring/*"]
+		},
+		"write": {
+			"uci": ["network"],
+			"api": ["/port_mirroring/*"]
+		}
+	}
+}

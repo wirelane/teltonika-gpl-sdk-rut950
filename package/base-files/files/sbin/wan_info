@@ -1,0 +1,46 @@
+#!/bin/sh
+. /lib/functions/network.sh
+
+if ! network_find_wan wanif "" 10; then
+	echo "$cfg" "NO_WAN_LINK"
+	exit
+fi
+
+min_wanif=$(echo "$wanif" | awk '{print $1;}')
+network_get_metric min_metric "$min_wanif"
+for i in $wanif
+do
+        network_get_metric metric "$i"
+        if [ "$metric" -lt "$min_metric" ]; then
+                min_metric="$metric"
+                min_wanif="$i"
+        fi
+done
+wanif="$min_wanif"
+
+case "$1" in
+	"ip")
+		network_get_ipaddrs wanadr "$wanif"
+		[ -z "$wanadr" ] && network_get_ipaddrs wanadr "$wanif"_4
+		[ -z "$wanadr" ] && network_get_ipaddrs wanadr "$wanif"_6
+		echo "$wanadr"
+		;;
+	"state")
+		network_get_device wandev "$wanif"
+		case "$wandev" in
+			"wwan"* | "rmnet"* | "qmimux"* | "usb"* | "ppp-"*)
+				echo "Mobile"
+				;;
+			"eth"* | "wan"* | "pppoe-"* | *"_to_wan")
+				echo "Wired"
+				;;
+			"wlan"* | "apcli"*)
+				echo "WiFi"
+				;;
+		esac
+		;;
+	"interface")
+		network_get_device wandev "$wanif"
+		echo "$wandev"
+		;;
+esac

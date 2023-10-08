@@ -1,0 +1,362 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Access Control CLI"
+    }
+  ],
+  "paths": {
+    "/access_control/cli/config": {
+      "get": {
+        "summary": "Returns all CLI access control configurations",
+        "tags": [
+          "Access Control CLI"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_cli"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified CLI access control configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_cli"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/cli_multi"
+        },
+        "tags": [
+          "Access Control CLI"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "General"
+        ]
+      }
+    },
+    "/access_control/cli/config/general": {
+      "get": {
+        "summary": "Returns the specified CLI access control configuration",
+        "tags": [
+          "Access Control CLI"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_cli_one"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified CLI access control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_cli_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/cli"
+        },
+        "tags": [
+          "Access Control CLI"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Access Control",
+          "General"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_cli": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/cli"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "enable": "string",
+                      "_cliWanAccess": "string",
+                      "port": "string",
+                      "shell_limit": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_cli_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/cli"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "enable": "string",
+                    "_cliWanAccess": "string",
+                    "port": "string",
+                    "shell_limit": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "cli": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enable": "",
+            "_cliWanAccess": "",
+            "port": "",
+            "shell_limit": ""
+          }
+        },
+        "properties": {
+          "enable": {
+            "x-web": {
+              "pretty": "Enable CLI",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns CLI access from the local network (LAN) on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "_cliWanAccess": {
+            "x-web": {
+              "pretty": "Enable remote CLI",
+              "input-type": "switch",
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "description": "Turns CLI access from remote networks (WAN) on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Port range",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Selects which ports to use for CLI access.",
+            "format": "portrange"
+          },
+          "shell_limit": {
+            "x-web": {
+              "pretty": "Shell limit",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Maximum number of active CLI connections.",
+            "format": "range(1, 10)",
+            "minLength": 1,
+            "maxLength": 2
+          }
+        },
+        "required": [
+          "enable",
+          "port",
+          "shell_limit"
+        ]
+      }
+    },
+    "requestBodies": {
+      "cli": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/cli"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "cli_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            },
+                            "description": "Access Control CLI configuration identifier (ID)",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/cli"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

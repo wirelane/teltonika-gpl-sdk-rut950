@@ -1,0 +1,607 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Access Control WebUI"
+    }
+  ],
+  "paths": {
+    "/access_control/webui/status": {
+      "get": {
+        "summary": "Returns all access control statuses",
+        "tags": ["Access Control WebUI"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "HTTP": {
+                          "type": "object",
+                          "properties": {
+                            "lan": {
+                              "type": "boolean",
+                              "description": "HTTP on LAN is enabled/disabled."
+                            },
+                            "wan": {
+                              "type": "boolean",
+                              "description": "HTTP on WAN is enabled/disabled."
+                            }
+                          }
+                        },
+                        "HTTPS": {
+                          "type": "object",
+                          "properties": {
+                            "lan": {
+                              "type": "boolean",
+                              "description": "HTTPS on LAN is enabled/disabled."
+                            },
+                            "wan": {
+                              "type": "boolean",
+                              "description": "HTTPS on WAN is enabled/disabled."
+                            }
+                          }
+                        },
+                        "SSH": {
+                          "type": "object",
+                          "properties": {
+                            "lan": {
+                              "type": "boolean",
+                              "description": "SSH on LAN is enabled/disabled."
+                            },
+                            "wan": {
+                              "type": "boolean",
+                              "description": "SSH on WAN is enabled/disabled."
+                            }
+                          }
+                        },
+                        "CLI": {
+                          "type": "object",
+                          "properties": {
+                            "lan": {
+                              "type": "boolean",
+                              "description": "CLI on LAN is enabled/disabled."
+                            },
+                            "wan": {
+                              "type": "boolean",
+                              "description": "CLI on WAN is enabled/disabled."
+                            }
+                          }
+                        },
+                        "Telnet": {
+                          "type": "object",
+                          "properties": {
+                            "lan": {
+                              "type": "boolean",
+                              "description": "Telnet on LAN is enabled/disabled."
+                            },
+                            "wan": {
+                              "type": "boolean",
+                              "description": "Telnet on WAN is enabled/disabled."
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "Access Control", "General"]
+      }
+    },
+    "/access_control/webui/config": {
+      "get": {
+        "summary": "Returns all WebUI access control configurations",
+        "tags": ["Access Control WebUI"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_webui"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates specified WebUI access control configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_webui"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/webui_multi"
+        },
+        "tags": ["Access Control WebUI"]
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "Access Control", "General"]
+      }
+    },
+    "/access_control/webui/config/general": {
+      "get": {
+        "summary": "Returns the specified WebUI access control configuration",
+        "tags": ["Access Control WebUI"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_webui_one"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the specified WebUI access control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_webui_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/webui"
+        },
+        "tags": ["Access Control WebUI"]
+      },
+      "post": {
+        "summary": "Upload file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_ac_webui"
+        },
+        "tags": ["DNS"]
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "Access Control", "General"],
+        "hw_tags": {
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_webui": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [{}]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/webui"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["success", "data"]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "string",
+                      "enable_http": "string",
+                      "enable_https": "string",
+                      "redirect_https": "string",
+                      "_httpWanAccess": "string",
+                      "listen_http": "string",
+                      "_httpsWanAccess": "string",
+                      "listen_https": "string",
+                      "rfc1918_filter": "string",
+                      "device_files": "string",
+                      "cert": "string",
+                      "key": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_webui_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/webui"
+                    }
+                  ]
+                }
+              },
+              "required": ["success", "data"]
+            },
+            "examples": {
+              "Response": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "id": "string",
+                    "enable_http": "string",
+                    "enable_https": "string",
+                    "redirect_https": "string",
+                    "_httpWanAccess": "string",
+                    "listen_http": "string",
+                    "_httpsWanAccess": "string",
+                    "listen_https": "string",
+                    "rfc1918_filter": "string",
+                    "device_files": "string",
+                    "cert": "string",
+                    "key": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "webui": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enable_http": "string",
+            "enable_https": "string",
+            "redirect_https": "string",
+            "_httpWanAccess": "string",
+            "listen_http": "string",
+            "_httpsWanAccess": "string",
+            "listen_https": "string",
+            "rfc1918_filter": "string",
+            "device_files": "string",
+            "cert": "string",
+            "key": "string"
+          }
+        },
+        "properties": {
+          "enable_http": {
+            "x-web": {
+              "pretty": "Enable HTTP access",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns HTTP access from the local network (LAN) to the router's WebUI on or off.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "enable_https": {
+            "x-web": {
+              "pretty": "Enable HTTPS access",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns HTTPS access from the local network (LAN) to the router's WebUI on or off.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "redirect_https": {
+            "x-web": {
+              "pretty": "Redirect to HTTPS",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Redirects connection attempts from HTTP to HTTPS.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "_httpWanAccess": {
+            "x-web": {
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              },
+              "pretty": "Enable remote HTTP access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enable_http": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Turns HTTP access from remote networks (WAN) to the router's WebUI on or off.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "listen_http": {
+            "x-web": {
+              "pretty": "HTTP Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_http": "1"
+                }
+              ]
+            },
+            "description": "Selects which port to use for HTTP access.",
+            "type": "string",
+            "format": "port"
+          },
+          "_httpsWanAccess": {
+            "x-web": {
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              },
+              "pretty": "Enable remote HTTPS access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enable_https": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Turns HTTPS access from remote networks (WAN) to the router's WebUI on or off.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "listen_https": {
+            "x-web": {
+              "pretty": "HTTPS Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_https": "1"
+                }
+              ]
+            },
+            "description": "Selects which port to use for HTTPS access.",
+            "type": "string",
+            "format": "port"
+          },
+          "rfc1918_filter": {
+            "x-web": {
+              "pretty": "Ignore private IPs on public interface",
+              "input-type": "switch",
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "description": "Prevent access from private (RFC1918) IPs on an interface if it has an public IP address.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "device_files": {
+            "type": "string",
+            "description": "Choose this option if you want to select certificate files from device.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "cert": {
+            "x-web": {
+              "pretty": "Server certificate",
+              "input-type": "input",
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "format": "path",
+            "pattern": "^/etc/(vuci-uploads|certificates)/",
+            "description": "Server certificate."
+          },
+          "key": {
+            "x-web": {
+              "pretty": "Server key",
+              "input-type": "input",
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "format": "path",
+            "pattern": "^/etc/(vuci-uploads|certificates)/",
+            "description": "Server key"
+          }
+        },
+        "required": ["enable_http", "enable_https", "redirect_https", "listen_http", "listen_https"]
+      }
+    },
+    "requestBodies": {
+      "webui": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/webui"
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "webui_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "x-web": {
+                              "pretty": "Configuration ID",
+                              "input-type": "input"
+                            },
+                            "description": "Access Control WebUI configuration identifier (ID)",
+                            "type": "string"
+                          }
+                        },
+                        "required": ["id"]
+                      },
+                      {
+                        "$ref": "#/components/schemas/webui"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "file_upload_ac_webui": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "option": {
+                  "type": "string",
+                  "description": "Parameter to upload the file to.",
+                  "enum": ["cert", "key"]
+                },
+                "file": {
+                  "type": "string",
+                  "format": "binary",
+                  "description": "File to upload."
+                }
+              },
+              "required": ["option", "file"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

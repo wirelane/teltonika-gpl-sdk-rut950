@@ -1,0 +1,135 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/custom_rules/config/general": {
+      "get": {
+        "summary": "GET All Firewall Custom Rules",
+        "description": "Returns custom rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/custom_rules"
+          }
+        },
+        "tags": [
+          "Firewall Custom Rules"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall Custom Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/custom_rules"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "custom_rules": {
+                        "type": "string",
+                        "description": "custom rules data",
+                        "x-web": {
+                          "input-type": "input",
+                          "pretty": "Firewall - Custom Rules"
+                        }
+                      }
+                    },
+                    "required": [
+                      "custom_rules"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Custom Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Custom Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/custom_rules/actions/reset": {
+      "post": {
+        "summary": "SEND Firewall Custom Rules Reset",
+        "operationId": "post-network-firewall-custom_rules-actions-reset",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/custom_rules"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firewall Custom Rules Reset"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Custom Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "custom_rules": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "custom_rules": {
+                      "type": "string",
+                      "x-web": {
+                        "input-type": "input",
+                        "pretty": "Firewall - Custom Rules"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {}
+  }
+}

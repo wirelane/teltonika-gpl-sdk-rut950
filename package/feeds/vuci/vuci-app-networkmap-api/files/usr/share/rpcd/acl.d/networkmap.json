@@ -1,0 +1,10 @@
+{
+	"status/network/topology": {
+		"description": "networkmap configuration",
+		"read": {
+			"api": [
+				"/topology/*"
+			]
+		}
+	}
+}

@@ -1,0 +1,102 @@
+{
+	"services/gps/general": {
+		"description": "gps general configuration",
+		"read": {
+			"api": [
+				"/gps/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/gps/*"
+			]
+		}
+	},
+	"services/gps/map": {
+		"description": "gps map configuration",
+		"read": {
+			"api": [
+				"/gps/general/config/*",
+				"/gps/general/position/*"
+			]
+		}
+	},
+	"services/gps/nmea": {
+		"description": "gps nmea configuration",
+		"read": {
+			"api": [
+				"/gps/nmea/*",
+				"/gps/nmea_rules/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/gps/nmea/*",
+				"/gps/nmea_rules/*"
+			]
+		}
+	},
+	"services/gps/https": {
+		"description": "gps https configuration",
+		"read": {
+			"api": [
+				"/io/status/*",
+				"/gps/https_general/*",
+				"/gps/https/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/gps/https_general/*",
+				"/gps/https/*"
+			]
+		}
+	},
+	"services/gps/avl": {
+		"description": "gps avl configuration",
+		"read": {
+			"api": [
+				"/io/status/*",
+				"/gps/avl/*",
+				"/gps/avl_main/*",
+				"/gps/avl_rules/*",
+				"/gps/tavl_rules/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/gps/avl/*",
+				"/gps/avl_main/*",
+				"/gps/avl_rules/*",
+				"/gps/tavl_rules/*"
+			]
+		}
+	},
+	"services/gps/input": {
+		"description": "gps io configuration",
+		"read": {
+			"api": [
+				"/gps/avl_io/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/gps/avl_io/*"
+			]
+		}
+	},
+	"services/gps/geofencing": {
+		"description": "gps geofencing configuration",
+		"read": {
+			"api": [
+				"/gps/geofencing/*",
+				"/profiles/*"
+			]
+		},
+		"write": {
+			"api": [
+				"/gps/geofencing/*"
+			]
+		}
+	}
+}

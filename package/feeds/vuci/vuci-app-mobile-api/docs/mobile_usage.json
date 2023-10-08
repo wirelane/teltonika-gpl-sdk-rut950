@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Mobile usage"
+    }
+  ],
+  "paths": {
+    "/mobile/simcards/usage/{interval}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "total"
+            ]
+          },
+          "name": "interval",
+          "in": "path",
+          "required": true,
+          "description": "Interval of the returned data"
+        }
+      ],
+      "get": {
+        "summary": "GET SIM Card Usage Data",
+        "tags": [
+          "SIM Card Usage Data"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of data usage entries.",
+                      "items": {
+                        "type": "array",
+                        "description": "Data usage entry. Values:\na[0] - timestamp of when the data was used.\na[1] - received data in bytes.\na[2] - transfered data in bytes.",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-mobile-simcards-usage-interval",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/simcards/usage/{interval}/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "total"
+            ]
+          },
+          "name": "interval",
+          "in": "path",
+          "required": true,
+          "description": "Interval of the returned data"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card configuration name"
+        }
+      ],
+      "get": {
+        "summary": "GET SIM Card Usage Data",
+        "tags": [
+          "SIM Card Usage Data"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of data usage entries.",
+                      "items": {
+                        "type": "array",
+                        "description": "Data usage entry. Values:\na[0] - timestamp of when the data was used.\na[1] - received data in bytes.\na[2] - transfered data in bytes.",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-network-mobile-simcards-usage-interval-id",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/usage/{modem_id}/simcards/{interval}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "total"
+            ]
+          },
+          "name": "interval",
+          "in": "path",
+          "required": true,
+          "description": "Interval of the returned data"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem id"
+        }
+      ],
+      "get": {
+        "summary": "GET Modem SIM Card Usage Data",
+        "tags": [
+          "Modem SIM Card Usage Data"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of data usage entries.",
+                      "items": {
+                        "type": "array",
+                        "description": "Data usage entry. Values:\na[0] - timestamp of when the data was used.\na[1] - received data in bytes.\na[2] - transfered data in bytes.",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-network-mobile-simcards-usage-interval-cfgg",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/mobile/modems/usage/{modem_id}/simcards/{interval}/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "day",
+              "week",
+              "month",
+              "total"
+            ]
+          },
+          "name": "interval",
+          "in": "path",
+          "required": true,
+          "description": "Interval of the returned data"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "modem_id",
+          "in": "path",
+          "required": true,
+          "description": "Modem id"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card configuration name"
+        }
+      ],
+      "get": {
+        "summary": "GET Modem SIM Card Usage Data",
+        "tags": [
+          "Modem SIM Card Usage Data"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of data usage entries.",
+                      "items": {
+                        "type": "array",
+                        "description": "Data usage entry. Values:\na[0] - timestamp of when the data was used.\na[1] - received data in bytes.\na[2] - transfered data in bytes.",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-network-mobile-simcards-usage-interval-cfgg12",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {}
+  }
+}

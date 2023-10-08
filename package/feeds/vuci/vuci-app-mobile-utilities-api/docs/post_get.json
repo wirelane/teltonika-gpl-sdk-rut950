@@ -1,0 +1,355 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mobile Post/Get",
+    "version": "1.0",
+    "contact": {},
+    "description": "Mobile Post/Get api documentation."
+  },
+  "paths": {
+    "/mobile_utilities/sms_gateway/post_get/config": {
+      "get": {
+        "summary": "Returns Mobile Post/Get configuration in an array",
+        "tags": [
+          "Mobile Post/Get"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/post_get_many"
+          }
+        },
+        "operationId": "get-post_get-config",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Mobile Post/Get configuration in an array",
+        "tags": [
+          "Mobile Post/Get"
+        ],
+        "operationId": "put-post_get-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/post_get_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_post_get_many"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "Post/Get"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/mobile_utilities/sms_gateway/post_get/config/general": {
+      "get": {
+        "summary": "Returns Mobile Post/Get configuration",
+        "tags": [
+          "Mobile Post/Get"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/post_get_one"
+          }
+        },
+        "operationId": "get-post_get-config-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates Mobile Post/Get configuration",
+        "tags": [
+          "Mobile Post/Get"
+        ],
+        "operationId": "put-post_get-config-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/post_get_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_post_get_one"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Mobile Utilities",
+          "SMS Gateway",
+          "Post/Get"
+        ],
+        "hw_tags": {
+          "mobile": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "post_get_update": {
+        "title": "post_get_update",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable SMS management functionality through POST/GET",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "info_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to get information from",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "send_modem_id": {
+            "type": "string",
+            "description": "Modem, which is used to send information from",
+            "x-web": {
+              "pretty": "Gateway modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "allow": {
+            "type": "array",
+            "description": "Accessible methods. All methods are allowed if a list is empty.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "mobile_data",
+                "sms_delete",
+                "sms_list",
+                "sms_read",
+                "sms_send",
+                "sms_total"
+              ]
+            },
+            "x-web": {
+              "pretty": "Access",
+              "input-type": "select"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "User name used for authorization. All characters are allowed except ` and space",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password used for authorization. All characters are allowed except ` and space",
+            "format": "credentials_validate",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            }
+          },
+          "password_confirm": {
+            "type": "string",
+            "description": "Confirmation password",
+            "writeOnly": true,
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Confirm password",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "username"
+        ]
+      },
+      "req_body_post_get_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/post_get_update"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_post_get_many": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/post_get_update"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "post_get_one": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/post_get_update"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "post_get_many": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/post_get_update"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {}
+  },
+  "tags": [
+    {
+      "name": "Mobile Post/Get"
+    }
+  ]
+}

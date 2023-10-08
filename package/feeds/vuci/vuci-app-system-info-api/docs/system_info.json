@@ -1,0 +1,1789 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "System info"
+    }
+  ],
+  "paths": {
+    "/device/info": {
+      "get": {
+        "summary": "Returns system information",
+        "tags": [
+          "System info"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "mnfinfo": {
+                          "macEth": "001E424F9563",
+                          "name": "RUTX1100XXXX",
+                          "hwver": "0808",
+                          "batch": "0031",
+                          "serial": "1118789105",
+                          "mac": "001E424F9562"
+                        },
+                        "static": {
+                          "fw_version": "RUTX_T_DEV_00.07.01.585",
+                          "kernel": "5.4.147",
+                          "system": "ARMv7 Processor rev 5 (v7l)",
+                          "device_name": "RUTX11",
+                          "cpu_count": 4,
+                          "hostname": "Teltonika-RUTX11.com",
+                          "release": {
+                            "distribution": "OpenWrt",
+                            "revision": "r16279-5cc0535800",
+                            "version": "21.02.0",
+                            "target": "ipq40xx/generic",
+                            "description": "OpenWrt 21.02.0 r16279-5cc0535800"
+                          },
+                          "fw_build_date": "2022-02-21 04:00:02",
+                          "model": "RUTX STM32",
+                          "board_name": "teltonika,rutx"
+                        },
+                        "features": {
+                          "ipv6": true
+                        },
+                        "board": {
+                          "modems": [
+                            {
+                              "gps": "1",
+                              "num": "1",
+                              "service_modes": {
+                                "4G": [
+                                  "1",
+                                  "3",
+                                  "5",
+                                  "7",
+                                  "8",
+                                  "20",
+                                  "28",
+                                  "32",
+                                  "38",
+                                  "40",
+                                  "41"
+                                ],
+                                "3G": [
+                                  "wcdma_850",
+                                  "wcdma_900",
+                                  "wcdma_1800",
+                                  "wcdma_2100"
+                                ]
+                              },
+                              "id": "3-1",
+                              "revision": "EG06ELAR04A04M4G",
+                              "builtin": true,
+                              "product": "0306",
+                              "type": "gobinet",
+                              "desc": "Quectel EG06",
+                              "control": "2",
+                              "boudrate": "115200",
+                              "simcount": 2,
+                              "stop_bits": "8",
+                              "vendor": "2c7c"
+                            }
+                          ],
+                          "network": {
+                            "wan": {
+                              "proto": "dhcp",
+                              "ifname": "eth1"
+                            },
+                            "lan": {
+                              "proto": "static",
+                              "ifname": "eth0"
+                            }
+                          },
+                          "model": {
+                            "id": "teltonika,rutx",
+                            "platform": "RUTX",
+                            "name": "RUTX STM32"
+                          },
+                          "switch": {
+                            "switch0": {
+                              "enable": true,
+                              "roles": [
+                                {
+                                  "ports": "2 3 4 0",
+                                  "role": "lan",
+                                  "device": "eth0"
+                                },
+                                {
+                                  "ports": "5 0",
+                                  "role": "wan",
+                                  "device": "eth1"
+                                }
+                              ],
+                              "ports": [
+                                {
+                                  "device": "eth0",
+                                  "num": 0,
+                                  "want_untag": true,
+                                  "need_tag": false
+                                },
+                                {
+                                  "num": 2,
+                                  "index": 1,
+                                  "role": "lan"
+                                },
+                                {
+                                  "num": 3,
+                                  "index": 2,
+                                  "role": "lan"
+                                },
+                                {
+                                  "num": 4,
+                                  "index": 3,
+                                  "role": "lan"
+                                },
+                                {
+                                  "device": "eth1",
+                                  "num": 0,
+                                  "want_untag": true,
+                                  "need_tag": false
+                                },
+                                {
+                                  "role": "wan",
+                                  "num": 5
+                                }
+                              ],
+                              "reset": true
+                            }
+                          },
+                          "hwinfo": {
+                            "gps": true,
+                            "sfp_port": false,
+                            "at_sim": false,
+                            "dual_sim": true,
+                            "bluetooth": true,
+                            "usb": true,
+                            "mobile": true,
+                            "sfp_switch": false,
+                            "ethernet": true,
+                            "wifi": true,
+                            "ios": true,
+                            "wps": false,
+                            "dual_band_ssid": true
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "mnfinfo": {
+                          "type": "object",
+                          "properties": {
+                            "macEth": {
+                              "type": "string",
+                              "description": "Ethernet WAN MAC address."
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Product code."
+                            },
+                            "hwver": {
+                              "type": "string",
+                              "description": "Hardware revision."
+                            },
+                            "batch": {
+                              "type": "string",
+                              "description": "Batch number."
+                            },
+                            "serial": {
+                              "type": "string",
+                              "description": "Serial number."
+                            },
+                            "mac": {
+                              "type": "string",
+                              "description": "Ethernet LAN MAC address."
+                            },
+                            "blver": {
+                              "type": "string",
+                              "description": "Bootloader version."
+                            }
+                          }
+                        },
+                        "static": {
+                          "type": "object",
+                          "properties": {
+                            "fw_version": {
+                              "type": "string",
+                              "description": "Firmware version."
+                            },
+                            "kernel": {
+                              "type": "string",
+                              "description": "Kernel version."
+                            },
+                            "system": {
+                              "type": "string",
+                              "description": "Processor name."
+                            },
+                            "device_name": {
+                              "type": "string",
+                              "description": "Device name."
+                            },
+                            "hostname": {
+                              "type": "string",
+                              "description": "Hostname of router."
+                            },
+                            "cpu_count": {
+                              "type": "number",
+                              "description": "Number of CPU cores."
+                            },
+                            "release": {
+                              "type": "object",
+                              "properties": {
+                                "distribution": {
+                                  "type": "string",
+                                  "description": "Distribution name."
+                                },
+                                "revision": {
+                                  "type": "string",
+                                  "description": "Revision."
+                                },
+                                "version": {
+                                  "type": "string",
+                                  "description": "Version of release."
+                                },
+                                "target": {
+                                  "type": "string",
+                                  "description": "Target of device."
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "description": "Description of release."
+                                }
+                              }
+                            },
+                            "fw_build_date": {
+                              "type": "string",
+                              "description": "Firmware build date."
+                            },
+                            "model": {
+                              "type": "string",
+                              "description": "Model name."
+                            },
+                            "board_name": {
+                              "type": "string",
+                              "description": "Board name."
+                            }
+                          }
+                        },
+                        "features": {
+                          "type": "object",
+                          "properties": {
+                            "ipv6": {
+                              "type": "boolean",
+                              "description": "IPv6 support."
+                            }
+                          }
+                        },
+                        "board": {
+                          "type": "object",
+                          "properties": {
+                            "modems": {
+                              "type": "array",
+                              "uniqueItems": true,
+                              "minItems": 1,
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "gps": {
+                                    "type": "string",
+                                    "description": "GPS support."
+                                  },
+                                  "num": {
+                                    "type": "string",
+                                    "description": "Modem number."
+                                  },
+                                  "service_modes": {
+                                    "type": "object",
+                                    "properties": {
+                                      "4G": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "description": "4G bandwidth support"
+                                        }
+                                      },
+                                      "3G": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string",
+                                          "description": "3G bandwidth support"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "id": {
+                                    "type": "string",
+                                    "description": "Modem ID."
+                                  },
+                                  "revision": {
+                                    "type": "string",
+                                    "description": "Modem revision."
+                                  },
+                                  "builtin": {
+                                    "type": "boolean",
+                                    "description": "Modem built-in."
+                                  },
+                                  "product": {
+                                    "type": "string",
+                                    "description": "Modem product code."
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "Modem type."
+                                  },
+                                  "desc": {
+                                    "type": "string",
+                                    "description": "Modem description."
+                                  },
+                                  "control": {
+                                    "type": "string",
+                                    "description": "Modem control."
+                                  },
+                                  "boudrate": {
+                                    "type": "string",
+                                    "description": "Modem boudrate."
+                                  },
+                                  "simcount": {
+                                    "type": "number",
+                                    "description": "Modem SIM count."
+                                  },
+                                  "stop_bits": {
+                                    "type": "string",
+                                    "description": "Modem stop bits."
+                                  },
+                                  "vendor": {
+                                    "type": "string",
+                                    "description": "Modem vendor."
+                                  }
+                                }
+                              }
+                            },
+                            "network": {
+                              "type": "object",
+                              "properties": {
+                                "wan": {
+                                  "type": "object",
+                                  "properties": {
+                                    "proto": {
+                                      "type": "string",
+                                      "description": "WAN protocol."
+                                    },
+                                    "device": {
+                                      "type": "string",
+                                      "description": "WAN device name."
+                                    }
+                                  }
+                                },
+                                "lan": {
+                                  "type": "object",
+                                  "properties": {
+                                    "proto": {
+                                      "type": "string",
+                                      "description": "LAN protocol."
+                                    },
+                                    "device": {
+                                      "type": "string",
+                                      "description": "LAN device name."
+                                    },
+                                    "default_ip": {
+                                      "type": "string",
+                                      "description": "LAN default IP."
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "model": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "Model ID."
+                                },
+                                "platform": {
+                                  "type": "string",
+                                  "description": "Model platform."
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "Model name."
+                                }
+                              }
+                            },
+                            "switch": {
+                              "type": "object",
+                              "properties": {
+                                "switch0": {
+                                  "type": "object",
+                                  "properties": {
+                                    "enable": {
+                                      "type": "boolean"
+                                    },
+                                    "roles": {
+                                      "type": "array",
+                                      "uniqueItems": true,
+                                      "minItems": 1,
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "ports": {
+                                            "type": "string",
+                                            "description": "Switch ports."
+                                          },
+                                          "role": {
+                                            "type": "string",
+                                            "description": "Switch role."
+                                          },
+                                          "device": {
+                                            "type": "string",
+                                            "description": "Switch device."
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "ports": {
+                                      "type": "array",
+                                      "uniqueItems": true,
+                                      "minItems": 1,
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "device": {
+                                            "type": "string",
+                                            "description": "Switch port device."
+                                          },
+                                          "num": {
+                                            "type": "number",
+                                            "description": "Switch port number."
+                                          },
+                                          "want_untag": {
+                                            "type": "boolean",
+                                            "description": "Switch port want untag."
+                                          },
+                                          "need_tag": {
+                                            "type": "boolean",
+                                            "description": "Switch port need tag."
+                                          },
+                                          "role": {
+                                            "type": "string",
+                                            "description": "Switch port role."
+                                          },
+                                          "index": {
+                                            "type": "number",
+                                            "description": "Switch port index."
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "reset": {
+                                      "type": "boolean",
+                                      "description": "Switch reset."
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "hwinfo": {
+                              "type": "object",
+                              "properties": {
+                                "gps": {
+                                  "type": "boolean",
+                                  "description": "GPS support."
+                                },
+                                "sfp_port": {
+                                  "type": "boolean",
+                                  "description": "SFP port support."
+                                },
+                                "at_sim": {
+                                  "type": "boolean",
+                                  "description": "AT SIM support."
+                                },
+                                "dual_sim": {
+                                  "type": "boolean",
+                                  "description": "Dual SIM support."
+                                },
+                                "bluetooth": {
+                                  "type": "boolean",
+                                  "description": "Bluetooth support."
+                                },
+                                "usb": {
+                                  "type": "boolean",
+                                  "description": "USB support."
+                                },
+                                "mobile": {
+                                  "type": "boolean",
+                                  "description": "Mobile support."
+                                },
+                                "sfp_switch": {
+                                  "type": "boolean",
+                                  "description": "SFP switch support."
+                                },
+                                "ethernet": {
+                                  "type": "boolean",
+                                  "description": "Ethernet support."
+                                },
+                                "wifi": {
+                                  "type": "boolean",
+                                  "description": "WiFi support."
+                                },
+                                "ios": {
+                                  "type": "boolean",
+                                  "description": "IOS support."
+                                },
+                                "wps": {
+                                  "type": "boolean",
+                                  "description": "WPS support."
+                                },
+                                "dual_band_ssid": {
+                                  "type": "boolean",
+                                  "description": "Dual band SSID support."
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": {
+                        "mnfinfo": {
+                          "macEth": "001E424F9563",
+                          "name": "RUTX1100XXXX",
+                          "hwver": "0808",
+                          "batch": "0031",
+                          "serial": "1118789105",
+                          "mac": "001E424F9562"
+                        },
+                        "static": {
+                          "fw_version": "RUTX_T_DEV_00.07.01.585",
+                          "kernel": "5.4.147",
+                          "system": "ARMv7 Processor rev 5 (v7l)",
+                          "device_name": "RUTX11",
+                          "cpu_count": 4,
+                          "hostname": "Teltonika-RUTX11.com",
+                          "release": {
+                            "distribution": "OpenWrt",
+                            "revision": "r16279-5cc0535800",
+                            "version": "21.02.0",
+                            "target": "ipq40xx/generic",
+                            "description": "OpenWrt 21.02.0 r16279-5cc0535800"
+                          },
+                          "fw_build_date": "2022-02-21 04:00:02",
+                          "model": "RUTX STM32",
+                          "board_name": "teltonika,rutx"
+                        },
+                        "features": {
+                          "ipv6": true
+                        },
+                        "board": {
+                          "modems": [
+                            {
+                              "gps": "1",
+                              "num": "1",
+                              "service_modes": {
+                                "4G": [
+                                  "1",
+                                  "3",
+                                  "5",
+                                  "7",
+                                  "8",
+                                  "20",
+                                  "28",
+                                  "32",
+                                  "38",
+                                  "40",
+                                  "41"
+                                ],
+                                "3G": [
+                                  "wcdma_850",
+                                  "wcdma_900",
+                                  "wcdma_1800",
+                                  "wcdma_2100"
+                                ]
+                              },
+                              "id": "3-1",
+                              "revision": "EG06ELAR04A04M4G",
+                              "builtin": true,
+                              "product": "0306",
+                              "type": "gobinet",
+                              "desc": "Quectel EG06",
+                              "control": "2",
+                              "boudrate": "115200",
+                              "simcount": 2,
+                              "stop_bits": "8",
+                              "vendor": "2c7c"
+                            }
+                          ],
+                          "network": {
+                            "wan": {
+                              "proto": "dhcp",
+                              "ifname": "eth1"
+                            },
+                            "lan": {
+                              "proto": "static",
+                              "ifname": "eth0"
+                            }
+                          },
+                          "model": {
+                            "id": "teltonika,rutx",
+                            "platform": "RUTX",
+                            "name": "RUTX STM32"
+                          },
+                          "switch": {
+                            "switch0": {
+                              "enable": true,
+                              "roles": [
+                                {
+                                  "ports": "2 3 4 0",
+                                  "role": "lan",
+                                  "device": "eth0"
+                                },
+                                {
+                                  "ports": "5 0",
+                                  "role": "wan",
+                                  "device": "eth1"
+                                }
+                              ],
+                              "ports": [
+                                {
+                                  "device": "eth0",
+                                  "num": 0,
+                                  "want_untag": true,
+                                  "need_tag": false
+                                },
+                                {
+                                  "num": 2,
+                                  "index": 1,
+                                  "role": "lan"
+                                },
+                                {
+                                  "num": 3,
+                                  "index": 2,
+                                  "role": "lan"
+                                },
+                                {
+                                  "num": 4,
+                                  "index": 3,
+                                  "role": "lan"
+                                },
+                                {
+                                  "device": "eth1",
+                                  "num": 0,
+                                  "want_untag": true,
+                                  "need_tag": false
+                                },
+                                {
+                                  "role": "wan",
+                                  "num": 5
+                                }
+                              ],
+                              "reset": true
+                            }
+                          },
+                          "hwinfo": {
+                            "gps": true,
+                            "sfp_port": false,
+                            "at_sim": false,
+                            "dual_sim": true,
+                            "bluetooth": true,
+                            "usb": true,
+                            "mobile": true,
+                            "sfp_switch": false,
+                            "ethernet": true,
+                            "wifi": true,
+                            "ios": true,
+                            "wps": false,
+                            "dual_band_ssid": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Returns static information about the system."
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Device",
+          "Info"
+        ]
+      }
+    },
+    "/device/status": {
+      "get": {
+        "summary": "Returns system status",
+        "tags": [
+          "System info"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "uptime",
+                  "uptime_seconds",
+                  "localtime",
+                  "memory",
+                  "load",
+                  "loadavg"
+                ]
+              },
+              "minItems": 1,
+              "maxLength" : 6
+            },
+            "description": "Device status values which will be included in results."
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "uptime",
+                  "uptime_seconds",
+                  "localtime",
+                  "memory",
+                  "load",
+                  "loadavg"
+                ]
+              },
+              "minItems": 1,
+              "maxLength" : 6
+            },
+            "description": "Device status values which will be exluded from results."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "memory": {
+                          "ram_buffered": 8.35,
+                          "ram_total": 254.57,
+                          "ram_used": 162.78,
+                          "flash_total": 97.59,
+                          "ram_free": 91.79,
+                          "flash_free": 96.94,
+                          "flash_percentage": 0.66,
+                          "flash_used": 0.65,
+                          "ram_percentage": 63.94,
+                          "ram_shared": 0.27
+                        },
+                        "uptime": "07h 56m 02s",
+                        "loadavg": 2.5,
+                        "localtime": 1645460400,
+                        "load": {
+                          "min5": 1056,
+                          "min15": 320,
+                          "min1": 4800
+                        },
+                        "uptime_seconds": 28562
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "memory": {
+                          "type": "object",
+                          "description": "Memory usage in MB ",
+                          "properties": {
+                            "ram_buffered": {
+                              "type": "number",
+                              "description": "Amount of buffered system memory in MB."
+                            },
+                            "ram_total": {
+                              "type": "number",
+                              "description": "Total amount of system memory in MB."
+                            },
+                            "ram_used": {
+                              "type": "number",
+                              "description": "Amount of used system memory in MB."
+                            },
+                            "flash_total": {
+                              "type": "number",
+                              "description": "Total amount of flash memory in MB."
+                            },
+                            "ram_free": {
+                              "type": "number",
+                              "description": "Amount of free system memory in MB."
+                            },
+                            "flash_free": {
+                              "type": "number",
+                              "description": "Amount of free flash memory in MB."
+                            },
+                            "flash_percentage": {
+                              "type": "number",
+                              "description": "Percentage of used flash memory."
+                            },
+                            "flash_used": {
+                              "type": "number",
+                              "description": "Amount of used flash memory in MB."
+                            },
+                            "ram_percentage": {
+                              "type": "number",
+                              "description": "Percentage of used system memory."
+                            },
+                            "ram_shared": {
+                              "type": "number",
+                              "description": "Amount of shared system memory in MB."
+                            }
+                          }
+                        },
+                        "uptime": {
+                          "type": "string",
+                          "description": "Uptime of the system."
+                        },
+                        "loadavg": {
+                          "type": "number",
+                          "description": "CPU load average over the last minute."
+                        },
+                        "localtime": {
+                          "type": "number",
+                          "description": "Local time timestamp of the system."
+                        },
+                        "load": {
+                          "type": "object",
+                          "description": "CPU load average (in %) over the last minute, 5 minutes and 15 minutes.",
+                          "properties": {
+                            "min5": {
+                              "type": "number",
+                              "description": "CPU load average over the last 5 minutes."
+                            },
+                            "min15": {
+                              "type": "number",
+                              "description": "CPU load average over the last 15 minutes."
+                            },
+                            "min1": {
+                              "type": "number",
+                              "description": "CPU load average over the last minute."
+                            }
+                          }
+                        },
+                        "uptime_seconds": {
+                          "type": "number",
+                          "description": "Uptime of the system in seconds."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": {
+                        "memory": {
+                          "ram_buffered": 8.35,
+                          "ram_total": 254.57,
+                          "ram_used": 159.42,
+                          "flash_total": 97.59,
+                          "ram_free": 95.15,
+                          "flash_free": 97.07,
+                          "flash_percentage": 0.53,
+                          "flash_used": 0.52,
+                          "ram_percentage": 62.62,
+                          "ram_shared": 0.28
+                        },
+                        "uptime": "08h 09m 16s",
+                        "loadavg": 0.02,
+                        "localtime": 1645461193,
+                        "load": {
+                          "min5": 0.10156404974441138,
+                          "min15": 0.04248111696040284,
+                          "min1": 0.07666132600900283
+                        },
+                        "uptime_seconds": 29356
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Returns system status (dynamic information such as memory usage, uptime...)"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Device",
+          "Info"
+        ]
+      }
+    },
+    "/device/packages": {
+      "get": {
+        "tags": [
+          "packages"
+        ],
+        "summary": "Returns all possible packages on device",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PackagesPaths"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Device",
+          "Info"
+        ]
+      }
+    },
+    "/device/load": {
+      "get": {
+        "summary": "Returns device CPU load",
+        "tags": [
+          "System info"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        [
+                          1647608384,
+                          6,
+                          2,
+                          0
+                        ],
+                        [
+                          1647608385,
+                          6,
+                          2,
+                          0
+                        ],
+                        [
+                          1647608386,
+                          6,
+                          2,
+                          0
+                        ],
+                        [
+                          1647608387,
+                          6,
+                          2,
+                          0
+                        ]
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of recorded CPU loads. Array format:\na[0] = Timestamp.\na[1] = 1 minute load.\na[2] = 5 minute load.\na[3] = 15 minute load.",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": [
+                        [
+                          1647608384,
+                          6,
+                          2,
+                          0
+                        ],
+                        [
+                          1647608385,
+                          6,
+                          2,
+                          0
+                        ],
+                        [
+                          1647608386,
+                          6,
+                          2,
+                          0
+                        ],
+                        [
+                          1647608387,
+                          6,
+                          2,
+                          0
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-system-device-load",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Device",
+          "Info"
+        ]
+      }
+    },
+    "/device/parameters": {
+      "get": {
+        "summary": "Returns all available device parameters",
+        "tags": [
+          "System info"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "id": "et",
+                          "type": "event",
+                          "description": "Event type"
+                        },
+                        {
+                          "id": "ex",
+                          "type": "event",
+                          "description": "Event text"
+                        },
+                        {
+                          "id": "ts",
+                          "type": "other",
+                          "description": "Time stamp"
+                        },
+                        {
+                          "id": "nl",
+                          "type": "other",
+                          "description": "New line"
+                        },
+                        {
+                          "id": "ms",
+                          "type": "other",
+                          "description": "Monitoring status"
+                        },
+                        {
+                          "id": "er",
+                          "type": "other",
+                          "description": "RMS error message"
+                        },
+                        {
+                          "id": "it",
+                          "type": "other",
+                          "description": "UTC time in ISO"
+                        },
+                        {
+                          "id": "rn",
+                          "type": "device",
+                          "description": "Router name"
+                        },
+                        {
+                          "id": "sn",
+                          "type": "device",
+                          "description": "Serial number"
+                        },
+                        {
+                          "id": "fc",
+                          "type": "device",
+                          "description": "Current FW version"
+                        },
+                        {
+                          "id": "pc",
+                          "type": "device",
+                          "description": "Device name"
+                        },
+                        {
+                          "id": "li",
+                          "type": "network",
+                          "description": "LAN IP address"
+                        },
+                        {
+                          "id": "wi",
+                          "type": "network",
+                          "description": "Wired WAN IP addresses"
+                        },
+                        {
+                          "id": "wm",
+                          "type": "network",
+                          "description": "WAN MAC address"
+                        },
+                        {
+                          "id": "lm",
+                          "type": "network",
+                          "description": "LAN MAC address"
+                        },
+                        {
+                          "id": "gs",
+                          "type": "gps",
+                          "description": "GPS info"
+                        },
+                        {
+                          "id": "mi",
+                          "type": "mobile",
+                          "description": "Mobile IP addresses"
+                        },
+                        {
+                          "id": "ss",
+                          "type": "mobile",
+                          "description": "Signal strength"
+                        },
+                        {
+                          "id": "on",
+                          "type": "mobile",
+                          "description": "Operator name"
+                        },
+                        {
+                          "id": "ct",
+                          "type": "mobile",
+                          "description": "Connection type"
+                        },
+                        {
+                          "id": "cs",
+                          "type": "mobile",
+                          "description": "Data connection state"
+                        },
+                        {
+                          "id": "ns",
+                          "type": "mobile",
+                          "description": "Network state"
+                        },
+                        {
+                          "id": "im",
+                          "type": "mobile",
+                          "description": "IMSI"
+                        },
+                        {
+                          "id": "ie",
+                          "type": "mobile",
+                          "description": "IMEI"
+                        },
+                        {
+                          "id": "md",
+                          "type": "mobile",
+                          "description": "Modem model"
+                        },
+                        {
+                          "id": "is",
+                          "type": "mobile",
+                          "description": "Modem serial number"
+                        },
+                        {
+                          "id": "ps",
+                          "type": "mobile",
+                          "description": "SIM pin state"
+                        },
+                        {
+                          "id": "st",
+                          "type": "mobile",
+                          "description": "SIM state"
+                        },
+                        {
+                          "id": "cp",
+                          "type": "mobile",
+                          "description": "RSCP"
+                        },
+                        {
+                          "id": "ec",
+                          "type": "mobile",
+                          "description": "ECIO"
+                        },
+                        {
+                          "id": "ic",
+                          "type": "mobile",
+                          "description": "ICCID"
+                        },
+                        {
+                          "id": "ci",
+                          "type": "mobile",
+                          "description": "CELLID"
+                        },
+                        {
+                          "id": "sv",
+                          "type": "mobile",
+                          "description": "Network serving"
+                        },
+                        {
+                          "id": "su",
+                          "type": "mobile",
+                          "description": "SIM slot in use"
+                        },
+                        {
+                          "id": "rp",
+                          "type": "mobile",
+                          "description": "RSRP"
+                        },
+                        {
+                          "id": "sr",
+                          "type": "mobile",
+                          "description": "SINR"
+                        },
+                        {
+                          "id": "rq",
+                          "type": "mobile",
+                          "description": "RSRQ"
+                        },
+                        {
+                          "id": "nb",
+                          "type": "mobile",
+                          "description": "Neighbour cells"
+                        },
+                        {
+                          "id": "ni",
+                          "type": "mobile",
+                          "description": "Network info"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Analog Current Loop (6,9)",
+                          "io_name": "Analog Current Loop",
+                          "block_pins": [
+                            6,
+                            9
+                          ],
+                          "id": "g0"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Analog Input (6,9)",
+                          "io_name": "Analog Input",
+                          "block_pins": [
+                            6,
+                            9
+                          ],
+                          "id": "g1"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Input (3)",
+                          "io_name": "Input",
+                          "block_pins": [
+                            3
+                          ],
+                          "id": "g2"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Digital Input (1)",
+                          "io_name": "Digital Input",
+                          "block_pins": [
+                            1
+                          ],
+                          "id": "g3"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Output (4)",
+                          "io_name": "Output",
+                          "block_pins": [
+                            4
+                          ],
+                          "id": "g4"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Isolated Output (3,4,8)",
+                          "io_name": "Isolated Output",
+                          "block_pins": [
+                            3,
+                            4,
+                            8
+                          ],
+                          "id": "g5"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Isolated Input (2,7)",
+                          "io_name": "Isolated Input",
+                          "block_pins": [
+                            2,
+                            7
+                          ],
+                          "id": "g6"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Relay (5,10)",
+                          "io_name": "Relay",
+                          "block_pins": [
+                            5,
+                            10
+                          ],
+                          "id": "g7"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/device_param"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": [
+                        {
+                          "id": "et",
+                          "type": "event",
+                          "description": "Event type"
+                        },
+                        {
+                          "id": "ex",
+                          "type": "event",
+                          "description": "Event text"
+                        },
+                        {
+                          "id": "ts",
+                          "type": "other",
+                          "description": "Time stamp"
+                        },
+                        {
+                          "id": "nl",
+                          "type": "other",
+                          "description": "New line"
+                        },
+                        {
+                          "id": "ms",
+                          "type": "other",
+                          "description": "Monitoring status"
+                        },
+                        {
+                          "id": "er",
+                          "type": "other",
+                          "description": "RMS error message"
+                        },
+                        {
+                          "id": "it",
+                          "type": "other",
+                          "description": "UTC time in ISO"
+                        },
+                        {
+                          "id": "rn",
+                          "type": "device",
+                          "description": "Router name"
+                        },
+                        {
+                          "id": "sn",
+                          "type": "device",
+                          "description": "Serial number"
+                        },
+                        {
+                          "id": "fc",
+                          "type": "device",
+                          "description": "Current FW version"
+                        },
+                        {
+                          "id": "pc",
+                          "type": "device",
+                          "description": "Device name"
+                        },
+                        {
+                          "id": "li",
+                          "type": "network",
+                          "description": "LAN IP address"
+                        },
+                        {
+                          "id": "wi",
+                          "type": "network",
+                          "description": "Wired WAN IP addresses"
+                        },
+                        {
+                          "id": "wm",
+                          "type": "network",
+                          "description": "WAN MAC address"
+                        },
+                        {
+                          "id": "lm",
+                          "type": "network",
+                          "description": "LAN MAC address"
+                        },
+                        {
+                          "id": "gs",
+                          "type": "gps",
+                          "description": "GPS info"
+                        },
+                        {
+                          "id": "mi",
+                          "type": "mobile",
+                          "description": "Mobile IP addresses"
+                        },
+                        {
+                          "id": "ss",
+                          "type": "mobile",
+                          "description": "Signal strength"
+                        },
+                        {
+                          "id": "on",
+                          "type": "mobile",
+                          "description": "Operator name"
+                        },
+                        {
+                          "id": "ct",
+                          "type": "mobile",
+                          "description": "Connection type"
+                        },
+                        {
+                          "id": "cs",
+                          "type": "mobile",
+                          "description": "Data connection state"
+                        },
+                        {
+                          "id": "ns",
+                          "type": "mobile",
+                          "description": "Network state"
+                        },
+                        {
+                          "id": "im",
+                          "type": "mobile",
+                          "description": "IMSI"
+                        },
+                        {
+                          "id": "ie",
+                          "type": "mobile",
+                          "description": "IMEI"
+                        },
+                        {
+                          "id": "md",
+                          "type": "mobile",
+                          "description": "Modem model"
+                        },
+                        {
+                          "id": "is",
+                          "type": "mobile",
+                          "description": "Modem serial number"
+                        },
+                        {
+                          "id": "ps",
+                          "type": "mobile",
+                          "description": "SIM pin state"
+                        },
+                        {
+                          "id": "st",
+                          "type": "mobile",
+                          "description": "SIM state"
+                        },
+                        {
+                          "id": "cp",
+                          "type": "mobile",
+                          "description": "RSCP"
+                        },
+                        {
+                          "id": "ec",
+                          "type": "mobile",
+                          "description": "ECIO"
+                        },
+                        {
+                          "id": "ic",
+                          "type": "mobile",
+                          "description": "ICCID"
+                        },
+                        {
+                          "id": "ci",
+                          "type": "mobile",
+                          "description": "CELLID"
+                        },
+                        {
+                          "id": "sv",
+                          "type": "mobile",
+                          "description": "Network serving"
+                        },
+                        {
+                          "id": "su",
+                          "type": "mobile",
+                          "description": "SIM slot in use"
+                        },
+                        {
+                          "id": "rp",
+                          "type": "mobile",
+                          "description": "RSRP"
+                        },
+                        {
+                          "id": "sr",
+                          "type": "mobile",
+                          "description": "SINR"
+                        },
+                        {
+                          "id": "rq",
+                          "type": "mobile",
+                          "description": "RSRQ"
+                        },
+                        {
+                          "id": "nb",
+                          "type": "mobile",
+                          "description": "Neighbour cells"
+                        },
+                        {
+                          "id": "ni",
+                          "type": "mobile",
+                          "description": "Network info"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Analog Current Loop (6,9)",
+                          "io_name": "Analog Current Loop",
+                          "block_pins": [
+                            6,
+                            9
+                          ],
+                          "id": "g0"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Analog Input (6,9)",
+                          "io_name": "Analog Input",
+                          "block_pins": [
+                            6,
+                            9
+                          ],
+                          "id": "g1"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Input (3)",
+                          "io_name": "Input",
+                          "block_pins": [
+                            3
+                          ],
+                          "id": "g2"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Digital Input (1)",
+                          "io_name": "Digital Input",
+                          "block_pins": [
+                            1
+                          ],
+                          "id": "g3"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Output (4)",
+                          "io_name": "Output",
+                          "block_pins": [
+                            4
+                          ],
+                          "id": "g4"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Isolated Output (3,4,8)",
+                          "io_name": "Isolated Output",
+                          "block_pins": [
+                            3,
+                            4,
+                            8
+                          ],
+                          "id": "g5"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Isolated Input (2,7)",
+                          "io_name": "Isolated Input",
+                          "block_pins": [
+                            2,
+                            7
+                          ],
+                          "id": "g6"
+                        },
+                        {
+                          "type": "io",
+                          "description": "Relay (5,10)",
+                          "io_name": "Relay",
+                          "block_pins": [
+                            5,
+                            10
+                          ],
+                          "id": "g7"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-system-device-p",
+        "description": ""
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "System",
+          "Device",
+          "Info"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "device_param": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "type": "io",
+            "description": "Relay (5,10)",
+            "io_name": "Relay",
+            "block_pins": [
+              5,
+              10
+            ],
+            "id": "g7"
+          }
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "IO = \"io\"",
+              "event",
+              "device",
+              "network",
+              "mobile",
+              "io",
+              "other"
+            ],
+            "description": "Parameter type.",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Parameter description.",
+            "readOnly": true
+          },
+          "io_name": {
+            "type": "string",
+            "description": "I/O pin name (if \"type\" is \"io\")",
+            "readOnly": true
+          },
+          "block_pins": {
+            "type": "array",
+            "description": "I/O pin location (if \"type\" is \"io\")",
+            "items": {
+              "type": "integer"
+            },
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "Parameter ID, used to when expanding the parameter (e.g. \"%er\")",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "type",
+          "description",
+          "id"
+        ]
+      }
+    },
+    "responses": {
+      "200PackagesPaths": {
+        "description": "Returns data about available packages paths",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of packages paths",
+                  "items": {
+                    "type": "string",
+                    "description": "Package paths"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

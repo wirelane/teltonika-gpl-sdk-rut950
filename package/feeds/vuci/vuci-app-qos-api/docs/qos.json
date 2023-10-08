@@ -1,0 +1,893 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "QOS",
+    "version": "1.0",
+    "contact": {},
+    "description": "QOS api documentation"
+  },
+  "tags": [
+    {
+      "name": "Interfaces"
+    },
+    {
+      "name": "Classification rules"
+    }
+  ],
+  "servers": [],
+  "paths": {
+    "/qos/interfaces/config": {
+      "get": {
+        "summary": "Get QOS interface configurations",
+        "tags": [
+          "Interfaces"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_interface_multi"
+          }
+        },
+        "operationId": "get-services-qos-interfaces",
+        "description": "Gets QOS interface configurations"
+      },
+      "post": {
+        "summary": "Create QOS interface configuration",
+        "operationId": "post-services-qos-interfaces",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_interface"
+          }
+        },
+        "description": "Creates QOS interface configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_qos_interface_post"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Interfaces"
+        ]
+      },
+      "put": {
+        "summary": "Update QOS interface configurations",
+        "operationId": "put-services-qos-interfaces",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_interface_multi"
+          }
+        },
+        "description": "Updates QOS interface configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_qos_interface_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Interfaces"
+        ]
+      },
+      "delete": {
+        "summary": "Delete QOS interface configurations",
+        "operationId": "delete-services-qos-interfaces",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          }
+        },
+        "description": "Deletes QOS interface configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Interfaces"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "QoS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/qos/rules/config": {
+      "get": {
+        "summary": "Get QOS classification rule",
+        "tags": [
+          "Classification rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_classification_multi"
+          }
+        },
+        "operationId": "get-services-qos-rules",
+        "description": "Gets QOS classification rules"
+      },
+      "post": {
+        "summary": "Create QOS classification rule",
+        "operationId": "post-services-qos-rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_classification"
+          }
+        },
+        "description": "Creates QOS classification rule",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_qos_classification"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Classification rules"
+        ]
+      },
+      "put": {
+        "summary": "Update QOS classification rules",
+        "operationId": "put-services-qos-rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_classification_multi"
+          }
+        },
+        "description": "Updates QOS classification rules",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_qos_classification_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Classification rules"
+        ]
+      },
+      "delete": {
+        "summary": "Delete QOS classification rules",
+        "operationId": "delete-services-qos-rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          }
+        },
+        "description": "Deletes QOS classification rules",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Classification rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "QoS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/qos/interfaces/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get QOS interface configuration",
+        "tags": [
+          "Interfaces"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_interface"
+          }
+        },
+        "operationId": "get-services-qos-interfaces-sid",
+        "description": "Get QOS interface configuration"
+      },
+      "put": {
+        "summary": "Update QOS interface configuration",
+        "operationId": "put-services-qos-interfaces-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_interface"
+          }
+        },
+        "description": "Updates QOS interface configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_qos_interface"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Interfaces"
+        ]
+      },
+      "delete": {
+        "summary": "Delete QOS interface configuration",
+        "operationId": "delete-services-qos-interfaces-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          }
+        },
+        "description": "Deletes QOS interface configuration",
+        "tags": [
+          "Interfaces"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "QoS"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/qos/rules/config/{sid}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sid",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get QOS classification rule configuration",
+        "tags": [
+          "Classification rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_classification"
+          }
+        },
+        "operationId": "get-services-qos-rules-sid",
+        "description": "Gets QOS classification rule configuration"
+      },
+      "put": {
+        "summary": "Update QOS classification rule configuration",
+        "operationId": "put-services-qos-rules-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_classification"
+          }
+        },
+        "description": "Updates QOS classification rule configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_qos_classification"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Classification rules"
+        ]
+      },
+      "delete": {
+        "summary": "Delete QOS classification rule configuration",
+        "operationId": "delete-services-qos-rules-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          }
+        },
+        "description": "Deletes QOS classification rule configuration",
+        "tags": [
+          "Classification rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "QoS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/qos/rules/options": {
+      "get": {
+        "summary": "Get rules service options",
+        "tags": [
+          "Classification rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_qos_rules_options"
+          }
+        },
+        "operationId": "get-services-qos-rules-options",
+        "description": "Gets rules service options"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "QoS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "qos_classification": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "target": "",
+            "srchost": "",
+            "dsthost": "",
+            "proto": "",
+            "ports": ""
+          }
+        },
+        "properties": {
+          "target": {
+            "type": "string",
+            "description": "Select target for which rule will be applied",
+            "x-web": {
+              "pretty": "Target",
+              "input-type": "input"
+            }
+          },
+          "srchost": {
+            "type": "string",
+            "description": "Packets matching this source host(s) (single IP or in CIDR notation) belong to the bucket defined in target",
+            "x-web": {
+              "pretty": "Source host",
+              "input-type": "input"
+            }
+          },
+          "dsthost": {
+            "type": "string",
+            "description": "Packets matching this destination host(s) (single IP or in CIDR notation) belong to the bucket defined in the target",
+            "x-web": {
+              "pretty": "Destination host",
+              "input-type": "input"
+            }
+          },
+          "proto": {
+            "type": "string",
+            "description": "Select data transmission protocol",
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "select",
+              "enum-pretty": {
+                "": "All",
+                "tcp": "TCP",
+                "udp": "UDP",
+                "icmp": "ICMP"
+              }
+            },
+            "enum": [
+              "",
+              "tcp",
+              "udp",
+              "icmp"
+            ]
+          },
+          "ports": {
+            "type": "string",
+            "description": "Select which ports will be used for transmission",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "target",
+          "srchost",
+          "dsthost",
+          "proto",
+          "ports"
+        ]
+      },
+      "qos_interface": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "overhead": "1",
+            "download": "",
+            "upload": ""
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Set to enable interface",
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enabled"
+            }
+          },
+          "overhead": {
+            "type": "string",
+            "description": "Set to decrease upload and download ratio to prevent link saturation",
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Calculate overhead"
+            }
+          },
+          "download": {
+            "type": "string",
+            "description": "Specify maximal download speed",
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Download speed (kbit/s)"
+            }
+          },
+          "upload": {
+            "type": "string",
+            "description": "Specify maximal upload speed",
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Upload speed (kbit/s)"
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "overhead",
+          "download",
+          "upload"
+        ]
+      },
+      "qos_options": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "ips": [
+              ""
+            ],
+            "classes": [
+              ""
+            ]
+          }
+        },
+        "properties": {
+          "ips": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "classes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "ips",
+          "classes"
+        ]
+      },
+      "req_body_qos_interface_post": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "$ref": "#/components/schemas/qos_interface"
+              }
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_qos_interface_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": []
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/qos_interface"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_qos_interface": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/qos_interface"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_qos_classification": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/qos_classification"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_qos_classification_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {}
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/qos_classification"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_delete_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              ""
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    },
+    "responses": {
+      "200_qos_rules_options": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    ""
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/qos_options"
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_qos_interface": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/qos_interface"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_qos_interface_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/qos_interface"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_qos_classification": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/qos_classification"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        }
+      },
+      "200_qos_classification_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/qos_classification"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

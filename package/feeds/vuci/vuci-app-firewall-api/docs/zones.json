@@ -1,0 +1,813 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/zones/config": {
+      "get": {
+        "summary": "GET All Firewall Zones",
+        "description": "Returns all sections with their parameters form firewall zones configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ZonMulti"
+          }
+        },
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall Zones",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ZonMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/zones_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "post": {
+        "summary": "CREATE All Firewall Zones",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Zon"
+          },
+          "201": {
+            "$ref": "#/components/responses/201response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/zones_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Firewall Zones",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "General Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/zones/config/{id}": {
+      "get": {
+        "summary": "GET Firewall Zones",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Zon"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration zone configuration section indetifier"
+          }
+        ],
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall Zones",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Zon"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall zone section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/zones_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Firewall Zones",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall zone section identifier"
+          }
+        ],
+        "tags": [
+          "Firewall Zones"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "General Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Zon": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/zones_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ZonMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/zones_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "zones_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "A custom name for the zone",
+            "x-web": {
+              "pretty": "Name",
+              "group": "General Settings",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "input": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default policy for traffic entering the zone",
+            "x-web": {
+              "pretty": "Input",
+              "group": "General Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "REJECT": "Reject",
+                "DROP": "Drop",
+                "ACCEPT": "Accept"
+              }
+            }
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default policy for traffic originating from and leaving the zone",
+            "x-web": {
+              "pretty": "Output",
+              "group": "General Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "REJECT": "Reject",
+                "DROP": "Drop",
+                "ACCEPT": "Accept"
+              }
+            }
+          },
+          "forward": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default policy for traffic forwarded between the networks belonging to the zone",
+            "x-web": {
+              "pretty": "Forward",
+              "group": "General Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "REJECT": "Reject",
+                "DROP": "Drop",
+                "ACCEPT": "Accept"
+              }
+            }
+          },
+          "masq": {
+            "type": "string",
+            "description": "Turns Masquerading off or on. MASQUERADE is an iptables target that can be used instead of the SNAT (source NAT) target when the external IP of the network interface is not known at the moment of writing the rule (when the interface gets the external IP dynamically).",
+            "x-web": {
+              "pretty": "Masquerading",
+              "group": "General Settings",
+              "input-type": "switch"
+            }
+          },
+          "mtu_fix": {
+            "type": "string",
+            "description": "Turns MSS clamping off or on. MSS clamping is a workaround used to change the maximum segment size (MSS) of all TCP connections passing through links with an MTU lower than the Ethernet default of 1500.",
+            "x-web": {
+              "pretty": "MSS clamping",
+              "group": "General Settings",
+              "input-type": "switch"
+            }
+          },
+          "network": {
+            "type": "array",
+            "description": "Network or networks that belong to the zone",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Covered networks",
+              "group": "General Settings",
+              "input-type": "input"
+            }
+          },
+          "family": {
+            "type": "string",
+            "enum": [
+              "",
+              "ipv4",
+              "ipv6"
+            ],
+            "description": "IP address family to which to rule will apply",
+            "x-web": {
+              "pretty": "Restrict to address family",
+              "group": "Advanced Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "": "IPv4 and IPv6",
+                "ipv4": "IPv4 only",
+                "ipv6": "IPv6 only"
+              }
+            }
+          },
+          "masq_src": {
+            "type": "array",
+            "description": "Applies Masquerading only to the specified source network/subnet",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Restrict Masquerading to given source subnets",
+              "group": "Advanced Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "family": ""
+                },
+                {
+                  "family": "ipv4"
+                }
+              ]
+            }
+          },
+          "masq_dest": {
+            "description": "Applies Masquerading only to the specified destination network/subnet",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Restrict Masquerading to given destination subnets",
+              "group": "Advanced Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "family": ""
+                },
+                {
+                  "family": "ipv4"
+                }
+              ]
+            }
+          },
+          "conntrack": {
+            "type": "string",
+            "description": "Always maintains connection state (NEW, ESTABLISHED, RELATED) information",
+            "x-web": {
+              "pretty": "Force connection tracking",
+              "group": "Advanced Settings",
+              "input-type": "switch"
+            }
+          },
+          "log": {
+            "type": "string",
+            "description": "Logs packets that hit this rule",
+            "x-web": {
+              "pretty": "Enable logging on this zone",
+              "group": "Advanced Settings",
+              "input-type": "switch"
+            }
+          },
+          "helper": {
+            "type": "array",
+            "description": "Explicitly chooses allowed connection tracking helpers for zone traffic",
+            "items": {
+              "enum": [
+                "amanda",
+                "ftp",
+                "RAS",
+                "Q.931",
+                "irc",
+                "pptp",
+                "sip",
+                "snmp",
+                "tftp"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Conntrack helpers",
+              "group": "Advanced Settings",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "auto_helper": "0"
+                },
+                {
+                  "auto_helper": false
+                }
+              ],
+              "enum-pretty": {
+                "amanda": "Amanda backup and archiving proto (AMANDA)",
+                "ftp": "FTP passive connection tracking (FTP)",
+                "RAS": "RAS proto tracking (RAS)",
+                "Q.931": "Q.931 proto tracking (Q.931)",
+                "irc": "IRC DCC connection tracking (IRC)",
+                "pptp": "PPTP VPN connection tracking (PPTP)",
+                "sip": "SIP VoIP connection tracking (SIP)",
+                "snmp": "SNMP monitoring connection tracking (SNMP)",
+                "tftp": "TFTP connection tracking (TFTP)"
+              }
+            }
+          },
+          "log_limit": {
+            "type": "string",
+            "description": "Limit how many messages can be logged in the span of 1 minute. For example, to log 50 packets per minute use: 50/minute.",
+            "x-web": {
+              "pretty": "Limit log messages",
+              "group": "Advanced Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "log": "1"
+                }
+              ]
+            }
+          },
+          "out": {
+            "description": "Allows forward traffic to specified destination zones. Destination zones cover forwarded traffic originating from this source zone.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Allow forward to destination zones",
+              "input-type": "input"
+            }
+          },
+          "in": {
+            "description": "Allows forward traffic to specified source zones. Source zones match forwarded traffic originating from other zones that is targeted at this zone.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Allow forward from source zones",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "zones_options_single_put": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A custom name for the zone",
+            "x-web": {
+              "pretty": "Name",
+              "group": "General Settings",
+              "input-type": "input",
+              "unique": true
+            }
+          },
+          "input": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default policy for traffic entering the zone",
+            "x-web": {
+              "pretty": "Input",
+              "group": "General Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "REJECT": "Reject",
+                "DROP": "Drop",
+                "ACCEPT": "Accept"
+              }
+            }
+          },
+          "output": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default policy for traffic originating from and leaving the zone",
+            "x-web": {
+              "pretty": "Output",
+              "group": "General Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "REJECT": "Reject",
+                "DROP": "Drop",
+                "ACCEPT": "Accept"
+              }
+            }
+          },
+          "forward": {
+            "type": "string",
+            "enum": [
+              "REJECT",
+              "DROP",
+              "ACCEPT"
+            ],
+            "description": "Default policy for traffic forwarded between the networks belonging to the zone",
+            "x-web": {
+              "pretty": "Forward",
+              "group": "General Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "REJECT": "Reject",
+                "DROP": "Drop",
+                "ACCEPT": "Accept"
+              }
+            }
+          },
+          "masq": {
+            "type": "string",
+            "description": "Turns Masquerading off or on. MASQUERADE is an iptables target that can be used instead of the SNAT (source NAT) target when the external IP of the network interface is not known at the moment of writing the rule (when the interface gets the external IP dynamically).",
+            "x-web": {
+              "pretty": "Masquerading",
+              "group": "General Settings",
+              "input-type": "switch"
+            }
+          },
+          "mtu_fix": {
+            "type": "string",
+            "description": "Turns MSS clamping off or on. MSS clamping is a workaround used to change the maximum segment size (MSS) of all TCP connections passing through links with an MTU lower than the Ethernet default of 1500.",
+            "x-web": {
+              "pretty": "MSS clamping",
+              "group": "General Settings",
+              "input-type": "switch"
+            }
+          },
+          "network": {
+            "type": "array",
+            "description": "Network or networks that belong to the zone",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Covered networks",
+              "group": "General Settings",
+              "input-type": "input"
+            }
+          },
+          "family": {
+            "type": "string",
+            "enum": [
+              "",
+              "ipv4",
+              "ipv6"
+            ],
+            "description": "IP address family to which to rule will apply",
+            "x-web": {
+              "pretty": "Restrict to address family",
+              "group": "Advanced Settings",
+              "input-type": "select",
+              "enum-pretty": {
+                "": "IPv4 and IPv6",
+                "ipv4": "IPv4 only",
+                "ipv6": "IPv6 only"
+              }
+            }
+          },
+          "masq_src": {
+            "type": "array",
+            "description": "Applies Masquerading only to the specified source network/subnet",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Restrict Masquerading to given source subnets",
+              "group": "Advanced Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "family": ""
+                },
+                {
+                  "family": "ipv4"
+                }
+              ]
+            }
+          },
+          "masq_dest": {
+            "description": "Applies Masquerading only to the specified destination network/subnet",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Restrict Masquerading to given destination subnets",
+              "group": "Advanced Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "family": ""
+                },
+                {
+                  "family": "ipv4"
+                }
+              ]
+            }
+          },
+          "conntrack": {
+            "type": "string",
+            "description": "Always maintains connection state (NEW, ESTABLISHED, RELATED) information",
+            "x-web": {
+              "pretty": "Force connection tracking",
+              "group": "Advanced Settings",
+              "input-type": "switch"
+            }
+          },
+          "log": {
+            "type": "string",
+            "description": "Logs packets that hit this rule",
+            "x-web": {
+              "pretty": "Enable logging on this zone",
+              "group": "Advanced Settings",
+              "input-type": "switch"
+            }
+          },
+          "helper": {
+            "type": "array",
+            "description": "Explicitly chooses allowed connection tracking helpers for zone traffic",
+            "items": {
+              "enum": [
+                "amanda",
+                "ftp",
+                "RAS",
+                "Q.931",
+                "irc",
+                "pptp",
+                "sip",
+                "snmp",
+                "tftp"
+              ],
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Conntrack helpers",
+              "group": "Advanced Settings",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "auto_helper": "0"
+                },
+                {
+                  "auto_helper": false
+                }
+              ],
+              "enum-pretty": {
+                "amanda": "Amanda backup and archiving proto (AMANDA)",
+                "ftp": "FTP passive connection tracking (FTP)",
+                "RAS": "RAS proto tracking (RAS)",
+                "Q.931": "Q.931 proto tracking (Q.931)",
+                "irc": "IRC DCC connection tracking (IRC)",
+                "pptp": "PPTP VPN connection tracking (PPTP)",
+                "sip": "SIP VoIP connection tracking (SIP)",
+                "snmp": "SNMP monitoring connection tracking (SNMP)",
+                "tftp": "TFTP connection tracking (TFTP)"
+              }
+            }
+          },
+          "log_limit": {
+            "type": "string",
+            "description": "Limit how many messages can be logged in the span of 1 minute. For example, to log 50 packets per minute use: 50/minute.",
+            "x-web": {
+              "pretty": "Limit log messages",
+              "group": "Advanced Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "log": "1"
+                }
+              ]
+            }
+          },
+          "out": {
+            "description": "Allows forward traffic to specified destination zones. Destination zones cover forwarded traffic originating from this source zone.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Allow forward to destination zones",
+              "input-type": "input"
+            }
+          },
+          "in": {
+            "description": "Allows forward traffic to specified source zones. Source zones match forwarded traffic originating from other zones that is targeted at this zone.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "x-web": {
+              "pretty": "Allow forward from source zones",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

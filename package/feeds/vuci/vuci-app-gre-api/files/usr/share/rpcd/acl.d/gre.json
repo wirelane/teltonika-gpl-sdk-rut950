@@ -1,0 +1,29 @@
+{
+	"services/vpn/gre": {
+		"description": "gre configuration",
+		"read": {
+			"api": [
+				"/gre/*",
+				"/interfaces/config/*"
+			],
+			"ubus": {
+				"network.interface.*": [
+					"status"
+				]
+			}
+		},
+		"write": {
+			"api": ["/gre/*"],
+			"uci": ["network"],
+			"ubus": {
+				"vuci.services.gre": [
+					"gre_create",
+					"gre_remove",
+					"gre_save",
+					"route_create",
+					"validate_netmask"
+				]
+			}
+		}
+	}
+}

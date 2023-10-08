@@ -1,0 +1,279 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Groups",
+    "version": "1.0.0",
+    "description": "Groups API documentation."
+  },
+  "tags": [
+    {
+      "name": "Groups"
+    }
+  ],
+  "paths": {
+    "/groups/config": {
+      "get": {
+        "summary": "Returns all groups configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200GroupMulti"
+          }
+        },
+        "tags": [
+          "Groups"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified groups configurations",
+        "operationId": "put-system-groups-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200GroupMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/group_options"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Groups"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "User Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/groups/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Group name"
+        }
+      ],
+      "get": {
+        "summary": "Returns specified groups configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Group"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Groups"
+        ]
+      },
+      "put": {
+        "summary": "Updates specified groups configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Group"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/group_single_options"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Groups"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "User Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Group": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/group_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200GroupMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/group_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "group_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Group name",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Group name"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/group_single_options"
+          }
+        ]
+      },
+      "group_single_options": {
+        "title": "group_options_put",
+        "type": "object",
+        "properties": {
+          "target_write": {
+            "x-web": {
+              "pretty": "Write action",
+              "input-type": "select",
+              "enum-pretty": {
+                "allow": "Allow",
+                "deny": "Deny"
+              }
+            },
+            "type": "string",
+            "description": "Specifies whether to deny or allow write access for users belonging the group.",
+            "enum": [
+              "allow",
+              "deny"
+            ]
+          },
+          "write": {
+            "x-web": {
+              "pretty": "Write access",
+              "input-type": "input"
+            },
+            "description": "Controls the ability of users to change and execute the contents (e.g. admin/network/lan).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "target_read": {
+            "x-web": {
+              "pretty": "Read action",
+              "input-type": "select",
+              "enum-pretty": {
+                "allow": "Allow",
+                "deny": "Deny"
+              }
+            },
+            "type": "string",
+            "description": "Specifies whether to deny or allow read access for users belonging the group.",
+            "enum": [
+              "allow",
+              "deny"
+            ]
+          },
+          "read": {
+            "x-web": {
+              "pretty": "Read access",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Controls the ability of users to navigate the contents (e.g. admin/network/*).",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

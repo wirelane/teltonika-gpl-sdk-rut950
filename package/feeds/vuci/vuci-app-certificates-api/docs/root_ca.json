@@ -1,0 +1,266 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Root CA",
+    "description": "Root CA API documentation",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Root CA"
+    }
+  ],
+  "paths": {
+    "/root_ca/config/general": {
+      "get": {
+        "tags": [
+          "Root CA"
+        ],
+        "summary": "Returns root ca data",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RootCa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Root CA"
+        ],
+        "summary": "Updates root ca data",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RootCa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/root_ca_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Upload Root CA certificate",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_root_ca"
+        },
+        "tags": [
+          "Root CA"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/root_ca/actions/change": {
+      "post": {
+        "tags": [
+          "Root CA"
+        ],
+        "summary": "Changes Root CA to new certificate from device",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RootCa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/root_ca_change_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/root_ca/actions/reset": {
+      "post": {
+        "tags": [
+          "Root CA"
+        ],
+        "summary": "Resets Root CA to its initial value",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RootCa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Certificates"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RootCa": {
+        "description": "Returns root certificate data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/root_ca_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "path": "/etc/cacert.pem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "root_ca_options": {
+        "type": "object",
+        "properties": {
+          "root_ca": {
+            "x-web": {
+              "pretty": "Root CA",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Root certificate data."
+          }
+        },
+        "required": [
+          "root_ca"
+        ]
+      },
+      "root_ca_change_options": {
+        "type": "object",
+        "properties": {
+          "certificate": {
+            "x-web": {
+              "pretty": "Certificate",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Certificate path to use as Root CA."
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "file_upload_root_ca": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "x-web": {
+                    "pretty": "Root CA"
+                  },
+                  "type": "string",
+                  "format": "binary",
+                  "description": "File to upload."
+                }
+              },
+              "required": [
+                "file"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

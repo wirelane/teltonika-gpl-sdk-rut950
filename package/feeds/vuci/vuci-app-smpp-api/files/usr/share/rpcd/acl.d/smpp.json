@@ -1,0 +1,14 @@
+
+{
+	"services/mobile_utilities/smpp": {
+		"description": "smpp configuration",
+		"read": {
+			"uci": ["smpp"],
+			"api": ["/smpp/*", "/mobile/modems/status_basic/*"]
+		},
+		"write": {
+			"uci": ["smpp"],
+			"api": ["/smpp/*"]
+		}
+	}
+}

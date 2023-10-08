@@ -1,0 +1,19 @@
+{
+    "network/traffic_shaping/sqm": {
+        "description": "sqm configuration",
+        "read": {
+            "api": [
+                "/sqm/*",
+                "/wireless/interfaces/status/*",
+                "/interfaces/status/*",
+                "/devices/status/*",
+                "/firewall/nat_offloading/config/general/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/sqm/*"
+            ]
+        }
+    }
+}

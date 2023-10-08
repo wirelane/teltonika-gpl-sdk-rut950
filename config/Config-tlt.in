@@ -1,0 +1,918 @@
+#
+# Copyright (C) 2023 Teltonika-Networks
+#
+
+#
+# core features
+#
+
+config CORE_PACKAGES
+	bool
+	default y
+	imply PACKAGE_troubleshoot
+	imply PACKAGE_vuci-app-troubleshoot-ui
+	imply PACKAGE_rpcd-mod-mnfinfo
+	imply PACKAGE_ucert-full
+	imply PACKAGE_kmod-gpio-button-hotplug
+	imply PACKAGE_cgi-io
+	imply PACKAGE_uci-default
+	imply BUSYBOX_CONFIG_PASSWD
+
+config PROFILES_SUPPORT
+	bool
+	default y
+	imply PACKAGE_profiler
+	imply PACKAGE_vuci-app-profiles-ui
+
+config EVENTS_SUBSYSTEM
+	bool
+	depends on !AP_DEVICE
+	default y
+	imply PACKAGE_events_reporting
+	imply PACKAGE_vuci-app-events-reporting-ui
+
+config REBOOT_UTILS
+	bool
+	default y
+	imply PACKAGE_periodic_reboot
+	imply PACKAGE_ping_reboot
+	imply PACKAGE_vuci-app-auto-reboot-ui
+
+config PKG_SUPPORT
+	bool
+	depends on !(AP_DEVICE || x86_64)
+	default y
+	imply PACKAGE_package_restore
+	imply PACKAGE_vuci-app-package-manager-ui
+
+config RMS_SUPPORT
+	bool
+	default y
+	imply PACKAGE_rms_json
+	imply PACKAGE_rms_mqtt
+	imply PACKAGE_vuci-app-cloud-solutions-ui
+
+config FOTA_SUPPORT
+	bool
+	default y
+	imply PACKAGE_rut_fota
+	imply PACKAGE_vuci-app-rut-fota-ui
+
+config LED_SUPPORT
+	bool
+	depends on !BASIC_ROUTER
+	default y
+	imply PACKAGE_ledman if AP_DEVICE && !LEDMAN_FULL
+	imply PACKAGE_ledman-full if !AP_DEVICE || LEDMAN_FULL
+
+config POE_SUPPORT
+	bool
+	imply PACKAGE_poeman
+
+config PAM_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_pam
+	imply DROPBEAR_UBUS_PAM
+	imply RPCD_PAM
+
+#
+# crypto, hardware acceleration
+#
+
+config CRYPTO
+	bool
+	default y
+	imply PACKAGE_kmod-crypto-crc32c
+	imply PACKAGE_kmod-crypto-sha512
+	imply PACKAGE_kmod-crypto-gcm
+
+config HNAT
+	bool
+	imply PACKAGE_qssdk-hnat
+
+#
+# network subsystem
+#
+
+config CORE_NETWORK_PACKAGES
+	bool
+	default y
+	imply PACKAGE_port_eventsd
+	imply PACKAGE_ip-full
+	imply PACKAGE_iptables-mod-nflog
+	imply PACKAGE_kmod-br-netfilter if AP_DEVICE
+	imply PACKAGE_ip_blockd
+	imply PACKAGE_vuci-app-ports-settings-ui if !AP_DEVICE
+	imply BUSYBOX_CONFIG_FEATURE_IP_BLOCKD
+
+config ADVANCED_NETWORK
+	bool
+	depends on !AP_DEVICE
+	default y
+	imply PACKAGE_ethtool
+	imply PACKAGE_networkmap
+	imply PACKAGE_vuci-app-networkmap-ui
+	imply PACKAGE_iptables-mod-nat-extra
+	imply PACKAGE_iptables-mod-conntrack-extra
+	imply PACKAGE_kmod-ipt-raw6
+	imply PACKAGE_odhcpd-ipv6only
+	imply PACKAGE_kmod-nf-nathelper-extra
+	imply PACKAGE_kmod-nf-nathelper
+	imply PACKAGE_6rd
+	imply PACKAGE_vuci-app-firewall-ui
+	imply PACKAGE_vuci-app-routes-ui
+	imply PACKAGE_vuci-app-dns-ui
+
+config NFTABLES_SUPORT
+	bool
+	depends on !HAS_DOWNSTREAM_KERNEL
+	default y
+	imply PACKAGE_kmod-nft-netdev
+	imply PACKAGE_nftables-nojson
+
+#
+# vpn, tunnels, etc
+#
+
+config STUNNEL_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && ADVANCED_NETWORK
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_stunnel
+
+config STRONGSWAN_SUPPORT
+	bool
+	depends on ADVANCED_NETWORK
+	default y
+	imply PACKAGE_strongswan
+	imply PACKAGE_strongswan-minimal
+	imply PACKAGE_strongswan-mod-xauth-generic
+	imply PACKAGE_strongswan-mod-vici
+	imply PACKAGE_strongswan-mod-sha2
+	imply PACKAGE_strongswan-mod-revocation
+	imply PACKAGE_strongswan-mod-pkcs8
+	imply PACKAGE_strongswan-mod-pkcs1
+	imply PACKAGE_strongswan-mod-pgp
+	imply PACKAGE_strongswan-mod-pem
+	imply PACKAGE_strongswan-mod-md5
+	imply PACKAGE_strongswan-mod-constraints
+	imply PACKAGE_strongswan-mod-openssl
+	imply PACKAGE_strongswan-mod-eap-identity
+	imply PACKAGE_strongswan-mod-eap-mschapv2
+	imply PACKAGE_vuci-app-strong-swan-ui
+
+config GRE_SUPPORT
+	bool
+	depends on ADVANCED_NETWORK
+	default y
+	imply PACKAGE_gre
+	imply PACKAGE_gkeepalive
+	imply PACKAGE_vuci-app-gre-ui
+
+config OPENVPN_SUPPORT
+	bool
+	depends on ADVANCED_NETWORK
+	default y
+	imply PACKAGE_openvpn-easy-rsa
+	imply PACKAGE_openvpn-openssl
+	imply PACKAGE_vuci-app-openvpn-ui
+
+config SSTP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && ADVANCED_NETWORK
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_sstp-client
+
+config DMVPN_SUPPORT
+	tristate
+	depends on !64MB_RAM && PKG_SUPPORT && GRE_SUPPORT && STRONGSWAN_SUPPORT && FRR_SUPPORT
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_dmvpn
+
+config DMVPN_FRR5_SUPPORT
+	tristate
+	depends on 64MB_RAM && PKG_SUPPORT && GRE_SUPPORT && STRONGSWAN_SUPPORT && FRR5_SUPPORT
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_dmvpn_frr5
+
+config PPTP_SUPPORT
+	bool
+	depends on ADVANCED_NETWORK
+	default y
+	imply PACKAGE_pptpd
+	imply PACKAGE_ppp-mod-pptp
+	imply PACKAGE_ppp-mod-pppoe
+	imply PACKAGE_vuci-app-pptp-ui
+
+config L2TP_SUPPORT
+	bool
+	depends on PPTP_SUPPORT
+	default y
+	imply PACKAGE_xl2tpd
+	imply PACKAGE_ppp-mod-ppol2tp
+	imply PACKAGE_kmod-l2tp-eth
+	imply PACKAGE_kmod-l2tp-ip
+	imply PACKAGE_vuci-app-l2tp-ui
+
+config ZEROTIER_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_zerotier
+
+config TINC_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_tinc
+
+config WIREGUARD_SUPPORT
+	bool
+	depends on !AP_DEVICE
+	default y
+	imply PACKAGE_wireguard if !HAS_DOWNSTREAM_KERNEL
+	imply PACKAGE_wireguard-trb5 if HAS_DOWNSTREAM_KERNEL
+
+#
+# network routing
+#
+
+config PORT_MIRRORING_SUPPORT
+	bool
+	imply PACKAGE_vuci-app-port-mirroring-ui
+	imply PACKAGE_vuci-app-port-mirroring-api if !USES_SOFT_PORT_MIRROR
+	imply PACKAGE_vuci-app-software-port-mirroring-api if USES_SOFT_PORT_MIRROR
+
+config RELAYD_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && !GATEWAY_DEVICE && !BASIC_ROUTER && !POE_SUPPORT
+	default y if NAND_SUPPORT
+	default m
+	imply PACKAGE_relayd
+
+config FRR_SUPPORT
+	tristate
+	depends on !64MB_RAM && PKG_SUPPORT && ADVANCED_NETWORK
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_frr
+	imply PACKAGE_frr-zebra
+	imply PACKAGE_frr-libfrr
+	imply PACKAGE_frr-ripd
+	imply PACKAGE_frr-ospfd
+	imply PACKAGE_frr-eigrpd
+	imply PACKAGE_frr-bgpd
+
+config FRR_VTYSH_SUPPORT
+	tristate
+	depends on !64MB_RAM && PKG_SUPPORT && ADVANCED_NETWORK && FRR_SUPPORT
+	default m
+	imply PACKAGE_frr-vtysh
+
+config FRR5_SUPPORT
+	tristate
+	depends on 64MB_RAM && PKG_SUPPORT && ADVANCED_NETWORK
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_frr5
+	imply PACKAGE_frr5-zebra
+	imply PACKAGE_frr5-libfrr
+	imply PACKAGE_frr5-ripd
+	imply PACKAGE_frr5-ospfd
+	imply PACKAGE_frr5-eigrpd
+	imply PACKAGE_frr5-bgpd
+
+config VRR_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && ADVANCED_NETWORK
+	default m if !NAND_SUPPORT || GATEWAY_DEVICE
+	default y
+	imply PACKAGE_vrrpd
+
+config MULTIWAN_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && (!GATEWAY_DEVICE || (GATEWAY_DEVICE && SERIAL_SUPPORT && !MULTI_DEVICE_QUIRK))
+	default m if HAS_SINGLE_ETH_PORT || POE_SUPPORT
+	default y
+	imply PACKAGE_mwan3
+	imply PACKAGE_vuci-app-mwan3-ui
+
+config IGMPPROXY_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_igmpproxy
+
+#
+# network tools, services, utils
+#
+
+config WOL_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_etherwake
+
+config BRIDGE_SUPPORT
+	bool
+	depends on !AP_DEVICE && !BASIC_ROUTER
+	default y
+	imply PACKAGE_bridge
+	imply PACKAGE_ebtables
+	imply PACKAGE_kmod-ebtables-ipv4
+	imply PACKAGE_kmod-ebtables-watchers
+
+config TCP_DUMP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_tcpdump
+
+config SPEEDTEST_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_speedtest
+
+config NTP_SUPPORT
+	bool
+	default y
+	imply PACKAGE_ntpclient
+	imply PACKAGE_vuci-app-ntp-ui
+
+config NTPD_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_ntpd
+
+config NF_LOGGING_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && !BYPASS_OFFLOAD_FEATURE
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_tlt-ulogd
+
+config IPTABLES_FILTER_EXTENSION
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_iptables-mod-filter
+
+config DDNS_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && ADVANCED_NETWORK
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_tlt-ddns
+
+config WEB_FILTER_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && ADVANCED_NETWORK
+	default y if (NAND_SUPPORT && !GATEWAY_DEVICE) || WIFI_GUEST_NETWORK_SUPPORT
+	default m
+	imply PACKAGE_web_filter
+
+config UPNP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_miniupnpd
+
+config SQM_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && !BYPASS_OFFLOAD_FEATURE
+	default m if !NAND_SUPPORT || (NAND_SUPPORT && GATEWAY_DEVICE)
+	default y
+	imply PACKAGE_sqm-scripts
+
+config QOS_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && !BYPASS_OFFLOAD_FEATURE
+	default m
+	imply PACKAGE_qos-scripts
+
+config DLNA_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && USB_SUPPORT_EXTERNAL
+	default m
+	imply PACKAGE_tlt-minidlna
+
+config SSHFS_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_sshfs
+
+config TELNET_SUPPORT
+	tristate
+	depends on !AP_DEVICE
+	default y
+	imply BUSYBOX_CONFIG_TELNET
+	imply BUSYBOX_CONFIG_FEATURE_TELNET_TTYPE
+	imply BUSYBOX_CONFIG_FEATURE_TELNET_AUTOLOGIN
+	imply BUSYBOX_CONFIG_FEATURE_TELNET_WIDTH
+	imply BUSYBOX_CONFIG_TELNETD
+	imply BUSYBOX_CONFIG_FEATURE_TELNETD_STANDALONE
+	imply PACKAGE_vuci-app-telnet-api
+
+config UDPRELAY_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_udprelay
+
+config EMAILRELAY
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_emailrelay
+
+config UMDNS_SUPPORT
+	bool
+	depends on AP_DEVICE
+	default y
+	imply PACKAGE_umdns
+
+
+#
+# cloud
+#
+
+config AZURE_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_azure_iothub
+
+config CUMULOCITY_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_cmStreamApp
+
+config GREENGRASS_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && arm_v7 && NAND_SUPPORT && !GATEWAY_DEVICE
+	default m
+	imply BUSYBOX_CONFIG_ADDGROUP
+	imply BUSYBOX_CONFIG_FEATURE_ADDUSER_TO_GROUP
+	imply BUSYBOX_CONFIG_CHPASSWD
+	imply BUSYBOX_CONFIG_REALPATH
+	imply KERNEL_CGROUP_DEVICE
+	imply PACKAGE_greengrass
+
+config THINGWORX_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_twStreamApp
+
+#
+# modem, mobile, etc
+#
+
+config MOBILE_SUPPORT
+	bool
+	depends on !AP_DEVICE
+	default y
+	imply PACKAGE_gsmctl
+	imply PACKAGE_mobifd
+	imply PACKAGE_apn_db
+	imply PACKAGE_mdcollectd if !BYPASS_OFFLOAD_FEATURE
+	imply PACKAGE_quota_limit if !BYPASS_OFFLOAD_FEATURE
+	imply PACKAGE_rpcd-mod-smslimit
+	imply PACKAGE_email_to_sms
+	imply PACKAGE_uqmi if !BYPASS_OFFLOAD_FEATURE
+	imply PACKAGE_qmi-utils if BYPASS_OFFLOAD_FEATURE
+	imply PACKAGE_vuci-app-mobile-ui
+	imply PACKAGE_vuci-app-mobile-utilities-ui
+	imply PACKAGE_dfota if !BASEBAND_SUPPORT
+	imply PACKAGE_post-get
+	imply PACKAGE_post-get-mobile
+	imply PACKAGE_mctl
+	imply PACKAGE_urcd
+
+config MODEM_UPDATER_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && MOBILE_SUPPORT
+	default m
+	imply PACKAGE_modem_updater
+
+config MOBILE_UTILS_SUPPORT
+	bool
+	depends on MOBILE_SUPPORT
+	default y
+	imply PACKAGE_mobutils
+	imply PACKAGE_mobutils-call_utilities
+	imply PACKAGE_mobutils-sms_utilities
+	imply SMS_UTILS_HANDLER_IO if IO_SUPPORT
+	imply SMS_UTILS_HANDLER_WIFI if WIFI_SUPPORT
+	imply SMS_UTILS_HANDLER_GPS if GPS_SUPPORT
+	imply CALL_UTILS_HANDLER_IO if IO_SUPPORT
+	imply CALL_UTILS_HANDLER_WIFI if WIFI_SUPPORT
+
+config DUAL_SIM_SUPPORT
+	bool
+	depends on MOBILE_SUPPORT
+	imply PACKAGE_sim_switch
+
+config RNDIS_SUPPORT
+	bool
+	depends on MOBILE_SUPPORT
+	imply PACKAGE_kmod-usb-net-rndis
+
+config USB_NCM_SUPPORT
+	bool
+	depends on MOBILE_SUPPORT
+	imply PACKAGE_kmod-usb-net-cdc-ncm
+
+config SMPP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && MOBILE_SUPPORT && !BASIC_ROUTER
+	default m
+	imply PACKAGE_smpp
+
+config GSM_CHECKER_SUPPORT
+	bool
+	imply PACKAGE_gsmchecker
+
+config MODEM_LOGGER_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && MOBILE_SUPPORT
+	default m
+	imply PACKAGE_modem_logger
+
+config SIM_IDLE_PROTECTION_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && DUAL_SIM_SUPPORT
+	default m
+	imply PACKAGE_sim_idle_protection
+	imply PACKAGE_vuci-app-sim-idle-protection-ui
+
+#
+# wifi, hostspot, etc
+#
+
+config WIFI_SUPPORT
+	bool
+	imply PACKAGE_iwinfo
+	imply PACKAGE_wireless-tools
+	imply PACKAGE_vuci-app-channel-analysis-ui
+	imply PACKAGE_wpad-openssl if !USES_VENDOR_WIFI_DRIVER
+	imply PACKAGE_wpa-cli if !USES_VENDOR_WIFI_DRIVER
+	imply PACKAGE_vuci-app-wireless-ui if !AP_DEVICE
+	imply PACKAGE_vuci-app-wireless-tap-ui if AP_DEVICE
+	imply PACKAGE_vuci-app-multi-ap-ui
+	imply PACKAGE_multiple_ap if !AP_DEVICE
+
+config MT7628_HOTSPOT20
+	bool
+	depends on USES_VENDOR_WIFI_DRIVER && !AP_DEVICE
+	default y
+
+config WIFI_GUEST_NETWORK_SUPPORT
+	bool
+	depends on WIFI_SUPPORT
+	imply PACKAGE_vuci-app-guest-network-ui
+
+config WIFI_SCANNER_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && WIFI_SUPPORT
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_wifi_scanner
+
+config HOTSPOT_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default y if NAND_SUPPORT && !GATEWAY_DEVICE
+	default m
+	imply PACKAGE_coova-chilli
+	imply COOVACHILLI_CHILLIQUERY
+
+config HOTSPOT_THEMES_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && HOTSPOT_SUPPORT
+	default m
+	imply PACKAGE_hs_theme_airport
+	imply PACKAGE_hs_theme_airport2
+	imply PACKAGE_hs_theme_bus
+	imply PACKAGE_hs_theme_coffee_shop
+	imply PACKAGE_hs_theme_grocery_store
+	imply PACKAGE_hs_theme_office
+	imply PACKAGE_hs_theme_park
+	imply PACKAGE_hs_theme_ship
+	imply PACKAGE_hs_theme_station
+
+config TRAVELMATE_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && WIFI_SUPPORT
+	default m
+	imply PACKAGE_travelmate
+
+#
+# usb subsystem
+#
+
+config USB_STORAGE_SUPPORT
+	bool
+	depends on USB_SUPPORT_EXTERNAL
+	default y
+	imply PACKAGE_kmod-usb-storage
+	imply PACKAGE_kmod-fuse
+	imply PACKAGE_kmod-fs-ntfs
+	imply PACKAGE_kmod-fs-exfat
+	imply PACKAGE_exfat-mkfs
+	imply PACKAGE_kmod-fs-msdos
+	imply PACKAGE_kmod-fs-autofs4
+	imply PACKAGE_kmod-fs-ext4
+	imply PACKAGE_block-mount
+	imply PACKAGE_storage-memory-expansion
+	imply PACKAGE_vuci-app-memory-expansion-ui
+	imply PACKAGE_vuci-app-usb-tools-ui
+	imply BUSYBOX_CONFIG_FDISK
+	imply BUSYBOX_CONFIG_FEATURE_FDISK_WRITABLE
+	imply BUSYBOX_CONFIG_FEATURE_FDISK_ADVANCED
+	imply BUSYBOX_CONFIG_FDISK_SUPPORT_LARGE_DISKS
+	imply BUSYBOX_CONFIG_PARTPROBE
+
+config APP_SAMBA
+	tristate
+	depends on PKG_SUPPORT && USB_STORAGE_SUPPORT
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_samba36-server
+
+config PRINTER_SUPPORT
+	bool
+	depends on USB_SUPPORT_EXTERNAL
+	default y
+	imply PACKAGE_kmod-usb-printer
+	imply PACKAGE_p910nd
+	imply PACKAGE_vuci-app-p910nd-ui
+
+config APP_SOCAT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_socat
+
+config SERIAL_SUPPORT
+	bool
+	imply PACKAGE_sodog-tlt
+	imply PACKAGE_modbusgwd
+	imply PACKAGE_vuci-app-overip-ui
+	imply PACKAGE_vuci-app-modbus-serial-gateway-ui
+	imply PACKAGE_vuci-app-getty-ui
+	imply PACKAGE_vuci-app-modem-control-ui
+	imply PACKAGE_usb-reboot if SERIAL_RESET_QUIRK
+
+
+config SERIAL_USB_DRIVERS
+	bool
+	depends on SERIAL_SUPPORT && USB_SUPPORT_EXTERNAL
+	default y
+	imply PACKAGE_kmod-usb-acm
+	imply PACKAGE_kmod-usb-serial-ch341
+	imply PACKAGE_kmod-usb-serial-pl2303
+	imply PACKAGE_kmod-usb-serial-ark3116
+	imply PACKAGE_kmod-usb-serial-belkin
+	imply PACKAGE_kmod-usb-serial-cp210x
+	imply PACKAGE_kmod-usb-serial-cypress-m8
+	imply PACKAGE_kmod-usb-serial-ftdi
+	imply PACKAGE_kmod-usb-serial-ch343
+
+#
+# langs
+#
+
+config PYTHON_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && (USB_SUPPORT_EXTERNAL || NAND_SUPPORT)
+	default m
+	imply PACKAGE_python3
+
+config JAVA_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && USB_SUPPORT_EXTERNAL
+	default m
+	imply PACKAGE_jamvm
+
+#
+# I/O, GPS, BT stack
+#
+
+config IO_SUPPORT
+	bool
+	depends on HAS_IO
+	default y
+	imply PACKAGE_input_output
+	imply PACKAGE_iojuggler
+	imply PACKAGE_vuci-app-io-ui
+	imply PACKAGE_post-get
+	imply PACKAGE_post-get-io
+
+config GPS_SUPPORT
+	bool
+	imply PACKAGE_gpsctl
+	imply PACKAGE_ntp_gps
+	imply PACKAGE_vuci-app-gps-ui
+	imply PACKAGE_avl
+
+config NTRIP_MODULE_SUPPORT
+	bool
+
+config NTRIP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && NTRIP_MODULE_SUPPORT
+	default m
+	imply PACKAGE_ntrip_client_v2
+
+config BLUETOOTH_SUPPORT
+	bool
+	imply PACKAGE_blesemd
+	imply PACKAGE_vuci-app-bluetooth-ui
+
+#
+# comm protocols
+#
+
+config EASYCWMP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_easycwmp
+
+config SNMP_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_snmp
+	imply SNMPTRAP_GSM if MOBILE_SUPPORT
+	imply SNMPTRAP_IO if IO_SUPPORT
+	imply SNMPTRAP_CHILLI if HOTSPOT_SUPPORT
+
+config MQTT_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m if !NAND_SUPPORT
+	default y
+	imply PACKAGE_mqtt_pub
+
+config IO_MODBUS_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m if !HAS_MODBUS
+	default y
+	imply PACKAGE_modbus_server
+	imply PACKAGE_modbus_client
+	imply PACKAGE_mqtt-modbus-gateway
+
+config DNP3_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_dnp3
+
+config BACNET_MODULE_SUPPORT
+	bool
+
+config BACNET_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && BACNET_MODULE_SUPPORT
+	default m
+	imply PACKAGE_bacnet-router
+
+config MBUS
+	bool
+	imply PACKAGE_libmbus-util
+	imply PACKAGE_mbus_client
+	imply PACKAGE_vuci-app-mbus-ui
+
+config OPCUA
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_opcua_client
+
+config DLMS_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_dlms_client
+	imply PACKAGE_libdlms
+
+#
+# utils
+#
+
+config 7Z_ARCHIVER_SUPPORT
+	tristate
+	depends on PKG_SUPPORT
+	default m
+	imply PACKAGE_7zip
+
+#
+# webui
+#
+
+config CORE_UI_PACKAGES
+	bool
+	default y
+	imply PACKAGE_vuci-app-ui-ui
+	imply PACKAGE_vuci-app-core-ui
+	imply PACKAGE_vuci-app-login-ui
+	imply PACKAGE_vuci-app-system-status-ui
+	imply PACKAGE_vuci-app-system-info-ui
+	imply PACKAGE_vuci-app-administration-ui
+	imply PACKAGE_vuci-app-access-control-ui
+	imply PACKAGE_vuci-app-firmware-ui
+	imply PACKAGE_vuci-app-backup-ui
+	imply PACKAGE_vuci-app-license-ui
+	imply PACKAGE_vuci-app-realtime-ui
+	imply PACKAGE_vuci-app-logs-ui
+
+config NORMAL_SERVICES_WEBUI
+	bool
+	depends on !AP_DEVICE
+	default y
+	imply PACKAGE_vuci-app-multiusers-ui
+	imply PACKAGE_vuci-app-mobile-usage-ui
+	imply PACKAGE_vuci-app-network-ui
+	imply PACKAGE_vuci-app-overview-ui
+	imply PACKAGE_vuci-app-side-widget-ui
+	imply PACKAGE_vuci-app-certificates-ui
+	imply PACKAGE_vuci-app-services-status-ui
+	imply PACKAGE_vuci-app-setup-wizard-ui
+	imply PACKAGE_vuci-app-recipients-ui
+	imply PACKAGE_vuci-app-uscripts-ui
+	imply PACKAGE_vuci-advanced-mode
+	imply PACKAGE_vuci-app-vlan-ui
+	imply PACKAGE_vuci-app-dhcp-ui
+
+config MINIMAL_SERVICES_WEBUI
+	bool
+	depends on AP_DEVICE
+	default y
+	imply PACKAGE_vuci-app-change-password-ui
+	imply PACKAGE_vuci-app-network-tap-ui
+	imply PACKAGE_vuci-app-overview-tap-ui
+	imply PACKAGE_vuci-app-jwt-ui
+
+# Commented for now - uncomment for 7.5
+# config DEVICE_MANAGER_SUPPORT
+#	bool
+#	default y if !AP_DEVICE
+#	imply PACKAGE_vuci-app-device-manager-ui
+#	imply PACKAGE_mdns-scan
+
+config MULTI_LANGUAGE_SUPPORT
+	tristate
+	depends on PKG_SUPPORT && CORE_UI_PACKAGES
+	default m
+	imply PACKAGE_vuci-i18n-german
+	imply PACKAGE_vuci-i18n-turkish
+	imply PACKAGE_vuci-i18n-spanish
+	imply PACKAGE_vuci-i18n-portuguese
+	imply PACKAGE_vuci-i18n-japanese
+
+config WEB_CLI_SUPPORT
+	bool
+	default y
+	imply PACKAGE_shellinabox
+	imply PACKAGE_vuci-app-cli-ui
+
+config DATA_SENDER_SUPPORT
+	tristate "Data sender support"
+	depends on !AP_DEVICE
+	default y
+	imply PACKAGE_data-sender
+	imply PACKAGE_vuci-app-data-sender-ui
+	imply PACKAGE_data-sender-mod-base
+	imply PACKAGE_data-sender-mod-mnfinfo
+	imply PACKAGE_data-sender-mod-gsm if MOBILE_SUPPORT
+	imply PACKAGE_data-sender-mod-mdcollect if MOBILE_SUPPORT
+	imply PACKAGE_data-sender-mod-bluetooth if BLUETOOTH_SUPPORT
+	imply PACKAGE_data-sender-mod-mbus if MBUS
+	imply PACKAGE_data-sender-mod-mqtt_in
+	imply PACKAGE_data-sender-mod-http
+	imply PACKAGE_data-sender-mod-mqtt
+	imply PACKAGE_data-sender-mod-ubus
+	imply PACKAGE_data-sender-mod-custom
+
+config APN_DATABASE_WEBUI_SUPPORT
+	tristate "APN Database support for WebUI"
+	depends on PKG_SUPPORT && MOBILE_SUPPORT
+	default m
+	imply PACKAGE_apn-db-webui

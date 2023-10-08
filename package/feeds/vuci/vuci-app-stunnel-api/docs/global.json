@@ -1,0 +1,153 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "STunnel",
+    "description": "STunnel API documentation",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "STunnel Global"
+    }
+  ],
+  "paths": {
+    "/stunnel/global/config/general": {
+      "get": {
+        "tags": [
+          "STunnel Global"
+        ],
+        "summary": "Returns specified stunnel global section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnel_global"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "STunnel Global"
+        ],
+        "summary": "Updates specified stunnel global configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200stunnel_global"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/stunnel_global_options"
+                  }
+                }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "data": {
+                      "enabled": "1",
+                      "debug": "5",
+                      "use_alt": "1",
+                      "alt_config_file": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "STunnel"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200stunnel_global": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/stunnel_global_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "stunnel_global_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enabled",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable service"
+          },
+          "debug": {
+            "x-web": {
+              "pretty": "Debug Level",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Debug Level (0"
+          },
+          "use_alt": {
+            "x-web": {
+              "pretty": "Use alternative config",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Set to use alternative config"
+          },
+          "alt_config_file": {
+            "x-web": {
+              "pretty": "Upload alternative config",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_alt": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Alternative config file path"
+          }
+        }
+      }
+    }
+  }
+}

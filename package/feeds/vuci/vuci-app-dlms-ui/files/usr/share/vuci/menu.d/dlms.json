@@ -1,0 +1,13 @@
+{
+	"services/dlms": {
+		"title": "DLMS",
+		"index": 150,
+		"view": "services/DlmsMain_aeaafe",
+		"acls": [
+			"services/dlms"
+		],
+		"files": [
+			"/etc/config/dlms_client"
+		]
+	}
+}

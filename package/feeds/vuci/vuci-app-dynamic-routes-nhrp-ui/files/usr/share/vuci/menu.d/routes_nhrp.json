@@ -1,0 +1,43 @@
+{
+	"network/routes": {
+		"title": "Routing",
+		"index": 80
+	},
+		"network/routes/dynamic_routes": {
+			"title": "Dynamic routes",
+			"index": 30,
+			"orfiles": [
+				"/usr/lib/opkg/info/frr-nhrp.control",
+				"/usr/lib/opkg/info/frr5-nhrp.control"
+			]
+		},
+			"network/routes/dynamic_routes/proto_nhrp": {
+				"title": "NHRP",
+				"index": 50,
+				"view": "network/ProtoNhrp_aeaafe",
+				"acls": [ "network/routes/dynamic_routes/proto_nhrp"],
+				"files": [ "/etc/config/nhrp" ],
+				"orfiles": [ "/usr/lib/opkg/info/frr5-nhrp.control", "/usr/lib/opkg/info/frr-nhrp.control" ]
+			},
+	"status/routes": {
+		"title": "Routes",
+		"index": 35
+	},
+		"status/routes/dynamic": {
+			"title": "Dynamic",
+			"index": 20,
+			"files": [ "/etc/config/network" ],
+			"orfiles": [
+				"/usr/lib/opkg/info/frr-nhrp.control",
+				"/usr/lib/opkg/info/frr5-nhrp.control"
+			]
+		},
+			"status/routes/dynamic/nhrp": {
+				"title": "NHRP",
+				"index": 50,
+				"view": "status/ProtoNhrp_aeaafe",
+				"acls": [ "status/routes/dynamic/nhrp"],
+				"files": [ "/etc/config/nhrp" ],
+				"orfiles": [ "/usr/lib/opkg/info/frr5-nhrp.control", "/usr/lib/opkg/info/frr-nhrp.control" ]
+			}
+}

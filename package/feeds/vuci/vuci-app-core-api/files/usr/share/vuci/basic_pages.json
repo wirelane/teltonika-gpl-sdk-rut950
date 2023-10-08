@@ -1,0 +1,5 @@
+{
+  "network": {
+    "guest_network": true
+  }
+}

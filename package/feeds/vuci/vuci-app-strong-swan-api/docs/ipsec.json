@@ -1,0 +1,1252 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/ipsec/config/{ipsec_id}": {
+      "put": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Updates the specified IPsec configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Ipsec"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "ipsec_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IPsec configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ipsec_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Returns the specified IPsec configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Ipsec"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "ipsec_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IPsec configuration identifier (ID)"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Deletes the specified IPsec configuration",
+        "description": "If specified configuration is the last one belonging to IPsec, then the Firewall zone and rules will be deleted.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "ipsec_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IPsec configuration identifier (ID)"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "ipsec_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "IPsec configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "IPsec"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ipsec/config": {
+      "put": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Updates specified IPsec configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IpsecMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/ipsec_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Returns all IPsec configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IpsecMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Creates IPsec configuration",
+        "description": "A Firewall forwarding rules for new configuration will also be created. If this is the first configuration for IPsec then a Firewall zone will also be created.",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200Ipsec"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ipsec_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IPsec"
+        ],
+        "summary": "Deletes specified IPsec configurations",
+        "description": "If specified configurations are the last ones belonging to IPsec, then the Firewall zone and rules will be deleted.",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Configuration id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "IPsec"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ipsec/status": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-services-ipsec-status",
+        "description": "Status of all instances",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "test2": {
+                        "type": "object",
+                        "properties": {
+                          "keyexchange": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "rx": {
+                            "type": "string"
+                          },
+                          "tx": {
+                            "type": "string"
+                          },
+                          "peers": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "tx": {
+                                  "type": "integer"
+                                },
+                                "uptime": {
+                                  "type": "string"
+                                },
+                                "peer_subnet": {
+                                  "type": "string"
+                                },
+                                "peer_id": {
+                                  "type": "string"
+                                },
+                                "rx": {
+                                  "type": "integer"
+                                },
+                                "my_id": {
+                                  "type": "string"
+                                },
+                                "peer_ip_address": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "uptime": {
+                            "type": "string"
+                          },
+                          "remote_subnet": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "clients_conected": {
+                            "type": "string"
+                          },
+                          "clients_all": {
+                            "type": "string"
+                          },
+                          "local_subnet": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "example-1": {
+                    "success": true,
+                    "data": {
+                      "test2": {
+                        "keyexchange": "ikev2",
+                        "type": "tunnel",
+                        "rx": "504",
+                        "tx": "504",
+                        "peers": [
+                          [
+                            {
+                              "tx": 336,
+                              "uptime": "00h 05m 55s",
+                              "peer_subnet": "192.168.4.0/24",
+                              "peer_id": "remote1",
+                              "rx": 336,
+                              "my_id": "local",
+                              "peer_ip_address": "192.168.10.2"
+                            },
+                            {
+                              "tx": 168,
+                              "uptime": "00h 01m 51s",
+                              "peer_subnet": "192.168.1.0/24",
+                              "peer_id": "remote2",
+                              "rx": 168,
+                              "my_id": "local",
+                              "peer_ip_address": "192.168.10.192"
+                            }
+                          ]
+                        ],
+                        "uptime": "00h 51m 40s",
+                        "remote_subnet": [
+                          "192.168.4.0/24",
+                          "192.168.1.0/24"
+                        ],
+                        "status": "2",
+                        "clients_conected": "2",
+                        "clients_all": "2",
+                        "local_subnet": [
+                          "192.168.5.0/24"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "IPsec"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/ipsec/log/{ipsec_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "ipsec_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "response": "Thu Apr 6 07:39:17 2023 daemon.info ipsec: 10[IKE] <test1-test1_c|2> initiating Main Mode IKE_SA test1-test1_c[2] to 192.168.10.192\n"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-services-ipsec-log-ipsec_id",
+        "description": "Logs of the instance"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "IPsec"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200Ipsec": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ipsec_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200IpsecMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/ipsec_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ipsec_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Enable/Disable IPsec configuration.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "gateway": {
+            "x-web": {
+              "pretty": "Remote endpoint",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "Domain name or IP address",
+            "format": "host"
+          },
+          "authentication_method": {
+            "x-web": {
+              "pretty": "Authentication method",
+              "input-type": "select",
+              "group": "General Settings",
+              "enum-pretty": {
+                "psk": "Pre-shared key",
+                "x509": "X.509",
+                "eap-mschapv2": "EAP"
+              }
+            },
+            "type": "string",
+            "description": "Authentication method.",
+            "enum": [
+              "psk",
+              "x509",
+              "eap-mschapv2"
+            ]
+          },
+          "pre_shared_key": {
+            "x-web": {
+              "pretty": "Pre shared key",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "authentication_method": "psk"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "A shared password used for authenticating IPsec peers.",
+            "format": "credentials_validate",
+            "minLength": 5
+          },
+          "key": {
+            "x-web": {
+              "pretty": "Key",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "authentication_method": "x509"
+                },
+                {
+                  "authentication_method": "eap-mschapv2"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "File path of private key file."
+          },
+          "key_decrypt": {
+            "x-web": {
+              "pretty": "Key decryption passphrase",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "authentication_method": "x509"
+                },
+                {
+                  "authentication_method": "eap-mschapv2"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Passphrase to decrypt private key file",
+            "format": "credentials_validate",
+            "minLength": 5,
+            "maxLength": 512
+          },
+          "leftcert": {
+            "x-web": {
+              "pretty": "Local certificate",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "authentication_method": "x509"
+                },
+                {
+                  "authentication_method": "eap-mschapv2"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "File path of device certificate file."
+          },
+          "cacert": {
+            "x-web": {
+              "pretty": "CA certificate",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "authentication_method": "x509"
+                },
+                {
+                  "authentication_method": "eap-mschapv2"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "File Path of CA certificate file."
+          },
+          "local_identifier": {
+            "x-web": {
+              "pretty": "Local identifier",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "How the left participant should be identified for authentication.",
+            "maxLength": 64
+          },
+          "remote_identifier": {
+            "x-web": {
+              "pretty": "Remote identifier",
+              "input-type": "input",
+              "group": "General Settings"
+            },
+            "type": "string",
+            "description": "How the right participant should be identified for authentication.",
+            "maxLength": 64
+          },
+          "_multiple_secrets": {
+            "x-web": {
+              "pretty": "Multiple secrets",
+              "input-type": "switch",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "authentication_method": "psk"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Enable/disable multiple secrets.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "rightcert": {
+            "x-web": {
+              "pretty": "Remote certificate",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "authentication_method": "x509"
+                },
+                {
+                  "authentication_method": "eap-mschapv2"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "File path of remote device certificate file."
+          },
+          "mode": {
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "group": "General Settings",
+              "enum-pretty": {
+                "start": "Start",
+                "add": "Add",
+                "route": "Route"
+              }
+            },
+            "type": "string",
+            "description": "What operation should be done automatically at IPsec startup.",
+            "enum": [
+              "start",
+              "add",
+              "route"
+            ]
+          },
+          "type": {
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "select",
+              "group": "General Settings",
+              "enum-pretty": {
+                "tunnel": "Tunnel",
+                "transport": "Transport"
+              }
+            },
+            "type": "string",
+            "description": "What connection type should be used for IPsec instance.",
+            "enum": [
+              "tunnel",
+              "transport"
+            ]
+          },
+          "defaultroute": {
+            "x-web": {
+              "pretty": "Default route",
+              "input-type": "switch",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Route all traffic through the IPsec tunnel.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "local_subnet": {
+            "x-web": {
+              "pretty": "Local subnet",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                },
+                {
+                  "defaultroute": "0"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "Private subnet behind the left (local) participant expressed as network/netmask.",
+            "format": "cidr4",
+            "items": {
+              "type": "string"
+            }
+          },
+          "remote_subnet": {
+            "x-web": {
+              "pretty": "Remote subnet",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                },
+                {
+                  "defaultroute": "0"
+                }
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Private subnet behind the right (remote) participant expressed as network/netmask or network/prefix.",
+            "format": "cidr4, cidr6"
+          },
+          "keyexchange": {
+            "x-web": {
+              "pretty": "Key exchange",
+              "input-type": "select",
+              "group": "General Settings",
+              "enum-pretty": {
+                "ikev1": "IKEv1",
+                "ikev2": "IKEv2"
+              }
+            },
+            "type": "string",
+            "description": "Internet Key Exchange (IKE) version used for exchanging keys.",
+            "enum": [
+              "ikev1",
+              "ikev2"
+            ]
+          },
+          "bind_to": {
+            "x-web": {
+              "pretty": "Bind to",
+              "input-type": "input",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "type": "transport"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Bind to GRE or L2TP interface to create GRE/L2TP over IPsec."
+          },
+          "aggressive": {
+            "x-web": {
+              "pretty": "Aggressive",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Aggressive mode disables the Peer Identity Protection. Available only for outgoing connections.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "forceencaps": {
+            "x-web": {
+              "pretty": "Force encapsulation",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Force UDP encapsulation for ESP packets even if no NAT situation is detected.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "local_firewall": {
+            "x-web": {
+              "pretty": "Local firewall",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Whether the left (local) participant is doing forwarding.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "remote_firewall": {
+            "x-web": {
+              "pretty": "Remote firewall",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Whether the right (remote) participant is doing forwarding.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "comp_mode": {
+            "x-web": {
+              "pretty": "Compatibility mode",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Enable this option if there is trouble with multiple subnets with a 3rd party remote peer.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "inactivity": {
+            "x-web": {
+              "pretty": "Inactivity",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Defines the timeout interval, after which a CHILD_SA is closed if it did not send or receive any traffic.",
+            "format": "uinteger"
+          },
+          "_dpd": {
+            "x-web": {
+              "pretty": "Dead peer detection",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Controls the use of the Dead Peer Detection protocol where notification messages are periodically sent in order to check the liveliness of the IPsec peer.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "dpdaction": {
+            "x-web": {
+              "pretty": "DPD action",
+              "input-type": "select",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "_dpd": "1"
+                }
+              ],
+              "enum-pretty": {
+                "restart": "Restart",
+                "hold": "Hold",
+                "clear": "Clear",
+                "none": "None"
+              }
+            },
+            "type": "string",
+            "description": "Controls the use of the Dead Peer Detection protocol where notification messages are periodically sent in order to check the liveliness of the IPsec peer.",
+            "enum": [
+              "restart",
+              "hold",
+              "clear",
+              "none"
+            ]
+          },
+          "dpddelay": {
+            "x-web": {
+              "pretty": "DPD delay",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "_dpd": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Defines the period time interval with which R_U_THERE messages/INFORMATIONAL exchanges are sent to the peer.",
+            "format": "uinteger",
+            "maxLength": 64
+          },
+          "dpdtimeout": {
+            "x-web": {
+              "pretty": "DPD timeout",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "_dpd": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Defines the timeout interval, after which all connections to a peer are deleted in case of inactivity.",
+            "format": "uinteger",
+            "maxLength": 64
+          },
+          "remote_sourceip": {
+            "x-web": {
+              "pretty": "Remote source IP",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                }
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The internal source IP to use in a tunnel for the remote (right) peer.",
+            "format": "cidr4, cidr6"
+          },
+          "local_sourceip": {
+            "x-web": {
+              "pretty": "Local source IP",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "The internal (left) source IP to use in a tunnel, also known as virtual IP.",
+            "format": "ipaddr"
+          },
+          "rightdns": {
+            "x-web": {
+              "pretty": "Remote DNS",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                }
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of DNS server addresses to exchange as configuration attributes.",
+            "format": "ipaddr"
+          },
+          "xauth_identity": {
+            "x-web": {
+              "pretty": "XAuth identity",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "The identity/username the client uses to reply to an XAuth request.",
+            "format": "regex",
+            "pattern": "[a-zA-Z0-9%_]"
+          },
+          "leftprotoport": {
+            "x-web": {
+              "pretty": "Locally allowed protocols",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Allowed protocols and ports over connection, also called Port Selectors.",
+            "format": "regex",
+            "pattern": "[a-zA-Z0-9/%%]"
+          },
+          "rightprotoport": {
+            "x-web": {
+              "pretty": "Remotely allowed protocols",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Allowed protocols and ports over connection, also called Port Selectors.",
+            "format": "regex",
+            "pattern": "[a-zA-Z0-9/%%]"
+          },
+          "custom": {
+            "x-web": {
+              "pretty": "Custom option",
+              "input-type": "input",
+              "group": "Advanced Settings"
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Syntax option=value.",
+            "format": "regex",
+            "pattern": "[a-zA-Z0-9=]"
+          },
+          "passthrough": {
+            "x-web": {
+              "pretty": "Passthrough interfaces",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                }
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Passthrough interfaces to use for IPsec instance."
+          },
+          "passthrough_ip": {
+            "x-web": {
+              "pretty": "Passthrough subnets",
+              "input-type": "input",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "type": "tunnel"
+                }
+              ]
+            },
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IPv4 or IPv6 address/subnet.",
+            "format": "cidr4, cidr6"
+          },
+          "flush": {
+            "x-web": {
+              "pretty": "Flush conntrack",
+              "input-type": "switch",
+              "group": "Advanced Settings"
+            },
+            "type": "string",
+            "description": "Flush conntrack after IPsec makes a successful connection.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "force_crypto_proposal": {
+            "x-web": {
+              "input-type": "switch",
+              "group": "Phase 1",
+              "pretty": "Force crypto proposal"
+            },
+            "type": "string",
+            "description": "Enable/Disable crypto proposal usage.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "ikelifetime": {
+            "x-web": {
+              "input-type": "input",
+              "group": "Phase 1",
+              "pretty": "IKE lifetime"
+            },
+            "type": "string",
+            "description": "How long the keying channel of a connection (ISAKMP or IKE SA) should last before being renegotiated.",
+            "format": "regex",
+            "pattern": "[0-9]+[smhd]",
+            "maxLength": 7
+          },
+          "force_crypto_proposal2": {
+            "x-web": {
+              "input-type": "switch",
+              "group": "Phase 2",
+              "pretty": "Force crypto proposal"
+            },
+            "type": "string",
+            "description": "Enable/Disable crypto proposal usage.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "lifetime": {
+            "x-web": {
+              "input-type": "input",
+              "group": "Phase 2",
+              "pretty": "lifetime"
+            },
+            "type": "string",
+            "description": "How long a particular instance of a connection should last, from successful negotiation to expiry.",
+            "format": "regex",
+            "pattern": "[0-9]+[smhd]",
+            "maxLength": 7
+          },
+          "xauth": {
+            "x-web": {
+              "input-type": "switch",
+              "group": "General settings",
+              "pretty": "Enable XAUTH",
+              "depends": [
+                {
+                  "keyexchange": "ikev1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Enable/disable XAUTH.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "crypto_proposal1": {
+            "x-web": {
+              "pretty": "Proposals",
+              "group": "Phase 1",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Encryption algorithm used for data encryption. Authentication algorithm used for exchanging authentication information. The DH (Diffie-Hellman) group must match with another incoming connection to establish IPsec.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "crypto_proposal2": {
+            "x-web": {
+              "pretty": "Proposals",
+              "group": "Phase 2",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Encryption algorithm used for data encryption. Authentication algorithm used for exchanging authentication information. The DH (Diffie-Hellman) group must match with another incoming connection to establish IPsec.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "service": {
+            "type": "string",
+            "description": "Shows if configuration belongs to another service."
+          }
+        }
+      },
+      "ipsec_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "IPsec configuration identifier (ID).",
+                "x-web": {
+                  "pretty": "Configuration name",
+                  "input-type": "input"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ipsec_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

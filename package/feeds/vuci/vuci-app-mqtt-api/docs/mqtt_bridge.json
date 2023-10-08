@@ -1,0 +1,596 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "MQTT Bridges"
+    }
+  ],
+  "paths": {
+    "/mqtt_broker/bridge/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration MQTT broker bridge identifier"
+        }
+      ],
+      "get": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Returns the specified MQTT broker bridge",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttBridge"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Updates the specified MQTT broker bridge configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttBridge"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/mqtt_bridge_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Deletes the specified MQTT broker bridge configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Uploads MQTT bridge certificate files",
+        "operationId": "post-services-MQTTbrdg-config-cfg",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Uploaded file path."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "enum": [
+                      "bridge_cafile",
+                      "bridge_certfile",
+                      "bridge_keyfile"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/mqtt_broker/bridge/config": {
+      "get": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Returns all MQTT broker bridge configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttBridgeMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Updates the specified MQTT broker bridge configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttBridgeMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/mqtt_bridge_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Creates MQTT broker bridge",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200MqttBridge"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/mqtt_bridge_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MQTT Bridges"
+        ],
+        "summary": "Deletes the specified MQTT broker bridge configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200MqttBridge": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mqtt_bridge_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200MqttBridgeMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/mqtt_bridge_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "mqtt_bridge_single_options": {
+        "type": "object",
+        "properties": {
+          "client_enabled": {
+            "type": "string",
+            "description": "Enable connection to remote bridge",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "connection_name": {
+            "type": "string",
+            "description": "Connection name",
+            "format": "nospace",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Connection name",
+              "input-type": "input",
+              "depends": [
+                {
+                  "client_enabled": "1"
+                }
+              ],
+              "unique": true
+            }
+          },
+          "bridge_protocol_version": {
+            "type": "string",
+            "enum": [
+              "mqttv31",
+              "mqttv311"
+            ],
+            "description": "Version of the MQTT protocol",
+            "x-web": {
+              "pretty": "Protocol version",
+              "input-type": "select",
+              "enum-pretty": {
+                "mqttv31": "3.1",
+                "mqttv311": "3.1.1"
+              }
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Select remote bridge address",
+            "format": "host",
+            "x-web": {
+              "pretty": "Remote address",
+              "input-type": "input",
+              "depends": [
+                {
+                  "client_enabled": "1"
+                }
+              ]
+            }
+          },
+          "remote_port": {
+            "type": "string",
+            "description": "Select remote port",
+            "format": "port",
+            "x-web": {
+              "pretty": "Remote port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "client_enabled": "1"
+                }
+              ]
+            }
+          },
+          "use_remote_tls": {
+            "type": "string",
+            "description": "Select to use TLS/SSL for remote connection",
+            "x-web": {
+              "pretty": "Use remote TLS/SSL",
+              "input-type": "switch"
+            }
+          },
+          "_device_brg_files": {
+            "type": "string",
+            "description": "Certificate files from device"
+          },
+          "bridge_cafile": {
+            "type": "string",
+            "description": "Bridge CA file",
+            "x-web": {
+              "pretty": "Bridge CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_remote_tls": "1"
+                }
+              ]
+            }
+          },
+          "bridge_certfile": {
+            "type": "string",
+            "description": "Bridge certificates file",
+            "x-web": {
+              "pretty": "Bridge certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_remote_tls": "1"
+                }
+              ]
+            }
+          },
+          "bridge_keyfile": {
+            "type": "string",
+            "description": "Bridge key file",
+            "x-web": {
+              "pretty": "Bridge key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_remote_tls": "1"
+                }
+              ]
+            }
+          },
+          "bridge_tls_version": {
+            "type": "string",
+            "enum": [
+              "tlsv1",
+              "tlsv1.1",
+              "tlsv1.2",
+              "tlsv1.3"
+            ],
+            "description": "Used bridge TLS version",
+            "x-web": {
+              "pretty": "Bridge TLS version",
+              "input-type": "select",
+              "depends": [
+                {
+                  "use_remote_tls": "1"
+                }
+              ]
+            }
+          },
+          "bridge_alpn": {
+            "type": "string",
+            "description": "Configure the application layer protocol negotiation option for the TLS session. Useful for brokers that support both websockets and MQTT on the same port.",
+            "format": "string",
+            "maxLength": 254,
+            "x-web": {
+              "pretty": "Bridge ALPN",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_remote_tls": "1"
+                }
+              ]
+            }
+          },
+          "use_bridge_login": {
+            "type": "string",
+            "description": "Select to use login for bridge",
+            "x-web": {
+              "pretty": "Use remote bridge login",
+              "input-type": "switch"
+            }
+          },
+          "remote_clientid": {
+            "type": "string",
+            "description": "Choose remote client ID",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Remote ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_bridge_login": "1",
+                  "client_enabled": "1"
+                }
+              ]
+            }
+          },
+          "remote_username": {
+            "type": "string",
+            "description": "Choose remote user name",
+            "format": "credentials_validate(512, 'allow-space')",
+            "x-web": {
+              "pretty": "Remote username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_bridge_login": "1"
+                }
+              ]
+            }
+          },
+          "remote_password": {
+            "type": "string",
+            "description": "Choose remote password",
+            "format": "credentials_validate(512, 'allow-space')",
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Remote password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "use_bridge_login": "1"
+                }
+              ]
+            }
+          },
+          "try_private": {
+            "type": "string",
+            "description": "Check if remote broker is another instance of a daemon",
+            "x-web": {
+              "pretty": "Try private",
+              "input-type": "switch"
+            }
+          },
+          "cleansession": {
+            "type": "string",
+            "description": "Discard session state when connecting or disconnecting",
+            "x-web": {
+              "pretty": "Clean session",
+              "input-type": "switch"
+            }
+          },
+          "notifications": {
+            "type": "string",
+            "description": "Publish notification messages to the local and remote brokers giving information about the state of the bridge connection",
+            "x-web": {
+              "pretty": "Enable notifications",
+              "input-type": "switch"
+            }
+          },
+          "notifications_local": {
+            "type": "string",
+            "description": "Only publish notification messages to the local broker giving information about the state of the bridge connection",
+            "x-web": {
+              "pretty": "Enable local notifications",
+              "input-type": "switch"
+            }
+          },
+          "keepalive_interval": {
+            "type": "string",
+            "description": "Set the keepalive interval for this bridge connection, in seconds.",
+            "format": "irange(5, 65535)",
+            "minLength": 1,
+            "maxLength": 5,
+            "x-web": {
+              "pretty": "Keepalive interval",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "connection_name",
+          "remote_addr",
+          "remote_port",
+          "remote_clientid",
+          "bridge_tls_version",
+          "bridge_cafile"
+        ]
+      },
+      "mqtt_bridge_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "MQTT Bridge Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/mqtt_bridge_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

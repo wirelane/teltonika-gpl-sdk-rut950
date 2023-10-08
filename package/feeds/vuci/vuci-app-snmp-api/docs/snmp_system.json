@@ -1,0 +1,231 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/snmp/system/config/general": {
+      "get": {
+        "tags": [
+          "SNMP system"
+        ],
+        "summary": "Returns the general SNMP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_system"
+          }
+        },
+        "operationId": "snmp1"
+      },
+      "put": {
+        "tags": [
+          "SNMP system"
+        ],
+        "summary": "Updates the general SNMP configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_system"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/snmp_system_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "snmp2"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "SNMP Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/snmp/system/config": {
+      "get": {
+        "tags": [
+          "SNMP system"
+        ],
+        "summary": "Returns the general SNMP configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_system_multi"
+          }
+        },
+        "operationId": "snmp3"
+      },
+      "put": {
+        "tags": [
+          "SNMP system"
+        ],
+        "summary": "Updates the general SNMP configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200snmp_system_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Data to update configurations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configurations to update",
+                    "items": {
+                      "$ref": "#/components/schemas/snmp_system_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "snmp4"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "SNMP",
+          "SNMP Settings"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200snmp_system": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status."
+                },
+                "data": {
+                  "$ref": "#/components/schemas/snmp_system_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200snmp_system_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status."
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/snmp_system_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "snmp_system_options": {
+        "type": "object",
+        "properties": {
+          "oid": {
+            "type": "string",
+            "description": "An OID is an Object Identifier. It's an address used to identify devices and their statuses.",
+            "readOnly": true,
+            "x-web": {
+              "pretty": "System OID"
+            }
+          },
+          "sysLocation": {
+            "type": "string",
+            "description": "Location of the system. If the field is empty, the option will have read-write permissions. If not, the option will become read-only.",
+            "maxLength": 255,
+            "format": "string",
+            "x-web": {
+              "pretty": "Location",
+              "input-type": "input"
+            }
+          },
+          "sysContact": {
+            "type": "string",
+            "description": "Contact email. If the field is empty, the option will have read-write permissions. If not, the option will become read-only.",
+            "maxLength": 255,
+            "format": "string",
+            "x-web": {
+              "pretty": "Contact",
+              "input-type": "input"
+            }
+          },
+          "sysName": {
+            "type": "string",
+            "description": "Name of the system. If the field is empty, the option will have read-write permissions. If not, the option will become read-only.",
+            "maxLength": 255,
+            "format": "string",
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "snmp_system_options_id": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/snmp_system_options"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "SNMP System Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ],
+        "title": ""
+      }
+    }
+  }
+}

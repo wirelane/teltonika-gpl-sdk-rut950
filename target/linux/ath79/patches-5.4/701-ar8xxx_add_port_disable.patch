@@ -1,0 +1,100 @@
+--- a/drivers/net/phy/ar8216.c
++++ b/drivers/net/phy/ar8216.c
+@@ -1881,6 +1881,61 @@ ar8xxx_sw_set_flush_port_arl_table(struc
+ 	return ret;
+ }
+ 
++int ar8xxx_sw_set_port_disable(struct switch_dev *dev, const struct switch_attr *attr, struct switch_val *val)
++{
++	struct ar8xxx_priv *priv = swdev_to_ar8xxx(dev);
++	struct mii_bus *bus;
++	int port;
++	u32 reg;
++
++	if ((val->port_vlan >= AR8XXX_NUM_PHYS) || (val->port_vlan <= AR8216_PORT_CPU)) {
++		return -EINVAL;
++	}
++
++	if (val->value.i < 0 || val->value.i > 1) {
++		return -EINVAL;
++	}
++
++	/* Represents physical ports 1-4 */
++	port = val->port_vlan - 1;
++	bus = priv->sw_mii_bus ?: priv->mii_bus;
++
++	reg = mdiobus_read (bus, port, MII_BMCR);
++
++	if (val->value.i == AR8316_PORT_ENABLED)
++		reg &= ~BMCR_PDOWN;
++	else
++		reg |= BMCR_PDOWN;
++
++	return mdiobus_write(bus, port, MII_BMCR, reg);
++}
++
++int ar8xxx_sw_get_port_disable(struct switch_dev *dev, const struct switch_attr *attr, struct switch_val *val)
++{
++	struct ar8xxx_priv *priv = swdev_to_ar8xxx(dev);
++	struct mii_bus *bus;
++	u32 reg;
++	int port;
++
++	if ((val->port_vlan >= AR8XXX_NUM_PHYS) || (val->port_vlan <= AR8216_PORT_CPU)) {
++		return -EINVAL;
++	}
++
++	/* Represents physical ports 1-4 */
++	port = val->port_vlan - 1;
++	bus = priv->sw_mii_bus ?: priv->mii_bus;
++
++	reg = mdiobus_read (bus, port, MII_BMCR);
++
++	if (!(reg & BMCR_PDOWN)) {
++		val->value.i = AR8316_PORT_ENABLED;
++	} else {
++		val->value.i = AR8316_PORT_DISABLED;
++	}
++
++	return 0;
++}
++
+ int
+ ar8xxx_sw_get_port_stats(struct switch_dev *dev, int port,
+ 			struct switch_port_stats *stats)
+@@ -2019,6 +2074,13 @@ const struct switch_attr ar8xxx_sw_attr_
+ 		.description = "Flush port's ARL table entries",
+ 		.set = ar8xxx_sw_set_flush_port_arl_table,
+ 	},
++	{
++		.type = SWITCH_TYPE_INT,
++		.name = "disable",
++		.description = "(Get/Set port state 0 - enabled, 1 - disabled)",
++		.set = ar8xxx_sw_set_port_disable,
++		.get = ar8xxx_sw_get_port_disable,
++	},
+ };
+ 
+ const struct switch_attr ar8xxx_sw_attr_vlan[1] = {
+--- a/drivers/net/phy/ar8216.h
++++ b/drivers/net/phy/ar8216.h
+@@ -182,6 +182,9 @@
+ #define   AR8216_PORT_STATUS_FLOW_CONTROL  BIT(12)
+ 
+ #define AR8216_REG_PORT_CTRL(_i)	(AR8216_PORT_OFFSET(_i) + 0x0004)
++/* State is 3 LSB. 000 - disable, 100 - forward */
++#define 	AR8216_PORT_CTRL_STATE_DISABLE_MASK 0xfff8
++#define 	AR8216_PORT_CTRL_STATE_FORWARD	    BIT(2)
+ 
+ /* port forwarding state */
+ #define   AR8216_PORT_CTRL_STATE	BITS(0, 3)
+@@ -360,6 +363,9 @@
+ #define   AR8316_POSTRIP_RXDELAY_S1		BIT(26)
+ #define   AR8316_POSTRIP_POWER_ON_SEL		BIT(31)
+ 
++#define AR8316_PORT_ENABLED	0
++#define AR8316_PORT_DISABLED	1
++
+ /* port speed */
+ enum {
+         AR8216_PORT_SPEED_10M = 0,

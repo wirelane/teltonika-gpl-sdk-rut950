@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Wifi Scanner Settings"
+    }
+  ],
+  "paths": {
+    "/wireless/wifi_scanner/config/general": {
+      "get": {
+        "tags": [
+          "Wifi Scanner Settings"
+        ],
+        "summary": "GET All Wifi Scanner Settings",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/wifi_scanner_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-wifi-scanner-cfg"
+      },
+      "put": {
+        "summary": "UPDATE All Wifi Scanner Settings",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/wifi_scanner_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wifi_scanner_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Wifi Scanner Settings"
+        ],
+        "operationId": "put-wifi-scanner-cfg"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Wireless",
+          "Wifi scanner"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {
+      "wifi_scanner_options": {
+        "title": "wifi_scanner_options",
+        "type": "object",
+        "properties": {
+          "two_g_enabled": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "0",
+            "description": "Enable wifi scanner for the 2.4GHz wireless device",
+            "x-web": {
+              "pretty": "Enable 2.4Ghz",
+              "input-type": "switch",
+              "hw_tags": { "wifi": true }
+            }
+          },
+          "five_g_enabled": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "0",
+            "description": "Enable wifi scanner for the 5GHz wireless device",
+            "x-web": {
+              "pretty": "Enable 5GHz",
+              "input-type": "switch",
+              "hw_tags": { "wifi5Ghz": true }
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Interval between wifi scans.",
+            "default": "10",
+            "format": "range(1, 2147483)",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          }
+        }
+      }
+    }
+  }
+}

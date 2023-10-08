@@ -1,0 +1,208 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/package_restore/config": {
+      "get": {
+        "summary": "Returns package restore configurations",
+        "tags": [
+          "Package restore"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_package_restore_multi"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates package restore configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_package_restore"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Package restore"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/package_restore"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_restore/config/general": {
+      "get": {
+        "summary": "Return package restore configuration",
+        "tags": [
+          "Package restore"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_package_restore"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update package restore configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_package_restore"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Package restore"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/package_restore_one"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "package_restore": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/package_restore_one"
+          }
+        ],
+        "required": [
+          "enabled"
+        ]
+      },
+      "package_restore_one": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "format": "is_bool",
+            "description": "Enable automatic Package Manager packages installation after upgrade",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          }
+        },
+        "required": [
+          "enabled"
+        ]
+      }
+    },
+    "responses": {
+      "200_package_restore": {
+        "description": "Returns configurations.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/package_restore"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_package_restore_multi": {
+        "description": "Returns configurations.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/package_restore"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

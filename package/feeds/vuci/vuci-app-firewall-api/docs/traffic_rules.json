@@ -1,0 +1,1387 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/traffic_rules/config": {
+      "get": {
+        "summary": "GET All Firewall Traffic Rules",
+        "description": "Returns all sections with their parameters form firewall traffic rules configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TraRulMulti"
+          }
+        },
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall Traffic Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TraRulOrdMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/traffic_rules_ordered_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "post": {
+        "summary": "CREATE All Firewall Traffic Rules",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200TraRulOrd"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/traffic_rules_ordered_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE All Firewall Traffic Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Traffic Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/traffic_rules/config/{id}": {
+      "get": {
+        "summary": "GET Firewall Traffic Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TraRul"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration traffic rule configuration section indetifier"
+          }
+        ],
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall Traffic Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TraRulOrd"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall traffic rule section indetifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/traffic_rules_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE Firewall Traffic Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration firewall traffic rule section identifier"
+          }
+        ],
+        "tags": [
+          "Firewall Traffic Rules"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Traffic Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200TraRul": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/traffic_rules_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200TraRulOrd": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/traffic_rules_ordered_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200TraRulMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/traffic_rules_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200TraRulOrdMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/traffic_rules_ordered_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "traffic_rules_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns the rule on or off"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Name of the rule"
+          },
+          "family": {
+            "enum": [
+              "",
+              "ipv4",
+              "ipv6"
+            ],
+            "x-web": {
+              "pretty": "Restrict to address family",
+              "input-type": "select",
+              "enum-pretty": {
+                "": "IPv4 and IPv6",
+                "ipv4": "IPv4 only",
+                "ipv6": "IPv6 only"
+              }
+            },
+            "type": "string",
+            "description": "IP address family to which the rule will apply to"
+          },
+          "proto": {
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Specifies to which protocols the rule should apply"
+          },
+          "icmp_type": {
+            "x-web": {
+              "pretty": "Match ICMP type",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "proto": "icmp"
+                }
+              ],
+              "enum-pretty": {
+                "": "Any"
+              }
+            },
+            "description": "Specific ICMP types to match",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "",
+                "echo-reply",
+                "destination-unreachable",
+                "network-unreachable",
+                "host-unreachable",
+                "protocol-unreachable",
+                "port-unreachable",
+                "fragmentation-needed",
+                "source-route-failed",
+                "network-unknown",
+                "host-unknown",
+                "network-prohibited",
+                "host-prohibited",
+                "TOS-network-unreachable",
+                "TOS-host-unreachable",
+                "communication-prohibited",
+                "host-precedence-violation",
+                "precedence-cutoff",
+                "source-quench",
+                "redirect",
+                "network-redirect",
+                "host-redirect",
+                "TOS-network-redirect",
+                "TOS-host-redirect",
+                "echo-request",
+                "router-advertisement",
+                "router-solicitation",
+                "time-exceeded",
+                "ttl-zero-during-transit",
+                "ttl-zero-during-reassembly",
+                "parameter-problem",
+                "ip-header-bad",
+                "required-option-missing",
+                "timestamp-request",
+                "timestamp-reply",
+                "address-mask-request",
+                "address-mask-reply"
+              ]
+            }
+          },
+          "src": {
+            "x-web": {
+              "pretty": "Source zone",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The zone to which the third party will be connecting"
+          },
+          "src_mac": {
+            "x-web": {
+              "pretty": "Source MAC address",
+              "input-type": "input"
+            },
+            "description": "MAC address(es) of connecting hosts. The rule will apply only to hosts that match MAC addresses specified in this field",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_ip": {
+            "x-web": {
+              "pretty": "Source IP address",
+              "input-type": "input"
+            },
+            "description": "IP address or network segment used by connecting hosts",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_port": {
+            "x-web": {
+              "pretty": "Source port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Port number(s) used by the connecting host",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dest_local": {
+            "x-web": {
+              "pretty": "Output zone",
+              "input-type": "input",
+              "depends": [
+                {
+                  "src": ""
+                }
+              ]
+            },
+            "type": "string"
+          },
+          "dest": {
+            "x-web": {
+              "pretty": "Destination zone",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Target zone of the incoming connection"
+          },
+          "dest_ip": {
+            "x-web": {
+              "pretty": "Destination address",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Target IP address or network segment of the incoming connection",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dest_port": {
+            "x-web": {
+              "pretty": "Destination port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Target port or range of ports of the incoming connection",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "target": {
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "DROP": "Drop",
+                "ACCEPT": "Accept",
+                "REJECT": "Reject",
+                "NOTRACK": "Don't track",
+                "DSCP": "DSCP",
+                "MARK": "Mark"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "DROP",
+              "ACCEPT",
+              "REJECT",
+              "NOTRACK",
+              "DSCP",
+              "MARK"
+            ],
+            "description": "Action that is to be taken when a packet meets the MATCH conditions.\nACCEPT \u2013 packet gets to continue to the next chain.\nDROP \u2013 packet is stopped and deleted.REJECT \u2013 packet is stopped, deleted and, differently from Drop an ICMP packet containing a message of rejection is sent to the source from which the dropped packet came.\nDSCP \u2013 packet is marked with specified DiffServ Code Point value.\nMARK \u2013 packet is marked with specified firewall mark."
+          },
+          "set_dscp": {
+            "x-web": {
+              "pretty": "Set Target value",
+              "input-type": "select",
+              "depends": [
+                {
+                  "target": "DSCP"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Default",
+                "8": "CS1",
+                "10": "AF11",
+                "12": "AF12",
+                "14": "AF13",
+                "16": "CS2",
+                "18": "AF21",
+                "20": "AF22",
+                "22": "AF23",
+                "24": "CS3",
+                "26": "AF31",
+                "28": "AF32",
+                "30": "AF33",
+                "32": "CS4",
+                "34": "AF41",
+                "36": "AF42",
+                "38": "AF43",
+                "40": "CS5",
+                "46": "EF",
+                "48": "CS6",
+                "56": "CS7"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "8",
+              "10",
+              "12",
+              "14",
+              "16",
+              "18",
+              "20",
+              "24",
+              "26",
+              "28",
+              "30",
+              "32",
+              "34",
+              "36",
+              "38",
+              "40",
+              "46",
+              "48",
+              "56"
+            ]
+          },
+          "set_mark": {
+            "x-web": {
+              "pretty": "Set Target value",
+              "input-type": "input",
+              "depends": [
+                {
+                  "target": "MARK"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "hexstring"
+          },
+          "match": {
+            "x-web": {
+              "pretty": "Match",
+              "input-type": "select",
+              "enum-pretty": {
+                "DSCP": "DSCP",
+                "FWMARK": "Mark"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "DSCP",
+              "FWMARK"
+            ],
+            "description": "Match traffic against the given DSCP value or firewall mark"
+          },
+          "mark": {
+            "x-web": {
+              "pretty": "Set Match value",
+              "input-type": "input",
+              "depends": [
+                {
+                  "match": "FWMARK"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "hexstring"
+          },
+          "dscp": {
+            "x-web": {
+              "pretty": "Set Match value",
+              "input-type": "select",
+              "depends": [
+                {
+                  "match": "DSCP"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Default",
+                "8": "CS1",
+                "10": "AF11",
+                "12": "AF12",
+                "14": "AF13",
+                "16": "CS2",
+                "18": "AF21",
+                "20": "AF22",
+                "22": "AF23",
+                "24": "CS3",
+                "26": "AF31",
+                "28": "AF32",
+                "30": "AF33",
+                "32": "CS4",
+                "34": "AF41",
+                "36": "AF42",
+                "38": "AF43",
+                "40": "CS5",
+                "46": "EF",
+                "48": "CS6",
+                "56": "CS7"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "8",
+              "10",
+              "12",
+              "14",
+              "16",
+              "18",
+              "20",
+              "24",
+              "26",
+              "28",
+              "30",
+              "32",
+              "34",
+              "36",
+              "38",
+              "40",
+              "46",
+              "48",
+              "56"
+            ]
+          },
+          "extra": {
+            "x-web": {
+              "pretty": "Extra arguments",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Passes additional arguments to iptables"
+          },
+          "weekdays": {
+            "x-web": {
+              "pretty": "Week Days",
+              "input-type": "multiselect",
+              "enum-pretty": {
+                "Mon": "Monday",
+                "Tue": "Tuesday",
+                "Wed": "Wednesday",
+                "Thu": "Thursday",
+                "Fri": "Friday",
+                "Sat": "Saturday",
+                "Sun": "Sunday"
+              }
+            },
+            "description": "Specifies on which days of the week the rule is valid.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun"
+              ],
+              "type": "string"
+            }
+          },
+          "monthdays": {
+            "x-web": {
+              "pretty": "Month Days",
+              "input-type": "multiselect"
+            },
+            "description": "Specifies on which days of the month the rule is valid.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23",
+                "24",
+                "25",
+                "26",
+                "27",
+                "28",
+                "29",
+                "30",
+                "31"
+              ],
+              "type": "string"
+            }
+          },
+          "start_time": {
+            "x-web": {
+              "pretty": "Start Time (hh:mm:ss)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the beginning of the time period during which the rule is valid."
+          },
+          "stop_time": {
+            "x-web": {
+              "pretty": "Stop Time (hh:mm:ss)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the end of the time period during which the rule is valid."
+          },
+          "start_date": {
+            "x-web": {
+              "pretty": "Start Date (yyyy-mm-dd)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the first day of the date of the period during which the rule is valid."
+          },
+          "stop_date": {
+            "x-web": {
+              "pretty": "Stop Date (yyyy-mm-dd)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the last day of the date of the period during which the rule is valid."
+          },
+          "utc_time": {
+            "x-web": {
+              "pretty": "Time in UTC",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Specifies whether the device should use UTC time."
+          },
+          "priority": {
+            "type": "string",
+            "description": "Determines ordering of rules",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        },
+        "description": ""
+      },
+      "traffic_rules_options_single_put": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turns the rule on or off"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Name of the rule"
+          },
+          "family": {
+            "enum": [
+              "",
+              "ipv4",
+              "ipv6"
+            ],
+            "x-web": {
+              "pretty": "Restrict to address family",
+              "input-type": "select",
+              "enum-pretty": {
+                "": "IPv4 and IPv6",
+                "ipv4": "IPv4 only",
+                "ipv6": "IPv6 only"
+              }
+            },
+            "type": "string",
+            "description": "IP address family to which the rule will apply to"
+          },
+          "proto": {
+            "x-web": {
+              "pretty": "Protocol",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Specifies to which protocols the rule should apply"
+          },
+          "icmp_type": {
+            "x-web": {
+              "pretty": "Match ICMP type",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "proto": "icmp"
+                }
+              ],
+              "enum-pretty": {
+                "": "Any"
+              }
+            },
+            "description": "Specific ICMP types to match",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "",
+                "echo-reply",
+                "destination-unreachable",
+                "network-unreachable",
+                "host-unreachable",
+                "protocol-unreachable",
+                "port-unreachable",
+                "fragmentation-needed",
+                "source-route-failed",
+                "network-unknown",
+                "host-unknown",
+                "network-prohibited",
+                "host-prohibited",
+                "TOS-network-unreachable",
+                "TOS-host-unreachable",
+                "communication-prohibited",
+                "host-precedence-violation",
+                "precedence-cutoff",
+                "source-quench",
+                "redirect",
+                "network-redirect",
+                "host-redirect",
+                "TOS-network-redirect",
+                "TOS-host-redirect",
+                "echo-request",
+                "router-advertisement",
+                "router-solicitation",
+                "time-exceeded",
+                "ttl-zero-during-transit",
+                "ttl-zero-during-reassembly",
+                "parameter-problem",
+                "ip-header-bad",
+                "required-option-missing",
+                "timestamp-request",
+                "timestamp-reply",
+                "address-mask-request",
+                "address-mask-reply"
+              ]
+            }
+          },
+          "src": {
+            "x-web": {
+              "pretty": "Source zone",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "The zone to which the third party will be connecting"
+          },
+          "src_mac": {
+            "x-web": {
+              "pretty": "Source MAC address",
+              "input-type": "input"
+            },
+            "description": "MAC address(es) of connecting hosts. The rule will apply only to hosts that match MAC addresses specified in this field",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_ip": {
+            "x-web": {
+              "pretty": "Source IP address",
+              "input-type": "input"
+            },
+            "description": "IP address or network segment used by connecting hosts",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "src_port": {
+            "x-web": {
+              "pretty": "Source port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Port number(s) used by the connecting host",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dest_local": {
+            "x-web": {
+              "pretty": "Output zone",
+              "input-type": "input",
+              "depends": [
+                {
+                  "src": ""
+                }
+              ]
+            },
+            "type": "string"
+          },
+          "dest": {
+            "x-web": {
+              "pretty": "Destination zone",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Target zone of the incoming connection"
+          },
+          "dest_ip": {
+            "x-web": {
+              "pretty": "Destination address",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Target IP address or network segment of the incoming connection",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dest_port": {
+            "x-web": {
+              "pretty": "Destination port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "proto": "tcp"
+                },
+                {
+                  "proto": "udp"
+                }
+              ]
+            },
+            "description": "Target port or range of ports of the incoming connection",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "target": {
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "DROP": "Drop",
+                "ACCEPT": "Accept",
+                "REJECT": "Reject",
+                "NOTRACK": "Don't track",
+                "DSCP": "DSCP",
+                "MARK": "Mark"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "DROP",
+              "ACCEPT",
+              "REJECT",
+              "NOTRACK",
+              "DSCP",
+              "MARK"
+            ],
+            "description": "Action that is to be taken when a packet meets the MATCH conditions.\nACCEPT \u2013 packet gets to continue to the next chain.\nDROP \u2013 packet is stopped and deleted.REJECT \u2013 packet is stopped, deleted and, differently from Drop an ICMP packet containing a message of rejection is sent to the source from which the dropped packet came.\nDSCP \u2013 packet is marked with specified DiffServ Code Point value.\nMARK \u2013 packet is marked with specified firewall mark."
+          },
+          "set_dscp": {
+            "x-web": {
+              "pretty": "Set Target value",
+              "input-type": "select",
+              "depends": [
+                {
+                  "target": "DSCP"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Default",
+                "8": "CS1",
+                "10": "AF11",
+                "12": "AF12",
+                "14": "AF13",
+                "16": "CS2",
+                "18": "AF21",
+                "20": "AF22",
+                "22": "AF23",
+                "24": "CS3",
+                "26": "AF31",
+                "28": "AF32",
+                "30": "AF33",
+                "32": "CS4",
+                "34": "AF41",
+                "36": "AF42",
+                "38": "AF43",
+                "40": "CS5",
+                "46": "EF",
+                "48": "CS6",
+                "56": "CS7"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "8",
+              "10",
+              "12",
+              "14",
+              "16",
+              "18",
+              "20",
+              "24",
+              "26",
+              "28",
+              "30",
+              "32",
+              "34",
+              "36",
+              "38",
+              "40",
+              "46",
+              "48",
+              "56"
+            ]
+          },
+          "set_mark": {
+            "x-web": {
+              "pretty": "Set Target value",
+              "input-type": "input",
+              "depends": [
+                {
+                  "target": "MARK"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "hexstring"
+          },
+          "match": {
+            "x-web": {
+              "pretty": "Match",
+              "input-type": "select",
+              "enum-pretty": {
+                "DSCP": "DSCP",
+                "FWMARK": "Mark"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "DSCP",
+              "FWMARK"
+            ],
+            "description": "Match traffic against the given DSCP value or firewall mark"
+          },
+          "mark": {
+            "x-web": {
+              "pretty": "Set Match value",
+              "input-type": "input",
+              "depends": [
+                {
+                  "match": "FWMARK"
+                }
+              ]
+            },
+            "type": "string",
+            "format": "hexstring"
+          },
+          "dscp": {
+            "x-web": {
+              "pretty": "Set Match value",
+              "input-type": "select",
+              "depends": [
+                {
+                  "match": "DSCP"
+                }
+              ],
+              "enum-pretty": {
+                "0": "Default",
+                "8": "CS1",
+                "10": "AF11",
+                "12": "AF12",
+                "14": "AF13",
+                "16": "CS2",
+                "18": "AF21",
+                "20": "AF22",
+                "22": "AF23",
+                "24": "CS3",
+                "26": "AF31",
+                "28": "AF32",
+                "30": "AF33",
+                "32": "CS4",
+                "34": "AF41",
+                "36": "AF42",
+                "38": "AF43",
+                "40": "CS5",
+                "46": "EF",
+                "48": "CS6",
+                "56": "CS7"
+              }
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "8",
+              "10",
+              "12",
+              "14",
+              "16",
+              "18",
+              "20",
+              "24",
+              "26",
+              "28",
+              "30",
+              "32",
+              "34",
+              "36",
+              "38",
+              "40",
+              "46",
+              "48",
+              "56"
+            ]
+          },
+          "extra": {
+            "x-web": {
+              "pretty": "Extra arguments",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Passes additional arguments to iptables"
+          },
+          "weekdays": {
+            "x-web": {
+              "pretty": "Week Days",
+              "input-type": "multiselect",
+              "enum-pretty": {
+                "Mon": "Monday",
+                "Tue": "Tuesday",
+                "Wed": "Wednesday",
+                "Thu": "Thursday",
+                "Fri": "Friday",
+                "Sat": "Saturday",
+                "Sun": "Sunday"
+              }
+            },
+            "description": "Specifies on which days of the week the rule is valid.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun"
+              ],
+              "type": "string"
+            }
+          },
+          "monthdays": {
+            "x-web": {
+              "pretty": "Month Days",
+              "input-type": "multiselect"
+            },
+            "description": "Specifies on which days of the month the rule is valid.",
+            "type": "array",
+            "items": {
+              "enum": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23",
+                "24",
+                "25",
+                "26",
+                "27",
+                "28",
+                "29",
+                "30",
+                "31"
+              ],
+              "type": "string"
+            }
+          },
+          "start_time": {
+            "x-web": {
+              "pretty": "Start Time (hh:mm:ss)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the beginning of the time period during which the rule is valid."
+          },
+          "stop_time": {
+            "x-web": {
+              "pretty": "Stop Time (hh:mm:ss)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the end of the time period during which the rule is valid."
+          },
+          "start_date": {
+            "x-web": {
+              "pretty": "Start Date (yyyy-mm-dd)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the first day of the date of the period during which the rule is valid."
+          },
+          "stop_date": {
+            "x-web": {
+              "pretty": "Stop Date (yyyy-mm-dd)",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Indicates the last day of the date of the period during which the rule is valid."
+          },
+          "utc_time": {
+            "x-web": {
+              "pretty": "Time in UTC",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Specifies whether the device should use UTC time."
+          },
+          "priority": {
+            "type": "string",
+            "description": "Determines ordering of rules",
+            "x-web": {
+              "pretty": "Priority",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "traffic_rules_ordered_options": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/traffic_rules_options"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "priority": {
+                "type": "string",
+                "description": "Determines ordering of rules",
+                "x-web": {
+                  "pretty": "Priority",
+                  "input-type": "input"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

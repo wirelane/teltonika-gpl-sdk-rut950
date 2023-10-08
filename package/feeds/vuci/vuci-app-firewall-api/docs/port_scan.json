@@ -1,0 +1,314 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/firewall/attack_prevention/port_scan/config": {
+      "get": {
+        "summary": "GET All Firewall Port Scan Settings",
+        "description": "Returns all port scan settings with their options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PrtScnMulti"
+          }
+        },
+        "tags": [
+          "Firewall Port Scan Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE All Firewall Port Scan Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PrtScnMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/port_scan_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Port Scan Settings"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/attack_prevention/port_scan/config/general": {
+      "get": {
+        "summary": "GET Firewall Port Scan Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PrtScn"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Firewall Port Scan Settings"
+        ]
+      },
+      "put": {
+        "summary": "UPDATE Firewall Port Scan Settings",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PrtScn"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/port_scan_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Firewall Port Scan Settings"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Attack Prevention"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200PrtScn": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/port_scan_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200PrtScnMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/port_scan_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "port_scan_options": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Configuration ID",
+              "input-type": "input"
+            }
+          },
+          "port_scan": {
+            "type": "string",
+            "description": "Enable port scan prevention",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "hitcount": {
+            "type": "string",
+            "description": "Port scan count before packets are rejected. Minimal value is 5",
+            "x-web": {
+              "pretty": "Scan count",
+              "input-type": "input"
+            }
+          },
+          "seconds": {
+            "type": "string",
+            "description": "Time range in which 'scan count' has to be reached before packets are rejected",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          },
+          "syn_fin": {
+            "type": "string",
+            "description": "Protect from SYN",
+            "x-web": {
+              "pretty": "SYN-FIN attack",
+              "input-type": "switch"
+            }
+          },
+          "syn_rst": {
+            "type": "string",
+            "description": "Protect from SYN",
+            "x-web": {
+              "pretty": "SYN-RST attack",
+              "input-type": "switch"
+            }
+          },
+          "x_max": {
+            "type": "string",
+            "description": "Protect from X",
+            "x-web": {
+              "pretty": "X-Mas attack",
+              "input-type": "switch"
+            }
+          },
+          "nmap_fin": {
+            "type": "string",
+            "description": "Protect from nmap FIN scan",
+            "x-web": {
+              "pretty": "FIN scan",
+              "input-type": "switch"
+            }
+          },
+          "null_flags": {
+            "type": "string",
+            "description": "Protect from NULLflags attack",
+            "x-web": {
+              "pretty": "NULLflags attack",
+              "input-type": "switch"
+            }
+          }
+        }
+      },
+      "port_scan_options_single_put": {
+        "type": "object",
+        "properties": {
+          "port_scan": {
+            "type": "string",
+            "description": "Enable port scan prevention",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "hitcount": {
+            "type": "string",
+            "description": "Port scan count before packets are rejected. Minimal value is 5",
+            "x-web": {
+              "pretty": "Scan count",
+              "input-type": "input"
+            }
+          },
+          "seconds": {
+            "type": "string",
+            "description": "Time range in which 'scan count' has to be reached before packets are rejected",
+            "x-web": {
+              "pretty": "Interval",
+              "input-type": "input"
+            }
+          },
+          "syn_fin": {
+            "type": "string",
+            "description": "Protect from SYN",
+            "x-web": {
+              "pretty": "SYN-FIN attack",
+              "input-type": "switch"
+            }
+          },
+          "syn_rst": {
+            "type": "string",
+            "description": "Protect from SYN",
+            "x-web": {
+              "pretty": "SYN-RST attack",
+              "input-type": "switch"
+            }
+          },
+          "x_max": {
+            "type": "string",
+            "description": "Protect from X",
+            "x-web": {
+              "pretty": "X-Mas attack",
+              "input-type": "switch"
+            }
+          },
+          "nmap_fin": {
+            "type": "string",
+            "description": "Protect from nmap FIN scan",
+            "x-web": {
+              "pretty": "FIN scan",
+              "input-type": "switch"
+            }
+          },
+          "null_flags": {
+            "type": "string",
+            "description": "Protect from NULLflags attack",
+            "x-web": {
+              "pretty": "NULLflags attack",
+              "input-type": "switch"
+            }
+          }
+        }
+      }
+    }
+  }
+}

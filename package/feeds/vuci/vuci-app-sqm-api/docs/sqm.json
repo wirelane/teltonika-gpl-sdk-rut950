@@ -1,0 +1,584 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "SQM"
+    }
+  ],
+  "info": {
+    "title": "SQM",
+    "description": "SQM api documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "paths": {
+    "/sqm/options": {
+      "get": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Get SQM options",
+        "description": "Gets SQM options",
+        "operationId": "get-services-sqm-options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_options"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "SQM"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/sqm/config": {
+      "get": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Get SQM configurations",
+        "description": "Gets SQM configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sqmMulti"
+          }
+        },
+        "operationId": "get-services-sqm-config"
+      },
+      "post": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Create SQM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sqm"
+          }
+        },
+        "operationId": "post-services-sqm-config",
+        "description": "Creates SQM configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "SQM name",
+                            "x-web": {
+                              "unique": true,
+                              "pretty": "SQM name",
+                              "input-type": "input"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/sqm_options"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Update SQM configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sqmMulti"
+          }
+        },
+        "operationId": "put-services-sqm-config",
+        "description": "Updates SQM configurations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_sqm_multi"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Delete SQM configurations",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          }
+        },
+        "operationId": "delete-services-sqm-config",
+        "description": "Deletes SQM configurations"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "SQM"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/sqm/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "SQM name"
+        }
+      ],
+      "get": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Get SQM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sqm"
+          }
+        },
+        "operationId": "get-services-sqm-config-id",
+        "description": "Gets SQM configuration"
+      },
+      "put": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Update SQM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sqm"
+          }
+        },
+        "operationId": "put-services-sqm-config-id",
+        "description": "Updates SQM configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_sqm_one"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SQM"
+        ],
+        "summary": "Delete SQM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          }
+        },
+        "operationId": "delete-services-sqm-config-id",
+        "description": "Deletes SQM configuration"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Traffic Shaping",
+          "SQM"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200sqm": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "id": ""
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/sqm_options"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200sqmMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": "",
+                      ".index": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          ".index": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          ".index"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/sqm_options"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_options": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": {
+                    "fq_codel": [
+                      "simple.qos",
+                      "simplest.qos",
+                      "simplest_tbf.qos"
+                    ],
+                    "cake": [
+                      "layer_cake.qos",
+                      "piece_of_cake.qos"
+                    ]
+                  }
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "fq_codel",
+                    "cake"
+                  ],
+                  "properties": {
+                    "fq_codel": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "cake": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "sqm_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enabled",
+            "x-web": {
+              "pretty": "Enabled",
+              "group": "General setup",
+              "input-type": "switch"
+            }
+          },
+          "interface": {
+            "type": "string",
+            "description": "Interface name",
+            "x-web": {
+              "pretty": "Interface name",
+              "group": "General setup",
+              "input-type": "input"
+            }
+          },
+          "download": {
+            "type": "string",
+            "description": "Download speed (kbit/s)",
+            "x-web": {
+              "pretty": "Download speed (kbit/s)",
+              "group": "General setup",
+              "input-type": "input"
+            }
+          },
+          "upload": {
+            "type": "string",
+            "description": "Upload speed (kbit/s)",
+            "x-web": {
+              "pretty": "Upload speed (kbit/s)",
+              "group": "General setup",
+              "input-type": "input"
+            }
+          },
+          "qdisc": {
+            "type": "string",
+            "enum": [
+              "cake",
+              "fq_codel"
+            ],
+            "description": "Queuing disciplines useable on this system",
+            "x-web": {
+              "pretty": "Queuing disciplines usable on this system",
+              "group": "Advanced settings",
+              "input-type": "select"
+            }
+          },
+          "script": {
+            "type": "string",
+            "enum": [
+              "layer_cake.qos",
+              "piece_of_cake.qos",
+              "simple.qos",
+              "simplest.qos",
+              "simplest_tbf.qos"
+            ],
+            "description": "Queue setup script",
+            "x-web": {
+              "pretty": "Queue setup script",
+              "group": "Advanced settings",
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "qdisc": "cake"
+                  },
+                  "values": [
+                    "layer_cake.qos",
+                    "piece_of_cake.qos"
+                  ]
+                },
+                {
+                  "depends": {
+                    "qdisc": "fq_codel"
+                  },
+                  "values": [
+                    "simple.qos",
+                    "simplest.qos",
+                    "simplest_tbf.qos"
+                  ]
+                }
+              ],
+              "depends": [
+                {
+                  "qdisc": ["cake", "fq_codel"]
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "enabled",
+          "interface",
+          "download",
+          "upload",
+          "qdisc",
+          "script"
+        ]
+      },
+      "req_body_sqm_one": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": {}
+          }
+        },
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/sqm_options"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_sqm_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              {
+                "id": ""
+              }
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "SQM name",
+                      "x-web": {
+                        "unique": true,
+                        "pretty": "SQM name",
+                        "input-type": "input"
+                      }
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/sqm_options"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    }
+  }
+}

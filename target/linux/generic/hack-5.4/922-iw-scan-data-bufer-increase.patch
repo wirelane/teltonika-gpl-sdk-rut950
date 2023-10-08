@@ -1,0 +1,13 @@
+Index: linux-5.4.251/include/uapi/linux/wireless.h
+===================================================================
+--- linux-5.4.251.orig/include/uapi/linux/wireless.h	2023-07-27 09:37:45.000000000 +0300
++++ linux-5.4.251/include/uapi/linux/wireless.h	2023-08-10 14:46:22.867349942 +0300
+@@ -544,7 +544,7 @@
+ #define IW_SCAN_TYPE_ACTIVE 0
+ #define IW_SCAN_TYPE_PASSIVE 1
+ /* Maximum size of returned data */
+-#define IW_SCAN_MAX_DATA	4096	/* In bytes */
++#define IW_SCAN_MAX_DATA	16384	/* In bytes */
+ 
+ /* Scan capability flags - in (struct iw_range *)->scan_capa */
+ #define IW_SCAN_CAPA_NONE		0x00

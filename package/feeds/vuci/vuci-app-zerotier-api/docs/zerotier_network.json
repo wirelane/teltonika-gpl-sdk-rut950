@@ -1,0 +1,462 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/zerotier/config/{zerotier_id}/networks": {
+      "post": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Creates Zerotier Network configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ZerotierNetwork"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/zerotier_network_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Updates specified Zerotier Network configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ZerotierNetworkMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of configuration objects",
+                    "items": {
+                      "$ref": "#/components/schemas/zerotier_network_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Returns all Zerotier Network configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ZerotierNetworkMulti"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Deletes specified Zerotier network configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "Zerotier"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/zerotier/config/{zerotier_id}/networks/{zerotier_network_id}": {
+      "put": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Updates the specified Zerotier Network configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ZerotierNetwork"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          },
+          {
+            "name": "zerotier_network_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Network Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/zerotier_network_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Returns the specified Zerotier Network configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ZerotierNetwork"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          },
+          {
+            "name": "zerotier_network_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Network Configuration identifier (ID)"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Zerotier Network"
+        ],
+        "summary": "Deletes the specified Zerotier Network configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "zerotier_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Configuration identifier (ID)"
+          },
+          {
+            "name": "zerotier_network_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Zerotier Network Configuration identifier (ID)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "VPN",
+          "Zerotier"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200ZerotierNetwork": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/zerotier_network_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200ZerotierNetworkMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/zerotier_network_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "zerotier_network_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Turn this zerotier network on/off",
+            "format": "is_bool"
+          },
+          "name": {
+            "x-web": {
+              "pretty": "Network name",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Name of the Zerotier network",
+            "maxLength": 32,
+            "format": "uciname"
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Port for UDP and TCP/HTTP (default: 9993, 0 for random).",
+            "format": "port"
+          },
+          "allow_default": {
+            "x-web": {
+              "pretty": "Allow default route",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allows ZeroTier to override system default route",
+            "format": "is_bool"
+          },
+          "allow_global": {
+            "x-web": {
+              "pretty": "Allow global IP",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allows ZeroTier managed IPs and routes to overlap public IP space",
+            "format": "is_bool"
+          },
+          "allow_managed": {
+            "x-web": {
+              "pretty": "Allow managed IP",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Assigns ZeroTier managed IPs and routes",
+            "format": "is_bool"
+          },
+          "allow_dns": {
+            "x-web": {
+              "pretty": "Allow DNS",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Applies DNS servers that are set at the network controller",
+            "format": "is_bool"
+          },
+          "network_id": {
+            "x-web": {
+              "pretty": "Network ID",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Zerotier networks ID",
+            "format": "hexstring",
+            "maxLength": 16
+          },
+          "bridge_to": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Bridge to",
+              "input-type": "input"
+            },
+            "description": "Specify to which interface this zerotier instance should be bridged"
+          }
+        }
+      },
+      "zerotier_network_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Zerotier Network Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/zerotier_network_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

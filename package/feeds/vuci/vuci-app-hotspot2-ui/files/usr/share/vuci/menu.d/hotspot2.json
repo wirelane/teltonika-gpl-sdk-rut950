@@ -1,0 +1,13 @@
+{
+	"services/hotspot": {
+		"title": "Hotspot",
+		"index": 190
+	},
+	"services/hotspot/hotspot2": {
+		"title": "Hotspot 2.0",
+		"index": 60,
+		"view": "services/Hotspot2Overview_aeaafe",
+		"acls": [ "services/hotspot/hotspot2" ],
+        "files": [ "/etc/config/wireless" ]
+	}
+}
