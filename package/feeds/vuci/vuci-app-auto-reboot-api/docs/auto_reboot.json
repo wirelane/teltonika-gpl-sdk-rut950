@@ -1,41 +1,41 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Auto reboot",
+    "title": "Auto Reboot",
     "version": "1.0",
-    "description": "Auto reboot API documentation",
+    "description": "Auto Reboot API documentation",
     "contact": {}
   },
   "tags": [
     {
-      "name": "Periodic reboot"
+      "name": "Reboot Scheduler"
     },
     {
-      "name": "Ping reboot"
+      "name": "Ping/Wget Reboot"
     }
   ],
-  "servers": [],
   "paths": {
     "/auto_reboot/periodic/config": {
       "get": {
-        "summary": "Returns all periodic reboot configurations",
+        "summary": "Returns all Reboot Scheduler configurations",
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_periodic_reboot_multi"
           }
-        },
-        "operationId": "get-services-auto_reboot-periodic"
+        }
       },
       "parameters": [],
       "post": {
-        "summary": "Creates a new periodic reboot configuration",
-        "operationId": "post-services-auto_reboot-periodic-config",
+        "summary": "Creates a new Reboot Scheduler configuration",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_periodic_reboot_one"
+          "201": {
+            "$ref": "#/components/responses/periodic_reboot_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -48,15 +48,20 @@
           }
         },
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ]
       },
       "put": {
-        "summary": "Updates the selected periodic reboot configurations",
-        "operationId": "put-services-auto_reboot-periodic-config",
+        "summary": "Updates the selected Reboot Scheduler configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_periodic_reboot_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -69,34 +74,50 @@
           }
         },
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ]
       },
       "delete": {
-        "summary": "Deletes the selected periodic reboot configurations",
-        "operationId": "delete-services-auto_reboot-periodic-config",
+        "summary": "Deletes the selected Reboot Scheduler configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
           "$ref": "#/components/requestBodies/delete_multi"
         },
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Auto Reboot",
-          "Ping/Wget Reboot"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "System",
+              "Maintenance",
+              "Auto Reboot",
+              "Reboot Scheduler"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "Auto Reboot",
+              "Reboot Scheduler"
+            ]
+          }
+        ]
       }
     },
     "/auto_reboot/periodic/config/{id}": {
@@ -112,23 +133,30 @@
         }
       ],
       "get": {
-        "summary": "Returns the selected periodic reboot configuration",
+        "summary": "Returns the selected Reboot Scheduler configuration",
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200_periodic_reboot_one"
+            "$ref": "#/components/responses/periodic_reboot_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
-        },
-        "operationId": "get-services-auto_reboot-periodic-config-sid"
+        }
       },
       "put": {
-        "summary": "Updates the selected periodic reboot configuration",
-        "operationId": "put-services-auto_reboot-periodic-config-sid",
+        "summary": "Updates the selected Reboot Scheduler configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200_periodic_reboot_one"
+            "$ref": "#/components/responses/periodic_reboot_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -141,52 +169,70 @@
           }
         },
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ]
       },
       "delete": {
-        "summary": "Deletes the selected periodic reboot configuration",
-        "operationId": "delete-services-auto_reboot-periodic-config-sid",
+        "summary": "Deletes the selected Reboot Scheduler configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "tags": [
-          "Periodic reboot"
+          "Reboot Scheduler"
         ]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Auto Reboot",
-          "Ping/Wget Reboot"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "System",
+              "Maintenance",
+              "Auto Reboot",
+              "Reboot Scheduler"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "Auto Reboot",
+              "Reboot Scheduler"
+            ]
+          }
+        ]
       }
     },
     "/auto_reboot/ping/config": {
       "get": {
-        "summary": "Returns all ping reboot configurations",
+        "summary": "Returns all Ping/Wget Reboot configurations",
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_ping_reboot_multi"
           }
-        },
-        "operationId": "get-services-auto_reboot-ping-config"
+        }
       },
+      "parameters": [],
       "post": {
-        "summary": "Creates a new ping reboot configuration",
-        "operationId": "post-services-auto_reboot-ping-config",
+        "summary": "Creates a new Ping/Wget Reboot configuration",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_ping_reboot_one"
+          "201": {
+            "$ref": "#/components/responses/ping_reboot_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -199,15 +245,20 @@
           }
         },
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ]
       },
       "put": {
-        "summary": "Updates the selected ping reboot configurations",
-        "operationId": "put-services-auto_reboot-ping-config",
+        "summary": "Updates the selected Ping/Wget Reboot configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_ping_reboot_multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -220,34 +271,50 @@
           }
         },
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ]
       },
       "delete": {
-        "summary": "Deletes the selected ping reboot configurations",
-        "operationId": "delete-services-auto_reboot-ping-config",
+        "summary": "Deletes the selected Ping/Wget Reboot configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/delete_multi"
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
           "$ref": "#/components/requestBodies/delete_multi"
         },
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Auto Reboot",
-          "Ping/Wget Reboot"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "System",
+              "Maintenance",
+              "Auto Reboot",
+              "Ping/Wget Reboot"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "Auto Reboot",
+              "Ping/Wget Reboot"
+            ]
+          }
+        ]
       }
     },
     "/auto_reboot/ping/config/{id}": {
@@ -263,24 +330,32 @@
         }
       ],
       "get": {
-        "summary": "Returns the selected ping reboot configuration",
+        "summary": "Returns the selected Ping/Wget Reboot configuration",
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200_ping_reboot_one"
+            "$ref": "#/components/responses/ping_reboot_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
-        },
-        "operationId": "get-services-auto_reboot-ping-sid"
+        }
       },
       "put": {
-        "summary": "Updates the selected ping reboot configuration",
-        "operationId": "put-services-auto_reboot-ping-sid",
+        "summary": "Updates the selected Ping/Wget Reboot configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200_ping_reboot_one"
+            "$ref": "#/components/responses/ping_reboot_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
+
         },
         "requestBody": {
           "content": {
@@ -292,31 +367,47 @@
           }
         },
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ]
       },
       "delete": {
-        "summary": "Deletes the selected ping reboot configuration",
-        "operationId": "delete-services-auto_reboot-ping-sid",
+        "summary": "Deletes the selected Ping/Wget Reboot configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/delete_one"
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "tags": [
-          "Ping reboot"
+          "Ping/Wget Reboot"
         ]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Auto Reboot",
-          "Ping/Wget Reboot"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "System",
+              "Maintenance",
+              "Auto Reboot",
+              "Ping/Wget Reboot"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "Auto Reboot",
+              "Ping/Wget Reboot"
+            ]
+          }
+        ]
       }
     }
   },
@@ -327,6 +418,11 @@
         "properties": {
           "enable": {
             "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
             "description": "Enable reboot instance",
             "x-web": {
               "pretty": "Enable",
@@ -337,7 +433,8 @@
             "type": "string",
             "description": "Action that will be executed at specified time",
             "enum": [
-              "1"
+              "1",
+              "2"
             ],
             "x-web": {
               "pretty": "Action",
@@ -351,6 +448,14 @@
                     "1",
                     "2"
                   ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false
+                  },
+                  "values": [
+                    "1"
+                  ]
                 }
               ],
               "enum-pretty": {
@@ -363,6 +468,7 @@
           "modem": {
             "type": "string",
             "description": "Modem selection",
+            "format": "string",
             "x-web": {
               "pretty": "Modem",
               "input-type": "select",
@@ -402,6 +508,7 @@
           },
           "days": {
             "type": "array",
+            "uniqueItems": true,
             "description": "Week days, when the reboot should happen.",
             "items": {
               "type": "string",
@@ -436,6 +543,7 @@
           },
           "time": {
             "type": "array",
+            "uniqueItems": true,
             "description": "Day time when action should be executed.",
             "items": {
               "type": "string",
@@ -448,6 +556,7 @@
           },
           "month_day": {
             "type": "array",
+            "uniqueItems": true,
             "description": "Day of a month when reboot will happen.",
             "items": {
               "type": "string",
@@ -487,7 +596,7 @@
             },
             "x-web": {
               "pretty": "Month day",
-              "input-type": "select",
+              "input-type": "multiselect",
               "depends": [
                 {
                   "period": "month"
@@ -497,6 +606,7 @@
           },
           "months": {
             "type": "array",
+            "uniqueItems": true,
             "description": "Months, when reboot should happen.",
             "items": {
               "type": "string",
@@ -517,7 +627,7 @@
             },
             "x-web": {
               "pretty": "Month",
-              "input-type": "select",
+              "input-type": "multiselect",
               "depends": [
                 {
                   "period": "month"
@@ -542,6 +652,7 @@
           "force_last": {
             "type": "string",
             "description": "Forces intervals to accept last day of month as valid option if selected day doesn't exist in ongoing month.",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -559,10 +670,8 @@
         },
         "required": [
           "action",
-          "days",
-          "time",
-          "month_day",
-          "months"
+          "period",
+          "time"
         ]
       },
       "ping_reboot": {
@@ -571,6 +680,11 @@
           "enable": {
             "type": "string",
             "description": "Turns the rule on or off.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -579,6 +693,11 @@
           "stop_action": {
             "type": "string",
             "description": "Stop actions when mobile data limit is reached",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
             "x-web": {
               "pretty": "No action on data limit",
               "input-type": "switch",
@@ -656,6 +775,7 @@
           "modem_id_sms": {
             "type": "string",
             "description": "Modem, which is used to send SMS from",
+            "format": "string",
             "x-web": {
               "pretty": "Gateway modem",
               "input-type": "select",
@@ -678,6 +798,7 @@
           "number": {
             "type": "array",
             "description": "Phone number for the SMS to be sent to",
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "format": "phonedigit"
@@ -694,7 +815,9 @@
           },
           "message": {
             "type": "string",
-            "format": "fieldvalidation('^[a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. ]+$',0)",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. ]+$",
+            "maxLength": 480,
             "description": "Message to be sent. Allowed characters: (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~.)",
             "x-web": {
               "pretty": "Message text",
@@ -764,7 +887,9 @@
           },
           "retry": {
             "type": "string",
-            "format": "irange(1,9999)",
+            "format": "integer",
+            "minimum": 1,
+            "maximum": 9999,
             "description": "Number of failed to receive responses before selected action is executed. Range [1 - 9999]",
             "x-web": {
               "pretty": "Interval count",
@@ -773,7 +898,9 @@
           },
           "time_out": {
             "type": "string",
-            "format": "irange(1,9999)",
+            "format": "integer",
+            "minimum": 1,
+            "maximum": 9999,
             "description": "Time interval (in seconds) to wait for a response. Range [1 - 9999]",
             "x-web": {
               "pretty": "Timeout (sec)",
@@ -782,11 +909,18 @@
           },
           "packet_size": {
             "type": "string",
-            "format": "irange(0,1000)",
+            "format": "integer",
+            "minimum": 0,
+            "maximum": 1000,
             "description": "ICMP packet size in bytes.",
             "x-web": {
               "pretty": "Packet size",
-              "input-type": "input"
+              "input-type": "input",
+              "depends": [
+                {
+                  "type": "ping"
+                }
+              ]
             }
           },
           "interface": {
@@ -802,7 +936,12 @@
               "enum-pretty": {
                 "1": "Automatically selected",
                 "2": "Ping from mobile"
-              }
+              },
+              "depends": [
+                {
+                  "type": "ping"
+                }
+              ]
             }
           },
           "ip_type": {
@@ -818,7 +957,13 @@
               "enum-pretty": {
                 "ipv4": "IPv4",
                 "ipv6": "IPv6"
-              }
+              },
+              "depends": [
+                {
+                  "type": "ping",
+                  "interface": "1"
+                }
+              ]
             }
           },
           "url": {
@@ -837,13 +982,14 @@
           },
           "host": {
             "type": "string",
-            "format": "host",
             "description": "Hostname or IP address to which the ping requests will be sent. E.g. 1.1.1.1 (or www.host.com if DNS server is configured correctly)",
+            "format": "host",
             "x-web": {
               "pretty": "Host to ping",
               "input-type": "input",
               "depends": [
                 {
+                  "type": "ping",
                   "interface": "1"
                 }
               ],
@@ -921,6 +1067,7 @@
           },
           "host2": {
             "type": "string",
+            "format": "host",
             "description": "Hostname or IP address to which the ping requests will be sent. E.g. 1.1.1.1",
             "x-web": {
               "pretty": "Host to ping from SIM 2",
@@ -941,27 +1088,14 @@
         "required": [
           "type",
           "action",
-          "number",
-          "message",
+          "time",
           "retry",
-          "time_out",
-          "packet_size",
-          "host",
-          "host1",
-          "host2",
-          "url"
+          "time_out"
         ]
       },
       "req_body_periodic_reboot_one": {
         "description": "",
         "type": "object",
-        "x-examples": {
-          "example-1": {
-            "data": {
-              "id": ""
-            }
-          }
-        },
         "properties": {
           "data": {
             "$ref": "#/components/schemas/periodic_reboot"
@@ -974,13 +1108,6 @@
       "req_body_ping_reboot_one": {
         "description": "",
         "type": "object",
-        "x-examples": {
-          "example-1": {
-            "data": {
-              "id": ""
-            }
-          }
-        },
         "properties": {
           "data": {
             "$ref": "#/components/schemas/ping_reboot"
@@ -993,15 +1120,6 @@
       "req_body_ping_reboot_multi": {
         "description": "",
         "type": "object",
-        "x-examples": {
-          "example-1": {
-            "data": [
-              {
-                "id": ""
-              }
-            ]
-          }
-        },
         "properties": {
           "data": {
             "type": "array",
@@ -1034,15 +1152,6 @@
       "req_body_periodic_reboot_multi": {
         "description": "",
         "type": "object",
-        "x-examples": {
-          "example-1": {
-            "data": [
-              {
-                "id": ""
-              }
-            ]
-          }
-        },
         "properties": {
           "data": {
             "type": "array",
@@ -1074,21 +1183,13 @@
       }
     },
     "responses": {
-      "200_periodic_reboot_one": {
+      "periodic_reboot_one": {
         "description": "Example response",
         "content": {
           "application/json": {
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": {
-                    "id": ""
-                  }
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1128,16 +1229,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": [
-                    {
-                      "id": ""
-                    }
-                  ]
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1146,7 +1237,6 @@
                 "data": {
                   "type": "array",
                   "uniqueItems": true,
-                  "minItems": 1,
                   "items": {
                     "allOf": [
                       {
@@ -1175,21 +1265,13 @@
           }
         }
       },
-      "200_ping_reboot_one": {
+      "ping_reboot_one": {
         "description": "Example response",
         "content": {
           "application/json": {
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": {
-                    "id": ""
-                  }
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1229,16 +1311,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": [
-                    {
-                      "id": ""
-                    }
-                  ]
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1247,7 +1319,6 @@
                 "data": {
                   "type": "array",
                   "uniqueItems": true,
-                  "minItems": 1,
                   "items": {
                     "allOf": [
                       {

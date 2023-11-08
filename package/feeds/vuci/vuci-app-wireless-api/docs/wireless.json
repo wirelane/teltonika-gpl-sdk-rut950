@@ -3827,6 +3827,7 @@
             "type": "string",
             "description": "ESSID. Extended Service Set Identifier.",
             "x-web": {
+              "unique": true,
               "pretty": "ESSID",
               "group": "General Setup",
               "input-type": "input",

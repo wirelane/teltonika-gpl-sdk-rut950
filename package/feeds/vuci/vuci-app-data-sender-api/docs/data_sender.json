@@ -756,10 +756,16 @@
                             "type": "object",
                             "properties": {
                               "description": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "A concise explanation of the plugin's functionality."
                               },
                               "name": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "The name of the plugin."
+                              },
+                              "solo_collection": {
+                                "type": "boolean",
+                                "description": "Indicates whether a collection can have only one plugin of this type (true), thus prohibiting multiple plugins of the same type within a single collection."
                               },
                               "params": {
                                 "type": "array",

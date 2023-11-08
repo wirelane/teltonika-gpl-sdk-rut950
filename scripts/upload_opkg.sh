@@ -90,6 +90,10 @@ mkdir -p ~/.ssh
 echo "${!SSH_HOST_KEY}" >~/.ssh/known_hosts
 
 [[ -n $days ]] && {
+	[[ $prefix == PRODUCTION ]] && {
+		printf "%s cleanup is not allowed!\n" "$prefix"
+		exit 1
+	}
 	cleanup "$PACKAGES_ROOT" "$days"
 	exit 0
 }
@@ -104,6 +108,7 @@ FOLDER="$PACKAGES_ROOT/${HASH}"
 LINK="$PACKAGES_ROOT/packages/00/${TAG}"
 
 echo "UPLOADING TO ${!SSH_USER_HOST#*@}:"
+ssh -p "${!SSH_PORT}" "${!SSH_USER_HOST}" "rm -fr ${FOLDER:?}"
 ssh -p "${!SSH_PORT}" "${!SSH_USER_HOST}" "mkdir -p ${FOLDER}/wiki ${LINK} && ln -fs ${FOLDER} ${LINK}/${PLATFORM}" || exit 1
 scp -P "${!SSH_PORT}" "${PACKAGEDIR}/"* "${!SSH_USER_HOST}:/${FOLDER}/"
 scp -P "${!SSH_PORT}" "${ZIPPEDDIR}/"* "${!SSH_USER_HOST}:/${FOLDER}/wiki/"
