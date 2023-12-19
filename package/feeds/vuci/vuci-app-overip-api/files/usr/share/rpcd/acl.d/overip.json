@@ -5,7 +5,7 @@
 			"api": [
 				"/overip/*",
 				"/serial/status/*",
-				"/device/info/*",
+				"/system/device/status/*",
 				"/firewall/zones/*"
 			]
 		},

@@ -1,21 +1,15 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "SideWidget API",
+    "title": "Side Widget API",
     "version": "1.0.0"
   },
-  "tags": [
-    {
-      "name": "SideWidget"
-    }
-  ],
+  "tags": [],
   "paths": {
     "/widget/config": {
       "get": {
-        "summary": "Returns all Side Widget configurations",
-        "tags": [
-          "SideWidget"
-        ],
+        "summary": "Returns all Side Widget cards",
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -42,7 +36,7 @@
         }
       },
       "put": {
-        "summary": "Updates specified SideWidget configurations",
+        "summary": "Updates specified Side Widget cards",
         "responses": {
           "200": {
             "description": "OK",
@@ -90,25 +84,23 @@
             }
           }
         },
-        "tags": [
-          "SideWidget"
-        ]
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Status",
-          "Side widget",
-          "Side widget"
-        ]
+        "menu": ["Status", "Side widget", "Side widget"],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
-    "/widget/config/{sidewidget_id}": {
+    "/widget/config/{id}": {
       "get": {
-        "summary": "Returns the specified SideWidget configuration",
-        "tags": [
-          "SideWidget"
-        ],
+        "summary": "Returns the specified Side Widget card",
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -135,7 +127,7 @@
         }
       },
       "put": {
-        "summary": "Updates the specified SideWidget configuration",
+        "summary": "Updates the specified Side Widget card",
         "responses": {
           "200": {
             "description": "OK",
@@ -177,27 +169,27 @@
             }
           }
         },
-        "tags": [
-          "SideWidget"
-        ]
+        "tags": ["General"]
       },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "sidewidget_id",
+          "name": "id",
           "in": "path",
           "required": true,
-          "description": "SideWidget configuration identifier (ID)"
+          "description": "Side Widget configuration identifier (ID)"
         }
       ],
       "x-web": {
-        "menu": [
-          "Status",
-          "Side widget",
-          "Side widget"
-        ]
+        "menu": ["Status", "Side widget", "Side widget"],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     }
   },
@@ -217,17 +209,15 @@
                   "input-type": "input"
                 },
                 "type": "string",
-                "description": "SideWidget configuration identifier (ID)."
+                "description": "Side Widget configuration identifier (ID)"
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           }
         ]
       },
       "sidewidget_single_options": {
-        "title": "SideWidget options",
+        "title": "Side Widget options",
         "type": "object",
         "properties": {
           "card_id": {
@@ -250,10 +240,7 @@
               "input-type": "switch"
             },
             "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "description": "Enables/disables Side Widget card."
           },
@@ -263,9 +250,7 @@
             "readOnly": true
           }
         },
-        "required": [
-          "position"
-        ]
+        "required": ["position"]
       }
     }
   }

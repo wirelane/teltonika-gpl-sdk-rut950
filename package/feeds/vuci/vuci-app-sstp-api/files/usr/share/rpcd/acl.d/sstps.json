@@ -10,7 +10,7 @@
 			},
 			"api": [
 				"/sstp/*",
-				"/certificates/config/ca/*"
+				"/certificates/ca/*"
 			]
 		},
 		"write": {

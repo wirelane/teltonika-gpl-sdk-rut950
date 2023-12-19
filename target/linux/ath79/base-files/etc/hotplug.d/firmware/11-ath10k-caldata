@@ -9,8 +9,7 @@ board=$(board_name)
 case "$FIRMWARE" in
 "ath10k/cal-pci-0000:00:00.0.bin")
 	case $board in
-	teltonika,tcr1xx |\
-	teltonika,otd1xx)
+	teltonika,tcr1xx)
 		caldata_extract "art" 0x5000 0x844
 		;;
 	esac

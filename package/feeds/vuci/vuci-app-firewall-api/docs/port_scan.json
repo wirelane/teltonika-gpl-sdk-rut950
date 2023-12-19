@@ -2,24 +2,26 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/attack_prevention/port_scan/config": {
+    "/attack_prevention/port_scan/config": {
       "get": {
-        "summary": "GET All Firewall Port Scan Settings",
-        "description": "Returns all port scan settings with their options",
+        "summary": "Returns Firewall Port Scan Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200PrtScnMulti"
           }
         },
         "tags": [
-          "Firewall Port Scan Settings"
+          "Port Scan"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall Port Scan Settings",
+        "summary": "Updates Firewall Port Scan Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200PrtScnMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -34,7 +36,7 @@
                 "properties": {
                   "data": {
                     "type": "array",
-                    "description": "Array of of section objects",
+                    "description": "Array of Port Scan objects",
                     "items": {
                       "$ref": "#/components/schemas/port_scan_options"
                     }
@@ -45,11 +47,11 @@
           }
         },
         "tags": [
-          "Firewall Port Scan Settings"
+          "Port Scan"
         ]
       },
-      "parameters": [],
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",
@@ -61,26 +63,40 @@
         }
       }
     },
-    "/firewall/attack_prevention/port_scan/config/general": {
+    "/attack_prevention/port_scan/config/{id}": {
       "get": {
-        "summary": "GET Firewall Port Scan Settings",
+        "summary": "Returns Firewall Port Scan Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200PrtScn"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the Port Scan configuration"
+          }
+        ],
         "tags": [
-          "Firewall Port Scan Settings"
+          "Port Scan"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall Port Scan Settings",
+        "summary": "Updates Firewall Port Scan Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200PrtScn"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -101,11 +117,23 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the Port Scan configuration"
+          }
+        ],
         "tags": [
-          "Firewall Port Scan Settings"
+          "Port Scan"
         ]
       },
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",

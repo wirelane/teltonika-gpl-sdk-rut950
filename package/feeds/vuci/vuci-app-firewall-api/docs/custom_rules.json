@@ -2,24 +2,123 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/custom_rules/config/general": {
+    "/firewall/custom_rules/config": {
       "get": {
-        "summary": "GET All Firewall Custom Rules",
+        "summary": "Returns Firewall Custom Rules",
+        "description": "Returns custom rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/custom_rules_multi"
+          }
+        },
+        "tags": [
+          "Custom Rules"
+        ]
+      },
+      "put": {
+        "summary": "Updates Firewall Custom Rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/custom_rules_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "x-web": {
+                            "pretty": "Configuration ID",
+                            "input-type": "input"
+                          }
+                        },
+                        "custom_rules": {
+                          "type": "string",
+                          "description": "custom rules data",
+                          "x-web": {
+                            "input-type": "input",
+                            "pretty": "Firewall - Custom Rules"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "custom_rules",
+                      "id"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Custom Rules"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Firewall",
+          "Custom Rules"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/firewall/custom_rules/config/{id}": {
+      "get": {
+        "summary": "Returns Firewall Custom Rules",
         "description": "Returns custom rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/custom_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the Custom Rules configuration"
+          }
+        ],
         "tags": [
-          "Firewall Custom Rules"
+          "Custom Rules"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall Custom Rules",
+        "summary": "Updates Firewall Custom Rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/custom_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -53,8 +152,19 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the Custom Rules configuration"
+          }
+        ],
         "tags": [
-          "Firewall Custom Rules"
+          "Custom Rules"
         ]
       },
       "parameters": [],
@@ -72,18 +182,15 @@
     },
     "/firewall/custom_rules/actions/reset": {
       "post": {
-        "summary": "SEND Firewall Custom Rules Reset",
+        "summary": "Resets Firewall Custom Rules",
         "operationId": "post-network-firewall-custom_rules-actions-reset",
         "responses": {
           "200": {
             "$ref": "#/components/responses/custom_rules"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
         "tags": [
-          "Firewall Custom Rules Reset"
+          "Custom Rules"
         ]
       },
       "x-web": {
@@ -102,7 +209,6 @@
   "components": {
     "responses": {
       "custom_rules": {
-        "description": "Example response",
         "content": {
           "application/json": {
             "schema": {
@@ -120,6 +226,43 @@
                       "x-web": {
                         "input-type": "input",
                         "pretty": "Firewall - Custom Rules"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "custom_rules_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "x-web": {
+                          "pretty": "Configuration ID",
+                          "input-type": "input"
+                        }
+                      },
+                      "custom_rules": {
+                        "type": "string",
+                        "x-web": {
+                          "input-type": "input",
+                          "pretty": "Firewall - Custom Rules"
+                        }
                       }
                     }
                   }

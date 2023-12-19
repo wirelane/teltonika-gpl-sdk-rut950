@@ -3,11 +3,9 @@
 		"description": "firewall zones configuration",
 		"read": {
 			"api": [
-				"/firewall/zones/*",
-				"/firewall/nat_offloading/*",
-				"/firewall/general_settings/*",
+				"/nat_offloading/*",
+				"/firewall/*",
 				"/interfaces/*",
-				"/firewall/port_forwards/*",
 				"/dmvpn/*",
 				"/gre/*",
 				"/l2tp/client/*",
@@ -19,9 +17,8 @@
 		},
 		"write": {
 			"api": [
-				"/firewall/zones/*",
-				"/firewall/nat_offloading/*",
-				"/firewall/general_settings/*"
+				"/nat_offloading/*",
+				"/firewall/*"
 			]
 		}
 	},
@@ -81,22 +78,12 @@
 		"description": "firewall attack prevention configuration",
 		"read": {
 			"api": [
-				"/firewall/attack_prevention/syn_flood_protection/*",
-				"/firewall/attack_prevention/remote_icmp_requests/*",
-				"/firewall/attack_prevention/ssh_attack_prevention/*",
-				"/firewall/attack_prevention/http_attack_prevention/*",
-				"/firewall/attack_prevention/https_attack_prevention/*",
-				"/firewall/attack_prevention/port_scan/*"
+				"/attack_prevention/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/firewall/attack_prevention/syn_flood_protection/*",
-				"/firewall/attack_prevention/remote_icmp_requests/*",
-				"/firewall/attack_prevention/ssh_attack_prevention/*",
-				"/firewall/attack_prevention/http_attack_prevention/*",
-				"/firewall/attack_prevention/https_attack_prevention/*",
-				"/firewall/attack_prevention/port_scan/*"
+				"/attack_prevention/*"
 			]
 		}
 	},
@@ -114,12 +101,12 @@
 		"description": "dmz (demilitarized zone) configuration",
 		"read": {
 			"api": [
-				"/firewall/dmz/*",
+				"/dmz/*",
 				"/routes/status/*"
 			]
 		},
 		"write": {
-			"api": ["/firewall/dmz/*"]
+			"api": ["/dmz/*"]
 		}
 	},
 	"status/network/firewall": {

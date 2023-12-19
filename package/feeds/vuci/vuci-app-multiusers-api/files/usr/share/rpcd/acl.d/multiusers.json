@@ -3,20 +3,20 @@
 	"system/admin/multiusers/change_password": {
 		"description": "change password page",
 		"read": {
-			"api": ["/users/*"]
+			"api": ["/users/config/*"]
 		},
 		"write": {
-			"api": ["/users/*"]
+			"api": ["/users/config/*"]
 		}
 	},
 
 	"system/admin/multiusers/users_configuration": {
 		"description": "multiusers configuration",
 		"read": {
-			"api": ["/groups/*", "/users/*"]
+			"api": ["/users/groups/*", "/users/config/*", "/users/acls/*"]
 		},
 		"write": {
-			"api": ["/groups/*", "/users/*"]
+			"api": ["/users/groups/*", "/users/config/*", "/users/acls/*"]
 		}
 	}
 }

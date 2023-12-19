@@ -5,7 +5,7 @@
             "api": [
                 "/qos/*",
                 "/interfaces/config/*",
-                "/firewall/nat_offloading/config/general/*"
+                "/nat_offloading/*"
             ]
         },
         "write": {

@@ -6,97 +6,11 @@
     }
   ],
   "paths": {
-    "/firewall/dmz/config/general": {
+    "/dmz/config": {
       "get": {
-        "summary": "GET All DMZ General",
+        "summary": "Returns DMZ configuration settings",
         "tags": [
-          "DMZ General"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "string",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/dmz_general_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-network-firewall-dmz-config-general"
-      },
-      "put": {
-        "summary": "UPDATE All DMZ General",
-        "operationId": "put-network-firewall-dmz-config-general",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "string",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/dmz_general_id"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "DMZ General"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/dmz_general"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Firewall",
-          "DMZ"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/firewall/dmz/config": {
-      "get": {
-        "summary": "GET All DMZ",
-        "tags": [
-          "DMZ"
+          "General"
         ],
         "responses": {
           "200": {
@@ -122,11 +36,11 @@
             }
           }
         },
-        "operationId": "get-network-firewall-dmz-config-general1"
+        "operationId": "get-network-firewall-dmz-config-general"
       },
       "put": {
-        "summary": "UPDATE All DMZ",
-        "operationId": "put-network-firewall-dmz-config-general1",
+        "summary": "Updates DMZ configration settings",
+        "operationId": "put-network-firewall-dmz-config-general",
         "responses": {
           "200": {
             "description": "OK",
@@ -158,7 +72,7 @@
           }
         },
         "tags": [
-          "DMZ"
+          "General"
         ],
         "requestBody": {
           "content": {
@@ -178,8 +92,123 @@
           }
         }
       },
-      "parameters": [],
       "x-web": {
+        "name": "DMZ",
+        "menu": [
+          "Network",
+          "Firewall",
+          "DMZ"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/dmz/config/{id}": {
+      "get": {
+        "summary": "Returns DMZ configuration settings",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dmz_general_id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the DMZ configuration"
+          }
+        ],
+        "operationId": "get-network-firewall-dmz-config-general"
+      },
+      "put": {
+        "summary": "Updates DMZ configration settings",
+        "operationId": "put-network-firewall-dmz-config-general",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the DMZ configuration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "string",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/dmz_general_id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "General"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dmz_general"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "DMZ",
         "menu": [
           "Network",
           "Firewall",

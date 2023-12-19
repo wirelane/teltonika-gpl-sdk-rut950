@@ -15,7 +15,7 @@
     }
   ],
   "paths": {
-    "/auto_reboot/periodic/config": {
+    "/auto_reboot/scheduler/config": {
       "get": {
         "summary": "Returns all Reboot Scheduler configurations",
         "tags": [
@@ -120,7 +120,7 @@
         ]
       }
     },
-    "/auto_reboot/periodic/config/{id}": {
+    "/auto_reboot/scheduler/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -212,7 +212,7 @@
         ]
       }
     },
-    "/auto_reboot/ping/config": {
+    "/auto_reboot/ping_wget/config": {
       "get": {
         "summary": "Returns all Ping/Wget Reboot configurations",
         "tags": [
@@ -317,7 +317,7 @@
         ]
       }
     },
-    "/auto_reboot/ping/config/{id}": {
+    "/auto_reboot/ping_wget/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -667,12 +667,7 @@
               ]
             }
           }
-        },
-        "required": [
-          "action",
-          "period",
-          "time"
-        ]
+        }
       },
       "ping_reboot": {
         "type": "object",
@@ -703,7 +698,7 @@
               "input-type": "switch",
               "hw_tags": {
                 "mobile": true,
-                "is_trb500": false
+                "is_trb5": false
               }
             }
           },
@@ -1084,14 +1079,7 @@
               "unique": true
             }
           }
-        },
-        "required": [
-          "type",
-          "action",
-          "time",
-          "retry",
-          "time_out"
-        ]
+        }
       },
       "req_body_periodic_reboot_one": {
         "description": "",

@@ -1,17 +1,11 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "Services status"
-    }
-  ],
+  "tags": [],
   "paths": {
     "/services/status": {
       "get": {
-        "summary": "Returns the status of installed services",
-        "tags": [
-          "Services status"
-        ],
+        "summary": "Returns information about installed services on the device",
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -32,10 +26,7 @@
                           "enabled": {
                             "type": "string",
                             "description": "Service enabled/disabled.",
-                            "enum": [
-                              "0",
-                              "1"
-                            ]
+                            "enum": ["0", "1"]
                           },
                           "service": {
                             "type": "string",
@@ -58,11 +49,12 @@
         "description": ""
       },
       "x-web": {
-        "menu": [
-          "Status",
-          "Services",
-          "Services"
-        ]
+        "menu": ["Status", "Services", "Services"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "hidden": true
       }
     }
   },

@@ -5,7 +5,7 @@
 			"api": [
 				"/modbus/tcp_over_serial/*",
 				"/serial/*",
-				"/device/*",
+				"/system/device/*",
 				"/firewall/zones/*"
 			]
 		},

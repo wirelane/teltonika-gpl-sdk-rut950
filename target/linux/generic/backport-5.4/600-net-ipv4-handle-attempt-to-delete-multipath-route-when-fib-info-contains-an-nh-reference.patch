@@ -1,6 +1,6 @@
 --- a/net/ipv4/fib_semantics.c
 +++ b/net/ipv4/fib_semantics.c
-@@ -883,6 +883,10 @@ int fib_nh_match(struct fib_config *cfg,
+@@ -884,6 +884,10 @@ int fib_nh_match(struct fib_config *cfg,
  		return 0;
  	}
  
@@ -11,7 +11,7 @@
  	if (cfg->fc_oif || cfg->fc_gw_family) {
  		struct fib_nh *nh;
  
-@@ -917,6 +921,10 @@ int fib_nh_match(struct fib_config *cfg,
+@@ -918,6 +922,10 @@ int fib_nh_match(struct fib_config *cfg,
  	if (!cfg->fc_mp)
  		return 0;
  

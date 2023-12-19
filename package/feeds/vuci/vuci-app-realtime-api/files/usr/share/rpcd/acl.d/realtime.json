@@ -12,7 +12,7 @@
 	"status/realtime/bandwidth": {
 		"description": "realtime bandwidth status",
 		"read": {
-			"api": ["/devices/traffic/*"],
+			"api": ["/network/devices/traffic/*"],
 			"ubus": {
 				"vuci.system": [
 					"lucibwc"
@@ -34,7 +34,7 @@
 	"status/realtime/mobile": {
 		"description": "mobile signal status",
 		"read": {
-			"api": ["/mobile/modems/*"],
+			"api": ["/modems/*"],
 			"ubus": {
 				"vuci.system": [
 					"lucibwc"
@@ -45,7 +45,7 @@
 	"status/realtime/connections": {
 		"description": "realtime connections status",
 		"read": {
-			"api": ["/routes/connections_realtime/*", "/routes/connections/*"],
+			"api": ["/routes/connections_realtime/*", "/firewall/connections/status/*"],
 			"ubus": {
 				"vuci.system": [
 					"lucibwc"

@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 APP_TITLE:=VuCI API Support for Events Reporting
 
-APP_DEPENDS:=+MOBILE_SUPPORT:libparam +libubus +liblua +MOBILE_SUPPORT:libgsm
+APP_DEPENDS:=+libparam +libubus +liblua +MOBILE_SUPPORT:libgsm
 
 CUSTOM_INSTALL=1
 include ../api.mk

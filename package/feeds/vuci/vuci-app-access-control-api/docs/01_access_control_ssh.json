@@ -1,0 +1,277 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "SSH"
+    }
+  ],
+  "paths": {
+    "/access_control/ssh/config": {
+      "get": {
+        "summary": "Returns SSH configuration",
+        "tags": ["SSH"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AccessControlSSH"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates SSH configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AccessControlSSH"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ssh_request"
+        },
+        "tags": ["SSH"]
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "Access Control", "General"]
+      }
+    },
+    "/access_control/ssh/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns SSH configuration",
+        "tags": ["SSH"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AccessControlSSHSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ]
+      },
+      "put": {
+        "summary": "Updates SSH configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AccessControlSSHSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ssh_request_single"
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ],
+        "tags": ["SSH"]
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "Access Control", "General"]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AccessControlSSH": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/access_control_ssh_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AccessControlSSHSingle": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/access_control_ssh_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "access_control_ssh_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/access_control_ssh_single_options"
+          }
+        ]
+      },
+      "access_control_ssh_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable SSH access",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/disable SSH access.",
+            "format": "is_bool",
+            "enum": ["1", "0"]
+          },
+          "wan_access": {
+            "x-web": {
+              "hw_tags": {
+                "is_switch": false,
+                "is_access_point": false
+              },
+              "pretty": "Remote SSH access",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "enabled": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Turns SSH access from remote networks (WAN) on or off.",
+            "format": "is_bool",
+            "enum": ["1", "0"]
+          },
+          "port": {
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Selects which port to use for SSH access.",
+            "format": "port"
+          },
+          "enable_key_ssh": {
+            "x-web": {
+              "pretty": "Enable key-based authentication",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Use public keys for authentication.",
+            "format": "is_bool",
+            "enum": ["1", "0"]
+          },
+          "ssh_keys": {
+            "x-web": {
+              "pretty": "Public keys",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_key_ssh": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Public keys for ssh key-based authentication. Each individual key must be specified on a new line."
+          }
+        },
+        "required": ["enabled", "port", "enable_key_ssh"]
+      }
+    },
+    "requestBodies": {
+      "ssh_request": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/access_control_ssh_options"
+                  }
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      },
+      "ssh_request_single": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/access_control_ssh_single_options"
+                }
+              },
+              "required": ["data"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

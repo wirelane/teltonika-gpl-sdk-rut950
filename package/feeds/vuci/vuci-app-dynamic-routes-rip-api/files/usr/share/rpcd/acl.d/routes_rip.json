@@ -3,14 +3,14 @@
 		"description": "dynamic rip routes configuration",
 		"read": {
 			"api": [
-				"/routes/dynamic/rip/*",
+				"/rip/*",
 				"/interfaces/config/*",
 				"/interfaces/status/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/routes/dynamic/rip/*"
+				"/rip/*"
 			]
 		}
 	},
@@ -19,7 +19,7 @@
 		"description": "rip routes",
 		"read": {
 			"api": [
-				"/routes/dynamic/rip/*"
+				"/rip/*"
 			]
 		}
 	}

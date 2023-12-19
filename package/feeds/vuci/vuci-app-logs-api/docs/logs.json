@@ -1,28 +1,21 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Events Logs",
+    "title": "Logs",
     "version": "1.0.0",
     "description": "Events Logs API documentation"
   },
-  "tags": [
-    {
-      "name": "Events Logs"
-    }
-  ],
+  "tags": [],
   "paths": {
-    "/events_log/log/{id}": {
+    "/events_log/config": {
       "get": {
         "tags": [
-          "Events Logs"
+          "General"
         ],
-        "summary": "Returns specified Events Log group.",
+        "summary": "Returns events from all log groups",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200events_log"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -30,41 +23,43 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Event log type ( Available types: [system, events, connections, network] ) identifier (ID)"
-          },
-          {
             "name": "limit",
             "in": "query",
             "required": false,
             "schema": {
               "type": "number"
             },
-            "description": "Limit number of items returned."
+            "description": "Limit number of items returned"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Number of items to skip from the beginning"
           }
         ]
       },
       "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        },
         {
           "name": "limit",
           "in": "query",
           "required": false,
           "schema": {
             "type": "number"
-          }
+          },
+          "description": "Limit number of items returned"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "description": "Number of items to skip from the beginning"
         }
       ],
       "x-web": {
@@ -75,18 +70,30 @@
         ]
       }
     },
-    "/events_log/log": {
+    "/events_log/config/{event_type}": {
       "get": {
         "tags": [
-          "Events Logs"
+          "General"
         ],
-        "summary": "Returns all Events log groups.",
+        "summary": "Returns events from specified log group",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200events_log"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "parameters": [
+          {
+            "name": "event_type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Event log type (Available types: [system, events, connections, network])"
+          },
           {
             "name": "limit",
             "in": "query",
@@ -94,18 +101,46 @@
             "schema": {
               "type": "number"
             },
-            "description": "Limit number of items returned."
+            "description": "Limit number of items returned"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Number of items to skip from the beginning"
           }
         ]
       },
       "parameters": [
+        {
+          "name": "event_type",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Event log type (Available types: [system, events, connections, network])"
+        },
         {
           "name": "limit",
           "in": "query",
           "required": false,
           "schema": {
             "type": "number"
-          }
+          },
+          "description": "Limit number of items returned"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "description": "Number of items to skip from the beginning"
         }
       ],
       "x-web": {
@@ -148,20 +183,20 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
+            "type": "number",
             "description": "ID of a log."
           },
-          "e": {
-            "type": "string",
-            "description": "Event description."
-          },
-          "d": {
+          "date": {
             "type": "string",
             "description": "Date and time of the event."
           },
-          "s": {
+          "event_type": {
             "type": "string",
             "description": "Sender."
+          },
+          "event": {
+            "type": "string",
+            "description": "Event description."
           }
         }
       }

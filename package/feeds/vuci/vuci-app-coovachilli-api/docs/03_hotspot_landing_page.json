@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Themes"
+    }
+  ],
+  "paths": {
+    "/hotspot/themes/global": {
+      "get": {
+        "tags": ["Themes"],
+        "summary": "Returns Hotspot Landing Page configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLandingPage"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Themes"],
+        "summary": "Updates Hotspot Landing Page configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLandingPage"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/hotspot_landing_page_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Services", "Hotspot", "Landing page"],
+        "hw_tags": {
+          "has_hotspot": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HotspotLandingPage": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/hotspot_landing_page_single_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "hotspot_landing_page_single_options": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "x-web": {
+              "pretty": "Theme",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Currently active theme. More themes can be installed using the Package Manager."
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,8 +16,9 @@
 		"description": "gps map configuration",
 		"read": {
 			"api": [
-				"/gps/general/config/*",
-				"/gps/general/position/*"
+				"/gps/config/*",
+				"/gps/global",
+				"/gps/position/*"
 			]
 		}
 	},
@@ -26,13 +27,13 @@
 		"read": {
 			"api": [
 				"/gps/nmea/*",
-				"/gps/nmea_rules/*"
+				"/gps/nmea/rules/*"
 			]
 		},
 		"write": {
 			"api": [
 				"/gps/nmea/*",
-				"/gps/nmea_rules/*"
+				"/gps/nmea/rules/*"
 			]
 		}
 	},
@@ -40,15 +41,15 @@
 		"description": "gps https configuration",
 		"read": {
 			"api": [
-				"/io/status/*",
-				"/gps/https_general/*",
-				"/gps/https/*"
+				"/io/*",
+				"/gps/https/*",
+				"/gps/https/tavl_rules/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/gps/https_general/*",
-				"/gps/https/*"
+				"/gps/https/*",
+				"/gps/https/tavl_rules/*"
 			]
 		}
 	},
@@ -56,19 +57,19 @@
 		"description": "gps avl configuration",
 		"read": {
 			"api": [
-				"/io/status/*",
+				"/io/*",
 				"/gps/avl/*",
-				"/gps/avl_main/*",
-				"/gps/avl_rules/*",
-				"/gps/tavl_rules/*"
+				"/gps/avl/main_rules/*",
+				"/gps/avl/secondary_rules/*",
+				"/gps/avl/tavl_rules/*"
 			]
 		},
 		"write": {
 			"api": [
 				"/gps/avl/*",
-				"/gps/avl_main/*",
-				"/gps/avl_rules/*",
-				"/gps/tavl_rules/*"
+				"/gps/avl/main_rules/*",
+				"/gps/avl/secondary_rules/*",
+				"/gps/avl/tavl_rules/*"
 			]
 		}
 	},
@@ -76,12 +77,12 @@
 		"description": "gps io configuration",
 		"read": {
 			"api": [
-				"/gps/avl_io/*"
+				"/gps/avl/io_rules/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/gps/avl_io/*"
+				"/gps/avl/io_rules/*"
 			]
 		}
 	},

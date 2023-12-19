@@ -5,8 +5,8 @@
 				"/minidlna/*",
 				"/wireless/interfaces/*",
 				"/interfaces/config/*",
-				"/usb_tools/general/mounts/*",
-				"/devices/status/*"
+				"/usb_tools/mount/options/*",
+				"/network/devices/status/*"
 			]
 		},
 		"write": {

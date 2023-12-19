@@ -1,128 +1,8 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/openvpn/config/{cfg}": {
-      "put": {
-        "tags": [
-          "OpenVPN"
-        ],
-        "summary": "Updates specified openvpn configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Openvpn"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/openvpn_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OpenVPN"
-        ],
-        "summary": "Deletes specified openvpn configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Openvpn"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "OpenVPN"
-        ],
-        "summary": "Returns specified openvpn section",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Openvpn"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Uci configuration openvpn section identifier"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
     "/openvpn/config": {
       "put": {
-        "tags": [
-          "OpenVPN"
-        ],
         "summary": "Updates specified openvpn configurations",
         "responses": {
           "200": {
@@ -153,16 +33,14 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "OpenVPN"
-        ],
         "summary": "Deletes specified openvpn child configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200Openvpn"
+            "$ref": "#/components/responses/200deleted_multi"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -187,31 +65,24 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "get": {
-        "tags": [
-          "OpenVPN"
-        ],
         "summary": "Returns all openvpn configuration sections",
         "description": "Returns all sections with their parameters from openvpn configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200OpenvpnMulti"
           }
-        }
+        },
+        "tags": ["General"]
       },
       "post": {
-        "tags": [
-          "OpenVPN"
-        ],
         "summary": "Creates openvpn section",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Openvpn"
-          },
           "201": {
-            "$ref": "#/components/responses/201response"
+            "$ref": "#/components/responses/200Openvpn"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -231,38 +102,64 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
+        "menu": ["Services", "VPN", "OpenVPN"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "OpenVPN"
       }
     },
-    "/openvpn/status/{cfg}": {
-      "get": {
-        "tags": [
-          "OpenVPN Status"
-        ],
-        "summary": "Returns specified openvpn section status",
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
+    "/openvpn/config/{id}": {
+      "put": {
+        "summary": "Updates specified openvpn configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Openvpn"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
-        ],
-        "description": "Returns statuses of the instance",
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/openvpn_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["General"]
+      },
+      "delete": {
+        "summary": "Deletes specified openvpn configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["General"]
+      },
+      "get": {
+        "summary": "Returns specified openvpn section",
         "responses": {
           "200": {
             "description": "OK",
@@ -270,143 +167,64 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "success": true,
-                      "data": {
-                        "type": "1",
-                        "protocol": "tun",
-                        "tx": "5575",
-                        "rx": "6136",
-                        "uptime": "00h 12m 23s",
-                        "clients_connected": "1",
-                        "status": "2",
-                        "clients": [
-                          {
-                            "tx": "5575",
-                            "uptime": "00h 05m 42s",
-                            "vpn_ip": "10.0.0.6",
-                            "last_ref": "2023-06-08 11:14:15",
-                            "name": "client1",
-                            "rx": "6136",
-                            "ip": "192.168.10.119:60396"
-                          }
-                        ],
-                        "clients_all": "1",
-                        "ipaddress": "10.0.0.1"
-                      }
-                    }
-                  },
                   "properties": {
                     "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
+                      "type": "boolean"
                     },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string"
-                        },
-                        "protocol": {
-                          "type": "string"
-                        },
-                        "tx": {
-                          "type": "string"
-                        },
-                        "rx": {
-                          "type": "string"
-                        },
-                        "uptime": {
-                          "type": "string"
-                        },
-                        "clients_connected": {
-                          "type": "string"
-                        },
-                        "status": {
-                          "type": "string"
-                        },
-                        "clients": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "tx": {
-                                "type": "string"
-                              },
-                              "uptime": {
-                                "type": "string"
-                              },
-                              "vpn_ip": {
-                                "type": "string"
-                              },
-                              "last_ref": {
-                                "type": "string"
-                              },
-                              "name": {
-                                "type": "string"
-                              },
-                              "rx": {
-                                "type": "string"
-                              },
-                              "ip": {
-                                "type": "string"
-                              }
-                            }
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
                           }
-                        },
-                        "clients_all": {
-                          "type": "string"
-                        },
-                        "ipaddress": {
-                          "type": "string"
-                        },
-                        "updated": {
-                          "type": "string"
-                        },
-                        "ipaddress_remote": {
-                          "type": "string"
-                        },
-                        "server": {
-                          "type": "string"
                         }
                       }
                     }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "id": "string"
+                        }
+                      ]
+                    }
                   }
-                },
-                "examples": {}
+                }
               }
             }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [
         {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
           },
+          "name": "id",
+          "in": "path",
+          "required": true,
           "description": "Uci configuration openvpn section identifier"
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
+        "menu": ["Services", "VPN", "OpenVPN"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "OpenVPN"
       }
     },
-    "/openvpn/status/": {
+    "/openvpn/status": {
       "get": {
-        "tags": [
-          "OpenVPN Status"
-        ],
         "summary": "Returns all openvpn configuration sections statuses",
         "description": "Returns all sections statuses",
         "responses": {
@@ -505,6 +323,9 @@
                             },
                             "server": {
                               "type": "string"
+                            },
+                            "logs": {
+                              "type": "string"
                             }
                           }
                         },
@@ -569,6 +390,9 @@
                             },
                             "ipaddress": {
                               "type": "string"
+                            },
+                            "logs": {
+                              "type": "string"
                             }
                           }
                         }
@@ -579,80 +403,17 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
+        "menu": ["Services", "VPN", "OpenVPN"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
-      }
-    },
-    "/openvpn/log/{cfg}": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "response": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "x-examples": {
-                    "example-1": {
-                      "success": true,
-                      "data": {
-                        "response": ""
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
         },
-        "operationId": "get-services-openvpn-log-cfg",
-        "description": "Returns logs of the instance"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "cfg",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "name": "OpenVPN"
       }
     }
   },
@@ -705,15 +466,6 @@
       "openvpn_single_options": {
         "type": "object",
         "properties": {
-          "_name": {
-            "x-web": {
-              "pretty": "Name of the tunnel",
-              "input-type": "input",
-              "virtual": true
-            },
-            "type": "string",
-            "description": "Name of the tunnel. Used for easier tunnels management purpose only"
-          },
           "type": {
             "x-web": {
               "pretty": "Role",
@@ -723,10 +475,7 @@
                 "server": "Server"
               }
             },
-            "enum": [
-              "client",
-              "server"
-            ],
+            "enum": ["client", "server"],
             "type": "string",
             "description": "Type of tunnel instance"
           },
@@ -743,11 +492,6 @@
               "pretty": "Enable external services",
               "input-type": "switch",
               "depends": [
-                {
-                  "type": "client"
-                }
-              ],
-              "enum-depends": [
                 {
                   "type": "client"
                 }
@@ -769,10 +513,7 @@
                 "nord": "Nord VPN"
               }
             },
-            "enum": [
-              "express",
-              "nord"
-            ],
+            "enum": ["express", "nord"],
             "type": "string",
             "description": "Choose from a list of available VPN providers"
           },
@@ -792,13 +533,7 @@
                 "custom": "Custom"
               }
             },
-            "enum": [
-              "uk",
-              "usa",
-              "aus",
-              "sa",
-              "custom"
-            ],
+            "enum": ["uk", "usa", "aus", "sa", "custom"],
             "type": "string",
             "description": "Choose from a list of available VPN servers"
           },
@@ -808,6 +543,9 @@
               "depends": [
                 {
                   "enable_external": "0"
+                },
+                {
+                  "enable_external": ""
                 }
               ],
               "input-type": "switch"
@@ -829,6 +567,7 @@
               "input-type": "input"
             },
             "type": "string",
+            "format": "binary",
             "description": "OpenVPN configuration file. Warning! This will overwrite your current configuration."
           },
           "upload_files": {
@@ -857,13 +596,14 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
-            "enum": [
-              "tun",
-              "tap"
-            ]
+            "enum": ["tun", "tap"]
           },
           "proto": {
             "x-web": {
@@ -880,17 +620,14 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
-            "enum": [
-              "udp",
-              "udp6",
-              "tcp-client",
-              "tcp-server",
-              "tcp6-client",
-              "tcp6-server"
-            ],
+            "enum": ["udp", "udp6", "tcp-client", "tcp-server", "tcp6-client", "tcp6-server"],
             "type": "string",
             "description": "A transport protocol used for connection. You can choose here between TCP and UDP"
           },
@@ -900,6 +637,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ],
               "pretty": "Port",
@@ -914,6 +655,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ],
               "pretty": "LZO",
@@ -924,23 +669,14 @@
                 "": "None"
               }
             },
-            "enum": [
-              "yes",
-              "no",
-              ""
-            ],
+            "enum": ["yes", "no", ""],
             "type": "string",
             "description": "Use fast LZO compression. With LZO compression your VPN connection will generate less network traffic"
           },
-          "_auth": {
+          "auth_mode": {
             "type": "string",
             "description": "Authentication mode used to secure data session",
-            "enum": [
-              "skey",
-              "tls",
-              "tls/pass",
-              "pass"
-            ],
+            "enum": ["skey", "tls", "tls/pass", "pass"],
             "x-web": {
               "pretty": "Authentication",
               "enum-pretty": {
@@ -957,6 +693,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             }
@@ -998,6 +738,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ],
               "input-type": "select"
@@ -1005,37 +749,37 @@
             "type": "string",
             "description": "Packet encryption algorithm (cipher)",
             "enum": [
-                "DES-CBC",
-                "RC2-CBC",
-                "DES-EDE-CBC",
-                "DES-EDE3-CBC",
-                "DESX-CBC",
-                "BF-CBC",
-                "RC2-40-CBC",
-                "CAST5-CBC",
-                "RC2-64-CBC",
-                "AES-128-CBC",
-                "AES-128-CFB",
-                "AES-128-CFB1",
-                "AES-128-CFB8",
-                "AES-128-OFB",
-                "AES-128-GCM",
-                "AES-192-CFB",
-                "AES-192-CFB1",
-                "AES-192-CFB8",
-                "AES-192-OFB",
-                "AES-192-CBC",
-                "AES-192-GCM",
-                "AES-256-GCM",
-                "AES-256-CFB",
-                "AES-256-CFB1",
-                "AES-256-CFB8",
-                "AES-256-OFB",
-                "AES-256-CBC",
-                "none"                      
-              ]
+              "DES-CBC",
+              "RC2-CBC",
+              "DES-EDE-CBC",
+              "DES-EDE3-CBC",
+              "DESX-CBC",
+              "BF-CBC",
+              "RC2-40-CBC",
+              "CAST5-CBC",
+              "RC2-64-CBC",
+              "AES-128-CBC",
+              "AES-128-CFB",
+              "AES-128-CFB1",
+              "AES-128-CFB8",
+              "AES-128-OFB",
+              "AES-128-GCM",
+              "AES-192-CFB",
+              "AES-192-CFB1",
+              "AES-192-CFB8",
+              "AES-192-OFB",
+              "AES-192-CBC",
+              "AES-192-GCM",
+              "AES-256-GCM",
+              "AES-256-CFB",
+              "AES-256-CFB1",
+              "AES-256-CFB8",
+              "AES-256-OFB",
+              "AES-256-CBC",
+              "none"
+            ]
           },
-          "_tls_cipher": {
+          "tls_cipher_list": {
             "x-web": {
               "enum-pretty": {
                 "all": "All",
@@ -1045,22 +789,28 @@
               "pretty": "TLS cipher",
               "depends": [
                 {
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "enable_custom": "0",
                   "enable_external": "0"
                 },
                 {
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "auth_mode": "tls",
+                  "enable_custom": "0",
+                  "enable_external": ""
+                },
+                {
+                  "auth_mode": "tls/pass",
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
-            "enum": [
-              "all",
-              "dhe_rsa",
-              "custom"
-            ],
+            "enum": ["all", "dhe_rsa", "custom"],
             "type": "string",
             "description": "Packet encryption algorithm (cipher)"
           },
@@ -1069,7 +819,7 @@
               "pretty": "Allowed TLS ciphers",
               "depends": [
                 {
-                  "_tls_cipher": "dhe_rsa"
+                  "tls_cipher_list": "dhe_rsa"
                 }
               ],
               "input-type": "multiselect"
@@ -1093,13 +843,13 @@
               "type": "string"
             }
           },
-          "_cipher_custom": {
+          "cipher_custom": {
             "x-web": {
               "input-type": "input",
               "pretty": "Allowed TLS ciphers",
               "depends": [
                 {
-                  "_tls_cipher": "custom"
+                  "tls_cipher_list": "custom"
                 }
               ]
             },
@@ -1117,6 +867,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
@@ -1131,6 +885,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
@@ -1145,6 +903,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
@@ -1160,19 +922,37 @@
                   "enable_external": "0",
                   "enable_custom": "0",
                   "type": "server",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "type": "server",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "type": "server",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "type": "server",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "type": "server",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "type": "server",
+                  "auth_mode": "pass"
                 }
               ]
             },
@@ -1188,7 +968,13 @@
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "skey"
+                  "auth_mode": "skey"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "skey"
                 }
               ]
             },
@@ -1203,7 +989,13 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "skey",
+                  "auth_mode": "skey",
+                  "dev": "tun"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "skey",
                   "dev": "tun"
                 }
               ]
@@ -1220,12 +1012,25 @@
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "skey",
+                  "auth_mode": "skey",
                   "dev": "tun"
                 },
                 {
                   "type": "client",
                   "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "skey",
+                  "dev": "tun"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "",
                   "enable_custom": "0",
                   "dev": "tun"
                 }
@@ -1243,12 +1048,25 @@
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "skey",
+                  "auth_mode": "skey",
                   "dev": "tun"
                 },
                 {
                   "type": "client",
                   "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "skey",
+                  "dev": "tun"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "",
                   "enable_custom": "0",
                   "dev": "tun"
                 }
@@ -1282,6 +1100,27 @@
                   "enable_custom": "0",
                   "dev": "tun",
                   "proto": "tcp6-server"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "proto": "udp6"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "proto": "tcp6-client"
+                },
+                {
+                  "type": "client",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "proto": "tcp6-server"
                 }
               ]
             },
@@ -1297,19 +1136,37 @@
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tun"
+                  "auth_mode": "tun"
                 },
                 {
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tun"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
                 }
               ]
             },
@@ -1324,21 +1181,42 @@
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "type": "server",
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "type": "server",
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "pass"
                 }
               ],
               "pretty": "Virtual network netmask",
@@ -1354,42 +1232,84 @@
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "proto": "udp6"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "proto": "tcp6-client"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "proto": "tcp6-server"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
                   "proto": "udp6"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
                   "proto": "tcp6-client"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
                   "dev": "tun",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
+                  "proto": "tcp6-server"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls",
+                  "proto": "udp6"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls",
+                  "proto": "tcp6-client"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls",
+                  "proto": "tcp6-server"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls/pass",
+                  "proto": "udp6"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls/pass",
+                  "proto": "tcp6-client"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "tls/pass",
                   "proto": "tcp6-server"
                 }
               ],
@@ -1405,17 +1325,32 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
                 }
               ],
               "pretty": "Push option",
@@ -1434,17 +1369,32 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
                 }
               ],
               "input-type": "switch"
@@ -1468,47 +1418,55 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 }
               ]
             },
-            "enum": [
-              "none",
-              "md5",
-              "sha1",
-              "sha256",
-              "sha384",
-              "sha512"
-            ],
+            "enum": ["none", "md5", "sha1", "sha256", "sha384", "sha512"],
             "type": "string",
             "description": "Authentication algorithm"
           },
-          "_tls_auth": {
+          "tls_security": {
             "x-web": {
               "pretty": "Additional HMAC authentication",
               "input-type": "select",
@@ -1521,40 +1479,51 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 }
               ]
             },
-            "enum": [
-              "none",
-              "tls-auth",
-              "tls-crypt"
-            ],
+            "enum": ["none", "tls-auth", "tls-crypt"],
             "type": "string",
             "description": "Add an additional layer of HMAC authentication on top of the TLS control channel to protect against DoS attacks."
           },
@@ -1566,38 +1535,56 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
                 }
               ]
             },
@@ -1613,38 +1600,56 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-crypt",
-                  "_auth": "tls"
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-crypt",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-crypt",
-                  "_auth": "pass"
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-crypt",
-                  "_auth": "tls"
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-crypt",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-crypt",
-                  "_auth": "pass"
+                  "tls_security": "tls-crypt",
+                  "auth_mode": "pass"
                 }
               ]
             },
@@ -1659,45 +1664,60 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
                 }
               ]
             },
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "type": "string",
             "description": "HMAC authentication key direction value is arbitrary and must be opposite between communicating parties (or omitted entirely"
           },
@@ -1709,27 +1729,27 @@
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
                 },
                 {
-                    "enable_custom": "0",
-                    "upload_files": "0",
-                    "_tls_auth": "tls-auth",
-                    "_auth": "pass"
-                  },
-                  {
-                    "enable_custom": "0",
-                    "upload_files": "0",
-                    "_tls_auth": "tls-auth",
-                    "_auth": "tls/pass"
-                  }
+                  "enable_custom": "0",
+                  "upload_files": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_custom": "0",
+                  "upload_files": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
+                }
               ]
             },
             "type": "string",
@@ -1743,33 +1763,33 @@
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_custom": "1",
                   "upload_files": "1",
-                  "_tls_auth": "tls-auth",
-                  "_auth": "tls/pass"
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
                 },
                 {
-                    "enable_custom": "0",
-                    "upload_files": "0",
-                    "_tls_auth": "tls-auth",
-                    "_auth": "pass"
-                  },
-                  {
-                    "enable_custom": "0",
-                    "upload_files": "0",
-                    "_tls_auth": "tls-auth",
-                    "_auth": "tls/pass"
-                  }
+                  "enable_custom": "0",
+                  "upload_files": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_custom": "0",
+                  "upload_files": "0",
+                  "tls_security": "tls-auth",
+                  "auth_mode": "tls/pass"
+                }
               ]
             },
             "type": "string",
             "description": "VPN client password"
           },
-          "_extra": {
+          "extra": {
             "x-web": {
               "pretty": "Extra options",
               "input-type": "input",
@@ -1777,6 +1797,10 @@
                 {
                   "enable_custom": "0",
                   "enable_external": "0"
+                },
+                {
+                  "enable_custom": "0",
+                  "enable_external": ""
                 }
               ]
             },
@@ -1786,7 +1810,7 @@
               "type": "string"
             }
           },
-          "_device_files": {
+          "device_files": {
             "type": "string",
             "description": "Choose this option if you want to select certificate files from device. Certificate files can be generated in system/administration/certificates"
           },
@@ -1798,37 +1822,55 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "use_pkcs": "0"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass",
+                  "auth_mode": "pass",
                   "use_pkcs": "0"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "pass",
+                  "auth_mode": "pass",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
                   "use_pkcs": "0"
                 }
               ]
@@ -1845,37 +1887,55 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "use_pkcs": "0"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass",
+                  "auth_mode": "pass",
                   "use_pkcs": "0"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "pass",
+                  "auth_mode": "pass",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
                   "use_pkcs": "0"
                 }
               ]
@@ -1892,37 +1952,55 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "use_pkcs": "0"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass",
+                  "auth_mode": "pass",
                   "use_pkcs": "0"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass",
+                  "use_pkcs": "0"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls",
+                  "auth_mode": "tls",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "pass",
+                  "auth_mode": "pass",
                   "use_pkcs": "0"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass",
+                  "auth_mode": "tls/pass",
                   "use_pkcs": "0"
                 }
               ]
@@ -1939,22 +2017,32 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 }
               ]
             },
@@ -1969,12 +2057,17 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "skey"
+                  "auth_mode": "skey"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "skey"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "skey"
+                  "auth_mode": "skey"
                 }
               ]
             },
@@ -1990,22 +2083,32 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 }
               ]
             },
@@ -2021,32 +2124,47 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 }
               ]
             },
@@ -2062,32 +2180,47 @@
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "enable_external": "0",
                   "enable_custom": "0",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls/pass"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "auth_mode": "tls"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "upload_files": "1",
                   "enable_custom": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 }
               ]
             },
@@ -2101,13 +2234,13 @@
               "input-type": "switch",
               "depends": [
                 {
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 }
               ]
             },
@@ -2121,15 +2254,15 @@
               "depends": [
                 {
                   "use_pkcs": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "use_pkcs": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "use_pkcs": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 }
               ]
             },
@@ -2143,23 +2276,68 @@
               "depends": [
                 {
                   "use_pkcs": "1",
-                  "_auth": "pass"
+                  "auth_mode": "pass"
                 },
                 {
                   "use_pkcs": "1",
-                  "_auth": "tls/pass"
+                  "auth_mode": "tls/pass"
                 },
                 {
                   "use_pkcs": "1",
-                  "_auth": "tls"
+                  "auth_mode": "tls"
                 }
               ]
             },
             "type": "string",
             "format": "binary",
             "description": "Uploads PKCS #12 certificate chain file."
+          },
+          "local_ipv6": {
+            "x-web": {
+              "pretty": "Local tunnel endpoint IPv6",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "skey"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "skey"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IPv6 address of virtual local network interface"
+          },
+          "remote_ipv6": {
+            "x-web": {
+              "pretty": "Local tunnel endpoint IPv6",
+              "input-type": "input",
+              "depends": [
+                {
+                  "enable_external": "0",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "skey"
+                },
+                {
+                  "enable_external": "",
+                  "enable_custom": "0",
+                  "dev": "tun",
+                  "auth_mode": "skey"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "IPv6 address of virtual remote network interface"
           }
-        }
+        },
+        "required": ["type"]
       },
       "openvpn_options": {
         "allOf": [
@@ -2182,5 +2360,15 @@
         ]
       }
     }
-  }
+  },
+  "info": {
+    "title": "OpenVPN",
+    "version": "1.0",
+    "description": "OpenVPN api documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

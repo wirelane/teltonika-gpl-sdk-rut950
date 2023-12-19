@@ -4,7 +4,7 @@
     "read": {
       "api": [
         "/recipients/phone_groups/*",
-        "/mobile/modems/*"
+        "/modems/*"
       ]
     },
     "write": {
@@ -22,8 +22,7 @@
     },
     "write": {
       "api": [
-        "/recipients/email_users/*",
-        "/recipients/send_email/*"
+        "/recipients/email_users/*"
       ]
     }
   }

@@ -3,15 +3,15 @@
     "description": "snmp settings",
     "read": {
       "api": [
-        "/snmp/settings/*",
-        "/snmp/system/*"
+        "/snmp/agent/*",
+        "/snmp/system/*",
+        "/profinet/status"
       ]
     },
     "write": {
       "api": [
-        "/snmp/settings/*",
-        "/snmp/system/*",
-        "/profinet/actions/update_status/*"
+        "/snmp/agent/*",
+        "/snmp/system/*"
       ]
     }
   },
@@ -19,13 +19,13 @@
     "description": "snmp v3 users",
     "read": {
       "api": [
-        "/snmp/v3/*"
+        "/snmp/users/*",
+        "/profinet/status"
       ]
     },
     "write": {
       "api": [
-        "/snmp/v3/*",
-        "/profinet/actions/update_status/*"
+        "/snmp/users/*"
       ]
     }
   },
@@ -34,14 +34,14 @@
     "read": {
       "api": [
         "/snmp/communities/*",
-        "/snmp/communities_v6/*"
+        "/snmp/communities_v6/*",
+        "/profinet/status"
       ]
     },
     "write": {
       "api": [
         "/snmp/communities/*",
-        "/snmp/communities_v6/*",
-        "/profinet/actions/update_status/*"
+        "/snmp/communities_v6/*"
       ]
     }
   },
@@ -49,17 +49,15 @@
     "description": "trap settings",
     "read": {
       "api": [
-        "/snmp/trap_settings/*",
-        "/snmp/trap_rules/*",
-        "/io/status/config/*",
-        "/mobile/modems/status_basic/*",
+        "/snmp/trap/*",
+        "/io/*",
+        "/modems/status_basic/*",
         "/events_reporting/options/*"
       ]
     },
     "write": {
       "api": [
-        "/snmp/trap_settings/*",
-        "/snmp/trap_rules/*"
+        "/snmp/trap/*"
       ]
     }
   }

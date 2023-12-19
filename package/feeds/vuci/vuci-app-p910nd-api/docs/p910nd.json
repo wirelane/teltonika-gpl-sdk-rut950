@@ -6,7 +6,79 @@
     }
   ],
   "paths": {
-    "/usb_tools/p910nd/config/general": {
+    "/usb_tools/p910nd/config": {
+      "get": {
+        "tags": [
+          "P910ND"
+        ],
+        "summary": "Returns all p910nd configuration sections",
+        "description": "Returns all sections with their parameters form p910nd configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200p910ndMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "P910ND"
+        ],
+        "summary": "Update all sections options",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200p910ndMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/p910nd_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "USB tools",
+        "menu": [
+          "Services",
+          "USB Tools",
+          "Printer server"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/p910nd/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Printer service configuration identifier (ID)"
+        }
+      ],
       "get": {
         "tags": [
           "P910ND"
@@ -16,8 +88,8 @@
           "200": {
             "$ref": "#/components/responses/200p910nd"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
@@ -29,6 +101,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200p910nd"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -62,66 +137,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "USB Tools",
-          "Printer server"
-        ],
-        "hw_tags": {
-          "usb": true
-        }
-      }
-    },
-    "/usb_tools/p910nd/config/": {
-      "get": {
-        "tags": [
-          "P910ND"
-        ],
-        "summary": "Returns all p910nd configuration sections",
-        "description": "Returns all sections with their parameters form p910nd configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200p910ndMulti"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "P910ND"
-        ],
-        "summary": "Update all sections options",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200p910ndMulti"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "sections for updating",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "array of of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/p910nd_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
+        "name": "USB tools",
         "menu": [
           "Services",
           "USB Tools",
@@ -147,7 +163,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/p910nd_options"
+                  "$ref": "#/components/schemas/p910nd_options_multi"
                 }
               }
             }
@@ -169,7 +185,7 @@
                   "type": "array",
                   "description": "Array of section objects",
                   "items": {
-                    "$ref": "#/components/schemas/p910nd_options"
+                    "$ref": "#/components/schemas/p910nd_options_multi"
                   }
                 }
               }
@@ -230,6 +246,26 @@
             }
           }
         }
+      },
+      "p910nd_options_multi": {
+        "title": "p910nd options",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "P910nd Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/p910nd_options"
+          }
+        ]
       }
     }
   }

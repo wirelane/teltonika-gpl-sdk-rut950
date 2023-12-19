@@ -1,0 +1,825 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/package_manager/all_packages/status": {
+      "get": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Returns all package manager configuration sections",
+        "description": "Returns all sections with their parameters from package manager configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_packages_data"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/installed_packages/status": {
+      "get": {
+        "summary": "Returns installed packages section",
+        "tags": [
+          "Packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_installed_packages"
+          }
+        },
+        "operationId": "get-services-packages-config-installed",
+        "description": "Returns installed sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/pending_packages/status": {
+      "get": {
+        "summary": "Returns pending packages section",
+        "tags": [
+          "Packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_packages_data"
+          }
+        },
+        "operationId": "get-services-packages-config-pending",
+        "description": "Returns pending sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/available_packages/status": {
+      "get": {
+        "summary": "Returns available packages section",
+        "tags": [
+          "Packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_packages_data"
+          }
+        },
+        "operationId": "get-services-packages-config-available",
+        "description": "Returns available sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/language_packages/status": {
+      "get": {
+        "summary": "Returns language packages section",
+        "tags": [
+          "Packages"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_language_package"
+          }
+        },
+        "operationId": "get-services-packages-config-language",
+        "description": "Returns language sections with their parameters from packages"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/repository_link/options": {
+      "get": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Returns information about packages",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_repository_link"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/actions/upload_package": {
+      "post": {
+        "summary": "Upload zipped package to device",
+        "operationId": "post-services-packages-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200UploadZipped"
+          },
+          "422": {
+            "$ref": "#/components/responses/422_package"
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "description": "Parameter to upload the file to.",
+                    "enum": [
+                      "package_file"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File to upload"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              },
+              "examples": {}
+            }
+          }
+        },
+        "tags": [
+          "Packages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/package_manager/actions/install_package": {
+      "post": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Install package",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422_install_package"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/install_package_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/actions/update_package": {
+      "post": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Update package from a server if possible",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_update_package"
+          },
+          "422": {
+            "$ref": "#/components/responses/422_package"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/update_package_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/package_manager/actions/remove_package": {
+      "post": {
+        "summary": "Deletes specified package manager package",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/remove_package_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Packages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hidden": true
+      }
+    },
+    "/package_manager/actions/delete_install_files": {
+      "post": {
+        "summary": "Deletes uploaded package data from device",
+        "operationId": "post-services-packages-actions-delete_install_files",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          }
+        },
+        "tags": [
+          "Packages"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Package Manager",
+          "Package Manager"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200UploadZipped": {
+        "description": "Returns data about uploaded zipped package to device",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/uploaded_package_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_repository_link": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "description": "",
+                  "properties": {
+                    "packages_url": {
+                      "type": "string",
+                      "description": "URL which contains packages available to download for the current device."
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example-1": {
+                "value": {
+                  "success": true,
+                  "data": {
+                    "packages_url": "http://opkg.teltonika-networks.com/1e844272737d9fa9587b0832b852448b7b2dc568b20b925fcfd33369ef018a0e/wiki"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_packages_data": {
+        "description": "Returns data about packages",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of packages data",
+                  "items": {
+                    "$ref": "#/components/schemas/packages_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_language_package": {
+        "description": "Returns data about language packages",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of packages data",
+                  "items": {
+                    "$ref": "#/components/schemas/language_packages_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_installed_packages": {
+        "description": "Returns installed packages",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of fetch packages",
+                  "items": {
+                    "$ref": "#/components/schemas/installed_packages_info"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "422_package": {
+        "description": "Returns error when try update package",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "errors": {
+                  "type": "array",
+                  "description": "Array of errors",
+                  "items": {
+                    "$ref": "#/components/schemas/errormessages"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "422_install_package": {
+        "description": "Returns error when try install package",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "errors": {
+                  "type": "array",
+                  "description": "Array of errors",
+                  "items": {
+                    "$ref": "#/components/schemas/errormessages"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200_update_package": {
+        "description": "Returns error when try update package",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "messages": {
+                  "type": "array",
+                  "description": "Array of messages",
+                  "items": {
+                    "$ref": "#/components/schemas/update"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "update_package_options": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "type": "string",
+            "description": "Name of package to be updated",
+            "format": "default_validation"
+          }
+        }
+      },
+      "errormessages": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "description": "Error number"
+          },
+          "source": {
+            "type": "string",
+            "description": "Error source"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          }
+        }
+      },
+      "update": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Status number"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message"
+          }
+        }
+      },
+      "installed_packages_info": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of package"
+          },
+          "package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "tlt_name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "installed_version": {
+            "type": "string",
+            "description": "Package Version"
+          },
+          "network_restart": {
+            "type": "boolean",
+            "description": "Flag is need to restart network, when package is installed"
+          },
+          "reboot": {
+            "type": "boolean",
+            "description": "Flag is need to reboot device, when package is installed"
+          }
+        }
+      },
+      "uploaded_package_info": {
+        "type": "object",
+        "properties": {
+          "checksum": {
+            "type": "string",
+            "description": "Package checksum"
+          },
+          "code": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "network_restart": {
+            "type": "boolean",
+            "description": "Flag is need to restart network, when package is installed"
+          },
+          "reboot": {
+            "type": "boolean",
+            "description": "Flag is need to reboot device, when package is installed"
+          },
+          "package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA checksum"
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Is package verified"
+          }
+        }
+      },
+      "packages_info": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of package"
+          },
+          "package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "installed_version": {
+            "type": "string",
+            "description": "Package Version"
+          },
+          "depends": {
+            "type": "string",
+            "description": "Depends to package"
+          },
+          "size": {
+            "type": "string",
+            "description": "Size of package"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA256 checksum"
+          },
+          "installed_size": {
+            "type": "string",
+            "description": "Package size when installed"
+          },
+          "version": {
+            "type": "string",
+            "description": "Package Version"
+          },
+          "tlt_name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "license": {
+            "type": "string",
+            "description": "Package License"
+          },
+          "network_restart": {
+            "type": "boolean",
+            "description": "Flag is need to restart network, when package is installed"
+          },
+          "reboot": {
+            "type": "boolean",
+            "description": "Flag is need to reboot device, when package is installed"
+          }
+        }
+      },
+      "language_packages_info": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "number",
+            "description": "Type of package"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of package"
+          },
+          "package": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "installed_version": {
+            "type": "string",
+            "description": "Package Version"
+          },
+          "depends": {
+            "type": "string",
+            "description": "Depends to package"
+          },
+          "size": {
+            "type": "string",
+            "description": "Size of package"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "SHA256 checksum"
+          },
+          "installed_size": {
+            "type": "string",
+            "description": "Package size when installed"
+          },
+          "version": {
+            "type": "string",
+            "description": "Package Version"
+          },
+          "tlt_name": {
+            "type": "string",
+            "description": "Package title"
+          },
+          "license": {
+            "type": "string",
+            "description": "Package License"
+          }
+        }
+      },
+      "install_package_options": {
+        "type": "object",
+        "properties": {
+          "custom": {
+            "type": "string",
+            "description": "Specifies if package is from server or not",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool"
+          },
+          "language": {
+            "type": "string",
+            "description": "Specifies if package is language pack.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool"
+
+          },
+          "package": {
+            "type": "string",
+            "description": "Name of package to be installed. Needs to be specified if package is being installed from online server.",
+            "format": "default_validation"
+          }
+        }
+      },
+      "remove_package_options": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "type": "string",
+            "description": "Name of package to be installed. Needs to be specified if package is being installed from online server.",
+            "format": "default_validation"
+          }
+        }
+      }
+    }
+  }
+}

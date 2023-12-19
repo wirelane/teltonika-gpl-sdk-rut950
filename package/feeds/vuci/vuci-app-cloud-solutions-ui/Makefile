@@ -10,6 +10,8 @@ define Package/$(PKG_NAME)/install
 	$(if $(CONFIG_AP_DEVICE),\
 		$(RM) $(1)/usr/share/vuci/menu.d/cloudsolutions.json,\
 		$(RM) $(1)/usr/share/vuci/menu.d/cloudsolutions_system.json)
+	$(if $(CONFIG_PACKAGE_vuci-app-setup-wizard-ui), ,\
+		$(RM) $(1)/usr/share/vuci/menu.d/cloudsolutions_wizard_step.json)
 endef
 
 

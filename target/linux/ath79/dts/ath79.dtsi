@@ -14,6 +14,67 @@
 		#interrupt-cells = <1>;
 	};
 
+	mnfinfo: mnfinfo {
+		compatible = "sysfs-mnfinfo";
+		status = "okay";
+
+		mac {
+			reg = <&config 0x0 0x6>;
+			min-res-len = <0xc>;
+			type = "mac";
+			default = "001E42013370";
+			log;
+		};
+
+		name {
+			reg = <&config 0x10 0xc>;
+			type = "ascii";
+			default = "UNKNOWNXXXXX";
+			log;
+		};
+
+		wps {
+			reg = <&config 0x20 0x8>;
+			type = "digit";
+		};
+
+		serial {
+			reg = <&config 0x30 0xa>;
+			type = "alnum";
+			default = "0000000000";
+			log;
+		};
+
+		batch {
+			reg = <&config 0x40 0x4>;
+			type = "digit";
+			default = "0000";
+			log;
+		};
+
+		hwver {
+			reg = <&config 0x50 0x4>;
+			type = "digit";
+			default = "0000";
+			log;
+		};
+
+		wpass {
+			reg = <&config 0x90 0x10>;
+			type = "ascii";
+		};
+
+		pass {
+			reg = <&config 0xa0 0x6a>;
+			type = "ascii";
+		};
+
+		sim_count {
+			default =  "0";
+			log;
+		};
+	};
+
 	ahb {
 		compatible = "simple-bus";
 		ranges;

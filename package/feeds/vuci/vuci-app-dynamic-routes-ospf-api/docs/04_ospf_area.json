@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/ospf/area/config": {
+      "get": {
+        "summary": "Returns all OSPF area configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsArMulti"
+          }
+        },
+        "tags": ["Area"]
+      },
+      "post": {
+        "summary": "Creates OSPF area configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200OsArMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_area_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Area"]
+      },
+      "put": {
+        "summary": "Updates specified OSPF area configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsArMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/ospf_area_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Area"]
+      },
+      "delete": {
+        "summary": "Deletes specified OSPF area configurations",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Area"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "OSPF"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "OSPF"
+      }
+    },
+    "/ospf/area/config/{id}": {
+      "get": {
+        "summary": "Returns specified OSPF area configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsAr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration OSPF area identifier"
+          }
+        ],
+        "tags": ["Area"]
+      },
+      "put": {
+        "summary": "Updates specified ospf area configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsAr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ospf area identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_area_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Area"]
+      },
+      "delete": {
+        "summary": "Deletes specified OSPF area configuration",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration OSPF area identifier"
+          }
+        ],
+        "tags": ["Area"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "OSPF"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "OSPF"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200OsAr": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ospf_area_options_multi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OsArMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/ospf_area_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ospf_area_options": {
+        "type": "object",
+        "properties": {
+          "area": {
+            "x-web": {
+              "pretty": "Area",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Area code. IPv4 address or 32bit integer."
+          },
+          "stub": {
+            "x-web": {
+              "pretty": "Stub",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Mark this area as stub"
+          },
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string"
+          }
+        }
+      },
+      "ospf_area_options_multi": {
+        "title": "ospf_area_options_multi",
+        "x-stoplight": {
+          "id": "g76t65sfqr0kr"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ospf_area_options"
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "OSPF Area",
+    "version": "1.0",
+    "description": "OSPF area api documentation"
+  },
+  "tags": [
+    {
+      "name": "Area"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+Index: linux-5.4.254/drivers/gpio/gpiolib-devprop.c
+===================================================================
+--- linux-5.4.254.orig/drivers/gpio/gpiolib-devprop.c
++++ linux-5.4.254/drivers/gpio/gpiolib-devprop.c
+@@ -58,3 +58,64 @@ void devprop_gpiochip_set_names(struct g
+ 	kfree(names);
+ }
+ EXPORT_SYMBOL_GPL(devprop_gpiochip_set_names);
++
++int tlt_gpio_set_line_name(struct gpio_chip *chip, const char *line_name, int index)
++{
++	struct gpio_device *gdev;
++
++	if (!chip || !line_name) {
++		return 1;
++	}
++
++	gdev = chip->gpiodev;
++	if (gdev->ngpio < index) {
++		return 1;
++	}
++
++	if (gdev->descs[index].name) {
++		return 1;
++	}
++	gdev->descs[index].name = line_name;
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(tlt_gpio_set_line_name);
++
++int tlt_gpio_set_active_low(struct gpio_chip *chip, int index)
++{
++	struct gpio_device *gdev;
++
++	if (!chip) {
++		return 1;
++	}
++
++	gdev = chip->gpiodev;
++	if (gdev->ngpio < index) {
++		return 1;
++	}
++	set_bit(FLAG_ACTIVE_LOW, &gdev->descs[index].flags);
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(tlt_gpio_set_active_low);
++
++struct gpio_chip *gpiochip_find_by_id(int id)
++{
++	struct gpio_device *gdev;
++	struct gpio_chip *chip = NULL;
++	unsigned long flags;
++
++	spin_lock_irqsave(&gpio_lock, flags);
++	list_for_each_entry(gdev, &gpio_devices, list){
++		if (gdev->id == id) {
++			chip = gdev->chip;
++			break;
++		}
++	}
++
++	spin_unlock_irqrestore(&gpio_lock, flags);
++
++	return chip;
++}
++EXPORT_SYMBOL_GPL(gpiochip_find_by_id);
++
+Index: linux-5.4.254/drivers/gpio/gpiolib-of.c
+===================================================================
+--- linux-5.4.254.orig/drivers/gpio/gpiolib-of.c
++++ linux-5.4.254/drivers/gpio/gpiolib-of.c
+@@ -900,9 +900,10 @@ int of_gpiochip_add(struct gpio_chip *ch
+ 		return ret;
+ 
+ 	/* If the chip defines names itself, these take precedence */
+-	if (!chip->names)
+-		devprop_gpiochip_set_names(chip,
+-					   of_fwnode_handle(chip->of_node));
++	/* Names are set by tlt-gpio kmod */
++//	if (!chip->names)
++//		devprop_gpiochip_set_names(chip,
++//					   of_fwnode_handle(chip->of_node));
+ 
+ 	of_node_get(chip->of_node);
+ 
+Index: linux-5.4.254/include/linux/gpio/driver.h
+===================================================================
+--- linux-5.4.254.orig/include/linux/gpio/driver.h
++++ linux-5.4.254/include/linux/gpio/driver.h
+@@ -716,6 +716,10 @@ void gpiochip_free_own_desc(struct gpio_
+ void devprop_gpiochip_set_names(struct gpio_chip *chip,
+ 				const struct fwnode_handle *fwnode);
+ 
++int tlt_gpio_set_line_name(struct gpio_chip *chip, const char *line_name, int index);
++int tlt_gpio_set_active_low(struct gpio_chip *chip, int index);
++struct gpio_chip *gpiochip_find_by_id(int id);
++
+ #ifdef CONFIG_GPIOLIB
+ 
+ /* lock/unlock as IRQ */

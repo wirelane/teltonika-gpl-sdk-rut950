@@ -2,329 +2,31 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Webfilter"
+      "name": "Site Blocking"
+    },
+    {
+      "name": "Proxy Based URL Content Blocker"
     }
   ],
   "paths": {
-    "/webfilter/hostnames/config": {
+    "/webfilter/global": {
       "get": {
         "tags": [
-          "Webfilter"
+          "Site Blocking"
         ],
-        "summary": "Returns all hostblock configuration sections",
-        "description": "Returns all sections with their parameters from hostblock configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200WebfilterHostnamesMulti"
-          }
-        },
-        "operationId": "webfilter1"
-      },
-      "put": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Update all hostblock block sections options",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200WebfilterHostnamesMulti"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "sections for updating",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "array of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/webfilter_hostname_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "webfilter3"
-      },
-      "post": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Creates hostblock block section",
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/201response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/webfilter_hostname_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "webfilter2"
-      },
-      "delete": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Deletes specified hostblock block configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "type": "string",
-                      "description": "Section id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "webfilter4"
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Web filter",
-          "Web filter"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/webfilter/hostnames/config/{cfg}": {
-      "get": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Returns specified hostblock section",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200WebfilterHostnames"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration section name"
-          }
-        ],
-        "operationId": "webfilter5"
-      },
-      "put": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Update specified hostblock block section's options",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200WebfilterHostnames"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration section name"
-          }
-        ],
-        "requestBody": {
-          "description": "section for updating",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/webfilter_hostname_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "webfilter6"
-      },
-      "delete": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Deletes specified hostblock block configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration hostblock block section identifier"
-          }
-        ],
-        "operationId": "webfilter7"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "cfg",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Web filter",
-          "Web filter"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/privoxy/config/general": {
-      "get": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Returns privoxy configuration section",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Privoxy"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "operationId": "webfilter8"
-      },
-      "put": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Update the privoxy configuration section",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Privoxy"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "section for updating",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/privoxy_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "webfilter9"
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Web filter",
-          "Web filter"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/webfilter/config/general": {
-      "get": {
-        "tags": [
-          "Webfilter"
-        ],
-        "summary": "Returns webfilter configuration section",
+        "summary": "Returns Site Blocking configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200WebfilterGeneral"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
         "operationId": "webfilter10"
       },
       "put": {
         "tags": [
-          "Webfilter"
+          "Site Blocking"
         ],
-        "summary": "Update the webfilter configuration section",
+        "summary": "Updates Site Blocking configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200WebfilterGeneral"
@@ -358,8 +60,420 @@
           "Web filter"
         ],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
+        },
+        "name": "Web filter"
+      }
+    },
+    "/webfilter/config": {
+      "post": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Creates a new Site Blocking rule",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200WebfilterHostnames"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/webfilter_hostname_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "webfilter2"
+      },
+      "get": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Returns all Site Blocking rules",
+        "description": "Returns all sections with their parameters from hostblock configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WebfilterHostnamesMulti"
+          }
+        },
+        "operationId": "webfilter1"
+      },
+      "put": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Updates specified Site Blocking rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WebfilterHostnamesMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "sections for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/webfilter_hostname_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "webfilter3"
+      },
+      "delete": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Deletes specified Site Blocking rules",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "webfilter4"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Web filter",
+          "Web filter"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "Web filter"
+      }
+    },
+    "/webfilter/config/{id}": {
+      "get": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Returns specified Site Blocking rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WebfilterHostnames"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hostblock configuration identifier (ID)"
+          }
+        ],
+        "operationId": "webfilter5"
+      },
+      "put": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Update specified Site Blocking rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WebfilterHostnames"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hostblock configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/webfilter_hostname_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "webfilter6"
+      },
+      "delete": {
+        "tags": [
+          "Site Blocking"
+        ],
+        "summary": "Deletes specified Site Blocking rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Hostblock configuration identifier (ID)"
+          }
+        ],
+        "operationId": "webfilter7"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Hostblock configuration identifier (ID)"
         }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Web filter",
+          "Web filter"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "Web filter"
+      }
+    },
+    "/webfilter/privoxy/config": {
+      "get": {
+        "tags": [
+          "Proxy Based URL Content Blocker"
+        ],
+        "summary": "Returns Proxy Based URL Content Blocker configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Privoxy"
+          }
+        },
+        "operationId": "webfilter8"
+      },
+      "put": {
+        "tags": [
+          "Proxy Based URL Content Blocker"
+        ],
+        "summary": "Updates Proxy Based URL Content Blocker configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Privoxy"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/privoxy_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "webfilter9"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Services",
+          "Web filter",
+          "Web filter"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "Web filter"
+      }
+    },
+    "/webfilter/privoxy/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Proxy Based URL Content Blocker"
+        ],
+        "summary": "Returns Proxy Based URL Content Blocker configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PrivoxySingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ],
+        "operationId": "webfilter8"
+      },
+      "put": {
+        "tags": [
+          "Proxy Based URL Content Blocker"
+        ],
+        "summary": "Updates Proxy Based URL Content Blocker configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200PrivoxySingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/privoxy_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ],
+        "operationId": "webfilter9"
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Web filter",
+          "Web filter"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "Web filter"
       }
     }
   },
@@ -392,6 +506,22 @@
         }
       },
       "privoxy_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/privoxy_single_options"
+          }
+        ]
+      },
+      "privoxy_single_options": {
         "type": "object",
         "properties": {
           "enabled": {
@@ -406,7 +536,7 @@
               "1"
             ]
           },
-          "_mode": {
+          "mode": {
             "x-web": {
               "pretty": "Mode",
               "input-type": "select"
@@ -466,7 +596,11 @@
             "type": "string",
             "description": "Network for which the site blocking service is activated. Accepted values 'all', 'hotspot'(if enabled) and all lan interfaces except 'lan'."
           }
-        }
+        },
+        "required": [
+          "mode",
+          "network"
+        ]
       },
       "webfilter_hostname_options_id": {
         "title": "webfilter_hostname_options_multi",
@@ -504,7 +638,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/webfilter_hostname_options"
+                  "$ref": "#/components/schemas/webfilter_hostname_options_id"
                 }
               }
             }
@@ -535,6 +669,29 @@
         }
       },
       "200Privoxy": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/privoxy_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200PrivoxySingle": {
         "description": "Returns section",
         "content": {
           "application/json": {

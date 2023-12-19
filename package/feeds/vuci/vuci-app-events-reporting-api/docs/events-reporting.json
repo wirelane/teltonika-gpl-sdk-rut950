@@ -1,18 +1,217 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Events reporting",
-    "description": "Events reporting api documentation",
+    "title": "Events Reporting",
+    "description": "Events Reporting API documentation",
     "version": "1.0.0",
     "contact": {}
   },
   "servers": [],
   "tags": [
     {
-      "name": "Events reporting"
+      "name": "Rules"
     }
   ],
   "paths": {
+    "/events_reporting/options": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "get": {
+        "summary": "Returns Events Reporting options",
+        "tags": [
+          "Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_options"
+          }
+        },
+        "operationId": "get-services-events_reporting-options"
+      }
+    },
+    "/events_reporting/config": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "get": {
+        "summary": "Returns all Events Reporting configurations",
+        "tags": [
+          "Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_multi"
+          }
+        },
+        "operationId": "get-services-events_reporting-config"
+      },
+      "post": {
+        "summary": "Creates a new Events Reporting configuration",
+        "operationId": "post-services-events_reporting-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/events_reporting_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_events_reporting_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Rules"
+        ]
+      },
+      "put": {
+        "summary": "Updates the selected Events Reporting configurations",
+        "operationId": "put-services-events_reporting-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_events_reporting_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Rules"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected Events Reporting configurations",
+        "operationId": "delete-services-events_reporting-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        },
+        "tags": [
+          "Rules"
+        ]
+      }
+    },
+    "/events_reporting/config/{id}": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "Events Reporting",
+          "Events Reporting"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns the selected Events Reporting configuration",
+        "tags": [
+          "Rules"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-events_reporting-config-sid"
+      },
+      "put": {
+        "summary": "Updates the selected Events Reporting configuration",
+        "operationId": "put-services-events_reporting-config-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/events_reporting_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_events_reporting_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Rules"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes the selected Events Reporting configuration",
+        "operationId": "delete-services-events_reporting-config-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Rules"
+        ]
+      }
+    },
     "/events_reporting/actions/send_test_email": {
       "x-web": {
         "menu": [
@@ -53,6 +252,9 @@
                 }
               }
             }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -65,206 +267,7 @@
           }
         },
         "tags": [
-          "Events reporting"
-        ]
-      }
-    },
-    "/events_reporting/options": {
-      "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      },
-      "get": {
-        "summary": "Returns events reporting options",
-        "tags": [
-          "Events reporting"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/events_options"
-          }
-        },
-        "operationId": "get-services-events_reporting-options"
-      }
-    },
-    "/events_reporting/config": {
-      "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      },
-      "get": {
-        "summary": "Returns all events reporting configurations",
-        "tags": [
-          "Events reporting"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/events_reporting_multi"
-          }
-        },
-        "operationId": "get-services-events_reporting-config"
-      },
-      "post": {
-        "summary": "Creates a new events reporting configuration",
-        "operationId": "post-services-events_reporting-config",
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/events_reporting_one"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/req_body_events_reporting_one"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Events reporting"
-        ]
-      },
-      "put": {
-        "summary": "Updates the selected events reporting configurations",
-        "operationId": "put-services-events_reporting-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/events_reporting_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/req_body_events_reporting_multi"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Events reporting"
-        ]
-      },
-      "delete": {
-        "summary": "Deletes the selected events reporting configurations",
-        "operationId": "delete-services-events_reporting-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "$ref": "#/components/requestBodies/delete_multi"
-        },
-        "tags": [
-          "Events reporting"
-        ]
-      }
-    },
-    "/events_reporting/config/{id}": {
-      "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "get": {
-        "summary": "Returns the selected events reporting configuration",
-        "tags": [
-          "Events reporting"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/events_reporting_one"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "operationId": "get-services-events_reporting-config-sid"
-      },
-      "put": {
-        "summary": "Updates the selected events reporting configuration",
-        "operationId": "put-services-events_reporting-config-sid",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/events_reporting_one"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/req_body_events_reporting_one"
-              }
-            }
-          }
-        },
-        "tags": [
-          "Events reporting"
-        ]
-      },
-      "delete": {
-        "summary": "Deletes the selected events reporting configuration",
-        "operationId": "delete-services-events_reporting-config-sid",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "tags": [
-          "Events reporting"
+          "Rules"
         ]
       }
     }
@@ -277,6 +280,11 @@
           "enable": {
             "description": "Turns the rule on or off",
             "type": "string",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -308,6 +316,14 @@
               "enum-pretty": {
                 "$ref": "#/x-schemas/event_names"
               },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "gps": false
+                  },
+                  "values": ["", "10", "100"]
+                }
+              ],
               "unique": true
             }
           },
@@ -394,7 +410,8 @@
           "subject": {
             "type": "string",
             "description": "Subject of an email. Allowed characters (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
-            "format": "fieldvalidation('^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$',0)",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$",
             "maxLength": 256,
             "x-web": {
               "pretty": "Subject",
@@ -735,6 +752,7 @@
                 "web ui",
                 "input/output",
                 "ping reboot",
+                "wget reboot",
                 "reboot scheduler",
                 "from button",
                 "sms reboot"

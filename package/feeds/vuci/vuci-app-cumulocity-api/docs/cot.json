@@ -2,87 +2,18 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/cloud_solutions/cot/actions/reset_auth": {
-      "post": {
-        "summary": "Resets authentication data",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200CoT"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "Cloud of Things"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cloud of Things"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/cloud_solutions/cot/config/general": {
-      "put": {
-        "summary": "Updates Cloud of Things configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200CoT"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/cloud_of_things_options_single_put"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Cloud of Things"
-        ]
-      },
+    "/cloud_of_things/config": {
       "get": {
-        "summary": "Returns Cloud of Things configuration",
+        "summary": "Returns Cloud of Things configuration in an array",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200CoT"
+            "$ref": "#/components/responses/200CoTMulti"
           }
         },
         "tags": [
-          "Cloud of Things"
+          "General"
         ]
       },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cloud of Things"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/cloud_solutions/cot/config": {
       "put": {
         "summary": "Updates Cloud of Things configuration in an array",
         "responses": {
@@ -115,18 +46,7 @@
           }
         },
         "tags": [
-          "Cloud of Things"
-        ]
-      },
-      "get": {
-        "summary": "Returns Cloud of Things configuration in an array",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200CoTMulti"
-          }
-        },
-        "tags": [
-          "Cloud of Things"
+          "General"
         ]
       },
       "x-web": {
@@ -138,7 +58,101 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
+        },
+        "name": "Cloud of Things"
+      }
+    },
+    "/cloud_of_things/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
         }
+      ],
+      "get": {
+        "summary": "Returns Cloud of Things configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoT"
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "put": {
+        "summary": "Updates Cloud of Things configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoT"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/cloud_of_things_options_single_put"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cloud of Things"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Cloud of Things"
+      }
+    },
+    "/cloud_of_things/actions/reset_auth": {
+      "post": {
+        "summary": "Resets authentication data",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CoT"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Cloud of Things"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Cloud of Things"
       }
     }
   },
@@ -194,6 +208,7 @@
           "enabled": {
             "type": "string",
             "description": "Enable Cloud of Things application",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -221,11 +236,7 @@
               "input-type": "input"
             }
           }
-        },
-        "required": [
-          "server",
-          "interval"
-        ]
+        }
       },
       "cloud_of_things_options": {
         "allOf": [

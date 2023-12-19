@@ -6,7 +6,7 @@
     }
   ],
   "paths": {
-    "/administration/ntp/remote_servers/config": {
+    "/date_time/ntp/time_servers/config": {
       "description": "This section is used to specify which time servers the device will use for time synchronization. To add more time servers to the list, click the 'Add' button",
       "summary": "Time Servers",
       "get": {
@@ -39,6 +39,51 @@
           }
         },
         "operationId": "ntpser-0"
+      },
+      "post": {
+        "summary": "Creates a new NTP Remote Server configuration",
+        "operationId": "post-services-ntp-remote_servers-config",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntp_remote_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntp_remote_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "NTP"
+        ]
       },
       "put": {
         "tags": [
@@ -130,61 +175,17 @@
         },
         "operationId": "ntpser2"
       },
-      "post": {
-        "summary": "Creates a new NTP Remote Server configuration",
-        "operationId": "post-services-ntp-remote_servers-config",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ntp_remote_server_options"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/ntp_remote_server_single_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "NTP"
-        ]
-      },
       "x-web": {
         "menu": [
           "System",
           "Administration",
           "Date & Time",
           "NTP"
-        ]
+        ],
+        "name": "Date & Time"
       }
     },
-    "/administration/ntp/remote_servers/config/{id}": {
+    "/date_time/ntp/time_servers/config/{id}": {
       "description": "This section is used to specify which time servers the device will use for time synchronization. To add more time servers to the list, click the 'Add' button",
       "summary": "Time Servers",
       "get": {
@@ -331,7 +332,8 @@
           "Administration",
           "Date & Time",
           "NTP"
-        ]
+        ],
+        "name": "Date & Time"
       }
     }
   },

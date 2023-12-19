@@ -2,24 +2,12 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Modbus TCP over Serial Gateway IP Filters"
+      "name": "TCP over Serial Gateway IP Filters"
     }
   ],
   "paths": {
-    "/modbus/tcp_over_serial/config/{modbus_serial_gateway_id}/filters/{id}": {
+    "/modbus/tcp_over_serial/{id}/filters/config": {
       "parameters": [
-        {
-          "name": "modbus_serial_gateway_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "x-web": {
-            "pretty": "Client name"
-          },
-          "description": "Modbus TCP over Serial Gateway configuration identifier (ID)"
-        },
         {
           "name": "id",
           "in": "path",
@@ -27,89 +15,6 @@
           "schema": {
             "type": "string"
           },
-          "description": "Modbus TCP over Serial IP Filter rule identifier (ID)."
-        }
-      ],
-      "get": {
-        "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
-        ],
-        "summary": "Returns the specified Modbus TCP over Serial Gateway IP Filter rule",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusSerialGatewayFilters"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
-        ],
-        "summary": "Updates the specified Modbus TCP over Serial Gateway IP Filter rule",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusSerialGatewayFilters"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/modbus_serial_gateway_filters_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
-        ],
-        "summary": "Deletes the specified Modbus TCP over Serial Gateway IP Filter rule",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Modbus",
-          "Modbus TCP over Serial Gateway"
-        ],
-        "hw_tags": {
-          "serial": true
-        }
-      }
-    },
-    "/modbus/tcp_over_serial/config/{modbus_serial_gateway_id}/filters": {
-      "parameters": [
-        {
-          "name": "modbus_serial_gateway_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
           "x-web": {
             "pretty": "Client name"
           },
@@ -118,18 +23,21 @@
       ],
       "get": {
         "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
+          "TCP over Serial Gateway IP Filters"
         ],
         "summary": "Returns all Modbus TCP over Serial Gateway IP Filter rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200ModbusSerialGatewayFiltersMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "post": {
         "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
+          "TCP over Serial Gateway IP Filters"
         ],
         "summary": "Creates Modbus TCP over Serial Gateway IP Filter rule",
         "responses": {
@@ -138,6 +46,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -158,7 +69,7 @@
       },
       "put": {
         "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
+          "TCP over Serial Gateway IP Filters"
         ],
         "summary": "Updates specified Modbus TCP over Serial Gateway IP Filter rules",
         "responses": {
@@ -181,7 +92,6 @@
                 "properties": {
                   "data": {
                     "type": "array",
-                    "description": "Array of section objects",
                     "items": {
                       "$ref": "#/components/schemas/modbus_serial_gateway_filters_options"
                     }
@@ -194,7 +104,7 @@
       },
       "delete": {
         "tags": [
-          "Modbus TCP over Serial Gateway IP Filters"
+          "TCP over Serial Gateway IP Filters"
         ],
         "summary": "Deletes specified Modbus TCP over Serial Gateway IP Filter rules",
         "responses": {
@@ -230,10 +140,105 @@
         "menu": [
           "Services",
           "Modbus",
-          "Modbus TCP over Serial Gateway"
+          "TCP over Serial Gateway"
         ],
         "hw_tags": {
-          "serial": true
+          "serial_usb": true
+        }
+      }
+    },
+    "/modbus/tcp_over_serial/{id}/filters/config/{filter_id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "x-web": {
+            "pretty": "Client name"
+          },
+          "description": "Modbus TCP over Serial Gateway configuration identifier (ID)"
+        },
+        {
+          "name": "filter_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Modbus TCP over Serial IP Filter rule identifier (ID)."
+        }
+      ],
+      "get": {
+        "tags": [
+          "TCP over Serial Gateway IP Filters"
+        ],
+        "summary": "Returns the specified Modbus TCP over Serial Gateway IP Filter rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialGatewayFilters"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TCP over Serial Gateway IP Filters"
+        ],
+        "summary": "Updates the specified Modbus TCP over Serial Gateway IP Filter rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialGatewayFilters"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_gateway_filters_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TCP over Serial Gateway IP Filters"
+        ],
+        "summary": "Deletes the specified Modbus TCP over Serial Gateway IP Filter rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "TCP over Serial Gateway"
+        ],
+        "hw_tags": {
+          "serial_usb": true
         }
       }
     }

@@ -1,12 +1,8 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "RMS"
-    }
-  ],
+  "tags": [],
   "paths": {
-    "/cloud_solutions/rms/status": {
+    "/rms/status": {
       "get": {
         "summary": "Returns RMS Status",
         "responses": {
@@ -15,74 +11,36 @@
           }
         },
         "tags": [
-          "RMS"
+          "General"
         ]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "RMS"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/cloud_solutions/rms/config/general": {
-      "get": {
-        "summary": "Returns RMS configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200rms"
-          }
-        },
-        "tags": [
-          "RMS"
-        ]
-      },
-      "put": {
-        "summary": "Updates RMS configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200rms"
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "Services",
+              "Cloud Solutions",
+              "RMS"
+            ]
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "RMS",
+              "RMS"
+            ]
           }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/rms_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "RMS"
-        ]
-      },
-      "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
-      "summary": "RMS settings",
-      "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "RMS"
         ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "name": "RMS"
       }
     },
-    "/cloud_solutions/rms/config": {
+    "/rms/config": {
       "get": {
         "summary": "Returns RMS configuration in an array",
         "responses": {
@@ -91,7 +49,7 @@
           }
         },
         "tags": [
-          "RMS"
+          "General"
         ]
       },
       "put": {
@@ -125,69 +83,119 @@
           }
         },
         "tags": [
-          "RMS"
+          "General"
         ]
       },
       "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
       "summary": "RMS settings",
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "RMS"
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "Services",
+              "Cloud Solutions",
+              "RMS"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "RMS",
+              "RMS"
+            ]
+          }
         ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "name": "RMS"
       }
     },
-    "/cloud_solutions/rms/actions/unregister": {
-      "post": {
-        "summary": "Unregister from RMS",
-        "operationId": "post-services-cloud_solutions-rms-actions-disconnect",
+    "/rms/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns RMS configuration",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    }
-                  },
-                  "x-examples": {
-                    "example-1": {
-                      "success": true
-                    }
+            "$ref": "#/components/responses/200rms"
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "put": {
+        "summary": "Updates RMS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rms_options"
                   }
                 }
               }
             }
           }
         },
-        "description": "",
         "tags": [
-          "RMS"
+          "General"
         ]
       },
+      "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
+      "summary": "RMS settings",
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "RMS"
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "Services",
+              "Cloud Solutions",
+              "RMS"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "RMS",
+              "RMS"
+            ]
+          }
         ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "name": "RMS"
       }
     },
-    "/cloud_solutions/rms/actions/connect": {
+    "/rms/actions/connect": {
       "post": {
         "summary": "Connect to RMS",
-        "operationId": "post-services-cloud_solutions-rms-actions-connect",
         "responses": {
           "200": {
             "description": "OK",
@@ -213,18 +221,90 @@
         },
         "description": "",
         "tags": [
-          "RMS"
+          "General"
         ]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "RMS"
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "Services",
+              "Cloud Solutions",
+              "RMS"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "RMS",
+              "RMS"
+            ]
+          }
         ],
-        "hw_tags": {
-          "is_access_point": false
-        }
+        "name": "RMS"
+      }
+    },
+    "/rms/actions/unregister": {
+      "post": {
+        "summary": "Unregister from RMS",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu-depends": [
+          {
+            "hw_tags": {
+              "is_access_point": false
+            },
+            "values": [
+              "Services",
+              "Cloud Solutions",
+              "RMS"
+            ]
+          },
+          {
+            "hw_tags": {
+              "is_access_point": true
+            },
+            "values": [
+              "System",
+              "RMS",
+              "RMS"
+            ]
+          }
+        ],
+        "name": "RMS"
       }
     }
   },

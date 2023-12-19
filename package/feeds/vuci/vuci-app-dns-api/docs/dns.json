@@ -2,98 +2,24 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "DNS"
+      "name": "General"
     }
   ],
   "paths": {
-    "/dns/config/general": {
-      "get": {
-        "summary": "GET DNS",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dns"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "tags": [
-          "DNS"
-        ]
-      },
-      "put": {
-        "summary": "UPDATE DNS",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dns"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/dns_single_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DNS"
-        ]
-      },
-      "post": {
-        "summary": "CREATE DNS",
-        "operationId": "post-network-dns-config-dns_id",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/file_response"
-          }
-        },
-        "requestBody": {
-          "$ref": "#/components/requestBodies/file_upload_dns"
-        },
-        "tags": [
-          "DNS"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "DNS",
-          "DNS"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
     "/dns/config": {
       "get": {
-        "summary": "GET All DNS",
+        "summary": "Returns DNS configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200dnsMulti"
           }
         },
         "tags": [
-          "DNS"
+          "General"
         ]
       },
       "put": {
-        "summary": "UPDATE All DNS",
+        "summary": "Updates DNS configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200dnsMulti"
@@ -114,7 +40,7 @@
                 "properties": {
                   "data": {
                     "type": "array",
-                    "description": "Array of of section objects",
+                    "description": "Array of configuration objects",
                     "items": {
                       "$ref": "#/components/schemas/dns_options"
                     }
@@ -125,7 +51,7 @@
           }
         },
         "tags": [
-          "DNS"
+          "General"
         ]
       },
       "x-web": {
@@ -137,7 +63,111 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "DNS"
+      }
+    },
+    "/dns/config/{id}": {
+      "get": {
+        "summary": "Returns DNS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dns"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the DNS configuration"
+          }
+        ],
+        "tags": [
+          "General"
+        ]
+      },
+      "put": {
+        "summary": "Updates DNS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200dns"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the DNS configuration"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dns_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "post": {
+        "summary": "Uploads DNS servers file",
+        "operationId": "post-network-dns-config-dns_id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_dns"
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "DNS",
+          "DNS"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "DNS"
       }
     }
   },

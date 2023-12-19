@@ -1,210 +1,33 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/openvpn/config/{cfg}/tls/{cfgTLS}": {
+    "/openvpn/{id}/clients/config": {
       "get": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
-        "summary": "Returns specified openvpn tls section",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200OpenvpnTls"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          },
-          {
-            "name": "cfgTLS",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn tls section identifier"
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
-        "summary": "Updates specified OpenVPN TLS configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200OpenvpnTls"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          },
-          {
-            "name": "cfgTLS",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn tls section identifier"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/openvpn_tls_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
-        "summary": "Deletes specified openvpn tls configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200OpenvpnTls"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          },
-          {
-            "name": "cfgTLS",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn tls section identifier"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Uci configuration openvpn section identifier"
-        },
-        {
-          "name": "cfgTLS",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Uci configuration openvpn tls section identifier"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/openvpn/config/{cfg}/tls": {
-      "get": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
-        "summary": "Returns all openvpn tls configuration sections",
-        "description": "Returns all sections with their parameters from openvpn tls configuration",
+        "summary": "Returns all openvpn tls client configuration sections",
+        "description": "Returns all sections with their parameters from openvpn tls client configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200OpenvpnTlsMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ]
+        "tags": ["TLS clients"]
       },
       "post": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
         "summary": "Creates openvpn tls section",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200OpenvpnTls"
           },
-          "201": {
-            "$ref": "#/components/responses/201response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -219,13 +42,11 @@
               }
             }
           }
-        }
+        },
+        "tags": ["TLS clients"]
       },
       "put": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
-        "summary": "Updates specified openvpn tls configurations",
+        "summary": "Updates specified openvpn tls client configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200OpenvpnTls"
@@ -237,17 +58,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -266,32 +76,19 @@
               }
             }
           }
-        }
+        },
+        "tags": ["TLS clients"]
       },
       "delete": {
-        "tags": [
-          "OpenVPN TLS"
-        ],
-        "summary": "Deletes specified openvpn tls configurations",
+        "summary": "Deletes specified openvpn tls client configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200OpenvpnTls"
+            "$ref": "#/components/responses/200deleted_multi"
           },
           "404": {
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration openvpn section identifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -311,28 +108,111 @@
               }
             }
           }
-        }
+        },
+        "tags": ["TLS clients"]
       },
       "parameters": [
         {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
           },
+          "name": "id",
+          "in": "path",
+          "required": true,
           "description": "Uci configuration openvpn section identifier"
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "OpenVPN"
-        ],
+        "menu": ["Services", "VPN", "OpenVPN"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
+        },
+        "name": "OpenVPN"
+      }
+    },
+    "/openvpn/{id}/clients/config/{clients_id}": {
+      "get": {
+        "summary": "Returns specified openvpn tls client section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpenvpnTls"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["TLS clients"]
+      },
+      "put": {
+        "summary": "Updates specified OpenVPN TLS client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpenvpnTls"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/openvpn_tls_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["TLS clients"]
+      },
+      "delete": {
+        "summary": "Deletes specified openvpn tls client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["TLS clients"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Uci configuration openvpn section identifier"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "clients_id",
+          "in": "path",
+          "required": true,
+          "description": "Uci configuration openvpn tls client section identifier"
         }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "OpenVPN"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "OpenVPN"
       }
     }
   },
@@ -385,64 +265,72 @@
       "openvpn_tls_single_options": {
         "type": "object",
         "properties": {
-          "sname": {
+          "name": {
             "x-web": {
-                "pretty": "Endpoint name",
-                "input-type": "input"
-              },
+              "pretty": "Endpoint name",
+              "input-type": "input"
+            },
             "type": "string",
             "description": "Endpoint name"
           },
-          "cn": {
+          "common_name": {
             "x-web": {
-                "pretty": "Common name (CN)",
-                "input-type": "input"
-              },
+              "pretty": "Common name (CN)",
+              "input-type": "input"
+            },
             "type": "string",
             "description": "Common name"
           },
-          "lip": {
+          "local_ip": {
             "x-web": {
-                "pretty": "Virtual local endpoint",
-                "input-type": "input"
-              },
+              "pretty": "Virtual local endpoint",
+              "input-type": "input"
+            },
             "type": "string",
             "description": "Virtual local endpoint"
           },
-          "rip": {
+          "remote_ip": {
             "x-web": {
-                "pretty": "Virtual remote endpoint",
-                "input-type": "input"
-              },
+              "pretty": "Virtual remote endpoint",
+              "input-type": "input"
+            },
             "type": "string",
             "description": "Virtual remote endpoint"
           },
-          "pip": {
+          "private_network": {
             "x-web": {
-                "pretty": "Private network",
-                "input-type": "input"
-              },
+              "pretty": "Private network",
+              "input-type": "input"
+            },
             "type": "string",
             "description": "Private network"
           },
-          "pnm": {
+          "covered_network": {
             "x-web": {
-                "pretty": "Private netmask",
-                "input-type": "input"
-              },
-            "type": "string",
-            "description": "Private netmask"
-          },
-          "cntw": {
-            "x-web": {
-                "pretty": "Covered network",
-                "input-type": "input"
-              },
+              "pretty": "Covered network",
+              "input-type": "input"
+            },
             "type": "array",
             "description": "Covered network",
             "items": {
               "type": "string"
             }
+          },
+          "local_ipv6": {
+            "x-web": {
+              "pretty": "Virtual local endpoint IPv6",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Virtual local endpoint IPv6"
+          },
+          "private_network_ipv6": {
+            "x-web": {
+              "pretty": "Private network IPv6",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Private network IPv6"
           }
         }
       },
@@ -451,7 +339,7 @@
           {
             "type": "object",
             "properties": {
-              "sname": {
+              "name": {
                 "type": "string",
                 "description": "Name of a section"
               }
@@ -463,5 +351,15 @@
         ]
       }
     }
-  }
+  },
+  "info": {
+    "title": "OpenVPN TLS clients",
+    "version": "1.0",
+    "description": "OpenVPN TLS clients api documentation"
+  },
+  "tags": [
+    {
+      "name": "TLS clients"
+    }
+  ]
 }

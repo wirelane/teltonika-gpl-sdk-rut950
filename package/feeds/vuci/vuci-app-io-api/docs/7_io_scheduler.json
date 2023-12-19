@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/io/scheduler/global": {
+      "get": {
+        "tags": [
+          "Scheduler Global"
+        ],
+        "summary": "Returns the general I/O Scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoScheduler"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Scheduler Global"
+        ],
+        "summary": "Updates the general I/O Scheduler configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200IoScheduler"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/io_scheduler_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Input/Output",
+          "Scheduler"
+        ],
+        "hw_tags": {
+          "ios": true
+        },
+        "name": "Input/Output"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200IoScheduler": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/io_scheduler_single_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "io_scheduler_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables/disables the I/O Scheduler.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Enable Scheduler",
+              "input-type": "switch"
+            }
+          }
+        }
+      }
+    }
+  }
+}

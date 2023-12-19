@@ -2,16 +2,16 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Wifi Scanner Settings"
+      "name": "Wifi Scanner"
     }
   ],
   "paths": {
-    "/wireless/wifi_scanner/config/general": {
+    "/wifi_scanner/config": {
       "get": {
         "tags": [
-          "Wifi Scanner Settings"
+          "General"
         ],
-        "summary": "GET All Wifi Scanner Settings",
+        "summary": "GET Wifi Scanner Settings",
         "description": "",
         "responses": {
           "200": {
@@ -26,7 +26,10 @@
                       "description": "Operation status."
                     },
                     "data": {
-                      "$ref": "#/components/schemas/wifi_scanner_options"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/wifi_scanner_options_id"
+                      }
                     }
                   }
                 }
@@ -37,7 +40,7 @@
         "operationId": "get-wifi-scanner-cfg"
       },
       "put": {
-        "summary": "UPDATE All Wifi Scanner Settings",
+        "summary": "UPDATE Wifi Scanner Settings",
         "responses": {
           "200": {
             "description": "OK",
@@ -51,7 +54,111 @@
                       "description": "Operation status."
                     },
                     "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/wifi_scanner_options_id"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
                       "$ref": "#/components/schemas/wifi_scanner_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Wifi Scanner"
+        ],
+        "operationId": "put-wifi-scanner-cfg"
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Wireless",
+          "Wifi scanner"
+        ],
+        "hw_tags": {
+          "wifi": true,
+          "is_access_point": false
+        }
+      }
+    },
+    "/wifi_scanner/config/{id}": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "GET Wifi Scanner Settings",
+        "description": "",
+        "responses": {
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/wifi_scanner_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-wifi-scanner-cfg-id"
+      },
+      "put": {
+        "summary": "UPDATE Wifi Scanner Settings",
+        "responses": {
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/wifi_scanner_options_id"
                     }
                   }
                 }
@@ -78,11 +185,20 @@
           }
         },
         "tags": [
-          "Wifi Scanner Settings"
+          "Wifi Scanner"
         ],
-        "operationId": "put-wifi-scanner-cfg"
+        "operationId": "put-wifi-scanner-cfg-id"
       },
-      "parameters": [],
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
       "x-web": {
         "menu": [
           "Network",
@@ -142,6 +258,22 @@
             }
           }
         }
+      },
+      "wifi_scanner_options_id": {
+        "title": "wifi_scanner_options_id",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/wifi_scanner_options"
+          }
+        ]
       }
     }
   }

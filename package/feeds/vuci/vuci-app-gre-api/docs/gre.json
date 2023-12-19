@@ -1,10 +1,5 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "GRE"
-    }
-  ],
   "paths": {
     "/gre/config": {
       "post": {
@@ -41,24 +36,19 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/gre_options_both"
+                    "$ref": "#/components/schemas/gre_options_both_no_service"
                   }
                 }
               }
             }
           }
         },
-        "tags": [
-          "GRE"
-        ],
-        "operationId": "post-gre"
+        "operationId": "post-gre",
+        "tags": ["General"]
       },
       "get": {
         "summary": "Returns all GRE configuration sections",
         "description": "Returns all sections with their parameters from gre configuration",
-        "tags": [
-          "GRE"
-        ],
         "operationId": "get-gre",
         "responses": {
           "200": {
@@ -83,7 +73,8 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "delete": {
         "summary": "Deletes specified GRE configurations",
@@ -93,6 +84,9 @@
           },
           "404": {
             "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -115,10 +109,8 @@
             }
           }
         },
-        "tags": [
-          "GRE"
-        ],
-        "operationId": "delete-gre"
+        "operationId": "delete-gre",
+        "tags": ["General"]
       },
       "put": {
         "summary": "Updates the specified GRE configurations",
@@ -160,7 +152,7 @@
                     "type": "array",
                     "description": "Array of of section objects",
                     "items": {
-                      "$ref": "#/components/schemas/gre_options_both"
+                      "$ref": "#/components/schemas/gre_options_both_no_service"
                     }
                   }
                 }
@@ -168,28 +160,21 @@
             }
           }
         },
-        "tags": [
-          "GRE"
-        ],
-        "operationId": "put-gre"
+        "operationId": "put-gre",
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "GRE"
-        ],
+        "menu": ["Services", "VPN", "GRE"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "GRE"
       }
     },
-    "/gre/config/{cfg}": {
+    "/gre/config/{id}": {
       "get": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Returns the specified GRE section",
         "responses": {
           "200": {
@@ -215,23 +200,11 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section indentifier"
-          }
-        ],
-        "operationId": "get-gre-cfg"
+        "operationId": "get-gre-cfg",
+        "description": "",
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Deletes the specified GRE configuration",
         "responses": {
           "200": {
@@ -241,23 +214,11 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section indetifier"
-          }
-        ],
-        "operationId": "delete-gre-cfg"
+        "operationId": "delete-gre-cfg",
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "GRE"
-        ],
+        "tags": ["General"],
         "summary": "Updates the specified GRE configuration",
         "responses": {
           "200": {
@@ -286,17 +247,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section identifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -305,7 +255,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/gre_options_index"
+                    "$ref": "#/components/schemas/gre_options_index_no_service"
                   }
                 }
               }
@@ -319,23 +269,22 @@
           "schema": {
             "type": "string"
           },
-          "name": "cfg",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Uci configuration gre section identifier"
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "GRE"
-        ],
+        "menu": ["Services", "VPN", "GRE"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "GRE"
       }
     },
-    "/gre/config/{cfg}/routes": {
+    "/gre/{id}/routes/config": {
       "get": {
         "summary": "Returns the selected GRE section's routes",
         "description": "Returns all sections with their parameters from gre configuration",
@@ -366,26 +315,10 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration section indetifier"
-          }
-        ],
-        "tags": [
-          "GRE"
-        ],
-        "operationId": "get-gre-routes"
+        "operationId": "get-gre-routes",
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Updates the selected GRE section's selected routes",
         "responses": {
           "200": {
@@ -414,17 +347,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section indetifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -444,12 +366,10 @@
             }
           }
         },
-        "operationId": "put-gre-routes"
+        "operationId": "put-gre-routes",
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Deletes the selected GRE section's selected routes",
         "responses": {
           "200": {
@@ -459,17 +379,6 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section indetifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -490,17 +399,18 @@
             }
           }
         },
-        "operationId": "delete-gre-routes"
+        "operationId": "delete-gre-routes",
+        "tags": ["General"]
       },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "cfg",
+          "name": "id",
           "in": "path",
           "required": true,
-          "description": "GRE section name"
+          "description": "Uci configuration gre section indetifier"
         }
       ],
       "post": {
@@ -548,26 +458,19 @@
           }
         },
         "description": "",
-        "tags": [
-          "GRE"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "GRE"
-        ],
+        "menu": ["Services", "VPN", "GRE"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "GRE"
       }
     },
-    "/gre/config/{cfg}/routes/{cfgRoute}": {
+    "/gre/{id}/routes/config/{routes_id}": {
       "get": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Returns specified GRE route section",
         "responses": {
           "200": {
@@ -593,32 +496,11 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration section indetifier"
-          },
-          {
-            "name": "cfgRoute",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre route section indetifier"
-          }
-        ],
-        "operationId": "get-gre-routes-cfg"
+        "operationId": "get-gre-routes-cfg",
+        "description": "",
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Updates the selected GRE section's selected route",
         "responses": {
           "200": {
@@ -647,26 +529,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section indetifier"
-          },
-          {
-            "name": "cfgRoute",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre route section indetifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -675,19 +537,17 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/gre_options_index"
+                    "$ref": "#/components/schemas/gre_route_options_index"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "put-gre-routes-cfg"
+        "operationId": "put-gre-routes-cfg",
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "GRE"
-        ],
         "summary": "Deletes the selected GRE section's selected route",
         "responses": {
           "200": {
@@ -697,57 +557,36 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre section indetifier"
-          },
-          {
-            "name": "cfgRoute",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration gre route section indetifier"
-          }
-        ],
-        "operationId": "delete-gre-routes-cfg"
+        "operationId": "delete-gre-routes-cfg",
+        "tags": ["General"]
       },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "cfg",
+          "name": "id",
           "in": "path",
           "required": true,
-          "description": "GRE section name"
+          "description": "Uci configuration gre section indetifier"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "cfgRoute",
+          "name": "routes_id",
           "in": "path",
           "required": true,
-          "description": "GRE route section name"
+          "description": "Uci configuration gre route section indetifier"
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "GRE"
-        ],
+        "menu": ["Services", "VPN", "GRE"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "GRE"
       }
     }
   },
@@ -757,9 +596,7 @@
       "gre_options_both": {
         "description": "GRE configuration section",
         "title": "",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "allOf": [
           {
             "type": "object",
@@ -780,6 +617,29 @@
           }
         ]
       },
+      "gre_options_both_no_service": {
+        "description": "GRE configuration section",
+        "title": "",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "x-web": {
+                  "pretty": "Configuration name",
+                  "unique": true,
+                  "input-type": "input"
+                },
+                "type": "string",
+                "description": "Section name"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/gre_options_index_no_service"
+          }
+        ]
+      },
       "gre_options_index": {
         "type": "object",
         "description": "GRE configuration section",
@@ -793,10 +653,7 @@
             },
             "type": "string",
             "description": "Turns the GRE Tunnel instance on or off.",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "ipaddr_tunlink": {
             "x-web": {
@@ -877,6 +734,7 @@
             "description": "Keep alive. The 'keep alive' feature sends packets to the remote instance in order to determine the health of the connection. If no response is received, the device will attempt to re"
           },
           "keep_alive_interval": {
+            "format": "uinteger",
             "x-web": {
               "pretty": "Keep alive interval",
               "input-type": "input",
@@ -888,7 +746,22 @@
               ]
             },
             "type": "string",
-            "description": "Keep alive interval. Frequency (in seconds) at which \\'keep alive\\' packets are sent to the remote instance. Range [0"
+            "description": "Frequency (in seconds) at which 'keep alive' packets are sent to the remote instance. Range [1-255]."
+          },
+          "keep_alive_retries": {
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Keep alive retries",
+              "input-type": "input",
+              "group": "Main settings",
+              "depends": [
+                {
+                  "keep_alive": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Amount of keep alive packets to lose before marking tunnel as DOWN. Range [1-255]."
           },
           "tun_ipaddr": {
             "x-web": {
@@ -911,6 +784,149 @@
           "service": {
             "type": "string",
             "description": "Shows if configuration belongs to another service."
+          }
+        }
+      },
+      "gre_options_index_no_service": {
+        "type": "object",
+        "description": "GRE configuration section",
+        "title": "",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Turns the GRE Tunnel instance on or off.",
+            "enum": ["0", "1"]
+          },
+          "ipaddr_tunlink": {
+            "x-web": {
+              "pretty": "Tunnel source",
+              "input-type": "input",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Tunnel source. Network interface used to establish the GRE Tunnel."
+          },
+          "peeraddr": {
+            "x-web": {
+              "pretty": "Remote endpoint IP address",
+              "input-type": "input",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Remote endpoint IP address. IP address or hostname of the remote GRE Tunnel device."
+          },
+          "mtu": {
+            "type": "string",
+            "x-web": {
+              "pretty": "MTU",
+              "input-type": "input",
+              "group": "Main settings"
+            },
+            "description": "Sets the maximum transmission unit (MTU) size. It is the largest size of a protocol data unit (PDU) that can be transmitted in a single network layer transaction.",
+            "format": "irange(68, 9200)"
+          },
+          "okey": {
+            "x-web": {
+              "pretty": "Outbound key",
+              "input-type": "input",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Outbound key. Key for outgoing packets. This value should match the 'Inbound key' value set on the opposite GRE instance or both key values should be omitted on both sides. Allowed range [0"
+          },
+          "ikey": {
+            "x-web": {
+              "pretty": "Inbound key",
+              "input-type": "input",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Inbound key. Key for incoming packets. This value should match the 'Outbound key' value set on the opposite GRE instance or both key values should be omitted on both sides. Allowed range [0"
+          },
+          "df": {
+            "x-web": {
+              "pretty": "Path MTU Discovery",
+              "input-type": "switch",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Path MTU Discovery. When '0', sets the nopmtudisc option for tunnel. Can not be used together with the TTL option."
+          },
+          "ttl": {
+            "x-web": {
+              "pretty": "TTL",
+              "input-type": "input",
+              "group": "Main settings",
+              "depends": [
+                {
+                  "df": "0"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Sets a custom TTL (Time to Live) value for encapsulated packets. TTL is a field in the IP packet header which is initially set by the sender and decreased by 1 on each hop. When it reaches 0 it is dropped and the last host to receive the packet sends an ICMP 'Time Exceeded' message back to the source."
+          },
+          "keep_alive": {
+            "x-web": {
+              "pretty": "Keep alive",
+              "input-type": "switch",
+              "group": "Main settings"
+            },
+            "type": "string",
+            "description": "Keep alive. The 'keep alive' feature sends packets to the remote instance in order to determine the health of the connection. If no response is received, the device will attempt to re"
+          },
+          "keep_alive_interval": {
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Keep alive interval",
+              "input-type": "input",
+              "group": "Main settings",
+              "depends": [
+                {
+                  "keep_alive": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Frequency (in seconds) at which 'keep alive' packets are sent to the remote instance. Range [1-255]."
+          },
+          "keep_alive_retries": {
+            "format": "uinteger",
+            "x-web": {
+              "pretty": "Keep alive retries",
+              "input-type": "input",
+              "group": "Main settings",
+              "depends": [
+                {
+                  "keep_alive": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Amount of keep alive packets to lose before marking tunnel as DOWN. Range [1-255]."
+          },
+          "tun_ipaddr": {
+            "x-web": {
+              "pretty": "Local GRE interface IP address",
+              "input-type": "input",
+              "group": "Tunnel Settings"
+            },
+            "type": "string",
+            "description": "Local GRE interface IP address. IP address of the local GRE Tunnel instance."
+          },
+          "tun_netmask": {
+            "x-web": {
+              "pretty": "Local GRE interface netmask",
+              "input-type": "input",
+              "group": "Tunnel Settings"
+            },
+            "type": "string",
+            "description": "Local GRE interface netmask. Subnet mask of the local GRE Tunnel instance."
           }
         }
       },
@@ -938,9 +954,7 @@
       "gre_route_options_index": {
         "description": "GRE route configuration section",
         "type": "object",
-        "required": [
-          "target"
-        ],
+        "required": ["target"],
         "properties": {
           "target": {
             "x-web": {
@@ -962,5 +976,15 @@
         }
       }
     }
-  }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "GRE",
+    "description": "GRE api documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

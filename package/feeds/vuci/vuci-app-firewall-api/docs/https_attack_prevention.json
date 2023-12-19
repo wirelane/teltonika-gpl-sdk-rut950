@@ -2,24 +2,26 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/attack_prevention/https_attack_prevention/config": {
+    "/attack_prevention/https/config": {
       "get": {
-        "summary": "GET All Firewall HTTPS Attack Prevention Settings",
-        "description": "Returns all firewall HTTPS attack prevention settings with their options",
+        "summary": "Returns Firewall HTTPS Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200HttpsAtPrMulti"
           }
         },
         "tags": [
-          "Firewall HTTPS Attack Prevention Settings"
+          "HTTPS"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall HTTPS Attack Prevention Settings",
+        "summary": "Updates Firewall HTTPS Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200HttpsAtPrMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -34,7 +36,7 @@
                 "properties": {
                   "data": {
                     "type": "array",
-                    "description": "Array of of section objects",
+                    "description": "Array of configuration objects",
                     "items": {
                       "$ref": "#/components/schemas/https_attack_prevention_options"
                     }
@@ -45,11 +47,11 @@
           }
         },
         "tags": [
-          "Firewall HTTPS Attack Prevention Settings"
+          "HTTPS"
         ]
       },
-      "parameters": [],
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",
@@ -61,26 +63,40 @@
         }
       }
     },
-    "/firewall/attack_prevention/https_attack_prevention/config/general": {
+    "/attack_prevention/https/config/{id}": {
       "get": {
-        "summary": "GET Firewall HTTPS Attack Prevention Settings",
+        "summary": "Returns Firewall HTTPS Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200HttpsAtPr"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the HTTPS configuration"
+          }
+        ],
         "tags": [
-          "Firewall HTTPS Attack Prevention Settings"
+          "HTTPS"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall HTTPS Attack Prevention Settings",
+        "summary": "Updates Firewall HTTPS Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200HttpsAtPr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -101,11 +117,23 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the HTTPS configuration"
+          }
+        ],
         "tags": [
-          "Firewall HTTPS Attack Prevention Settings"
+          "HTTPS"
         ]
       },
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",

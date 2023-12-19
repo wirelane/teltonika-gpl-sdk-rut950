@@ -6,7 +6,6 @@
 				"/dlms/client*",
 				"/dlms/connections/*",
 				"/dlms/cosem_group/*",
-				"/dlms/*",
 				"/dlms/devices/*"
 			]
 		},
@@ -15,7 +14,6 @@
 				"/dlms/client*",
 				"/dlms/connections/*",
 				"/dlms/cosem_group/*",
-				"/dlms/*",
 				"/dlms/devices/*"
 			]
 		}

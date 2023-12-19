@@ -2,24 +2,26 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/attack_prevention/remote_icmp_requests/config": {
+    "/attack_prevention/icmp/config": {
       "get": {
-        "summary": "GET All Firewall Remote ICMP Request Settings",
-        "description": "Returns all firewall remote ICMP requests settings with their options",
+        "summary": "Returns Firewall Remote ICMP Request Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200RemIcmpReqMulti"
           }
         },
         "tags": [
-          "Firewall Remote ICMP Request Settings"
+          "ICMP"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall Remote ICMP Request Settings",
+        "summary": "Updates Firewall Remote ICMP Request Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200RemIcmpReqMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -45,11 +47,11 @@
           }
         },
         "tags": [
-          "Firewall Remote ICMP Request Settings"
+          "ICMP"
         ]
       },
-      "parameters": [],
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",
@@ -61,31 +63,56 @@
         }
       }
     },
-    "/firewall/attack_prevention/remote_icmp_requests/config/general": {
+    "/attack_prevention/icmp/config/{id}": {
       "get": {
-        "summary": "GET Firewall Remote ICMP Request Settings",
+        "summary": "Returns Firewall Remote ICMP Request Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200RemIcmpReq"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the ICMP Request configuration"
+          }
+        ],
         "tags": [
-          "Firewall Remote ICMP Request Settings"
+          "ICMP"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall Remote ICMP Request Settings",
+        "summary": "Updates Firewall Remote ICMP Request Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200RemIcmpReq"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the ICMP Request configuration"
+          }
+        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -102,10 +129,11 @@
           }
         },
         "tags": [
-          "Firewall Remote ICMP Request Settings"
+          "ICMP"
         ]
       },
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",

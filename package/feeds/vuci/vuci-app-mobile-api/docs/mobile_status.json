@@ -7,15 +7,15 @@
   "servers": [],
   "tags": [
     {
-      "name": "Modems"
+      "name": "Modem status"
     }
   ],
   "paths": {
-    "/mobile/modems/status_basic": {
+    "/modems/status_basic": {
       "get": {
-        "summary": "Returns basic status of all modems",
+        "summary": "Returns basic status for multiple modems",
         "tags": [
-          "Modems"
+          "Modem status"
         ],
         "responses": {
           "200": {
@@ -32,10 +32,12 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
-    "/mobile/modems/status_basic/{id}": {
+    "/modems/status_basic/{id}": {
       "parameters": [
         {
           "schema": {
@@ -43,17 +45,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Modem ID"
         }
       ],
       "get": {
-        "summary": "Returns basic status of one modems",
+        "summary": "Returns basic status for specfied modem",
         "tags": [
-          "Modems"
+          "Modem status"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/mobile_status_basic_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mobile-modems-status_basic-id"
@@ -66,14 +72,16 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
-    "/mobile/modems/status_full": {
+    "/modems/status": {
       "get": {
-        "summary": "Returns full status of all modems",
+        "summary": "Returns full status for multiple modems",
         "tags": [
-          "Modems"
+          "Modem status"
         ],
         "responses": {
           "200": {
@@ -93,7 +101,7 @@
         }
       }
     },
-    "/mobile/modems/status_full/{id}": {
+    "/modems/status/{id}": {
       "parameters": [
         {
           "schema": {
@@ -101,17 +109,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Modem ID"
         }
       ],
       "get": {
-        "summary": "Returns full status of one modem",
+        "summary": "Returns full status for specified modem",
         "tags": [
-          "Modems"
+          "Modem status"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/mobile_status_full_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mobile-modems-status_full-id"
@@ -152,6 +164,15 @@
               "mnc": {
                 "type": "string"
               },
+              "cellid": {
+                "type": "string"
+              },
+              "ue_state": {
+                "type": "string"
+              },
+              "lac": {
+                "type": "string"
+              },
               "pcid": {
                 "type": "string"
               },
@@ -162,6 +183,18 @@
                 "type": "string"
               },
               "uarfcn": {
+                "type": "string"
+              },
+              "rsrp": {
+                "type": "string"
+              },
+              "rsrq": {
+                "type": "string"
+              },
+              "sinr": {
+                "type": "string"
+              },
+              "bandwidth": {
                 "type": "string"
               }
             }
@@ -350,6 +383,10 @@
             "type": "number",
             "description": "Currently active SIM card."
           },
+          "data_off": {
+            "type": "boolean",
+            "description": "Shows if data was turned off with mobileoff SMS."
+          },
           "busy_state": {
             "type": "string"
           },
@@ -452,12 +489,10 @@
           "sc_band_av": {
             "type": "string",
             "enum": [
-              "Single",
-              "Dual",
-              "Triple",
-              "Multi"
+              "Inactive",
+              "Active"
             ],
-            "description": "Carrier aggregation type"
+            "description": "Carrier aggregation"
           },
           "ca_signal": {
             "type": "array",
@@ -491,6 +526,57 @@
           },
           "temperature": {
             "type": "number"
+          },
+          "mobile_stage": {
+            "type": "number",
+            "description": "Indicates current mobile connection stage",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "x-web": {
+              "pretty": "Mobile stage",
+              "enum-pretty": {
+                "0": "Unknown state",
+                "1": "Waiting for SIM to be inserted",
+                "2": "SIM failure",
+                "3": "Idling",
+                "4": "Waiting for user action",
+                "5": "Waiting for PIN to be entered",
+                "6": "Waiting for PUK to be entered",
+                "7": "SIM blocked, no PUK attempts left",
+                "8": "Initializing mobile connection",
+                "9": "Configuring Voice over LTE (VoLTE)",
+                "10": "Setting up connection settings",
+                "11": "Scanning for available operators",
+                "12": "Currently handling SIM PIN event",
+                "13": "Currently handling SIM switch event",
+                "14": "Initializing modem",
+                "15": "Changed default SIM card",
+                "16": "Setting up data connection settings",
+                "17": "Clearing PDP context",
+                "18": "Currently handling config",
+                "19": "Mobile connection setup is complete"
+              }
+            }
           }
         },
         "required": [
@@ -564,6 +650,30 @@
           "sim_count": {
             "type": "number",
             "description": "Modem SIM count"
+          },
+          "mode": {
+            "type": "number",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "multi_apn": {
+            "type": "boolean"
+          },
+          "operators_scan": {
+            "type": "boolean"
+          },
+          "dynamic_mtu": {
+            "type": "boolean"
+          },
+          "ipv6": {
+            "type": "boolean"
+          },
+          "volte": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -572,7 +682,13 @@
           "offline",
           "builtin",
           "primary",
-          "sim_count"
+          "sim_count",
+          "mode",
+          "multi_apn",
+          "operators_scan",
+          "dynamic_mtu",
+          "ipv6",
+          "volte"
         ]
       }
     },

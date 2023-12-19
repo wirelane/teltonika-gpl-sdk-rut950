@@ -2,10 +2,10 @@
 	"system/ui": {
 		"description": "webui menu info",
 		"read": {
-			"api": ["/ui/*", "/administration/general/*"]
+			"api": ["/ui/*", "/system/config/*"]
 		},
 		"write": {
-			"api": ["/ui/*", "/administration/general/*"]
+			"api": ["/ui/*", "/system/config/*"]
 		}
 	}
 }

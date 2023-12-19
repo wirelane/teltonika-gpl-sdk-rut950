@@ -12,13 +12,13 @@
 				]
 			},
 			"api": [
-				"/cloud_solutions/thingworx/*",
+				"/thingworx/*",
 				"/interfaces/*"
 			]
 		},
 		"write": {
 			"uci": ["iottw"],
-			"api": ["/cloud_solutions/thingworx/*"]
+			"api": ["/thingworx/*"]
 		}
 	}
 }

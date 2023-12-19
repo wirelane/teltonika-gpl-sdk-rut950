@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/mobile/sim_idle_protection/config": {
+    "/sim_idle_protection/config": {
       "get": {
-        "summary": "Get all SIM idle protection configurations",
+        "summary": "Returns multiple SIM idle protection configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/many_sim_idle_protection"
@@ -15,7 +15,7 @@
         ]
       },
       "put": {
-        "summary": "Update many SIM idle protection configurations",
+        "summary": "Update multiple SIM idle protection configurations",
         "operationId": "put-network-mobile-sim_idle_protection-config",
         "responses": {
           "200": {
@@ -55,10 +55,11 @@
         "hw_tags": {
           "mobile": true,
           "dual_sim": true
-        }
+        },
+        "name": "SIM idle protection"
       }
     },
-    "/mobile/sim_idle_protection/config/{id}": {
+    "/sim_idle_protection/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -66,27 +67,34 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "SIM idle protection configuration ID"
         }
       ],
       "get": {
-        "summary": "Get SIM idle protection configuration",
+        "summary": "Returns specified SIM idle protection configuration",
         "tags": [
           "SIM idle protection"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sim_idle_protection"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mobile-sim_idle_protection-config-id"
       },
       "put": {
-        "summary": "Update SIM idle protection configuration",
+        "summary": "Update specified SIM idle protection configuration",
         "operationId": "put-network-mobile-sim_idle_protection-config-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/sim_idle_protection"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -120,7 +128,8 @@
         "hw_tags": {
           "mobile": true,
           "dual_sim": true
-        }
+        },
+        "name": "SIM idle protection"
       }
     }
   },

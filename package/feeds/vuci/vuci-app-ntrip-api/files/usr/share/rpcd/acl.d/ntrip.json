@@ -4,7 +4,7 @@
 		"read": {
 			"api": [
 				"/ntrip/*",
-				"/device/info/*",
+				"/system/device/status/*",
 				"/serial/status/*"
 			]
 		},

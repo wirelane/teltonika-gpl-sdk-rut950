@@ -1,0 +1,731 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Data limit",
+    "version": "1.0",
+    "description": "Data limit documentation",
+    "contact": {}
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "General"
+    }
+  ],
+  "paths": {
+    "/data_limit/config": {
+      "get": {
+        "summary": "Returns Data Limit configurations",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_limit_multi"
+          }
+        },
+        "description": "Returns Data Limit configurations"
+      },
+      "post": {
+        "summary": "Creates Data Limit configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200_data_limit"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "Creates Data Limit configuration",
+        "tags": [
+          "General"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "x-web": {
+                              "pretty": "Name"
+                            }
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/data_limit"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "put": {
+        "summary": "Updates Data limit configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_limit_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_data_limit_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates Data limit configurations",
+        "tags": [
+          "General"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes Data Limit configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_delete_multi"
+              }
+            }
+          }
+        },
+        "description": "Deletes Data Limit configurations",
+        "tags": [
+          "General"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Interfaces",
+          "Interfaces"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "Data Limit"
+      }
+    },
+    "/data_limit/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "description": "The ID of the Data Limit configuration",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns Data Limit configuration",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_limit"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "Returns Data Limit configuration"
+      },
+      "put": {
+        "summary": "Updates Data Limit configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_limit"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_data_limit"
+              }
+            }
+          }
+        },
+        "description": "Updates Data Limit configuration",
+        "tags": [
+          "General"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes Data Limit configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "Deletes Data Limit configuration",
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Interfaces",
+          "Interfaces"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "Data Limit"
+      }
+    },
+    "/data_limit/actions/clear": {
+      "post": {
+        "summary": "Clears data limit of the specified interface",
+        "operationId": "post-network-interfaces-actions-clear_data_limit",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "interface": {
+                        "type": "string",
+                        "description": "Interface name (e.g. \"mob1s1a1\")"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Interfaces",
+          "Interfaces"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "Data Limit"
+      }
+    },
+    "/data_limit/status": {
+      "get": {
+        "summary": "Returns Data Limit configurations status",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/data_limit_status"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Interfaces",
+          "Interfaces"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "Data Limit"
+      }
+    },
+    "/data_limit/status/{id}": {
+      "get": {
+        "summary": "Returns Data Limit status of specified configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/data_limit_status"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "General"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the Data Limit configuration"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Interfaces",
+          "Interfaces"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "Data Limit"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "data_limit": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable data connection limit",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "proto": "wwan"
+                },
+                {
+                  "proto": "connm"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Enable data connection limit. Disables data when a limit for current period is reached"
+          },
+          "data_limit": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Data limit (MB)",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "mob_limit_enabled": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Data limit (MB). Disable data after limit value in MB is reached"
+          },
+          "period": {
+            "x-web": {
+              "input-type": "select",
+              "pretty": "Period",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "mob_limit_enabled": "1"
+                }
+              ],
+              "enum-pretty": {
+                "day": "Day",
+                "week": "Week",
+                "month": "Month"
+              }
+            },
+            "enum": [
+              "day",
+              "week",
+              "month"
+            ],
+            "type": "string",
+            "description": "Period for which data limiting should apply."
+          },
+          "reset_day": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Start day",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "mob_limit_enabled": "1",
+                  "period": "month"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Start day. A starting day in a month for data limiting period."
+          },
+          "reset_hour": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Start hour",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "mob_limit_enabled": "1",
+                  "period": "day"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Start hour. A starting hour in a day for data limiting period."
+          },
+          "reset_weekday": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Start day",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "mob_limit_enabled": "1",
+                  "period": "week"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Start day. A starting day in a week for data limiting period."
+          },
+          "enable_warning": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Enable SMS warning",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "mob_limit_enabled": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Enable SMS warning. Enables sending of warning SMS message when data limit is reached.",
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "warning_limit": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Data limit (MB)",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "enable_warning": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Data limit (MB). Send warning SMS message after limit value in MB is reached. Data warning limit cannot be higher than data limit!"
+          },
+          "warning_num": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Phone number",
+              "group": "General Settings",
+              "depends": [
+                {
+                  "enable_warning": "1"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Phone number. A phone number to send warning SMS message to."
+          }
+        }
+      },
+      "req_body_data_limit": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/data_limit"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_data_limit_multi": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the Data Limit configuration"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/data_limit"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_delete_multi": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "data": [
+              ""
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "data_limit_status": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "interface": {
+            "type": "string"
+          },
+          "data_limit": {
+            "type": "number"
+          },
+          "data_used": {
+            "type": "number"
+          },
+          "due_reset_time": {
+            "type": "string"
+          },
+          "data_warning_enabled": {
+            "type": "string"
+          },
+          "data_warning_limit": {
+            "type": "number"
+          },
+          "enabled": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "interface",
+          "enabled"
+        ]
+      }
+    },
+    "responses": {
+      "200_data_limit": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "due_reset_time": {
+                          "type": "string",
+                          "description": "Data limit clear due. The data limit will be automatically cleared on this date.",
+                          "readOnly": true
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/data_limit"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_data_limit_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of the Data Limit configuration"
+                          },
+                          "due_reset_time": {
+                            "type": "string",
+                            "description": "Data limit clear due. The data limit will be automatically cleared on this date.",
+                            "readOnly": true
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/data_limit"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

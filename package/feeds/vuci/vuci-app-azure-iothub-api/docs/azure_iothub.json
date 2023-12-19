@@ -2,54 +2,11 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/cloud_solutions/azure_iothub/config/general": {
+    "/azure_iot_hub/config": {
       "get": {
-        "tags": ["Azure IoT Hub"],
-        "summary": "Returns Azure IoT Hub configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Azure"
-          }
-        }
-      },
-      "put": {
-        "tags": ["Azure IoT Hub"],
-        "summary": "Updates Azure IoT Hub configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Azure"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Configuration options",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/azure_iothub_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": ["Services", "Cloud Solutions", "Azure IoT Hub"],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/cloud_solutions/azure_iothub/config": {
-      "get": {
-        "tags": ["Azure IoT Hub"],
+        "tags": [
+          "General"
+        ],
         "summary": "Returns Azure IoT Hub configuration in an array",
         "responses": {
           "200": {
@@ -58,14 +15,21 @@
         }
       },
       "x-web": {
-        "menu": ["Services", "Cloud Solutions", "Azure IoT Hub"],
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Azure IoT Hub"
+        ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Azure IoT Hub"
       },
       "put": {
-        "tags": ["Azure IoT Hub"],
+        "tags": [
+          "General"
+        ],
         "summary": "Updates Azure IoT Hub configuration in an array",
         "responses": {
           "200": {
@@ -98,6 +62,77 @@
           }
         }
       }
+    },
+    "/azure_iot_hub/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns Azure IoT Hub configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Azure"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Updates Azure IoT Hub configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Azure"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Configuration options",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/azure_iothub_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "Azure IoT Hub"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Azure IoT Hub"
+      }
     }
   },
   "components": {
@@ -114,7 +149,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/azure_iothub_options"
+                  "$ref": "#/components/schemas/azure_iothub_single_options_get"
                 }
               }
             }
@@ -136,7 +171,7 @@
                   "type": "array",
                   "description": "Array of configuration objects",
                   "items": {
-                    "$ref": "#/components/schemas/azure_iothub_options"
+                    "$ref": "#/components/schemas/azure_iothub_single_options_get"
                   }
                 }
               }
@@ -152,7 +187,11 @@
           "enabled": {
             "description": "Enable Azure IoT Hub monitoring",
             "type": "string",
-            "enum": ["0", "1"],
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
             "x-web": {
               "pretty": "Enable Azure IoT Hub monitoring",
               "input-type": "switch"
@@ -170,7 +209,10 @@
           "msg_type": {
             "type": "string",
             "description": "Messages Type",
-            "enum": ["mqtt"],
+            "enum": [
+              "mqtt",
+              "gsmctl"
+            ],
             "x-web": {
               "pretty": "Messages Type",
               "input-type": "select",
@@ -183,7 +225,18 @@
                   "hw_tags": {
                     "mobile": true
                   },
-                  "values": ["mqtt", "gsmctl"]
+                  "values": [
+                    "mqtt",
+                    "gsmctl"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false
+                  },
+                  "values": [
+                    "mqtt"
+                  ]
                 }
               ]
             }
@@ -235,6 +288,7 @@
             "type": "string",
             "description": "Username",
             "maxLength": 512,
+            "format": "credentials_validate",
             "x-web": {
               "pretty": "Username",
               "input-type": "input",
@@ -361,9 +415,42 @@
               "enum-depends": [
                 {
                   "hw_tags": {
-                    "is_trb500": true
+                    "is_trb5": true
                   },
                   "values": [
+                    "cellid",
+                    "pincount",
+                    "pinstate",
+                    "revision",
+                    "rscp",
+                    "rsrp",
+                    "rsrq",
+                    "serial",
+                    "signal",
+                    "simstate",
+                    "sinr",
+                    "connstate",
+                    "conntype",
+                    "ecio",
+                    "iccid",
+                    "imei",
+                    "imsi",
+                    "ipaddr",
+                    "manuf",
+                    "model",
+                    "netstate",
+                    "operator",
+                    "opernum",
+                    "temp"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "is_trb500": false
+                  },
+                  "values": [
+                    "brecv",
+                    "bsent",
                     "cellid",
                     "pincount",
                     "pinstate",
@@ -393,8 +480,305 @@
               ]
             }
           }
-        },
-        "required": ["connection_string", "mqtt_ip", "mqtt_port", "mqtt_topic", "message_interval"]
+        }
+      },
+      "azure_iothub_single_options_get": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Configuration ID"
+          },
+          "enabled": {
+            "description": "Enable Azure IoT Hub monitoring",
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Enable Azure IoT Hub monitoring",
+              "input-type": "switch"
+            }
+          },
+          "connection_string": {
+            "type": "string",
+            "format": "string",
+            "description": "Connection String",
+            "x-web": {
+              "pretty": "Connection String",
+              "input-type": "input"
+            }
+          },
+          "msg_type": {
+            "type": "string",
+            "description": "Messages Type",
+            "enum": [
+              "mqtt",
+              "gsmctl"
+            ],
+            "x-web": {
+              "pretty": "Messages Type",
+              "input-type": "select",
+              "enum-pretty": {
+                "mqtt": "MQTT messages",
+                "gsmctl": "GSM values"
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "mobile": true
+                  },
+                  "values": [
+                    "mqtt",
+                    "gsmctl"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "mobile": false
+                  },
+                  "values": [
+                    "mqtt"
+                  ]
+                }
+              ]
+            }
+          },
+          "mqtt_ip": {
+            "type": "string",
+            "format": "host",
+            "description": "Host address of MQTT broker",
+            "x-web": {
+              "pretty": "MQTT Host",
+              "input-type": "input",
+              "depends": [
+                {
+                  "msg_type": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_port": {
+            "type": "string",
+            "description": "Port of MQTT broker",
+            "format": "port",
+            "x-web": {
+              "pretty": "MQTT Port",
+              "input-type": "input",
+              "depends": [
+                {
+                  "msg_type": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_topic": {
+            "type": "string",
+            "description": "Topic to subscribe",
+            "format": "string",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Topic",
+              "input-type": "input",
+              "depends": [
+                {
+                  "msg_type": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_username": {
+            "type": "string",
+            "description": "Username",
+            "maxLength": 512,
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "depends": [
+                {
+                  "msg_type": "mqtt"
+                }
+              ]
+            }
+          },
+          "mqtt_password": {
+            "type": "string",
+            "description": "Indicates if 'mqtt_password' option is set. 'unset' for not set, 'set' for configured.",
+            "enum": [
+              "unset",
+              "set"
+            ],
+            "readOnly": true
+          },
+          "message_interval": {
+            "description": "Message sending interval (sec.)",
+            "type": "string",
+            "format": "irange(10,99999)",
+            "default": "300",
+            "x-web": {
+              "pretty": "Message sending interval (sec.)",
+              "input-type": "input",
+              "depends": [
+                {
+                  "msg_type": "gsmctl"
+                }
+              ]
+            }
+          },
+          "interface": {
+            "type": "string",
+            "description": "Mobile Interface",
+            "x-web": {
+              "pretty": "Mobile Interface",
+              "input-type": "input",
+              "depends": [
+                {
+                  "msg_type": "gsmctl"
+                }
+              ]
+            }
+          },
+          "gsm": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "brecv",
+                "bsent",
+                "cellid",
+                "pincount",
+                "pinstate",
+                "revision",
+                "rscp",
+                "rsrp",
+                "rsrq",
+                "serial",
+                "signal",
+                "simstate",
+                "sinr",
+                "connstate",
+                "conntype",
+                "ecio",
+                "iccid",
+                "imei",
+                "imsi",
+                "ipaddr",
+                "manuf",
+                "model",
+                "netstate",
+                "operator",
+                "opernum",
+                "temp"
+              ]
+            },
+            "x-web": {
+              "pretty": "GSM Values",
+              "input-type": "multiselect",
+              "depends": [
+                {
+                  "msg_type": "gsmctl"
+                }
+              ],
+              "enum-pretty": {
+                "brecv": "Bytes received",
+                "bsent": "Bytes sent",
+                "cellid": "Cell ID",
+                "connstate": "Connection state",
+                "conntype": "Data carrier type",
+                "ecio": "ECIO",
+                "iccid": "ICCID",
+                "imei": "IMEI",
+                "imsi": "IMSI",
+                "ipaddr": "IP Address",
+                "manuf": "Manufacturer",
+                "model": "Model",
+                "netstate": "Network link state",
+                "operator": "Operator",
+                "opernum": "Operator number",
+                "pincount": "PIN count",
+                "pinstate": "PIN state",
+                "revision": "Revision number",
+                "rscp": "RSCP",
+                "rsrp": "RSRP",
+                "rsrq": "RSRQ",
+                "serial": "Serial number",
+                "signal": "Signal level",
+                "simstate": "SIM card state",
+                "sinr": "SINR",
+                "temp": "Temperature"
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "is_trb5": true
+                  },
+                  "values": [
+                    "cellid",
+                    "pincount",
+                    "pinstate",
+                    "revision",
+                    "rscp",
+                    "rsrp",
+                    "rsrq",
+                    "serial",
+                    "signal",
+                    "simstate",
+                    "sinr",
+                    "connstate",
+                    "conntype",
+                    "ecio",
+                    "iccid",
+                    "imei",
+                    "imsi",
+                    "ipaddr",
+                    "manuf",
+                    "model",
+                    "netstate",
+                    "operator",
+                    "opernum",
+                    "temp"
+                  ]
+                },
+                {
+                  "hw_tags": {
+                    "is_trb500": false
+                  },
+                  "values": [
+                    "brecv",
+                    "bsent",
+                    "cellid",
+                    "pincount",
+                    "pinstate",
+                    "revision",
+                    "rscp",
+                    "rsrp",
+                    "rsrq",
+                    "serial",
+                    "signal",
+                    "simstate",
+                    "sinr",
+                    "connstate",
+                    "conntype",
+                    "ecio",
+                    "iccid",
+                    "imei",
+                    "imsi",
+                    "ipaddr",
+                    "manuf",
+                    "model",
+                    "netstate",
+                    "operator",
+                    "opernum",
+                    "temp"
+                  ]
+                }
+              ]
+            }
+          }
+        }
       },
       "azure_iothub_options": {
         "allOf": [
@@ -405,7 +789,10 @@
                 "type": "string",
                 "description": "Configuration ID"
               }
-            }
+            },
+            "required": [
+              "id"
+            ]
           },
           {
             "$ref": "#/components/schemas/azure_iothub_single_options"

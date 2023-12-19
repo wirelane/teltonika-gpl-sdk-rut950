@@ -2,24 +2,26 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/attack_prevention/syn_flood_protection/config": {
+    "/attack_prevention/syn_flood/config": {
       "get": {
-        "summary": "GET All Firewall SYN Flood Protection Settings",
-        "description": "Returns all firewall SYN flood protection settings with their options",
+        "summary": "Returns Firewall SYN Flood Protection Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SynFlPrMulti"
           }
         },
         "tags": [
-          "Firewall SYN Flood Protection Settings"
+          "SYN Flood"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall SYN Flood Protection Settings",
+        "summary": "Updates Firewall SYN Flood Protection Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SynFlPrMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -33,11 +35,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/syn_flood_protection_options"
-                    }
+                    "$ref": "#/components/schemas/syn_flood_protection_options"
                   }
                 }
               }
@@ -45,11 +43,11 @@
           }
         },
         "tags": [
-          "Firewall SYN Flood Protection Settings"
+          "SYN Flood"
         ]
       },
-      "parameters": [],
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",
@@ -61,31 +59,56 @@
         }
       }
     },
-    "/firewall/attack_prevention/syn_flood_protection/config/general": {
+    "/attack_prevention/syn_flood/config/{id}": {
       "get": {
-        "summary": "GET Firewall SYN Flood Protection Settings",
+        "summary": "Returns Firewall SYN Flood Protection Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SynFlPr"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the SYN Flood Protection configuration"
+          }
+        ],
         "tags": [
-          "Firewall SYN Flood Protection Settings"
+          "SYN Flood"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall SYN Flood Protection Settings",
+        "summary": "Updates Firewall SYN Flood Protection Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SynFlPr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the SYN Flood Protection configuration"
+          }
+        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -102,10 +125,11 @@
           }
         },
         "tags": [
-          "Firewall SYN Flood Protection Settings"
+          "SYN Flood"
         ]
       },
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",

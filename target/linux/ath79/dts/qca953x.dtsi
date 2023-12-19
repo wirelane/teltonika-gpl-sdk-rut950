@@ -215,6 +215,16 @@
 	};
 };
 
+&mnfinfo {
+	blver {
+		reg = <&boot 0x1ebf6 0xa>;
+		strip-whitespaces;
+		type = "ascii";
+		log;
+	};
+};
+
+
 &cpuintc {
 	qca,ddr-wb-channel-interrupts = <3>, <4>, <5>;
 	qca,ddr-wb-channels = <&ddr_ctrl 2>, <&ddr_ctrl 0>,

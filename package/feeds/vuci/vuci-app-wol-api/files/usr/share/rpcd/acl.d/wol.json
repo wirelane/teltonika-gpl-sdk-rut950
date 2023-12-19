@@ -3,14 +3,12 @@
 		"description": "Wake on LAN",
 		"read": {
 			"api": [
-				"/wol_setup/*",
-				"/wol_devices/*"
+				"/wol/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/wol_setup/*",
-				"/wol_devices/*"
+				"/wol/*"
 			]
 		}
 	}

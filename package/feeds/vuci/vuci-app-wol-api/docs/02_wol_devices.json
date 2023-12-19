@@ -1,0 +1,589 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/wol/global": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns global wake on lan configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolSetup"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": []
+      },
+      "put": {
+        "tags": [
+          "Setup"
+        ],
+        "summary": "Updates global wake on lan configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolSetup"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wol_setup_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "Wake On LAN"
+      },
+      "parameters": []
+    },
+    "/wol/config": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Creates wake on lan device section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolDev"
+          },
+          "201": {
+            "$ref": "#/components/responses/200WolDev"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wol_devices_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Returns all wake on lan devices configuration sections",
+        "description": "Returns all sections with their parameters form wake on lan devices configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolDevMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Updates specified wake on lan devices configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolDevMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "configuration identifier"
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/wol_devices_options"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Deletes specified wake on lan devices configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "Wake On LAN"
+      }
+    },
+    "/wol/config/{id}": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Returns specified wake on lan device section",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolDev"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Wake on Lan Device configuration identifier (ID)"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Updates specified wake on lan device configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200WolDev"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Wake on Lan Device configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wol_devices_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Deletes specified wake on lan device configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Wake on Lan Device configuration identifier (ID)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "Wake On LAN"
+      }
+    },
+    "/wol/actions/wake_device": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Wakes device",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wol_devices_name_mac"
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "Wake On LAN"
+      }
+    },
+    "/wol/actions/wake_all_devices": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Wakes all devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Wake On LAN",
+          "Wake On LAN"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "Wake On LAN"
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "responses": {
+      "200WolSetup": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/wol_setup_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200WolSetupMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/wol_setup_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200WolDev": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/wol_device_options_id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200WolDevMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/wol_device_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "wol_setup_options": {
+        "type": "object",
+        "properties": {
+          "broadcast": {
+            "x-web": {
+              "pretty": "Broadcast",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "enum": [
+              "on",
+              "off"
+            ],
+            "description": "If turned on, the WOL function sends a magic packet to the broadcast address (FF:FF:FF:FF:FF:FF) whenever it is asked to wake a device"
+          },
+          "interface": {
+            "x-web": {
+              "pretty": "Interface",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Interface name which will be used for WOL"
+          }
+        }
+      },
+      "wol_devices_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "password": {
+                "type": "string",
+                "x-web": {
+                  "pretty": "Password",
+                  "input-type": "input"
+                },
+                "description": "Password in HEX without any delimiters.",
+                "format": "regex",
+                "pattern": "^[0-9a-fA-F]{8}|[0-9a-fA-F]{12}$"
+              },
+              "wakeonboot": {
+                "x-web": {
+                  "pretty": "Wake on Boot",
+                  "input-type": "switch"
+                },
+                "type": "string",
+                "enum": [
+                  "on",
+                  "off"
+                ],
+                "description": "Decide whether to send a Wake-On-LAN (WOL) packet when booting the system."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/wol_devices_name_mac"
+          }
+        ]
+      },
+      "wol_device_options_id": {
+        "title": "wol_device_options_id",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/wol_devices_options"
+          }
+        ]
+      },
+      "wol_devices_name_mac": {
+        "title": "wol_devices_name_mac",
+        "type": "object",
+        "properties": {
+          "name": {
+            "x-web": {
+              "pretty": "Name",
+              "input-type": "input",
+              "unique": true
+            },
+            "type": "string",
+            "description": "Name for the target. The name should be unique for each configuration."
+          },
+          "mac": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Mac",
+              "input-type": "input"
+            },
+            "description": "Specifies the MAC address of the host to wake. The MAC address should be unique for each configuration.",
+            "format": "regex",
+            "pattern": "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$"
+          }
+        },
+        "required": [
+          "name",
+          "mac"
+        ]
+      }
+    }
+  }
+}

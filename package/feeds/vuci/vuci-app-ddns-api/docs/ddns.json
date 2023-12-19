@@ -1,21 +1,14 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "DDNS",
-      "description": "Dynamic DNS service endpoints"
-    }
-  ],
+  "tags": [],
   "paths": {
-    "/ddns/config/{cfg}": {
-      "get": {
-        "tags": [
-          "DDNS"
-        ],
-        "summary": "Returns the specified dynamic DNS section",
+    "/ddns/config": {
+      "post": {
+        "summary": "Creates a new DDNS section",
+        "operationId": "post-services-ddns",
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -32,71 +25,13 @@
                 }
               }
             }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "cfg",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "Uci configuration dynamic dns section identifier"
-          }
-        ],
-        "x-internal": false,
-        "operationId": "get-services-ddns",
-        "description": ""
-      },
-      "put": {
-        "operationId": "put-services-ddns-cfg",
-        "tags": [
-          "DDNS"
-        ],
-        "summary": "Updates the specified dynamic DNS configuration",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ddns_section_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "required": true,
-            "name": "cfg",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration dynamic DNS section identifier"
-          }
-        ],
         "description": "",
+        "tags": ["General"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -104,7 +39,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ddns_section_index"
+                    "$ref": "#/components/schemas/ddns_section_name_index"
                   }
                 }
               }
@@ -112,60 +47,8 @@
           }
         }
       },
-      "delete": {
-        "operationId": "delete-services-ddns-cfg",
-        "tags": [
-          "DDNS"
-        ],
-        "summary": "Deletes the specified dynamic DNS configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "required": true,
-            "name": "cfg",
-            "in": "path",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Uci configuration dynamic DNS section identifier"
-          }
-        ],
-        "description": ""
-      },
-      "parameters": [
-        {
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "name": "cfg",
-          "in": "path",
-          "description": "DDNS section name"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Dynamic DNS",
-          "DDNS"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/ddns/config": {
       "get": {
-        "tags": [
-          "DDNS"
-        ],
+        "tags": ["General"],
         "summary": "Returns all dynamic DNS configuration sections",
         "description": "",
         "operationId": "get-services-ddns2",
@@ -196,9 +79,7 @@
       },
       "put": {
         "operationId": "put-services-ddns",
-        "tags": [
-          "DDNS"
-        ],
+        "tags": ["General"],
         "summary": "Updates the specified dynamic DNS configurations",
         "responses": {
           "200": {
@@ -250,9 +131,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "DDNS"
-        ],
+        "tags": ["General"],
         "summary": "Deletes the specified dynamic DNS configurations",
         "responses": {
           "200": {
@@ -283,12 +162,23 @@
           }
         }
       },
-      "post": {
-        "summary": "Creates a new DDNS section",
-        "operationId": "post-services-ddns",
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "Dynamic DNS", "DDNS"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "DDNS"
+      }
+    },
+    "/ddns/config/{id}": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Returns the specified dynamic DNS section",
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,14 +196,68 @@
               }
             }
           },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Uci configuration dynamic dns section identifier"
+          }
+        ],
+        "x-internal": false,
+        "operationId": "get-services-ddns",
+        "description": ""
+      },
+      "put": {
+        "operationId": "put-services-ddns-id",
+        "tags": ["General"],
+        "summary": "Updates the specified dynamic DNS configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ddns_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
-        "description": "",
-        "tags": [
-          "DDNS"
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration dynamic DNS section identifier"
+          }
         ],
+        "description": "",
         "requestBody": {
           "content": {
             "application/json": {
@@ -321,7 +265,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/ddns_section_name_index"
+                    "$ref": "#/components/schemas/ddns_section_index"
                   }
                 }
               }
@@ -329,24 +273,55 @@
           }
         }
       },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Dynamic DNS",
-          "DDNS"
+      "delete": {
+        "operationId": "delete-services-ddns-id",
+        "tags": ["General"],
+        "summary": "Deletes the specified dynamic DNS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Uci configuration dynamic DNS section identifier"
+          }
         ],
-        "hw_tags": {
-          "is_access_point": false
+        "description": ""
+      },
+      "parameters": [
+        {
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "description": "DDNS section name"
         }
+      ],
+      "x-web": {
+        "menu": ["Services", "Dynamic DNS", "DDNS"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "DDNS"
       }
     },
     "/ddns/status": {
       "get": {
         "summary": "Returns the status about all DDNS instances",
-        "tags": [
-          "DDNS"
-        ],
+        "tags": ["General"],
         "operationId": "get-services-ddns-status",
         "description": " ",
         "responses": {
@@ -376,22 +351,18 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "Dynamic DNS",
-          "DDNS"
-        ],
+        "menu": ["Services", "Dynamic DNS", "DDNS"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "DDNS"
       }
     },
-    "/ddns/status/{cfg}": {
+    "/ddns/status/{id}": {
       "get": {
         "summary": "Returns the status about the selected DDNS instance",
-        "tags": [
-          "DDNS"
-        ],
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -416,7 +387,7 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "operationId": "get-services-ddns-status-cfg",
+        "operationId": "get-services-ddns-status-id",
         "description": " "
       },
       "parameters": [
@@ -424,28 +395,24 @@
           "schema": {
             "type": "string"
           },
-          "name": "cfg",
+          "name": "id",
           "in": "path",
           "description": "DDNS section name"
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "Dynamic DNS",
-          "DDNS"
-        ],
+        "menu": ["Services", "Dynamic DNS", "DDNS"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "DDNS"
       }
     },
     "/ddns/options": {
       "get": {
         "summary": "Returns info needed to configure a DDNS section",
-        "tags": [
-          "DDNS"
-        ],
+        "tags": ["General"],
         "operationId": "get-services-ddns-info",
         "description": " ",
         "responses": {
@@ -472,14 +439,12 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "Dynamic DNS",
-          "DDNS"
-        ],
+        "menu": ["Services", "Dynamic DNS", "DDNS"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "DDNS"
       }
     }
   },
@@ -499,7 +464,6 @@
             "password": "my_password",
             "ip_source": "network",
             "interface": "wan",
-            "ip_network": "wan",
             "ip_url": "http://example2.com",
             "ip_script": "/etc/vuci-uploads/script.sh",
             "check_interval": "10,seconds",
@@ -516,7 +480,6 @@
             "password": "my_password",
             "ip_source": "network",
             "interface": "wan",
-            "ip_network": "wan",
             "ip_url": "http://example.com",
             "ip_script": "/etc/vuci-uploads/script.sh",
             "check_interval": "10,minutes",
@@ -524,9 +487,7 @@
           }
         },
         "description": " ",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "allOf": [
           {
             "$ref": "#/components/schemas/ddns_section_index"
@@ -562,7 +523,6 @@
             "password": "my_password",
             "ip_source": "network",
             "interface": "wan",
-            "ip_network": "wan",
             "ip_url": "http://example2.com",
             "ip_script": "/etc/vuci-uploads/script.sh",
             "check_interval": "10,seconds",
@@ -579,7 +539,6 @@
             "password": "my_password",
             "ip_source": "network",
             "interface": "wan",
-            "ip_network": "wan",
             "ip_url": "http://example.com",
             "ip_script": "/etc/vuci-uploads/script.sh",
             "check_interval": "10,minutes",
@@ -595,10 +554,7 @@
             },
             "type": "string",
             "description": "Turns the DDNS instance on or off.",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "use_https": {
             "x-web": {
@@ -607,15 +563,15 @@
             },
             "type": "string",
             "description": "Use HTTP Secure // Configure Root CA certificates in System",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "lookup_host": {
             "x-web": {
               "pretty": "Lookup hostname",
-              "input-type": "input"
+              "input-type": "input",
+              "hw_tags": {
+                "flash16mb": false
+              }
             },
             "type": "string",
             "description": "Fully qualified domain name (FQDN) of your defined host."
@@ -993,40 +949,25 @@
               }
             },
             "type": "string",
-            "enum": [
-              "network",
-              "script",
-              "interface",
-              "web"
-            ],
+            "enum": ["network", "script", "interface", "web"],
             "default": "network",
             "description": "Defines the source to read the system's IPv4 Address from, which will be sent to the DNS provider. For example, if your router has a Private IP (i.e., 10.140.56.57) on its WAN interface, then you can send this exact IP to DDNS server by selecting Private."
           },
           "interface": {
-            "x-web": {
-              "pretty": "Event network",
-              "input-type": "input",
-              "depends": [
-                {
-                  "ip_source": "script"
-                }
-              ]
-            },
-            "type": "string",
-            "description": "Network on which the DDNS updater scripts will be started."
-          },
-          "ip_network": {
             "x-web": {
               "pretty": "Network",
               "input-type": "input",
               "depends": [
                 {
                   "ip_source": "network"
+                },
+                {
+                  "ip_source": "script"
                 }
               ]
             },
             "type": "string",
-            "description": "Specifies which interface's IP address should be bound to the hostname."
+            "description": "Specifies which interface's IP address should be bound to the hostname and the interface to use in DDNS updater scripts."
           },
           "ip_url": {
             "x-web": {
@@ -1070,7 +1011,7 @@
             "type": "string",
             "description": "Frequency at which IP update requests are sent to the DNS provider."
           },
-          "_authentication_type": {
+          "cloudflare_authentication_type": {
             "x-web": {
               "pretty": "Authentication type",
               "input-type": "select",
@@ -1086,10 +1027,7 @@
             },
             "type": "string",
             "description": "Authentication type for cloudflare.com-v4 service.",
-            "enum": [
-              "emailAPI",
-              "bearer"
-            ]
+            "enum": ["emailAPI", "bearer"]
           }
         }
       },

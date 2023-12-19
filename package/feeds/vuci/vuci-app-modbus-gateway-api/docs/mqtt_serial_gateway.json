@@ -6,6 +6,127 @@
     }
   ],
   "paths": {
+    "/modbus/serial_gateway/config": {
+      "get": {
+        "tags": [
+          "MQTT Modbus Serial Gateway"
+        ],
+        "summary": "Returns all MQTT Modbus Serial Gateway configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttModbusSerialGatewayMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MQTT Modbus Serial Gateway"
+        ],
+        "summary": "Creates MQTT Modbus Serial Gateway configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200MqttModbusSerialGateway"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/mqtt_modbus_serial_gateway_post_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MQTT Modbus Serial Gateway"
+        ],
+        "summary": "Updates specified MQTT Modbus Serial Gateway configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttModbusSerialGatewayMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/mqtt_modbus_serial_gateway_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MQTT Modbus Serial Gateway"
+        ],
+        "summary": "Deletes specified MQTT Modbus Serial Gateway configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "MQTT Serial Gateway"
+        ],
+        "hw_tags": {
+          "serial_usb": true
+        }
+      }
+    },
     "/modbus/serial_gateway/config/{id}": {
       "get": {
         "tags": [
@@ -104,129 +225,10 @@
         "menu": [
           "Services",
           "Modbus",
-          "MQTT Gateway"
+          "MQTT Serial Gateway"
         ],
         "hw_tags": {
-          "serial": true
-        }
-      }
-    },
-    "/modbus/serial_gateway/config": {
-      "get": {
-        "tags": [
-          "MQTT Modbus Serial Gateway"
-        ],
-        "summary": "Returns all MQTT Modbus Serial Gateway configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200MqttModbusSerialGatewayMulti"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "MQTT Modbus Serial Gateway"
-        ],
-        "summary": "Creates MQTT Modbus Serial Gateway configuration",
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/200MqttModbusSerialGateway"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/mqtt_modbus_serial_gateway_post_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "MQTT Modbus Serial Gateway"
-        ],
-        "summary": "Updates specified MQTT Modbus Serial Gateway configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200MqttModbusSerialGatewayMulti"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/mqtt_modbus_serial_gateway_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "MQTT Modbus Serial Gateway"
-        ],
-        "summary": "Deletes specified MQTT Modbus Serial Gateway configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "type": "string",
-                      "description": "Section id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Modbus",
-          "MQTT Gateway"
-        ],
-        "hw_tags": {
-          "serial": true
+          "serial_usb": true
         }
       }
     }

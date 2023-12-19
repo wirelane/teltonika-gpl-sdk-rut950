@@ -2,15 +2,15 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Firewall status"
+      "name": "IPTables"
     }
   ],
   "paths": {
-    "/firewall/iptables/ipv4": {
+    "/firewall/iptables/ipv4/status": {
       "get": {
         "summary": "Returns all parsed chains and their rules from `iptables` command",
         "tags": [
-          "Firewall status"
+          "IPTables"
         ],
         "responses": {
           "200": {
@@ -20,18 +20,18 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Status", "Network", "Firewall", "IPv4"],
+        "menu": ["Network", "Firewall", "IPv4"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
         }
       }
     },
-    "/firewall/iptables/ipv6": {
+    "/firewall/iptables/ipv6/status": {
       "get": {
         "summary": "Returns all parsed chains and their rules from `ip6tables` command",
         "tags": [
-          "Firewall status"
+          "IPTables"
         ],
         "responses": {
           "200": {
@@ -41,18 +41,18 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Status", "Network", "Firewall", "IPv6"],
+        "menu": ["Network", "Firewall", "IPv6"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
         }
       }
     },
-    "/firewall/iptables/actions/reset_ipv4": {
+    "/firewall/iptables/ipv4/actions/reset": {
       "post": {
         "summary": "Resets `iptables` chains counters",
         "tags": [
-          "Firewall status"
+          "IPTables"
         ],
         "responses": {
           "200": {
@@ -62,18 +62,18 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Status", "Network", "Firewall", "IPv4"],
+        "menu": ["Network", "Firewall", "IPv4"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
         }
       }
     },
-    "/firewall/iptables/actions/reset_ipv6": {
+    "/firewall/iptables/ipv6/actions/reset": {
       "post": {
         "summary": "Resets `ip6tables` chains counters",
         "tags": [
-          "Firewall status"
+        "IPTables"
         ],
         "responses": {
           "200": {
@@ -83,7 +83,7 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Status", "Network", "Firewall", "IPv6"],
+        "menu": ["Network", "Firewall", "IPv6"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -174,9 +174,6 @@
                         "type": "string"
                       },
                       "prot": {
-                        "type": "string"
-                      },
-                      "opt": {
                         "type": "string"
                       },
                       "in": {

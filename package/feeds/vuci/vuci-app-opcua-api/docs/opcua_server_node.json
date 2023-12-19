@@ -2,20 +2,8 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/opcua/server/config/{opcua_server_id}/nodes/{id}": {
+    "/opcua/server/{id}/nodes/config": {
       "parameters": [
-        {
-          "name": "opcua_server_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "x-web": {
-            "pretty": "OPC UA server configuration name"
-          },
-          "description": "OPC UA Server Instance identifier (ID)"
-        },
         {
           "name": "id",
           "in": "path",
@@ -23,90 +11,6 @@
           "schema": {
             "type": "string"
           },
-          "description": "OPC UA Server Node Configuration identifier (ID)"
-        }
-      ],
-      "get": {
-        "tags": [
-          "OPC UA Server Nodes"
-        ],
-        "summary": "Returns the specified OPC UA Server Node configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200opcuaServerNode"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "OPC UA Server Nodes"
-        ],
-        "summary": "Updates the specified OPC UA Server Node configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200opcuaServerNode"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/opcua_server_node_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OPC UA Server Nodes"
-        ],
-        "summary": "Deletes the specified OPC UA Server Node configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "OPC",
-          "OPC UA"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/opcua/server/config/{opcua_server_id}/nodes": {
-      "parameters": [
-        {
-          "name": "opcua_server_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
           "x-web": {
             "pretty": "OPC UA server configuration name"
           },
@@ -115,18 +19,21 @@
       ],
       "get": {
         "tags": [
-          "OPC UA Server Nodes"
+          "Server Nodes"
         ],
         "summary": "Returns all OPC UA Server Node configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200opcuaServerNodeMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "post": {
         "tags": [
-          "OPC UA Server Nodes"
+          "Server Nodes"
         ],
         "summary": "Creates OPC UA Server Node configuration",
         "responses": {
@@ -135,6 +42,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -155,7 +65,7 @@
       },
       "put": {
         "tags": [
-          "OPC UA Server Nodes"
+          "Server Nodes"
         ],
         "summary": "Updates specified OPC UA Server Node configurations",
         "responses": {
@@ -191,7 +101,7 @@
       },
       "delete": {
         "tags": [
-          "OPC UA Server Nodes"
+          "Server Nodes"
         ],
         "summary": "Deletes specified OPC UA Server Node configurations",
         "responses": {
@@ -224,9 +134,10 @@
         }
       },
       "x-web": {
+        "name": "OPC UA",
         "menu": [
           "Services",
-          "OPC",
+          "OPC UA",
           "OPC UA"
         ],
         "hw_tags": {
@@ -235,10 +146,107 @@
         }
       }
     },
-    "/opcua/server/actions/{opcua_server_id}/nodes/test": {
+    "/opcua/server/{id}/nodes/config{node_id}": {
       "parameters": [
         {
-          "name": "opcua_server_id",
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "x-web": {
+            "pretty": "OPC UA server configuration name"
+          },
+          "description": "OPC UA Server Instance identifier (ID)"
+        },
+        {
+          "name": "node_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "OPC UA Server Node Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Server Nodes"
+        ],
+        "summary": "Returns the specified OPC UA Server Node configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNode"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Server Nodes"
+        ],
+        "summary": "Updates the specified OPC UA Server Node configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerNode"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_node_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Server Nodes"
+        ],
+        "summary": "Deletes the specified OPC UA Server Node configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "name": "OPC UA",
+        "menu": [
+          "Services",
+          "OPC UA",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/server/{id}/nodes/actions/test": {
+      "parameters": [
+        {
+          "name": "id",
           "in": "path",
           "required": true,
           "schema": {
@@ -251,9 +259,8 @@
         }
       ],
       "post": {
-        "deprecated": true,
         "tags": [
-          "OPC UA Server Nodes"
+          "Server Nodes"
         ],
         "summary": "Test OPC UA Server Node",
         "responses": {
@@ -262,6 +269,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -281,9 +291,11 @@
         }
       },
       "x-web": {
+        "hidden": true,
+        "name": "OPC UA",
         "menu": [
           "Services",
-          "OPC",
+          "OPC UA",
           "OPC UA"
         ],
         "hw_tags": {
@@ -381,7 +393,7 @@
               }
             }
           },
-          "_id": {
+          "node_id": {
             "type": "string",
             "description": "Node ID",
             "x-web": {
@@ -408,7 +420,7 @@
             "minLength": 1,
             "maxLength": 1
           },
-          "_id": {
+          "node_id": {
             "type": "string",
             "description": "Node ID"
           }

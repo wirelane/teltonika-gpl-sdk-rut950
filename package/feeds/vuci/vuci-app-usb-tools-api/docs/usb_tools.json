@@ -6,34 +6,7 @@
     }
   ],
   "paths": {
-    "/usb_tools/general/mounts": {
-      "get": {
-        "tags": [
-          "USB Tools"
-        ],
-        "summary": "Returns mounted devices",
-        "description": "Returns mounted USB devices",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200usbMounts"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "USB Tools",
-          "General"
-        ],
-        "hw_tags": {
-          "usb": true
-        }
-      }
-    },
-    "/usb_tools/general/config": {
+    "/usb_tools/config": {
       "get": {
         "tags": [
           "USB Tools"
@@ -43,9 +16,6 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200usbMulti"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         }
       },
@@ -60,6 +30,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -83,6 +56,7 @@
         }
       },
       "x-web": {
+        "name": "USB tools",
         "menu": [
           "Services",
           "USB Tools",
@@ -93,7 +67,32 @@
         }
       }
     },
-    "/usb_tools/general/config/{id}": {
+    "/usb_tools/mount/options": {
+      "get": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Returns mounted devices",
+        "description": "Returns mounted USB devices",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usbMounts"
+          }
+        }
+      },
+      "x-web": {
+        "name": "USB tools",
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/config/{id}": {
       "get": {
         "tags": [
           "USB Tools"
@@ -105,6 +104,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -130,6 +132,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -160,6 +165,7 @@
         }
       },
       "x-web": {
+        "name": "USB tools",
         "menu": [
           "Services",
           "USB Tools",
@@ -170,7 +176,49 @@
         }
       }
     },
-    "/usb_tools/general/actions/safe_remove": {
+    "/usb_tools/actions/format": {
+      "post": {
+        "tags": [
+          "USB Tools"
+        ],
+        "summary": "Formats selected USB device",
+        "operationId": "post-services-usb_tools-general-actions-format",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200usb_action"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/usb_mounts_action_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "USB tools",
+        "menu": [
+          "Services",
+          "USB Tools",
+          "General"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/actions/safe_remove": {
       "post": {
         "summary": "Safe remove",
         "operationId": "post-services-usb_tools-general-actions-safe_remove",
@@ -202,47 +250,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "USB Tools",
-          "General"
-        ],
-        "hw_tags": {
-          "usb": true
-        }
-      }
-    },
-    "/usb_tools/general/actions/format": {
-      "post": {
-        "tags": [
-          "USB Tools"
-        ],
-        "summary": "Formats selected USB device",
-        "operationId": "post-services-usb_tools-general-actions-format",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200usb_action"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/usb_mounts_action_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
+        "name": "USB tools",
         "menu": [
           "Services",
           "USB Tools",
@@ -268,7 +276,7 @@
                   "type": "boolean"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/usb_options"
+                  "$ref": "#/components/schemas/usb_options_multi"
                 }
               }
             }
@@ -306,7 +314,7 @@
                   "type": "array",
                   "description": "Array of section objects",
                   "items": {
-                    "$ref": "#/components/schemas/usb_options"
+                    "$ref": "#/components/schemas/usb_options_multi"
                   }
                 }
               }
@@ -357,6 +365,26 @@
           }
         }
       },
+      "usb_options_multi": {
+        "title": "USB tools options",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "USB tools configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/usb_options"
+          }
+        ]
+      },
       "usb_mounts_action_options": {
         "type": "object",
         "properties": {
@@ -385,13 +413,23 @@
           },
           "used": {
             "type": "string",
+            "description": "External device usage status",
             "x-web": {
               "pretty": "Used",
               "input-type": "input"
             }
           },
+          "type": {
+            "type": "string",
+            "description": "Connected external device type",
+            "x-web": {
+              "pretty": "Type",
+              "input-type": "input"
+            }
+          },
           "available": {
             "type": "string",
+            "description": "Connected external device available storage space",
             "x-web": {
               "pretty": "Available",
               "input-type": "input"
@@ -399,19 +437,57 @@
           },
           "mountpoint": {
             "type": "string",
+            "description": "Connected external mountpoint",
             "x-web": {
               "pretty": "Mount point",
               "input-type": "input"
             }
           },
           "system_format": {
-            "type": "string"
+            "type": "string",
+            "description": "Connected external device system format",
+            "x-web": {
+              "pretty": "System format",
+              "input-type": "input"
+            }
           },
           "in_use": {
             "type": "string",
             "description": "Specifies a service that is using the current USB device",
             "x-web": {
               "pretty": "In use",
+              "input-type": "input"
+            }
+          },
+          "blocks": {
+            "type": "string",
+            "description": "Connected external device blocking status",
+            "x-web": {
+              "pretty": "Blocks",
+              "input-type": "input"
+            }
+          },
+          "label": {
+            "type": "string",
+            "description": "Mounted device label",
+            "x-web": {
+              "pretty": "Label",
+              "input-type": "input"
+            }
+          },
+          "percent": {
+            "type": "string",
+            "description": "Mounted device free used storage percentage",
+            "x-web": {
+              "pretty": "Percent",
+              "input-type": "input"
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Mounted device description",
+            "x-web": {
+              "pretty": "Description",
               "input-type": "input"
             }
           }

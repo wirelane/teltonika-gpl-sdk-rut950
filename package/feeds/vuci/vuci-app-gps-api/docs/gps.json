@@ -4,82 +4,85 @@
     "title": "GPS Documentation",
     "version": "1.0",
     "contact": {},
-    "description": "GPS api documentation"
+    "description": "GPS Api documentation"
   },
   "tags": [
     {
-      "name": "GPS General"
+      "name": "General"
     },
     {
-      "name": "GPS NMEA"
+      "name": "NMEA"
     },
     {
-      "name": "GPS NMEA Rules"
+      "name": "NMEA Rules"
     },
     {
-      "name": "GPS Geofencing"
+      "name": "Geofencing"
     },
     {
-      "name": "GPS HTTPS General"
+      "name": "HTTPS"
     },
     {
-      "name": "GPS HTTPS"
+      "name": "HTTPS TAVL"
     },
     {
-      "name": "GPS AVL IO"
+      "name": "AVL IO"
     },
     {
-      "name": "GPS AVL General"
+      "name": "AVL"
     },
     {
-      "name": "GPS TAVL Rules"
+      "name": "AVL TAVL Rules"
     },
     {
-      "name": "GPS AVL Main"
+      "name": "AVL Main Rules"
     },
     {
-      "name": "GPS AVL Rules"
+      "name": "AVL Secondary Rules"
     }
   ],
   "paths": {
-    "/gps/general/config": {
+    "/gps/global": {
       "get": {
-        "summary": "Get GPS General configurations",
+        "summary": "Get GPS General configuration",
         "tags": [
-          "GPS General"
+          "General"
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/gps_general_multi"
+            "$ref": "#/components/responses/gps_general"
           }
         },
-        "operationId": "get-services-gps-general",
-        "description": "Gets all GPS General configurations"
+        "operationId": "get-services-gps-general-sid",
+        "description": "Gets one GPS General configuration"
       },
       "put": {
-        "summary": "Update GPS General configurations",
-        "operationId": "put-services-gps-general",
+        "summary": "Update GPS General configuration",
+        "operationId": "put-services-gps-general-sid",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/gps_general_multi"
+            "$ref": "#/components/responses/gps_general"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/req_body_gps_general_put_multi"
+                "$ref": "#/components/schemas/req_body_gps_general_put"
               }
             }
           }
         },
         "tags": [
-          "GPS General"
+          "General"
         ],
-        "description": "Updates all GPS General configurations"
+        "description": "Updates one GPS General configuration"
       },
-      "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -90,11 +93,11 @@
         }
       }
     },
-    "/gps/general/status": {
+    "/gps/status": {
       "get": {
         "summary": "Get GPS General function status",
         "tags": [
-          "GPS General"
+          "General"
         ],
         "responses": {
           "200": {
@@ -109,6 +112,7 @@
                       "description": "Function status."
                     },
                     "data": {
+                      "description": "GPS supported functionality list",
                       "type": "object",
                       "properties": {
                         "dpo_support": {
@@ -127,53 +131,7 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "GPS",
-          "GPS"
-        ],
-        "hw_tags": {
-          "gps": true
-        }
-      }
-    },
-    "/gps/general/config/general": {
-      "get": {
-        "summary": "Get GPS General configuration",
-        "tags": [
-          "GPS General"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_general"
-          }
-        },
-        "operationId": "get-services-gps-general-sid",
-        "description": "Gets one GPS General configuration"
-      },
-      "put": {
-        "summary": "Update GPS General configuration",
-        "operationId": "put-services-gps-general-sid",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_general"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/req_body_gps_general_put"
-              }
-            }
-          }
-        },
-        "tags": [
-          "GPS General"
-        ],
-        "description": "Updates one GPS General configuration"
-      },
-      "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -188,7 +146,7 @@
       "get": {
         "summary": "Get GPS NMEA configurations",
         "tags": [
-          "GPS NMEA"
+          "NMEA"
         ],
         "responses": {
           "200": {
@@ -204,6 +162,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_nmea_multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Updates GPS NMEA configurations",
@@ -217,11 +181,12 @@
           }
         },
         "tags": [
-          "GPS NMEA"
+          "NMEA"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -232,15 +197,29 @@
         }
       }
     },
-    "/gps/nmea/config/general": {
+    "/gps/nmea/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "GPS NMEA identifier (ID)"
+        }
+      ],
       "get": {
         "summary": "Get GPS NMEA configuration",
         "tags": [
-          "GPS NMEA"
+          "NMEA"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_nmea"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-nmea-sid",
@@ -252,6 +231,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_nmea"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -265,10 +250,11 @@
         },
         "description": "Update GPS NMEA configuration",
         "tags": [
-          "GPS NMEA"
+          "NMEA"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -279,11 +265,11 @@
         }
       }
     },
-    "/gps/nmea_rules/config": {
+    "/gps/nmea/rules/config": {
       "get": {
         "summary": "Get GPS NMEA Rules configurations",
         "tags": [
-          "GPS NMEA Rules"
+          "NMEA Rules"
         ],
         "responses": {
           "200": {
@@ -299,6 +285,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_nmea_rules_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -312,11 +304,12 @@
         },
         "description": "Updates GPS NMEA Rules configurations",
         "tags": [
-          "GPS NMEA Rules"
+          "NMEA Rules"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -327,7 +320,7 @@
         }
       }
     },
-    "/gps/nmea_rules/config/{id}": {
+    "/gps/nmea/rules/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -335,17 +328,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "GPS NMEA rule configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS NMEA Rule configuration",
         "tags": [
-          "GPS NMEA Rules"
+          "NMEA Rules"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_nmea_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-nmea_rules-sid",
@@ -357,6 +354,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_nmea_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -370,10 +373,11 @@
         },
         "description": "Updates GPS NMEA Rule configuration",
         "tags": [
-          "GPS NMEA Rules"
+          "NMEA Rules"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -388,7 +392,7 @@
       "get": {
         "summary": "Get GPS Geofencing configurations",
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "responses": {
           "200": {
@@ -402,8 +406,11 @@
         "summary": "Create GPS Geofencing configuration",
         "operationId": "post-services-gps-geofencing",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_geofencing"
+          "201": {
+            "$ref": "#/components/responses/gps_geofencing_with_id"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -416,7 +423,7 @@
           }
         },
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "description": "Creates new GPS Geofencing configuration"
       },
@@ -426,6 +433,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_geofencing_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -438,7 +451,7 @@
           }
         },
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "description": "Updates GPS Geofencing configurations"
       },
@@ -448,6 +461,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -460,12 +476,13 @@
           }
         },
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "description": "Deletes GPS Geofencing configurations"
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -484,17 +501,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Geofencing configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS Geofencing configuration",
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/gps_geofencing"
+            "$ref": "#/components/responses/gps_geofencing_with_id"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-geofencing-sid",
@@ -505,7 +526,13 @@
         "operationId": "put-services-gps-geofencing-sid",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/gps_geofencing"
+            "$ref": "#/components/responses/gps_geofencing_with_id"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -518,7 +545,7 @@
           }
         },
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "description": "Updates GPS Geofencing configuration"
       },
@@ -528,14 +555,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "tags": [
-          "GPS Geofencing"
+          "Geofencing"
         ],
         "description": "Deletes GPS Geofencing configuration"
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -546,11 +577,11 @@
         }
       }
     },
-    "/gps/https_general/config": {
+    "/gps/https/config": {
       "get": {
         "summary": "Get GPS HTTP General configurations",
         "tags": [
-          "GPS HTTPS General"
+          "HTTPS"
         ],
         "responses": {
           "200": {
@@ -566,6 +597,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_https_general_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -579,106 +616,12 @@
         },
         "description": "Updates GPS HTTP General configurations",
         "tags": [
-          "GPS HTTPS General"
+          "HTTPS"
         ]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "GPS",
-          "GPS"
-        ],
-        "hw_tags": {
-          "gps": true
-        }
-      }
-    },
-    "/gps/https_general/config/general": {
-      "get": {
-        "summary": "Get GPS HTTP General configuration",
-        "tags": [
-          "GPS HTTPS General"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_https_general"
-          }
-        },
-        "operationId": "get-services-gps-https_general-sid",
-        "description": "Gets GPS HTTP General configuration"
-      },
-      "put": {
-        "summary": "Update GPS HTTP General configuration",
-        "operationId": "put-services-gps-https_general-sid",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_https_general"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/req_body_gps_https_general_put"
-              }
-            }
-          }
-        },
-        "description": "Updates GPS HTTP General configuration",
-        "tags": [
-          "GPS HTTPS General"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "GPS",
-          "GPS"
-        ],
-        "hw_tags": {
-          "gps": true
-        }
-      }
-    },
-    "/gps/https/config": {
-      "get": {
-        "summary": "Get GPS HTTP configurations",
-        "tags": [
-          "GPS HTTPS"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_https_multi"
-          }
-        },
-        "operationId": "get-services-gps-https",
-        "description": "Gets GPS HTTP configurations"
-      },
-      "put": {
-        "summary": "Update GPS HTTP configurations",
-        "operationId": "put-services-gps-https",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/gps_https_multi"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/req_body_gps_https_put_multi"
-              }
-            }
-          }
-        },
-        "tags": [
-          "GPS HTTPS"
-        ],
-        "description": "Updates GPS HTTP configurations"
-      },
-      "parameters": [],
-      "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -697,17 +640,144 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "GPS HTTPS identifier (ID)"
+        }
+      ],
+      "get": {
+        "summary": "Get GPS HTTP General configuration",
+        "tags": [
+          "HTTPS"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-services-gps-https_general-sid",
+        "description": "Gets GPS HTTP General configuration"
+      },
+      "put": {
+        "summary": "Update GPS HTTP General configuration",
+        "operationId": "put-services-gps-https_general-sid",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_https_general_put"
+              }
+            }
+          }
+        },
+        "description": "Updates GPS HTTP General configuration",
+        "tags": [
+          "HTTPS"
+        ]
+      },
+      "x-web": {
+        "name": "GPS",
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/https/tavl_rules/config": {
+      "get": {
+        "summary": "Get GPS HTTP configurations",
+        "tags": [
+          "HTTPS TAVL"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_multi"
+          }
+        },
+        "operationId": "get-services-gps-https",
+        "description": "Gets GPS HTTP configurations"
+      },
+      "put": {
+        "summary": "Update GPS HTTP configurations",
+        "operationId": "put-services-gps-https",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/gps_https_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_gps_https_put_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "HTTPS TAVL"
+        ],
+        "description": "Updates GPS HTTP configurations"
+      },
+      "parameters": [],
+      "x-web": {
+        "name": "GPS",
+        "menu": [
+          "Services",
+          "GPS",
+          "GPS"
+        ],
+        "hw_tags": {
+          "gps": true
+        }
+      }
+    },
+    "/gps/https/tavl_rules/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "HTTP configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS HTTP configuration",
         "tags": [
-          "GPS HTTPS"
+          "HTTPS TAVL"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_https"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-https-sid",
@@ -719,6 +789,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_https"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -731,11 +807,12 @@
           }
         },
         "tags": [
-          "GPS HTTPS"
+          "HTTPS TAVL"
         ],
         "description": "Updates GPS HTTP configuration"
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -746,11 +823,11 @@
         }
       }
     },
-    "/gps/avl_io/config": {
+    "/gps/avl/io_rules/config": {
       "get": {
         "summary": "Get GPS AVL IO configurations",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ],
         "responses": {
           "200": {
@@ -764,8 +841,11 @@
         "summary": "Create GPS AVL IO configuration",
         "operationId": "post-services-gps-avl_io",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/gps_avl_io"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -779,7 +859,7 @@
         },
         "description": "Creates GPS AVL IO configuration",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ]
       },
       "put": {
@@ -788,6 +868,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_io_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -801,7 +887,7 @@
         },
         "description": "Updates GPS AVL IO configurations",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ]
       },
       "delete": {
@@ -810,6 +896,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -823,11 +912,12 @@
         },
         "description": "Deletes GPS AVL IO configurations",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -839,7 +929,7 @@
         }
       }
     },
-    "/gps/avl_io/config/{id}": {
+    "/gps/avl/io_rules/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -847,17 +937,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "AVL IO configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS AVL IO configuration",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_io"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-avl_io-sid",
@@ -869,6 +963,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_io"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -882,7 +982,7 @@
         },
         "description": "Updates GPS AVL IO configuration",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ]
       },
       "delete": {
@@ -891,14 +991,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Deletes GPS AVL IO configuration",
         "tags": [
-          "GPS AVL IO"
+          "AVL IO"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -914,7 +1018,7 @@
       "get": {
         "summary": "Get GPS AVL General configurations",
         "tags": [
-          "GPS AVL General"
+          "AVL"
         ],
         "responses": {
           "200": {
@@ -930,6 +1034,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_general_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -943,11 +1053,12 @@
         },
         "description": "Updates GPS AVL General configuration",
         "tags": [
-          "GPS AVL General"
+          "AVL"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -958,15 +1069,29 @@
         }
       }
     },
-    "/gps/avl/config/general": {
+    "/gps/avl/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "GPS AVL identifier (ID)"
+        }
+      ],
       "get": {
         "summary": "Get GPS AVL General configuration",
         "tags": [
-          "GPS AVL General"
+          "AVL"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-avl-sid",
@@ -978,6 +1103,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -991,10 +1122,11 @@
         },
         "description": "Updates GPS AVL General configuration",
         "tags": [
-          "GPS AVL General"
+          "AVL"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1005,11 +1137,11 @@
         }
       }
     },
-    "/gps/tavl_rules/config": {
+    "/gps/avl/tavl_rules/config": {
       "get": {
         "summary": "Get GPS TAVL Rules configurations",
         "tags": [
-          "GPS TAVL Rules"
+          "AVL TAVL Rules"
         ],
         "responses": {
           "200": {
@@ -1025,6 +1157,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_tavl_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1038,11 +1176,12 @@
         },
         "description": "Updates GPS TAVL Rules configurations",
         "tags": [
-          "GPS TAVL Rules"
+          "AVL TAVL Rules"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1053,7 +1192,7 @@
         }
       }
     },
-    "/gps/tavl_rules/config/{id}": {
+    "/gps/avl/tavl_rules/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -1061,17 +1200,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "TAVL Rules configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS TAVL Rules configuration",
         "tags": [
-          "GPS TAVL Rules"
+          "AVL TAVL Rules"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_tavl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-tavl_rules-sid",
@@ -1082,7 +1225,13 @@
         "operationId": "put-services-gps-tavl_rules-sid",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/gps_tavl_multi"
+            "$ref": "#/components/responses/gps_tavl"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1096,10 +1245,11 @@
         },
         "description": "Updates GPS TAVL Rules configuration",
         "tags": [
-          "GPS TAVL Rules"
+          "AVL TAVL Rules"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1110,11 +1260,11 @@
         }
       }
     },
-    "/gps/avl_main/config": {
+    "/gps/avl/main_rules/config": {
       "get": {
         "summary": "Get GPS AVL Main configurations",
         "tags": [
-          "GPS AVL Main"
+          "AVL Main Rules"
         ],
         "responses": {
           "200": {
@@ -1130,6 +1280,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_main_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1143,11 +1299,12 @@
         },
         "description": "Updates GPS AVL Main configurations",
         "tags": [
-          "GPS AVL Main"
+          "AVL Main Rules"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1158,7 +1315,7 @@
         }
       }
     },
-    "/gps/avl_main/config/{id}": {
+    "/gps/avl/main_rules/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -1166,17 +1323,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "AVL Main configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS AVL Main configuration",
         "tags": [
-          "GPS AVL Main"
+          "AVL Main Rules"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_main"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-avl_main-sid",
@@ -1188,6 +1349,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_main"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1201,10 +1368,11 @@
         },
         "description": "Updates GPS AVL Main configuration",
         "tags": [
-          "GPS AVL Main"
+          "AVL Main Rules"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1215,11 +1383,11 @@
         }
       }
     },
-    "/gps/avl_rules/config": {
+    "/gps/avl/secondary_rules/config": {
       "get": {
         "summary": "Get GPS AVL Rules configurations",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ],
         "responses": {
           "200": {
@@ -1233,8 +1401,11 @@
         "summary": "Create GPS AVL Rules configuration",
         "operationId": "post-services-gps-avl_rules",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/gps_avl_rules"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1248,7 +1419,7 @@
         },
         "description": "Creates GPS AVL Rules configuration",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ]
       },
       "put": {
@@ -1257,6 +1428,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_rules_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1270,7 +1447,7 @@
         },
         "description": "Updates GPS AVL Rules configurations",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ]
       },
       "delete": {
@@ -1279,6 +1456,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -1292,11 +1472,12 @@
         },
         "description": "Deletes GPS AVL Rules configurations",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1307,7 +1488,7 @@
         }
       }
     },
-    "/gps/avl_rules/config/{id}": {
+    "/gps/avl/secondary_rules/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -1315,17 +1496,21 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "AVL Rules configuration identifier"
         }
       ],
       "get": {
         "summary": "Get GPS AVL Rules configuration",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-gps-avl_rules-sid",
@@ -1337,6 +1522,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/gps_avl_rules"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1350,7 +1541,7 @@
         },
         "description": "Updates GPS AVL Rules configuration",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ]
       },
       "delete": {
@@ -1359,14 +1550,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Deletes GPS AVL Rules configuration",
         "tags": [
-          "GPS AVL Rules"
+          "AVL Secondary Rules"
         ]
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1377,11 +1572,11 @@
         }
       }
     },
-    "/gps/general/position": {
+    "/gps/position/status": {
       "get": {
         "summary": "Get GPS position",
         "tags": [
-          "GPS General"
+          "General"
         ],
         "responses": {
           "200": {
@@ -1392,6 +1587,7 @@
         "description": "Gets GPS position"
       },
       "x-web": {
+        "name": "GPS",
         "menu": [
           "Services",
           "GPS",
@@ -1539,8 +1735,7 @@
           "enabled",
           "galileo_sup",
           "glonass_sup",
-          "beidou_sup",
-          "dpo_enabled"
+          "beidou_sup"
         ]
       },
       "nmea": {
@@ -1595,7 +1790,7 @@
               "input-type": "input"
             }
           },
-          "con_contain": {
+          "con_cont": {
             "type": "string",
             "description": "Contain active session with a remote server",
             "format": "is_bool",
@@ -1692,7 +1887,7 @@
           "hostname",
           "proto",
           "port",
-          "con_contain",
+          "con_cont",
           "type",
           "sentences_max",
           "location",
@@ -2123,7 +2318,7 @@
               "input-type": "input"
             }
           },
-          "con_contain": {
+          "con_cont": {
             "type": "string",
             "description": "Set to handle each AVL packet iteration as a new connection",
             "format": "is_bool",
@@ -2156,7 +2351,7 @@
           "hostname",
           "proto",
           "port",
-          "con_contain",
+          "con_cont",
           "static_navigation"
         ]
       },
@@ -2561,7 +2756,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -2612,7 +2808,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -2665,7 +2862,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -2743,25 +2941,8 @@
         },
         "properties": {
           "data": {
-            "allOf": [
-              {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "string",
-                    "x-web": {
-                      "pretty": "Device ID",
-                      "unique": true,
-                      "input-type": "input"
-                    }
-                  }
-                }
-              },
-              {
-                "$ref": "#/components/schemas/geofencing"
-              }
-            ]
-          }
+              "$ref": "#/components/schemas/geofencing"
+            }
         },
         "required": [
           "data"
@@ -2782,7 +2963,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "List of configuration IDs to delete"
           }
         },
         "required": [
@@ -2827,7 +3009,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -2880,7 +3063,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -2933,7 +3117,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "AVL IO configuration identifier"
                     }
                   }
                 },
@@ -2986,7 +3171,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -3039,7 +3225,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -3092,7 +3279,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Identifier"
                     }
                   }
                 },
@@ -3145,7 +3333,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "AVL Rules configuration identifier"
                     }
                   }
                 },
@@ -3351,7 +3540,20 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/nmea"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "GPS NMEA Configuration identifier (ID)."
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/nmea"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -3390,7 +3592,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "GPS NMEA Configuration identifier (ID)."
                           }
                         }
                       },
@@ -3428,7 +3631,20 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/nmea_rules"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "GPS NMEA rule configuration identifier (ID)."
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/nmea_rules"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -3469,7 +3685,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "GPS NMEA rule configuration identifier (ID)."
                           }
                         }
                       },
@@ -3561,6 +3778,51 @@
                       }
                     ]
                   }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "gps_geofencing_with_id": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "GPS Geofencing configuration identifier (ID)."
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/geofencing"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -3688,7 +3950,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/https_general"
+                  "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "GPS HTTPS Configuration identifier (ID)."
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/https_general"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -3771,6 +4049,10 @@
                     {
                       "type": "object",
                       "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "LLDP Configuration identifier (ID)."
+                        },
                         "type": {
                           "type": "string",
                           "description": "Type of Tavl rule",
@@ -3859,6 +4141,10 @@
                       {
                         "type": "object",
                         "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "TAVL Configuration identifier (ID)."
+                          },
                           "type": {
                             "type": "string",
                             "description": "Type of Tavl rule",
@@ -3938,7 +4224,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/avl_io"
+                  "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "AVL IO Configuration identifier (ID)."
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/avl_io"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -3979,7 +4281,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "AVL IO Configuration identifier (ID)."
                           }
                         }
                       },
@@ -4017,7 +4320,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/avl_general"
+                  "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "AVL Configuration identifier (ID)."
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/avl_general"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -4100,6 +4419,10 @@
                     {
                       "type": "object",
                       "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "TAVL Configuration identifier (ID)."
+                        },
                         "type": {
                           "type": "string",
                           "description": "Type of Tavl rule",
@@ -4188,6 +4511,10 @@
                       {
                         "type": "object",
                         "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "TAVL Configuration identifier (ID)."
+                          },
                           "type": {
                             "type": "string",
                             "description": "Type of Tavl rule",
@@ -4267,7 +4594,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/avl_main"
+                  "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "AVL main configuration identifier (ID)."
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/avl_main"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -4346,7 +4689,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/avl_rules"
+                  "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "Secondary rule configuration identifier (ID)."
+                            }
+                        },
+                        "required": [
+                            "id"
+                        ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/avl_rules"
+                    }
+                  ]
                 }
               },
               "required": [

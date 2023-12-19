@@ -6,8 +6,8 @@
                 "/sqm/*",
                 "/wireless/interfaces/status/*",
                 "/interfaces/status/*",
-                "/devices/status/*",
-                "/firewall/nat_offloading/config/general/*"
+                "/network/devices/status/*",
+                "/nat_offloading/*"
             ]
         },
         "write": {

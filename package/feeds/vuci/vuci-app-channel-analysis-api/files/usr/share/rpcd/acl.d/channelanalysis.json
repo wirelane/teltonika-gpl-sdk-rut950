@@ -8,7 +8,7 @@
 		},
 		"write": {
 			"api": [
-				"/wireless/devices/actions/wifi_scan/*"
+				"/wireless/actions/scan/*"
 			]
 		}
 	}

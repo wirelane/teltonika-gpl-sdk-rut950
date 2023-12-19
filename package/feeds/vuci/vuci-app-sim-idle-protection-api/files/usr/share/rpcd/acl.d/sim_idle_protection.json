@@ -2,10 +2,10 @@
     "network/mobile/sim_idle_protection": {
         "description": "SIM idle protection",
         "read": {
-			"api": ["/mobile/sim_idle_protection/*"]
+			"api": ["/sim_idle_protection/*"]
         },
         "write": {
-			"api": ["/mobile/sim_idle_protection/*"]
+			"api": ["/sim_idle_protection/*"]
         }
     }
 }

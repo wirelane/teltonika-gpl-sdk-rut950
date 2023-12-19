@@ -3,11 +3,10 @@
     "description": "administration general",
     "read": {
       "api": [
-        "/administration/general/config/*",
-        "/administration/system/config/*",
-        "/administration/led/config/*",
-        "/administration/buttons/config/*",
-        "/packages/config/language/*"
+        "/system/config/*",
+        "/system/led/config/*",
+        "/system/buttons/config/*",
+        "/package_manager/language_packages/*"
       ],
       "uci": [
         "system",
@@ -30,10 +29,9 @@
     },
     "write": {
       "api": [
-        "/administration/general/config/*",
-        "/administration/system/config/*",
-        "/administration/led/config/*",
-        "/administration/buttons/config/*"
+        "/system/config/*",
+        "/system/led/config/*",
+        "/system/buttons/config/*"
       ],
       "uci": [
         "system",
@@ -46,24 +44,15 @@
     }
   },
   "system/reboot": {
-    "description": "reboot",
     "read": {
       "api": [
-        "/administration/general/actions/*"
-      ],
-      "uci": [
-        " "
+          "/system/actions/reboot/*"
       ]
     },
     "write": {
       "api": [
-        "/administration/general/actions/*"
-      ],
-      "ubus": {
-        "vuci.system": [
-          "reboot"
-        ]
-      }
+          "/system/actions/reboot/*"
+      ]
     }
   }
 }

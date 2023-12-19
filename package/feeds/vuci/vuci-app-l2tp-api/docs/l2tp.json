@@ -2,525 +2,15 @@
   "openapi": "3.0.0",
   "info": {
     "title": "L2TP",
-    "description": "L2TP documentation",
-    "version": "3.0.0",
+    "description": "L2TP api documentation",
+    "version": "1.0",
     "contact": {}
   },
   "servers": [],
-  "tags": [
-    {
-      "name": "L2TP Client"
-    },
-    {
-      "name": "L2TP Server"
-    },
-    {
-      "name": "L2TP Users"
-    }
-  ],
   "paths": {
-    "/l2tp/client/config": {
-      "get": {
-        "description": "Gets l2tp client configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_client_multi"
-          }
-        },
-        "summary": "Get l2tp client configurations",
-        "tags": ["L2TP Client"],
-        "operationId": "get-services-l2tp-client-config"
-      },
-      "post": {
-        "description": "Creates l2tp client configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_client_one"
-          }
-        },
-        "summary": "Create l2tp client configuration",
-        "tags": ["L2TP Client"],
-        "operationId": "post-services-l2tp-client-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/l2tp_client_options_id"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "description": "Updates l2tp client configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_client_multi"
-          }
-        },
-        "summary": "Update l2tp client configurations",
-        "tags": ["L2TP Client"],
-        "operationId": "put-services-l2tp-client-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/l2tp_client_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Deletes l2tp client configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/delete_multi"
-          }
-        },
-        "summary": "Delete l2tp client configurations",
-        "tags": ["L2TP Client"],
-        "operationId": "delete-services-l2tp-client-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": ["Services", "VPN", "L2TP"],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/l2tp/client/config/{sid}": {
-      "get": {
-        "description": "Gets l2tp client configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_client_one"
-          }
-        },
-        "summary": "Get l2tp client configuration",
-        "tags": ["L2TP Client"],
-        "operationId": "get-services-l2tp-client-config-sid"
-      },
-      "put": {
-        "description": "Updates l2tp client configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_client_one"
-          }
-        },
-        "summary": "Update l2tp client configuration",
-        "tags": ["L2TP Client"],
-        "operationId": "put-services-l2tp-client-config-sid",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/l2tp_client_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Deletes l2tp client configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/delete_one"
-          }
-        },
-        "summary": "Delete l2tp client configuration",
-        "tags": ["L2TP Client"],
-        "operationId": "delete-services-l2tp-client-config-sid"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "sid",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": ["Services", "VPN", "L2TP"],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/l2tp/server/config": {
-      "get": {
-        "description": "Gets l2tp server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_server_multi"
-          }
-        },
-        "summary": "Get l2tp server configurations",
-        "tags": ["L2TP Server"],
-        "operationId": "get-l2tp-server-config"
-      },
-      "post": {
-        "description": "Creates l2tp server configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_server_one"
-          }
-        },
-        "summary": "Create l2tp server configuration",
-        "tags": ["L2TP Server"],
-        "operationId": "post-l2tp-server-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/l2tp_server_options_id"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "description": "Updates l2tp server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_server_multi"
-          }
-        },
-        "summary": "Update l2tp server configurations",
-        "tags": ["L2TP Server"],
-        "operationId": "put-l2tp-server-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/l2tp_server_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Deletes l2tp server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/delete_multi"
-          }
-        },
-        "summary": "Delete l2tp server configurations",
-        "tags": ["L2TP Server"],
-        "operationId": "delete-l2tp-server-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": ["Services", "VPN", "L2TP"],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/l2tp/server/config/{sid}": {
-      "get": {
-        "description": "Gets l2tp server configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_server_one"
-          }
-        },
-        "summary": "Get l2tp server configuration",
-        "operationId": "get-l2tp-server-config-sid",
-        "tags": ["L2TP Server"]
-      },
-      "put": {
-        "description": "Updates l2tp server configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_server_one"
-          }
-        },
-        "summary": "Update l2tp server configuration",
-        "operationId": "put-l2tp-server-config-sid",
-        "tags": ["L2TP Server"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/l2tp_server_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Deletes l2tp server configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/delete_one"
-          }
-        },
-        "summary": "Delete l2tp server configuration",
-        "operationId": "delete-l2tp-server-config-sid",
-        "tags": ["L2TP Server"]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "sid",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": ["Services", "VPN", "L2TP"],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/l2tp/users/config": {
-      "get": {
-        "description": "Gets l2tp user configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_user_multi"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "summary": "Get l2tp user configurations",
-        "operationId": "get-l2tp-users-config"
-      },
-      "post": {
-        "description": "Creates l2tp user configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_user_one"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "summary": "Create l2tp user configurations",
-        "operationId": "post-l2tp-users-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/l2tp_user_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "description": "Updates l2tp user configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_user_multi"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "summary": "Update l2tp user configurations",
-        "operationId": "put-l2tp-users-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/l2tp_user_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Deletes l2tp user configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/delete_multi"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "summary": "Delete l2tp user configurations",
-        "operationId": "delete-l2tp-users-config",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": ["Services", "VPN", "L2TP"],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/l2tp/users/config/{sid}": {
-      "get": {
-        "description": "Gets user configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_user_one"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "operationId": "get-l2tp-users-config-sid",
-        "summary": "Get user configuration"
-      },
-      "put": {
-        "description": "Updates user configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/l2tp_user_one"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "operationId": "put-l2tp-users-config-sid",
-        "summary": "Update user configuration",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/l2tp_user_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Deletes user configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/delete_one"
-          }
-        },
-        "tags": ["L2TP Users"],
-        "operationId": "delete-l2tp-users-config-sid",
-        "summary": "Delete user configuration"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "sid",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": ["Services", "VPN", "L2TP"],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
     "/l2tp/status": {
       "get": {
         "summary": "Your GET endpoint",
-        "tags": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -589,6 +79,9 @@
                             },
                             "server": {
                               "type": "string"
+                            },
+                            "logs": {
+                              "type": "string"
                             }
                           }
                         },
@@ -647,6 +140,9 @@
                                   }
                                 }
                               }
+                            },
+                            "logs": {
+                              "type": "string"
                             }
                           }
                         }
@@ -659,180 +155,277 @@
           }
         },
         "operationId": "get-services-l2tp-status",
-        "description": "Status of all l2tp instances"
+        "description": "Status of all l2tp instances",
+        "tags": ["General"]
       },
       "x-web": {
         "menu": ["Services", "VPN", "L2TP"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "L2TP"
       }
     },
-    "/l2tp/status/{sid}": {
+    "/l2tp/client/config": {
+      "get": {
+        "description": "Gets l2tp client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_multi"
+          }
+        },
+        "summary": "Get l2tp client configurations",
+        "operationId": "get-services-l2tp-client-config",
+        "tags": ["Client"]
+      },
+      "post": {
+        "description": "Creates l2tp client configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/l2tp_client_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Create l2tp client configuration",
+        "operationId": "post-services-l2tp-client-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_client_options_id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Client"]
+      },
+      "put": {
+        "description": "Updates l2tp client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Update l2tp client configurations",
+        "operationId": "put-services-l2tp-client-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tp_client_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Client"]
+      },
+      "delete": {
+        "description": "Deletes l2tp client configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Delete l2tp client configurations",
+        "operationId": "delete-services-l2tp-client-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Client"]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "L2TP"
+      }
+    },
+    "/l2tp/client/config/{id}": {
+      "get": {
+        "description": "Gets l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Get l2tp client configuration",
+        "operationId": "get-services-l2tp-client-config-sid",
+        "tags": ["Client"]
+      },
+      "put": {
+        "description": "Updates l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_client_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Update l2tp client configuration",
+        "operationId": "put-services-l2tp-client-config-sid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_client_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Client"]
+      },
+      "delete": {
+        "description": "Deletes l2tp client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Delete l2tp client configuration",
+        "operationId": "delete-services-l2tp-client-config-sid",
+        "tags": ["Client"]
+      },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "id",
           "in": "path",
           "required": true
         }
       ],
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "rx": {
-                          "type": "string"
-                        },
-                        "local_ip": {
-                          "type": "string"
-                        },
-                        "tx": {
-                          "type": "string"
-                        },
-                        "end_ip": {
-                          "type": "string"
-                        },
-                        "uptime": {
-                          "type": "string"
-                        },
-                        "clients_connected": {
-                          "type": "integer"
-                        },
-                        "status": {
-                          "type": "string"
-                        },
-                        "start_ip": {
-                          "type": "string"
-                        },
-                        "clients_all": {
-                          "type": "integer"
-                        },
-                        "peers": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "username": {
-                                "type": "string"
-                              },
-                              "remote_ip": {
-                                "type": "string"
-                              },
-                              "uptime": {
-                                "type": "string"
-                              },
-                              "tx": {
-                                "type": "string"
-                              },
-                              "rx": {
-                                "type": "string"
-                              },
-                              "local_ip": {
-                                "type": "string"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "x-examples": {
-                    "example-1": {
-                      "success": true,
-                      "data": {
-                        "rx": "4312",
-                        "local_ip": "192.168.0.1",
-                        "tx": "2880",
-                        "end_ip": "192.168.0.30",
-                        "uptime": "01h 24m 04s",
-                        "clients_connected": 2,
-                        "status": "2",
-                        "start_ip": "192.168.0.20",
-                        "clients_all": 2,
-                        "peers": [
-                          [
-                            {
-                              "username": "user",
-                              "remote_ip": "192.168.0.21",
-                              "uptime": "01h 00m 33s",
-                              "tx": "830",
-                              "rx": "794",
-                              "local_ip": "192.168.0.1"
-                            },
-                            {
-                              "username": "user2",
-                              "remote_ip": "192.168.0.20",
-                              "uptime": "01h 24m 04s",
-                              "tx": "2050",
-                              "rx": "3518",
-                              "local_ip": "192.168.0.1"
-                            }
-                          ]
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-services-l2tp-status-sid",
-        "description": "L2TP status of the instance"
-      },
       "x-web": {
         "menu": ["Services", "VPN", "L2TP"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "L2TP"
       }
     },
-    "/l2tp/log": {
+    "/l2tp/server/config": {
       "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+        "description": "Gets l2tp server configurations",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "response": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  },
-                  "x-examples": {
-                    "example-1": {
-                      "success": true,
-                      "data": {
-                        "response": "Thu Apr 13 06:53:37 2023 daemon.notice xl2tpd[3224]: Connecting to host 1.1.1.1, port 1701\n"
-                      }
+            "$ref": "#/components/responses/l2tp_server_multi"
+          }
+        },
+        "summary": "Get l2tp server configurations",
+        "operationId": "get-l2tp-server-config",
+        "tags": ["Server"]
+      },
+      "post": {
+        "description": "Creates l2tp server configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/l2tp_server_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Create l2tp server configuration",
+        "operationId": "post-l2tp-server-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_server_options_id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "put": {
+        "description": "Updates l2tp server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Update l2tp server configurations",
+        "operationId": "put-l2tp-server-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tp_server_options_id"
                     }
                   }
                 }
@@ -840,14 +433,320 @@
             }
           }
         },
-        "operationId": "get-services-l2tp-log",
-        "description": "Logs of all l2tp instances"
+        "tags": ["Server"]
       },
+      "delete": {
+        "description": "Deletes l2tp server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Delete l2tp server configurations",
+        "operationId": "delete-l2tp-server-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "parameters": [],
       "x-web": {
         "menu": ["Services", "VPN", "L2TP"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
+        },
+        "name": "L2TP"
+      }
+    },
+    "/l2tp/server/config/{id}": {
+      "get": {
+        "description": "Gets l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Get l2tp server configuration",
+        "operationId": "get-l2tp-server-config-sid",
+        "tags": ["Server"]
+      },
+      "put": {
+        "description": "Updates l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_server_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Update l2tp server configuration",
+        "operationId": "put-l2tp-server-config-sid",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_server_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "delete": {
+        "description": "Deletes l2tp server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Delete l2tp server configuration",
+        "operationId": "delete-l2tp-server-config-sid",
+        "tags": ["Server"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
         }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "L2TP"
+      }
+    },
+    "/l2tp/users/config": {
+      "get": {
+        "description": "Gets l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_multi"
+          }
+        },
+        "summary": "Get l2tp user configurations",
+        "operationId": "get-l2tp-users-config",
+        "tags": ["Server"]
+      },
+      "post": {
+        "description": "Creates l2tp user configurations",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/l2tp_user_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Create l2tp user configurations",
+        "operationId": "post-l2tp-users-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_user_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "put": {
+        "description": "Updates l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "summary": "Update l2tp user configurations",
+        "operationId": "put-l2tp-users-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/l2tp_user_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "delete": {
+        "description": "Deletes l2tp user configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "summary": "Delete l2tp user configurations",
+        "operationId": "delete-l2tp-users-config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "L2TP"
+      }
+    },
+    "/l2tp/users/config/{id}": {
+      "get": {
+        "description": "Gets user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-l2tp-users-config-sid",
+        "summary": "Get user configuration",
+        "tags": ["Server"]
+      },
+      "put": {
+        "description": "Updates user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/l2tp_user_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "put-l2tp-users-config-sid",
+        "summary": "Update user configuration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/l2tp_user_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Server"]
+      },
+      "delete": {
+        "description": "Deletes user configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "delete-l2tp-users-config-sid",
+        "summary": "Delete user configuration",
+        "tags": ["Server"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "L2TP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "L2TP"
       }
     }
   },
@@ -1471,5 +1370,16 @@
         ]
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Client"
+    },
+    {
+      "name": "General"
+    },
+    {
+      "name": "Server"
+    }
+  ]
 }

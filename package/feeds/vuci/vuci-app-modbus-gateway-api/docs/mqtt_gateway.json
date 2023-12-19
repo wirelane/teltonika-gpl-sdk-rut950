@@ -6,6 +6,65 @@
     }
   ],
   "paths": {
+    "/modbus/gateway/config": {
+      "get": {
+        "tags": [
+          "MQTT Modbus Gateway"
+        ],
+        "summary": "Returns all MQTT Modbus Gateway configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttModbusGatewayMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MQTT Modbus Gateway"
+        ],
+        "summary": "Updates specified MQTT Modbus Gateway configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200MqttModbusGatewayMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/mqtt_modbus_gateway_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "MQTT TCP Gateway"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
     "/modbus/gateway/config/{id}": {
       "parameters": [
         {
@@ -82,67 +141,7 @@
         "menu": [
           "Services",
           "Modbus",
-          "MQTT Modbus Gateway"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/modbus/gateway/config": {
-      "get": {
-        "tags": [
-          "MQTT Modbus Gateway"
-        ],
-        "summary": "Returns all MQTT Modbus Gateway configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200MqttModbusGatewayMulti"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "MQTT Modbus Gateway"
-        ],
-        "summary": "Updates specified MQTT Modbus Gateway configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200MqttModbusGatewayMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/mqtt_modbus_gateway_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Modbus",
-          "MQTT Modbus Gateway"
+          "MQTT TCP Gateway"
         ],
         "hw_tags": {
           "is_access_point": false,

@@ -6,7 +6,7 @@
     }
   ],
   "paths": {
-    "/mobile/simcards/usage/{interval}": {
+    "/data_usage/{interval}/status": {
       "parameters": [
         {
           "schema": {
@@ -25,9 +25,9 @@
         }
       ],
       "get": {
-        "summary": "GET SIM Card Usage Data",
+        "summary": "Returns SIM card usage data for specified interval",
         "tags": [
-          "SIM Card Usage Data"
+          "Data usage"
         ],
         "responses": {
           "200": {
@@ -58,6 +58,9 @@
                 }
               }
             }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "operationId": "get-network-mobile-simcards-usage-interval",
@@ -71,10 +74,11 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "name": "Data usage"
       }
     },
-    "/mobile/simcards/usage/{interval}/{id}": {
+    "/data_usage/{interval}/modem/{modem_id}/status": {
       "parameters": [
         {
           "schema": {
@@ -95,16 +99,16 @@
           "schema": {
             "type": "string"
           },
-          "name": "id",
+          "name": "modem_id",
           "in": "path",
           "required": true,
-          "description": "SIM card configuration name"
+          "description": "Modem ID"
         }
       ],
       "get": {
-        "summary": "GET SIM Card Usage Data",
+        "summary": "Returns SIM card usage data for specified interval and SIM card",
         "tags": [
-          "SIM Card Usage Data"
+          "Data usage"
         ],
         "responses": {
           "200": {
@@ -138,6 +142,9 @@
           },
           "404": {
             "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "operationId": "get-network-mobile-simcards-usage-interval-id",
@@ -151,10 +158,11 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "name": "Data usage"
       }
     },
-    "/mobile/modems/usage/{modem_id}/simcards/{interval}": {
+    "/data_usage/{interval}/modem/{modem_id}/sim/{sim_id}/status": {
       "parameters": [
         {
           "schema": {
@@ -178,13 +186,26 @@
           "name": "modem_id",
           "in": "path",
           "required": true,
-          "description": "Modem id"
+          "description": "Modem ID"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2"
+            ]
+          },
+          "name": "sim_id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card number"
         }
       ],
       "get": {
-        "summary": "GET Modem SIM Card Usage Data",
+        "summary": "Returns data usage for specified modem and SIM card",
         "tags": [
-          "Modem SIM Card Usage Data"
+          "Data usage"
         ],
         "responses": {
           "200": {
@@ -218,95 +239,9 @@
           },
           "404": {
             "$ref": "#/components/responses/404response"
-          }
-        },
-        "operationId": "get-network-mobile-simcards-usage-interval-cfgg",
-        "description": ""
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Mobile",
-          "Mobile"
-        ],
-        "hw_tags": {
-          "mobile": true
-        }
-      }
-    },
-    "/mobile/modems/usage/{modem_id}/simcards/{interval}/{id}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "total"
-            ]
           },
-          "name": "interval",
-          "in": "path",
-          "required": true,
-          "description": "Interval of the returned data"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "modem_id",
-          "in": "path",
-          "required": true,
-          "description": "Modem id"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "SIM card configuration name"
-        }
-      ],
-      "get": {
-        "summary": "GET Modem SIM Card Usage Data",
-        "tags": [
-          "Modem SIM Card Usage Data"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "description": "Array of data usage entries.",
-                      "items": {
-                        "type": "array",
-                        "description": "Data usage entry. Values:\na[0] - timestamp of when the data was used.\na[1] - received data in bytes.\na[2] - transfered data in bytes.",
-                        "minItems": 3,
-                        "maxItems": 3,
-                        "items": {
-                          "type": "number"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "operationId": "get-network-mobile-simcards-usage-interval-cfgg12",
@@ -320,7 +255,8 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "name": "Data usage"
       }
     }
   },

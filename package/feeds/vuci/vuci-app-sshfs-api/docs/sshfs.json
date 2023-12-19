@@ -2,29 +2,182 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/sshfs/config/general": {
+    "/sshfs/config": {
       "get": {
         "tags": [
-          "SSHFS"
+          "General"
         ],
-        "summary": "Returns sshfs config options",
+        "summary": "Returns SSHFS configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200sshfs"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Configuration name"
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/sshfs_options"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "put": {
         "tags": [
+          "General"
+        ],
+        "summary": "Updates SSHFS configurations",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "Configuration name"
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/sshfs_options"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "section for updating",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "Configuration name"
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/sshfs_options"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Storage Memory Expansion",
           "SSHFS"
         ],
-        "summary": "Update sshfs options",
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "SSHFS"
+      }
+    },
+    "/sshfs/config/{id}": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns SSHFS configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200sshfs"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+            "type": "string"
+            },
+            "description": "The ID of the SSHFS configuration"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Updates SSHFS configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200sshfs"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -44,63 +197,18 @@
               }
             }
           }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Storage Memory Expansion",
-          "SSHFS"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/sshfs/config": {
-      "put": {
-        "tags": [
-          "SSHFS"
-        ],
-        "summary": "Update sshfs sections options (sshfs hold only one named section - sshfs)",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200sshfs"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
         },
-        "requestBody": {
-          "description": "sections for updating",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "array of of section objects",
-                    "items": {
-                      "type": "object",
-                      "description": "section id",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "section unique identifier"
-                        },
-                        "null": {
-                          "$ref": "#/components/schemas/sshfs_options"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+            "type": "string"
+            },
+            "description": "The ID of the SSHFS configuration"
           }
-        }
+        ]
       },
       "x-web": {
         "menu": [
@@ -110,8 +218,10 @@
           "SSHFS"
         ],
         "hw_tags": {
-          "is_access_point": false
-        }
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "SSHFS"
       }
     }
   },
@@ -126,10 +236,23 @@
               "properties": {
                 "success": {
                   "type": "boolean",
-                  "description": "Operation status"
+                  "description": "Operation status."
                 },
                 "data": {
-                  "$ref": "#/components/schemas/sshfs_options"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration name"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/sshfs_options"
+                    }
+                  ]
                 }
               }
             }

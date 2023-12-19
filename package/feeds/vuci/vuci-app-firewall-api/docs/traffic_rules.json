@@ -4,7 +4,7 @@
   "paths": {
     "/firewall/traffic_rules/config": {
       "get": {
-        "summary": "GET All Firewall Traffic Rules",
+        "summary": "Returns Firewall Traffic Rules",
         "description": "Returns all sections with their parameters form firewall traffic rules configuration",
         "responses": {
           "200": {
@@ -12,14 +12,17 @@
           }
         },
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall Traffic Rules",
+        "summary": "Updates Firewall Traffic Rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200TraRulOrdMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -45,11 +48,11 @@
           }
         },
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "post": {
-        "summary": "CREATE All Firewall Traffic Rules",
+        "summary": "Creates Firewall Traffic Rule",
         "responses": {
           "201": {
             "$ref": "#/components/responses/200TraRulOrd"
@@ -74,17 +77,17 @@
           }
         },
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "delete": {
-        "summary": "DELETE All Firewall Traffic Rules",
+        "summary": "Deletes Firewall Traffic Rules",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted_multi"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -108,7 +111,7 @@
           }
         },
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "parameters": [],
@@ -126,13 +129,13 @@
     },
     "/firewall/traffic_rules/config/{id}": {
       "get": {
-        "summary": "GET Firewall Traffic Rules",
+        "summary": "Returns Firewall Traffic Rule",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200TraRul"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -143,18 +146,21 @@
             "schema": {
               "type": "string"
             },
-            "description": "Uci configuration traffic rule configuration section indetifier"
+            "description": "The ID of the traffic rule configuration"
           }
         ],
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall Traffic Rules",
+        "summary": "Updates Firewall Traffic Rule",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200TraRulOrd"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -168,7 +174,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Uci configuration firewall traffic rule section indetifier"
+            "description": "The ID of the traffic rule configuration"
           }
         ],
         "requestBody": {
@@ -187,17 +193,17 @@
           }
         },
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "delete": {
-        "summary": "DELETE Firewall Traffic Rules",
+        "summary": "Deletes Firewall Traffic Rule",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -208,11 +214,11 @@
             "schema": {
               "type": "string"
             },
-            "description": "Uci configuration firewall traffic rule section identifier"
+            "description": "The ID of the traffic rule configuration"
           }
         ],
         "tags": [
-          "Firewall Traffic Rules"
+          "Traffic Rules"
         ]
       },
       "parameters": [
@@ -222,7 +228,8 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of the traffic rule configuration"
         }
       ],
       "x-web": {
@@ -331,6 +338,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "The ID of the traffic rule configuration",
             "x-web": {
               "pretty": "Configuration ID",
               "input-type": "input"
@@ -377,7 +385,10 @@
               "input-type": "input"
             },
             "type": "array",
-            "description": "Specifies to which protocols the rule should apply"
+            "description": "Specifies to which protocols the rule should apply",
+            "items": {
+              "type": "string"
+            }
           },
           "icmp_type": {
             "x-web": {
@@ -892,7 +903,10 @@
               "input-type": "input"
             },
             "type": "array",
-            "description": "Specifies to which protocols the rule should apply"
+            "description": "Specifies to which protocols the rule should apply",
+            "items": {
+              "type": "string"
+            }
           },
           "icmp_type": {
             "x-web": {

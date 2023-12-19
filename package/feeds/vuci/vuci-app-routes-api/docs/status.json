@@ -1,224 +1,341 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
+  "tags": [
+    {
+      "name": "Status"
+    }
+  ],
   "paths": {
-    "/routes/status": {
+    "/ip_neighbors/ipv4/status": {
       "get": {
-        "summary": "Returns all routes info",
-        "description": "Returns all routes info with their parameters",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          }
-        },
-        "tags": [
-          "routes_status"
-        ]
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Routing"
-        ]
-      }
-    },
-    "/routes/status/arp": {
-      "get": {
-        "summary": "Returns arp tables",
+        "summary": "Returns ARP tables",
         "description": "Returns arp tables with their parameters",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/responses/routes_arp_status_200"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
-          "routes_status"
+          "IPv4"
         ]
       },
       "x-web": {
+        "hw_tags": {
+          "is_access_point": false
+        },
         "menu": [
           "Network",
           "Routing",
           "Routing"
-        ]
+        ],
+        "name": "IP Neighbors"
       }
     },
-    "/routes/status/routes4": {
+    "/ip_routes/ipv4/status": {
       "get": {
         "summary": "Returns IPv4 routes",
         "description": "Returns IPv4 routes with their parameters",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/responses/routes_ipv4_status_200"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
-          "routes_status"
+          "IPv4"
         ]
       },
       "x-web": {
+        "hw_tags": {
+          "is_access_point": false
+        },
         "menu": [
           "Network",
           "Routing",
           "Routing"
-        ]
+        ],
+        "name": "IP Routes"
       }
     },
-    "/routes/status/routes6": {
+    "/ip_routes/ipv6/status": {
       "get": {
         "summary": "Returns IPv6 routes",
         "description": "Returns IPv6 routes with their parameters",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/responses/routes_ipv6_status_200"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
-          "routes_status"
+          "IPv6"
         ]
       },
       "x-web": {
+        "hw_tags": {
+          "is_access_point": false
+        },
         "menu": [
           "Network",
           "Routing",
           "Routing"
-        ]
+        ],
+        "name": "IP Routes"
       }
     },
-    "/routes/status/routes6_neighbors": {
+    "/ip_neighbors/ipv6/status": {
       "get": {
         "summary": "Returns IPv6 neighbors",
         "description": "Returns IPv6 neighbors with their parameters",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "$ref": "#/components/responses/routes6_neighbors_status_200"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
-          "routes_status"
+          "IPv6"
         ]
       },
       "x-web": {
+        "hw_tags": {
+          "is_access_point": false
+        },
         "menu": [
           "Network",
           "Routing",
           "Routing"
-        ]
-      }
-    },
-    "/routes/status/mac_hints": {
-      "get": {
-        "summary": "Returns MACs",
-        "description": "Returns MACs with their parameters",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "routes_status"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Routing"
-        ]
-      }
-    },
-    "/routes/status/ipv4_hints": {
-      "get": {
-        "summary": "Returns IPv4 addresses",
-        "description": "Returns IPv4 addresses with their parameters",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "routes_status"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Routing"
-        ]
-      }
-    },
-    "/routes/status/ip_addrs": {
-      "get": {
-        "summary": "Returns IP addresses",
-        "description": "Returns IP addresses with their parameters",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "routes_status"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Routing"
-        ]
-      }
-    },
-    "/routes/status/routes_tables": {
-      "get": {
-        "summary": "Returns all route tables",
-        "description": "Returns route tables with their parameters",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "routes_status"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Routing"
-        ]
+        ],
+        "name": "IP Neighbors"
       }
     }
   },
   "components": {
-    "responses": {},
+    "responses": {
+      "routes_arp_status_200": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "proxy": {
+              "type": "string"
+            },
+            "stale": {
+              "type": "string"
+            },
+            "noarp": {
+              "type": "string"
+            },
+            "incomplete": {
+              "type": "string"
+            },
+            "delay": {
+              "type": "string"
+            },
+            "family": {
+              "type": "string"
+            },
+            "reachable": {
+              "type": "string"
+            },
+            "mac": {
+              "type": "string"
+            },
+            "dev": {
+              "type": "string"
+            },
+            "router": {
+              "type": "string"
+            },
+            "dest": {
+              "type": "string"
+            },
+            "probe": {
+              "type": "string"
+            },
+            "failed": {
+              "type": "string"
+            },
+            "permanent": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "routes_ipv4_status_200": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dev": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "family": {
+              "type": "string"
+            },
+            "table": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            },
+            "proto": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "dest": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "routes_ipv6_status_200": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dev": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "family": {
+              "type": "string"
+            },
+            "table": {
+              "type": "string"
+            },
+            "metric": {
+              "type": "string"
+            },
+            "proto": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "dest": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "routes6_neighbors_status_200": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dev": {
+              "type": "string"
+            },
+            "stale": {
+              "type": "string"
+            },
+            "noarp": {
+              "type": "string"
+            },
+            "delay": {
+              "type": "string"
+            },
+            "family": {
+              "type": "string"
+            },
+            "reachable": {
+              "type": "string"
+            },
+            "mac": {
+              "type": "string"
+            },
+            "proxy": {
+              "type": "string"
+            },
+            "router": {
+              "type": "string"
+            },
+            "dest": {
+              "type": "string"
+            },
+            "probe": {
+              "type": "string"
+            },
+            "failed": {
+              "type": "string"
+            },
+            "permanent": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "schemas": {}
+  },
+  "info": {
+    "title": "Routes status",
+    "version": "1.0",
+    "description": "Routes status api documentation"
   }
 }

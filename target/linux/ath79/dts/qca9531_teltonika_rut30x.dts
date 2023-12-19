@@ -58,6 +58,54 @@
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 	};
+
+	tlt_gpios { // Modify according to wiki page "DTS syntax with Libgpiod changes"
+		gpiochip_info {
+			hw_0 {
+				hwver = <0>;
+				gpiochip_count = <1>;
+
+				gpiochip_0 = <32>; // Built-in
+			};
+		};
+
+		ioman {
+			GPIO_11 {
+				line_name = "GPIO_IN_1";
+			};
+			GPIO_12 {
+				line_name = "GPIO_IN_2";
+			};
+			GPIO_13 {
+				line_name = "GPIO_OUT_1";
+			};
+			GPIO_14 {
+				line_name = "GPIO_OUT_2";
+			};
+		};
+
+		ledman {
+			GPIO_4 {
+				line_name = "LED_ETH_GREEN_1";
+			};
+			GPIO_3 {
+				line_name = "LED_ETH_GREEN_2";
+			};
+			GPIO_2 {
+				line_name = "LED_ETH_GREEN_3";
+			};
+			GPIO_1 {
+				line_name = "LED_ETH_GREEN_4";
+			};
+			GPIO_0 {
+				line_name = "LED_ETH_GREEN_5";
+			};
+			GPIO_15 {
+				line_name = "LED_POWER";
+				active_low;
+			};
+		};
+	};
 };
 
 &spi {
@@ -74,7 +122,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
-			partition@0 {
+			boot: partition@0 {
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;

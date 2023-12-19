@@ -4,8 +4,8 @@
         "read": {
             "api": [
                 "/bacnet/*",
-                "/devices/status/*",
-                "/device/info/*",
+                "/network/devices/status/*",
+                "/system/device/status/*",
                 "/serial/status/*"
             ]
         },

@@ -2,24 +2,26 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/attack_prevention/ssh_attack_prevention/config": {
+    "/attack_prevention/ssh/config": {
       "get": {
-        "summary": "GET All Firewall SSH Attack Prevention Settings",
-        "description": "Returns all firewall SSH attack prevention settings with their options",
+        "summary": "Returns Firewall SSH Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SshAtPrMulti"
           }
         },
         "tags": [
-          "Firewall SSH Attack Prevention Settings"
+          "SSH"
         ]
       },
       "put": {
-        "summary": "UPDATE All Firewall SSH Attack Prevention Settings",
+        "summary": "Updates Firewall SSH Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SshAtPrMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -45,11 +47,11 @@
           }
         },
         "tags": [
-          "Firewall SSH Attack Prevention Settings"
+          "SSH"
         ]
       },
-      "parameters": [],
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",
@@ -61,31 +63,56 @@
         }
       }
     },
-    "/firewall/attack_prevention/ssh_attack_prevention/config/general": {
+    "/attack_prevention/ssh/config/{id}": {
       "get": {
-        "summary": "GET Firewall SSH Attack Prevention Settings",
+        "summary": "Returns Firewall SSH Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SshAtPr"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the SSH Attack Prevention configuration"
+          }
+        ],
         "tags": [
-          "Firewall SSH Attack Prevention Settings"
+          "SSH"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall SSH Attack Prevention Settings",
+        "summary": "Updates Firewall SSH Attack Prevention Settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SshAtPr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the SSH Attack Prevention configuration"
+          }
+        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -102,10 +129,11 @@
           }
         },
         "tags": [
-          "Firewall SSH Attack Prevention Settings"
+          "SSH"
         ]
       },
       "x-web": {
+        "name": "Attack Prevention",
         "menu": [
           "Network",
           "Firewall",

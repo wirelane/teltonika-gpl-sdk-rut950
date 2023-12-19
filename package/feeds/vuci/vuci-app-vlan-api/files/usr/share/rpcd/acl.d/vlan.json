@@ -3,15 +3,15 @@
 		"description": "vlan configuration",
 		"read": {
 			"api": [
-				"/vlan/interface_based/*",
-				"/devices/status/*",
+				"/interface_based_vlan/*",
+				"/network/devices/status/*",
 				"/l2tpv3/config/*",
-				"/vlan/port_based/config/*"
+				"/port_based_vlan/config/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/vlan/interface_based/*"
+				"/interface_based_vlan/*"
 			]
 		}
 	},
@@ -19,15 +19,13 @@
 		"description": "vlan configuration",
 		"read": {
 			"api": [
-				"/vlan/port_based_general_settings/*",
-				"/vlan/port_based/*",
+				"/port_based_vlan/*",
 				"/interfaces/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/vlan/port_based_general_settings/*",
-				"/vlan/port_based/*"
+				"/port_based_vlan/*"
 			]
 		}
 	}

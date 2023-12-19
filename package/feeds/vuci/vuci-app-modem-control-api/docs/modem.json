@@ -2,121 +2,16 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "RS Modem"
+      "name": "Modem Control"
     }
   ],
   "paths": {
-    "/rs_modem/config/{id}": {
+    "/modem_control/config": {
       "get": {
         "tags": [
-          "RS Modem"
-        ],
-        "summary": "Returns the specified RS Modem configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Socat"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "RS Modem configuration identifier (ID)."
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "RS Modem"
-        ],
-        "summary": "Updates the specified RS Modem configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Socat"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "RS Modem configuration identifier (ID)."
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/socat_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "RS Modem"
-        ],
-        "summary": "Deletes the specified RS Modem configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "RS Modem configuration identifier (ID)."
-          }
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Serial Utilities",
           "Modem Control"
         ],
-        "hw_tags": {
-          "serial": true
-        }
-      }
-    },
-    "/rs_modem/config": {
-      "get": {
-        "tags": [
-          "RS Modem"
-        ],
-        "summary": "Returns all RS Modem configurations",
+        "summary": "Returns all Modem Control configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SocatMulti"
@@ -125,9 +20,9 @@
       },
       "post": {
         "tags": [
-          "RS Modem"
+          "Modem Control"
         ],
-        "summary": "Creates RS Modem configuration",
+        "summary": "Creates Modem Control configuration",
         "responses": {
           "201": {
             "$ref": "#/components/responses/200Socat"
@@ -154,9 +49,9 @@
       },
       "put": {
         "tags": [
-          "RS Modem"
+          "Modem Control"
         ],
-        "summary": "Updates specified RS Modem configurations",
+        "summary": "Updates specified Modem Control configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200SocatMulti"
@@ -190,9 +85,9 @@
       },
       "delete": {
         "tags": [
-          "RS Modem"
+          "Modem Control"
         ],
-        "summary": "Deletes specified RS Modem configurations",
+        "summary": "Deletes specified Modem Control configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
@@ -225,11 +120,118 @@
       "x-web": {
         "menu": [
           "Services",
-          "Serial Utilities",
+          "Modem Control",
           "Modem Control"
         ],
         "hw_tags": {
-          "serial": true
+          "serial_usb": true,
+          "mobile": true
+        }
+      }
+    },
+    "/modem_control/config/{id}": {
+      "get": {
+        "tags": [
+          "Modem Control"
+        ],
+        "summary": "Returns the specified Modem Control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Socat"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem Control configuration identifier (ID)."
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Modem Control"
+        ],
+        "summary": "Updates the specified Modem Control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Socat"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem Control configuration identifier (ID)."
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/socat_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Modem Control"
+        ],
+        "summary": "Deletes the specified Modem Control configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem Control configuration identifier (ID)."
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modem Control",
+          "Modem Control"
+        ],
+        "hw_tags": {
+          "serial_usb": true,
+          "mobile": true
         }
       }
     }
@@ -726,7 +728,7 @@
           },
           "ctl_mode": {
             "type": "string",
-            "description": "Select modem control mode",
+            "description": "Select modem Control mode",
             "enum": [
               "partial",
               "full"
@@ -742,7 +744,7 @@
           },
           "modem": {
             "type": "string",
-            "description": "Modem, which is used for modem control.",
+            "description": "Modem, which is used for modem Control.",
             "x-web": {
               "pretty": "Modem",
               "input-type": "select",
@@ -775,13 +777,94 @@
           },
           "start_up_msg": {
             "type": "array",
-            "description": "Prints message to serial device when modem control is ready",
+            "description": "Prints message to serial device when modem Control is ready",
             "items": {
               "type": "string"
             },
             "x-web": {
               "pretty": "Start up message",
               "input-type": "input"
+            }
+          },
+          "csd_enabled": {
+            "x-web": {
+              "pretty": "Enable CSD",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable CSD service",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "depends": [
+              {
+                "modems": [
+                  "EC25-EU",
+                  "EC21-EU"
+                ]
+              }
+            ]
+          },
+          "csd_scan_mode": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Network mode for CSD service. Auto - switching between 2G/3G and LTE",
+            "x-web": {
+              "pretty": "Flow control",
+              "enum-pretty": {
+                "0": "Auto",
+                "1": "2G only"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "modems": [
+                      "EC25-EU",
+                      "EC21-EU"
+                    ]
+                  },
+                  "values": [
+                    "0",
+                    "1"
+                  ]
+                }
+              ]
+            }
+          },
+          "csd_role": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": " Role for CSD service",
+            "x-web": {
+              "pretty": "Role",
+              "enum-pretty": {
+                "0": "Caller",
+                "1": "Responder"
+              },
+              "input-type": "select",
+              "enum-depends": [
+                {
+                  "depends": {
+                    "modems": [
+                      "EC25-EU",
+                      "EC21-EU"
+                    ]
+                  },
+                  "values": [
+                    "0",
+                    "1"
+                  ]
+                }
+              ]
             }
           }
         }
@@ -793,7 +876,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "RS Modem Configuration identifier (ID)."
+                "description": "Modem Control Configuration identifier (ID)."
               }
             },
             "required": [

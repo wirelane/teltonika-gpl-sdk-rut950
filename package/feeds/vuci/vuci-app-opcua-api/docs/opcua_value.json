@@ -2,21 +2,12 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "OPC UA Group Values"
+      "name": "Group Values"
     }
   ],
   "paths": {
-    "/opcua/group/config/{opcua_value_group_id}/values/{id}": {
+    "/opcua/group/{id}/values/config": {
       "parameters": [
-        {
-          "name": "opcua_value_group_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "OPC UA Value Group Configuration identifier (ID)"
-        },
         {
           "name": "id",
           "in": "path",
@@ -24,107 +15,26 @@
           "schema": {
             "type": "string"
           },
-          "description": "OPC UA Value Configuration identifier (ID)"
-        }
-      ],
-      "get": {
-        "tags": [
-          "OPC UA Group Values"
-        ],
-        "summary": "Returns the specified OPC UA Value configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200opcuaValue"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "OPC UA Group Values"
-        ],
-        "summary": "Updates the specified OPC UA Value configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200opcuaValue"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/opcua_value_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OPC UA Group Values"
-        ],
-        "summary": "Deletes the specified OPC UA Value configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "OPC",
-          "OPC UA"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/opcua/group/config/{opcua_value_group_id}/values": {
-      "parameters": [
-        {
-          "name": "opcua_value_group_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
           "description": "OPC UA Value Group Configuration identifier (ID)"
         }
       ],
       "get": {
         "tags": [
-          "OPC UA Group Values"
+          "Group Values"
         ],
         "summary": "Returns all OPC UA Value configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200opcuaValueMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "post": {
         "tags": [
-          "OPC UA Group Values"
+          "Group Values"
         ],
         "summary": "Creates OPC UA Value configuration",
         "responses": {
@@ -133,6 +43,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -153,7 +66,7 @@
       },
       "put": {
         "tags": [
-          "OPC UA Group Values"
+          "Group Values"
         ],
         "summary": "Updates specified OPC UA Value configurations",
         "responses": {
@@ -189,7 +102,7 @@
       },
       "delete": {
         "tags": [
-          "OPC UA Group Values"
+          "Group Values"
         ],
         "summary": "Deletes specified OPC UA Value configurations",
         "responses": {
@@ -222,9 +135,10 @@
         }
       },
       "x-web": {
+        "name": "OPC UA",
         "menu": [
           "Services",
-          "OPC",
+          "OPC UA",
           "OPC UA"
         ],
         "hw_tags": {
@@ -233,11 +147,104 @@
         }
       }
     },
-    "/opcua/group/actions/{opcua_value_group_id}/values/test": {
-      "post": {
-        "deprecated": true,
+    "/opcua/group/{id}/values/config/{value_id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "OPC UA Value Group Configuration identifier (ID)"
+        },
+        {
+          "name": "value_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "OPC UA Value Configuration identifier (ID)"
+        }
+      ],
+      "get": {
         "tags": [
-          "OPC UA Group Values"
+          "Group Values"
+        ],
+        "summary": "Returns the specified OPC UA Value configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValue"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Group Values"
+        ],
+        "summary": "Updates the specified OPC UA Value configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaValue"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_value_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Group Values"
+        ],
+        "summary": "Deletes the specified OPC UA Value configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "name": "OPC UA",
+        "menu": [
+          "Services",
+          "OPC UA",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/opcua/group/{id}/values/actions/test": {
+      "post": {
+        "tags": [
+          "Group Values"
         ],
         "summary": "Test OPC UA Value",
         "responses": {
@@ -246,11 +253,14 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
           {
-            "name": "opcua_value_group_id",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -276,9 +286,11 @@
         }
       },
       "x-web": {
+        "hidden": true,
+        "name": "OPC UA",
         "menu": [
           "Services",
-          "OPC",
+          "OPC UA",
           "OPC UA"
         ],
         "hw_tags": {
@@ -390,14 +402,6 @@
             "description": "Server node to retrieve data from.",
             "x-web": {
               "pretty": "Server node",
-              "input-type": "input"
-            }
-          },
-          "server": {
-            "type": "string",
-            "description": "Server to retrieve data from.",
-            "x-web": {
-              "pretty": "Server",
               "input-type": "input"
             }
           }

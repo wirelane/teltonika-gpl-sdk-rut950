@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Destination Server"
+    }
+  ],
+  "paths": {
+    "/opcua/destination_server/config": {
+      "get": {
+        "tags": [
+          "Destination server"
+        ],
+        "summary": "Returns all OPC UA destination server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpcuaDestinationServerMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Destination server"
+        ],
+        "summary": "Updates specified OPC UA destination server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpcuaDestinationServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of objects",
+                    "items": {
+                      "$ref": "#/components/schemas/opcua_destination_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "OPC UA",
+        "menu": [
+          "Services",
+          "OPC UA",
+          "Destination Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/opcua/destination_server/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "OPC UA destination Server Instance identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Destination server"
+        ],
+        "summary": "Returns the specified OPC UA destination server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpcuaDestinationServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Destination server"
+        ],
+        "summary": "Updates the specified OPC UA destination server configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OpcuaDestinationServer"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_destination_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "OPC UA",
+        "menu": [
+          "Services",
+          "OPC UA",
+          "Destination Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200OpcuaDestinationServer": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/opcua_destination_server_options_for_get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OpcuaDestinationServerMulti": {
+        "description": "Returns configurations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of objects",
+                  "items": {
+                    "$ref": "#/components/schemas/opcua_destination_server_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "opcua_destination_server_single_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable/disable OPC UA destination server.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "Service port.",
+            "format": "port",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "opcua_destination_server_options_for_get": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "OPC UA destination server Configuration identifier (ID)."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/opcua_destination_server_single_options"
+          }
+        ]
+      },
+      "opcua_destination_server_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "OPC UA destination server Configuration identifier (ID)."
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/opcua_destination_server_single_options"
+          }
+        ]
+      }
+    }
+  }
+}

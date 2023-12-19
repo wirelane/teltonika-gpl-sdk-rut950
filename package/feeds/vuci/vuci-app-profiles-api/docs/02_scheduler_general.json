@@ -1,0 +1,99 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Profiles Scheduler general",
+    "description": "Profiles Scheduler general API documentation.",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Scheduler"
+    }
+  ],
+  "paths": {
+    "/profiles/scheduler/global": {
+      "get": {
+        "summary": "Returns Profiles Scheduler general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200schgen"
+          }
+        },
+        "tags": ["Scheduler"]
+      },
+      "put": {
+        "summary": "Updates Profiles Scheduler general configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200schgen"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/scheduler_general_options_single"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Scheduler"]
+      },
+      "x-web": {
+        "hw_tags": {
+          "is_switch": false
+        },
+        "menu": ["System", "Administration", "Profiles", "Scheduler"]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200schgen": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "description": "Operation status",
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/scheduler_general_options_single"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "scheduler_general_options_single": {
+        "title": "Scheduler general single put options",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable scheduler",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/disable Scheduler",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          }
+        }
+      }
+    }
+  }
+}

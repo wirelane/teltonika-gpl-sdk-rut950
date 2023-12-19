@@ -3,12 +3,12 @@
 		"description": "ntp general configuration",
 		"read": {
 			"api": [
-				"/administration/ntp/*"
+				"/date_time/ntp/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/administration/ntp/*"
+				"/date_time/ntp/*"
 			]
 		}
 	},
@@ -16,14 +16,14 @@
 		"description": "ntp configuration",
 		"read": {
 			"api": [
-				"/administration/ntp/*",
-				"/mobile/modems/status_basic/*",
-				"/administration/ntpd/config/general/*"
+				"/date_time/ntp/*",
+				"/modems/status_basic/*",
+				"/date_time/ntpd/config/general/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/administration/ntp/*"
+				"/date_time/ntp/*"
 			]
 		}
 	}

@@ -2,10 +2,134 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
+    "/opcua/server/config": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Returns all OPC UA Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Creates OPC UA Server configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200opcuaServer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/opcua_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Updates specified OPC UA Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200opcuaServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/opcua_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Deletes specified OPC UA Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "OPC UA",
+        "menu": [
+          "Services",
+          "OPC UA",
+          "OPC UA"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
     "/opcua/server/config/{id}": {
       "get": {
         "tags": [
-          "OPC UA Servers"
+          "Servers"
         ],
         "summary": "Returns the specified OPC UA Server configuration",
         "responses": {
@@ -30,7 +154,7 @@
       },
       "put": {
         "tags": [
-          "OPC UA Servers"
+          "Servers"
         ],
         "summary": "Updates the specified OPC UA Server configuration",
         "responses": {
@@ -73,7 +197,7 @@
       },
       "delete": {
         "tags": [
-          "OPC UA Servers"
+          "Servers"
         ],
         "summary": "Deletes the specified OPC UA Server configuration",
         "responses": {
@@ -97,132 +221,10 @@
         ]
       },
       "x-web": {
+        "name": "OPC UA",
         "menu": [
           "Services",
-          "OPC",
-          "OPC UA"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/opcua/server/config": {
-      "get": {
-        "tags": [
-          "OPC UA Servers"
-        ],
-        "summary": "Returns all OPC UA Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200opcuaServerMulti"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "OPC UA Servers"
-        ],
-        "summary": "Updates specified OPC UA Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200opcuaServerMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/opcua_server_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "OPC UA Servers"
-        ],
-        "summary": "Creates OPC UA Server configuration",
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/200opcuaServer"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/opcua_server_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OPC UA Servers"
-        ],
-        "summary": "Deletes specified OPC UA Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "type": "string",
-                      "description": "Section id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "OPC",
+          "OPC UA",
           "OPC UA"
         ],
         "hw_tags": {
@@ -233,9 +235,8 @@
     },
     "/opcua/server/actions/test": {
       "post": {
-        "deprecated": true,
         "tags": [
-          "OPC UA Servers"
+          "Servers"
         ],
         "summary": "Test OPC UA Server",
         "responses": {
@@ -263,9 +264,11 @@
         }
       },
       "x-web": {
+        "hidden": true,
+        "name": "OPC UA",
         "menu": [
           "Services",
-          "OPC",
+          "OPC UA",
           "OPC UA"
         ],
         "hw_tags": {

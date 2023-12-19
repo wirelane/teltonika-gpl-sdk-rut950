@@ -29,13 +29,13 @@
         "description": "certificates root ca",
         "read": {
             "api": [
-                "/root_ca/*",
-				"/certificates/config/ca/*"
+                "/certificates/root_ca/*",
+				"/certificates/ca/*"
             ]
         },
         "write": {
             "api": [
-                "/root_ca/*"
+                "/certificates/root_ca/*"
             ]
         }
     }

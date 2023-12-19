@@ -2,12 +2,12 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/vlan/interface_based/config": {
+    "/interface_based_vlan/config": {
       "get": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "GET All Interface based vlan",
+        "summary": "Returns Interface Based VLANs",
         "description": "",
         "responses": {
           "200": {
@@ -17,15 +17,15 @@
       },
       "delete": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "DELETE All Interface based vlan",
+        "summary": "Deletes Interface Based VLANs",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted_multi"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -51,29 +51,26 @@
       },
       "post": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "CREATE All Interface based vlan",
+        "summary": "Creates Interface Based VLAN",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200InteBase"
-          },
           "201": {
-            "$ref": "#/components/responses/201response"
+            "$ref": "#/components/responses/200InteBase"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/interface_based_options"
+                    "$ref": "#/components/schemas/interface_based_options_put"
                   }
                 }
               }
@@ -83,12 +80,15 @@
       },
       "put": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "UPDATE All Interface based vlan",
+        "summary": "Updates Interface Based VLANs",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBaseMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -124,21 +124,23 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Interface Based VLAN",
+        "hidden_documentation_page": true
       }
     },
-    "/vlan/interface_based/config/{id}": {
+    "/interface_based_vlan/config/{id}": {
       "get": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "GET Interface based vlan",
+        "summary": "Returns Interface Based VLAN",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBase"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -155,15 +157,15 @@
       },
       "delete": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "DELETE Interface based vlan",
+        "summary": "Deletes Interface based VLAN",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -180,12 +182,15 @@
       },
       "put": {
         "tags": [
-          "Interface based vlan"
+          "VLAN"
         ],
-        "summary": "UPDATE Interface based vlan",
+        "summary": "Updates Interface Based VLAN",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBase"
+          },
+          "404": {
+            "$ref": "#/components/responses/422response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -225,7 +230,8 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of Interface Based VLAN"
         }
       ],
       "x-web": {
@@ -237,32 +243,9 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
-      }
-    },
-    "/vlan/interface_based/devices": {
-      "get": {
-        "tags": [
-          "Interface based vlan"
-        ],
-        "summary": "GET All Interface based childs of parents",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200InteBaseMulti"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "VLAN",
-          "Interface Based"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
+        },
+        "name": "Interface Based VLAN",
+        "hidden_documentation_page": true
       }
     }
   },

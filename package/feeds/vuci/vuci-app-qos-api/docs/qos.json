@@ -6,19 +6,11 @@
     "contact": {},
     "description": "QOS api documentation"
   },
-  "tags": [
-    {
-      "name": "Interfaces"
-    },
-    {
-      "name": "Classification rules"
-    }
-  ],
   "servers": [],
   "paths": {
     "/qos/interfaces/config": {
       "get": {
-        "summary": "Get QOS interface configurations",
+        "summary": "Returns QoS interface configurations",
         "tags": [
           "Interfaces"
         ],
@@ -31,14 +23,17 @@
         "description": "Gets QOS interface configurations"
       },
       "post": {
-        "summary": "Create QOS interface configuration",
+        "summary": "Creates QOS interface configuration",
         "operationId": "post-services-qos-interfaces",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_qos_interface"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "description": "Creates QOS interface configuration",
+        "description": "Creates QoS interface configuration",
         "requestBody": {
           "content": {
             "application/json": {
@@ -53,11 +48,17 @@
         ]
       },
       "put": {
-        "summary": "Update QOS interface configurations",
+        "summary": "Updates QoS interface configurations",
         "operationId": "put-services-qos-interfaces",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_qos_interface_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Updates QOS interface configurations",
@@ -75,11 +76,14 @@
         ]
       },
       "delete": {
-        "summary": "Delete QOS interface configurations",
+        "summary": "Deletes QoS interface configurations",
         "operationId": "delete-services-qos-interfaces",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Deletes QOS interface configurations",
@@ -98,6 +102,7 @@
       },
       "parameters": [],
       "x-web": {
+        "name": "QoS",
         "menu": [
           "Network",
           "Traffic Shaping",
@@ -111,9 +116,9 @@
     },
     "/qos/rules/config": {
       "get": {
-        "summary": "Get QOS classification rule",
+        "summary": "Returns QoS classification rules",
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ],
         "responses": {
           "200": {
@@ -124,11 +129,14 @@
         "description": "Gets QOS classification rules"
       },
       "post": {
-        "summary": "Create QOS classification rule",
+        "summary": "Creates QoS classification rule",
         "operationId": "post-services-qos-rules",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_qos_classification"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Creates QOS classification rule",
@@ -142,15 +150,21 @@
           }
         },
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ]
       },
       "put": {
-        "summary": "Update QOS classification rules",
+        "summary": "Updates QoS classification rules",
         "operationId": "put-services-qos-rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_qos_classification_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Updates QOS classification rules",
@@ -164,15 +178,18 @@
           }
         },
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ]
       },
       "delete": {
-        "summary": "Delete QOS classification rules",
+        "summary": "Deletes QoS classification rules",
         "operationId": "delete-services-qos-rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Deletes QOS classification rules",
@@ -186,11 +203,12 @@
           }
         },
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ]
       },
       "parameters": [],
       "x-web": {
+        "name": "QoS",
         "menu": [
           "Network",
           "Traffic Shaping",
@@ -202,36 +220,46 @@
         }
       }
     },
-    "/qos/interfaces/config/{sid}": {
+    "/qos/interfaces/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of the QoS interface configuration"
         }
       ],
       "get": {
-        "summary": "Get QOS interface configuration",
+        "summary": "Returns QoS interface configuration",
         "tags": [
           "Interfaces"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_qos_interface"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "operationId": "get-services-qos-interfaces-sid",
+        "operationId": "get-services-qos-interfaces-id",
         "description": "Get QOS interface configuration"
       },
       "put": {
-        "summary": "Update QOS interface configuration",
-        "operationId": "put-services-qos-interfaces-sid",
+        "summary": "Updates QoS interface configuration",
+        "operationId": "put-services-qos-interfaces-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_qos_interface"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Updates QOS interface configuration",
@@ -249,11 +277,14 @@
         ]
       },
       "delete": {
-        "summary": "Delete QOS interface configuration",
-        "operationId": "delete-services-qos-interfaces-sid",
+        "summary": "Deletes QoS interface configuration",
+        "operationId": "delete-services-qos-interfaces-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Deletes QOS interface configuration",
@@ -262,6 +293,7 @@
         ]
       },
       "x-web": {
+        "name": "QoS",
         "menu": [
           "Network",
           "Traffic Shaping",
@@ -273,36 +305,46 @@
         }
       }
     },
-    "/qos/rules/config/{sid}": {
+    "/qos/rules/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of the QoS rule configuration"
         }
       ],
       "get": {
-        "summary": "Get QOS classification rule configuration",
+        "summary": "Returns QoS classification rule configuration",
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_qos_classification"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "operationId": "get-services-qos-rules-sid",
+        "operationId": "get-services-qos-rules-id",
         "description": "Gets QOS classification rule configuration"
       },
       "put": {
-        "summary": "Update QOS classification rule configuration",
-        "operationId": "put-services-qos-rules-sid",
+        "summary": "Updates QoS classification rule configuration",
+        "operationId": "put-services-qos-rules-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_qos_classification"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Updates QOS classification rule configuration",
@@ -316,23 +358,27 @@
           }
         },
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ]
       },
       "delete": {
-        "summary": "Delete QOS classification rule configuration",
-        "operationId": "delete-services-qos-rules-sid",
+        "summary": "Deletes QoS classification rule configuration",
+        "operationId": "delete-services-qos-rules-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Deletes QOS classification rule configuration",
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ]
       },
       "x-web": {
+        "name": "QoS",
         "menu": [
           "Network",
           "Traffic Shaping",
@@ -346,9 +392,9 @@
     },
     "/qos/rules/options": {
       "get": {
-        "summary": "Get rules service options",
+        "summary": "Returns rules service options",
         "tags": [
-          "Classification rules"
+          "Classification Rules"
         ],
         "responses": {
           "200": {
@@ -359,6 +405,7 @@
         "description": "Gets rules service options"
       },
       "x-web": {
+        "name": "QoS",
         "menu": [
           "Network",
           "Traffic Shaping",
@@ -546,7 +593,8 @@
                 "type": "object",
                 "properties": {
                   "id": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The ID of the QoS interface configuration"
                   }
                 }
               },
@@ -577,7 +625,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The ID of the QoS interface configuration"
                     }
                   }
                 },
@@ -647,7 +696,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The ID of the QoS rule configuration"
                     }
                   }
                 },
@@ -707,10 +757,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/qos_options"
-                  }
+                  "$ref": "#/components/schemas/qos_options"
                 }
               },
               "required": [
@@ -740,7 +787,24 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/qos_interface"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the QoS rule configuration"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the interface"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/qos_interface"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -779,7 +843,12 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the QoS rule configuration"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the interface"
                           }
                         }
                       },
@@ -822,7 +891,8 @@
                       "type": "object",
                       "properties": {
                         "id": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "The ID of the QoS rule configuration"
                         }
                       }
                     },
@@ -869,7 +939,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the QoS rule configuration"
                           }
                         }
                       },

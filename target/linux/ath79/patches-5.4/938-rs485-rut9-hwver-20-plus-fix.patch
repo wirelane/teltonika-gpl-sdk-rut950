@@ -147,18 +147,19 @@
  		if (--timeout == 0)
 --- a/drivers/Makefile
 +++ b/drivers/Makefile
-@@ -50,6 +50,10 @@ obj-$(CONFIG_REGULATOR)		+= regulator/
+@@ -50,6 +50,11 @@ obj-$(CONFIG_REGULATOR)		+= regulator/
  # reset controllers early, since gpu drivers might rely on them to initialize
  obj-$(CONFIG_RESET_CONTROLLER)	+= reset/
  
 +# moved here to satisfy tty mtd_read dependences
 +obj-$(CONFIG_SPI)		+= spi/
 +obj-$(CONFIG_MTD)		+= mtd/
++obj-$(CONFIG_SYSFS_MNFINFO)	+= spi/sysfs-mnfinfo/
 +
  # tty/ comes before char/ so that the VT console is the boot-time
  # default.
  obj-y				+= tty/
-@@ -80,8 +84,6 @@ obj-y				+= scsi/
+@@ -80,8 +85,6 @@ obj-y				+= scsi/
  obj-y				+= nvme/
  obj-$(CONFIG_ATA)		+= ata/
  obj-$(CONFIG_TARGET_CORE)	+= target/
@@ -167,3 +168,11 @@
  obj-$(CONFIG_SPMI)		+= spmi/
  obj-$(CONFIG_HSI)		+= hsi/
  obj-$(CONFIG_SLIMBUS)		+= slimbus/
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -127,5 +127,3 @@ obj-$(CONFIG_SPI_ZYNQMP_GQSPI)		+= spi-z
+ # SPI slave protocol handlers
+ obj-$(CONFIG_SPI_SLAVE_TIME)		+= spi-slave-time.o
+ obj-$(CONFIG_SPI_SLAVE_SYSTEM_CONTROL)	+= spi-slave-system-control.o
+-
+-obj-$(CONFIG_SYSFS_MNFINFO)	+= sysfs-mnfinfo/

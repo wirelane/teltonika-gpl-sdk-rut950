@@ -3,15 +3,15 @@
 		"description": "Modem configuration",
 		"read": {
 			"api": [
-				"/rs_modem/*",
-				"/device/info/*",
+				"/modem_control/*",
+				"/system/device/status/*",
 				"/serial/status/*",
-				"/mobile/modems/status_basic/*"
+				"/modems/status_basic/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/rs_modem/*"
+				"/modem_control/*"
 			]
 		}
 	}

@@ -828,44 +828,6 @@ tlt-rut9xx-vboot-64k: ar934x_common
 	@$(call define_add,DDR_TUNE,1)
 	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
 
-tlt-rut952: ar934x_common
-	@$(call config_init,Teltonika RUT952,tlt-rut952,16,15,1,QCA_AR9344_SOC)
-	@$(call define_add,CONFIG_FOR_TELTONIKA_RUT952,1)
-	@$(call define_add,CFG_ATHRS27_PHY,1)
-	@$(call define_add,CFG_AG7240_NMACS,2)
-	@$(call define_add,CONFIG_SHIFT_REG,1)
-	@$(call define_add,CONFIG_CMD_DIGITAL_IN,1)
-	@$(call define_add,CONFIG_CMD_PHY_POWER,1)
-	@$(call define_add,DDR_TUNE,1)
-	@$(call define_add,CONFIG_MNFINFO_SUPPORT,1)
-	@$(call define_add,CONFIG_CMD_MNFINFO,1)
-	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
-
-tlt-rut952-vboot: ar934x_common
-	@$(call config_init,Teltonika RUT952,tlt-rut952,16,15,1,QCA_AR9344_SOC)
-	@$(call define_add,CONFIG_FOR_TELTONIKA_RUT952,1)
-	@$(call define_add,CFG_ATHRS27_PHY,1)
-	@$(call define_add,CFG_AG7240_NMACS,2)
-	@$(call define_add,CONFIG_SHIFT_REG,1)
-	@$(call define_add,CONFIG_CMD_DIGITAL_IN,1)
-	@$(call define_add,CONFIG_CMD_PHY_POWER,1)
-	@$(call define_add,CONFIG_TLT_VERIFIED_BOOT,1)
-	@$(call define_add,DDR_TUNE,1)
-	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
-
-tlt-rut952-vboot-64k: ar934x_common
-	@$(call config_init,Teltonika RUT952,tlt-rut952,16,15,1,QCA_AR9344_SOC)
-	@$(call define_add,CONFIG_FOR_TELTONIKA_RUT952,1)
-	@$(call define_add,CFG_ATHRS27_PHY,1)
-	@$(call define_add,CFG_AG7240_NMACS,2)
-	@$(call define_add,CONFIG_SHIFT_REG,1)
-	@$(call define_add,CONFIG_CMD_DIGITAL_IN,1)
-	@$(call define_add,CONFIG_CMD_PHY_POWER,1)
-	@$(call define_add,CONFIG_TLT_VERIFIED_BOOT,1)
-	@$(call define_add,CONFIG_UBOOT_64K,1)
-	@$(call define_add,DDR_TUNE,1)
-	@$(MKCONFIG) -a db12x mips mips db12x ar7240 ar7240
-
 tlt-tcr1xx: qca953x_common
 	@$(call config_init,Teltonika TCR1XX,tlt-tcr1xx,16,17,1,QCA_QCA9531_SOC)
 	@$(call define_add,CONFIG_FOR_TELTONIKA_TCR1XX,1)

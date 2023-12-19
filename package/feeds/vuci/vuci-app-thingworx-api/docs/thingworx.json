@@ -2,65 +2,10 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/cloud_solutions/thingworx/config/general": {
+    "/thingworx/config": {
       "get": {
         "tags": [
-          "ThingWorx"
-        ],
-        "summary": "Returns the ThingWorx configuration",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Thingworx"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ThingWorx"
-        ],
-        "summary": "Updates the ThingWorx configuration",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Thingworx"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/thingworx_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Thingworx"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/cloud_solutions/thingworx/config": {
-      "get": {
-        "tags": [
-          "ThingWorx"
+          "General"
         ],
         "summary": "Returns the ThingWorx configuration in an array",
         "description": "",
@@ -72,7 +17,7 @@
       },
       "put": {
         "tags": [
-          "ThingWorx"
+          "General"
         ],
         "summary": "Updates the ThingWorx configuration in an array",
         "description": "",
@@ -111,12 +56,86 @@
         "menu": [
           "Services",
           "Cloud Solutions",
-          "Thingworx"
+          "ThingWorx"
         ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
+        },
+        "name": "ThingWorx"
+      }
+    },
+    "/thingworx/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
         }
+      ],
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns the ThingWorx configuration",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Thingworx"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Updates the ThingWorx configuration",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Thingworx"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/thingworx_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "ThingWorx"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "ThingWorx"
       }
     }
   },
@@ -134,7 +153,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/thingworx_options"
+                  "$ref": "#/components/schemas/thingworx_options_resp"
                 }
               }
             }
@@ -156,7 +175,7 @@
                   "type": "array",
                   "description": "",
                   "items": {
-                    "$ref": "#/components/schemas/thingworx_options"
+                    "$ref": "#/components/schemas/thingworx_options_resp"
                   }
                 }
               }
@@ -183,12 +202,7 @@
             "format": "host",
             "x-web": {
               "pretty": "Server address",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           },
           "port": {
@@ -197,12 +211,7 @@
             "format": "port",
             "x-web": {
               "pretty": "Server port",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           },
           "thing": {
@@ -212,12 +221,7 @@
             "maxLength": 32,
             "x-web": {
               "pretty": "Thing name",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           },
           "appkey": {
@@ -228,12 +232,7 @@
             "writeOnly": true,
             "x-web": {
               "pretty": "Application key",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           },
           "iface": {
@@ -244,15 +243,104 @@
               "input-type": "input",
               "hw_tags": {
                 "mobile": true
-              },
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              }
             }
           }
-        }
+        },
+        "required": [
+          "server",
+          "port",
+          "thing",
+          "appkey",
+          "iface"
+        ]
+      },
+      "thingworx_single_options_resp": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable ThingWorx Application",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "server": {
+            "type": "string",
+            "description": "ThingWorx Server IP",
+            "format": "host",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input"
+            }
+          },
+          "port": {
+            "type": "string",
+            "description": "ThingWorx Server Port",
+            "format": "port",
+            "x-web": {
+              "pretty": "Server port",
+              "input-type": "input"
+            }
+          },
+          "thing": {
+            "type": "string",
+            "description": "Thing name defined in ThingWorx CP",
+            "format": "uciname",
+            "maxLength": 32,
+            "x-web": {
+              "pretty": "Thing name",
+              "input-type": "input"
+            }
+          },
+          "appkey": {
+            "type": "string",
+            "description": "Indicates if 'appkey' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": [
+              "unset",
+              "set"
+            ]
+          },
+          "iface": {
+            "type": "string",
+            "description": "Interface name for which gsm values would be selected",
+            "x-web": {
+              "pretty": "Mobile interface",
+              "input-type": "input",
+              "hw_tags": {
+                "mobile": true
+              }
+            }
+          }
+        },
+        "required": [
+          "server",
+          "port",
+          "thing",
+          "appkey",
+          "iface"
+        ]
+      },
+      "thingworx_options_resp": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/thingworx_single_options_resp"
+          }
+        ]
       },
       "thingworx_options": {
         "allOf": [
@@ -263,7 +351,10 @@
                 "type": "string",
                 "description": "Configuration ID"
               }
-            }
+            },
+            "required": [
+              "id"
+            ]
           },
           {
             "$ref": "#/components/schemas/thingworx_single_options"

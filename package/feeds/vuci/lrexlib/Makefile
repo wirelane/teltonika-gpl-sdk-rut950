@@ -20,12 +20,12 @@ define Package/lrexlib
 	SECTION:=libs
 	CATEGORY:=Libraries
 	TITLE:=A library for exposing regex functions to LUA.
-	DEPENDS:=+liblua +lua +libc
+	DEPENDS:=+liblua +lua +libc +libpcre2
 endef
 
 define Package/lrexlib/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/rex_posix.so $(1)/usr/lib/lua
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/rex_pcre2.so $(1)/usr/lib/lua
 endef
 
 $(eval $(call BuildPackage,lrexlib))

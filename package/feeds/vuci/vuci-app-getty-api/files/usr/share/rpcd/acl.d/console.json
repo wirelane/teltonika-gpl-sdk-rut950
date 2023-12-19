@@ -5,7 +5,7 @@
 			"api": [
 				"/console/*",
 				"/serial/*",
-				"/device/*"
+				"/system/device/*"
 			]
 		},
 		"write": {

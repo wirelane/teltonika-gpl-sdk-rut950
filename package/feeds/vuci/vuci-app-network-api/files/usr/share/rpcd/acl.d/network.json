@@ -6,12 +6,12 @@
 				"/interfaces/*",
 				"/openvpn/config/*",
 				"/mobile/*",
-				"/device/info/*",
+				"/system/device/status/*",
 				"/dhcp/servers/*",
 				"/firewall/zones/*",
 				"/wireless/interfaces/*",
-				"/vlan/interface_based/config/*",
-				"/devices/status/*"
+				"/interface_based_vlan/*",
+				"/network/devices/status/*"
 			]
 		},
 		"write": {
@@ -28,20 +28,22 @@
 				"/interfaces/*",
 				"/openvpn/config/*",
 				"/mobile/*",
-				"/device/info/*",
+				"/system/device/status/*",
 				"/dhcp/servers/*",
 				"/firewall/zones/*",
 				"/wireless/interfaces/*",
-				"/vlan/interface_based/config/*",
-				"/mwan3/interfaces/config/*",
-				"/mwan3/general/config/globals/*",
-				"/devices/status/*"
+				"/interface_based_vlan/*",
+				"/failover/interfaces/config/*",
+				"/failover/mode/config/globals/*",
+				"/network/devices/status/*",
+				"/data_limit/*"
 			]
 		},
 		"write": {
 			"api": [
 				"/interfaces/*",
-				"/dhcp/servers/*"
+				"/dhcp/servers/*",
+				"/data_limit/*"
 			]
 		}
 	},
@@ -49,12 +51,14 @@
 		"description": "mobile network status",
 		"read": {
 			"api": [
-				"/mobile/modems/*"
+				"/modems/*",
+				"/data_limit/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/mobile/modems/*"
+				"/modems/*",
+				"/data_limit/*"
 			]
 		}
 	},
@@ -63,8 +67,8 @@
 		"read": {
 			"api": [
 				"/interfaces/status/*",
-				"/dhcp/servers/status/*",
-				"/dhcp/static_leases/config/*"
+				"/dhcp/leases/ipv4/status/*",
+				"/dhcp/static_leases/ipv4/config/*"
 			]
 		}
 	},

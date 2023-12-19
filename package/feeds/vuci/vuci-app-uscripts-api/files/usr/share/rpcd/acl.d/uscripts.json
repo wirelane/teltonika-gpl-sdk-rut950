@@ -2,10 +2,10 @@
     "system/maintenance/uscripts": {
         "description": "custom scripts",
         "read": {
-            "api": ["/administration/uscripts/*"]
+            "api": ["/uscripts/*"]
         },
         "write": {
-            "api": ["/administration/uscripts/*"]
+            "api": ["/uscripts/*"]
         }
     }
 }

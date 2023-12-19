@@ -3,8 +3,8 @@
 		"description": "NTPD time synchronisation configuration module",
 		"read": {
 			"api": [
-				"/administration/ntpd/*",
-				"/administration/ntp/server/config/*"
+				"/date_time/ntpd/*",
+				"/date_time/ntp/server/*"
 			],
 			"uci": [
 				"ntpd",
@@ -13,7 +13,7 @@
 		},
 		"write": {
 			"api": [
-				"/administration/ntpd/*"
+				"/date_time/ntpd/*"
 			],
 			"uci": [
 				"ntpd",

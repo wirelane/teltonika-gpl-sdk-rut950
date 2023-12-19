@@ -3,9 +3,9 @@
 		"description": "system status",
 		"read": {
 			"api": [
-				"/device/*",
-				"/devices/*",
-				"/mobile/modems/*"
+				"/system/device/*",
+				"/network/devices/*",
+				"/modems/*"
 			],
 			"uci": [
 				"system"

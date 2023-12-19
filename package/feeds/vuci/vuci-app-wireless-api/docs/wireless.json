@@ -17,8 +17,8 @@
   "paths": {
     "/wireless/devices/config": {
       "get": {
-        "tags": ["Wireless"],
-        "summary": "GET All Wireless",
+        "tags": ["Devices"],
+        "summary": "Returns wireless device configurations",
         "description": "Returns all sections with their parameters from wireless device configuration",
         "operationId": "get-network-wireless-devices",
         "responses": {
@@ -47,8 +47,8 @@
         }
       },
       "put": {
-        "tags": ["Wireless"],
-        "summary": "UPDATE All Wireless",
+        "tags": ["Devices"],
+        "summary": "Updates wireless device configurations",
         "responses": {
           "200": {
             "description": "OK",
@@ -101,7 +101,7 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
+        "menu": ["Network", "Wireless", "Radio"],
         "hw_tags": {
           "wifi": true
         }
@@ -109,8 +109,8 @@
     },
     "/wireless/devices/config/{id}": {
       "get": {
-        "tags": ["Wireless"],
-        "summary": "GET Wireless",
+        "tags": ["Devices"],
+        "summary": "Returns wireless device configuration",
         "responses": {
           "200": {
             "description": "OK",
@@ -143,13 +143,13 @@
             "schema": {
               "type": "string"
             },
-            "description": "Configuration section name"
+            "description": "The ID of the wireless interface configuration"
           }
         ],
         "operationId": "get-network-wireless-devices-id"
       },
       "put": {
-        "summary": "UPDATE Wireless",
+        "summary": "Updates wireless device configuration",
         "operationId": "put-network-wireless-devices-id",
         "description": "",
         "requestBody": {
@@ -166,7 +166,7 @@
             }
           }
         },
-        "tags": ["Wireless"],
+        "tags": ["Devices"],
         "responses": {
           "200": {
             "description": "OK",
@@ -203,7 +203,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Wireless device name",
+          "description": "The ID of the wireless device configuration ('radio0', 'radio1' ...)",
           "x-web": {
             "pretty": "Wireless device",
             "enum-depends": [
@@ -232,16 +232,16 @@
         }
       ],
       "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
+        "menu": ["Network", "Wireless", "Radio"],
         "hw_tags": {
           "wifi": true
         }
       }
     },
-    "/wireless/devices/actions/join_wifi_network": {
+    "/wireless/actions/join": {
       "parameters": [],
       "post": {
-        "summary": "SEND Join Wireless Network",
+        "summary": "Joins the specified Wi-Fi network",
         "operationId": "post-network-wireless-devices-cfg-join-wifi",
         "responses": {
           "201": {
@@ -323,7 +323,7 @@
           },
           "description": ""
         },
-        "tags": ["Join Wireless Network"]
+        "tags": ["General"]
       },
       "x-web": {
         "menu": ["Network", "Wireless", "SSIDs"],
@@ -333,10 +333,10 @@
         }
       }
     },
-    "/wireless/devices/actions/wifi_scan": {
+    "/wireless/actions/scan": {
       "parameters": [],
       "post": {
-        "summary": "SEND Wireless Scan",
+        "summary": "Scans the environment for nearby Wi-Fi networks",
         "operationId": "post-network-wireless-devices-cfg-scan-wifi",
         "responses": {
           "200": {
@@ -1758,7 +1758,7 @@
           },
           "description": ""
         },
-        "tags": ["Wireless Scan"]
+        "tags": ["General"]
       },
       "x-web": {
         "menu": ["Network", "Wireless", "SSIDs"],
@@ -1769,8 +1769,8 @@
     },
     "/wireless/devices/status": {
       "get": {
-        "tags": ["Wireless Status"],
-        "summary": "GET All Wireless Status",
+        "tags": ["Devices"],
+        "summary": "Returns wireless device statuses",
         "responses": {
           "200": {
             "description": "OK",
@@ -1800,7 +1800,7 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
+        "menu": ["Network", "Wireless", "Radio"],
         "hw_tags": {
           "wifi": true
         }
@@ -1808,8 +1808,8 @@
     },
     "/wireless/devices/status/{id}": {
       "get": {
-        "tags": ["Wireless Status"],
-        "summary": "GET Wireless Status",
+        "tags": ["Devices"],
+        "summary": "Returns wireless device status",
         "responses": {
           "200": {
             "description": "OK",
@@ -1845,11 +1845,11 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Wireless device name"
+          "description": "The ID of the wireless device configuration ('radio0', 'radio1' ...)"
         }
       ],
       "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
+        "menu": ["Network", "Wireless", "Radio"],
         "hw_tags": {
           "wifi": true
         }
@@ -1857,8 +1857,8 @@
     },
     "/wireless/devices/options": {
       "get": {
-        "tags": ["Wireless Options"],
-        "summary": "GET All Wireless Options",
+        "tags": ["Devices"],
+        "summary": "Returns wireless device options",
         "responses": {
           "200": {
             "description": "OK",
@@ -1888,7 +1888,7 @@
       },
       "parameters": [],
       "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
+        "menu": ["Network", "Wireless", "Radio"],
         "hw_tags": {
           "wifi": true
         }
@@ -1896,8 +1896,8 @@
     },
     "/wireless/devices/options/{id}": {
       "get": {
-        "tags": ["Wireless Options"],
-        "summary": "GET Wireless Options",
+        "tags": ["Devices"],
+        "summary": "Returns wireless device options",
         "responses": {
           "200": {
             "description": "OK",
@@ -1930,7 +1930,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Device name (usually radio0 or radio1)"
+            "description": "The ID of the wireless device configuration ('radio0', 'radio1' ...)"
           }
         ],
         "description": "",
@@ -1944,11 +1944,11 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Wireless device name ('radio0', 'radio1' ...)"
+          "description": "The ID of the wireless device configuration ('radio0', 'radio1' ...)"
         }
       ],
       "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
+        "menu": ["Network", "Wireless", "Radio"],
         "hw_tags": {
           "wifi": true
         }
@@ -1956,8 +1956,8 @@
     },
     "/wireless/interfaces/config": {
       "get": {
-        "summary": "GET All Wireless Interfaces",
-        "tags": ["Wireless Interfaces"],
+        "summary": "Returns wireless interface configurations",
+        "tags": ["Interfaces"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1980,16 +1980,13 @@
                 }
               }
             }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-wireless-interfaces",
         "description": ""
       },
       "post": {
-        "summary": "CREATE All Wireless Interfaces",
+        "summary": "Creates wireless interface configuration",
         "operationId": "post-network-wireless-interfaces",
         "responses": {
           "201": {
@@ -2011,9 +2008,6 @@
               }
             }
           },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
           "422": {
             "$ref": "#/components/responses/422response"
           }
@@ -2033,10 +2027,10 @@
             }
           }
         },
-        "tags": ["Wireless Interfaces"]
+        "tags": ["Interfaces"]
       },
       "put": {
-        "summary": "UPDATE All Wireless Interfaces",
+        "summary": "Updates wireless interface configurations",
         "operationId": "put-network-wireless-interfaces",
         "responses": {
           "200": {
@@ -2085,10 +2079,10 @@
             }
           }
         },
-        "tags": ["Wireless Interfaces"]
+        "tags": ["Interfaces"]
       },
       "delete": {
-        "summary": "DELETE All Wireless Interfaces",
+        "summary": "Deletes wireless interface configurations",
         "operationId": "delete-network-wireless-interfaces",
         "responses": {
           "200": {
@@ -2116,19 +2110,19 @@
             }
           }
         },
-        "tags": ["Wireless Interfaces"]
+        "tags": ["Interfaces"]
       },
       "x-web": {
         "menu": ["Network", "Wireless", "SSIDs"],
         "hw_tags": {
-          "is_access_point": true
+          "wifi": true
         }
       }
     },
     "/wireless/interfaces/config/{id}": {
       "get": {
-        "summary": "GET Wireless Interfaces",
-        "tags": ["Wireless Interfaces"],
+        "summary": "Returns wireless interface configuration",
+        "tags": ["Interfaces"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2164,14 +2158,14 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Wireless interface name",
+          "description": "The ID of the wireless interface configuration",
           "x-web": {
             "pretty": "Wireless interface"
           }
         }
       ],
       "put": {
-        "summary": "UPDATE Wireless Interfaces",
+        "summary": "Updates wireless interface configuration",
         "operationId": "put-network-wireless-interfaces-id",
         "responses": {
           "200": {
@@ -2214,10 +2208,10 @@
             }
           }
         },
-        "tags": ["Wireless Interfaces"]
+        "tags": ["Interfaces"]
       },
       "delete": {
-        "summary": "DELETE Wireless Interfaces",
+        "summary": "Deletes wireless interface configuration",
         "operationId": "delete-network-wireless-interfaces-id",
         "responses": {
           "200": {
@@ -2227,398 +2221,16 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "tags": ["Wireless Interfaces"]
+        "tags": ["Interfaces"]
       },
       "x-web": {
         "menu": ["Network", "Wireless", "SSIDs"],
         "hw_tags": {
-          "is_access_point": true
+          "wifi": true
         }
       }
     },
-    "/wireless/devices/config/{id}/interfaces": {
-      "get": {
-        "summary": "GET Wireless Device Interfaces",
-        "tags": ["Wireless Device Interfaces"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/wireless_interface_options_name_index"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "operationId": "get-network-wireless-device",
-        "description": ""
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Wireless device name",
-          "x-web": {
-            "pretty": "Wireless device",
-            "enum-depends": [
-              {
-                "hw_tags": {
-                  "wifi": true,
-                  "wifi5Ghz": true,
-                  "is_access_point": false
-                },
-                "values": ["radio0", "radio1"]
-              },
-              {
-                "hw_tags": {
-                  "wifi": true,
-                  "wifi5Ghz": false,
-                  "is_access_point": false
-                },
-                "values": ["radio0"]
-              }
-            ],
-            "enum-pretty": {
-              "radio0": "2.4 GHz",
-              "radio1": "5 GHz"
-            }
-          }
-        }
-      ],
-      "post": {
-        "summary": "CREATE Wireless Device Interfaces",
-        "operationId": "post-network-wireless-devices-dev_cfg-interfaces",
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/wireless_interface_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "allOf": [
-                      {
-                        "required": ["mode"]
-                      },
-                      {
-                        "$ref": "#/components/schemas/wireless_interface_options_index"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Wireless Device Interfaces"]
-      },
-      "put": {
-        "summary": "UPDATE Wireless Device Interfaces",
-        "operationId": "put-network-wireless-devices-dev_cfg-interfaces",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/wireless_interface_options_name_index"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/wireless_interface_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Wireless Device Interfaces"]
-      },
-      "delete": {
-        "summary": "DELETE Wireless Device Interfaces",
-        "operationId": "delete-network-wireless-devices-dev_cfg-interfaces",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "success": {
-                    "type": "boolean",
-                    "description": "Operation status"
-                  },
-                  "data": {
-                    "type": "array",
-                    "description": "List of section names to delete.",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Wireless Device Interfaces"]
-      },
-      "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
-        "hw_tags": {
-          "wifi": true,
-          "is_access_point": false
-        }
-      }
-    },
-    "/wireless/devices/config/{id}/interfaces/{id_interface}": {
-      "get": {
-        "summary": "GET Wireless Device Interfaces",
-        "tags": ["Wireless Device Interfaces"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/wireless_interface_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "operationId": "get-network-wireless-devices-dev_cfg-interfaces-id",
-        "description": ""
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Wireless device name",
-          "x-web": {
-            "pretty": "Wireless device",
-            "enum-depends": [
-              {
-                "hw_tags": {
-                  "wifi": true,
-                  "wifi5Ghz": true,
-                  "is_access_point": false
-                },
-                "values": ["radio0", "radio1"]
-              },
-              {
-                "hw_tags": {
-                  "wifi": true,
-                  "wifi5Ghz": false,
-                  "is_access_point": false
-                },
-                "values": ["radio0"]
-              }
-            ],
-            "enum-pretty": {
-              "radio0": "2.4 GHz",
-              "radio1": "5 GHz"
-            }
-          }
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id_interface",
-          "in": "path",
-          "required": true,
-          "description": "Wireless interface section name"
-        }
-      ],
-      "put": {
-        "summary": "UPDATE Wireless Device Interfaces",
-        "operationId": "put-network-wireless-devices-dev_cfg-interfaces-id",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/wireless_interface_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "allOf": [
-                      {
-                        "required": ["mode"]
-                      },
-                      {
-                        "$ref": "#/components/schemas/wireless_interface_options_index"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": ["Wireless Device Interfaces"]
-      },
-      "delete": {
-        "summary": "DELETE Wireless Device Interfaces",
-        "operationId": "delete-network-wireless-devices-dev_cfg-interfaces-id",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "tags": ["Wireless Device Interfaces"]
-      },
-      "post": {
-        "summary": "CREATE Wireless Device Interfaces",
-        "operationId": "post-network-wireless-devices-config-dev_cfg-interfaces-id",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/file_response"
-          }
-        },
-        "requestBody": {
-          "$ref": "#/components/requestBodies/file_upload_wireless"
-        },
-        "tags": ["Wireless Device Interfaces"]
-      },
-      "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
-        "hw_tags": {
-          "wifi": true,
-          "is_access_point": false
-        }
-      }
-    },
-    "/wireless/devices/status/{id}/interfaces": {
+    "/wireless/interfaces/status": {
       "parameters": [
         {
           "schema": {
@@ -2656,8 +2268,8 @@
         }
       ],
       "get": {
-        "summary": "GET Wireless Interfaces Status",
-        "tags": ["Wireless Interfaces Status"],
+        "summary": "Returns wireless interfaces status",
+        "tags": ["Interfaces"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2680,9 +2292,6 @@
                 }
               }
             }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-wireless-devices-dev_cfg-interfaces-status"
@@ -2695,7 +2304,7 @@
         }
       }
     },
-    "/wireless/devices/status/{id}/interfaces/{id_interface}": {
+    "/wireless/interfaces/status/{id}": {
       "parameters": [
         {
           "schema": {
@@ -2742,8 +2351,8 @@
         }
       ],
       "get": {
-        "summary": "GET Wireless Interfaces Status",
-        "tags": ["Wireless Interfaces Status"],
+        "summary": "Returns wireless interface status",
+        "tags": ["Interfaces"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2775,96 +2384,6 @@
         "hw_tags": {
           "wifi": true,
           "is_access_point": false
-        }
-      }
-    },
-    "/wireless/interfaces/signal": {
-      "get": {
-        "summary": "GET All Wireless Interfaces Signal",
-        "tags": ["Wireless Interfaces Signal"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/wireless_signal"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-network-wireless-interfaces-signal",
-        "description": ""
-      },
-      "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
-        "hw_tags": {
-          "wifi": true
-        }
-      }
-    },
-    "/wireless/interfaces/signal/{id}": {
-      "get": {
-        "summary": "GET Wireless Interfaces Signal",
-        "tags": ["Wireless Interfaces Signal"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/wireless_signal"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "operationId": "get-network-wireless-interfaces-signal-id",
-        "description": ""
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Wireless interface name (or section name)"
-        }
-      ],
-      "x-web": {
-        "menu": ["Network", "Wireless", "SSIDs"],
-        "hw_tags": {
-          "wifi": true
         }
       }
     }
@@ -2937,7 +2456,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Section name.",
+                "description": "The ID of the wireless interface configuration",
                 "x-web": {
                   "unique": true,
                   "pretty": "Configuration ID",
@@ -3757,7 +3276,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Section name.",
+                "description": "The ID of the wireless interface configuration",
                 "x-web": {
                   "pretty": "Configuration ID",
                   "group": "General Setup",
@@ -3805,6 +3324,26 @@
               }
             }
           },
+          "device": {
+            "type": "array",
+            "items": {
+              "enum": ["radio0", "radio1"],
+              "type": "string"
+            },
+            "description": "SSID will use these radios. Use one of them if you want seperate SSIDs for each radio or use all of them if you want combined SSID.",
+            "x-web": {
+              "pretty": "Radios",
+              "group": "General Setup",
+              "input-type": "multiselect",
+              "enum-pretty": {
+                "radio0": "2.4GHz",
+                "radio1": "5GHz"
+              },
+              "hw_tags": {
+                "wifi5Ghz": true
+              }
+            }
+          },
           "mesh_id": {
             "type": "string",
             "description": "Mesh ID",
@@ -3825,21 +3364,18 @@
           },
           "ssid": {
             "type": "string",
-            "description": "ESSID. Extended Service Set Identifier.",
+            "description": "Service Set Identifier is a name used to identify access point which is shown when client tries to connect to it.",
             "x-web": {
               "unique": true,
-              "pretty": "ESSID",
+              "pretty": "SSID",
               "group": "General Setup",
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "ap"
-                },
-                {
-                  "mode": "sta"
-                },
-                {
                   "mode": ""
+                },
+                {
+                  "mode": ["ap", "sta"]
                 }
               ]
             }
@@ -3854,19 +3390,7 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "bgscan_enabled": ""
-                },
-                {
-                  "mode": "sta",
-                  "bgscan_enabled": "0"
-                },
-                {
-                  "mode": "sta",
-                  "bgscan_enabled": "0"
-                },
-                {
-                  "mode": "sta",
-                  "bgscan_enabled": ""
+                  "bgscan_enabled": ["", "0"]
                 }
               ]
             }
@@ -3877,43 +3401,22 @@
             "x-web": {
               "pretty": "Network",
               "group": "General Setup",
-              "input-type": "input"
+              "input-type": "input",
+              "hw_tags": {
+                "is_access_point": false
+              }
             }
           },
-          "hidden": {
+          "vlan_id": {
             "type": "string",
-            "description": "Hide ESSID. Hide extended Service Set Identifier",
-            "enum": ["0", "1"],
+            "description": "Use tagged VLAN from the network as untagged VLAN on the SSID.",
             "x-web": {
-              "pretty": "Hide ESSID",
+              "pretty": "VLAN ID",
               "group": "General Setup",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "mode": "ap"
-                },
-                {
-                  "mode": ""
-                }
-              ]
-            }
-          },
-          "wmm": {
-            "type": "string",
-            "description": "Wi-Fi Multimedia (WMM), previously known as Wireless Multimedia Extensions (WME), is a subset of the 802.11e wireless LAN (WLAN) specification that enhances quality of service (QoS) on a network by prioritizing data packets according to four categories.",
-            "enum": ["0", "1"],
-            "x-web": {
-              "pretty": "WMM Mode",
-              "group": "General Setup",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "mode": "ap"
-                },
-                {
-                  "mode": ""
-                }
-              ]
+              "input-type": "input",
+              "hw_tags": {
+                "is_access_point": true
+              }
             }
           },
           "wps_pushbutton": {
@@ -3924,26 +3427,161 @@
               "pretty": "WPS",
               "group": "General Setup",
               "input-type": "switch",
-              "enum-depends": [
-                {
-                  "hw_tags": {
-                    "is_tcr100": true
-                  },
-                  "values": ["0", "1"]
-                }
-              ],
               "depends": [
                 {
                   "mode": "ap"
                 },
                 {
-                  "encryption": "psk"
+                  "encryption": ["psk", "psk2", "psk-mixed"]
+                }
+              ],
+              "hw_tags": {
+                "wps": true
+              }
+            }
+          },
+          "mesh_fwding": {
+            "type": "string",
+            "description": "Forward mesh peer traffic",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Forward mesh peer traffic",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": "mesh"
+                }
+              ]
+            }
+          },
+          "mesh_rssi_threshold": {
+            "type": "string",
+            "description": "RSSI threshold for joining. 0 (default) = not using RSSI threshold, 1 = do not change driver default",
+            "x-web": {
+              "pretty": "RSSI threshold for joining",
+              "group": "Additional Settings",
+              "input-type": "input",
+              "depends": [
+                {
+                  "mode": "mesh"
+                }
+              ]
+            }
+          },
+          "hidden": {
+            "type": "string",
+            "description": "Hide SSID. Hide Service Set Identifier",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Hide SSID",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": ""
                 },
                 {
-                  "encryption": "psk2"
+                  "mode": "ap"
+                }
+              ]
+            }
+          },
+          "isolate": {
+            "type": "string",
+            "description": "Isolate Clients. Prevents client-to-client communication",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Isolate Clients",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": ""
                 },
                 {
-                  "encryption": "psk-mixed"
+                  "mode": "ap"
+                }
+              ]
+            }
+          },
+          "bss_transition": {
+            "type": "string",
+            "description": "Enables suggestions for clients to leave this AP if a signal is getting low. For clients not understanding this standard AP can kick them forcibly so they can connect to other AP",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "802.11v BSS Transition Management",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": ""
+                },
+                {
+                  "mode": "ap"
+                }
+              ]
+            }
+          },
+          "ieee80211k": {
+            "type": "string",
+            "description": "Enables suggestions for clients to join other APs when this AP has too many clients",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "802.11k Radio Resource Measurement",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": ""
+                },
+                {
+                  "mode": "ap"
+                }
+              ]
+            }
+          },
+          "disassoc_low_ack": {
+            "type": "string",
+            "description": "Disassociate On Low Acknowledgement. Allow AP mode to disconnect STAs based on low ACK condition",
+            "enum": ["0", "1"],
+            "default": 1,
+            "x-web": {
+              "pretty": "Disassociate On Low Acknowledgement",
+              "group": "Additional Settings",
+              "input-type": "switch"
+            }
+          },
+          "bgscan_enabled": {
+            "type": "string",
+            "enum": ["0", "1"],
+            "description": "Requests background scans for the purpose of roaming within an ESS",
+            "x-web": {
+              "pretty": "Enable fast roaming",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": ["sta", "multi_ap"]
+                }
+              ],
+              "hw_tags": {
+                "is_access_point": false,
+                "sta_80211r": true
+              }
+            }
+          },
+          "trm_enabled": {
+            "type": "string",
+            "enum": ["0", "1"],
+            "description": "Enables captive portal redirection",
+            "x-web": {
+              "pretty": "Redirect captive portal",
+              "group": "Additional Settings",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "mode": "sta"
                 }
               ]
             }
@@ -3951,23 +3589,17 @@
           "encryption": {
             "type": "string",
             "description": "Encryption. The type of WiFi encryption used.",
-            "enum": ["none", "psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "owe", "wpa3-mixed", "wpa3"],
+            "enum": ["none", "sae", "sae-mixed", "wpa", "wpa2", "owe", "wpa3-mixed", "wpa3"],
             "x-web": {
               "pretty": "Encryption",
               "group": "Wireless Security",
               "input-type": "select",
               "depends": [
                 {
-                  "mode": "ap"
-                },
-                {
-                  "mode": "sta"
-                },
-                {
-                  "mode": "mesh"
-                },
-                {
                   "mode": ""
+                },
+                {
+                  "mode": ["ap", "sta", "mesh"]
                 }
               ],
               "enum-pretty": {
@@ -3982,7 +3614,49 @@
                 "owe": "OWE",
                 "wpa3-mixed": "WPA2-EAP/WPA3-EAP Mixed Mode",
                 "wpa3": "WPA3-EAP"
-              }
+              },
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "wifi_driver": "mac80211",
+                    "is_access_point": false
+                  },
+                  "depends": {
+                    "mode": ["ap", "sta"]
+                  },
+                  "values": ["none", "psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "owe", "wpa3-mixed", "wpa3"]
+                },
+                {
+                  "hw_tags": {
+                    "wifi_driver": "ralink",
+                    "is_access_point": false
+                  },
+                  "depends": {
+                    "mode": ["ap", "sta"]
+                  },
+                  "values": ["none", "psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "owe"]
+                },
+                {
+                  "hw_tags": {
+                    "wifi_driver": "ralink",
+                    "is_access_point": true
+                  },
+                  "values": ["none", "psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "owe"]
+                },
+                {
+                  "hw_tags": {
+                    "wifi_driver": "mac80211",
+                    "is_access_point": true
+                  },
+                  "values": ["none", "psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "owe", "wpa3-mixed", "wpa3"]
+                },
+                {
+                  "depends": {
+                    "mode": "mesh"
+                  },
+                  "values": ["none", "sae"]
+                }
+              ]
             }
           },
           "cipher": {
@@ -3995,22 +3669,7 @@
               "input-type": "select",
               "depends": [
                 {
-                  "encryption": "psk"
-                },
-                {
-                  "encryption": "psk2"
-                },
-                {
-                  "encryption": "psk-mixed"
-                },
-                {
-                  "encryption": "wpa"
-                },
-                {
-                  "encryption": "wpa2"
-                },
-                {
-                  "encryption": "wpa3"
+                  "encryption": ["wpa3", "wpa", "wpa2", "psk", "psk2", "wpa-mixed", "psk-mixed"]
                 }
               ],
               "enum-pretty": {
@@ -4032,20 +3691,12 @@
               "input-type": "input",
               "depends": [
                 {
-                  "encryption": ["psk", "psk2", "psk+psk2", "psk-mixed", "sae", "sae-mixed"],
-                  "mode": ""
+                  "mode": "",
+                  "encryption": ["psk", "psk2", "psk+psk2", "psk-mixed", "sae", "sae-mixed"]
                 },
                 {
-                  "encryption": ["psk", "psk2", "psk+psk2", "psk-mixed", "sae", "sae-mixed"],
-                  "mode": "ap"
-                },
-                {
-                  "encryption": ["psk", "psk2", "psk+psk2", "psk-mixed", "sae", "sae-mixed"],
-                  "mode": "sta"
-                },
-                {
-                  "encryption": ["psk", "psk2", "psk+psk2", "psk-mixed", "sae", "sae-mixed"],
-                  "mode": "mesh"
+                  "mode": ["ap", "sta", "mesh"],
+                  "encryption": ["psk", "psk2", "psk+psk2", "psk-mixed", "sae", "sae-mixed"]
                 }
               ]
             }
@@ -4116,22 +3767,17 @@
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "ap",
-                  "encryption": "wpa"
+                  "mode": "",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 },
                 {
                   "mode": "ap",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "ap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "ap",
-                  "encryption": "wpa3-mixed"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
-              ]
+              ],
+              "hw_tags": {
+                "wifi_driver": "mac80211"
+              }
             }
           },
           "acct_port": {
@@ -4143,22 +3789,17 @@
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "ap",
-                  "encryption": "wpa"
+                  "mode": "",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 },
                 {
                   "mode": "ap",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "ap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "ap",
-                  "encryption": "wpa3-mixed"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
-              ]
+              ],
+              "hw_tags": {
+                "wifi_driver": "mac80211"
+              }
             }
           },
           "acct_secret": {
@@ -4170,22 +3811,17 @@
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "ap",
-                  "encryption": "wpa"
+                  "mode": "",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 },
                 {
                   "mode": "ap",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "ap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "ap",
-                  "encryption": "wpa3-mixed"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
-              ]
+              ],
+              "hw_tags": {
+                "wifi_driver": "mac80211"
+              }
             }
           },
           "ieee80211r": {
@@ -4199,11 +3835,11 @@
               "depends": [
                 {
                   "mode": "",
-                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                  "encryption": ["psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 },
                 {
                   "mode": "ap",
-                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                  "encryption": ["psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4218,13 +3854,21 @@
               "depends": [
                 {
                   "mode": "",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                },
+                {
+                  "mode": "",
                   "ieee80211r": "1",
+                  "encryption": ["psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                },
+                {
+                  "mode": "ap",
                   "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 },
                 {
                   "mode": "ap",
                   "ieee80211r": "1",
-                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                  "encryption": ["psk", "psk2", "psk-mixed", "sae", "sae-mixed", "wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4234,7 +3878,7 @@
             "description": "Mobility Domain. 4-character hexadecimal ID",
             "x-web": {
               "pretty": "Mobility Domain",
-              "group": "Wireless Security",
+              "group": "Fast Transition",
               "input-type": "input",
               "depends": [
                 {
@@ -4248,13 +3892,16 @@
             "description": "Reassociation Deadline. Time units (TUs / 1.024 ms) [1000-65535]",
             "x-web": {
               "pretty": "Reassociation Deadline",
-              "group": "Wireless Security",
+              "group": "Fast Transition",
               "input-type": "input",
               "depends": [
                 {
                   "ieee80211r": "1"
                 }
-              ]
+              ],
+              "hw_tags": {
+                "wifi_driver": "mac80211"
+              }
             }
           },
           "ft_over_ds": {
@@ -4267,7 +3914,7 @@
                 "0": "FT over the Air",
                 "1": "FT over DS"
               },
-              "group": "Wireless Security",
+              "group": "Fast Transition",
               "input-type": "select",
               "depends": [
                 {
@@ -4293,48 +3940,7 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3-mixed"
-                }
-              ]
-            }
-          },
-          "devFiles": {
-            "type": "string",
-            "description": "Choose this option if you want to select certificate files from device",
-            "enum": ["0", "1"],
-            "x-web": {
-              "pretty": "Certificate files from device",
-              "group": "Wireless Security",
-              "input-type": "switch",
-              "virtual": true,
-              "depends": [
-                {
-                  "mode": "sta",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3-mixed"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4351,43 +3957,7 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "encryption": "wpa",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa2",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3-mixed",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa2",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "encryption": "wpa3-mixed",
-                  "devFiles": "1"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4405,50 +3975,7 @@
                 {
                   "mode": "sta",
                   "eap_type": "tls",
-                  "encryption": "wpa",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed",
-                  "devFiles": "1"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4466,50 +3993,7 @@
                 {
                   "mode": "sta",
                   "eap_type": "tls",
-                  "encryption": "wpa",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed",
-                  "devFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3",
-                  "devFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed",
-                  "devFiles": "1"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4525,236 +4009,7 @@
                 {
                   "mode": "sta",
                   "eap_type": "tls",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed"
-                }
-              ]
-            }
-          },
-          "ca_cert2": {
-            "type": "string",
-            "format": "path",
-            "pattern": "^/etc/(vuci-uploads|certificates)/",
-            "description": "Inner CA-Certificate",
-            "x-web": {
-              "pretty": "Inner CA-Certificate",
-              "group": "Wireless Security",
-              "input-type": "input",
-              "depends": [
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed",
-                  "devInFiles": "1"
-                }
-              ]
-            }
-          },
-          "client_cert2": {
-            "type": "string",
-            "format": "path",
-            "pattern": "^/etc/(vuci-uploads|certificates)/",
-            "description": "Inner Client-Certificate",
-            "x-web": {
-              "pretty": "Inner Client-Certificate",
-              "group": "Wireless Security",
-              "input-type": "input",
-              "depends": [
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed",
-                  "devInFiles": "1"
-                }
-              ]
-            }
-          },
-          "priv_key2": {
-            "type": "string",
-            "format": "path",
-            "pattern": "^/etc/(vuci-uploads|certificates)/",
-            "description": "Inner Private Key",
-            "x-web": {
-              "pretty": "Inner Private Key",
-              "group": "Wireless Security",
-              "input-type": "input",
-              "depends": [
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed",
-                  "devInFiles": "0"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3",
-                  "devInFiles": "1"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed",
-                  "devInFiles": "1"
-                }
-              ]
-            }
-          },
-          "priv_key2_pwd": {
-            "type": "string",
-            "description": "Password of inner Private Key",
-            "x-web": {
-              "pretty": "Password of inner Private Key",
-              "group": "Wireless Security",
-              "input-type": "input",
-              "depends": [
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "auth": "EAP-TLS",
-                  "encryption": "wpa3-mixed"
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4778,63 +4033,78 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa"
-                },
+                  "eap_type": ["peap", "ttls", "fast"],
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                }
+              ]
+            }
+          },
+          "ca_cert2": {
+            "type": "string",
+            "format": "path",
+            "pattern": "^/etc/(vuci-uploads|certificates)/",
+            "description": "Inner CA-Certificate",
+            "x-web": {
+              "pretty": "Inner CA-Certificate",
+              "group": "Wireless Security",
+              "input-type": "input",
+              "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa"
-                },
+                  "auth": "EAP-TLS",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                }
+              ]
+            }
+          },
+          "client_cert2": {
+            "type": "string",
+            "format": "path",
+            "pattern": "^/etc/(vuci-uploads|certificates)/",
+            "description": "Inner Client-Certificate",
+            "x-web": {
+              "pretty": "Inner Client-Certificate",
+              "group": "Wireless Security",
+              "input-type": "input",
+              "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa"
-                },
+                  "auth": "EAP-TLS",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                }
+              ]
+            }
+          },
+          "priv_key2": {
+            "type": "string",
+            "format": "path",
+            "pattern": "^/etc/(vuci-uploads|certificates)/",
+            "description": "Inner Private Key",
+            "x-web": {
+              "pretty": "Inner Private Key",
+              "group": "Wireless Security",
+              "input-type": "input",
+              "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa2"
-                },
+                  "auth": "EAP-TLS",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
+                }
+              ]
+            }
+          },
+          "priv_key2_pwd": {
+            "type": "string",
+            "description": "Password of inner Private Key",
+            "x-web": {
+              "pretty": "Password of inner Private Key",
+              "group": "Wireless Security",
+              "input-type": "input",
+              "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3-mixed"
+                  "auth": "EAP-TLS",
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4849,83 +4119,8 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed"
+                  "eap_type": ["peap", "ttls", "fast", "tls"],
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -4940,83 +4135,8 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "tls",
-                  "encryption": "wpa3-mixed"
+                  "eap_type": ["peap", "ttls", "fast", "tls"],
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -5031,63 +4151,8 @@
               "depends": [
                 {
                   "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "fast",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "peap",
-                  "encryption": "wpa3-mixed"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa2"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3"
-                },
-                {
-                  "mode": "sta",
-                  "eap_type": "ttls",
-                  "encryption": "wpa3-mixed"
+                  "eap_type": ["peap", "ttls", "fast"],
+                  "encryption": ["wpa", "wpa2", "wpa3", "wpa3-mixed"]
                 }
               ]
             }
@@ -5107,10 +4172,10 @@
               },
               "depends": [
                 {
-                  "mode": "ap"
+                  "mode": ""
                 },
                 {
-                  "mode": ""
+                  "mode": "ap"
                 }
               ]
             }
@@ -5146,53 +4211,6 @@
               "depends": [
                 {
                   "macfilter": "allow"
-                }
-              ]
-            }
-          },
-          "mesh_fwding": {
-            "type": "string",
-            "description": "Forward mesh peer traffic",
-            "enum": ["0", "1"],
-            "x-web": {
-              "pretty": "Forward mesh peer traffic",
-              "group": "Advanced Settings",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "mode": "mesh"
-                }
-              ]
-            }
-          },
-          "mesh_rssi_threshold": {
-            "type": "string",
-            "description": "RSSI threshold for joining. 0 (default) = not using RSSI threshold, 1 = do not change driver default",
-            "x-web": {
-              "pretty": "RSSI threshold for joining",
-              "group": "Advanced Settings",
-              "input-type": "input",
-              "depends": [
-                {
-                  "mode": "mesh"
-                }
-              ]
-            }
-          },
-          "isolate": {
-            "type": "string",
-            "description": "Isolate Clients. Prevents client-to-client communication",
-            "enum": ["0", "1"],
-            "x-web": {
-              "pretty": "Isolate Clients",
-              "group": "Advanced Settings",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "mode": "ap"
-                },
-                {
-                  "mode": ""
                 }
               ]
             }
@@ -5254,24 +4272,14 @@
               "input-type": "input"
             }
           },
-          "disassoc_low_ack": {
-            "type": "string",
-            "description": "Disassociate On Low Acknowledgement. Allow AP mode to disconnect STAs based on low ACK condition",
-            "enum": ["0", "1"],
-            "default": 1,
-            "x-web": {
-              "pretty": "Disassociate On Low Acknowledgement",
-              "group": "Advanced Settings",
-              "input-type": "switch"
-            }
-          },
-          "_device_files": {
+
+          "device_files": {
             "type": "string",
             "description": "Certificate files from device",
             "enum": ["0", "1"],
             "readOnly": true
           },
-          "_device_files2": {
+          "device_files2": {
             "type": "string",
             "description": "Inner certificate files from device",
             "enum": ["0", "1"],
@@ -5285,43 +4293,32 @@
               "pretty": "Enable WDS",
               "group": "Advanced Settings",
               "input-type": "switch",
-              "hw_tags": {
-                "is_access_point": false
-              }
-            }
-          },
-          "trm_enabled": {
-            "type": "string",
-            "enum": ["0", "1"],
-            "description": "Enables captive portal redirection",
-            "x-web": {
-              "pretty": "Redirect captive portal",
-              "group": "Advanced Settings",
-              "input-type": "switch",
               "depends": [
                 {
-                  "mode": "sta"
+                  "mode": ""
+                },
+                {
+                  "mode": ["ap", "sta"]
                 }
               ]
             }
           },
-          "bgscan_enabled": {
+          "wmm": {
             "type": "string",
+            "description": "Wi-Fi Multimedia (WMM), previously known as Wireless Multimedia Extensions (WME), is a subset of the 802.11e wireless LAN (WLAN) specification that enhances quality of service (QoS) on a network by prioritizing data packets according to four categories.",
             "enum": ["0", "1"],
-            "description": "Requests background scans for the purpose of roaming within an ESS",
             "x-web": {
-              "pretty": "Enable fast roaming",
+              "pretty": "WMM Mode",
               "group": "Advanced Settings",
               "input-type": "switch",
               "depends": [
                 {
-                  "mode": "sta"
+                  "mode": ""
+                },
+                {
+                  "mode": "ap"
                 }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "sta_80211r": true
-              }
+              ]
             }
           },
           "bgscan_mode": {
@@ -5404,10 +4401,9 @@
           "scan_time": {
             "type": "string",
             "description": "Time between scans of available access points (minimum 30 sec.)",
-            "format": "irange(30, 86400)",
             "x-web": {
               "pretty": "Scan time (sec)",
-              "group": "Multi AP",
+              "group": "General Setup",
               "input-type": "input",
               "depends": [
                 {
@@ -5894,7 +4890,7 @@
             }
           }
         },
-        "required": ["id", "features", "options"]
+        "required": ["id", "features", "options", "device"]
       },
       "wireless_interface_status": {
         "description": "",

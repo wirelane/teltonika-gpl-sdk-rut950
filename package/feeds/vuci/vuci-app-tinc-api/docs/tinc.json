@@ -1,139 +1,17 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/tinc/config/{tinc_id}": {
-      "get": {
-        "tags": [
-          "Tinc"
-        ],
-        "summary": "Returns the specified Tinc VPN configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Tinc"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "Tinc"
-        ],
-        "summary": "Updates the specified Tinc VPN configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Tinc"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/tinc_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Tinc"
-        ],
-        "summary": "Deletes the specified Tinc VPN configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "name": "tinc_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Tinc Configuration identifier (ID)"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Tinc"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
     "/tinc/config": {
       "get": {
-        "tags": [
-          "Tinc"
-        ],
         "summary": "Returns all Tinc VPN configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200TincMulti"
           }
-        }
+        },
+        "tags": ["General"]
       },
       "post": {
-        "tags": [
-          "Tinc"
-        ],
         "summary": "Creates Tinc VPN configuration",
         "responses": {
           "201": {
@@ -157,12 +35,10 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "Tinc"
-        ],
         "summary": "Updates specified Tinc VPN configurations",
         "responses": {
           "200": {
@@ -193,12 +69,10 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "Tinc"
-        ],
         "summary": "Deletes specified Tinc VPN configurations",
         "responses": {
           "200": {
@@ -227,16 +101,88 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Tinc"
-        ],
+        "menu": ["Services", "VPN", "Tinc"],
         "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/tinc/config/{id}": {
+      "get": {
+        "summary": "Returns the specified Tinc VPN configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Tinc"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["General"]
+      },
+      "put": {
+        "summary": "Updates the specified Tinc VPN configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Tinc"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/tinc_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["General"]
+      },
+      "delete": {
+        "summary": "Deletes the specified Tinc VPN configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["General"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Tinc Configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "Tinc"],
+        "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
         }
       }
@@ -302,9 +248,7 @@
                 "description": "Tinc Configuration identifier (ID)."
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           },
           {
             "$ref": "#/components/schemas/tinc_single_options"
@@ -323,10 +267,7 @@
             "type": "string",
             "description": "Turn Tinc VPN on or off.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "addressfamily": {
             "x-web": {
@@ -341,11 +282,7 @@
             },
             "type": "string",
             "description": "This option affects the address family of listening and outgoing sockets.",
-            "enum": [
-              "any",
-              "ipv4",
-              "ipv6"
-            ]
+            "enum": ["any", "ipv4", "ipv6"]
           },
           "bindtoaddress": {
             "x-web": {
@@ -406,11 +343,7 @@
             },
             "type": "string",
             "description": "This option selects the way packets are routed to other daemons.",
-            "enum": [
-              "router",
-              "switch",
-              "hub"
-            ]
+            "enum": ["router", "switch", "hub"]
           },
           "subnet": {
             "x-web": {
@@ -472,5 +405,15 @@
         }
       }
     }
-  }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Tinc",
+    "description": "Tinc api documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

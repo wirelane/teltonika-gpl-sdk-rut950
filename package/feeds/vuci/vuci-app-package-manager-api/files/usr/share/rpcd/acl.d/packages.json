@@ -4,8 +4,7 @@
 		"read": {
 			"uci": ["rut_fota"],
 			"api": [
-				"/packages/*",
-				"/package_restore/*"
+				"/package_manager/*"
 			]
 		},
 		"write": {
@@ -15,7 +14,7 @@
 					"reboot"
 				]
 			},
-			"api": ["/package_restore/*"]
+			"api": ["/package_manager/*"]
 		}
 	},
 
@@ -33,7 +32,7 @@
 			"cgi-io": [
 				"upload"
 			],
-			"api": ["/packages/*"]
+			"api": ["/package_manager/*", "/system/actions/network_restart/*"]
 		}
 	}
 }

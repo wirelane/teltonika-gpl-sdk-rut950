@@ -2,119 +2,14 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Modbus TCP over Serial Gateway"
+      "name": "TCP over Serial Gateway"
     }
   ],
   "paths": {
-    "/modbus/tcp_over_serial/config/{modbus_serial_gateway_id}": {
-      "get": {
-        "tags": [
-          "Modbus TCP over Serial Gateway"
-        ],
-        "summary": "Returns the specified Modbus TCP over Serial Gateway configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusSerialGateway"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modbus_serial_gateway_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modbus TCP over Serial Gateway Configuration identifier (ID)"
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "Modbus TCP over Serial Gateway"
-        ],
-        "summary": "Updates the specified Modbus TCP over Serial Gateway configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusSerialGateway"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modbus_serial_gateway_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modbus TCP over Serial Gateway Configuration identifier (ID)"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/modbus_serial_gateway_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Modbus TCP over Serial Gateway"
-        ],
-        "summary": "Deletes the specified Modbus TCP over Serial Gateway configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modbus_serial_gateway_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modbus TCP over Serial Gateway Configuration identifier (ID)"
-          }
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Modbus",
-          "Modbus TCP over Serial Gateway"
-        ],
-        "hw_tags": {
-          "serial": true
-        }
-      }
-    },
     "/modbus/tcp_over_serial/config": {
       "get": {
         "tags": [
-          "Modbus TCP over Serial Gateway"
+          "TCP over Serial Gateway"
         ],
         "summary": "Returns all Modbus TCP over Serial Gateway configurations",
         "responses": {
@@ -125,7 +20,7 @@
       },
       "post": {
         "tags": [
-          "Modbus TCP over Serial Gateway"
+          "TCP over Serial Gateway"
         ],
         "summary": "Creates Modbus TCP over Serial Gateway configuration",
         "responses": {
@@ -154,7 +49,7 @@
       },
       "put": {
         "tags": [
-          "Modbus TCP over Serial Gateway"
+          "TCP over Serial Gateway"
         ],
         "summary": "Updates specified Modbus TCP over Serial Gateway configurations",
         "responses": {
@@ -190,7 +85,7 @@
       },
       "delete": {
         "tags": [
-          "Modbus TCP over Serial Gateway"
+          "TCP over Serial Gateway"
         ],
         "summary": "Deletes specified Modbus TCP over Serial Gateway configurations",
         "responses": {
@@ -226,10 +121,115 @@
         "menu": [
           "Services",
           "Modbus",
-          "Modbus TCP over Serial Gateway"
+          "TCP over Serial Gateway"
         ],
         "hw_tags": {
-          "serial": true
+          "serial_usb": true
+        }
+      }
+    },
+    "/modbus/tcp_over_serial/config/{id}": {
+      "get": {
+        "tags": [
+          "TCP over Serial Gateway"
+        ],
+        "summary": "Returns the specified Modbus TCP over Serial Gateway configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialGateway"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modbus TCP over Serial Gateway Configuration identifier (ID)"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "TCP over Serial Gateway"
+        ],
+        "summary": "Updates the specified Modbus TCP over Serial Gateway configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialGateway"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modbus TCP over Serial Gateway Configuration identifier (ID)"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_gateway_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TCP over Serial Gateway"
+        ],
+        "summary": "Deletes the specified Modbus TCP over Serial Gateway configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modbus TCP over Serial Gateway Configuration identifier (ID)"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "TCP over Serial Gateway"
+        ],
+        "hw_tags": {
+          "serial_usb": true
         }
       }
     }
@@ -813,24 +813,6 @@
               "depends": [
                 {
                   "device": "/dev/rs485"
-                }
-              ]
-            }
-          },
-          "echo_enabled": {
-            "type": "string",
-            "description": "Enables RS232 echo",
-            "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "Echo",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "device": "/dev/rs232"
                 }
               ]
             }

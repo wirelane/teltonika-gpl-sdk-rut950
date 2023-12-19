@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/nhrp/global": {
+      "get": {
+        "summary": "Returns NHRP global configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhGe"
+          }
+        },
+        "tags": ["Global Settings"],
+        "operationId": ""
+      },
+      "put": {
+        "summary": "Updates specified NHRP global configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhGe"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_general_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "NHRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "NHRP"
+      }
+    },
+    "/nhrp/status": {
+      "get": {
+        "summary": "Fetches data about NHRP neighbors",
+        "operationId": "get-network-routes-dynamic-nhrp-general-nhrp_info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "timeout": {
+                            "type": "boolean"
+                          },
+                          "identity": {
+                            "type": "string"
+                          },
+                          "auth": {
+                            "type": "boolean"
+                          },
+                          "claimed_nbma": {
+                            "type": "string"
+                          },
+                          "used": {
+                            "type": "boolean"
+                          },
+                          "protocol": {
+                            "type": "string"
+                          },
+                          "nbma": {
+                            "type": "string"
+                          },
+                          "interface": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "type": "dynamic",
+                          "timeout": true,
+                          "identity": "84.15.197.7",
+                          "auth": false,
+                          "claimed_nbma": "84.15.197.7",
+                          "used": false,
+                          "protocol": "10.0.0.1",
+                          "nbma": "192.168.222.102",
+                          "interface": "gre4-hub"
+                        },
+                        {
+                          "type": "local",
+                          "timeout": false,
+                          "identity": "-",
+                          "auth": false,
+                          "claimed_nbma": "192.168.222.100",
+                          "used": false,
+                          "protocol": "10.0.0.254",
+                          "nbma": "192.168.222.100",
+                          "interface": "gre4-hub"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "NHRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "NHRP"
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "responses": {
+      "200NhGe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/nhrp_general_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NhGeMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/nhrp_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "nhrp_general_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable service",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable service."
+          },
+          "debug": {
+            "x-web": {
+              "pretty": "Enable logging",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable logging of NHRP."
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "NHRP Global Settings",
+    "version": "1.0",
+    "description": "NHRP global settings api documentation"
+  },
+  "tags": [
+    {
+      "name": "Global Settings"
+    }
+  ]
+}

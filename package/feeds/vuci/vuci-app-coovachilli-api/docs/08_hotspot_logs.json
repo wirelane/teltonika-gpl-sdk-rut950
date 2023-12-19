@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "Logs"
+    }
+  ],
+  "paths": {
+    "/hotspot/logs/status": {
+      "get": {
+        "tags": ["Logs"],
+        "summary": "Fetches logs of Hotspot from database",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200HotspotLogs"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["System", "Maintenance", "Hotspot Log"],
+        "hw_tags": {
+          "has_hotspot": true
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200HotspotLogs": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/hotspot_log_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "hotspot_log_options": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mac": "FF-FF-FF-FF-FF-FF",
+            "input_octets": "132844",
+            "ip": "192.168.2.1",
+            "username": "string",
+            "terminate_cause": "0",
+            "output_octets": "165072",
+            "start_time": "01/01/22 00:00:00",
+            "session": "0",
+            "sessiontime": "100"
+          }
+        },
+        "properties": {
+          "mac": {
+            "type": "string"
+          },
+          "input_octets": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "terminate_cause": {
+            "type": "string"
+          },
+          "output_octets": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "session": {
+            "type": "string"
+          },
+          "sessiontime": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

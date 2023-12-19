@@ -84,8 +84,8 @@ link() {
 
 		# removes duplicated services that have tags
 		for app in "${files[@]}"; do
+			local found_duplicate=0
 			for tag_app in "${tag_files[@]}"; do
-				local found_duplicate=0
 				if [[ $app == $tag_app ]]; then
 					found_duplicate=1; break
 				fi

@@ -1,54 +1,32 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
+  "tags": [
+    {
+      "name": "General"
+    }
+  ],
   "paths": {
-    "/routes/advanced_static/table/config/{id}": {
+    "/routing_tables/config": {
       "get": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Returns specified advanced route table section",
+        "summary": "Returns routing table configurations",
+        "description": "",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200AdRoRu"
+            "$ref": "#/components/responses/200AdRoTaMulti"
           }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration advanced route table identifier"
-          }
-        ]
+        "tags": ["General"]
       },
-      "put": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Updates specified advanced route table configuration",
+      "post": {
+        "summary": "Creates routing table configuration",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200AdRoRu"
+          "201": {
+            "$ref": "#/components/responses/200AdRoTa"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration advanced route table identifier"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -63,108 +41,17 @@
               }
             }
           }
-        }
-      },
-      "delete": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Deletes specified advanced route table configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration advanced route table identifier"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Policy based routing"
-        ],
-        "hw_tags": {
-          "is_switch": false,
-          "is_access_point": false
-        }
-      }
-    },
-    "/routes/advanced_static/table/config": {
-      "get": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Returns all advanced route table configuration sections",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200AdRoRuMulti"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Creates advanced route table section",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200AdRoRu"
-          },
-          "201": {
-            "$ref": "#/components/responses/201response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/advanced_route_table_options_multi"
-                  }
-                }
-              }
-            }
-          }
-        }
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Updates specified advanced route table configurations",
+        "summary": "Updates routing table configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200AdRoRuMulti"
+            "$ref": "#/components/responses/200AdRoTaMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -188,19 +75,17 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "advanced_route_table"
-        ],
-        "summary": "Deletes specified advanced route table configurations",
+        "summary": "Deletes routing table configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted_multi"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -222,19 +107,126 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Policy based routing"
-        ],
+        "menu": ["Network", "Routing", "Policy based routing"],
         "hw_tags": {
           "is_switch": false,
           "is_access_point": false
+        },
+        "name": "Routing tables"
+      }
+    },
+    "/routing_tables/config/{id}": {
+      "get": {
+        "summary": "Returns routing table configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoTa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration route table identifier"
+          }
+        ],
+        "tags": ["General"]
+      },
+      "put": {
+        "summary": "Updates routing table configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdRoTa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the routing table configuration"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/advanced_route_table_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["General"]
+      },
+      "delete": {
+        "summary": "Deletes routing table configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the routing table configuration"
+          }
+        ],
+        "tags": ["General"],
+        "operationId": ""
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the routing table configuration"
         }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Policy based routing"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "Routing tables"
       }
     }
   },
@@ -252,7 +244,20 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/advanced_route_table_options"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the routing table configuration"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/advanced_route_table_options"
+                    }
+                  ]
                 }
               }
             }
@@ -293,6 +298,7 @@
               "input-type": "input"
             },
             "type": "string",
+            "description": "The ID of the routing table",
             "format": "irange(0, 65535)"
           },
           "name": {
@@ -301,7 +307,8 @@
               "input-type": "input",
               "unique": true
             },
-            "type": "string"
+            "type": "string",
+            "description": "Name of the routing table"
           }
         }
       },
@@ -310,6 +317,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "The ID of the routing table configuration",
             "x-web": {
               "pretty": "Configuration ID",
               "input-type": "input"
@@ -321,6 +329,7 @@
               "input-type": "input"
             },
             "type": "string",
+            "description": "The ID of the routing table",
             "format": "irange(0, 65535)"
           },
           "name": {
@@ -329,10 +338,16 @@
               "input-type": "input",
               "unique": true
             },
-            "type": "string"
+            "type": "string",
+            "description": "Name of the routing table"
           }
         }
       }
     }
+  },
+  "info": {
+    "title": "Routing tables",
+    "version": "1.0",
+    "description": " Routing tables api documentation"
   }
 }

@@ -1,0 +1,12 @@
+{
+	"system/wizard": {
+		"title": "Setup Wizard",
+		"index": 45
+	},
+	"system/wizard/step_rms": {
+		"title": "RMS",
+		"view": "system/StepRms",
+		"acls": [ "system/wizard/step_rms" ],
+		"index": 50
+	}
+}

@@ -1,7 +1,5 @@
-Index: linux-5.4.251/include/uapi/linux/wireless.h
-===================================================================
---- linux-5.4.251.orig/include/uapi/linux/wireless.h	2023-07-27 09:37:45.000000000 +0300
-+++ linux-5.4.251/include/uapi/linux/wireless.h	2023-08-10 14:46:22.867349942 +0300
+--- a/include/uapi/linux/wireless.h
++++ b/include/uapi/linux/wireless.h
 @@ -544,7 +544,7 @@
  #define IW_SCAN_TYPE_ACTIVE 0
  #define IW_SCAN_TYPE_PASSIVE 1

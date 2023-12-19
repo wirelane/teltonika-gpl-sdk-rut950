@@ -14,11 +14,5 @@
             "view": "system/StepLan",
             "acls": [ "system/wizard/step_lan" ],
             "index": 20
-        },
-        "system/wizard/step_rms": {
-            "title": "RMS",
-            "view": "system/StepRms",
-            "acls": [ "system/wizard/step_rms" ],
-            "index": 50
         }
 }

@@ -2,7 +2,8 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/download.mk
 
 PKG_NAME:=bacnet-router
-PKG_SOURCE_VERSION:=1.2
+PKG_VERSION:=2023-12-08
+PKG_SOURCE_VERSION:=1.3
 
 include $(INCLUDE_DIR)/package.mk
 

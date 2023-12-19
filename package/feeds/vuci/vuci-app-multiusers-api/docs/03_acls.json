@@ -1,0 +1,146 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "ACL",
+      "version": "1.0.0",
+      "description": "ACL configuration API documentation"
+    },
+    "tags": [
+      {
+        "name": "ACL"
+      }
+    ],
+    "paths": {
+      "/users/acls/options": {
+        "get": {
+          "summary": "Returns current user's permissions (ACL's)",
+          "tags": [
+            "ACL"
+          ],
+          "responses": {
+            "200": {
+              "$ref": "#/components/responses/200Acls"
+            }
+          }
+        },
+        "x-web": {
+          "menu": [
+            "System",
+            "Administration",
+            "User Settings"
+          ],
+          "hw_tags": {
+            "is_access_point": false
+          }
+        }
+      }
+    },
+    "components": {
+      "responses": {
+        "200Acls": {
+          "description": "Example response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "description": "Operation status"
+                  },
+                  "data": {
+                    "$ref": "#/components/schemas/acl_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "schemas": {
+        "acl_options": {
+          "title": "ACL options",
+          "type": "object",
+          "properties": {
+            "ubus": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "api": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "uci": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "file": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "cgi-io": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "access-group": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "vuci.firmware": {
+              "type": "object",
+              "properties": {
+                "string": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

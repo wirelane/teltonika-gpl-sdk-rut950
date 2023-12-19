@@ -1,149 +1,19 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/wireguard/config/{wireguard_id}": {
-      "put": {
-        "tags": [
-          "Wireguard"
-        ],
-        "summary": "Updates the specified Wireguard configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Wire"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "wireguard_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Wireguard Configuration identifier (ID)"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/wireguard_single_options"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "wireguard_put"
-      },
-      "get": {
-        "tags": [
-          "Wireguard"
-        ],
-        "summary": "Returns the specified Wireguard configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Wire"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "wireguard_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Wireguard Configuration identifier (ID)"
-          }
-        ],
-        "operationId": "wireguard_get"
-      },
-      "delete": {
-        "tags": [
-          "Wireguard"
-        ],
-        "summary": "Deletes the specified Wireguard configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "wireguard_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Wireguard Configuration identifier (ID)"
-          }
-        ],
-        "description": "Wireguard peers created for this configuration will also be deleted. Firewall forwarding rules created for specified configuration will be deletes. If specified configuration is the last one belonging to Wireguard, then the Firewall zone will also be deleted.",
-        "operationId": "wireguard_delete"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "wireguard_id",
-          "in": "path",
-          "required": true,
-          "description": "Wireguard Configuration identifier (ID)"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Wireguard"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
     "/wireguard/config": {
       "get": {
-        "tags": [
-          "Wireguard"
-        ],
         "summary": "Returns all Wireguard configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200WireMulti"
           }
         },
-        "operationId": "wireguard_get_all"
+        "operationId": "wireguard_get_all",
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "Wireguard"
-        ],
         "summary": "Deletes specified wireguard configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -165,16 +35,25 @@
           }
         },
         "operationId": "wireguard_delete_all",
-        "description": "Wireguard peers created for specified configurations will also be deleted. Firewall forwarding rules created for specified configurations will be deletes. If all configuration are deleted, then the Firewall zone for Wireguard will also be deleted."
+        "description": "Wireguard peers created for specified configurations will also be deleted. Firewall forwarding rules created for specified configurations will be deletes. If all configuration are deleted, then the Firewall zone for Wireguard will also be deleted.",
+        "tags": ["General"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
       },
       "put": {
-        "tags": [
-          "Wireguard"
-        ],
         "summary": "Updates specified wireguard configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200Wire"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -199,19 +78,14 @@
             }
           }
         },
-        "operationId": "wireguard_put_all"
+        "operationId": "wireguard_put_all",
+        "tags": ["General"]
       },
       "post": {
-        "tags": [
-          "Wireguard"
-        ],
         "summary": "Creates a Wireguard configuration",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Wire"
-          },
           "201": {
-            "$ref": "#/components/responses/201response"
+            "$ref": "#/components/responses/200WireMulti"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -233,28 +107,103 @@
           }
         },
         "operationId": "wireguard_post",
-        "description": "A Firewall forwarding rule for new configuration will also be created. If this is the first configuration for Wireguard then a Firewall zone will also be created."
+        "description": "A Firewall forwarding rule for new configuration will also be created. If this is the first configuration for Wireguard then a Firewall zone will also be created.",
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Wireguard"
-        ],
+        "menu": ["Services", "VPN", "WireGuard"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
+        },
+        "name": "WireGuard"
+      }
+    },
+    "/wireguard/config/{id}": {
+      "put": {
+        "summary": "Updates the specified Wireguard configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Wire"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/wireguard_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "wireguard_put",
+        "tags": ["General"]
+      },
+      "get": {
+        "summary": "Returns the specified Wireguard configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Wire"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "wireguard_get",
+        "tags": ["General"]
+      },
+      "delete": {
+        "summary": "Deletes the specified Wireguard configuration",
+        "description": "Wireguard peers created for this configuration will also be deleted. Firewall forwarding rules created for specified configuration will be deletes. If specified configuration is the last one belonging to Wireguard, then the Firewall zone will also be deleted.",
+        "operationId": "wireguard_delete",
+        "tags": ["General"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
         }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Wireguard Configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "WireGuard"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "WireGuard"
       }
     },
     "/wireguard/actions/generate_keys": {
       "post": {
-        "tags": [
-          "Wireguard"
-        ],
         "summary": "Generates Private and Public keys",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200WireAction"
           },
           "422": {
@@ -262,18 +211,17 @@
           }
         },
         "operationId": "wireguard_action",
-        "description": "Generates and returns a unique pair of keys(private and public) to use while configuring Wireguard."
+        "description": "Generates and returns a unique pair of keys(private and public) to use while configuring Wireguard.",
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Wireguard"
-        ],
+        "menu": ["Services", "VPN", "WireGuard"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "WireGuard"
       }
     }
   },
@@ -405,7 +353,10 @@
             },
             "type": "array",
             "description": "IP addresses of the WireGuard interface.",
-            "format": "cidr"
+            "format": "cidr",
+            "items": {
+              "type": "string"
+            }
           },
           "metric": {
             "x-web": {
@@ -443,9 +394,7 @@
             }
           }
         },
-        "required": [
-          "private_key"
-        ]
+        "required": ["private_key"]
       },
       "wireguard_options": {
         "allOf": [
@@ -468,5 +417,15 @@
         ]
       }
     }
-  }
+  },
+  "info": {
+    "title": "WireGuard",
+    "version": "1.0",
+    "description": "WireGuard api documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

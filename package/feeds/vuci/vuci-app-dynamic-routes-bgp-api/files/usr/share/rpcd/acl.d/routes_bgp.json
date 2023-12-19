@@ -3,12 +3,12 @@
 		"description": "dynamic routes bgp configuration",
 		"read": {
 			"api": [
-				"/routes/dynamic/bgp/*"
+				"/bgp/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/routes/dynamic/bgp/*"
+				"/bgp/*"
 			]
 		}
 	},
@@ -17,7 +17,7 @@
 		"description": "bgp routes",
 		"read": {
 			"api": [
-				"/routes/dynamic/bgp/*"
+				"/bgp/*"
 			]
 		}
 	}

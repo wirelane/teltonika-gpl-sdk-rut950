@@ -1,10 +1,6 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "Diagnostics"
-    }
-  ],
+  "tags": [],
   "paths": {
     "/diagnostics/actions/ping": {
       "post": {
@@ -81,7 +77,7 @@
           }
         },
         "tags": [
-          "Diagnostics"
+          "General"
         ]
       },
       "x-web": {
@@ -167,7 +163,7 @@
           }
         },
         "tags": [
-          "Diagnostics"
+          "General"
         ]
       },
       "x-web": {
@@ -236,7 +232,7 @@
           }
         },
         "tags": [
-          "Diagnostics"
+          "General"
         ]
       },
       "x-web": {

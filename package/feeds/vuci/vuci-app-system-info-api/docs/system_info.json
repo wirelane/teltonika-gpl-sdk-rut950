@@ -6,7 +6,7 @@
     }
   ],
   "paths": {
-    "/device/info": {
+    "/system/device/status": {
       "get": {
         "summary": "Returns system information",
         "tags": [
@@ -298,53 +298,103 @@
                           "properties": {
                             "modems": {
                               "type": "array",
+                              "x-web": {
+                                "pretty": "Modem information",
+                                "hw_tags": {
+                                  "mobile": true
+                                }
+                              },
                               "uniqueItems": true,
                               "minItems": 1,
                               "items": {
                                 "type": "object",
                                 "properties": {
-                                  "gps": {
+                                  "id": {
                                     "type": "string",
-                                    "description": "GPS support."
+                                    "description": "Modem ID."
                                   },
                                   "num": {
                                     "type": "string",
                                     "description": "Modem number."
                                   },
-                                  "service_modes": {
-                                    "type": "object",
-                                    "properties": {
-                                      "4G": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string",
-                                          "description": "4G bandwidth support"
-                                        }
-                                      },
-                                      "3G": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string",
-                                          "description": "3G bandwidth support"
-                                        }
-                                      }
-                                    }
+                                  "builtin": {
+                                    "type": "boolean",
+                                    "description": "Modem built-in."
                                   },
-                                  "id": {
-                                    "type": "string",
-                                    "description": "Modem ID."
+                                  "simcount": {
+                                    "type": "number",
+                                    "description": "Modem SIM count."
+                                  },
+                                  "gps_out": {
+                                    "type": "boolean",
+                                    "description": "GPS support."
+                                  },
+                                  "primary": {
+                                    "type": "boolean",
+                                    "description": "Modem primary."
                                   },
                                   "revision": {
                                     "type": "string",
                                     "description": "Modem revision."
                                   },
-                                  "builtin": {
+                                  "modem_func_id": {
+                                    "type": "number",
+                                    "description": "Modem func id."
+                                  },
+                                  "multi_apn": {
                                     "type": "boolean",
-                                    "description": "Modem built-in."
+                                    "description": "Modem multiple APN support."
+                                  },
+                                  "operator_scan": {
+                                    "type": "boolean",
+                                    "description": "Modem operator scan support."
+                                  },
+                                  "dhcp_filter": {
+                                    "type": "boolean",
+                                    "description": "Modem DHCP filter support."
+                                  },
+                                  "dynamic_mtu": {
+                                    "type": "boolean",
+                                    "description": "Modem dynamic MTU support."
+                                  },
+                                  "ipv6": {
+                                    "type": "boolean",
+                                    "description": "Modem IPv6 support."
+                                  },
+                                  "volte": {
+                                    "type": "boolean",
+                                    "description": "Modem VoLTE support."
+                                  },
+                                  "csd": {
+                                    "type": "boolean",
+                                    "description": "Modem CSD support."
+                                  },
+                                  "band_list": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "description": "Modem supported bands."
                                   },
                                   "product": {
                                     "type": "string",
                                     "description": "Modem product code."
+                                  },
+                                  "vendor": {
+                                    "type": "string",
+                                    "description": "Modem vendor."
+                                  },
+                                  "gps": {
+                                    "type": "string",
+                                    "description": "GPS support."
+                                  },
+                                  "stop_bits": {
+                                    "type": "string",
+                                    "description": "Modem stop bits."
+                                  },
+                                  "boudrate": {
+                                    "type": "string",
+                                    "description": "Modem boudrate."
                                   },
                                   "type": {
                                     "type": "string",
@@ -357,22 +407,67 @@
                                   "control": {
                                     "type": "string",
                                     "description": "Modem control."
+                                  }
+                                }
+                              }
+                            },
+                            "serial": {
+                              "type": "array",
+                              "x-web": {
+                                "pretty": "Serial information",
+                                "hw_tags": {
+                                  "serial": true
+                                }
+                              },
+                              "uniqueItems": true,
+                              "minItems": 1,
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "path": {
+                                    "type": "string"
                                   },
-                                  "boudrate": {
-                                    "type": "string",
-                                    "description": "Modem boudrate."
-                                  },
-                                  "simcount": {
-                                    "type": "number",
-                                    "description": "Modem SIM count."
+                                  "parity_types": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   },
                                   "stop_bits": {
-                                    "type": "string",
-                                    "description": "Modem stop bits."
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   },
-                                  "vendor": {
-                                    "type": "string",
-                                    "description": "Modem vendor."
+                                  "bauds": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "data_bits": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "flow_control": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "devices": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "external_devices": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   }
                                 }
                               }
@@ -389,7 +484,26 @@
                                     },
                                     "device": {
                                       "type": "string",
-                                      "description": "WAN device name."
+                                      "description": "WAN device name.",
+                                      "x-web": {
+                                        "pretty": "WAN device name",
+                                        "hw_tags": {
+                                          "dsa": false
+                                        }
+                                      }
+                                    },
+                                    "ports": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "description": "WAN port names.",
+                                      "x-web": {
+                                        "pretty": "WAN port names",
+                                        "hw_tags": {
+                                          "dsa": true
+                                        }
+                                      }
                                     }
                                   }
                                 },
@@ -402,7 +516,26 @@
                                     },
                                     "device": {
                                       "type": "string",
-                                      "description": "LAN device name."
+                                      "description": "LAN device name.",
+                                      "x-web": {
+                                        "pretty": "LAN device name",
+                                        "hw_tags": {
+                                          "dsa": false
+                                        }
+                                      }
+                                    },
+                                    "ports": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "description": "LAN port names.",
+                                      "x-web": {
+                                        "pretty": "LAN port names",
+                                        "hw_tags": {
+                                          "dsa": true
+                                        }
+                                      }
                                     },
                                     "default_ip": {
                                       "type": "string",
@@ -426,6 +559,63 @@
                                 "name": {
                                   "type": "string",
                                   "description": "Model name."
+                                }
+                              }
+                            },
+                            "usb_jack": {
+                              "type": "string",
+                              "description": "USB ports.",
+                              "x-web": {
+                                "pretty": "USB ports",
+                                "hw_tags": {
+                                  "usb": true
+                                }
+                              }
+                            },
+                            "network_options": {
+                              "type": "object",
+                              "properties": {
+                                "readonly_vlans": {
+                                  "type": "number",
+                                  "x-web": {
+                                    "pretty": "Readonly Vlans",
+                                    "hw_tags": {
+                                      "is_access_point": false
+                                    }
+                                  }
+                                },
+                                "ula": {
+                                  "type": "boolean",
+                                  "x-web": {
+                                    "pretty": "Ula",
+                                    "hw_tags": {
+                                      "is_access_point": true
+                                    }
+                                  }
+                                },
+                                "disable_vlan": {
+                                  "type": "boolean",
+                                  "x-web": {
+                                    "pretty": "Disable VLAN",
+                                    "hw_tags": {
+                                      "is_access_point": true
+                                    }
+                                  }
+                                },
+                                "no_metric": {
+                                  "type": "boolean",
+                                  "x-web": {
+                                    "pretty": "No metric",
+                                    "hw_tags": {
+                                      "is_access_point": true
+                                    }
+                                  }
+                                },
+                                "max_mtu": {
+                                  "type": "number"
+                                },
+                                "vlans": {
+                                  "type": "number"
                                 }
                               }
                             },
@@ -505,219 +695,128 @@
                             "hwinfo": {
                               "type": "object",
                               "properties": {
-                                "gps": {
+                                "wps": {
                                   "type": "boolean",
-                                  "description": "GPS support."
+                                  "description": "WPS support"
                                 },
-                                "sfp_port": {
+                                "rs232": {
                                   "type": "boolean",
-                                  "description": "SFP port support."
+                                  "description": "RS232 support"
                                 },
-                                "at_sim": {
+                                "nat_offloading": {
                                   "type": "boolean",
-                                  "description": "AT SIM support."
+                                  "description": "NAT Offloading support"
                                 },
                                 "dual_sim": {
                                   "type": "boolean",
-                                  "description": "Dual SIM support."
+                                  "description": "Dual SIM support"
                                 },
                                 "bluetooth": {
                                   "type": "boolean",
-                                  "description": "Bluetooth support."
+                                  "description": "Bluetooth support"
                                 },
-                                "usb": {
+                                "soft_port_mirror": {
                                   "type": "boolean",
-                                  "description": "USB support."
+                                  "description": "Software Port Mirroring support"
                                 },
-                                "mobile": {
+                                "vcert": {
                                   "type": "boolean",
-                                  "description": "Mobile support."
+                                  "description": "VCert support"
                                 },
-                                "sfp_switch": {
+                                "micro_usb": {
                                   "type": "boolean",
-                                  "description": "SFP switch support."
-                                },
-                                "ethernet": {
-                                  "type": "boolean",
-                                  "description": "Ethernet support."
+                                  "description": "Micro USB support"
                                 },
                                 "wifi": {
                                   "type": "boolean",
-                                  "description": "WiFi support."
+                                  "description": "WiFi support"
+                                },
+                                "sd_card": {
+                                  "type": "boolean",
+                                  "description": "SD Card support"
+                                },
+                                "multi_tag": {
+                                  "type": "boolean",
+                                  "description": "Multi Tag support."
+                                },
+                                "dual_modem": {
+                                  "type": "boolean",
+                                  "description": "Dual Modem support"
+                                },
+                                "sfp_switch": {
+                                  "type": "boolean",
+                                  "description": "SFP switch support"
+                                },
+                                "dsa": {
+                                  "type": "boolean",
+                                  "description": "DSA support"
+                                },
+                                "hw_nat": {
+                                  "type": "boolean",
+                                  "description": "HW NAT support"
+                                },
+                                "sw_rst_on_init": {
+                                  "type": "boolean",
+                                  "description": "SW RST on init support"
+                                },
+                                "at_sim": {
+                                  "type": "boolean",
+                                  "description": "AT SIM support"
+                                },
+                                "port_link": {
+                                  "type": "boolean",
+                                  "description": "Port link support"
                                 },
                                 "ios": {
                                   "type": "boolean",
-                                  "description": "IOS support."
+                                  "description": "iOS support"
                                 },
-                                "wps": {
+                                "usb": {
                                   "type": "boolean",
-                                  "description": "WPS support."
+                                  "description": "USB support"
+                                },
+                                "console": {
+                                  "type": "boolean",
+                                  "description": "Console support"
                                 },
                                 "dual_band_ssid": {
                                   "type": "boolean",
-                                  "description": "Dual band SSID support."
+                                  "description": "Dual band SSID support"
+                                },
+                                "gps": {
+                                  "type": "boolean",
+                                  "description": "GPS support"
+                                },
+                                "ethernet": {
+                                  "type": "boolean",
+                                  "description": "Ethernet support"
+                                },
+                                "sfp_port": {
+                                  "type": "boolean",
+                                  "description": "SFP port support"
+                                },
+                                "rs485": {
+                                  "type": "boolean",
+                                  "description": "RS485 support"
+                                },
+                                "mobile": {
+                                  "type": "boolean",
+                                  "description": "Mobile support"
+                                },
+                                "poe": {
+                                  "type": "boolean",
+                                  "description": "POE support"
+                                },
+                                "gigabit_port": {
+                                  "type": "boolean",
+                                  "description": "Gigabit port support"
+                                },
+                                "2_5_gigabit_port": {
+                                  "type": "boolean",
+                                  "description": "2.5 Gigabit port support"
                                 }
                               }
                             }
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "success": true,
-                      "data": {
-                        "mnfinfo": {
-                          "macEth": "001E424F9563",
-                          "name": "RUTX1100XXXX",
-                          "hwver": "0808",
-                          "batch": "0031",
-                          "serial": "1118789105",
-                          "mac": "001E424F9562"
-                        },
-                        "static": {
-                          "fw_version": "RUTX_T_DEV_00.07.01.585",
-                          "kernel": "5.4.147",
-                          "system": "ARMv7 Processor rev 5 (v7l)",
-                          "device_name": "RUTX11",
-                          "cpu_count": 4,
-                          "hostname": "Teltonika-RUTX11.com",
-                          "release": {
-                            "distribution": "OpenWrt",
-                            "revision": "r16279-5cc0535800",
-                            "version": "21.02.0",
-                            "target": "ipq40xx/generic",
-                            "description": "OpenWrt 21.02.0 r16279-5cc0535800"
-                          },
-                          "fw_build_date": "2022-02-21 04:00:02",
-                          "model": "RUTX STM32",
-                          "board_name": "teltonika,rutx"
-                        },
-                        "features": {
-                          "ipv6": true
-                        },
-                        "board": {
-                          "modems": [
-                            {
-                              "gps": "1",
-                              "num": "1",
-                              "service_modes": {
-                                "4G": [
-                                  "1",
-                                  "3",
-                                  "5",
-                                  "7",
-                                  "8",
-                                  "20",
-                                  "28",
-                                  "32",
-                                  "38",
-                                  "40",
-                                  "41"
-                                ],
-                                "3G": [
-                                  "wcdma_850",
-                                  "wcdma_900",
-                                  "wcdma_1800",
-                                  "wcdma_2100"
-                                ]
-                              },
-                              "id": "3-1",
-                              "revision": "EG06ELAR04A04M4G",
-                              "builtin": true,
-                              "product": "0306",
-                              "type": "gobinet",
-                              "desc": "Quectel EG06",
-                              "control": "2",
-                              "boudrate": "115200",
-                              "simcount": 2,
-                              "stop_bits": "8",
-                              "vendor": "2c7c"
-                            }
-                          ],
-                          "network": {
-                            "wan": {
-                              "proto": "dhcp",
-                              "ifname": "eth1"
-                            },
-                            "lan": {
-                              "proto": "static",
-                              "ifname": "eth0"
-                            }
-                          },
-                          "model": {
-                            "id": "teltonika,rutx",
-                            "platform": "RUTX",
-                            "name": "RUTX STM32"
-                          },
-                          "switch": {
-                            "switch0": {
-                              "enable": true,
-                              "roles": [
-                                {
-                                  "ports": "2 3 4 0",
-                                  "role": "lan",
-                                  "device": "eth0"
-                                },
-                                {
-                                  "ports": "5 0",
-                                  "role": "wan",
-                                  "device": "eth1"
-                                }
-                              ],
-                              "ports": [
-                                {
-                                  "device": "eth0",
-                                  "num": 0,
-                                  "want_untag": true,
-                                  "need_tag": false
-                                },
-                                {
-                                  "num": 2,
-                                  "index": 1,
-                                  "role": "lan"
-                                },
-                                {
-                                  "num": 3,
-                                  "index": 2,
-                                  "role": "lan"
-                                },
-                                {
-                                  "num": 4,
-                                  "index": 3,
-                                  "role": "lan"
-                                },
-                                {
-                                  "device": "eth1",
-                                  "num": 0,
-                                  "want_untag": true,
-                                  "need_tag": false
-                                },
-                                {
-                                  "role": "wan",
-                                  "num": 5
-                                }
-                              ],
-                              "reset": true
-                            }
-                          },
-                          "hwinfo": {
-                            "gps": true,
-                            "sfp_port": false,
-                            "at_sim": false,
-                            "dual_sim": true,
-                            "bluetooth": true,
-                            "usb": true,
-                            "mobile": true,
-                            "sfp_switch": false,
-                            "ethernet": true,
-                            "wifi": true,
-                            "ios": true,
-                            "wps": false,
-                            "dual_band_ssid": true
                           }
                         }
                       }
@@ -738,7 +837,7 @@
         ]
       }
     },
-    "/device/status": {
+    "/system/device/usage/status": {
       "get": {
         "summary": "Returns system status",
         "tags": [
@@ -962,12 +1061,12 @@
         ]
       }
     },
-    "/device/packages": {
+    "/system/device/packages/status": {
       "get": {
         "tags": [
-          "packages"
+          "System info"
         ],
-        "summary": "Returns all possible packages on device",
+        "summary": "Returns all packages installed on device",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200PackagesPaths"
@@ -979,12 +1078,14 @@
           "System",
           "Device",
           "Info"
-        ]
+        ],
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
-    "/device/load": {
+    "/system/device/load/status": {
       "get": {
-        "summary": "Returns device CPU load",
+        "summary": "Returns device CPU load over a period of time",
         "tags": [
           "System info"
         ],
@@ -1092,7 +1193,7 @@
         ]
       }
     },
-    "/device/parameters": {
+    "/system/device/parameters/status": {
       "get": {
         "summary": "Returns all available device parameters",
         "tags": [
@@ -1693,7 +1794,9 @@
           "System",
           "Device",
           "Info"
-        ]
+        ],
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     }
   },

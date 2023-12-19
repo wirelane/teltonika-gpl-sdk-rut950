@@ -11,7 +11,7 @@
 	"system/maintenance/traffic": {
 		"description": "traffic logs",
 		"read": {
-		  "api": ["/ulog/general/status/*"]
+		  "api": ["/ulog/status/*"]
 		}
 	}
 }

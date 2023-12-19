@@ -4,7 +4,7 @@
 		"index": 20
 	},
 	"services/vpn/wireguard": {
-		"title": "Wireguard",
+		"title": "WireGuard",
 		"index": 110,
 		"view": "services/Wireguard",
 		"acls": [ "services/vpn/wireguard" ],

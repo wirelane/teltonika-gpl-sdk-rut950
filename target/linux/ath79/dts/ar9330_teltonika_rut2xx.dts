@@ -105,6 +105,90 @@
 			gpios = <&gpio 20 GPIO_ACTIVE_HIGH>;
 		};
 	};
+
+	tlt_gpios { // Modify according to wiki page "DTS syntax with Libgpiod changes"
+		gpiochip_info {
+			hw_0 {
+				hwver = <0>;
+				gpiochip_count = <1>;
+
+				gpiochip_0 = <32>; // Built-in
+			};
+		};
+
+		ioman {
+			GPIO_12 {
+				line_name = "GPIO_OUT_1";
+			};
+			GPIO_16 {
+				line_name = "GPIO_IN_1";
+			};
+		};
+
+		ledman {
+			GPIO_14 {
+				line_name = "LED_ETH_GREEN_1";
+				active_low;
+			};
+			GPIO_17 {
+				line_name = "LED_ETH_GREEN_2";
+				active_low;
+			};
+			GPIO_8 {
+				line_name = "LED_TECH_GEN_2";
+			};
+			GPIO_24 {
+				line_name = "LED_TECH_GEN_3";
+			};
+			GPIO_21 {
+				line_name = "LED_TECH_GEN_4";
+			};
+			GPIO_23 {
+				line_name = "LED_SSID_1";
+			};
+			GPIO_7 {
+				line_name = "LED_SSID_2";
+			};
+			GPIO_6 {
+				line_name = "LED_SSID_3";
+			};
+			GPIO_26 {
+				line_name = "LED_SSID_4";
+			};
+			GPIO_27 {
+				line_name = "LED_SSID_5";
+			};
+		};
+
+		misc {
+			GPIO_18 {
+				line_name = "GPIO_MODEM_RESET_1";
+			};
+			GPIO_19 {
+				line_name = "GPIO_MODEM_POWER_1";
+			};
+		};
+	};
+};
+
+&mnfinfo {
+	simpin1 {
+		reg = <&config 0x68 0xc>;
+		type = "digit";
+		default = "";
+		right-side-alligned;
+	};
+
+	sim_count {
+		default =  "1";
+	};
+
+	blver {
+		reg = <&boot 0x1fff6 0xa>;
+		strip-whitespaces;
+		type = "ascii";
+		log;
+	};
 };
 
 &spi {
@@ -121,7 +205,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
-			partition@0 {
+			boot: partition@0 {
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;

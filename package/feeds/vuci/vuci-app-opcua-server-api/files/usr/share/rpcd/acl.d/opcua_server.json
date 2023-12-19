@@ -1,0 +1,15 @@
+{
+    "services/opcua_server": {
+        "description": "OPC UA server configuration",
+        "read": {
+            "api": [
+                "/opcua/*"
+            ]
+        },
+        "write": {
+            "api": [
+                "/opcua/*"
+            ]
+        }
+    }
+}

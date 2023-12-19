@@ -78,7 +78,6 @@ mnf_field_t mnf_fields[] = {
 #endif
 
 #if defined(CONFIG_FOR_TELTONIKA_RUT9XX) || \
-    defined(CONFIG_FOR_TELTONIKA_RUT952) || \
     defined(CONFIG_FOR_TELTONIKA_RUT9M)
 	MNF_FIELD( '2', "sim2",      "SIM 2 PIN",           0x78,   8, clear          , 0 ),
 #elif defined (CONFIG_FOR_TELTONIKA_TRB24XX)

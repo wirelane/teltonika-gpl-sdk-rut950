@@ -18,7 +18,7 @@
 			"api": [
 				"/dnp3/serial/*",
 				"/serial/*",
-				"/device/*"
+				"/system/device/*"
 			]
 		},
 		"write": {
@@ -46,7 +46,7 @@
 			"api": [
 				"/dnp3/serial_outstation/*",
 				"/serial/*",
-				"/device/*"
+				"/system/device/*"
 			]
 		},
 		"write": {

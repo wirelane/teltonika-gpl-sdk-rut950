@@ -1,41 +1,31 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "STunnel",
-    "description": "STunnel API documentation",
-    "version": "1.0.0",
+    "title": "STunnel general",
+    "description": "STunnel general API documentation",
+    "version": "1.0",
     "contact": {}
   },
   "servers": [],
-  "tags": [
-    {
-      "name": "STunnel Global"
-    }
-  ],
   "paths": {
-    "/stunnel/global/config/general": {
+    "/stunnel/global": {
       "get": {
-        "tags": [
-          "STunnel Global"
-        ],
         "summary": "Returns specified stunnel global section",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200stunnel_global"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
-        }
+        },
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "STunnel Global"
-        ],
         "summary": "Updates specified stunnel global configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200stunnel_global"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -67,16 +57,14 @@
             }
           },
           "description": ""
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "STunnel"
-        ],
+        "menu": ["Services", "VPN", "STunnel"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
         }
       }
@@ -149,5 +137,10 @@
         }
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

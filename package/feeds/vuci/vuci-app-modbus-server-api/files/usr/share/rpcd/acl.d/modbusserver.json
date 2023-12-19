@@ -3,12 +3,12 @@
 		"description": "modbus tcp server configuration",
 		"read": {
 			"api": [
-				"/modbus/tcp_server/*"
+				"/modbus/server/tcp*"
 			]
 		},
 		"write": {
 			"api": [
-				"/modbus/tcp_server/*"
+				"/modbus/server/tcp/*"
 			]
 		}
 	},
@@ -16,15 +16,15 @@
 		"description": "modbus serial server configuration",
 		"read": {
 			"api": [
-				"/modbus/serial_server/*",
+				"/modbus/server/serial/*",
 				"/serial/*",
-				"/device/*",
-				"/modbus/tcp_server/*"
+				"/system/device/*",
+				"/modbus/server/tcp/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/modbus/serial_server/*"
+				"/modbus/server/serial/*"
 			]
 		}
 	}

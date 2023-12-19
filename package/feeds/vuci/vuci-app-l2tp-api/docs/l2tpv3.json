@@ -2,15 +2,10 @@
   "openapi": "3.0.0",
   "info": {
     "title": "L2TPv3",
-    "description": "L2TPv3 documentation",
-    "version": "3.0.0",
+    "description": "L2TPv3 api documentation",
+    "version": "1.0",
     "contact": {}
   },
-  "tags": [
-    {
-      "name": "L2TPv3"
-    }
-  ],
   "paths": {
     "/l2tpv3/config": {
       "get": {
@@ -22,22 +17,20 @@
           }
         },
         "operationId": "get-services-l2tpv3",
-        "tags": [
-          "L2TPv3"
-        ]
+        "tags": ["General"]
       },
       "post": {
         "summary": "Create l2tpv3 configuration",
         "description": "Creates l2tpv3 configuration",
         "operationId": "post-services-l2tpv3",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_l2tpv3_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "L2TPv3"
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -51,7 +44,8 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "put": {
         "summary": "Update l2tpv3 configurations",
@@ -60,11 +54,14 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_l2tpv3_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "L2TPv3"
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -81,7 +78,8 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "delete": {
         "summary": "Delete l2tpv3 configurations",
@@ -90,11 +88,11 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "L2TPv3"
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -111,27 +109,26 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "L2TPv3"
-        ],
+        "menu": ["Services", "VPN", "L2TPv3"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "L2TPv3"
       }
     },
-    "/l2tpv3/config/{sid}": {
+    "/l2tpv3/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "id",
           "in": "path",
           "required": true
         }
@@ -142,12 +139,13 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_l2tpv3_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-l2tpv3-sid",
-        "tags": [
-          "L2TPv3"
-        ]
+        "tags": ["General"]
       },
       "put": {
         "summary": "Update l2tpv3 configuration",
@@ -156,6 +154,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_l2tpv3_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -172,9 +176,7 @@
             }
           }
         },
-        "tags": [
-          "L2TPv3"
-        ]
+        "tags": ["General"]
       },
       "delete": {
         "summary": "Delete l2tpv3 configuration",
@@ -183,21 +185,20 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/delete_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "L2TPv3"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "L2TPv3"
-        ],
+        "menu": ["Services", "VPN", "L2TPv3"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "L2TPv3"
       }
     }
   },
@@ -232,9 +233,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id"
-                      ]
+                      "required": ["id"]
                     },
                     {
                       "$ref": "#/components/schemas/l2tpv3_options"
@@ -242,10 +241,7 @@
                   ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -289,10 +285,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -317,15 +310,10 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "id"
-                  ]
+                  "required": ["id"]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ],
+              "required": ["success", "data"],
               "x-examples": {
                 "example-1": {
                   "success": true,
@@ -377,16 +365,11 @@
                         "type": "string"
                       }
                     },
-                    "required": [
-                      "id"
-                    ]
+                    "required": ["id"]
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -536,10 +519,7 @@
               "input-type": "select",
               "group": "Instance settings"
             },
-            "enum": [
-              "ip",
-              "udp"
-            ],
+            "enum": ["ip", "udp"],
             "description": "Specify technology to use when connecting to other end"
           },
           "udp_sport": {
@@ -571,10 +551,7 @@
               "input-type": "select",
               "group": "Instance settings"
             },
-            "enum": [
-              "none",
-              "default"
-            ],
+            "enum": ["none", "default"],
             "description": "Layer 2 specific header type."
           }
         }
@@ -604,5 +581,10 @@
         ]
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

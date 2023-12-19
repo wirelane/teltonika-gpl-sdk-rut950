@@ -7,7 +7,7 @@
 
 ## Building
 
-    1. Copy "vuci-app-example-api" and "vuci-app-example-ui" into "RUT9_R_GPL_00.07.05.4/package/feeds/vuci" directory.
+    1. Copy "vuci-app-example-api" and "vuci-app-example-ui" into "RUT9_R_GPL_00.07.06/package/feeds/vuci" directory.
 
        Directory names can be changed, but API and UI names must match, for example "vuci-app-test-app-api" and "vuci-app-test-app-ui" are valid.
 
@@ -32,13 +32,13 @@
             $ make clean
             $ make
 
-    5. After building both the API and UI packages will be available in "RUT9_R_GPL_00.07.05.4/bin/packages/ath79/vuci"
+    5. After building both the API and UI packages will be available in "RUT9_R_GPL_00.07.06/bin/packages/ath79/vuci"
 
 ## Manual installation
 
-    1. Copy both API and UI packages from "RUT9_R_GPL_00.07.05.4/bin/packages/ath79/vuci" to the device.
+    1. Copy both API and UI packages from "RUT9_R_GPL_00.07.06/bin/packages/ath79/vuci" to the device.
 
-        $ scp "RUT9_R_GPL_00.07.05.4/bin/packages/ath79/vuci/vuci-app-example-api_1_ath79.ipk" "RUT9_R_GPL_00.07.05.4/bin/packages/ath79/vuci/vuci-app-example-ui_1_ath79.ipk" root@192.168.1.1:/tmp
+        $ scp "RUT9_R_GPL_00.07.06/bin/packages/ath79/vuci/vuci-app-example-api_1_ath79.ipk" "RUT9_R_GPL_00.07.06/bin/packages/ath79/vuci/vuci-app-example-ui_1_ath79.ipk" root@192.168.1.1:/tmp
 
     2. Install using "opkg"
 

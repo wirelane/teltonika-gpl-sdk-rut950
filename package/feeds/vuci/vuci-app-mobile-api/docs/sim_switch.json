@@ -1,0 +1,843 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mobile status API documentation",
+        "version": "1.0"
+    },
+    "servers": [],
+    "tags": [
+        {
+            "name": "SIM switch"
+        }
+    ],
+    "paths": {
+        "/sim_switch/config": {
+            "get": {
+                "tags": [
+                    "SIM switch"
+                ],
+                "summary": "Returns multiple SIM switch configurations",
+                "description": "",
+                "operationId": "mobile22",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "description": "Operation status."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/sim_switch_options_name_index"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "SIM switch"
+                ],
+                "summary": "Updates multiple SIM switch configurations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "description": "Operation status."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/sim_switch_options_name_index"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422response"
+                    }
+                },
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "array",
+                                        "description": "Array of of section objects",
+                                        "items": {
+                                            "$ref": "#/components/schemas/sim_switch_options_name_index"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "mobile23"
+            },
+            "parameters": [],
+            "x-web": {
+                "menu": [
+                    "Network",
+                    "Mobile",
+                    "SIM Switch"
+                ],
+                "hw_tags": {
+                    "dual_sim": true
+                },
+                "name": "SIM switch"
+            }
+        },
+        "/sim_switch/config/{id}": {
+            "get": {
+                "tags": [
+                    "SIM switch"
+                ],
+                "summary": "Returns specified SIM switch configuration",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "description": "Operation status."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/sim_switch_options_name_index"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    }
+                },
+                "operationId": "mobile1"
+            },
+            "put": {
+                "tags": [
+                    "SIM switch"
+                ],
+                "summary": "Updates specified SIM switch configuration",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "description": "Operation status."
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/sim_switch_options_name_index"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422response"
+                    }
+                },
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/sim_switch_options_index"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "mobile2"
+            },
+            "parameters": [
+                {
+                    "schema": {
+                        "type": "string"
+                    },
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "SIM switch configuration ID"
+                }
+            ],
+            "x-web": {
+                "menu": [
+                    "Network",
+                    "Mobile",
+                    "SIM Switch"
+                ],
+                "hw_tags": {
+                    "dual_sim": true
+                },
+                "name": "SIM switch"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "sim_switch_options_name_index": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Configuration ID",
+                        "x-web": {
+                            "pretty": "Configuration ID",
+                            "input-type": "input"
+                        }
+                    },
+                    "modem": {
+                        "x-web": {
+                            "pretty": "Modem",
+                            "input-type": "select",
+                            "unique": true,
+                            "enum-pretty": {
+                                "$ref": "#/x-schemas/modem_names"
+                            },
+                            "enum-depends": {
+                                "$ref": "#/x-schemas/modem_select"
+                            }
+                        },
+                        "type": "string",
+                        "description": "Modem which the SIM switch configuration belongs to.",
+                        "readOnly": true
+                    },
+                    "position": {
+                        "type": "string",
+                        "description": "SIM card position inside the modem.",
+                        "x-web": {
+                            "pretty": "SIM Position",
+                            "unique": true,
+                            "virtual": true,
+                            "enum-pretty": {
+                                "$ref": "#/x-schemas/simcard_names"
+                            },
+                            "enum-depends": {
+                                "$ref": "#/x-schemas/simcard_select"
+                            }
+                        }
+                    },
+                    "enabled": {
+                        "type": "string",
+                        "description": "Automatically switch between default and non-default SIM cards based on the various rules and criterias defined below",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "Enable automatic switching",
+                            "input-type": "switch"
+                        }
+                    },
+                    "interval": {
+                        "type": "string",
+                        "description": "Check interval in seconds",
+                        "x-web": {
+                            "pretty": "Check interval",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "retry_count": {
+                        "type": "string",
+                        "description": "Attempts before SIM switch. Fail count before switching to other SIM",
+                        "x-web": {
+                            "pretty": "Attempts before SIM switch",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "on_signal": {
+                        "type": "string",
+                        "description": "On weak signal. Perform a SIM card switch when a signal's strength drops below a certain threshold",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On weak signal",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "weak_signal": {
+                        "type": "string",
+                        "description": "Signal strength (dBm). Lowest signal's strength value in dBm below which a SIM card switch should occur",
+                        "x-web": {
+                            "pretty": "Signal strength (dBm)",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "on_signal": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "data_limit": {
+                        "type": "string",
+                        "description": "On data limit. Perform a SIM card switch when mobile data limit for your current SIM card is exceeded",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On data limit",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "sms_limit": {
+                        "type": "string",
+                        "description": "On SMS limit. Perform a SIM card switch when sent SMS limit for your current SIM card is exceeded",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On SMS limit",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "roaming": {
+                        "type": "string",
+                        "description": "On roaming. Perform a SIM card switch when roaming is detected",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On roaming",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "no_network": {
+                        "type": "string",
+                        "description": "No network. Perform a SIM card switch when network isn't detected",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "No network",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "denied": {
+                        "type": "string",
+                        "description": "On network denied. Perform a SIM card switch when network is denied",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On network denied",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "fail_flag": {
+                        "type": "string",
+                        "description": "On data connection fail. Perform a SIM card switch when data connection fails",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On data connection fail",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "data_fail": {
+                        "type": "string",
+                        "description": "Method. '1",
+                        "enum": [
+                            "1",
+                            "2"
+                        ],
+                        "x-web": {
+                            "pretty": "Method",
+                            "enum-pretty": {
+                                "1": "LCP echo",
+                                "2": "ICMP echo"
+                            },
+                            "input-type": "select",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "fail_flag": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "data_fail_host": {
+                        "type": "string",
+                        "description": "Health monitor ICMP host. A remote host to ping (send an ICMP (Internet Control Message Protocol) packet to) and determine when connection goes down",
+                        "x-web": {
+                            "pretty": "Health monitor ICMP host",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "data_fail": "2"
+                                }
+                            ]
+                        }
+                    },
+                    "data_fail_timeout": {
+                        "type": "string",
+                        "description": "Health monitor ICMP timeout. A timeout value for ICMP (Internet Control Message Protocol) packet",
+                        "enum": [
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "10"
+                        ],
+                        "x-web": {
+                            "pretty": "Health monitor ICMP timeout",
+                            "enum-pretty": {
+                                "1": "1 sec.",
+                                "2": "2 sec.",
+                                "3": "3 sec.",
+                                "4": "4 sec.",
+                                "5": "5 sec.",
+                                "10": "10 sec."
+                            },
+                            "input-type": "select",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "data_fail": "2"
+                                }
+                            ]
+                        }
+                    },
+                    "enable_back": {
+                        "type": "string",
+                        "description": "Switch back to default SIM card after timeout. Switch back to default SIM card after timeout has been reached",
+                        "x-web": {
+                            "pretty": "Switch back to default SIM card after timeout",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "switch_back": {
+                        "type": "string",
+                        "description": "An initial timeout value in minutes after which a SIM card's switch-back to default SIM card should occur",
+                        "x-web": {
+                            "pretty": "Initial timeout (min)",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "enable_back": "1"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "interval",
+                    "retry_count",
+                    "weak_signal",
+                    "data_fail",
+                    "data_fail_host",
+                    "data_fail_timeout"
+                ]
+            },
+            "sim_switch_options_index": {
+                "type": "object",
+                "properties": {
+                    "modem": {
+                        "x-web": {
+                            "pretty": "Modem",
+                            "unique": true,
+                            "input-type": "select",
+                            "enum-pretty": {
+                                "$ref": "#/x-schemas/modem_names"
+                            },
+                            "enum-depends": {
+                                "$ref": "#/x-schemas/modem_select"
+                            }
+                        },
+                        "type": "string",
+                        "description": "Modem which the SIM switch configuration belongs to.",
+                        "readOnly": true
+                    },
+                    "position": {
+                        "type": "string",
+                        "description": "SIM card section position inside the modem.",
+                        "x-web": {
+                            "pretty": "SIM Position",
+                            "unique": true,
+                            "virtual": true,
+                            "enum-pretty": {
+                                "$ref": "#/x-schemas/simcard_names"
+                            },
+                            "enum-depends": {
+                                "$ref": "#/x-schemas/simcard_select"
+                            }
+                        }
+                    },
+                    "enabled": {
+                        "type": "string",
+                        "description": "Automatically switch between default and non-default SIM cards based on the various rules and criterias defined below",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "Enable automatic switching",
+                            "input-type": "switch"
+                        }
+                    },
+                    "interval": {
+                        "type": "string",
+                        "description": "Check interval in seconds",
+                        "x-web": {
+                            "pretty": "Check interval",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "retry_count": {
+                        "type": "string",
+                        "description": "Attempts before SIM switch. Fail count before switching to other SIM",
+                        "x-web": {
+                            "pretty": "Attempts before SIM switch",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "on_signal": {
+                        "type": "string",
+                        "description": "On weak signal. Perform a SIM card switch when a signal's strength drops below a certain threshold",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On weak signal",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "weak_signal": {
+                        "type": "string",
+                        "description": "Signal strength (dBm). Lowest signal's strength value in dBm below which a SIM card switch should occur",
+                        "x-web": {
+                            "pretty": "Signal strength (dBm)",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "on_signal": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "data_limit": {
+                        "type": "string",
+                        "description": "On data limit. Perform a SIM card switch when mobile data limit for your current SIM card is exceeded",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On data limit",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "sms_limit": {
+                        "type": "string",
+                        "description": "On SMS limit. Perform a SIM card switch when sent SMS limit for your current SIM card is exceeded",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On SMS limit",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "roaming": {
+                        "type": "string",
+                        "description": "On roaming. Perform a SIM card switch when roaming is detected",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On roaming",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "no_network": {
+                        "type": "string",
+                        "description": "No network. Perform a SIM card switch when network isn't detected",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "No network",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "denied": {
+                        "type": "string",
+                        "description": "On network denied. Perform a SIM card switch when network is denied",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On network denied",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "fail_flag": {
+                        "type": "string",
+                        "description": "On data connection fail. Perform a SIM card switch when data connection fails",
+                        "enum": [
+                            "0",
+                            "1"
+                        ],
+                        "x-web": {
+                            "pretty": "On data connection fail",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "data_fail": {
+                        "type": "string",
+                        "description": "Method",
+                        "enum": [
+                            "1",
+                            "2"
+                        ],
+                        "x-web": {
+                            "pretty": "Method",
+                            "enum-pretty": {
+                                "1": "LCP echo",
+                                "2": "ICMP echo"
+                            },
+                            "input-type": "select",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "fail_flag": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "data_fail_host": {
+                        "type": "string",
+                        "description": "Health monitor ICMP host. A remote host to ping (send an ICMP (Internet Control Message Protocol) packet to) and determine when connection goes down",
+                        "x-web": {
+                            "pretty": "Health monitor ICMP host",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "data_fail": "2"
+                                }
+                            ]
+                        }
+                    },
+                    "data_fail_timeout": {
+                        "type": "string",
+                        "description": "Health monitor ICMP timeout. A timeout value for ICMP (Internet Control Message Protocol) packet",
+                        "enum": [
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "10"
+                        ],
+                        "x-web": {
+                            "pretty": "Health monitor ICMP timeout",
+                            "enum-pretty": {
+                                "1": "1 sec.",
+                                "2": "2 sec.",
+                                "3": "3 sec.",
+                                "4": "4 sec.",
+                                "5": "5 sec.",
+                                "10": "10 sec."
+                            },
+                            "input-type": "select",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "data_fail": "2"
+                                }
+                            ]
+                        }
+                    },
+                    "enable_back": {
+                        "type": "string",
+                        "description": "Switch back to default SIM card after timeout. Switch back to default SIM card after timeout has been reached",
+                        "x-web": {
+                            "pretty": "Switch back to default SIM card after timeout",
+                            "input-type": "switch",
+                            "depends": [
+                                {
+                                    "enabled": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "switch_back": {
+                        "type": "string",
+                        "description": "An initial timeout value in minutes after which a SIM card's switch-back to default SIM card should occur",
+                        "x-web": {
+                            "pretty": "Initial timeout (min)",
+                            "input-type": "input",
+                            "depends": [
+                                {
+                                    "enabled": "1",
+                                    "enable_back": "1"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "interval",
+                    "retry_count",
+                    "weak_signal",
+                    "data_fail",
+                    "data_fail_host",
+                    "data_fail_timeout"
+                ]
+            }
+        }
+    }
+}

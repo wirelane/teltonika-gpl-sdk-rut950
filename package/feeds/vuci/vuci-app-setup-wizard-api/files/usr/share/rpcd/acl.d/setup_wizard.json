@@ -3,10 +3,10 @@
         "description": "setup wizard general",
         "read": {
             "api": [
-                "/administration/ntp/client/*",
-                "/packages/config/language/*",
-                "/ui/config/languages/*",
-                "/administration/general/*"
+                "/date_time/ntp/client/*",
+                "/package_manager/language_packages/*",
+                "/system/languages/*",
+                "/system/config/*"
             ],
             "uci": [
                 "system",
@@ -27,8 +27,8 @@
                 "ntpclient"
             ],
             "api": [
-                "/administration/ntp/client/*",
-                "/administration/general/*"
+                "/date_time/ntp/client/*",
+                "/system/config/*"
             ]
         }
     },
@@ -36,9 +36,9 @@
         "description": "setup wizard lan",
         "read": {
             "api": [
-                "/mobile/modems/status*",
+                "/modems/status*",
                 "/interfaces/config/*",
-                "/dhcp/servers/config/*"
+                "/dhcp/servers/*"
             ],
             "uci": [
                 "network",
@@ -53,7 +53,7 @@
         "write": {
             "api": [
                 "/interfaces/config/*",
-                "/dhcp/servers/config/*"
+                "/dhcp/servers/*"
             ],
             "uci": [
                 "network",
@@ -65,9 +65,9 @@
         "description": "setup wizard wan",
         "read": {
             "api": [
-                "/mobile/modems/status*",
+                "/modems/status*",
                 "/interfaces/*",
-                "/mobile/simcards/*"
+                "/sim_cards/*"
             ],
             "uci": [
                 "network",
@@ -82,7 +82,7 @@
         "write": {
             "api": [
                 "/interfaces/*",
-                "/mobile/simcards/*"
+                "/sim_cards/*"
             ],
             "uci": [
                 "network",
@@ -95,7 +95,7 @@
         "read": {
             "api": [
                 "/wireless/*",
-                "/mobile/modems/status*"
+                "/modems/status*"
             ],
             "uci": [
                 "wireless"
@@ -114,13 +114,13 @@
         "description": "setup wizard rms",
         "read": {
             "api": [
-                "/cloud_solutions/rms/*",
-                "/mobile/modems/status*"
+                "/rms/*",
+                "/modems/status*"
             ]
         },
         "write": {
             "api": [
-                "/cloud_solutions/rms/*"
+                "/rms/*"
             ]
         }
     }

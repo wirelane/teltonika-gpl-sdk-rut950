@@ -1,30 +1,77 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/routes/dynamic/eigrp/general/config/general": {
+    "/eigrp/config": {
       "get": {
-        "tags": [
-          "eigrp_general"
-        ],
-        "summary": "Returns eigrp general configuration",
+        "summary": "Returns EIGRP global configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200EiGe"
+            "$ref": "#/components/responses/200EiGeMulti"
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "put": {
+        "summary": "Updates EIGRP global configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200EiGeMulti"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
-        }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/eigrp_general_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Global Settings"]
       },
-      "put": {
-        "tags": [
-          "eigrp_general"
-        ],
-        "summary": "Updates  eigrp general configuration",
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "EIGRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "EIGRP"
+      }
+    },
+    "/eigrp/config/{id}": {
+      "get": {
+        "summary": "Returns EIGRP global configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200EiGe"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "put": {
+        "summary": "Updates EIGRP global configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200EiGe"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -44,42 +91,210 @@
               }
             }
           }
-        }
+        },
+        "tags": ["Global Settings"]
       },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Dynamic Routes",
-          "EIGRP"
-        ],
-        "hw_tags": {
-          "is_access_point": false
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
         }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "EIGRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "EIGRP"
       }
     },
-    "/routes/dynamic/eigrp/general/eigrp_info": {
+    "/eigrp/status": {
       "get": {
-        "summary": "Fetches data about eigrp neighbors",
-        "tags": [
-          "eigrp_general"
-        ],
+        "summary": "Fetches data about EIGRP neighbors",
+        "operationId": "get-network-routes-dynamic-eigrp-general",
+        "tags": ["Global Settings"],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "route1": {
+                          "type": "object",
+                          "properties": {
+                            "serno": {
+                              "type": "string"
+                            },
+                            "fd": {
+                              "type": "string"
+                            },
+                            "successors": {
+                              "type": "string"
+                            },
+                            "interface": {
+                              "type": "string"
+                            },
+                            "via": {
+                              "type": "string"
+                            },
+                            "ip": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "neighbors": {
+                          "type": "object",
+                          "properties": {
+                            "neighbor1": {
+                              "type": "object",
+                              "properties": {
+                                "Q": {
+                                  "type": "string"
+                                },
+                                "SRTT": {
+                                  "type": "string"
+                                },
+                                "RTO": {
+                                  "type": "string"
+                                },
+                                "H": {
+                                  "type": "string"
+                                },
+                                "Uptime": {
+                                  "type": "string"
+                                },
+                                "Address": {
+                                  "type": "string"
+                                },
+                                "Hold": {
+                                  "type": "string"
+                                },
+                                "Seq": {
+                                  "type": "string"
+                                },
+                                "Interface": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "route3": {
+                          "type": "object",
+                          "properties": {
+                            "serno": {
+                              "type": "string"
+                            },
+                            "fd": {
+                              "type": "string"
+                            },
+                            "successors": {
+                              "type": "string"
+                            },
+                            "interface": {
+                              "type": "string"
+                            },
+                            "via": {
+                              "type": "string"
+                            },
+                            "ip": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "route2": {
+                          "type": "object",
+                          "properties": {
+                            "serno": {
+                              "type": "string"
+                            },
+                            "fd": {
+                              "type": "string"
+                            },
+                            "successors": {
+                              "type": "string"
+                            },
+                            "interface": {
+                              "type": "string"
+                            },
+                            "via": {
+                              "type": "string"
+                            },
+                            "ip": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "route1": {
+                          "serno": "serno: 0 ",
+                          "fd": "FD is 28160",
+                          "successors": "1 successors",
+                          "interface": "br-lan",
+                          "via": "via Connected",
+                          "ip": "P  192.168.10.0/24"
+                        },
+                        "neighbors": {
+                          "neighbor1": {
+                            "Q": "0",
+                            "SRTT": "0",
+                            "RTO": "2",
+                            "H": "0",
+                            "Uptime": "0",
+                            "Address": "192.168.222.101",
+                            "Hold": "10",
+                            "Seq": "2",
+                            "Interface": "eth1"
+                          }
+                        },
+                        "route3": {
+                          "serno": "serno: 0 ",
+                          "fd": "FD is 28160",
+                          "successors": "1 successors",
+                          "interface": "eth1",
+                          "via": "via Connected",
+                          "ip": "P  192.168.222.0/24"
+                        },
+                        "route2": {
+                          "serno": "serno: 0 ",
+                          "fd": "FD is 30720",
+                          "successors": "1 successors",
+                          "interface": "eth1",
+                          "via": "via 192.168.222.101 (30720/28160)",
+                          "ip": "P  192.168.20.0/24"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        },
-        "operationId": "get-network-routes-dynamic-eigrp-general"
+        }
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Dynamic Routes",
-          "EIGRP"
-        ]
+        "menu": ["Network", "Routing", "Dynamic Routes", "EIGRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "EIGRP"
       }
     }
   },
@@ -93,11 +308,10 @@
               "type": "object",
               "properties": {
                 "success": {
-                  "type": "boolean",
-                  "description": "Operation status"
+                  "type": "boolean"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/eigrp_general_options"
+                  "$ref": "#/components/schemas/eigrp_general_options_multi"
                 }
               }
             }
@@ -105,21 +319,19 @@
         }
       },
       "200EiGeMulti": {
-        "description": "Returns sections",
+        "description": "Example response",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "properties": {
                 "success": {
-                  "type": "boolean",
-                  "description": "Operation status"
+                  "type": "boolean"
                 },
                 "data": {
                   "type": "array",
-                  "description": "Array of section objects",
                   "items": {
-                    "$ref": "#/components/schemas/eigrp_general_options"
+                    "$ref": "#/components/schemas/eigrp_general_options_multi"
                   }
                 }
               }
@@ -150,10 +362,7 @@
               "input-type": "switch"
             },
             "description": "Toggles EIGRP network ON or OFF.",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "debug": {
             "type": "string",
@@ -162,10 +371,7 @@
               "input-type": "switch"
             },
             "description": "Enable logging of EIGRP.",
-            "enum": [
-              "1",
-              "0"
-            ]
+            "enum": ["1", "0"]
           },
           "as": {
             "type": "string",
@@ -186,7 +392,6 @@
             "format": "ipv4"
           },
           "network": {
-            "type": "string",
             "x-web": {
               "pretty": "Network",
               "input-type": "input"
@@ -198,7 +403,7 @@
             "description": "Add the announcement network.",
             "format": "ipmask4"
           },
-            "redistribute": {
+          "redistribute": {
             "x-web": {
               "pretty": "Redistribution options",
               "input-type": "input"
@@ -210,7 +415,6 @@
             "description": "Redistribute information from another routing protocol."
           },
           "neighbor": {
-            "type": "string",
             "x-web": {
               "pretty": "Neighbors",
               "input-type": "input"
@@ -223,7 +427,36 @@
             "format": "ipmask4"
           }
         }
+      },
+      "eigrp_general_options_multi": {
+        "title": "eigrp_general_options_multi",
+        "x-stoplight": {
+          "id": "qjivicre9jvxl"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/eigrp_general_options"
+          }
+        ]
       }
     }
-  }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "EIGRP Global Settings",
+    "description": "EIGRP global settings api documentation"
+  },
+  "tags": [
+    {
+      "name": "Global Settings"
+    }
+  ]
 }

@@ -9,24 +9,27 @@
   "servers": [],
   "tags": [
     {
-      "name": "Failover General"
+      "name": "General"
     },
     {
-      "name": "Failover Interfaces"
+      "name": "Interfaces"
     },
     {
-      "name": "Failover Policies"
+      "name": "Policies"
     },
     {
-      "name": "Failover Rules"
+      "name": "Rules"
+    },
+    {
+      "name": "Members"
     }
   ],
   "paths": {
-    "/mwan3/general/config": {
+    "/failover/mode/config": {
       "get": {
-        "summary": "GET All Failover General",
+        "summary": "Returns failover configurations",
         "tags": [
-          "Failover General"
+          "General"
         ],
         "responses": {
           "200": {
@@ -34,14 +37,20 @@
           }
         },
         "operationId": "get-network-mwan3-general",
-        "description": "Gets MWAN general configurations"
+        "description": "Returns failover configurations"
       },
       "put": {
-        "summary": "UPDATE All Failover General",
+        "summary": "Updates failover configurations",
         "operationId": "put-network-mwan3-general",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_general_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -53,9 +62,9 @@
             }
           }
         },
-        "description": "Updates MWAN general configurations",
+        "description": "Updates failover configurations",
         "tags": [
-          "Failover General"
+          "General"
         ]
       },
       "parameters": [],
@@ -71,26 +80,32 @@
         }
       }
     },
-    "/mwan3/interfaces/config": {
+    "/failover/interfaces/config": {
       "get": {
-        "summary": "GET All Failover Interfaces",
+        "summary": "Returns failover interfaces",
         "operationId": "get-network-mwan3-interfaces",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_interface_multi"
           }
         },
-        "description": "Gets MWAN interface configurations",
+        "description": "Returns failover interfaces",
         "tags": [
-          "Failover Interfaces"
+          "Interfaces"
         ]
       },
       "put": {
-        "summary": "UPDATE All Failover Interfaces",
+        "summary": "Updates failover interfaces",
         "operationId": "put-network-mwan3-interfaces",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_interface_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -102,9 +117,9 @@
             }
           }
         },
-        "description": "Updates MWAN interface configurations",
+        "description": "Updates failover interfaces",
         "tags": [
-          "Failover Interfaces"
+          "Interfaces"
         ]
       },
       "parameters": [],
@@ -120,11 +135,11 @@
         }
       }
     },
-    "/mwan3/policies/config": {
+    "/failover/policies/config": {
       "get": {
-        "summary": "GET All Failover Policies",
+        "summary": "Returns failover policies",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ],
         "responses": {
           "200": {
@@ -132,19 +147,22 @@
           }
         },
         "operationId": "get-network-mwan3-policies",
-        "description": "Gets MWAN policy configurations"
+        "description": "Returns failover policies"
       },
       "post": {
-        "summary": "CREATE All Failover Policies",
+        "summary": "Creates failover policies",
         "operationId": "post-network-mwan3-policies",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_mwan_policy"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "description": "Creates MWAN policy configuration",
+        "description": "Creates failover policies",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ],
         "requestBody": {
           "content": {
@@ -162,6 +180,22 @@
                             "type": "string",
                             "x-web": {
                               "pretty": "Name"
+                            }
+                          },
+                          "mode": {
+                            "type": "string",
+                            "enum": [
+                              "mwan",
+                              "balance"
+                            ],
+                            "description": "Mode",
+                            "x-web": {
+                              "pretty": "Mode",
+                              "input-type": "select",
+                              "enum-pretty": {
+                                "mwan": "Failover",
+                                "balance": "Load balancing"
+                              }
                             }
                           }
                         },
@@ -185,11 +219,17 @@
         }
       },
       "put": {
-        "summary": "UPDATE All Failover Policies",
+        "summary": "Updates failover policies",
         "operationId": "put-network-mwan3-policies",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_policy_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -201,17 +241,20 @@
             }
           }
         },
-        "description": "Updates MWAN policy configurations",
+        "description": "Updates failover policies",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ]
       },
       "delete": {
-        "summary": "DELETE All Failover Policies",
+        "summary": "Deletes failover policies",
         "operationId": "delete-network-mwan3-policies",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -223,9 +266,9 @@
             }
           }
         },
-        "description": "Deletes MWAN policy configurations",
+        "description": "Deletes failover policies",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ]
       },
       "parameters": [],
@@ -241,11 +284,11 @@
         }
       }
     },
-    "/mwan3/rules/config": {
+    "/failover/rules/config": {
       "get": {
-        "summary": "GET All Failover Rules",
+        "summary": "Returns failover rules",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ],
         "responses": {
           "200": {
@@ -253,19 +296,22 @@
           }
         },
         "operationId": "get-network-mwan3-rules",
-        "description": "Gets MWAN rule configurations"
+        "description": "Returns failover rules"
       },
       "post": {
-        "summary": "CREATE All Failover Rules",
+        "summary": "Creates failover rules",
         "operationId": "post-network-mwan3-rules",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_mwan_rule"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "description": "Creates MWAN rule configurations",
+        "description": "Creates failover rules",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ],
         "requestBody": {
           "content": {
@@ -306,11 +352,17 @@
         }
       },
       "put": {
-        "summary": "UPDATE All Failover Rules",
+        "summary": "Updates failover rules",
         "operationId": "put-network-mwan3-rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_rule_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -322,17 +374,20 @@
             }
           }
         },
-        "description": "Updates MWAN rule configurations",
+        "description": "Updates failover rules",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ]
       },
       "delete": {
-        "summary": "DELETE All Failover Rules",
+        "summary": "Deletes failover rules",
         "operationId": "delete-network-mwan3-rules",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -344,9 +399,9 @@
             }
           }
         },
-        "description": "Deletes MWAN rule configurations",
+        "description": "Deletes failover rules",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ]
       },
       "parameters": [],
@@ -362,36 +417,46 @@
         }
       }
     },
-    "/mwan3/general/config/{id}": {
+    "/failover/mode/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "id",
+          "description": "The ID of the failover configuration",
           "in": "path",
           "required": true
         }
       ],
       "get": {
-        "summary": "GET Failover General",
+        "summary": "Returns failover configuration",
         "tags": [
-          "Failover General"
+          "General"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mwan3-general-id",
-        "description": "Gets MWAN general configuration"
+        "description": "Returns failover configuration"
       },
       "put": {
-        "summary": "UPDATE Failover General",
+        "summary": "Updates failover configuration",
         "operationId": "put-network-mwan3-general-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -403,9 +468,9 @@
             }
           }
         },
-        "description": "Updates MWAN general configuration",
+        "description": "Updates failover configuration",
         "tags": [
-          "Failover General"
+          "General"
         ]
       },
       "x-web": {
@@ -420,36 +485,46 @@
         }
       }
     },
-    "/mwan3/interfaces/config/{id}": {
+    "/failover/interfaces/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "id",
+          "description": "The ID of the failover interface configuration",
           "in": "path",
           "required": true
         }
       ],
       "get": {
-        "summary": "GET Failover Interfaces",
+        "summary": "Returns failover interface",
         "tags": [
-          "Failover Interfaces"
+          "Interfaces"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_interface"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mwan3-interfaces-id",
-        "description": "Gets MWAN interface configuration"
+        "description": "Returns failover interface"
       },
       "put": {
-        "summary": "UPDATE Failover Interfaces",
+        "summary": "Updates failover interface",
         "operationId": "put-network-mwan3-interfaces-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_interface"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -461,9 +536,9 @@
             }
           }
         },
-        "description": "Updates MWAN interface configuration",
+        "description": "Updates failover interface",
         "tags": [
-          "Failover Interfaces"
+          "Interfaces"
         ]
       },
       "x-web": {
@@ -478,36 +553,46 @@
         }
       }
     },
-    "/mwan3/policies/config/{id}": {
+    "/failover/policies/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "id",
+          "description": "The ID of the failover policy configuration",
           "in": "path",
           "required": true
         }
       ],
       "get": {
-        "summary": "GET Failover Policies",
+        "summary": "Returns failover policy",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_policy"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mwan3-policies-id",
-        "description": "Gets MWAN policy configuration"
+        "description": "Returns failover policy"
       },
       "put": {
-        "summary": "UPDATE Failover Policies",
+        "summary": "Updates failover policy",
         "operationId": "put-network-mwan3-policies-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_policy"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -519,22 +604,25 @@
             }
           }
         },
-        "description": "Updates MWAN policy configuration",
+        "description": "Updates failover policy",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ]
       },
       "delete": {
-        "summary": "DELETE Failover Policies",
+        "summary": "Deletes failover policy",
         "operationId": "delete-network-mwan3-policies-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "description": "Deletes MWAN policy configuration",
+        "description": "Deletes failover policy",
         "tags": [
-          "Failover Policies"
+          "Policies"
         ]
       },
       "x-web": {
@@ -549,36 +637,46 @@
         }
       }
     },
-    "/mwan3/rules/config/{id}": {
+    "/failover/rules/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
           "name": "id",
+          "description": "The ID of the failover rule configuration",
           "in": "path",
           "required": true
         }
       ],
       "get": {
-        "summary": "GET Failover Rules",
+        "summary": "Returns failover rule",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_rule"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mwan3-rules-id",
-        "description": "Gets MWAN rule configuration"
+        "description": "Returns failover rule"
       },
       "put": {
-        "summary": "UPDATE Failover Rules",
+        "summary": "Updates failover rule",
         "operationId": "put-network-mwan3-rules-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mwan_rule"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -590,22 +688,25 @@
             }
           }
         },
-        "description": "Updates MWAN rule configuration",
+        "description": "Updates failover rule",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ]
       },
       "delete": {
-        "summary": "DELETE Failover Rules",
+        "summary": "Deletes failover rule",
         "operationId": "delete-network-mwan3-rules-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "description": "Deletes MWAN rule configuration",
+        "description": "Deletes failover rule",
         "tags": [
-          "Failover Rules"
+          "Rules"
         ]
       },
       "x-web": {
@@ -620,19 +721,139 @@
         }
       }
     },
-    "/mwan3/general/status": {
+    "/failover/members/config": {
       "get": {
-        "summary": "GET All Failover Status",
+        "summary": "Returns failover menmber configurations",
         "tags": [
-          "Failover Status"
+          "Members"
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200_get_action_status"
+            "$ref": "#/components/responses/200_mwan_member_multi"
+          }
+        },
+        "description": "Gets failover member configurations"
+      },
+      "put": {
+        "summary": "Updates failover member configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_member_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mwan_member_multi"
+              }
+            }
+          }
+        },
+        "description": "Updates failover members configurations",
+        "tags": [
+          "Members"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/failover/members/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "description": "The ID of the failover member configuration",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns failover member configuration",
+        "tags": [
+          "Members"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_member"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "Returns failover member configuration"
+      },
+      "put": {
+        "summary": "Updates failover member",
+        "operationId": "put-network-mwan3-rules-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mwan_member"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_member_rule"
+              }
+            }
+          }
+        },
+        "description": "Updates failover member configuration",
+        "tags": [
+          "Rules"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Failover",
+          "Multiwan"
+        ],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/failover/status": {
+      "get": {
+        "summary": "Returns failover status",
+        "tags": [
+          "General"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_get_action_status_mwan"
           }
         },
         "operationId": "get-network-mwan3-general-status",
-        "description": "Gets MWAN interface status"
+        "description": "Returns failover status"
       },
       "x-web": {
         "menu": [
@@ -689,9 +910,6 @@
             "flush_conntrack": [
               "connected"
             ],
-            "group": "string",
-            "ratio": "string",
-            "metric": "string",
             "track_method": "ping",
             "track_ip": [
               "string"
@@ -715,6 +933,7 @@
           "interval": {
             "type": "string",
             "description": "Number of seconds between each test",
+            "format": "irange(0, 65000)",
             "x-web": {
               "pretty": "Interval",
               "input-type": "input"
@@ -738,30 +957,6 @@
                 "connected": "Connected",
                 "disconnected": "Disconnected"
               }
-            }
-          },
-          "group": {
-            "type": "string",
-            "description": "Group",
-            "x-web": {
-              "pretty": "Group",
-              "input-type": "input"
-            }
-          },
-          "ratio": {
-            "type": "string",
-            "description": "The ratio values represent a percentage of load that will go through an interface.",
-            "x-web": {
-              "pretty": "Ratio",
-              "input-type": "input"
-            }
-          },
-          "metric": {
-            "type": "string",
-            "description": "Metric",
-            "x-web": {
-              "pretty": "Metric",
-              "input-type": "input"
             }
           },
           "track_method": {
@@ -794,6 +989,7 @@
           "reliability": {
             "type": "string",
             "description": "Number of hosts that must reply for the test to be considered as successful. Ensure there are at least this many hosts defined or the interface will always be considered down.",
+            "format": "irange(1, 65000)",
             "x-web": {
               "pretty": "Reliability",
               "input-type": "input"
@@ -802,6 +998,7 @@
           "count": {
             "type": "string",
             "description": "Number of pings to send to each host with each test",
+            "format": "irange(1, 65000)",
             "x-web": {
               "pretty": "Count",
               "input-type": "input"
@@ -810,6 +1007,7 @@
           "up": {
             "type": "string",
             "description": "Number of successful tests to considered link as alive",
+            "format": "irange(1, 65000)",
             "x-web": {
               "pretty": "Up",
               "input-type": "input"
@@ -818,6 +1016,7 @@
           "down": {
             "type": "string",
             "description": "Number of failed tests to considered link as dead",
+            "format": "irange(1, 65000)",
             "x-web": {
               "pretty": "Down",
               "input-type": "input"
@@ -874,23 +1073,6 @@
           }
         },
         "properties": {
-          "mode": {
-            "type": "string",
-            "enum": [
-              "mwan",
-              "balance"
-            ],
-            "description": "Mode",
-            "x-web": {
-              "pretty": "Mode",
-              "input-type": "select",
-              "enum-pretty": {
-                "mwan": "Failover",
-                "balance": "Load balancing"
-              }
-            },
-            "writeOnly": true
-          },
           "use_member": {
             "type": "array",
             "description": "Member used",
@@ -901,6 +1083,24 @@
             "items": {
               "type": "string"
             }
+          },
+          "last_resort": {
+            "type": "string",
+            "description": "Determine the fallback routing behaviour if all WAN members in the policy are down",
+            "x-web": {
+              "pretty": "Last resort",
+              "input-type": "select",
+              "enum-pretty": {
+                "unreachable": "Unreachable",
+                "blackhole": "Blackhole",
+                "default": "Default"
+              }
+            },
+            "enum": [
+              "unreachable",
+              "blackhole",
+              "default"
+            ]
           }
         },
         "required": [
@@ -923,6 +1123,24 @@
             "items": {
               "type": "string"
             }
+          },
+          "last_resort": {
+            "type": "string",
+            "description": "Determine the fallback routing behaviour if all WAN members in the policy are down",
+            "x-web": {
+              "pretty": "Last resort",
+              "input-type": "select",
+              "enum-pretty": {
+                "unreachable": "Unreachable",
+                "blackhole": "Blackhole",
+                "default": "Default"
+              }
+            },
+            "enum": [
+              "unreachable",
+              "blackhole",
+              "default"
+            ]
           }
         },
         "required": [
@@ -1052,6 +1270,51 @@
           }
         }
       },
+      "mwan_member": {
+        "type": "object",
+        "properties": {
+          "metric": {
+            "type": "string",
+            "description": "Metric",
+            "x-web": {
+              "pretty": "Metric"
+            }
+          },
+          "weight": {
+            "type": "string",
+            "description": "The ratio values represent a percentage of load that will go through an interface.",
+            "x-web": {
+              "pretty": "Ratio"
+            }
+          },
+          "interface": {
+            "type": "string",
+            "description": "Interface",
+            "x-web": {
+              "pretty": "Interface"
+            }
+          }
+        }
+      },
+      "mwan_member_editable": {
+        "type": "object",
+        "properties": {
+          "metric": {
+            "type": "string",
+            "description": "Metric",
+            "x-web": {
+              "pretty": "Metric"
+            }
+          },
+          "weight": {
+            "type": "string",
+            "description": "The ratio values represent a percentage of load that will go through an interface.",
+            "x-web": {
+              "pretty": "Ratio"
+            }
+          }
+        }
+      },
       "req_body_mwan_general": {
         "description": "",
         "type": "object",
@@ -1137,6 +1400,18 @@
           "data"
         ]
       },
+      "req_body_member_rule": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mwan_member_editable"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
       "req_body_mwan_general_multi": {
         "description": "",
         "type": "object",
@@ -1158,7 +1433,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The ID of the failover configuration"
                     }
                   }
                 },
@@ -1194,7 +1470,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The ID of the failover interface configuration"
                     }
                   }
                 },
@@ -1230,7 +1507,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The ID of the failover policy configuration"
                     }
                   }
                 },
@@ -1266,7 +1544,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The ID of the failover policy configuration"
                     }
                   }
                 },
@@ -1303,6 +1582,45 @@
                   "properties": {
                     "id": {
                       "type": "string",
+                      "description": "The ID of the failover rule configuration",
+                      "x-web": {
+                        "unique": true,
+                        "pretty": "Name"
+                      }
+                    },
+                    "priority": {
+                      "type": "string",
+                      "description": "Priority of the rule"
+                    }
+                  }
+                },
+                {
+                  "$ref": "#/components/schemas/mwan_rule"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mwan_member_multi": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the failover member configuration",
                       "x-web": {
                         "unique": true,
                         "pretty": "Name"
@@ -1311,7 +1629,7 @@
                   }
                 },
                 {
-                  "$ref": "#/components/schemas/mwan_rule"
+                  "$ref": "#/components/schemas/mwan_member_editable"
                 }
               ]
             }
@@ -1373,6 +1691,47 @@
           }
         }
       },
+      "200_mwan_member": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": {}
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the failover member configuration"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/mwan_member"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
       "200_mwan_interface": {
         "description": "Example response",
         "content": {
@@ -1391,7 +1750,21 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/mwan_interface"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the interface",
+                          "readOnly": true
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/mwan_interface"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -1447,7 +1820,24 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/mwan_rule"
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The ID of the failover configuration"
+                        },
+                        "priority": {
+                          "type": "string",
+                          "description": "Priority of the rule"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/mwan_rule"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -1484,7 +1874,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the failover configuration"
                           }
                         }
                       },
@@ -1531,7 +1922,18 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the failover interface configuration"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the interface",
+                            "readOnly": true
                           }
                         }
                       },
@@ -1578,12 +1980,60 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the failover policy configuration"
                           }
                         }
                       },
                       {
                         "$ref": "#/components/schemas/mwan_policy"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mwan_member_multi": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "data": [
+                    {}
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of the failover member configuration"
+                          }
+                        }
+                      },
+                      {
+                        "$ref": "#/components/schemas/mwan_member"
                       }
                     ]
                   }
@@ -1626,10 +2076,15 @@
                         "properties": {
                           "id": {
                             "type": "string",
+                            "description": "The ID of the failover rule configuration",
                             "x-web": {
                               "pretty": "Name",
                               "unique": true
                             }
+                          },
+                          "priority": {
+                            "type": "string",
+                            "description": "Priority of the rule"
                           }
                         }
                       },
@@ -1647,7 +2102,7 @@
           }
         }
       },
-      "200_get_action_status": {
+      "200_get_action_status_mwan": {
         "description": "Example response",
         "content": {
           "application/json": {
@@ -1726,7 +2181,9 @@
                         },
                         "track_ip": {
                           "type": "array",
-                          "items": {}
+                          "items": {
+                            "type": "string"
+                          }
                         },
                         "lost": {
                           "type": "number"

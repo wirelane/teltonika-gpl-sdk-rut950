@@ -3,21 +3,16 @@
   "paths": {
     "/dmvpn/config": {
       "get": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Returns all DMVPN instances",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200DMVPNMulti"
           }
         },
-        "operationId": "get-services-dmvpn-config"
+        "operationId": "get-services-dmvpn-config",
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Deletes specified DMVPN configurations",
         "responses": {
           "200": {
@@ -47,12 +42,10 @@
             }
           }
         },
-        "operationId": "delete-services-dmvpn-config"
+        "operationId": "delete-services-dmvpn-config",
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Updates specified DMVPN configurations",
         "responses": {
           "200": {
@@ -84,13 +77,11 @@
             }
           }
         },
-        "operationId": "put-services-dmvpn-config"
+        "operationId": "put-services-dmvpn-config",
+        "tags": ["General"]
       },
       "parameters": [],
       "post": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Creates DMVPN configuration",
         "responses": {
           "201": {
@@ -110,29 +101,64 @@
                     "$ref": "#/components/schemas/dmvpn_options"
                   }
                 }
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "data": {
+                      "id": "string",
+                      "enabled": "0",
+                      "config_mode": "spoke",
+                      "hub_address": "string",
+                      "ipaddr_tunlink": "string",
+                      "gre_ipaddr": "string",
+                      "netmask": "string",
+                      "gre_remote_ipaddr": "string",
+                      "mtu": "stri",
+                      "ikey": "strin",
+                      "okey": "strin",
+                      "local_identifier": "string",
+                      "remote_identifier": "string",
+                      "pre_shared_key": "string",
+                      "lifetime": "/regex/",
+                      "ikelifetime": "/regex/",
+                      "encryption_algorithm": "3des",
+                      "hash_algorithm": "md5",
+                      "dh_group": "modp768",
+                      "force_crypto_proposal": "0",
+                      "encryption_algorithm_2": "3des",
+                      "hash_algorithm_2": "md5",
+                      "dh_group_2": "modp768",
+                      "force_crypto_proposal_2": "0",
+                      "network_id": "string",
+                      "auth": "string",
+                      "holdtime": "strin",
+                      "redirect": "0",
+                      "nflog_group": "strin",
+                      "multicast": "0",
+                      "multicast_nflog_group": "strin"
+                    }
+                  }
+                }
               }
             }
           }
         },
         "description": "",
-        "operationId": "post-services-dmvpn-config"
+        "operationId": "post-services-dmvpn-config",
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "DMVPN"
-        ],
+        "menu": ["Services", "VPN", "DMVPN"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "DMVPN"
       }
     },
-    "/dmvpn/config/{dmvpn_id}": {
+    "/dmvpn/config/{id}": {
       "put": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Updates the specified DMVPN configuration",
         "responses": {
           "200": {
@@ -145,17 +171,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "dmvpn_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "DMVPN Instance identifier (ID)"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -171,12 +186,10 @@
             }
           }
         },
-        "operationId": "put-services-dmvpn-config-dmvpn-id"
+        "operationId": "put-services-dmvpn-config-dmvpn-id",
+        "tags": ["General"]
       },
       "get": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Returns the specified DMVPN configuration",
         "responses": {
           "200": {
@@ -186,23 +199,10 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "dmvpn_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "DMVPN Instance identifier (ID)"
-          }
-        ],
-        "operationId": "get-services-dmvpn-config-dmvpn-id"
+        "operationId": "get-services-dmvpn-config-dmvpn-id",
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "DMVPN"
-        ],
         "summary": "Deletes the specified DMVPN configuration",
         "responses": {
           "200": {
@@ -212,29 +212,28 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "dmvpn_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "DMVPN Instance identifier (ID)"
-          }
-        ],
-        "operationId": "delete-services-dmvpn-config-dmvpn-id"
+        "operationId": "delete-services-dmvpn-config-dmvpn-id",
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "DMVPN"
-        ],
+        "menu": ["Services", "VPN", "DMVPN"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
+        },
+        "name": "DMVPN"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "DMVPN Instance identifier (ID)"
         }
-      }
+      ]
     }
   },
   "components": {
@@ -295,10 +294,7 @@
             },
             "description": "Enables/disables DMVPN instance.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "config_mode": {
             "type": "string",
@@ -311,10 +307,7 @@
               "group": "DMVPN Parameters Configuration"
             },
             "description": "Selects the role of this instance: Hub - the central instance of DMVPN that connects other peers (spokes) into single network. There is no need to reconfigure the hub when connecting new spokes to it. Spoke - an instance that connects to the hub.",
-            "enum": [
-              "spoke",
-              "hub"
-            ]
+            "enum": ["spoke", "hub"]
           },
           "hub_address": {
             "type": "string",
@@ -491,22 +484,7 @@
               "group": "IPSEC Phase 1 Proposal Configuration"
             },
             "description": "The encryption algorithm must match with another incoming connection to establish IPSec. Phase 1.",
-            "enum": [
-              "3des",
-              "des",
-              "aes128",
-              "aes192",
-              "aes256",
-              "aes128gcm8",
-              "aes192gcm8",
-              "aes256gcm8",
-              "aes128gcm12",
-              "aes192gcm12",
-              "aes256gcm12",
-              "aes128gcm16",
-              "aes192gcm16",
-              "aes256gcm16"
-            ]
+            "enum": ["3des", "des", "aes128", "aes192", "aes256", "aes128gcm8", "aes192gcm8", "aes256gcm8", "aes128gcm12", "aes192gcm12", "aes256gcm12", "aes128gcm16", "aes192gcm16", "aes256gcm16"]
           },
           "hash_algorithm": {
             "type": "string",
@@ -523,13 +501,7 @@
               "group": "IPSEC Phase 1 Proposal Configuration"
             },
             "description": "The authentication algorithm must match with another incoming connection to establish IPSec. Phase 1.",
-            "enum": [
-              "md5",
-              "sha1",
-              "sha256",
-              "sha384",
-              "sha512"
-            ]
+            "enum": ["md5", "sha1", "sha256", "sha384", "sha512"]
           },
           "dh_group": {
             "type": "string",
@@ -552,19 +524,7 @@
               "group": "IPSEC Phase 1 Proposal Configuration"
             },
             "description": "The DH (Diffie-Hellman) group must match with another incoming connection to establish IPSec. Phase 1.",
-            "enum": [
-              "modp768",
-              "modp1024",
-              "modp1536",
-              "modp2048",
-              "modp3072",
-              "modp4096",
-              "ecp192",
-              "ecp224",
-              "ecp256",
-              "ecp384",
-              "ecp521"
-            ]
+            "enum": ["modp768", "modp1024", "modp1536", "modp2048", "modp3072", "modp4096", "ecp192", "ecp224", "ecp256", "ecp384", "ecp521"]
           },
           "force_crypto_proposal": {
             "type": "string",
@@ -575,10 +535,7 @@
             },
             "description": "Only chosen proposals will be used. Phase 1.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "encryption_algorithm_2": {
             "type": "string",
@@ -604,22 +561,7 @@
               "group": "IPSEC Phase 2 Proposal Configuration"
             },
             "description": "The encryption algorithm must match with another incoming connection to establish IPSec. Phase 2.",
-            "enum": [
-              "3des",
-              "des",
-              "aes128",
-              "aes192",
-              "aes256",
-              "aes128gcm8",
-              "aes192gcm8",
-              "aes256gcm8",
-              "aes128gcm12",
-              "aes192gcm12",
-              "aes256gcm12",
-              "aes128gcm16",
-              "aes192gcm16",
-              "aes256gcm16"
-            ]
+            "enum": ["3des", "des", "aes128", "aes192", "aes256", "aes128gcm8", "aes192gcm8", "aes256gcm8", "aes128gcm12", "aes192gcm12", "aes256gcm12", "aes128gcm16", "aes192gcm16", "aes256gcm16"]
           },
           "hash_algorithm_2": {
             "type": "string",
@@ -636,13 +578,7 @@
               "group": "IPSEC Phase 2 Proposal Configuration"
             },
             "description": "The authentication algorithm must match with another incoming connection to establish IPSec. Phase 2.",
-            "enum": [
-              "md5",
-              "sha1",
-              "sha256",
-              "sha384",
-              "sha512"
-            ]
+            "enum": ["md5", "sha1", "sha256", "sha384", "sha512"]
           },
           "dh_group_2": {
             "type": "string",
@@ -666,20 +602,7 @@
               "group": "IPSEC Phase 2 Proposal Configuration"
             },
             "description": "The DH (Diffie-Hellman) group must match with another incoming connection to establish IPSec. Phase 2.",
-            "enum": [
-              "modp768",
-              "modp1024",
-              "modp1536",
-              "modp2048",
-              "modp3072",
-              "modp4096",
-              "ecp192",
-              "ecp224",
-              "ecp256",
-              "ecp384",
-              "ecp521",
-              "no_pfs"
-            ]
+            "enum": ["modp768", "modp1024", "modp1536", "modp2048", "modp3072", "modp4096", "ecp192", "ecp224", "ecp256", "ecp384", "ecp521", "no_pfs"]
           },
           "force_crypto_proposal_2": {
             "type": "string",
@@ -690,10 +613,7 @@
             },
             "description": "Only chosen proposals will be used. Phase 2.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "network_id": {
             "type": "string",
@@ -739,10 +659,7 @@
             "format": "is_bool",
             "description": "Enables/disables DMVPN traffic redirection (Phase 3).",
             "default": "0",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "nflog_group": {
             "type": "string",
@@ -771,10 +688,7 @@
             "format": "is_bool",
             "description": "Allow use of dynamic routing protocols that use multicast",
             "default": "0",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "multicast_nflog_group": {
             "type": "string",
@@ -794,12 +708,44 @@
             "maxLength": 5
           }
         },
-        "required": [
-          "config_mode"
-        ]
+        "required": ["config_mode"],
+        "x-examples": {
+          "example-1": {
+            "enabled": "0",
+            "config_mode": "spoke",
+            "hub_address": "string",
+            "ipaddr_tunlink": "string",
+            "gre_ipaddr": "string",
+            "netmask": "string",
+            "gre_remote_ipaddr": "string",
+            "mtu": "stri",
+            "ikey": "strin",
+            "okey": "strin",
+            "local_identifier": "string",
+            "remote_identifier": "string",
+            "pre_shared_key": "string",
+            "lifetime": "/regex/",
+            "ikelifetime": "/regex/",
+            "encryption_algorithm": "3des",
+            "hash_algorithm": "md5",
+            "dh_group": "modp768",
+            "force_crypto_proposal": "0",
+            "encryption_algorithm_2": "3des",
+            "hash_algorithm_2": "md5",
+            "dh_group_2": "modp768",
+            "force_crypto_proposal_2": "0",
+            "network_id": "string",
+            "auth": "string",
+            "holdtime": "strin",
+            "redirect": "0",
+            "nflog_group": "strin",
+            "multicast": "0",
+            "multicast_nflog_group": "strin"
+          }
+        }
       },
       "dmvpn_options": {
-        "required": [ "id" ],
+        "required": ["id"],
         "allOf": [
           {
             "type": "object",
@@ -818,8 +764,53 @@
           {
             "$ref": "#/components/schemas/dmvpn_single_options"
           }
-        ]
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": "string",
+            "enabled": "0",
+            "config_mode": "spoke",
+            "hub_address": "string",
+            "ipaddr_tunlink": "string",
+            "gre_ipaddr": "string",
+            "netmask": "string",
+            "gre_remote_ipaddr": "string",
+            "mtu": "stri",
+            "ikey": "strin",
+            "okey": "strin",
+            "local_identifier": "string",
+            "remote_identifier": "string",
+            "pre_shared_key": "string",
+            "lifetime": "/regex/",
+            "ikelifetime": "/regex/",
+            "encryption_algorithm": "3des",
+            "hash_algorithm": "md5",
+            "dh_group": "modp768",
+            "force_crypto_proposal": "0",
+            "encryption_algorithm_2": "3des",
+            "hash_algorithm_2": "md5",
+            "dh_group_2": "modp768",
+            "force_crypto_proposal_2": "0",
+            "network_id": "string",
+            "auth": "string",
+            "holdtime": "strin",
+            "redirect": "0",
+            "nflog_group": "strin",
+            "multicast": "0",
+            "multicast_nflog_group": "strin"
+          }
+        }
       }
     }
-  }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "DMVPN",
+    "description": "DMVPN api documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

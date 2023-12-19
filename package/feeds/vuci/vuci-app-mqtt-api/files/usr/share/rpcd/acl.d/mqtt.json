@@ -1,10 +1,10 @@
 {
 	"services/mqtt/publisher": {
 		"read": {
-			"api": ["/mqtt_pub/*", "/certificates/config/*", "/mobile/modems/status_basic/*"]
+			"api": ["/mqtt/publisher/*", "/certificates/config/*", "/modems/status_basic/*"]
 		},
 		"write": {
-			"api": ["/mqtt_pub/*"]
+			"api": ["/mqtt/publisher/*"]
 		}
 	},
 	"services/mqtt/broker": {
@@ -21,14 +21,14 @@
 					"get_only_certificates"
 				]
 			},
-			"api": ["/mqtt_broker/*", "/certificates/config/*"]
+			"api": ["/mqtt/broker/*", "/mqtt/bridge/*", "/certificates/config/*"]
 		},
 		"write": {
 			"uci": [
 				"mosquitto",
 				"firewall"
 			],
-			"api": ["/mqtt_broker/*"]
+			"api": ["/mqtt/broker/*", "/mqtt/bridge/*"]
 		}
 	}
 }

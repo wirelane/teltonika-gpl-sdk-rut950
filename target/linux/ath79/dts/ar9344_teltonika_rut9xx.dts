@@ -150,7 +150,7 @@
 			reference-voltage-microvolt = <3300000>;
 			scan-for-address;
 		};
-		
+
 		hwmon@48 {
 			compatible = "ti,tla2021";
 			reg = <0x48>;
@@ -167,7 +167,132 @@
 			debounce-interval = <60>;
 		};
 	};
+
+	tlt_gpios { // Modify according to wiki page "DTS syntax with Libgpiod changes"
+		gpiochip_info {
+			hw_0 {
+				hwver = <0>;
+				gpiochip_count = <2>;
+
+				gpiochip_0 = <32>; // Built-in
+				gpiochip_1 = <16>; // Shift Register
+			};
+		};
+
+		ioman {
+			GPIO_2 {
+				line_name = "GPIO_IN_1";
+			};
+			GPIO_44 {
+				line_name = "GPIO_OUT_1";
+			};
+			GPIO_19 {
+				compatible_model = "RUT955";
+				line_name = "GPIO_ISOLATED_INPUT";
+			};
+			GPIO_21 {
+				compatible_model = "RUT955";
+				line_name = "GPIO_IN_2";
+			};
+			GPIO_40 {
+				compatible_model = "RUT955";
+				line_name = "GPIO_OUT_2";
+			};
+			GPIO_41 {
+				compatible_model = "RUT955";
+				line_name = "GPIO_RELAY_CLOSE_1";
+			};
+			GPIO_47 {
+				compatible_model = "RUT955";
+				line_name = "GPIO_RELAY_OPEN_1";
+			};
+		};
+
+		ledman {
+			GPIO_14 {
+				line_name = "LED_ETH_GREEN_1";
+				active_low;
+			};
+			GPIO_13 {
+				line_name = "LED_ETH_GREEN_2";
+				active_low;
+			};
+			GPIO_22 {
+				line_name = "LED_ETH_GREEN_3";
+				active_low;
+			};
+			GPIO_1 {
+				line_name = "LED_ETH_GREEN_4";
+				active_low;
+			};
+			GPIO_37 {
+				line_name = "LED_TECH_GEN_23";
+			};
+			GPIO_38 {
+				line_name = "LED_TECH_GEN_43";
+			};
+			GPIO_32 {
+				line_name = "LED_SSID_1";
+			};
+			GPIO_33 {
+				line_name = "LED_SSID_2";
+			};
+			GPIO_34 {
+				line_name = "LED_SSID_3";
+			};
+			GPIO_35 {
+				line_name = "LED_SSID_4";
+			};
+			GPIO_36 {
+				line_name = "LED_SSID_5";
+			};
+		};
+
+		misc {
+			GPIO_43 {
+				line_name = "GPIO_MODEM_RESET_1";
+			};
+			GPIO_42 {
+				line_name = "GPIO_MODEM_POWER_1";
+			};
+			GPIO_39 {
+				line_name = "GPIO_SIM_SELECT";
+			};
+			GPIO_45 {
+				line_name = "GPIO_RS485_RX_EN";
+			};
+			GPIO_46 {
+				line_name = "GPIO_RS232_DCD";
+			};
+		};
+	};
 };
+
+&mnfinfo {
+	simpin1 {
+		reg = <&config 0x70 0x8>;
+		type = "digit";
+		default = "";
+	};
+
+	simpin2 {
+		reg = <&config 0x78 0x8>;
+		type = "digit";
+		default = "";
+	};
+
+	sim_count {
+		default =  "2";
+	};
+
+	blver {
+		reg = <&boot 0x1fff6 0xa>;
+		strip-whitespaces;
+		type = "ascii";
+		log;
+	};
+};
+
 
 &ref {
 	clock-frequency = <40000000>;
@@ -202,7 +327,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
-			partition@0 {
+			boot: partition@0 {
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;

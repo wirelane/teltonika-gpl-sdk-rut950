@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/rip/access/config": {
+      "get": {
+        "summary": "Returns all RIP access configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiAcMulti"
+          }
+        },
+        "tags": ["Access List Filters"]
+      },
+      "post": {
+        "summary": "Creates RIP access configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200RiAcMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rip_access_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Access List Filters"]
+      },
+      "put": {
+        "summary": "Updates specified RIP access configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiAcMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/rip_access_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Access List Filters"]
+      },
+      "delete": {
+        "summary": "Deletes specified RIP access configurations",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Access List Filters"]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "RIP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "RIP"
+      }
+    },
+    "/rip/access/config/{id}": {
+      "get": {
+        "summary": "Returns specified RIP access configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiAc"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration RIP access identifier"
+          }
+        ],
+        "tags": ["Access List Filters"]
+      },
+      "put": {
+        "summary": "Updates specified RIP access configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiAc"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration RIP access identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rip_access_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Access List Filters"]
+      },
+      "delete": {
+        "summary": "Deletes specified RIP access configuration",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration RIP access identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Access List Filters"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "RIP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "RIP"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RiAc": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/rip_access_options_multi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200RiAcMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/rip_access_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "rip_access_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string"
+          },
+          "target": {
+            "x-web": {
+              "pretty": "RIP interface",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Applies the rule for the specified interface."
+          },
+          "action": {
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "permit": "Permit",
+                "deny": "Deny"
+              }
+            },
+            "type": "string",
+            "enum": ["permit", "deny"],
+            "description": "Denies or permits matched entry."
+          },
+          "net": {
+            "x-web": {
+              "pretty": "Network",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Filter network."
+          },
+          "direction": {
+            "x-web": {
+              "pretty": "Direction",
+              "input-type": "select",
+              "enum-pretty": {
+                "in": "Inbound",
+                "out": "Outbound"
+              }
+            },
+            "type": "string",
+            "enum": ["in", "out"],
+            "description": "If direction is Inbound, the access list is applied to input routes. If direction is Outbound the access list is applied to advertised routes."
+          }
+        }
+      },
+      "rip_access_options_multi": {
+        "title": "rip_access_options_multi",
+        "x-stoplight": {
+          "id": "k8odio4msat2b"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/rip_access_options"
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "RIP Access List Filters",
+    "description": "RIP access list filters api documentation",
+    "version": "1.0"
+  },
+  "tags": [
+    {
+      "name": "Access List Filters"
+    }
+  ]
+}

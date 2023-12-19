@@ -2,10 +2,10 @@
 	"system/admin/access_control/pam": {
 		"description": "access control pam",
 		"read": {
-		  "api": ["/access_control/security/pam/*"]
+		  "api": ["/access_control/pam/*"]
 		},
 		"write": {
-		  "api": ["/access_control/security/pam/*"]
+		  "api": ["/access_control/pam/*"]
 		}
 	}
 }

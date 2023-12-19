@@ -3,13 +3,13 @@
         "description": "usb tools configuration",
         "read": {
             "api": [
-                "/usb_tools/general/*"
+                "/usb_tools/*"
             ]
         },
         "write": {
             "api": [
-                "/usb_tools/general/*",
-                "/administration/general/actions/reboot/*"
+                "/usb_tools/*",
+                "/system/actions/reboot/*"
             ],
             "ubus": {
                 "vuci.system": [

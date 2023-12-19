@@ -2,83 +2,20 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/firewall/nat_offloading/config": {
+    "/nat_offloading/global": {
       "get": {
-        "summary": "GET All Firewall NAT Offloading",
-        "description": "Returns all NAT offloading settings with their options",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200NatOffMulti"
-          }
-        },
-        "tags": [
-          "Firewall NAT Offloading"
-        ]
-      },
-      "put": {
-        "summary": "UPDATE All Firewall NAT Offloading",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200NatOffMulti"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/nat_offloading_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Firewall NAT Offloading"
-        ]
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Firewall",
-          "General Settings"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false,
-          "nat_offloading": true
-        }
-      }
-    },
-    "/firewall/nat_offloading/config/general": {
-      "get": {
-        "summary": "GET Firewall NAT Offloading",
+        "summary": "Returns Firewall NAT Offloading settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200NatOff"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
         "tags": [
-          "Firewall NAT Offloading"
+          "General"
         ]
       },
       "put": {
-        "summary": "UPDATE Firewall NAT Offloading",
+        "summary": "Updates Firewall NAT Offloading settings",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200NatOff"
@@ -95,7 +32,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/nat_offloading_options_single_put"
+                    "$ref": "#/components/schemas/nat_offloading_options"
                   }
                 }
               }
@@ -103,14 +40,15 @@
           }
         },
         "tags": [
-          "Firewall NAT Offloading"
+          "General"
         ]
       },
       "x-web": {
+        "name": "NAT Offloading",
         "menu": [
           "Network",
           "Firewall",
-          "General Settings"
+          "NAT Offloading"
         ],
         "hw_tags": {
           "is_access_point": false,
@@ -167,42 +105,6 @@
     },
     "schemas": {
       "nat_offloading_options": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "x-web": {
-              "pretty": "Configuration ID",
-              "input-type": "input"
-            }
-          },
-          "flow_offloading": {
-            "type": "string",
-            "description": "Software based offloading for routing/NAT",
-            "x-web": {
-              "pretty": "Software flow offloading",
-              "input-type": "switch"
-            }
-          },
-          "flow_offloading_hw": {
-            "type": "string",
-            "description": "Hardware based offloading for routing/NAT",
-            "x-web": {
-              "pretty": "Hardware flow offloading",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "flow_offloading": "1"
-                }
-              ],
-              "hw_tags": {
-                "hw_nat": true
-              }
-            }
-          }
-        }
-      },
-      "nat_offloading_options_single_put": {
         "type": "object",
         "properties": {
           "flow_offloading": {

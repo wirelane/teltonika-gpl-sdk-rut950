@@ -6,18 +6,45 @@
     }
   ],
   "paths": {
-    "/usb_tools/memory_expansion/actions/change": {
+    "/usb_tools/memory_expansion/status": {
+      "get": {
+        "summary": "Returns all status information",
+        "tags": [
+          "Memory expansion"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200memoryall"
+          },
+          "422": {
+            "$ref": "#/components/responses/422memory"
+          }
+        }
+      },
+      "x-web": {
+        "name": "USB tools",
+        "menu": [
+          "System",
+          "Storage Memory Expansion",
+          "Storage Memory Expansion"
+        ],
+        "hw_tags": {
+          "usb": true
+        }
+      }
+    },
+    "/usb_tools/memory_expansion/actions/enable_expansion": {
       "post": {
         "tags": [
           "Memory expansion"
         ],
-        "summary": "Expand or shrink available memory",
+        "summary": "Enable memory expansion",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200memorychange"
           },
           "422": {
-            "$ref": "#/components/responses/422response"
+            "$ref": "#/components/responses/422memory"
           }
         },
         "requestBody": {
@@ -30,19 +57,6 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "expand": {
-                        "type": "string",
-                        "description": "This will wipe the external storage device contents and the router will reboot.",
-                        "format": "is_bool",
-                        "enum": [
-                          "0",
-                          "1"
-                        ],
-                        "x-web": {
-                          "pretty": "Enable storage expansion",
-                          "input-type": "switch"
-                        }
-                      },
                       "storage": {
                         "type": "string",
                         "enum": [
@@ -66,7 +80,8 @@
                               ]
                             }
                           ]
-                        }
+                        },
+                        "description": "External storage device path"
                       }
                     }
                   }
@@ -77,92 +92,38 @@
         }
       },
       "x-web": {
+        "name": "USB tools",
         "menu": [
           "System",
-          "Administration",
           "Storage Memory Expansion",
-          "USB"
+          "Storage Memory Expansion"
         ],
         "hw_tags": {
           "usb": true
         }
       }
     },
-    "/usb_tools/memory_expansion/config": {
-      "get": {
-        "summary": "Returns all status information",
+    "/usb_tools/memory_expansion/actions/disable_expansion": {
+      "post": {
         "tags": [
           "Memory expansion"
         ],
+        "summary": "Disable memory expansion",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200memoryall"
+            "$ref": "#/components/responses/200memorychange"
           },
           "422": {
-            "$ref": "#/components/responses/422response"
+            "$ref": "#/components/responses/422memory"
           }
         }
       },
       "x-web": {
+        "name": "USB tools",
         "menu": [
           "System",
-          "Administration",
           "Storage Memory Expansion",
-          "USB"
-        ],
-        "hw_tags": {
-          "usb": true
-        }
-      }
-    },
-    "/usb_tools/memory_expansion/config/info": {
-      "get": {
-        "summary": "Returns general memory expansion information",
-        "tags": [
-          "Memory expansion"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200memoryinfo"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Storage Memory Expansion",
-          "USB"
-        ],
-        "hw_tags": {
-          "usb": true
-        }
-      }
-    },
-    "/usb_tools/memory_expansion/config/status": {
-      "get": {
-        "summary": "Returns status of expansion",
-        "tags": [
-          "Memory expansion"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200memorystatus"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Storage Memory Expansion",
-          "USB"
+          "Storage Memory Expansion"
         ],
         "hw_tags": {
           "usb": true
@@ -186,17 +147,13 @@
                 "data": {
                   "type": "object",
                   "properties": {
-                    "status": {
-                      "type": "string"
+                    "expansion_enabled": {
+                      "type": "string",
+                      "description": "Returns status of current memory expansion state."
                     },
-                    "msd_status": {
-                      "type": "string"
-                    },
-                    "mmc_status": {
-                      "type": "string"
-                    },
-                    "checked": {
-                      "type": "string"
+                    "expansion_job_status": {
+                      "type": "string",
+                      "description": "Returns status of currently ongoing or last memory expansion job."
                     }
                   }
                 }
@@ -205,53 +162,22 @@
           }
         }
       },
-      "200memoryinfo": {
-        "description": "Returns section",
+      "422memory": {
+        "description": "Error appeared while parsing request",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "properties": {
                 "success": {
+                  "type": "boolean",
                   "description": "Operation status",
-                  "type": "boolean"
+                  "default": false
                 },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "msd_status": {
-                      "type": "string"
-                    },
-                    "mmc_status": {
-                      "type": "string"
-                    },
-                    "checked": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "200memorystatus": {
-        "description": "Returns section",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "description": "Operation status",
-                  "type": "boolean"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string"
-                    }
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/memory_default_error"
                   }
                 }
               }
@@ -273,8 +199,8 @@
                 "data": {
                   "type": "object",
                   "properties": {
-                    "return_code": {
-                      "type": "number"
+                    "response": {
+                      "type": "string"
                     }
                   }
                 }
@@ -284,6 +210,31 @@
         }
       }
     },
-    "schemas": {}
+    "schemas": {
+      "memory_default_error": {
+        "title": "default_error",
+        "type": "object",
+        "description": "Default error object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "Error code"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "section": {
+            "type": "string",
+            "description": "Error section"
+          }
+        },
+        "required": [
+          "code",
+          "error",
+          "source"
+        ]
+      }
+    }
   }
 }

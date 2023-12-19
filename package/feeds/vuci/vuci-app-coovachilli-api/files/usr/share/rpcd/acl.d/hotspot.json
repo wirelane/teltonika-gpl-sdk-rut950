@@ -2,24 +2,26 @@
 	"services/hotspot/general": {
 		"read": {
 			"api": [
-				"/interfaces/config/*",
+				"/hotspot/config/*",
+				"/hotspot/options/*",
+				"/hotspot/status/*",
 				"/interfaces/status/*",
 				"/certificates/config/*",
-				"/device/info/*",
+				"/system/device/status/*",
 				"/hotspot/users/config/*",
 				"/hotspot/groups/config/*",
-				"/hotspot/general/*",
-				"/mobile/modems/status_basic/*",
+				"/modems/status_basic/*",
 				"/wireless/interfaces/status/*",
-				"/dhcp/servers/config/*",
+				"/dhcp/servers/ipv4/config/*",
 				"/users/config/*",
-				"/wireless/interfaces/config/*",
-				"/devices/status/*"
+				"/wireless/interfaces/config/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/hotspot/general/*"
+				"/hotspot/config/*",
+				"/hotspot/options/*",
+				"/hotspot/status/*"
 			]
 		}
 	},
@@ -54,14 +56,12 @@
 		"description": "hotspot landing page configuration",
 		"read": {
 			"api": [
-				"/hotspot/landing/*",
 				"/hotspot/themes/*",
 				"/hotspot/images/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/hotspot/landing/*",
 				"/hotspot/themes/*",
 				"/hotspot/images/*"
 			]
@@ -84,20 +84,7 @@
 		"description": "hotspot logs",
 		"read": {
 			"api": [
-				"/hotspot/general/logs/*"
-			]
-		}
-	},
-	"services/hotspot": {
-		"description": "hotspot API",
-		"read": {
-			"api": [
-				"/hotspot/*"
-			]
-		},
-		"write": {
-			"api": [
-				"/hotspot/*"
+				"/hotspot/logs/*"
 			]
 		}
 	}

@@ -5,8 +5,7 @@
 			"api": [
 				"/recipients/*",
 				"/events_reporting/*",
-				"/mobile/modems/*",
-				"/devices/*"
+				"/modems/*"
 			]
 		},
 		"write": {

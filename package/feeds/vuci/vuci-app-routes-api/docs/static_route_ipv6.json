@@ -1,143 +1,24 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/routes/static/ipv6/config/{id}": {
+    "/ip_routes/ipv6/config": {
       "get": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Returns specified static ipv6 route configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200StRoIPv6"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration static ipv6 route identifier"
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Updates specified static ipv6 route configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200StRoIPv6"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration static ipv6 route identifier"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/static_route_ipv6_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Deletes specified static ipv6 route configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration static ipv6 route identifier"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Routing",
-          "Static Routes"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/routes/static/ipv6/config": {
-      "get": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Returns all static ipv6 route configurations",
+        "summary": "Returns static IPv6 route configurations",
         "description": "",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200StRoIPv6Multi"
           }
-        }
+        },
+        "tags": [
+          "IPv6"
+        ]
       },
       "post": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Creates static ipv6 route configuration",
+        "summary": "Creates static IPv6 route configuration",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200StRoIPv6"
-          },
           "201": {
-            "$ref": "#/components/responses/201response"
+            "$ref": "#/components/responses/200StRoIPv6"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -157,16 +38,19 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "IPv6"
+        ]
       },
       "put": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Updates specified static ipv6 route configurations",
+        "summary": "Updates static IPv6 route configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200StRoIPv6Multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -190,10 +74,7 @@
                             "id": {
                               "x-web": {
                                 "pretty": "ID",
-                                "input-type": "input",
-                                "hw_tags": {
-                                  "is_switch": true
-                                }
+                                "input-type": "input"
                               },
                               "type": "string",
                               "description": "Route ID."
@@ -210,19 +91,19 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "IPv6"
+        ]
       },
       "delete": {
-        "tags": [
-          "static_route_ipv6"
-        ],
-        "summary": "Deletes specified static ipv6 route configurations",
+        "summary": "Deletes static IPv6 route configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted_multi"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -244,7 +125,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "IPv6"
+        ]
       },
       "parameters": [],
       "x-web": {
@@ -255,7 +139,125 @@
         ],
         "hw_tags": {
           "is_access_point": false
+        },
+        "name": "IP Routes"
+      }
+    },
+    "/ip_routes/ipv6/config/{id}": {
+      "get": {
+        "summary": "Returns static IPv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the IPv6 route configuration"
+          }
+        ],
+        "tags": [
+          "IPv6"
+        ]
+      },
+      "put": {
+        "summary": "Updates static IPv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200StRoIPv6"
+          },
+          "404": {
+            "$ref": "#/components/responses/422response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the IPv6 route configuration"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/static_route_ipv6_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "IPv6"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes static IPv6 route configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the IPv6 route configuration"
+          }
+        ],
+        "tags": [
+          "IPv6"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the IPv6 route configuration"
         }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "Routing",
+          "Static Routes"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "IP Routes"
       }
     }
   },
@@ -280,10 +282,7 @@
                         "id": {
                           "x-web": {
                             "pretty": "ID",
-                            "input-type": "input",
-                            "hw_tags": {
-                              "is_switch": true
-                            }
+                            "input-type": "input"
                           },
                           "type": "string",
                           "description": "Route ID."
@@ -322,10 +321,7 @@
                           "id": {
                             "x-web": {
                               "pretty": "ID",
-                              "input-type": "input",
-                              "hw_tags": {
-                                "is_switch": true
-                              }
+                              "input-type": "input"
                             },
                             "type": "string",
                             "description": "Route ID."
@@ -415,9 +411,22 @@
               "blackhole",
               "anycast"
             ]
+          },
+          "table": {
+            "type": "string",
+            "description": "The ID of routing table to which route belongs.",
+            "x-web": {
+              "pretty": "Table ID",
+              "input-type": "input"
+            }
           }
         }
       }
     }
+  },
+  "info": {
+    "title": "Static IPv6 routes",
+    "version": "1.0",
+    "description": "Static IPv6 routes api documentation"
   }
 }

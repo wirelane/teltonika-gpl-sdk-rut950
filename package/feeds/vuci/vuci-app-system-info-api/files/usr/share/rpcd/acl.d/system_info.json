@@ -2,10 +2,10 @@
 	"system/info": {
 		"description": "device info",
 		"read": {
-			"api": ["/device/info/*", "/device/status/*", "/device/load/*"]
+			"api": ["/system/device/status/*", "/system/device/usage/*", "/system/device/load/*"]
 		},
 		"write": {
-			"api": ["/device/info/*", "/device/status/*", "/device/load/*"]
+			"api": ["/system/device/status/*", "/system/device/usage/*", "/system/device/load/*"]
 		}
 	}
 }

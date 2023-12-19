@@ -1,15 +1,95 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "Cumulocity"
-    }
-  ],
+  "tags": [],
   "paths": {
-    "/cloud_solutions/cumulocity/config/general": {
+    "/cumulocity/config": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns Cumulocity configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CumulocityMulti"
+          }
+        }
+      },
       "put": {
         "tags": [
+          "General"
+        ],
+        "summary": "Updates Cumulocity configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200CumulocityMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "",
+                    "items": {
+                      "$ref": "#/components/schemas/cumulocity_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Cloud Solutions",
           "Cumulocity"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Cumulocity"
+      }
+    },
+    "/cumulocity/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns Cumulocity configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Cumulocity"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "General"
         ],
         "summary": "Updates Cumulocity configuration",
         "responses": {
@@ -48,17 +128,6 @@
           }
         }
       },
-      "get": {
-        "tags": [
-          "Cumulocity"
-        ],
-        "summary": "Returns Cumulocity configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Cumulocity"
-          }
-        }
-      },
       "x-web": {
         "menu": [
           "Services",
@@ -68,74 +137,14 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Cumulocity"
       }
     },
-    "/cloud_solutions/cumulocity/config": {
-      "put": {
-        "tags": [
-          "Cumulocity"
-        ],
-        "summary": "Updates Cumulocity configuration in an array",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200CumulocityMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "",
-                    "items": {
-                      "$ref": "#/components/schemas/cumulocity_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "description": ""
-      },
-      "get": {
-        "tags": [
-          "Cumulocity"
-        ],
-        "summary": "Returns Cumulocity configuration in an array",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200CumulocityMulti"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cumulocity"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/cloud_solutions/cumulocity/actions/reset_auth": {
+    "/cumulocity/actions/reset_auth": {
       "post": {
         "tags": [
-          "Cumulocity"
+          "General"
         ],
         "summary": "Resets authentication data",
         "responses": {
@@ -158,7 +167,8 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Cumulocity"
       }
     }
   },
@@ -232,6 +242,7 @@
               "0",
               "1"
             ],
+            "format": "is_bool",
             "x-web": {
               "pretty": "Use SSL/TLS",
               "input-type": "switch"
@@ -261,11 +272,7 @@
               "input-type": "input"
             }
           }
-        },
-        "required": [
-          "server",
-          "interval"
-        ]
+        }
       },
       "cumulocity_options": {
         "allOf": [

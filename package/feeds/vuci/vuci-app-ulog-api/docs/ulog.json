@@ -1,25 +1,40 @@
 {
   "openapi": "3.0.0",
-  "info": {
-    "title": "ULog",
-    "version": "1.0",
-    "contact": {}
-  },
-  "tags": [
-    {
-      "name": "Traffic logging"
-    },
-    {
-      "name": "Traffic logging FTP"
-    }
-  ],
+  "tags": [],
   "servers": [],
   "paths": {
-    "/ulog/general/config": {
+    "/ulog/available_interfaces/options": {
       "get": {
-        "summary": "Returns the Traffic logging configuration in an array",
+        "summary": "Returns Traffic Logging options",
         "tags": [
-          "Traffic logging"
+          "Settings"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ulog_options"
+          }
+        },
+        "operationId": "get-services-ulog-options",
+        "description": ""
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Traffic Logging",
+          "Traffic Logging"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Traffic Logging"
+      }
+    },
+    "/ulog/config": {
+      "get": {
+        "summary": "Returns the Traffic Logging configuration in an array",
+        "tags": [
+          "Settings"
         ],
         "responses": {
           "200": {
@@ -30,11 +45,17 @@
         "description": ""
       },
       "put": {
-        "summary": "Updates the Traffic logging configuration in an array",
+        "summary": "Updates the Traffic Logging configuration in an array",
         "operationId": "put-services-ulog-config",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -42,41 +63,62 @@
         },
         "description": "",
         "tags": [
-          "Traffic logging"
+          "Settings"
         ]
       },
       "x-web": {
         "menu": [
           "Services",
-          "Traffic logging",
-          "Traffic logging"
+          "Traffic Logging",
+          "Traffic Logging"
         ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Traffic Logging"
       }
     },
-    "/ulog/general/config/general": {
+    "/ulog/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
       "get": {
-        "summary": "Returns the Traffic logging configuration",
+        "summary": "Returns the Traffic Logging configuration",
         "tags": [
-          "Traffic logging"
+          "Settings"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-ulog-config-sid",
         "description": ""
       },
       "put": {
-        "summary": "Updates the Traffic logging configuration",
+        "summary": "Updates the Traffic Logging configuration",
         "operationId": "put-services-ulog-config-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -84,26 +126,27 @@
         },
         "description": "",
         "tags": [
-          "Traffic logging"
+          "Settings"
         ]
       },
       "x-web": {
         "menu": [
           "Services",
-          "Traffic logging",
-          "Traffic logging"
+          "Traffic Logging",
+          "Traffic Logging"
         ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Traffic Logging"
       }
     },
-    "/ulog/general/status": {
+    "/ulog/status": {
       "get": {
-        "summary": "Returns Traffic logging status",
+        "summary": "Returns Traffic Logging status",
         "tags": [
-          "Traffic logging"
+          "Settings"
         ],
         "responses": {
           "200": {
@@ -122,40 +165,15 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
-      }
-    },
-    "/ulog/general/options": {
-      "get": {
-        "summary": "Returns Traffic logging options",
-        "tags": [
-          "Traffic logging"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/ulog_options"
-          }
         },
-        "operationId": "get-services-ulog-options",
-        "description": ""
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Traffic logging",
-          "Traffic logging"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
+        "name": "Traffic Logging"
       }
     },
     "/ulog/ftp/config": {
       "get": {
-        "summary": "Returns the Traffic logging FTP configuration",
+        "summary": "Returns the Traffic Logging FTP configuration",
         "tags": [
-          "Traffic logging FTP"
+          "FTP Settings"
         ],
         "responses": {
           "200": {
@@ -166,11 +184,17 @@
         "description": ""
       },
       "put": {
-        "summary": "Updates the Traffic logging FTP configuration",
+        "summary": "Updates the Traffic Logging FTP configuration",
         "operationId": "put-services-ulog_ftp-config",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_ftp_many"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -178,41 +202,62 @@
         },
         "description": "",
         "tags": [
-          "Traffic logging FTP"
+          "FTP Settings"
         ]
       },
       "x-web": {
         "menu": [
           "Services",
-          "Traffic logging",
-          "Traffic logging"
+          "Traffic Logging",
+          "Traffic Logging"
         ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Traffic Logging"
       }
     },
-    "/ulog/ftp/config/general": {
+    "/ulog/ftp/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
       "get": {
-        "summary": "Returns the Traffic logging FTP configuration",
+        "summary": "Returns the Traffic Logging FTP configuration",
         "tags": [
-          "Traffic logging FTP"
+          "FTP Settings"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_ftp_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-ulog_ftp-config-sid",
         "description": ""
       },
       "put": {
-        "summary": "Updates the Traffic logging FTP configuration",
+        "summary": "Updates the Traffic Logging FTP configuration",
         "operationId": "put-services-ulog_ftp-config-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_ftp_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -220,19 +265,20 @@
         },
         "description": "",
         "tags": [
-          "Traffic logging FTP"
+          "FTP Settings"
         ]
       },
       "x-web": {
         "menu": [
           "Services",
-          "Traffic logging",
-          "Traffic logging"
+          "Traffic Logging",
+          "Traffic Logging"
         ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Traffic Logging"
       }
     }
   },
@@ -244,7 +290,7 @@
         "properties": {
           "enabled": {
             "type": "string",
-            "description": "Enable traffic logging",
+            "description": "Enable Traffic Logging",
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -262,7 +308,72 @@
             },
             "x-web": {
               "pretty": "Networks",
-              "input-type": "select"
+              "input-type": "input",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "has_hotspot": true,
+                    "vlan": 0
+                  },
+                  "values": ["hotspot"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": true,
+                    "vlan": 1
+                  },
+                  "values": ["hotspot", "lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": true,
+                    "vlan": 2
+                  },
+                  "values": ["hotspot", "lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": true,
+                    "vlan": 3
+                  },
+                  "values": ["hotspot", "lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": true,
+                    "vlan": 4
+                  },
+                  "values": ["hotspot", "lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": false,
+                    "vlan": 1
+                  },
+                  "values": ["lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": false,
+                    "vlan": 2
+                  },
+                  "values": ["lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": false,
+                    "vlan": 3
+                  },
+                  "values": ["lan"]
+                },
+                {
+                  "hw_tags": {
+                    "has_hotspot": false,
+                    "vlan": 4
+                  },
+                  "values": ["lan"]
+                }
+              ]
             }
           }
         },
@@ -474,6 +585,220 @@
           }
         },
         "required": [
+          "host",
+          "port",
+          "hours",
+          "minutes",
+          "interval",
+          "weekdays"
+        ]
+      },
+      "ulog_ftp_resp": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The domain name or IP address of the server",
+            "format": "host",
+            "x-web": {
+              "pretty": "Server address",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "The user name of the FTP server that will be used for logs uploading",
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
+            "enum": [
+              "unset",
+              "set"
+            ],
+            "readOnly": true
+          },
+          "port": {
+            "type": "string",
+            "description": "The TCP/IP port of the server",
+            "format": "port",
+            "default": "21",
+            "x-web": {
+              "pretty": "Port",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "remote_file_path": {
+            "type": "string",
+            "description": "FTP server's subfolder in which received file will be stored. Entry should end with a slash (either \"\/\" or \"\\\")",
+            "format": "string",
+            "x-web": {
+              "pretty": "Subfolder",
+              "input-type": "input",
+              "group": "FTP Server"
+            }
+          },
+          "extra_name_info": {
+            "type": "string",
+            "description": "Extra information to be added to file name",
+            "enum": [
+              "none",
+              "mac",
+              "serial",
+              "custom"
+            ],
+            "x-web": {
+              "pretty": "File name extras",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "enum-pretty": {
+                "none": "No extra information",
+                "mac": "MAC address",
+                "serial": "Serial number",
+                "custom": "Custom string"
+              }
+            }
+          },
+          "custom_string": {
+            "type": "string",
+            "description": "Custom string to be added to ftp file name",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9_+.-]+$",
+            "x-web": {
+              "pretty": "Custom string",
+              "input-type": "input",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "extra_name_info": "custom"
+                }
+              ]
+            }
+          },
+          "fixed": {
+            "type": "string",
+            "description": "The schedule mode to be used for uploading to FTP server",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Mode",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "enum-pretty": {
+                "0": "Interval",
+                "1": "Fixed"
+              }
+            }
+          },
+          "hours": {
+            "type": "string",
+            "description": "Uploading will be performed on this specific time of the day. Range [0 - 23]",
+            "format": "irange(0,23)",
+            "x-web": {
+              "pretty": "Hours",
+              "input-type": "input",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "fixed": "1"
+                }
+              ]
+            }
+          },
+          "minutes": {
+            "type": "string",
+            "description": "Uploading will be performed on this specific time of the day. Range [0 - 59]",
+            "format": "irange(0,59)",
+            "x-web": {
+              "pretty": "Minutes",
+              "input-type": "input",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "fixed": "1"
+                }
+              ]
+            }
+          },
+          "interval": {
+            "type": "string",
+            "description": "Upload logs to server every x hours",
+            "default": "1",
+            "enum": [
+              "1",
+              "2",
+              "4",
+              "8",
+              "12",
+              "24"
+            ],
+            "x-web": {
+              "pretty": "Upload interval",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "depends": [
+                {
+                  "fixed": "0"
+                }
+              ],
+              "enum-pretty": {
+                "1": "1 hour",
+                "2": "2 hours",
+                "4": "4 hours",
+                "8": "8 hours",
+                "12": "12 hours",
+                "24": "24 hours"
+              }
+            }
+          },
+          "weekdays": {
+            "type": "array",
+            "description": "Uploading will be performed on these days only",
+            "items": {
+              "type": "string",
+              "enum": [
+                "mon",
+                "tue",
+                "wed",
+                "thu",
+                "fri",
+                "sat",
+                "sun"
+              ]
+            },
+            "x-web": {
+              "pretty": "Days",
+              "input-type": "select",
+              "group": "Upload Settings",
+              "enum-pretty": {
+                "mon": "Monday",
+                "tue": "Tuesday",
+                "wed": "Wednesday",
+                "thu": "Thursday",
+                "fri": "Friday",
+                "sat": "Saturday",
+                "sun": "Sunday"
+              }
+            }
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "hours",
+          "minutes",
+          "interval",
           "weekdays"
         ]
       },
@@ -802,7 +1127,7 @@
                         ]
                       },
                       {
-                        "$ref": "#/components/schemas/ulog_ftp"
+                        "$ref": "#/components/schemas/ulog_ftp_resp"
                       }
                     ]
                   }
@@ -840,7 +1165,7 @@
                       }
                     },
                     {
-                      "$ref": "#/components/schemas/ulog_ftp"
+                      "$ref": "#/components/schemas/ulog_ftp_resp"
                     }
                   ]
                 }

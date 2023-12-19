@@ -1,0 +1,427 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "General",
+    "version": "1.0",
+    "description": "Administration General API documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ],
+  "paths": {
+    "/system/languages/options": {
+      "get": {
+        "summary": "Returns installed languages",
+        "tags": ["General"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "name": "English",
+                          "code": "en"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": [
+                        {
+                          "name": "English",
+                          "code": "en"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-system-ui-languages",
+        "description": ""
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "General"]
+      }
+    },
+    "/system/config": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Returns the Administration General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneral"
+          }
+        }
+      },
+      "put": {
+        "tags": ["General"],
+        "summary": "Updates the Administration General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneral"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/administration_general_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "General"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/system/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "tags": ["General"],
+        "summary": "Returns the Administration General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneralSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ]
+      },
+      "put": {
+        "tags": ["General"],
+        "summary": "Updates the Administration General configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminGeneralSingle"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/administration_general_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration ID"
+          }
+        ]
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "General"],
+        "hw_tags": {
+          "is_access_point": false
+        }
+      }
+    },
+    "/system/actions/change_password_firstlogin": {
+      "post": {
+        "tags": ["General"],
+        "summary": "Changes password on first login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/change_password_firstlogin_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "General"]
+      }
+    },
+    "/system/actions/reboot": {
+      "post": {
+        "tags": ["General"],
+        "summary": "Reboots device",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200AdminReboot"
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["System", "Administration", "General"]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200AdminReboot": {
+        "description": "Reboots device",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminGeneral": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/administration_general_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200AdminGeneralSingle": {
+        "description": "Returns configuration",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/administration_general_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "change_password_firstlogin_options": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "description": "New password to set",
+            "type": "string",
+            "format": "root_password"
+          },
+          "password_confirm": {
+            "description": "New Password to set confirmation",
+            "type": "string",
+            "format": "root_password"
+          }
+        },
+        "required": ["password", "password_confirm"]
+      },
+      "administration_general_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/administration_general_single_options"
+          }
+        ]
+      },
+      "administration_general_single_options": {
+        "type": "object",
+        "properties": {
+          "lang_code": {
+            "x-web": {
+              "pretty": "Language",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Sets current language of Web interface."
+          },
+          "advanced": {
+            "x-web": {
+              "pretty": "Configuration mode",
+              "input-type": "select",
+              "enum-pretty": {
+                "0": "Basic",
+                "1": "Advanced"
+              }
+            },
+            "type": "string",
+            "description": "Turn between basic and advanced modes in Web Interface.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
+          "firstlogin": {
+            "x-web": {
+              "pretty": "First login"
+            },
+            "type": "string",
+            "description": "Indicates status of a first login.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "readOnly": true
+          },
+          "devicename": {
+            "x-web": {
+              "pretty": "Device name",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies device name, it will be seen in Status page.",
+            "maxLength": 20
+          },
+          "hostname": {
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies how device will be seen by other devices.",
+            "format": "host"
+          }
+        }
+      }
+    }
+  }
+}

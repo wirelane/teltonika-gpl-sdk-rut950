@@ -100,10 +100,16 @@
           "Status",
           "Overview",
           "Overview"
-        ]
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
-    "/overview/config/{overview_id}": {
+    "/overview/config/{id}": {
       "get": {
         "summary": "Returns the selected Overview configuration",
         "tags": [
@@ -186,7 +192,7 @@
           "schema": {
             "type": "string"
           },
-          "name": "overview_id",
+          "name": "id",
           "in": "path",
           "required": true,
           "description": "Overview configuration identifier (ID)"
@@ -197,7 +203,13 @@
           "Status",
           "Overview",
           "Overview"
-        ]
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     }
   },

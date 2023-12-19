@@ -7,7 +7,7 @@ DEVICE_VARS += LOADER_FLASH_OFFS LOADER_TYPE
 DEVICE_VARS += LOADER_FLASH_MAX LOADER_KERNEL_MAGIC
 
 DEVICE_VARS += TPLINK_HWID TPLINK_HWREV TPLINK_FLASHLAYOUT TPLINK_HEADER_VERSION
-DEVICE_VARS += UBOOT_NAME UBOOT_SIZE
+DEVICE_VARS += UBOOT_SIZE
 DEVICE_VARS += CONFIG_SIZE
 DEVICE_VARS += ART_SIZE NO_ART
 DEVICE_VARS += MASTER_IMAGE_SIZE
@@ -20,7 +20,7 @@ $(patsubst %-256k,0x40000,$(patsubst %-128k,0x20000,$(patsubst %-64k,0x10000,$(p
 endef
 
 define Build/append-tlt-uboot
-  dd if="$(BIN_DIR)/u-boot_$(UBOOT_NAME)$(word 1,$(1)).bin" >> $@
+  dd if="$(BIN_DIR)/u-boot_$(word 1,$(DEVICE_BOOT_NAME))$(word 1,$(1)).bin" >> $@
 endef
 
 define Build/append-tlt-config
@@ -76,7 +76,6 @@ define Device/Default
   LOADER_FLASH_OFFS :=
   LOADER_TYPE :=
   COMPILE :=
-  UBOOT_NAME :=
   UBOOT_SIZE := 131072
   CONFIG_SIZE := 65536
   ART_SIZE := 65536

@@ -6,17 +6,13 @@
     "description": "Speed test api documentation",
     "contact": {}
   },
-  "tags": [
-    {
-      "name": "Speed test"
-    }
-  ],
+  "tags": [],
   "paths": {
     "/speedtest/status": {
       "get": {
-        "summary": "Get speed test status",
+        "summary": "Returns information about speed test state",
         "tags": [
-          "Speed test"
+          "General"
         ],
         "responses": {
           "200": {
@@ -29,59 +25,18 @@
           "System",
           "Maintenance",
           "Speed Test"
-        ]
-      }
-    },
-    "/speedtest/wan": {
-      "get": {
-        "summary": "Get WAN interface",
-        "tags": [
-          "Speed test"
         ],
-        "operationId": "get-services-speedtest",
-        "description": "Get current main WAN interface and it's IP address",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "sid": {
-                          "type": "string"
-                        },
-                        "ip": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
         }
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Speed Test"
-        ]
       }
     },
-    "/speedtest/servers": {
+    "/speedtest/options": {
       "get": {
-        "summary": "Get speed test server list",
+        "summary": "Returns a list of available speed test servers",
         "tags": [
-          "Speed test"
+          "General"
         ],
         "responses": {
           "200": {
@@ -94,22 +49,29 @@
           "System",
           "Maintenance",
           "Speed Test"
-        ]
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
       }
     },
     "/speedtest/actions/get_ip": {
       "post": {
-        "summary": "Get ip from server url",
+        "summary": "Converts speed test server URL to IP address",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_get_ip"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
           "$ref": "#/components/requestBodies/speedtest_get_ip"
         },
         "tags": [
-          "Speed test"
+          "General"
         ]
       },
       "x-web": {
@@ -117,19 +79,23 @@
           "System",
           "Maintenance",
           "Speed Test"
-        ]
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
       }
     },
     "/speedtest/actions/refresh": {
       "post": {
-        "summary": "Refresh server lists on the device",
+        "summary": "Refreshes speed test server list on device",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_speedtest_server_list"
           }
         },
         "tags": [
-          "Speed test"
+          "General"
         ]
       },
       "x-web": {
@@ -137,22 +103,29 @@
           "System",
           "Maintenance",
           "Speed Test"
-        ]
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
       }
     },
     "/speedtest/actions/start": {
       "post": {
-        "summary": "Start speed test",
+        "summary": "Starts a new speed test",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_start"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
           "$ref": "#/components/requestBodies/speedtest_start"
         },
         "tags": [
-          "Speed test"
+          "General"
         ]
       },
       "x-web": {
@@ -160,7 +133,11 @@
           "System",
           "Maintenance",
           "Speed Test"
-        ]
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
       }
     }
   },
@@ -235,6 +212,14 @@
             "lat": {
               "type": "string",
               "description": "Latitude of the server."
+            },
+            "ip": {
+              "type": "string",
+              "description": "IP address of the server."
+            },
+            "force_ping_select": {
+              "type": "string",
+              "description": "Force ping select."
             }
           }
         },
@@ -275,7 +260,9 @@
                     "downloaded": 0,
                     "avgDownloadSpeed": 0,
                     "serverURL": "",
-                    "uploaded": 0
+                    "uploaded": 0,
+					"wan_name": "WAN",
+					"wan_ip": "192.0.2.5"
                   }
                 }
               },
@@ -295,6 +282,14 @@
                     "uploaded"
                   ],
                   "properties": {
+                    "wan_ip": {
+                      "type": "string",
+                      "description": "Wan interface name"
+                    },
+                    "wan_name": {
+                      "type": "string",
+                      "description": "Wan interface IP address"
+                    },
                     "state": {
                       "type": "string",
                       "description": "Current state of the speed test."
@@ -388,7 +383,12 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string"
+                    }
+                  }
                 }
               },
               "required": [
@@ -416,6 +416,14 @@
                 "success": {
                   "type": "boolean",
                   "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string"
+                    }
+                  }
                 }
               },
               "required": [

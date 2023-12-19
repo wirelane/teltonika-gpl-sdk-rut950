@@ -11,12 +11,22 @@
     }
   ],
   "paths": {
-    "/root_ca/config/general": {
+    "/certificates/root_ca/config": {
+      "post": {
+        "summary": "Uploads Root CA file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_root_ca"
+        },
+        "tags": ["Root CA"]
+      },
       "get": {
-        "tags": [
-          "Root CA"
-        ],
-        "summary": "Returns root ca data",
+        "tags": ["Root CA"],
+        "summary": "Returns Root CA file contents",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200RootCa"
@@ -27,10 +37,8 @@
         }
       },
       "put": {
-        "tags": [
-          "Root CA"
-        ],
-        "summary": "Updates root ca data",
+        "tags": ["Root CA"],
+        "summary": "Updates Root CA file with provided data",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200RootCa"
@@ -58,36 +66,17 @@
           }
         }
       },
-      "post": {
-        "summary": "Upload Root CA certificate",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/file_response"
-          }
-        },
-        "requestBody": {
-          "$ref": "#/components/requestBodies/file_upload_root_ca"
-        },
-        "tags": [
-          "Root CA"
-        ]
-      },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Certificates"
-        ],
+        "menu": ["System", "Administration", "Certificates"],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/root_ca/actions/change": {
+    "/certificates/root_ca/actions/change": {
       "post": {
-        "tags": [
-          "Root CA"
-        ],
+        "tags": ["Root CA"],
         "summary": "Changes Root CA to new certificate from device",
         "responses": {
           "200": {
@@ -95,9 +84,6 @@
           },
           "404": {
             "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -117,21 +103,16 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Certificates"
-        ],
+        "menu": ["System", "Administration", "Certificates"],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/root_ca/actions/reset": {
+    "/certificates/root_ca/actions/reset": {
       "post": {
-        "tags": [
-          "Root CA"
-        ],
+        "tags": ["Root CA"],
         "summary": "Resets Root CA to its initial value",
         "responses": {
           "200": {
@@ -143,13 +124,10 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Certificates"
-        ],
+        "menu": ["System", "Administration", "Certificates"],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     }
@@ -220,9 +198,7 @@
             "description": "Root certificate data."
           }
         },
-        "required": [
-          "root_ca"
-        ]
+        "required": ["root_ca"]
       },
       "root_ca_change_options": {
         "type": "object",
@@ -254,9 +230,7 @@
                   "description": "File to upload."
                 }
               },
-              "required": [
-                "file"
-              ]
+              "required": ["file"]
             }
           }
         }

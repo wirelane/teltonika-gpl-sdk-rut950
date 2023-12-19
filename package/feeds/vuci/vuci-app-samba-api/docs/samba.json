@@ -12,14 +12,14 @@
       "name": "General"
     },
     {
-      "name": "Shares"
+      "name": "Shared Directories"
     },
     {
       "name": "Users"
     }
   ],
   "paths": {
-    "/samba/general/config/general": {
+    "/samba/global": {
       "get": {
         "summary": "Get SAMBA general configuration",
         "tags": [
@@ -39,6 +39,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -65,7 +68,7 @@
       "get": {
         "summary": "Get SAMBA share configurations",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ],
         "responses": {
           "200": {
@@ -79,8 +82,11 @@
         "summary": "Create SAMBA share configuration",
         "operationId": "post-services-samba-shares",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_samba_share"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -88,7 +94,7 @@
         },
         "description": "Creates SAMBA share configuration",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ]
       },
       "put": {
@@ -97,6 +103,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba_share_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -104,7 +116,7 @@
         },
         "description": "Updates SAMBA share configurations",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ]
       },
       "delete": {
@@ -123,7 +135,7 @@
         },
         "description": "Deletes SAMBA share configurations",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ]
       },
       "parameters": [],
@@ -138,7 +150,7 @@
         }
       }
     },
-    "/samba/shares/config/{sid}": {
+    "/samba/shares/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -152,11 +164,14 @@
       "get": {
         "summary": "Get SAMBA share configuration",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba_share"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-samba-shares-sid",
@@ -168,6 +183,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba_share"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -175,7 +196,7 @@
         },
         "description": "Updates SAMBA share configuration",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ]
       },
       "delete": {
@@ -191,7 +212,7 @@
         },
         "description": "Deletes SAMBA share configuration",
         "tags": [
-          "Shares"
+          "Shared Directories"
         ]
       },
       "x-web": {
@@ -223,8 +244,11 @@
         "summary": "Create SAMBA user configuration",
         "operationId": "post-services-samba-users",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_samba_user"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -241,6 +265,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba_user_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -282,7 +312,7 @@
         }
       }
     },
-    "/samba/users/config/{sid}": {
+    "/samba/users/config/{id}": {
       "parameters": [
         {
           "schema": {
@@ -301,6 +331,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba_user"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-samba-users-sid",
@@ -312,6 +345,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_samba_user"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -349,7 +388,7 @@
         }
       }
     },
-    "/samba/general/status": {
+    "/samba/status": {
       "get": {
         "summary": "Get SAMBA instance status and all active sessions",
         "tags": [
@@ -362,31 +401,6 @@
         },
         "operationId": "get-services-samba-general-status",
         "description": "SAMBA instance status and all active sessions"
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "USB Tools",
-          "Network Shares"
-        ],
-        "hw_tags": {
-          "usb": true
-        }
-      }
-    },
-    "/samba/general/config_file": {
-      "get": {
-        "summary": "Get SAMBA general configuration file",
-        "tags": [
-          "General"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_samba_config"
-          }
-        },
-        "operationId": "get-services-samba-general-config_file",
-        "description": "Get SAMBA general configuration file"
       },
       "x-web": {
         "menu": [
@@ -496,10 +510,10 @@
               "input-type": "input"
             },
             "type": "string",
-	    "format": "regex",
-	    "pattern": "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])",
-	    "minLength": 8,
-	    "maxLength": 130,
+            "format": "regex",
+            "pattern": "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])",
+            "minLength": 8,
+            "maxLength": 130,
             "description": "User password",
             "writeOnly": true
           },
@@ -507,11 +521,11 @@
             "x-web": {
               "pretty": "Name",
               "input-type": "input",
-	      "unique": true
+              "unique": true
             },
-	    "readOnly": true,
+            "readOnly": true,
             "type": "string",
-	    "maxLength": 8,
+            "maxLength": 8,
             "description": "User name"
           }
         },
@@ -579,7 +593,10 @@
               "input-type": "input"
             },
             "type": "array",
-            "description": "Bind samba server to specified interfaces "
+            "description": "Bind samba server to specified interfaces ",
+            "items": {
+              "type": "string"
+            }
           },
           "custom": {
             "x-web": {
@@ -587,12 +604,12 @@
               "input-type": "input"
             },
             "type": "array",
-	    "items": {
-		    "type": "string"
-	    },
             "description": "Custom option for global configuration. If the option already exist - it will be replaced with new one. Following format is accepted: [a-Z0-9] = [all characters are allowed except ?]",
-	    "format": "regex",
-	    "pattern": "^[a-zA-Z0-9 ]+=[^?]*$"
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9 ]+=[^?]*$",
+            "items": {
+              "type": "string"
+            }
           }
         },
         "required": [
@@ -878,19 +895,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "allOf": [
-                    {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    {
                       "$ref": "#/components/schemas/samba"
-                    }
-                  ]
                 }
               },
               "required": [
@@ -945,9 +950,6 @@
                           "description": "User username"
                         }
                       }
-                    },
-                    {
-                      "$ref": "#/components/schemas/samba_user"
                     }
                   ]
                 }
@@ -1006,9 +1008,6 @@
                             "description": "User username"
                           }
                         }
-                      },
-                      {
-                        "$ref": "#/components/schemas/samba_user"
                       }
                     ]
                   }
@@ -1174,10 +1173,16 @@
                 "data": {
                   "type": "object",
                   "properties": {
-                    "status": {
+                    "running": {
                       "type": "boolean"
                     },
-                    "sessions": {
+                    "active_sessions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "config_file": {
                       "type": "array",
                       "items": {
                         "type": "string"

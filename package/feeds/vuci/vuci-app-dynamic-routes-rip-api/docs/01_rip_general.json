@@ -1,0 +1,416 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/rip/global": {
+      "get": {
+        "summary": "Returns RIP global configuration",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiGe"
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "put": {
+        "summary": "Updates specified RIP global configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200RiGe"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rip_general_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "RIP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "RIP"
+      },
+      "post": {
+        "summary": "Uploads custom RIP configuration file",
+        "operationId": "post-rip-global-config-general",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/file_response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ripd_custom_config"
+        },
+        "tags": ["Global Settings"]
+      }
+    },
+    "/rip/status": {
+      "get": {
+        "summary": "Fetches data about RIP neighbors",
+        "operationId": "get-network-dynamic-rip-general-actions-rip_info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "route1": {
+                          "type": "object",
+                          "properties": {
+                            "Type": {
+                              "type": "string"
+                            },
+                            "Network": {
+                              "type": "string"
+                            },
+                            "NextHop": {
+                              "type": "string"
+                            },
+                            "Metric": {
+                              "type": "string"
+                            },
+                            "Time": {
+                              "type": "string"
+                            },
+                            "From": {
+                              "type": "string"
+                            },
+                            "Tag": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "sources": {
+                          "type": "object",
+                          "properties": {
+                            "neighbor1": {
+                              "type": "object",
+                              "properties": {
+                                "Badpackets": {
+                                  "type": "string"
+                                },
+                                "Gateway": {
+                                  "type": "string"
+                                },
+                                "Distance": {
+                                  "type": "string"
+                                },
+                                "Badroutes": {
+                                  "type": "string"
+                                },
+                                "LastUpdate": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "sendreceive": {
+                              "type": "string"
+                            },
+                            "Interface": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "route3": {
+                          "type": "object",
+                          "properties": {
+                            "Type": {
+                              "type": "string"
+                            },
+                            "Network": {
+                              "type": "string"
+                            },
+                            "NextHop": {
+                              "type": "string"
+                            },
+                            "Metric": {
+                              "type": "string"
+                            },
+                            "Time": {
+                              "type": "string"
+                            },
+                            "From": {
+                              "type": "string"
+                            },
+                            "Tag": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "route2": {
+                          "type": "object",
+                          "properties": {
+                            "Type": {
+                              "type": "string"
+                            },
+                            "Network": {
+                              "type": "string"
+                            },
+                            "NextHop": {
+                              "type": "string"
+                            },
+                            "Metric": {
+                              "type": "string"
+                            },
+                            "Time": {
+                              "type": "string"
+                            },
+                            "From": {
+                              "type": "string"
+                            },
+                            "Tag": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "data": {
+                        "route1": {
+                          "Type": "C(i)",
+                          "Network": "192.168.1.0/24",
+                          "NextHop": "0.0.0.0",
+                          "Metric": "1",
+                          "Time": "0",
+                          "From": "self",
+                          "Tag": "0"
+                        },
+                        "sources": {
+                          "neighbor1": {
+                            "Badpackets": "0",
+                            "Gateway": "192.168.222.101",
+                            "Distance": "120",
+                            "Badroutes": "0",
+                            "LastUpdate": "00:00:13"
+                          },
+                          "sendreceive": "2/2",
+                          "Interface": "br-lan"
+                        },
+                        "route3": {
+                          "Type": "C(i)",
+                          "Network": "192.168.222.0/24",
+                          "NextHop": "0.0.0.0",
+                          "Metric": "1",
+                          "Time": "0",
+                          "From": "self",
+                          "Tag": "0"
+                        },
+                        "route2": {
+                          "Type": "R(n)",
+                          "Network": "192.168.111.0/24",
+                          "NextHop": "192.168.222.101",
+                          "Metric": "2",
+                          "Time": "02:47",
+                          "From": "192.168.222.101",
+                          "Tag": "0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Global Settings"]
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "RIP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "RIP"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200RiGe": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "type": "string"
+                    },
+                    "enabled_vty": {
+                      "type": "string"
+                    },
+                    "ripd_custom_conf": {
+                      "type": "string"
+                    },
+                    "ripd_custom_conf:file_size": {
+                      "type": "number"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "neighbors": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "file_response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "rip_general_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable RIP protocol."
+          },
+          "enabled_vty": {
+            "x-web": {
+              "pretty": "Enable VTY",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable vty access from LAN."
+          },
+          "ripd_custom_conf": {
+            "x-web": {
+              "pretty": "Import config",
+              "input-type": "input"
+            },
+            "type": "string",
+            "format": "binary",
+            "description": "Use imported RIP configuration."
+          },
+          "version": {
+            "x-web": {
+              "pretty": "Version",
+              "input-type": "select",
+              "enum-pretty": {
+                "1": "1",
+                "2": "2"
+              }
+            },
+            "type": "string",
+            "enum": ["1", "2"],
+            "description": "Specify the version of RIP."
+          },
+          "neighbors": {
+            "x-web": {
+              "pretty": "Neighbor",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Specify RIP neighbor.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "ripd_custom_config": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "option": {
+                  "type": "string",
+                  "description": "Parameter to upload the file to.",
+                  "enum": ["ripd_custom_conf"]
+                },
+                "file": {
+                  "type": "string",
+                  "description": "File to upload.",
+                  "format": "binary"
+                }
+              },
+              "required": ["option", "file"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "RIP Global Settings",
+    "version": "1.0",
+    "description": "RIP global settings api documentation"
+  },
+  "tags": [
+    {
+      "name": "Global Settings"
+    }
+  ]
+}

@@ -2,14 +2,135 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Modbus Serial Server"
+      "name": "Serial Server"
     }
   ],
   "paths": {
-    "/modbus/serial_server/config/{id}": {
+    "/modbus/server/serial/config": {
       "get": {
         "tags": [
-          "Modbus Serial Server"
+          "Serial Server"
+        ],
+        "summary": "Returns all Modbus Serial Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialServerMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Serial Server"
+        ],
+        "summary": "Creates a Modbus Serial Server configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200ModbusSerialServer"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/modbus_serial_server_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Serial Server"
+        ],
+        "summary": "Updates specified Modbus Serial Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusSerialServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_serial_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Serial Server"
+        ],
+        "summary": "Deletes specified Modbus Serial Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "Serial Server"
+        ],
+        "hw_tags": {
+          "serial_usb": true
+        }
+      }
+    },
+    "/modbus/server/serial/config/{id}": {
+      "get": {
+        "tags": [
+          "Serial Server"
         ],
         "summary": "Returns the specified Modbus Serial Server configuration",
         "responses": {
@@ -34,7 +155,7 @@
       },
       "put": {
         "tags": [
-          "Modbus Serial Server"
+          "Serial Server"
         ],
         "summary": "Updates the specified Modbus Serial Server configuration",
         "responses": {
@@ -77,15 +198,15 @@
       },
       "delete": {
         "tags": [
-          "Modbus Serial Server"
+          "Serial Server"
         ],
         "summary": "Deletes the specified Modbus Serial Server configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -104,132 +225,10 @@
         "menu": [
           "Services",
           "Modbus",
-          "Modbus Serial Server"
+          "Serial Server"
         ],
         "hw_tags": {
-          "serial": true
-        }
-      }
-    },
-    "/modbus/serial_server/config": {
-      "get": {
-        "tags": [
-          "Modbus Serial Server"
-        ],
-        "summary": "Returns all Modbus Serial Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusSerialServerMulti"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Modbus Serial Server"
-        ],
-        "summary": "Updates specified Modbus Serial Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusSerialServerMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/modbus_serial_server_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Modbus Serial Server"
-        ],
-        "summary": "Creates a Modbus Serial Server configuration",
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/200ModbusSerialServer"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/modbus_serial_server_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Modbus Serial Server"
-        ],
-        "summary": "Deletes specified Modbus Serial Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "type": "string",
-                      "description": "Section id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Modbus",
-          "Modbus Serial Server"
-        ],
-        "hw_tags": {
-          "serial": true
+          "serial_usb": true
         }
       }
     }

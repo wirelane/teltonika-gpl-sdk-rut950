@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/ospf/network/config": {
+      "get": {
+        "summary": "Returns all OSPF network configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNetMulti"
+          }
+        },
+        "tags": ["Networks"]
+      },
+      "post": {
+        "summary": "Creates OSPF network configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200OsNetMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_network_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Networks"]
+      },
+      "put": {
+        "summary": "Updates specified OSPF network configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNetMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/ospf_network_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Networks"]
+      },
+      "delete": {
+        "summary": "Deletes specified OSPF network configurations",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Networks"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "OSPF"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "OSPF"
+      }
+    },
+    "/ospf/network/config/{id}": {
+      "get": {
+        "summary": "Returns specified OSPF network configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNet"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration OSPF network identifier"
+          }
+        ],
+        "tags": ["Networks"]
+      },
+      "put": {
+        "summary": "Updates specified OSPF network configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OsNet"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration OSPF network identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ospf_network_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Networks"]
+      },
+      "delete": {
+        "summary": "Deletes specified OSPF network configuration",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration OSPF network identifier"
+          }
+        ],
+        "tags": ["Networks"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "OSPF"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "OSPF"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200OsNet": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ospf_network_options_multi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200OsNetMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/ospf_network_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ospf_network_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string"
+          },
+          "net": {
+            "x-web": {
+              "pretty": "Network",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Network address and netmask."
+          },
+          "area": {
+            "x-web": {
+              "pretty": "Area",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Selection from created areas."
+          }
+        }
+      },
+      "ospf_network_options_multi": {
+        "title": "ospf_network_options_multi",
+        "x-stoplight": {
+          "id": "hkaj7o7d6g0gs"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/ospf_network_options"
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "OSPF Networks",
+    "version": "1.0",
+    "description": "OSPF networks api documentation"
+  },
+  "tags": [
+    {
+      "name": "Networks"
+    }
+  ]
+}

@@ -2,15 +2,15 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Wireless Multi AP"
+      "name": "Multi AP"
     }
   ],
   "paths": {
-    "/wireless/multi_ap/access_points/config": {
+    "/wireless/multi_ap/config": {
       "get": {
-        "summary": "GET All Wireless Multi AP Access Points",
+        "summary": "Returns wireless Multi AP configurations",
         "tags": [
-          "Wireless Multi AP Access Points"
+          "Multi AP"
         ],
         "responses": {
           "200": {
@@ -39,12 +39,9 @@
         "operationId": "get-network-wireless-multi_ap-access_points"
       },
       "post": {
-        "summary": "CREATE All Wireless Multi AP Access Points",
+        "summary": "Creates wireless Multi AP configuration",
         "operationId": "post-network-wireless-multi_ap-access_points",
         "responses": {
-        "200": {
-          "$ref": "#/components/responses/access_point_config"
-        },
         "201": {
           "description": "Created",
           "content": {
@@ -69,14 +66,14 @@
         }
         },
         "tags": [
-          "Wireless Multi AP Access Points"
+          "Multi AP"
         ],
         "requestBody": {
           "$ref": "#/components/requestBodies/access_point_config"
         }
       },
       "put": {
-        "summary": "UPDATE All Wireless Multi AP Access Points",
+        "summary": "Updates wireless Multi AP configurations",
         "operationId": "put-network-wireless-multi_ap-access_points",
         "responses": {
         "200": {
@@ -126,11 +123,11 @@
         }
         },
         "tags": [
-        "Wireless Multi AP Access Points"
+        "Multi AP"
         ]
       },
       "delete": {
-        "summary": "DELETE All Wireless Multi AP Access Points",
+        "summary": "Deletes wireless Multi AP configurations",
         "operationId": "delete-network-wireless-multi_ap-access_points",
         "responses": {
         "200": {
@@ -160,7 +157,7 @@
         }
         },
         "tags": [
-          "Wireless Multi AP Access Points"
+          "Multi AP"
         ]
       },
       "parameters": [],
@@ -176,11 +173,11 @@
         }
       }
     },
-    "/wireless/multi_ap/access_points/config/{id}": {
+    "/wireless/multi_ap/config/{id}": {
       "get": {
-        "summary": "GET Wireless Multi AP Access Points",
+        "summary": "Returns wireless Multi AP configuration",
         "tags": [
-          "Wireless Multi AP Access Points"
+          "Multi AP"
         ],
         "responses": {
           "200": {
@@ -201,12 +198,15 @@
                 }
               }
             }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-wireless-multi_ap-access_points-id"
       },
       "put": {
-        "summary": "UPDATE Wireless Multi AP Access Points",
+        "summary": "Updates wireless Multi AP configuration",
         "operationId": "put-network-wireless-multi_ap-access_points-id",
         "responses": {
           "200": {
@@ -250,11 +250,11 @@
           }
         },
         "tags": [
-          "Wireless Multi AP Access Points"
+          "Multi AP"
         ]
       },
       "delete": {
-        "summary": "DELETE Wireless Multi AP Access Points",
+        "summary": "Deletes wireless Multi AP configuration",
         "operationId": "delete-network-wireless-multi_ap-access_points-id",
         "responses": {
           "200": {
@@ -266,7 +266,7 @@
         },
         "description": "",
         "tags": [
-          "Wireless Multi AP Access Points"
+          "Multi AP"
         ]
       },
       "parameters": [
@@ -277,7 +277,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Section name"
+          "description": "The ID of the Multi AP configuration"
         }
       ],
       "x-web": {
@@ -317,7 +317,7 @@
                     },
                     "id": {
                       "type": "string",
-                      "description": "AP id."
+                      "description": "The ID of the Multi AP configuration"
                     },
                     "priority": {
                       "type": "string",
@@ -351,7 +351,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Section name.",
+                "description": "The ID of the Multi AP configuration",
                 "x-web": {
                   "pretty": "Configuration ID",
                   "input-type": "input"

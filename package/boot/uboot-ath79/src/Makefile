@@ -353,32 +353,6 @@ tlt-rut9xx-vboot-64k:
 		CFG_TLT_VERIFIED_BOOT=1 \
 		VERIFIED_BOOT_STR=-vbr)
 
-
-tlt-rut952:
-	@$(call build,128,1,\
-		ETH_CONFIG=_s27 \
-		DEVICE_VENDOR=teltonika \
-		DEVICE_MODEL=RUT952 \
-		CFG_74X164=1)
-
-tlt-rut952-vboot:
-	@$(call build,128,1,\
-		ETH_CONFIG=_s27 \
-		DEVICE_VENDOR=teltonika_VerifiedBoot \
-		DEVICE_MODEL=RUT952 \
-		CFG_74X164=1 \
-		CFG_TLT_VERIFIED_BOOT=1 \
-		VERIFIED_BOOT_STR=-vb)
-
-tlt-rut952-vboot-64k:
-	@$(call build,64,1,\
-		ETH_CONFIG=_s27 \
-		DEVICE_VENDOR=teltonika_recovery \
-		DEVICE_MODEL=RUT952 \
-		CFG_74X164=1 \
-		CFG_TLT_VERIFIED_BOOT=1 \
-		VERIFIED_BOOT_STR=-vbr)
-
 tlt-rut9m:
 	@$(call build,128,0,\
 		DEVICE_VENDOR=teltonika \

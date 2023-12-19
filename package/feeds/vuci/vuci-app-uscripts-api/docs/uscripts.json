@@ -1,34 +1,11 @@
 {
   "openapi": "3.0.0",
-  "tags": [
-    {
-      "name": "Custom Scripts"
-    }
-  ],
+  "tags": [],
   "paths": {
-    "/administration/uscripts/config": {
-      "post": {
-        "summary": "Upload a script file",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Uscripts"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "$ref": "#/components/requestBodies/file_upload_uscripts"
-        },
-        "tags": [
-          "Custom Scripts"
-        ]
-      },
+    "/uscripts/config": {
       "get": {
-        "tags": [
-          "Custom Scripts"
-        ],
-        "summary": "Returns script contents",
+        "tags": ["General"],
+        "summary": "Returns startup script file contents",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200UscriptsGet"
@@ -36,14 +13,34 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Custom Scripts"
-        ],
+        "menu": ["System", "Maintenance", "Custom Scripts"],
         "hw_tags": {
-          "is_access_point": false
-        }
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Custom Scripts"
+      }
+    },
+    "/uscripts/actions/upload": {
+      "post": {
+        "summary": "Uploads a startup script file",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Uscripts"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/file_upload_uscripts"
+        },
+        "tags": ["General"]
+      },
+      "x-web": {
+        "menu": ["System", "Maintenance", "Custom Scripts"],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Custom Scripts"
       }
     }
   },
@@ -120,9 +117,7 @@
                   "description": "File to upload."
                 }
               },
-              "required": [
-                "file"
-              ]
+              "required": ["file"]
             }
           }
         }

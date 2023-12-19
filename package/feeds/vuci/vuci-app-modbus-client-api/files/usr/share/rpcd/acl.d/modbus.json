@@ -3,17 +3,15 @@
 		"description": "modbus tcp client configuration",
 		"read": {
 			"api": [
-				"/modbus/tcp/*",
-				"/mobile/modems/*",
-				"/modbus/main/*",
-				"/io/status/*",
-				"/devices/status/*"
+				"/modbus/client/tcp/*",
+				"/modems/*",
+				"/io/*",
+				"/network/devices/status/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/modbus/main/*",
-				"/modbus/tcp/*"
+				"/modbus/client/tcp/*"
 			]
 		}
 	}

@@ -10,11 +10,5 @@
         ],
         "view": "system/Admin",
         "index": 10
-    },
-    "system/reboot": {
-        "title": "Reboot",
-        "acls": [ "system/reboot" ],
-        "view": "system/Reboot",
-        "index": 50
     }
 }

@@ -1,105 +1,10 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/overip/config/{overip_id}/filters/{id}": {
+    "/overip/{id}/filters/config": {
       "parameters": [
-        {
-          "name": "overip_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "x-web": {
-            "pretty": "Over IP configuration name"
-          },
-          "description": "OverIP Configuration identifier (ID)"
-        },
         {
           "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "OverIP IP Filter rule identifier (ID)"
-        }
-      ],
-      "get": {
-        "tags": [
-          "OverIP IP Filters"
-        ],
-        "summary": "Returns the specified OverIP IP Filter rule",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200OveripFilters"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "OverIP IP Filters"
-        ],
-        "summary": "Updates the specified OverIP IP Filter rule",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200OveripFilters"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/overip_filters_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "OverIP IP Filters"
-        ],
-        "summary": "Deletes the specified OverIP IP Filter rule",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Serial Utilities",
-          "OverIP"
-        ],
-        "hw_tags": {
-          "serial": true
-        }
-      }
-    },
-    "/overip/config/{overip_id}/filters": {
-      "parameters": [
-        {
-          "name": "overip_id",
           "in": "path",
           "required": true,
           "schema": {
@@ -119,6 +24,9 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200OveripFiltersMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
@@ -133,6 +41,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -143,7 +54,7 @@
                 "type": "object",
                 "properties": {
                   "data": {
-                    "$ref": "#/components/schemas/overip_filters_options"
+                    "$ref": "#/components/schemas/overip_filters_single_options"
                   }
                 }
               }
@@ -222,13 +133,110 @@
         }
       },
       "x-web": {
+        "name": "OverIP",
         "menu": [
           "Services",
-          "Serial Utilities",
+          "OverIP",
           "OverIP"
         ],
         "hw_tags": {
-          "serial": true
+          "serial_mbus": true
+        }
+      }
+    },
+    "/overip/{id}/filters/config/{filter_id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "x-web": {
+            "pretty": "Over IP configuration name"
+          },
+          "description": "OverIP Configuration identifier (ID)"
+        },
+        {
+          "name": "filter_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "OverIP IP Filter rule identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OverIP IP Filters"
+        ],
+        "summary": "Returns the specified OverIP IP Filter rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OveripFilters"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OverIP IP Filters"
+        ],
+        "summary": "Updates the specified OverIP IP Filter rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200OveripFilters"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/overip_filters_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OverIP IP Filters"
+        ],
+        "summary": "Deletes the specified OverIP IP Filter rule",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "name": "OverIP",
+        "menu": [
+          "Services",
+          "OverIP",
+          "OverIP"
+        ],
+        "hw_tags": {
+          "serial_mbus": true
         }
       }
     }
@@ -247,7 +255,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/overip_filters_single_options"
+                  "$ref": "#/components/schemas/overip_filters_options"
                 }
               }
             }

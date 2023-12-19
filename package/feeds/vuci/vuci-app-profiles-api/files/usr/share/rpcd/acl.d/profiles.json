@@ -3,13 +3,17 @@
 	"system/admin/profiles/config": {
 		"read": {
 			"api": [
-				"/profiles/*",
-				"/administration/ntp/client/*"
+				"/profiles/config/*",
+				"/profiles/status/*",
+				"/profiles/actions/*",
+				"/date_time/ntp/client/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/profiles/*"
+				"/profiles/config/*",
+				"/profiles/status/*",
+				"/profiles/actions/*"
 			]
 		}
 	},
@@ -17,15 +21,13 @@
 	"system/admin/profiles/scheduler": {
 		"read": {
 			"api": [
-				"/profiles_scheduler_general/*",
-				"/profiles_scheduler/*",
+				"/profiles/scheduler/*",
 				"/profiles/config/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/profiles_scheduler_general/*",
-				"/profiles_scheduler/*"
+				"/profiles/scheduler/*"
 			]
 		}
 	}

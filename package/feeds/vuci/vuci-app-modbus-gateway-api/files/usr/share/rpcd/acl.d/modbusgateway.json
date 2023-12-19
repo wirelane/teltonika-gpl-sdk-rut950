@@ -6,7 +6,7 @@
 				"/modbus/gateway/*",
 				"/modbus/serial_gateway/*",
 				"/serial/*",
-				"/device/*",
+				"/system/device/*",
 				"/certificates/*"
 			]
 		},

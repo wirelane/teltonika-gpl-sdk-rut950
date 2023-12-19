@@ -129,7 +129,7 @@
  	count = up->tx_loadsz;
  	do {
  		serial_out(up, UART_TX, xmit->buf[xmit->tail]);
-@@ -2050,6 +2112,9 @@ EXPORT_SYMBOL_GPL(serial8250_do_set_mctr
+@@ -2053,6 +2115,9 @@ EXPORT_SYMBOL_GPL(serial8250_do_set_mctr
  
  static void serial8250_set_mctrl(struct uart_port *port, unsigned int mctrl)
  {

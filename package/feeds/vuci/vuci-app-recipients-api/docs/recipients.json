@@ -15,17 +15,6 @@
   ],
   "paths": {
     "/recipients/phone_groups/config": {
-      "get": {
-        "summary": "Returns all phone group configurations",
-        "tags": [
-          "Phone groups"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_phone_groups_multiple"
-          }
-        }
-      },
       "post": {
         "summary": "Creates phone group configuration",
         "responses": {
@@ -61,6 +50,17 @@
         "tags": [
           "Phone groups"
         ]
+      },
+      "get": {
+        "summary": "Returns all phone group configurations",
+        "tags": [
+          "Phone groups"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_phone_groups_multiple"
+          }
+        }
       },
       "put": {
         "summary": "Updates specified phone group configurations",
@@ -169,22 +169,12 @@
           "Recipients"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
     "/recipients/email_users/config": {
-      "get": {
-        "summary": "Returns all email users configurations",
-        "tags": [
-          "Email users"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_email_users_multiple"
-          }
-        }
-      },
       "post": {
         "summary": "Creates email users configuration",
         "responses": {
@@ -220,6 +210,17 @@
         "tags": [
           "Email users"
         ]
+      },
+      "get": {
+        "summary": "Returns all email users configurations",
+        "tags": [
+          "Email users"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_email_users_multiple"
+          }
+        }
       },
       "put": {
         "summary": "Updates specified email users configurations",
@@ -329,7 +330,8 @@
           "Recipients"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
@@ -419,7 +421,8 @@
           "Recipients"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
@@ -510,20 +513,24 @@
           "Recipients"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/recipients/send_email/actions/send_email": {
+    "/recipients/email_users/actions/send_email": {
       "post": {
         "summary": "Send test email",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_test_email"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "tags": [
-          "Test email"
+          "Email users"
         ],
         "requestBody": {
           "content": {
@@ -566,7 +573,8 @@
           "Recipients"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     }
@@ -797,7 +805,20 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/email_user"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/email_user"
+                    }
+                  ]
                 }
               },
               "required": [
@@ -874,7 +895,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/phone_group"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
+                    },
+                    {
+                      "$ref": "#/components/schemas/phone_group"
+                    }
+                  ]
                 }
               },
               "required": [

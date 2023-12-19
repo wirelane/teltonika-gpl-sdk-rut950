@@ -2,17 +2,13 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "UDP Broadcast Relay",
-      "description": "UDP Broadcast Relay configuration API"
+      "name": "General"
     }
   ],
   "paths": {
     "/udprelay/config": {
       "get": {
-        "tags": [
-          "UDP Broadcast Relay"
-        ],
-        "summary": "GET All UDP Broadcast Relay",
+        "summary": "Returns UDP Broadcast Relay configurations",
         "description": "",
         "responses": {
           "200": {
@@ -43,9 +39,9 @@
       "put": {
         "deprecated": true,
         "tags": [
-          "UDP Broadcast Relay"
+          "General"
         ],
-        "summary": "UPDATE All UDP Broadcast Relay",
+        "summary": "Updates UDP Broadcast Relay configurations",
         "responses": {
           "200": {
             "description": "OK",
@@ -77,7 +73,7 @@
           }
         },
         "requestBody": {
-          "description": "sections for updating",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -100,9 +96,9 @@
       },
       "post": {
         "tags": [
-          "UDP Broadcast Relay"
+          "General"
         ],
-        "summary": "CREATE All UDP Broadcast Relay",
+        "summary": "Creates UDP Broadcast Relay configuration",
         "responses": {
           "201": {
             "description": "Created",
@@ -128,7 +124,7 @@
           }
         },
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -147,9 +143,9 @@
       },
       "delete": {
         "tags": [
-          "UDP Broadcast Relay"
+          "General"
         ],
-        "summary": "DELETE All UDP Broadcast Relay",
+        "summary": "Deletes UDP Broadcast Relay configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
@@ -159,7 +155,7 @@
           }
         },
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -191,18 +187,19 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "UDP Broadcast Relay"
       }
     },
     "/udprelay/config/{id}": {
       "get": {
         "tags": [
-          "UDP Broadcast Relay"
+          "General"
         ],
-        "summary": "GET UDP Broadcast Relay",
+        "summary": "Returns UDP Broadcast Relay configuration",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -240,9 +237,9 @@
       },
       "put": {
         "tags": [
-          "UDP Broadcast Relay"
+          "General"
         ],
-        "summary": "UPDATE UDP Broadcast Relay",
+        "summary": "Updates UDP Broadcast Relay configuration",
         "responses": {
           "200": {
             "description": "OK",
@@ -301,9 +298,9 @@
       },
       "delete": {
         "tags": [
-          "UDP Broadcast Relay"
+          "General"
         ],
-        "summary": "DELETE UDP Broadcast Relay",
+        "summary": "Deletes UDP Broadcast Relay configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
@@ -334,7 +331,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Section name"
+          "description": "The ID of UDP Broadcast Relay configuration"
         }
       ],
       "x-web": {
@@ -346,7 +343,8 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "UDP Broadcast Relay"
       }
     }
   },
@@ -358,7 +356,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Section name.",
+            "description": "The ID of UDP Broadcast Relay configuration",
             "x-web": {
               "pretty": "Configuration ID",
               "input-type": "input"
@@ -393,9 +391,6 @@
             "type": "array",
             "description": "UDP broadcast relay destination interfaces. Open port 137 in firewall so LAN could be reachable from WAN",
             "uniqueItems": true,
-            "items": {
-              "type": "string"
-            },
             "x-web": {
               "pretty": "Destination interface",
               "input-type": "input",
@@ -404,6 +399,9 @@
                   "enabled": "1"
                 }
               ]
+            },
+            "items": {
+              "type": "string"
             }
           },
           "interface_mark": {

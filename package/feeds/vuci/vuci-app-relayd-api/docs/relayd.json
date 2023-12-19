@@ -2,19 +2,19 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Relayd",
-      "description": "Relayd configuration API"
+      "name": "General"
     }
   ],
   "paths": {
     "/relayd/config": {
       "get": {
-        "tags": ["Relayd"],
-        "summary": "GET All Relayd",
-        "description": "Returns all sections with their parameters form relayd configuration",
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns Relayd configuration",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -34,19 +34,18 @@
                 }
               }
             }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
-        "operationId": "get-relayd"
+        "operationId": "get-relayd-id"
       },
       "put": {
-        "tags": ["Relayd"],
-        "summary": "UPDATE All Relayd",
+        "tags": [
+          "General"
+        ],
+        "summary": "Updates Relayd configuration",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -75,7 +74,7 @@
           }
         },
         "requestBody": {
-          "description": "sections for updating",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -92,23 +91,26 @@
             }
           }
         },
-        "operationId": "put-relayd"
+        "operationId": "put-relayd-id"
       },
       "x-web": {
         "menu": ["Network", "Wireless", "Relayd"],
         "hw_tags": {
           "wifi": true,
           "is_access_point": false
-        }
+        },
+        "name": "Relayd"
       }
     },
-    "/relayd/config/general": {
+    "/relayd/config/{id}": {
       "get": {
-        "tags": ["Relayd"],
-        "summary": "GET Relayd",
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns Relayd configuration",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -128,19 +130,29 @@
           },
           "404": {
             "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+            "type": "string"
+            },
+            "description": "The ID of the Relayd configuration"
+          }
+        ],
         "operationId": "get-relayd-id"
       },
       "put": {
-        "tags": ["Relayd"],
-        "summary": "UPDATE Relayd",
+        "tags": [
+          "General"
+        ],
+        "summary": "Updates Relayd configuration",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -166,7 +178,7 @@
           }
         },
         "requestBody": {
-          "description": "section for updating",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -180,6 +192,17 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+            "type": "string"
+            },
+            "description": "The ID of the Relayd configuration"
+          }
+        ],
         "operationId": "put-relayd-id"
       },
       "x-web": {
@@ -187,7 +210,8 @@
         "hw_tags": {
           "wifi": true,
           "is_access_point": false
-        }
+        },
+        "name": "Relayd"
       }
     }
   },
@@ -199,7 +223,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Section name",
+            "description": "The ID of RelayD configuration",
             "x-web": {
               "pretty": "Configuration ID",
               "input-type": "input"

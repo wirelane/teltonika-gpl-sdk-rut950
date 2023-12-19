@@ -1,0 +1,328 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BGP Route Maps",
+    "version": "1.0",
+    "description": "BGP route maps api documentation"
+  },
+  "servers": [],
+  "paths": {
+    "/bgp/maps/config": {
+      "post": {
+        "summary": "Creates BGP route maps configuration",
+        "operationId": "",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_maps_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200BgMapMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": ["Route Maps"]
+      },
+      "parameters": [],
+      "get": {
+        "summary": "Returns all BGP route maps configurations",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgMapMulti"
+          }
+        },
+        "tags": ["Route Maps"]
+      },
+      "put": {
+        "summary": "Updates specified BGP route maps configurations",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_maps_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgMapMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": ["Route Maps"]
+      },
+      "delete": {
+        "summary": "Deletes specified BGP route maps configurations",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Route Maps"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "BGP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "BGP"
+      }
+    },
+    "/bgp/maps/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Returns specified BGP route maps configuration",
+        "operationId": "",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgMap"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Route Maps"]
+      },
+      "put": {
+        "summary": "Updates specified BGP route maps configuration",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgMap"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_route_maps_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Route Maps"]
+      },
+      "delete": {
+        "summary": "Deletes specified BGP route maps configuration",
+        "operationId": "",
+        "description": "",
+        "tags": ["Route Maps"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "BGP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "BGP"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "bgp_route_maps_options": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "enabled": "1",
+            "action": "permit",
+            "id": "rmap",
+            "local_preference": "2",
+            "metric": "4",
+            "sequence": "10"
+          }
+        },
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "description": "Enable/Disable BGP route map.",
+            "enum": ["0", "1"]
+          },
+          "action": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Action",
+              "input-type": "select",
+              "enum-pretty": {
+                "permit": "Permit",
+                "deny": "Deny"
+              }
+            },
+            "description": "Denies or permits matched entry.",
+            "enum": ["permit", "deny"]
+          },
+          "local_preference": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Local preference",
+              "input-type": "input"
+            },
+            "description": "Used to determine best route towards a certain destination",
+            "format": "irange(0, 4294967295)"
+          },
+          "metric": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Metric",
+              "input-type": "input"
+            },
+            "description": "Sets a metric value for determining the preferred path into an AS",
+            "format": "irange(0, 4294967295)"
+          },
+          "sequence": {
+            "type": "string",
+            "description": "Sequence number for the route map.",
+            "format": "irange(1, 65535)"
+          }
+        },
+        "required": ["action"]
+      },
+      "bgp_route_maps_options_multi": {
+        "title": "bgp_route_maps_options_multi",
+        "x-stoplight": {
+          "id": "c4my1wizvh4cs"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/bgp_route_maps_options"
+          }
+        ]
+      }
+    },
+    "responses": {
+      "200BgMap": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/bgp_route_maps_options_multi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200BgMapMulti": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/bgp_route_maps_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Route Maps"
+    }
+  ]
+}

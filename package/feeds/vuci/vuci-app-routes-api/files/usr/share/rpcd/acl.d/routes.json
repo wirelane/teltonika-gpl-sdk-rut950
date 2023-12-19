@@ -3,8 +3,8 @@
 		"description": "static routes configuration",
 		"read": {
 			"api": [
-				"/routes/static/*",
-				"/routes/connections/*",
+				"/ip_routes/*",
+				"/firewall/connections/status/*",
 				"/routes/connections_realtime/*",
 				"/interfaces/config/*",
 				"/l2tp/server/config/*",
@@ -18,8 +18,8 @@
 		},
 		"write": {
 			"api": [
-				"/routes/static/*",
-				"/routes/connections/*",
+				"/ip_routes/*",
+				"/firewall/connections/status/*",
 				"/routes/connections_realtime/*"
 			]
 		}
@@ -29,7 +29,9 @@
 		"description": "advanced static routes configuration",
 		"read": {
 			"api": [
-				"/routes/advanced_static/*",
+				"/ip_rules/ipv4/*",
+				"/routing_tables/*",
+				"/ip_routes/*",
 				"/interfaces/config/*",
 				"/l2tp/server/config/*",
 				"/l2tp/client/config/*",
@@ -42,7 +44,9 @@
 		},
 		"write": {
 			"api": [
-				"/routes/advanced_static/*"
+				"/ip_rules/ipv4/*",
+				"/routing_tables/*",
+				"/ip_routes/*"
 			]
 		}
 	},
@@ -51,7 +55,9 @@
 		"description": "general routes",
 		"read": {
 			"api": [
-				"/routes/status/*"
+				"/routes/status/*",
+				"/ip_neighbors/*",
+				"/ip_routes/*"
 			]
 		}
 	}

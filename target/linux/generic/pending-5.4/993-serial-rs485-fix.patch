@@ -4846,7 +4846,7 @@
  
  	if (iir & UART_IIR_NO_INT)
  		return 0;
-@@ -1876,6 +1942,7 @@ int serial8250_handle_irq(struct uart_po
+@@ -1879,6 +1945,7 @@ int serial8250_handle_irq(struct uart_po
  		serial8250_tx_chars(up);
  
  	uart_unlock_and_check_sysrq(port, flags);
@@ -4854,7 +4854,7 @@
  	return 1;
  }
  EXPORT_SYMBOL_GPL(serial8250_handle_irq);
-@@ -1975,7 +2042,7 @@ void serial8250_do_set_mctrl(struct uart
+@@ -1978,7 +2045,7 @@ void serial8250_do_set_mctrl(struct uart
  
  	mcr = serial8250_TIOCM_to_MCR(mctrl);
  
@@ -4863,7 +4863,7 @@
  
  	serial8250_out_MCR(up, mcr);
  }
-@@ -2005,10 +2072,7 @@ static void serial8250_break_ctl(struct
+@@ -2008,10 +2075,7 @@ static void serial8250_break_ctl(struct
  	serial8250_rpm_put(up);
  }
  
@@ -4875,7 +4875,7 @@
  {
  	unsigned int status, tmout = 10000;
  
-@@ -2026,6 +2090,17 @@ static void wait_for_xmitr(struct uart_8
+@@ -2029,6 +2093,17 @@ static void wait_for_xmitr(struct uart_8
  		touch_nmi_watchdog();
  	}
  
@@ -4893,7 +4893,7 @@
  	/* Wait up to 1s for flow control if necessary */
  	if (up->port.flags & UPF_CONS_FLOW) {
  		for (tmout = 1000000; tmout; tmout--) {
-@@ -2162,20 +2237,6 @@ int serial8250_do_startup(struct uart_po
+@@ -2165,20 +2240,6 @@ int serial8250_do_startup(struct uart_po
  	enable_rsa(up);
  #endif
  
@@ -4914,7 +4914,7 @@
  	/*
  	 * Clear the FIFO buffers and disable them.
  	 * (they will be reenabled in set_termios())
-@@ -2197,7 +2258,7 @@ int serial8250_do_startup(struct uart_po
+@@ -2200,7 +2261,7 @@ int serial8250_do_startup(struct uart_po
  	 */
  	if (!(port->flags & UPF_BUGGY_UART) &&
  	    (serial_port_in(port, UART_LSR) == 0xff)) {
@@ -4923,7 +4923,7 @@
  		retval = -ENODEV;
  		goto out;
  	}
-@@ -2229,8 +2290,7 @@ int serial8250_do_startup(struct uart_po
+@@ -2232,8 +2293,7 @@ int serial8250_do_startup(struct uart_po
  	     (port->type == PORT_ALTR_16550_F128)) && (port->fifosize > 1)) {
  		/* Bounds checking of TX threshold (valid 0 to fifosize-2) */
  		if ((up->tx_loadsz < 2) || (up->tx_loadsz > port->fifosize)) {
@@ -4933,7 +4933,7 @@
  		} else {
  			serial_port_out(port, UART_ALTR_AFR,
  					UART_ALTR_EN_TXFIFO_LW);
-@@ -2334,8 +2394,7 @@ int serial8250_do_startup(struct uart_po
+@@ -2337,8 +2397,7 @@ int serial8250_do_startup(struct uart_po
  	if (lsr & UART_LSR_TEMT && iir & UART_IIR_NO_INT) {
  		if (!(up->bugs & UART_BUG_TXEN)) {
  			up->bugs |= UART_BUG_TXEN;
@@ -4943,7 +4943,7 @@
  		}
  	} else {
  		up->bugs &= ~UART_BUG_TXEN;
-@@ -2360,10 +2419,14 @@ dont_test_tx_en:
+@@ -2363,10 +2422,14 @@ dont_test_tx_en:
  	 * Request DMA channels for both RX and TX.
  	 */
  	if (up->dma) {
@@ -4962,7 +4962,7 @@
  			up->dma = NULL;
  		}
  	}
-@@ -2474,19 +2537,45 @@ static unsigned int serial8250_do_get_di
+@@ -2477,19 +2540,45 @@ static unsigned int serial8250_do_get_di
  					      unsigned int baud,
  					      unsigned int *frac)
  {
@@ -5014,7 +5014,7 @@
  		quot = 0x8002;
  	else if (up->port.type == PORT_NPCM)
  		quot = npcm_get_divisor(up, baud);
-@@ -2613,6 +2702,63 @@ static unsigned int serial8250_get_baud_
+@@ -2616,6 +2705,63 @@ static unsigned int serial8250_get_baud_
  	return uart_get_baud_rate(port, termios, old, min, max);
  }
  
@@ -5078,7 +5078,7 @@
  void
  serial8250_do_set_termios(struct uart_port *port, struct ktermios *termios,
  			  struct ktermios *old)
-@@ -2848,7 +2994,7 @@ static int serial8250_request_std_resour
+@@ -2851,7 +2997,7 @@ static int serial8250_request_std_resour
  		}
  
  		if (port->flags & UPF_IOREMAP) {
@@ -5087,7 +5087,7 @@
  			if (!port->membase) {
  				release_mem_region(port->mapbase, size);
  				ret = -ENOMEM;
-@@ -2959,7 +3105,7 @@ static int do_serial8250_get_rxtrig(stru
+@@ -2962,7 +3108,7 @@ static int do_serial8250_get_rxtrig(stru
  	return rxtrig_bytes;
  }
  
@@ -5096,7 +5096,7 @@
  	struct device_attribute *attr, char *buf)
  {
  	struct tty_port *port = dev_get_drvdata(dev);
-@@ -2969,7 +3115,7 @@ static ssize_t serial8250_get_attr_rx_tr
+@@ -2972,7 +3118,7 @@ static ssize_t serial8250_get_attr_rx_tr
  	if (rxtrig_bytes < 0)
  		return rxtrig_bytes;
  
@@ -5105,7 +5105,7 @@
  }
  
  static int do_set_rxtrig(struct tty_port *port, unsigned char bytes)
-@@ -3004,7 +3150,7 @@ static int do_serial8250_set_rxtrig(stru
+@@ -3007,7 +3153,7 @@ static int do_serial8250_set_rxtrig(stru
  	return ret;
  }
  
@@ -5114,7 +5114,7 @@
  	struct device_attribute *attr, const char *buf, size_t count)
  {
  	struct tty_port *port = dev_get_drvdata(dev);
-@@ -3025,18 +3171,16 @@ static ssize_t serial8250_set_attr_rx_tr
+@@ -3028,18 +3174,16 @@ static ssize_t serial8250_set_attr_rx_tr
  	return count;
  }
  
@@ -5137,7 +5137,7 @@
  
  static void register_dev_spec_attr_grp(struct uart_8250_port *up)
  {
-@@ -3065,6 +3209,9 @@ static void serial8250_config_port(struc
+@@ -3068,6 +3212,9 @@ static void serial8250_config_port(struc
  	if (flags & UART_CONFIG_TYPE)
  		autoconfig(up);
  
@@ -5147,7 +5147,7 @@
  	/* if access method is AU, it is a 16550 with a quirk */
  	if (port->type == PORT_16550A && port->iotype == UPIO_AU)
  		up->bugs |= UART_BUG_NOMSR;
-@@ -3201,7 +3348,36 @@ static void serial8250_console_restore(s
+@@ -3205,7 +3352,36 @@ static void serial8250_console_restore(s
  
  	serial8250_set_divisor(port, baud, quot, frac);
  	serial_port_out(port, UART_LCR, up->lcr);
@@ -5185,7 +5185,7 @@
  }
  
  /*
-@@ -3209,19 +3385,21 @@ static void serial8250_console_restore(s
+@@ -3213,19 +3389,21 @@ static void serial8250_console_restore(s
   *	any possible real use of the port...
   *
   *	The console_lock must be held when we get here.
@@ -5210,7 +5210,7 @@
  	if (oops_in_progress)
  		locked = spin_trylock_irqsave(&port->lock, flags);
  	else
-@@ -3243,13 +3421,39 @@ void serial8250_console_write(struct uar
+@@ -3247,13 +3425,39 @@ void serial8250_console_write(struct uar
  		up->canary = 0;
  	}
  
@@ -5251,7 +5251,7 @@
  	serial_port_out(port, UART_IER, ier);
  
  	/*
-@@ -3264,7 +3468,6 @@ void serial8250_console_write(struct uar
+@@ -3268,7 +3472,6 @@ void serial8250_console_write(struct uar
  
  	if (locked)
  		spin_unlock_irqrestore(&port->lock, flags);
@@ -5259,7 +5259,7 @@
  }
  
  static unsigned int probe_baud(struct uart_port *port)
-@@ -3288,6 +3491,7 @@ int serial8250_console_setup(struct uart
+@@ -3292,6 +3495,7 @@ int serial8250_console_setup(struct uart
  	int bits = 8;
  	int parity = 'n';
  	int flow = 'n';
@@ -5267,7 +5267,7 @@
  
  	if (!port->iobase && !port->membase)
  		return -ENODEV;
-@@ -3297,7 +3501,22 @@ int serial8250_console_setup(struct uart
+@@ -3301,7 +3505,22 @@ int serial8250_console_setup(struct uart
  	else if (probe)
  		baud = probe_baud(port);
  

@@ -1,12 +1,85 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/tr069/config/general": {
+    "/tr069/config": {
       "get": {
         "tags": [
-          "TR069"
+          "General"
         ],
-        "summary": "Returns the TR069 configuration",
+        "summary": "Returns the TR-069 configuration in an array",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200tr069Multi"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Updates the TR-069 configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200tr069"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/components/schemas/tr069_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "TR-069",
+          "TR-069"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "TR-069"
+      }
+    },
+    "/tr069/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Returns the TR-069 configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200tr069"
@@ -15,9 +88,9 @@
       },
       "put": {
         "tags": [
-          "TR069"
+          "General"
         ],
-        "summary": "Updates the TR069 configuration",
+        "summary": "Updates the TR-069 configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200tr069"
@@ -45,72 +118,14 @@
       "x-web": {
         "menu": [
           "Services",
-          "Tr069",
-          "TR069"
+          "TR-069",
+          "TR-069"
         ],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
-      }
-    },
-    "/tr069/config": {
-      "get": {
-        "tags": [
-          "TR069"
-        ],
-        "summary": "Returns the TR069 configuration in an array",
-        "description": "",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200tr069Multi"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "TR069"
-        ],
-        "summary": "Updates the TR069 configuration in an array",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200tr069"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
         },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/tr069_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Tr069",
-          "TR069"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
+        "name": "TR-069"
       }
     }
   },
@@ -128,7 +143,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/tr069_options"
+                  "$ref": "#/components/schemas/tr069_options_resp"
                 }
               }
             }
@@ -148,8 +163,9 @@
                 },
                 "data": {
                   "type": "array",
+                  "uniqueItems": true,
                   "items": {
-                    "$ref": "#/components/schemas/tr069_options"
+                    "$ref": "#/components/schemas/tr069_options_resp"
                   }
                 }
               }
@@ -165,6 +181,11 @@
           "enabled": {
             "type": "string",
             "description": "Enables TR-069 client",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -181,6 +202,11 @@
           "allow_ra": {
             "type": "string",
             "description": "Accept server request",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
             "x-web": {
               "pretty": "Accept server request",
               "input-type": "switch"
@@ -189,8 +215,10 @@
           "periodic_interval": {
             "type": "string",
             "description": "Periodic data transmission interval (allowed: 60s-9999999s)",
-            "format": "irange(60, 9999999)",
+            "format": "integer",
             "default": "3600",
+            "minimum": "60",
+            "maximum": "9999999",
             "x-web": {
               "pretty": "Sending interval",
               "input-type": "input"
@@ -199,7 +227,8 @@
           "username": {
             "type": "string",
             "description": "User name for authentication on TR-069 server. Allowed characters (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
-            "format": "fieldvalidation('^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$',0)",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$",
             "maxLength": 64,
             "x-web": {
               "pretty": "Username",
@@ -230,6 +259,88 @@
           }
         }
       },
+      "tr069_single_options_resp": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enables TR-069 client",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "periodic_enable": {
+            "type": "string",
+            "description": "Enables TR-069 client periodic data transmission to TR-069 server",
+            "x-web": {
+              "pretty": "Periodic enable",
+              "input-type": "switch"
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Accept server request",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Accept server request",
+              "input-type": "switch"
+            }
+          },
+          "periodic_interval": {
+            "type": "string",
+            "description": "Periodic data transmission interval (allowed: 60s-9999999s)",
+            "format": "integer",
+            "default": "3600",
+            "minimum": "60",
+            "maximum": "9999999",
+            "x-web": {
+              "pretty": "Sending interval",
+              "input-type": "input"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "User name for authentication on TR-069 server. Allowed characters (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": [
+              "unset",
+              "set"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "TR-069 server's URL to send data to",
+            "format": "url",
+            "maxLength": 128,
+            "default": "http://192.168.1.110:8080/openacs/acs",
+            "x-web": {
+              "pretty": "URL",
+              "input-type": "input"
+            }
+          }
+        }
+      },
       "tr069_options": {
         "allOf": [
           {
@@ -243,6 +354,22 @@
           },
           {
             "$ref": "#/components/schemas/tr069_single_options"
+          }
+        ]
+      },
+      "tr069_options_resp": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/tr069_single_options_resp"
           }
         ]
       }

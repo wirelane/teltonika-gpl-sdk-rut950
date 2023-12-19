@@ -2,14 +2,84 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "Modbus TCP Server"
+      "name": "TCP Server"
     }
   ],
   "paths": {
-    "/modbus/tcp_server/config/general": {
+    "/modbus/server/tcp/config": {
       "get": {
         "tags": [
-          "Modbus TCP Server"
+          "TCP Server"
+        ],
+        "summary": "Returns all Modbus TCP Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusServerMulti"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TCP Server"
+        ],
+        "summary": "Updates specified Modbus TCP Server configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200ModbusServerMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/modbus_server_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Modbus",
+          "TCP Server"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/modbus/server/tcp/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Modbus Server Configuration identifier (ID)"
+        }
+      ],
+      "get": {
+        "tags": [
+          "TCP Server"
         ],
         "summary": "Returns the specified Modbus TCP Server configuration",
         "responses": {
@@ -23,7 +93,7 @@
       },
       "put": {
         "tags": [
-          "Modbus TCP Server"
+          "TCP Server"
         ],
         "summary": "Updates the specified Modbus TCP Server configuration",
         "responses": {
@@ -57,67 +127,7 @@
         "menu": [
           "Services",
           "Modbus",
-          "Modbus TCP Server"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/modbus/tcp_server/config": {
-      "get": {
-        "tags": [
-          "Modbus TCP Server"
-        ],
-        "summary": "Returns all Modbus TCP Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusServerMulti"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Modbus TCP Server"
-        ],
-        "summary": "Updates specified Modbus TCP Server configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200ModbusServerMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/modbus_server_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Modbus",
-          "Modbus TCP Server"
+          "TCP Server"
         ],
         "hw_tags": {
           "is_access_point": false,
@@ -255,7 +265,7 @@
           },
           "timeout": {
             "type": "string",
-            "description": "Timeout in seconds (1-60) after which the connection is forcefully closed (0 for default value provided by the OS).",
+            "description": "Timeout in seconds: this parameter specifies the duration after which the connection will be forcefully closed. A value of 0 is considered the same as no timeout",
             "format": "irange(0, 60)",
             "default": "0",
             "x-web": {

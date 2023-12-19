@@ -1,35 +1,8 @@
 {
-  "status/mobile_usage/day": {
-    "description": "mobile usage day",
+  "status/realtime/mobile_usage": {
+    "description": "mobile usage",
     "read": {
-      "api": ["/mobile/modems/*", "/mobile/simcards/*"],
-      "ubus": {
-        "vuci.system": ["lucibwc"]
-      }
-    }
-  },
-  "status/mobile_usage/week": {
-    "description": "mobile usage week",
-    "read": {
-      "api": ["/mobile/modems/*", "/mobile/simcards/*"],
-      "ubus": {
-        "vuci.system": ["lucibwc"]
-      }
-    }
-  },
-  "status/mobile_usage/month": {
-    "description": "mobile usage month",
-    "read": {
-      "api": ["/mobile/modems/*", "/mobile/simcards/*"],
-      "ubus": {
-        "vuci.system": ["lucibwc"]
-      }
-    }
-  },
-  "status/mobile_usage/total": {
-    "description": "mobile usage total",
-    "read": {
-      "api": ["/mobile/modems/*", "/mobile/simcards/*"],
+      "api": ["/modems/*", "/data_usage/*", "/sim_cards/*"],
       "ubus": {
         "vuci.system": ["lucibwc"]
       }

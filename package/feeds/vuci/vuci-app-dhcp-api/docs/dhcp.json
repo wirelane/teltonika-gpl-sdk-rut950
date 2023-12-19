@@ -2,17 +2,19 @@
   "openapi": "3.0.0",
   "tags": [
     {
-      "name": "DHCP",
-      "description": "DHCP configuration API"
+      "name": "Static Leases"
+    },
+    {
+      "name": "Leases"
     }
   ],
   "paths": {
-    "/dhcp/static_leases/config": {
+    "/dhcp/static_leases/ipv4/config": {
       "get": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Returns all static lease configuration sections",
+        "summary": "Returns static leases",
         "description": "",
         "operationId": "get-static-leases",
         "responses": {
@@ -39,9 +41,9 @@
       },
       "put": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Updates the selected static lease sections",
+        "summary": "Updates static leases",
         "responses": {
           "200": {
             "description": "OK",
@@ -61,6 +63,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -89,9 +94,9 @@
       },
       "post": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Creates a new static lease section",
+        "summary": "Creates static lease",
         "responses": {
           "201": {
             "description": "Created",
@@ -135,14 +140,14 @@
       },
       "delete": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Deletes the specified static lease sections",
+        "summary": "Deletes static leases",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
           },
-          "422": {
+          "404": {
             "$ref": "#/components/responses/422response"
           }
         },
@@ -177,18 +182,19 @@
         ],
         "hw_tags": {
           "is_access_point": false
-        }
+        },
+        "name": "DHCP Servers"
       }
     },
-    "/dhcp/static_leases/config/{id}": {
+    "/dhcp/static_leases/ipv4/config/{id}": {
       "get": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Returns the  specified static lease section",
+        "summary": "Returns static lease",
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
@@ -226,9 +232,9 @@
       },
       "put": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Updates the specified static lease section",
+        "summary": "Updates static lease",
         "responses": {
           "200": {
             "description": "OK",
@@ -286,9 +292,9 @@
       },
       "delete": {
         "tags": [
-          "DHCP"
+          "Static Leases"
         ],
-        "summary": "Deletes specified static_leases configuration",
+        "summary": "Deletes static lease",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
@@ -319,7 +325,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Section id"
+          "description": "The ID of static lease"
         }
       ],
       "x-web": {
@@ -330,14 +336,15 @@
         ],
         "hw_tags": {
           "is_access_point": false
-        }
+        },
+        "name": "DHCP Servers"
       }
     },
-    "/dhcp/servers/config": {
+    "/dhcp/servers/ipv4/config": {
       "get": {
-        "summary": "Returns all DHCP server configuration sections",
+        "summary": "Returns DHCP IPv4 servers",
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ],
         "responses": {
           "200": {
@@ -354,7 +361,20 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/dhcp_section_name_index"
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "interface": {
+                                "type": "string",
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/dhcp_section_name_index"
+                          }
+                        ]
                       }
                     }
                   }
@@ -367,7 +387,7 @@
         "description": ""
       },
       "put": {
-        "summary": "Updates the selected DHCP server configuration sections",
+        "summary": "Updates DHCP IPv4 servers",
         "operationId": "put-network-dhcp",
         "responses": {
           "200": {
@@ -384,7 +404,20 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/dhcp_section_name_index"
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "interface": {
+                                "type": "string",
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/dhcp_section_name_index"
+                          }
+                        ]
                       }
                     }
                   }
@@ -418,11 +451,11 @@
           }
         },
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ]
       },
       "delete": {
-        "summary": "Deletes the selected DHCP server configuration sections",
+        "summary": "Deletes DHCP IPv4 servers",
         "operationId": "delete-network-dhcp",
         "responses": {
           "200": {
@@ -452,11 +485,11 @@
           }
         },
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ]
       },
       "post": {
-        "summary": "Creates a new DHCP server configuration section",
+        "summary": "Creates DHCP IPv4 server",
         "operationId": "post-network-dhcp",
         "responses": {
           "201": {
@@ -471,7 +504,20 @@
                       "description": "Operation status"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "interface": {
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dhcp_section_name_index"
+                        }
+                      ]
                     }
                   }
                 }
@@ -484,7 +530,7 @@
         },
         "description": "",
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ],
         "requestBody": {
           "content": {
@@ -510,14 +556,15 @@
         ],
         "hw_tags": {
           "is_access_point": false
-        }
+        },
+        "name": "DHCP Servers"
       }
     },
-    "/dhcp/servers/config/{id}": {
+    "/dhcp/servers/ipv4/config/{id}": {
       "get": {
-        "summary": "Returns the selected DHCP server configuration section",
+        "summary": "Returns DHCP IPv4 server",
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ],
         "responses": {
           "200": {
@@ -532,7 +579,20 @@
                       "description": "Operation status"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "interface": {
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dhcp_section_name_index"
+                        }
+                      ]
                     }
                   }
                 }
@@ -547,7 +607,7 @@
         "description": ""
       },
       "put": {
-        "summary": "Updates the selected DHCP server configuration section",
+        "summary": "Updates DHCP IPv4 server",
         "operationId": "put-network-dhcp-id",
         "responses": {
           "200": {
@@ -562,7 +622,20 @@
                       "description": "Operation status"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/dhcp_section_name_index"
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "interface": {
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dhcp_section_name_index"
+                        }
+                      ]
                     }
                   }
                 }
@@ -592,11 +665,11 @@
           }
         },
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ]
       },
       "delete": {
-        "summary": "Deletes the selected DHCP server configuration section",
+        "summary": "Deletes DHCP IPv4 server",
         "operationId": "delete-network-dhcp-id",
         "responses": {
           "200": {
@@ -608,7 +681,7 @@
         },
         "description": "",
         "tags": [
-          "DHCP"
+          "Servers IPv4"
         ]
       },
       "parameters": [
@@ -619,7 +692,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Configuration name"
+          "description": "The ID of DHCP server"
         }
       ],
       "x-web": {
@@ -630,14 +703,382 @@
         ],
         "hw_tags": {
           "is_access_point": false
-        }
+        },
+        "name": "DHCP Servers"
       }
     },
-    "/dhcp/servers/status": {
+    "/dhcp/servers/ipv6/config": {
       "get": {
-        "summary": "Returns all DHCP server leases",
+        "summary": "Returns DHCP IPv6 servers",
         "tags": [
-          "DHCP"
+          "Servers IPv6"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "interface": {
+                                "type": "string",
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/dhcp6_section_name_index"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-dhcp",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates DHCP IPv6 servers",
+        "operationId": "put-network-dhcp",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "interface": {
+                                "type": "string",
+                                "readOnly": true
+                              }
+                            }
+                          },
+                          {
+                            "$ref": "#/components/schemas/dhcp6_section_name_index"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/dhcp6_section_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Servers IPv6"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes DHCP IPv6 servers",
+        "operationId": "delete-network-dhcp",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Names of sections to delete",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Servers IPv6"
+        ]
+      },
+      "post": {
+        "summary": "Creates DHCP IPv6 server",
+        "operationId": "post-network-dhcp",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "interface": {
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dhcp6_section_name_index"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Servers IPv6"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dhcp6_section_name_index"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "DHCP Servers"
+      }
+    },
+    "/dhcp/servers/ipv6/config/{id}": {
+      "get": {
+        "summary": "Returns DHCP IPv6 server",
+        "tags": [
+          "Servers IPv6"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "interface": {
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dhcp6_section_name_index"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-network-dhcp-id",
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates DHCP IPv6 server",
+        "operationId": "put-network-dhcp-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "interface": {
+                              "type": "string",
+                              "readOnly": true
+                            }
+                          }
+                        },
+                        {
+                          "$ref": "#/components/schemas/dhcp6_section_name_index"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/dhcp6_section_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Servers IPv6"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes DHCP IPv6 server",
+        "operationId": "delete-network-dhcp-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "tags": [
+          "General"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of DHCP server"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Network",
+          "DHCP",
+          "Static Leases"
+        ],
+        "hw_tags": {
+          "is_access_point": false
+        },
+        "name": "DHCP Servers"
+      }
+    },
+    "/dhcp/leases/ipv4/status": {
+      "get": {
+        "summary": "Returns active DHCP servers leases",
+        "tags": [
+          "Leases"
         ],
         "responses": {
           "200": {
@@ -674,7 +1115,8 @@
         ],
         "hw_tags": {
           "is_access_point": false
-        }
+        },
+        "name": "DHCP Servers"
       }
     }
   },
@@ -690,7 +1132,7 @@
               "input-type": "input"
             },
             "type": "string",
-            "description": "Configuration name"
+            "description": "The ID of static lease"
           },
           "name": {
             "x-web": {
@@ -764,29 +1206,39 @@
               "input-type": "input"
             }
           },
-          "ignore": {
+          "enable_dhcpv4": {
+            "type": "string",
             "x-web": {
-              "input-type": "select",
-              "pretty": "Enable DHCP",
-              "group": "General Settings"
+              "input-type": "switch",
+              "pretty": "Enable DHCPv4",
+              "group": "General Setup"
             },
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "mode": {
             "type": "string",
             "enum": [
-              "enable",
-              "disable",
+              "server",
               "relay"
             ],
-            "description": "Enable DHCP for this interface (or relay mode)."
-          },
-          "interface": {
-            "type": "string",
-            "readOnly": true
+            "x-web": {
+              "input-type": "select",
+              "pretty": "DHCPv4 mode",
+              "group": "General Setup"
+            },
+            "enum-pretty": {
+              "server": "Server",
+              "relay": "Relay"
+            }
           },
           "server_relay": {
             "x-web": {
               "input-type": "input",
               "pretty": "DHCP server",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "relay"
@@ -800,7 +1252,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "Start IP",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "enable"
@@ -814,7 +1266,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "End IP",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "enable"
@@ -828,7 +1280,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "Lease time",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "enable"
@@ -923,6 +1375,75 @@
               "1"
             ],
             "description": "Force DHCP options to be sent even if it's not requested."
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "dhcp6_section_name_index": {
+        "title": "dhcp_section",
+        "type": "object",
+        "description": "DHCP IPv6 configuration section",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Interface name",
+            "x-web": {
+              "pretty": "Interface name",
+              "input-type": "input"
+            }
+          },
+          "leasetime": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Lease time",
+              "group": "General Setup",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Lease time. Expiry time of leased addresses."
+          },
+          "dynamicdhcp": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Dynamic DHCP",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "1",
+            "description": "Dynamic DHCP. Dynamically allocate DHCP addresses for clients. If disabled, only   clients having static leases will be served."
+          },
+          "force": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Force",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Force. Force DHCP on this network even if another server is detected."
           },
           "ra": {
             "x-web": {
@@ -1088,19 +1609,33 @@
         "type": "object",
         "description": "DHCP configuration section",
         "properties": {
-          "ignore": {
+          "enable_dhcpv4": {
+            "type": "string",
             "x-web": {
-              "input-type": "select",
-              "pretty": "Enable DHCP",
-              "group": "General Settings"
+              "input-type": "switch",
+              "pretty": "Enable DHCPv4",
+              "group": "General Setup"
             },
+            "enum": [
+              "0",
+              "1"
+            ]
+          },
+          "mode": {
             "type": "string",
             "enum": [
-              "enable",
-              "disable",
+              "server",
               "relay"
             ],
-            "description": "Enable DHCP for this interface (or relay mode)."
+            "x-web": {
+              "input-type": "select",
+              "pretty": "DHCPv4 mode",
+              "group": "General Setup"
+            },
+            "enum-pretty": {
+              "server": "Server",
+              "relay": "Relay"
+            }
           },
           "interface": {
             "type": "string",
@@ -1110,7 +1645,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "DHCP server",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "relay"
@@ -1124,7 +1659,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "Start IP",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "enable"
@@ -1138,7 +1673,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "End IP",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "enable"
@@ -1152,7 +1687,7 @@
             "x-web": {
               "input-type": "input",
               "pretty": "Lease time",
-              "group": "General Settings",
+              "group": "General Setup",
               "depends": [
                 {
                   "ignore": "enable"
@@ -1247,6 +1782,64 @@
               "1"
             ],
             "description": "Force DHCP options to be sent even if it's not requested."
+          }
+        }
+      },
+      "dhcp6_section_index": {
+        "title": "dhcp_section",
+        "type": "object",
+        "description": "DHCP IPv6 configuration section",
+        "properties": {
+          "leasetime": {
+            "x-web": {
+              "input-type": "input",
+              "pretty": "Lease time",
+              "group": "General Setup",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "description": "Lease time. Expiry time of leased addresses."
+          },
+          "dynamicdhcp": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Dynamic DHCP",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "1",
+            "description": "Dynamic DHCP. Dynamically allocate DHCP addresses for clients. If disabled, only   clients having static leases will be served."
+          },
+          "force": {
+            "x-web": {
+              "input-type": "switch",
+              "pretty": "Force",
+              "group": "Advanced Settings",
+              "depends": [
+                {
+                  "ignore": "enable"
+                }
+              ]
+            },
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Force. Force DHCP on this network even if another server is detected."
           },
           "ra": {
             "x-web": {

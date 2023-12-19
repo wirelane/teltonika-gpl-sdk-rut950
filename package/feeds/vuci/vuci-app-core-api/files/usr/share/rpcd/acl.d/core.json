@@ -20,13 +20,13 @@
 		"description": "Core functions for VuCI",
 		"read": {
 			"api": [
-				"/administration/ntp/client/config/*",
-				"/administration/general/*",
-				"/device/*",
+				"/date_time/ntp/client/config/*",
+				"/system/config/*",
+				"/system/device/*",
 				"/ui/config/*",
 				"/interfaces/config/*",
-				"/mobile/modems/*",
-				"/base/*"
+				"/modems/*",
+				"/system/actions/change_password_firstlogin/*"
 			],
 			"uci": [
 				"vuci",
@@ -91,7 +91,7 @@
 		},
 		"write": {
 			"api": [
-				"/base/*",
+				"/system/actions/change_password_firstlogin/*",
 				"/logout*"
 			],
 			"uci": [

@@ -4,13 +4,12 @@
 		"read": {
 			"api": [
 				"/widget/*",
-				"/bluetooth/general/config/general/*",
+				"/bluetooth/config/general/*",
 				"/wireless/interfaces/*",
 				"/interfaces/config/*",
-				"/cloud_solutions/rms/config/general/*",
-				"/cloud_solutions/rms/status/*",
-				"/device/status/*",
-				"/mobile/modems/*"
+				"/rms/*",
+				"/system/device/usage/*",
+				"/modems/*"
 			]
 		},
 		"write": {

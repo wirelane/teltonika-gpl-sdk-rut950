@@ -114,6 +114,63 @@
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 	};
+
+	tlt_gpios { // Modify according to wiki page "DTS syntax with Libgpiod changes"
+		gpiochip_info {
+			hw_0 {
+				hwver = <0>;
+				gpiochip_count = <2>;
+
+				gpiochip_0 = <32>; // Built-in
+				gpiochip_1 = <8>;  // Shift Register
+			};
+		};
+
+		ledman {
+			GPIO_4 {
+				line_name = "LED_ETH_GREEN_1";
+			};
+			GPIO_13 {
+				line_name = "LED_ETH_GREEN_2";
+			};
+			GPIO_34 {
+				line_name = "LED_WAN_ANY";
+			};
+			GPIO_33 {
+				line_name = "LED_WIFI_24";
+			};
+			GPIO_35 {
+				line_name = "LED_SSID_1";
+			};
+			GPIO_36 {
+				line_name = "LED_SSID_3";
+			};
+			GPIO_37 {
+				line_name = "LED_SSID_5";
+			};
+		};
+
+		misc {
+			GPIO_15 {
+				line_name = "GPIO_MODEM_RESET_1";
+			};
+			GPIO_16 {
+				line_name = "GPIO_MODEM_POWER_1";
+			};
+		};
+	};
+};
+
+&mnfinfo {
+	simpin1 {
+		reg = <&config 0x70 0x10>;
+		type = "digit";
+		default = "";
+	};
+
+	sim_count {
+		default =  "1";
+	};
 };
 
 &spi {
@@ -130,7 +187,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
-			partition@0 {
+			boot: partition@0 {
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;

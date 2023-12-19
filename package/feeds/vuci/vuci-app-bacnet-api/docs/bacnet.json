@@ -6,7 +6,7 @@
     }
   ],
   "paths": {
-    "/bacnet/general/config": {
+    "/bacnet/config": {
       "get": {
         "summary": "Returns all BACnet configurations",
         "tags": [
@@ -41,7 +41,6 @@
       "parameters": [],
       "put": {
         "summary": "Updates specified BACnet configurations",
-        "operationId": "put-services-bacnet-general-config",
         "responses": {
           "200": {
             "description": "OK",
@@ -104,7 +103,18 @@
         }
       }
     },
-    "/bacnet/general/config/general": {
+    "/bacnet/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Bacnet identifier (ID)"
+        }
+      ],
       "get": {
         "summary": "Returns the specified BACnet configuration",
         "tags": [
@@ -136,10 +146,8 @@
         },
         "operationId": "get-services-bacnet-general1"
       },
-      "parameters": [],
       "put": {
         "summary": "Updates the specified BACnet configuration",
-        "operationId": "put-services-bacnet-general-config3",
         "responses": {
           "200": {
             "description": "OK",
@@ -198,7 +206,7 @@
     },
     "/bacnet/bip/config": {
       "get": {
-        "summary": "Returns all BACnet BIP configurations",
+        "summary": "Returns all BACnet Over Internet Protocol configurations",
         "tags": [
           "BACnet"
         ],
@@ -225,13 +233,11 @@
               }
             }
           }
-        },
-        "operationId": "get-services-bacnet-general2"
+        }
       },
       "parameters": [],
       "put": {
-        "summary": "Updates specified BACnet BIP configurations",
-        "operationId": "put-services-bacnet-general-config4",
+        "summary": "Updates specified BACnet Over Internet Protocol configurations",
         "responses": {
           "200": {
             "description": "OK",
@@ -294,9 +300,20 @@
         }
       }
     },
-    "/bacnet/bip/config/general": {
+    "/bacnet/bip/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Bacnet BIP identifier (ID)"
+        }
+      ],
       "get": {
-        "summary": "Returns the specified BACnet BIP configurations",
+        "summary": "Returns the specified BACnet Over Internet Protocol configurations",
         "tags": [
           "BACnet"
         ],
@@ -323,13 +340,10 @@
           "404": {
             "$ref": "#/components/responses/404response"
           }
-        },
-        "operationId": "get-services-bacnet-general5"
+        }
       },
-      "parameters": [],
       "put": {
-        "summary": "Updates the specified BACnet BIP configuration",
-        "operationId": "put-services-bacnet-general-config6",
+        "summary": "Updates the specified BACnet Over Internet Protocol configuration",
         "responses": {
           "200": {
             "description": "OK",
@@ -388,7 +402,7 @@
     },
     "/bacnet/mstp/config": {
       "get": {
-        "summary": "Returns all BACnet MSTP configurations",
+        "summary": "Returns all BACnet Server/Client token passing configurations",
         "tags": [
           "BACnet"
         ],
@@ -415,13 +429,11 @@
               }
             }
           }
-        },
-        "operationId": "get-services-bacnet-general7"
+        }
       },
       "parameters": [],
       "put": {
-        "summary": "Updates specified BACnet MSTP configurations",
-        "operationId": "put-services-bacnet-general-config8",
+        "summary": "Updates specified BACnet Server/Client token passing configurations",
         "responses": {
           "200": {
             "description": "OK",
@@ -484,9 +496,20 @@
         }
       }
     },
-    "/bacnet/mstp/config/general": {
+    "/bacnet/mstp/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Bacnet MSTP identifier (ID)"
+        }
+      ],
       "get": {
-        "summary": "Returns the specified BACnet MSTP configuration",
+        "summary": "Returns the specified BACnet Server/Client token passing configuration",
         "tags": [
           "BACnet"
         ],
@@ -513,13 +536,10 @@
           "404": {
             "$ref": "#/components/responses/404response"
           }
-        },
-        "operationId": "get-services-bacnet-general9"
+        }
       },
-      "parameters": [],
       "put": {
-        "summary": "Updates the specified BACnet MSTP configuration",
-        "operationId": "put-services-bacnet-general-config10",
+        "summary": "Updates the specified BACnet Server/Client token passing configuration",
         "responses": {
           "200": {
             "description": "OK",

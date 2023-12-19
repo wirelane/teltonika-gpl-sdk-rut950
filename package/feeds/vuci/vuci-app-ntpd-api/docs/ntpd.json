@@ -6,152 +6,7 @@
     }
   ],
   "paths": {
-    "/administration/ntpd/config/general": {
-      "get": {
-        "tags": [
-          "NTPD"
-        ],
-        "summary": "Returns the NTPD configuration",
-        "operationId": "ntpd1",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ntpd_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "NTPD"
-        ],
-        "summary": "Updates the NTPD configuration",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ntpd_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/ntpd_options_index"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "ntpd123"
-      },
-      "post": {
-        "tags": [
-          "NTPD"
-        ],
-        "summary": "Uploads the NTPD config file",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "path": {
-                          "type": "string",
-                          "description": "Path of the uploaded file"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "required": [
-                  "file"
-                ],
-                "type": "object",
-                "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "The config file"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "ntpd2"
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTPD"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/administration/ntpd/config": {
+    "/date_time/ntpd/config": {
       "get": {
         "tags": [
           "NTPD"
@@ -248,7 +103,179 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
+        },
+        "name": "Date & Time"
+      }
+    },
+    "/date_time/ntpd/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
         }
+      ],
+      "get": {
+        "tags": [
+          "NTPD"
+        ],
+        "summary": "Returns the NTPD configuration",
+        "operationId": "ntpd1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntpd_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NTPD"
+        ],
+        "summary": "Updates the NTPD configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/ntpd_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntpd_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "ntpd123"
+      },
+      "post": {
+        "tags": [
+          "NTPD"
+        ],
+        "summary": "Uploads the NTPD config file",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Path of the uploaded file"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "description": "Parameter to upload the file to.",
+                    "enum": [
+                      "config_file"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The config file"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "ntpd2"
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTPD"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "Date & Time"
       }
     }
   },
@@ -281,6 +308,7 @@
               "0",
               "1"
             ],
+            "format": "is_bool",
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -293,6 +321,7 @@
               "0",
               "1"
             ],
+            "format": "is_bool",
             "x-web": {
               "pretty": "Enable NTP config from file",
               "input-type": "switch"
@@ -341,6 +370,7 @@
               "0",
               "1"
             ],
+            "format": "is_bool",
             "x-web": {
               "pretty": "Enable server",
               "input-type": "switch",

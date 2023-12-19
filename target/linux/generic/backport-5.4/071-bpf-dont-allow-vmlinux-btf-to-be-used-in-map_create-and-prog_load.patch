@@ -60,7 +60,7 @@
  	return !t || btf_type_nosize(t);
 --- a/include/uapi/linux/bpf.h
 +++ b/include/uapi/linux/bpf.h
-@@ -3276,6 +3276,7 @@ struct bpf_btf_info {
+@@ -3278,6 +3278,7 @@ struct bpf_btf_info {
  	__aligned_u64 btf;
  	__u32 btf_size;
  	__u32 id;

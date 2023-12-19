@@ -1,25 +1,25 @@
 {
 	"network/routes/dynamic_routes/proto_ospf": {
-		"description": "dynamic ospf routes configuration",
+		"description": "OSPF routes configuration",
 		"read": {
 			"api": [
-				"/routes/dynamic/ospf/*",
+				"/*",
 				"/interfaces/config/*",
 				"/interfaces/status/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/routes/dynamic/ospf/*"
+				"/ospf/*"
 			]
 		}
 	},
 
 	"status/routes/dynamic/ospf": {
-		"description": "ospf routes",
+		"description": "OSPF routes",
 		"read": {
 			"api": [
-				"/routes/dynamic/ospf/*"
+				"/ospf/*"
 			]
 		}
 	}

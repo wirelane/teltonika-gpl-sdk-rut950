@@ -2,117 +2,12 @@
     "openapi": "3.0.0",
     "tags": [],
     "paths": {
-        "/mobile/apn_database/config/{id}": {
+        "/apn_database/config": {
             "get": {
                 "tags": [
-                    "APN Database"
+                    "APN database"
                 ],
-                "summary": "Returns the specified APN database entry",
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/200apn"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404response"
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "description": "APN database entry identificator (ID)"
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "APN Database"
-                ],
-                "summary": "Updates the specified APN database entry",
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/200apn"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404response"
-                    },
-                    "422": {
-                        "$ref": "#/components/responses/422response"
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "description": "APN database entry identificator (ID)"
-                    }
-                ],
-                "requestBody": {
-                    "description": "Parameter section",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "data": {
-                                        "$ref": "#/components/schemas/apn_single_options"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "APN Database"
-                ],
-                "summary": "Deletes the specified APN database entry",
-                "responses": {
-                    "200": {
-                        "$ref": "#/components/responses/200deleted"
-                    },
-                    "404": {
-                        "$ref": "#/components/responses/404response"
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "description": "APN database entry identificator (ID)"
-                    }
-                ]
-            },
-            "x-web": {
-                "menu": [
-                    "Network",
-                    "Mobile",
-                    "APN Database"
-                ],
-                "hw_tags": {
-                    "mobile": true
-                }
-            }
-        },
-        "/mobile/apn_database/config": {
-            "get": {
-                "tags": [
-                    "APN Database"
-                ],
-                "summary": "Returns all APN database entries",
+                "summary": "Returns multiple entries of APN database",
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/200apnMulti"
@@ -121,9 +16,9 @@
             },
             "post": {
                 "tags": [
-                    "APN Database"
+                    "APN database"
                 ],
-                "summary": "Creates APN database entry",
+                "summary": "Creates entry in APN database",
                 "responses": {
                     "201": {
                         "$ref": "#/components/responses/200apn"
@@ -150,9 +45,9 @@
             },
             "put": {
                 "tags": [
-                    "APN Database"
+                    "APN database"
                 ],
-                "summary": "Updates specified APN database entries",
+                "summary": "Updates multiple entries of APN database",
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/200apnMulti"
@@ -186,9 +81,9 @@
             },
             "delete": {
                 "tags": [
-                    "APN Database"
+                    "APN database"
                 ],
-                "summary": "Deletes specified APN database entries",
+                "summary": "Deletes multiple entries of APN database",
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/200deleted_multi"
@@ -226,7 +121,92 @@
                 ],
                 "hw_tags": {
                     "mobile": true
+                },
+                "name": "APN database"
+            }
+        },
+        "/apn_database/config/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "APN database entry identificator (ID)"
                 }
+            ],
+            "get": {
+                "tags": [
+                    "APN database"
+                ],
+                "summary": "Returns specified entry of APN database",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200apn"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "APN database"
+                ],
+                "summary": "Updates specified entry of APN database",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200apn"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422response"
+                    }
+                },
+                "requestBody": {
+                    "description": "Parameter section",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/apn_single_options"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "APN database"
+                ],
+                "summary": "Deletes specified entry of APN database",
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/200deleted"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404response"
+                    }
+                }
+            },
+            "x-web": {
+                "menu": [
+                    "Network",
+                    "Mobile",
+                    "APN Database"
+                ],
+                "hw_tags": {
+                    "mobile": true
+                },
+                "name": "APN database"
             }
         }
     },

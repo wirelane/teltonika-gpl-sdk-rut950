@@ -7,524 +7,31 @@
   },
   "tags": [
     {
-      "name": "SIM switch"
-    },
-    {
       "name": "SIM cards"
     },
     {
-      "name": "Operator Lists"
+      "name": "Operator lists"
     },
     {
-      "name": "Modems"
+      "name": "Modem actions"
+    },
+    {
+      "name": "Modem status"
+    },
+    {
+      "name": "SMS limit clearing"
+    },
+    {
+      "name": "SIM actions"
     }
   ],
   "paths": {
-    "/mobile/modems/config/{modem_id}/sim_switch": {
-      "x-web": {
-        "hidden": true,
-        "menu": [
-          "Network",
-          "Mobile",
-          "SIM Switch"
-        ],
-        "hw_tags": {
-          "dual_sim": true
-        }
-      },
+    "/operator_lists/config": {
       "get": {
         "tags": [
-          "Modem SIM Switch"
+          "Operator lists"
         ],
-        "summary": "GET Modem SIM Switch",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/sim_switch_options_name_index"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modem_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modem ID"
-          }
-        ],
-        "operationId": "mobile18"
-      },
-      "put": {
-        "tags": [
-          "Modem SIM Switch"
-        ],
-        "summary": "UPDATE Modem SIM Switch",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "mobile19"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "modem_id",
-          "in": "path",
-          "required": true,
-          "description": "Modem ID"
-        }
-      ]
-    },
-    "/mobile/modems/config/{modem_id}/sim_switch/{id}": {
-      "x-web": {
-        "hidden": true,
-        "menu": [
-          "Network",
-          "Mobile",
-          "SIM Switch"
-        ],
-        "hw_tags": {
-          "dual_sim": true
-        }
-      },
-      "get": {
-        "tags": [
-          "Modem SIM Switch"
-        ],
-        "summary": "GET Modem SIM Switch",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modem_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modem ID"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SIM switch section name"
-          }
-        ],
-        "operationId": "mobile20"
-      },
-      "put": {
-        "tags": [
-          "Modem SIM Switch"
-        ],
-        "summary": "UPDATE Modem SIM Switch",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modem_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modem ID"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SIM switch section name"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/sim_switch_options_index"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "mobile21"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "modem_id",
-          "in": "path",
-          "required": true,
-          "description": "Modem ID"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "SIM switch section name"
-        }
-      ]
-    },
-    "/mobile/sim_switch/config": {
-      "get": {
-        "tags": [
-          "SIM switch"
-        ],
-        "summary": "GET All SIM switch",
-        "description": "",
-        "operationId": "mobile22",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "SIM switch"
-        ],
-        "summary": "UPDATE All SIM switch",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/sim_switch_options_name_index"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "mobile23"
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Mobile",
-          "SIM Switch"
-        ],
-        "hw_tags": {
-          "dual_sim": true
-        }
-      }
-    },
-    "/mobile/sim_switch/config/{id}": {
-      "get": {
-        "tags": [
-          "SIM switch"
-        ],
-        "summary": "GET SIM switch",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SIM switch section name"
-          }
-        ],
-        "operationId": "mobile1"
-      },
-      "put": {
-        "tags": [
-          "SIM switch"
-        ],
-        "summary": "UPDATE SIM switch",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/sim_switch_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SIM switch section name"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/sim_switch_options_index"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "mobile2"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Section  name"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Mobile",
-          "SIM Switch"
-        ],
-        "hw_tags": {
-          "dual_sim": true
-        }
-      }
-    },
-    "/mobile/operator_lists/config": {
-      "get": {
-        "tags": [
-          "Operator Lists"
-        ],
-        "summary": "GET All Operator Lists",
+        "summary": "Returns multiple configurations of operator lists",
         "description": "",
         "operationId": "mobile3",
         "responses": {
@@ -570,9 +77,9 @@
       },
       "put": {
         "tags": [
-          "Operator Lists"
+          "Operator lists"
         ],
-        "summary": "UPDATE All Operator Lists",
+        "summary": "Updates multiple configurations of operator lists",
         "responses": {
           "200": {
             "description": "OK",
@@ -658,9 +165,9 @@
       },
       "delete": {
         "tags": [
-          "Operator Lists"
+          "Operator lists"
         ],
-        "summary": "DELETE All Operator Lists",
+        "summary": "Deletes multiple configurations of operator lists",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
@@ -693,9 +200,9 @@
       },
       "post": {
         "tags": [
-          "Operator Lists"
+          "Operator lists"
         ],
-        "summary": "CREATE All Operator Lists",
+        "summary": "Creates configuration for operator lists",
         "responses": {
           "201": {
             "description": "Created",
@@ -749,12 +256,12 @@
         }
       }
     },
-    "/mobile/operator_lists/config/{id}": {
+    "/operator_lists/config/{id}": {
       "get": {
         "tags": [
-          "Operator Lists"
+          "Operator lists"
         ],
-        "summary": "GET Operator Lists",
+        "summary": "Returns specified configuration of operator lists",
         "responses": {
           "200": {
             "description": "OK",
@@ -794,9 +301,9 @@
       },
       "put": {
         "tags": [
-          "Operator Lists"
+          "Operator lists"
         ],
-        "summary": "UPDATE Operator Lists",
+        "summary": "Updates specified configuration of operator lists",
         "responses": {
           "200": {
             "description": "OK",
@@ -854,9 +361,9 @@
       },
       "delete": {
         "tags": [
-          "Operator Lists"
+          "Operator lists"
         ],
-        "summary": "DELETE Operator Lists",
+        "summary": "Deletes specified configuration of operator lists",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
@@ -886,7 +393,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Section name"
+          "description": "Operator list configuration ID"
         }
       ],
       "x-web": {
@@ -900,291 +407,12 @@
         }
       }
     },
-    "/mobile/modems/config/{modem_id}/simcards": {
-      "x-web": {
-        "hidden": true,
-        "menu": [
-          "Network",
-          "Mobile",
-          "Mobile"
-        ],
-        "hw_tags": {
-          "mobile": true
-        }
-      },
+    "/sim_cards/config": {
       "get": {
         "tags": [
-          "Modem SIM Cards"
+          "SIM configuration"
         ],
-        "summary": "GET Modem SIM Cards",
-        "description": "",
-        "parameters": [
-          {
-            "name": "modem_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modem ID"
-          }
-        ],
-        "operationId": "mobile10",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/simcard_options_name_index"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Modem SIM Cards"
-        ],
-        "summary": "UPDATE Modem SIM Cards",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/simcard_options_name_index"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of of section objects",
-                    "items": {
-                      "$ref": "#/components/schemas/simcard_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "mobile11"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "modem_id",
-          "in": "path",
-          "required": true,
-          "description": "Modem ID"
-        }
-      ]
-    },
-    "/mobile/modems/config/{modem_id}/simcards/{id}": {
-      "x-web": {
-        "hidden": true,
-        "menu": [
-          "Network",
-          "Mobile",
-          "Mobile"
-        ],
-        "hw_tags": {
-          "mobile": true
-        }
-      },
-      "get": {
-        "tags": [
-          "Modem SIM Cards"
-        ],
-        "summary": "GET Modem SIM Cards",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/simcard_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modem_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modem ID"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SIM card configuration id"
-          }
-        ],
-        "operationId": "mobile12"
-      },
-      "put": {
-        "tags": [
-          "Modem SIM Cards"
-        ],
-        "summary": "UPDATE Modem SIM Cards",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/simcard_options_name_index"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "modem_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Modem ID"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SIM card configuration id"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/simcard_options_index"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "mobile13"
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "modem_id",
-          "in": "path",
-          "required": true,
-          "description": "Modem ID"
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "SIM card configuration id"
-        }
-      ]
-    },
-    "/mobile/simcards/config": {
-      "get": {
-        "tags": [
-          "SIM Cards"
-        ],
-        "summary": "GET All SIM Cards",
+        "summary": "Returns multiple SIM card configurations",
         "description": "",
         "operationId": "mobile14",
         "responses": {
@@ -1214,9 +442,9 @@
       },
       "put": {
         "tags": [
-          "SIM Cards"
+          "SIM configuration"
         ],
-        "summary": "UPDATE All SIM Cards",
+        "summary": "Updates multiple SIM card configurations",
         "responses": {
           "200": {
             "description": "OK",
@@ -1277,15 +505,16 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "name": "SIM cards"
       }
     },
-    "/mobile/simcards/config/{id}": {
+    "/sim_cards/config/{id}": {
       "get": {
         "tags": [
-          "SIM Cards"
+          "SIM configuration"
         ],
-        "summary": "GET SIM Cards",
+        "summary": "Returns specified SIM card configuration",
         "responses": {
           "200": {
             "description": "OK",
@@ -1318,16 +547,16 @@
             "schema": {
               "type": "string"
             },
-            "description": "SIM card configuration id"
+            "description": "SIM card configuration ID"
           }
         ],
         "operationId": "mobile16"
       },
       "put": {
         "tags": [
-          "SIM Cards"
+          "SIM configuration"
         ],
-        "summary": "UPDATE SIM Cards",
+        "summary": "Updates multiple SIM card configurations",
         "responses": {
           "200": {
             "description": "OK",
@@ -1363,7 +592,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "SIM card configuration id"
+            "description": "SIM card configuration ID"
           }
         ],
         "requestBody": {
@@ -1391,7 +620,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Section name"
+          "description": "SIM card configuration ID"
         }
       ],
       "x-web": {
@@ -1402,25 +631,88 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "name": "SIM cards"
       }
     },
-    "/mobile/simcards/status": {
+    "/sim_cards/status": {
       "get": {
-        "summary": "GET SIM Cards Status",
+        "summary": "Returns multiple SIM card status information",
         "tags": [
-          "Modem SIM Cards"
+          "SIM configuration"
         ],
         "operationId": "get-network-mobile-simcards-status",
         "description": "",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/simcards_status"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
+            "$ref": "#/components/responses/simcards_status_multiple"
           }
         }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "SIM cards"
+      }
+    },
+    "/sim_cards/status/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns specified SIM card status information",
+        "tags": [
+          "SIM configuration"
+        ],
+        "operationId": "get-network-mobile-simcards-status-id",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/simcards_status"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "SIM cards"
+      }
+    },
+    "/modems/apns/status": {
+      "get": {
+        "summary": "Returns APN values for multiple modems",
+        "tags": [
+          "Modem status"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/modem_apns_multiple"
+          }
+        },
+        "operationId": "get-network-mobile-modems-apns"
       },
       "x-web": {
         "menu": [
@@ -1433,11 +725,63 @@
         }
       }
     },
-    "/mobile/simcards/actions/send_ussd": {
-      "post": {
-        "summary": "SEND USSD",
+    "/modems/apns/status/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns APN values for specified modem",
         "tags": [
-          "USSD"
+          "Modem status"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/modem_apns_single"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "get-network-mobile-modems-apns-id"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/modems/{id}/actions/send_ussd": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
+      "post": {
+        "summary": "Sends USSD code",
+        "tags": [
+          "Modem actions"
         ],
         "responses": {
           "200": {
@@ -1467,6 +811,9 @@
           },
           "422": {
             "$ref": "#/components/responses/422response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-mobile-simcards-actions-send_ussd",
@@ -1480,17 +827,12 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "simcard_section": {
-                        "type": "string",
-                        "description": "SIM card configuration id"
-                      },
                       "ussd": {
                         "type": "string",
                         "description": "USSD code"
                       }
                     },
                     "required": [
-                      "simcard_section",
                       "ussd"
                     ]
                   }
@@ -1507,15 +849,27 @@
           "Mobile"
         ],
         "hw_tags": {
-          "mobile": true
+          "mobile": true,
+          "modem_low_power": false
         }
       }
     },
-    "/mobile/simcards/actions/clear_sms_limit": {
+    "/sim_cards/{id}/actions/clear_sms_limit": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card configuration ID"
+        }
+      ],
       "post": {
-        "summary": "SEND SMS Limit Clear",
+        "summary": "Clears SMS limit for specified SIM card configuration",
         "tags": [
-          "SMS Limit Clear"
+          "SMS limit clearing"
         ],
         "responses": {
           "200": {
@@ -1528,43 +882,40 @@
                     "success": {
                       "type": "boolean",
                       "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "description": "Operation status"
+                        },
+                        "code": {
+                          "type": "number",
+                          "description": "Operation code",
+                          "enum": [
+                            0,
+                            1,
+                            3
+                          ]
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
         "operationId": "get-network-mobile-simcards-actions-send_ussd-id",
-        "description": "",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "simcard_section": {
-                        "type": "string",
-                        "description": "SIM card configuration id"
-                      }
-                    },
-                    "required": [
-                      "simcard_section"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
+        "description": ""
       },
-      "parameters": [],
       "x-web": {
         "menu": [
           "Network",
@@ -1573,12 +924,24 @@
         ],
         "hw_tags": {
           "mobile": true
-        }
+        },
+        "name": "SIM cards"
       }
     },
-    "/mobile/modems/actions/scan_network": {
+    "/modems/{id}/actions/scan_network": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
       "post": {
-        "summary": "SEND Modem Network Scan",
+        "summary": "Scans mobile network and returns available operators with details",
         "operationId": "post-network-mobile-modems-actions-scan_network",
         "responses": {
           "200": {
@@ -1674,52 +1037,15 @@
               }
             }
           },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
           "422": {
             "$ref": "#/components/responses/422response"
           }
         },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "modem_id": {
-                        "type": "string",
-                        "description": "Modem ID of the specified modem.",
-                        "x-web": {
-                          "unique": true,
-                          "pretty": "Modem",
-                          "input-type": "select",
-                          "enum-depends": {
-                            "$ref": "#/x-schemas/modem_select"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "modem_id"
-                    ]
-                  }
-                }
-              },
-              "examples": {
-                "example-1": {
-                  "value": {
-                    "data": {
-                      "modem_id": "3-1"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
         "tags": [
-          "Modem Network Scan"
+          "Modem actions"
         ]
       },
       "x-web": {
@@ -1733,49 +1059,31 @@
         }
       }
     },
-    "/mobile/modems/actions/reboot": {
+    "/modems/{id}/actions/reboot": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
       "post": {
-        "summary": "SEND Modem Reboot",
+        "summary": "Reboots specified modem",
         "operationId": "post-network-mobile-modems-actions-reboot",
         "description": "",
         "tags": [
-          "Modem Reboot"
+          "Modem actions"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "modem_id": {
-                        "type": "string",
-                        "description": "Modem ID",
-                        "x-web": {
-                          "unique": true,
-                          "pretty": "Modem",
-                          "input-type": "select",
-                          "enum-depends": {
-                            "$ref": "#/x-schemas/modem_select"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "modem_id"
-                    ]
-                  }
-                }
-              },
-              "examples": {}
-            }
-          }
-        },
         "responses": {
           "200": {
             "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -1793,13 +1101,24 @@
         }
       }
     },
-    "/mobile/modems/actions/exec_at": {
+    "/modems/{id}/actions/exec_at": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
       "post": {
-        "summary": "Execute modem AT command",
+        "summary": "Executes AT command",
         "operationId": "post-network-mobile-modems-actions-exec-at",
         "description": "",
         "tags": [
-          "Execute Modem AT"
+          "Modem actions"
         ],
         "requestBody": {
           "content": {
@@ -1810,18 +1129,6 @@
                   "data": {
                     "type": "object",
                     "properties": {
-                      "modem_id": {
-                        "type": "string",
-                        "description": "Modem ID",
-                        "x-web": {
-                          "unique": true,
-                          "pretty": "Modem",
-                          "input-type": "select",
-                          "enum-depends": {
-                            "$ref": "#/x-schemas/modem_select"
-                          }
-                        }
-                      },
                       "command": {
                         "type": "string",
                         "description": "AT command to execute",
@@ -1832,7 +1139,6 @@
                       }
                     },
                     "required": [
-                      "modem_id",
                       "command"
                     ]
                   }
@@ -1846,42 +1152,8 @@
           "200": {
             "$ref": "#/components/responses/exec_at_post"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Mobile",
-          "Mobile"
-        ],
-        "hw_tags": {
-          "mobile": true
-        }
-      }
-    },
-    "/mobile/modems/actions/sim_unblock": {
-      "post": {
-        "summary": "Unblock SIM with PUK and set new PIN",
-        "operationId": "post-network-mobile-modems-actions-sim-unblock",
-        "description": "",
-        "tags": [
-          "Modems"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/sim_unblock"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/sim_unblock"
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -1899,92 +1171,7 @@
         }
       }
     },
-    "/mobile/modems/actions/restart_connection": {
-      "post": {
-        "summary": "Restarts the connection of the selected modem",
-        "operationId": "post-network-mobile-rr-actions-reboot",
-        "description": "",
-        "tags": [
-          "Modems"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "modem_id": {
-                        "type": "string",
-                        "description": "Modem ID",
-                        "x-web": {
-                          "unique": true,
-                          "pretty": "Modem",
-                          "input-type": "select",
-                          "enum-depends": {
-                            "$ref": "#/x-schemas/modem_select"
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "modem_id"
-                    ]
-                  }
-                }
-              },
-              "examples": {}
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Mobile",
-          "Mobile"
-        ],
-        "hw_tags": {
-          "mobile": true
-        }
-      },
-      "parameters": []
-    },
-    "/mobile/modems/apns": {
-      "get": {
-        "summary": "Returns APN values for all modems",
-        "tags": [
-          "Modems"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/modem_apns_multiple"
-          }
-        },
-        "operationId": "get-network-mobile-modems-apns"
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Mobile",
-          "Mobile"
-        ],
-        "hw_tags": {
-          "mobile": true
-        }
-      }
-    },
-    "/mobile/modems/apns/{id}": {
+    "/modems/{id}/actions/restart_connection": {
       "parameters": [
         {
           "schema": {
@@ -1993,23 +1180,27 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Modem id"
+          "description": "Modem ID"
         }
       ],
-      "get": {
-        "summary": "Returns APN values for specified modem",
+      "post": {
+        "summary": "Restarts connection of the specified modem",
+        "operationId": "post-network-mobile-rr-actions-reboot",
+        "description": "",
         "tags": [
-          "Modems"
+          "Modem actions"
         ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/modem_apns_single"
+            "$ref": "#/components/responses/200response"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
           }
-        },
-        "operationId": "get-network-mobile-modems-apns-id"
+        }
       },
       "x-web": {
         "menu": [
@@ -2021,634 +1212,389 @@
           "mobile": true
         }
       }
+    },
+    "/modems/{id}/sim_cards/config": {
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
+      },
+      "get": {
+        "tags": [
+          "SIM configuration"
+        ],
+        "summary": "Returns multiple modem SIM card configurations",
+        "description": "",
+        "parameters": [
+          {
+            "name": "modem_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Modem ID"
+          }
+        ],
+        "operationId": "mobile10",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/simcard_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SIM configuration"
+        ],
+        "summary": "Updates multiple modem SIM card configurations",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/simcard_options_name_index"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile11"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ]
+    },
+    "/modems/{id}/sim_cards/config/{sim_id}": {
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
+      },
+      "get": {
+        "tags": [
+          "SIM configuration"
+        ],
+        "summary": "Returns specified modem SIM card configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "operationId": "mobile12"
+      },
+      "put": {
+        "tags": [
+          "SIM configuration"
+        ],
+        "summary": "Updates specified modem SIM card configuration",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/simcard_options_name_index"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/simcard_options_index"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "mobile13"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sim_id",
+          "in": "path",
+          "required": true,
+          "description": "SIM card configuration ID"
+        }
+      ]
+    },
+    "/modems/{id}/actions/sim_unblock": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
+      "post": {
+        "summary": "Unblocks SIM card with PUK and sets a new PIN",
+        "operationId": "post-network-mobile-modems-actions-sim-unblock",
+        "description": "",
+        "tags": [
+          "SIM actions"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sim_unblock"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sim_unblock"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/modems/{id}/actions/sim_unlock": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
+      "post": {
+        "summary": "Unlocks SIM card with PIN",
+        "operationId": "post-mobile-modems-actions-sim-unlock",
+        "description": "",
+        "tags": [
+          "SIM actions"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/sim_unlock"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/sim_unlock"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        }
+      }
+    },
+    "/modems/countries": {
+      "get": {
+        "summary": "Returns multiple APN MCCs and countries",
+        "tags": [
+          "Modem status"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/modem_apn_countries_multiple"
+          }
+        },
+        "operationId": "get-network-mobile-modems-countries"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "hidden": true,
+        "hidden_documentation_page": true
+      }
     }
   },
   "components": {
     "schemas": {
-      "sim_switch_options_name_index": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Section name.",
-            "x-web": {
-              "pretty": "Configuration ID",
-              "input-type": "input"
-            }
-          },
-          "modem": {
-            "x-web": {
-              "pretty": "Modem",
-              "input-type": "select",
-              "unique": true,
-              "enum-pretty": {
-                "$ref": "#/x-schemas/modem_names"
-              },
-              "enum-depends": {
-                "$ref": "#/x-schemas/modem_select"
-              }
-            },
-            "type": "string",
-            "description": "Modem which the SIM switch configuration belongs to.",
-            "readOnly": true
-          },
-          "position": {
-            "type": "string",
-            "description": "SIM card position inside the modem.",
-            "x-web": {
-              "pretty": "SIM Position",
-              "unique": true,
-              "virtual": true,
-              "enum-pretty": {
-                "$ref": "#/x-schemas/simcard_names"
-              },
-              "enum-depends": {
-                "$ref": "#/x-schemas/simcard_select"
-              }
-            }
-          },
-          "enabled": {
-            "type": "string",
-            "description": "Automatically switch between default and non-default SIM cards based on the various rules and criterias defined below",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "Enable automatic switching",
-              "input-type": "switch"
-            }
-          },
-          "interval": {
-            "type": "string",
-            "description": "Check interval in seconds",
-            "x-web": {
-              "pretty": "Check interval",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "retry_count": {
-            "type": "string",
-            "description": "Attempts before SIM switch. Fail count before switching to other SIM",
-            "x-web": {
-              "pretty": "Attempts before SIM switch",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "on_signal": {
-            "type": "string",
-            "description": "On weak signal. Perform a SIM card switch when a signal's strength drops below a certain threshold",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On weak signal",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "weak_signal": {
-            "type": "string",
-            "description": "Signal strength (dBm). Lowest signal's strength value in dBm below which a SIM card switch should occur",
-            "x-web": {
-              "pretty": "Signal strength (dBm)",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "on_signal": "1"
-                }
-              ]
-            }
-          },
-          "data_limit": {
-            "type": "string",
-            "description": "On data limit. Perform a SIM card switch when mobile data limit for your current SIM card is exceeded",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On data limit",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "sms_limit": {
-            "type": "string",
-            "description": "On SMS limit. Perform a SIM card switch when sent SMS limit for your current SIM card is exceeded",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On SMS limit",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "roaming": {
-            "type": "string",
-            "description": "On roaming. Perform a SIM card switch when roaming is detected",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On roaming",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "no_network": {
-            "type": "string",
-            "description": "No network. Perform a SIM card switch when network isn't detected",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "No network",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "denied": {
-            "type": "string",
-            "description": "On network denied. Perform a SIM card switch when network is denied",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On network denied",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "fail_flag": {
-            "type": "string",
-            "description": "On data connection fail. Perform a SIM card switch when data connection fails",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On data connection fail",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "data_fail": {
-            "type": "string",
-            "description": "Method. '1",
-            "enum": [
-              "1",
-              "2"
-            ],
-            "x-web": {
-              "pretty": "Method",
-              "enum-pretty": {
-                "1": "LCP echo",
-                "2": "ICMP echo"
-              },
-              "input-type": "select",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "fail_flag": "1"
-                }
-              ]
-            }
-          },
-          "data_fail_host": {
-            "type": "string",
-            "description": "Health monitor ICMP host. A remote host to ping (send an ICMP (Internet Control Message Protocol) packet to) and determine when connection goes down",
-            "x-web": {
-              "pretty": "Health monitor ICMP host",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "data_fail": "2"
-                }
-              ]
-            }
-          },
-          "data_fail_timeout": {
-            "type": "string",
-            "description": "Health monitor ICMP timeout. A timeout value for ICMP (Internet Control Message Protocol) packet",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "10"
-            ],
-            "x-web": {
-              "pretty": "Health monitor ICMP timeout",
-              "enum-pretty": {
-                "1": "1 sec.",
-                "2": "2 sec.",
-                "3": "3 sec.",
-                "4": "4 sec.",
-                "5": "5 sec.",
-                "10": "10 sec."
-              },
-              "input-type": "select",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "data_fail": "2"
-                }
-              ]
-            }
-          },
-          "enable_back": {
-            "type": "string",
-            "description": "Switch back to default SIM card after timeout. Switch back to default SIM card after timeout has been reached",
-            "x-web": {
-              "pretty": "Switch back to default SIM card after timeout",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "switch_back": {
-            "type": "string",
-            "description": "An initial timeout value in minutes after which a SIM card's switch-back to default SIM card should occur",
-            "x-web": {
-              "pretty": "Initial timeout (min)",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "enable_back": "1"
-                }
-              ]
-            }
-          }
-        },
-        "required": [
-          "interval",
-          "retry_count",
-          "weak_signal",
-          "data_fail",
-          "data_fail_host",
-          "data_fail_timeout"
-        ]
-      },
-      "sim_switch_options_index": {
-        "type": "object",
-        "properties": {
-          "modem": {
-            "x-web": {
-              "pretty": "Modem",
-              "unique": true,
-              "input-type": "select",
-              "enum-pretty": {
-                "$ref": "#/x-schemas/modem_names"
-              },
-              "enum-depends": {
-                "$ref": "#/x-schemas/modem_select"
-              }
-            },
-            "type": "string",
-            "description": "Modem which the SIM switch configuration belongs to.",
-            "readOnly": true
-          },
-          "position": {
-            "type": "string",
-            "description": "SIM card section position inside the modem.",
-            "x-web": {
-              "pretty": "SIM Position",
-              "unique": true,
-              "virtual": true,
-              "enum-pretty": {
-                "$ref": "#/x-schemas/simcard_names"
-              },
-              "enum-depends": {
-                "$ref": "#/x-schemas/simcard_select"
-              }
-            }
-          },
-          "enabled": {
-            "type": "string",
-            "description": "Automatically switch between default and non-default SIM cards based on the various rules and criterias defined below",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "Enable automatic switching",
-              "input-type": "switch"
-            }
-          },
-          "interval": {
-            "type": "string",
-            "description": "Check interval in seconds",
-            "x-web": {
-              "pretty": "Check interval",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "retry_count": {
-            "type": "string",
-            "description": "Attempts before SIM switch. Fail count before switching to other SIM",
-            "x-web": {
-              "pretty": "Attempts before SIM switch",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "on_signal": {
-            "type": "string",
-            "description": "On weak signal. Perform a SIM card switch when a signal's strength drops below a certain threshold",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On weak signal",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "weak_signal": {
-            "type": "string",
-            "description": "Signal strength (dBm). Lowest signal's strength value in dBm below which a SIM card switch should occur",
-            "x-web": {
-              "pretty": "Signal strength (dBm)",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "on_signal": "1"
-                }
-              ]
-            }
-          },
-          "data_limit": {
-            "type": "string",
-            "description": "On data limit. Perform a SIM card switch when mobile data limit for your current SIM card is exceeded",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On data limit",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "sms_limit": {
-            "type": "string",
-            "description": "On SMS limit. Perform a SIM card switch when sent SMS limit for your current SIM card is exceeded",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On SMS limit",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "roaming": {
-            "type": "string",
-            "description": "On roaming. Perform a SIM card switch when roaming is detected",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On roaming",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "no_network": {
-            "type": "string",
-            "description": "No network. Perform a SIM card switch when network isn't detected",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "No network",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "denied": {
-            "type": "string",
-            "description": "On network denied. Perform a SIM card switch when network is denied",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On network denied",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "fail_flag": {
-            "type": "string",
-            "description": "On data connection fail. Perform a SIM card switch when data connection fails",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "On data connection fail",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "data_fail": {
-            "type": "string",
-            "description": "Method",
-            "enum": [
-              "1",
-              "2"
-            ],
-            "x-web": {
-              "pretty": "Method",
-              "enum-pretty": {
-                "1": "LCP echo",
-                "2": "ICMP echo"
-              },
-              "input-type": "select",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "fail_flag": "1"
-                }
-              ]
-            }
-          },
-          "data_fail_host": {
-            "type": "string",
-            "description": "Health monitor ICMP host. A remote host to ping (send an ICMP (Internet Control Message Protocol) packet to) and determine when connection goes down",
-            "x-web": {
-              "pretty": "Health monitor ICMP host",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "data_fail": "2"
-                }
-              ]
-            }
-          },
-          "data_fail_timeout": {
-            "type": "string",
-            "description": "Health monitor ICMP timeout. A timeout value for ICMP (Internet Control Message Protocol) packet",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "10"
-            ],
-            "x-web": {
-              "pretty": "Health monitor ICMP timeout",
-              "enum-pretty": {
-                "1": "1 sec.",
-                "2": "2 sec.",
-                "3": "3 sec.",
-                "4": "4 sec.",
-                "5": "5 sec.",
-                "10": "10 sec."
-              },
-              "input-type": "select",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "data_fail": "2"
-                }
-              ]
-            }
-          },
-          "enable_back": {
-            "type": "string",
-            "description": "Switch back to default SIM card after timeout. Switch back to default SIM card after timeout has been reached",
-            "x-web": {
-              "pretty": "Switch back to default SIM card after timeout",
-              "input-type": "switch",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "switch_back": {
-            "type": "string",
-            "description": "An initial timeout value in minutes after which a SIM card's switch-back to default SIM card should occur",
-            "x-web": {
-              "pretty": "Initial timeout (min)",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1",
-                  "enable_back": "1"
-                }
-              ]
-            }
-          }
-        },
-        "required": [
-          "interval",
-          "retry_count",
-          "weak_signal",
-          "data_fail",
-          "data_fail_host",
-          "data_fail_timeout"
-        ]
-      },
       "operator_lists_options_put": {
         "type": "object",
         "properties": {
@@ -2664,9 +1610,11 @@
           },
           "mcc_mnc": {
             "type": "array",
-            "description": "Operator's code used to identify a network operator. Allowed characters: (0-9)",
+            "description": "3 characters long code will select all operators with the corresponding Mobile Country Code (MCC). 5 or 6 characters long code will select specific operator code.",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "regex",
+              "pattern": "^[0-9]{3}$|^[0-9]{5}$|^[0-9]{6}$"
             },
             "x-web": {
               "pretty": "Operator code",
@@ -2689,9 +1637,11 @@
           },
           "mcc_mnc": {
             "type": "array",
-            "description": "Operator's code used to identify a network operator. Allowed characters: (0-9)",
+            "description": "3 characters long code will select all operators with the corresponding Mobile Country Code (MCC). 5 or 6 characters long code will select specific operator code.",
             "items": {
-              "type": "string"
+              "type": "string",
+              "format": "regex",
+              "pattern": "^[0-9]{3}$|^[0-9]{5}$|^[0-9]{6}$"
             },
             "x-web": {
               "pretty": "Operator code",
@@ -2706,7 +1656,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Section name.",
+            "description": "Configuration ID",
             "x-web": {
               "pretty": "Configuration ID",
               "input-type": "input"
@@ -2825,7 +1775,7 @@
           },
           "service": {
             "type": "string",
-            "description": "Service mode. If your local mobile network supports 2G/3G/4G/5G you can specify to which network you prefer to connect to",
+            "description": "Specify your preferred network type. If your mobile network is compatible with 2G/3G/4G/5G standards, you may choose the preferred network type to which the device should attempt to connect",
             "enum": [
               "2g",
               "3g_pref",
@@ -4247,7 +3197,7 @@
           },
           "operlist_name": {
             "type": "string",
-            "description": "Operator list. Operator's code list name. You can get/add them in /mobile/operator_lists",
+            "description": "Operator list. Operator's code list name. You can get/add them in /operator_lists",
             "x-web": {
               "pretty": "Operator list",
               "input-type": "input",
@@ -5989,7 +4939,7 @@
           },
           "operlist_name": {
             "type": "string",
-            "description": "Operator list. Operator's code list name. You can get/add them in /mobile/operator_lists",
+            "description": "Operator list. Operator's code list name. You can get/add them in /operator_lists",
             "x-web": {
               "pretty": "Operator list",
               "input-type": "input",
@@ -6192,33 +5142,58 @@
           "period"
         ]
       },
+      "apn_countries": {
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "mcc": "246",
+            "country": "Lithuania"
+          }
+        },
+        "properties": {
+          "mcc": {
+            "type": "string",
+            "description": "Mobile country code (MCC)."
+          },
+          "country": {
+            "type": "string",
+            "description": "Country name."
+          }
+        }
+      },
       "modems_apns": {
         "type": "object",
         "x-examples": {
           "example-1": {
+            "id": 1,
             "password": "apn_password",
             "apn": "wap",
             "user": "username",
             "carrier": "Test Internet",
-            "auth": "none"
+            "auth": "none",
+            "pdptype": "0"
           }
         },
         "properties": {
+          "id": {
+            "type": "number",
+            "description": "APN ID"
+          },
           "password": {
             "type": "string",
-            "description": "APN password."
+            "description": "APN password"
           },
           "apn": {
             "type": "string",
-            "description": "APN name."
+            "description": "APN name"
           },
           "user": {
             "type": "string",
-            "description": "APN username."
+            "description": "APN username"
           },
           "carrier": {
             "type": "string",
-            "description": "APN carrier name."
+            "description": "APN carrier name"
           },
           "auth": {
             "type": "string",
@@ -6227,7 +5202,7 @@
               "pap",
               "chap"
             ],
-            "description": "APN auth type."
+            "description": "APN auth type"
           },
           "pdptype": {
             "type": "string",
@@ -6236,7 +5211,7 @@
               "1",
               "2"
             ],
-            "description": "APN pdp type."
+            "description": "APN pdp type"
           }
         },
         "required": [
@@ -6251,20 +5226,6 @@
       "sim_unblock": {
         "type": "object",
         "properties": {
-          "modem": {
-            "type": "string",
-            "description": "Modem ID that should set the PIN for active SIM",
-            "x-web": {
-              "pretty": "Modem",
-              "input-type": "select",
-              "enum-pretty": {
-                "$ref": "#/x-schemas/modem_names"
-              },
-              "enum-depends": {
-                "$ref": "#/x-schemas/modem_select"
-              }
-            }
-          },
           "pin": {
             "type": "string",
             "description": "New PIN code",
@@ -6283,10 +5244,62 @@
           }
         },
         "required": [
-          "modem",
           "pin",
           "puk"
         ]
+      },
+      "sim_unlock": {
+        "type": "object",
+        "properties": {
+          "pin": {
+            "type": "string",
+            "description": "PIN code",
+            "x-web": {
+              "pretty": "PIN code",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "pin"
+        ]
+      },
+      "sim_card_status": {
+        "type": "object",
+        "properties": {
+          "section_name": {
+            "type": "string",
+            "description": "SIM switch configuration ID"
+          },
+          "deny_roaming": {
+            "type": "string",
+            "description": "Deny data connection on roaming"
+          },
+          "sim": {
+            "type": "string",
+            "description": "SIM position"
+          },
+          "modem": {
+            "type": "string",
+            "description": "Modem ID"
+          },
+          "sms_limit_enabled": {
+            "type": "string",
+            "description": "SMS limit enabled"
+          },
+          "sms_limit_period": {
+            "type": "string",
+            "description": "SMS limit period"
+          },
+          "sms_sent": {
+            "type": "string",
+            "description": "Total sent SMS"
+          },
+          "sms_limit": {
+            "type": "string",
+            "description": "SMS limit count"
+          }
+        }
       }
     },
     "responses": {
@@ -6299,42 +5312,55 @@
               "properties": {
                 "success": {
                   "type": "boolean",
+                  "description": "Operation status."
+                },
+                "data": {
+                  "$ref": "#/components/schemas/sim_card_status"
+                }
+              }
+            }
+          }
+        }
+      },
+      "simcards_status_multiple": {
+        "description": "SIM cards status response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
                   "description": "Operation status"
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "section_name": {
-                      "type": "string",
-                      "description": "SIM switch configuration ID"
-                    },
-                    "deny_roaming": {
-                      "type": "string",
-                      "description": "Deny data connection on roaming"
-                    },
-                    "sim": {
-                      "type": "string",
-                      "description": "SIM position"
-                    },
-                    "modem": {
-                      "type": "string",
-                      "description": "Modem ID"
-                    },
-                    "sms_limit_enabled": {
-                      "type": "string",
-                      "description": "SMS limit enabled"
-                    },
-                    "sms_limit_period": {
-                      "type": "string",
-                      "description": "SMS limit period"
-                    },
-                    "sms_sent": {
-                      "type": "string",
-                      "description": "Total sent SMS"
-                    },
-                    "sms_limit": {
-                      "type": "string",
-                      "description": "SMS limit count"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sim_card_status"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "modem_apn_countries_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/apn_countries"
                     }
                   }
                 }
@@ -6385,7 +5411,7 @@
                           },
                           "modem": {
                             "type": "string",
-                            "description": "Modem id that caused the error."
+                            "description": "Modem ID that caused the error."
                           }
                         },
                         "required": [
@@ -6436,14 +5462,11 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "response": {
-                        "type": "string",
-                        "description": "AT Command response"
-                      }
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "description": "AT Command response"
                     }
                   }
                 }
@@ -6471,6 +5494,22 @@
                       "description": "New SIM PIN code"
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "sim_unlock": {
+        "description": "SIM unlock response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
                 }
               }
             }

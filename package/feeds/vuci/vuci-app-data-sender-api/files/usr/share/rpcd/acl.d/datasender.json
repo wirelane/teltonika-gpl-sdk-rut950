@@ -3,18 +3,18 @@
 		"description": "Data Sender configuration",
 		"read": {
 			"api": [
-				"/data_sender/*",
+				"/data_to_server/*",
 				"/certificates/config/*",
-				"/mobile/simcards/config/*",
-				"/mobile/modems/status_basic/*",
-				"/io/status/config/*",
-				"/ulog/general/options/*",
+				"/sim_cards/config/*",
+				"/modems/status_basic/*",
+				"/io/*",
+				"/ulog/available_interfaces/*",
 				"/events_reporting/options/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/data_sender/*"
+				"/data_to_server/*"
 			]
 		}
 	}

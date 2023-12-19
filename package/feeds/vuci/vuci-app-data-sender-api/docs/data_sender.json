@@ -1,29 +1,43 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/data_sender/collections/config/{cfg}": {
+    "/data_to_server/collections/config": {
       "get": {
         "tags": [
-          "Data to Server collection"
+          "Collections"
         ],
-        "summary": "Returns the specified Data to Server collection configuration",
+        "summary": "Returns all Data to Server Collections configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderCollectionSingle"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
+            "$ref": "#/components/responses/200_data_to_server_collection_multi"
           }
+        }
+      },
+      "post": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Creates a new Data to Server Collection configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200_data_to_server_collection_single"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/req_data_to_server_collection_single"
         }
       },
       "put": {
         "tags": [
-          "Data to Server collection"
+          "Collections"
         ],
-        "summary": "Updates the specified Data to Server collection configuration",
+        "summary": "Updates the selected Data to Server Collections configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderCollectionSingle"
+            "$ref": "#/components/responses/200_data_to_server_collection_multi"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -33,24 +47,88 @@
           }
         },
         "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/data_sender_collections_single_options"
-                  }
-                }
-              }
-            }
-          }
+          "$ref": "#/components/requestBodies/req_data_to_server_collection_multi"
         }
       },
       "delete": {
         "tags": [
-          "Data to Server collection"
+          "Collections"
+        ],
+        "summary": "Deletes the selected Data to Server Collections configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/delete_multi"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Collections"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/data_to_server/collections/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Collection configuration ID."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Returns the specified Data to Server Collection configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_to_server_collection_single"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collections"
+        ],
+        "summary": "Updates the specified Data to Server Collection configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_to_server_collection_single"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/req_data_to_server_collection_single"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collections"
         ],
         "summary": "Deletes the specified Data to Server configuration",
         "responses": {
@@ -62,17 +140,6 @@
           }
         }
       },
-      "parameters": [
-        {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Configuration ID."
-        }
-      ],
       "x-web": {
         "menu": [
           "Services",
@@ -80,33 +147,55 @@
           "Collections"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/data_sender/collections/config": {
+    "/data_to_server/data/options": {
       "get": {
+        "summary": "Returns Data to Server all available data plugin names, description and tags",
         "tags": [
-          "Data to Server collection"
+          "Data Plugins"
         ],
-        "summary": "Returns all Data to Server collections configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderCollectionMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
+            "$ref": "#/components/responses/200_data_sender_available_plugin_names"
           }
         }
       },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/data_to_server/collections/{id}/data/config": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Collection configuration ID."
+        }
+      ],
       "post": {
         "tags": [
-          "Data to Server collection"
+          "Data Plugins"
         ],
-        "summary": "Creates a new Data to Server collection configuration",
+        "summary": "Creates a new Data to Server Data Plugin configuration",
         "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderCollectionSingle"
+          "201": {
+            "$ref": "#/components/responses/200_data_to_server_data_single"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -116,29 +205,41 @@
           }
         },
         "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/data_sender_collections_single_options"
-                  }
-                }
-              }
-            }
+          "$ref": "#/components/requestBodies/req_data_to_server_data_single"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Data Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/data_to_server/data/config": {
+      "get": {
+        "tags": [
+          "Data Plugins"
+        ],
+        "summary": "Returns all Data to Server Data Plugins configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_to_server_data_multi"
           }
         }
       },
       "put": {
         "tags": [
-          "Data to Server collection"
+          "Data Plugins"
         ],
-        "summary": "Updates the selected Data to Server collections configurations",
+        "summary": "Updates the selected Data to Server Data Plugins configurations",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderCollectionMulti"
+            "$ref": "#/components/responses/200_data_to_server_data_multi"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -148,29 +249,14 @@
           }
         },
         "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/data_sender_collections_multi_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
+          "$ref": "#/components/requestBodies/req_data_to_server_data_multi"
         }
       },
       "delete": {
         "tags": [
-          "Data to Server collection"
+          "Data Plugins"
         ],
-        "summary": "Deletes the selected Data to Server collections configurations",
+        "summary": "Deletes the selected Data to Server Plugins configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
@@ -188,73 +274,114 @@
         "menu": [
           "Services",
           "Data to Server",
-          "Collections"
+          "Data Plugins"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/data_sender/inputs/config/{cfg}": {
-      "get": {
-        "tags": [
-          "Data to Server data plugin"
-        ],
-        "summary": "Returns the specified Data to Server data plugin configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderInputSingle"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
+    "/data_to_server/data/config/{id}": {
       "parameters": [
         {
-          "name": "cfg",
+          "name": "id",
           "in": "path",
           "required": true,
           "schema": {
             "type": "string"
           },
-          "description": "Configuration ID."
+          "description": "Data Input configuration ID."
         }
       ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/collections/config/{collection_id}/inputs/{cfg}": {
       "get": {
         "tags": [
-          "Data to Server data plugin"
+          "Data Plugins"
         ],
-        "summary": "Returns the specified Data to Server data plugin configuration",
+        "summary": "Returns the specified Data to Server Data Plugin configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderInputSingle"
+            "$ref": "#/components/responses/200_data_to_server_data_single"
           },
           "404": {
             "$ref": "#/components/responses/404response"
           }
         }
       },
-      "put": {
+      "post": {
         "tags": [
-          "Data to Server data plugin"
+          "Data Plugins"
         ],
-        "summary": "Updates the specified Data to Server data plugin configuration",
+        "summary": "Uploads the Data Plugin necessary files",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderInputSingle"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Path of the uploaded file"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "description": "Parameter to upload the file to.",
+                    "enum": [
+                      "mqtt_in_cafile",
+                      "mqtt_in_certfile",
+                      "mqtt_in_keyfile"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The config file"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data Plugins"
+        ],
+        "summary": "Updates the selected Data to Server Data Plugins configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_to_server_data_single"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -264,26 +391,14 @@
           }
         },
         "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/data_sender_input_single_options"
-                  }
-                }
-              }
-            }
-          }
+          "$ref": "#/components/requestBodies/req_data_to_server_data_single"
         }
       },
       "delete": {
         "tags": [
-          "Data to Server data plugin"
+          "Data Plugins"
         ],
-        "summary": "Deletes the specified Data to Server data plugin configuration",
+        "summary": "Deletes the specified Data to Server Data Plugins configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
@@ -293,26 +408,6 @@
           }
         }
       },
-      "parameters": [
-        {
-          "name": "collection_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Data collection configuration ID."
-        },
-        {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Data plugin configuration ID."
-        }
-      ],
       "x-web": {
         "menu": [
           "Services",
@@ -320,22 +415,20 @@
           "Data Plugins"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/data_sender/inputs/config": {
+    "/data_to_server/servers/options": {
       "get": {
+        "summary": "Returns Data to Server all available Server Plugin names, description and tags",
         "tags": [
-          "Data to Server data plugin"
+          "Server Plugins"
         ],
-        "summary": "Returns all Data to Server data plugins configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderInputMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
+            "$ref": "#/components/responses/200_data_sender_available_plugin_names"
           }
         }
       },
@@ -343,22 +436,78 @@
         "menu": [
           "Services",
           "Data to Server",
-          "Data Plugins"
+          "Server Plugins"
         ],
         "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     },
-    "/data_sender/collections/config/{collection_id}/inputs": {
+    "/data_to_server/servers/config": {
       "get": {
         "tags": [
-          "Data to Server data plugin"
+          "Server Plugins"
         ],
-        "summary": "Returns all Data to Server data plugins configuration",
+        "summary": "Returns all Data to Server Server Plugins configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderInputMulti"
+            "$ref": "#/components/responses/200_data_to_server_servers_multi"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Server Plugins"
+        ],
+        "summary": "Updates the selected Data to Server Server Plugins configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_to_server_servers_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "$ref": "#/components/requestBodies/req_data_to_server_servers_multi"
+        }
+      },
+      "x-web": {
+        "menu": [
+          "Services",
+          "Data to Server",
+          "Server Plugins"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/data_to_server/servers/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Server Plugin configuration ID."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Server Plugins"
+        ],
+        "summary": "Returns the specified Data to Server Server Plugin configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_data_to_server_servers_single"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -367,194 +516,83 @@
       },
       "post": {
         "tags": [
-          "Data to Server data plugin"
+          "Server Plugins"
         ],
-        "summary": "Creates a new Data to Server data plugin configuration",
+        "summary": "Uploads the Server Plugin necessary files",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderInputSingle"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/data_sender_input_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Data to Server data plugin"
-        ],
-        "summary": "Updates the selected Data to Server data plugins configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderInputMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/data_sender_input_multi_options"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Path of the uploaded file"
+                        }
+                      }
                     }
                   }
                 }
               }
             }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Data to Server data plugin"
-        ],
-        "summary": "Deletes the selected Data to Server data plugins configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
           },
-          "404": {
-            "$ref": "#/components/responses/404response"
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "description": "",
         "requestBody": {
-          "$ref": "#/components/requestBodies/delete_multi"
-        }
-      },
-      "parameters": [
-        {
-          "name": "collection_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Data collection configuration ID."
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/inputs/options": {
-      "get": {
-        "summary": "Returns Data to Server all available data plugin names, description and tags",
-        "tags": [
-          "Data to Server data plugin"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/data_sender_available_plugin_names"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/outputs/config/{cfg}": {
-      "get": {
-        "tags": [
-          "Data to Server server plugin"
-        ],
-        "summary": "Returns the specified Data to Server server plugin configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderOutputSingle"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Configuration ID."
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/collections/config/{collection_id}/outputs/{cfg}": {
-      "get": {
-        "tags": [
-          "Data to Server server plugin"
-        ],
-        "summary": "Returns the specified Data to Server server plugin configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderOutputSingle"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
+          "description": "",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "description": "Parameter to upload the file to.",
+                    "enum": [
+                      "http_cafile",
+                      "http_certfile",
+                      "http_keyfile",
+                      "mqtt_cafile",
+                      "mqtt_certfile",
+                      "mqtt_keyfile",
+                      "azure_x509certificate",
+                      "azure_x509privatekey"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The config file"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
           }
         }
       },
       "put": {
         "tags": [
-          "Data to Server server plugin"
+          "Server Plugins"
         ],
-        "summary": "Updates the specified Data to Server server plugin configuration",
+        "summary": "Updates the specified Data to Server Server Plugin configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200dataSenderOutputSingle"
+            "$ref": "#/components/responses/200_data_to_server_servers_single"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -564,65 +602,7 @@
           }
         },
         "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/data_sender_output_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "collection_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Data collection configuration ID."
-        },
-        {
-          "name": "cfg",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Data server configuration ID."
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/outputs/config": {
-      "get": {
-        "tags": [
-          "Data to Server server plugin"
-        ],
-        "summary": "Returns all Data to Server server plugins configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderOutputMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
+          "$ref": "#/components/requestBodies/req_data_to_server_servers_single"
         }
       },
       "x-web": {
@@ -632,109 +612,116 @@
           "Server Plugins"
         ],
         "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/collections/config/{collection_id}/outputs": {
-      "get": {
-        "tags": [
-          "Data to Server server plugin"
-        ],
-        "summary": "Returns all Data to Server server plugins configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderOutputMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Data to Server server plugin"
-        ],
-        "summary": "Updates the selected Data to Server server plugins configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200dataSenderOutputMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/data_sender_output_multi_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "collection_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Data collection configuration ID."
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/data_sender/outputs/options": {
-      "get": {
-        "summary": "Returns Data to Server all available server plugin names, description and tags",
-        "tags": [
-          "Data to Server server plugin"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/data_sender_available_plugin_names"
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
-        "hw_tags": {
-          "is_access_point": false
+          "is_access_point": false,
+          "is_switch": false
         }
       }
     }
   },
   "components": {
+    "requestBodies": {
+      "req_data_to_server_collection_single": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/data_sender_collections_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "req_data_to_server_collection_multi": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/data_sender_collections_multi_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "req_data_to_server_data_single": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/data_sender_input_single_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "req_data_to_server_data_multi": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/data_sender_input_multi_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "req_data_to_server_servers_multi": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/data_sender_output_multi_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "req_data_to_server_servers_single": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/components/schemas/data_sender_output_single_options"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "responses": {
-      "data_sender_available_plugin_names": {
+      "200_data_sender_available_plugin_names": {
         "description": "Example response",
         "content": {
           "application/json": {
@@ -793,7 +780,7 @@
           }
         }
       },
-      "200dataSenderCollectionSingle": {
+      "200_data_to_server_collection_single": {
         "description": "",
         "content": {
           "application/json": {
@@ -812,7 +799,7 @@
           }
         }
       },
-      "200dataSenderCollectionMulti": {
+      "200_data_to_server_collection_multi": {
         "description": "",
         "content": {
           "application/json": {
@@ -835,7 +822,7 @@
           }
         }
       },
-      "200dataSenderInputSingle": {
+      "200_data_to_server_data_single": {
         "description": "",
         "content": {
           "application/json": {
@@ -847,14 +834,14 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/data_sender_input_multi_options"
+                  "$ref": "#/components/schemas/data_sender_input_multi_options_resp"
                 }
               }
             }
           }
         }
       },
-      "200dataSenderInputMulti": {
+      "200_data_to_server_data_multi": {
         "description": "",
         "content": {
           "application/json": {
@@ -869,7 +856,7 @@
                   "type": "array",
                   "description": "",
                   "items": {
-                    "$ref": "#/components/schemas/data_sender_input_multi_options"
+                    "$ref": "#/components/schemas/data_sender_input_multi_options_resp"
                   }
                 }
               }
@@ -877,7 +864,7 @@
           }
         }
       },
-      "200dataSenderOutputSingle": {
+      "200_data_to_server_servers_single": {
         "description": "",
         "content": {
           "application/json": {
@@ -896,7 +883,7 @@
           }
         }
       },
-      "200dataSenderOutputMulti": {
+      "200_data_to_server_servers_multi": {
         "description": "",
         "content": {
           "application/json": {
@@ -953,6 +940,7 @@
               "custom",
               "json"
             ],
+            "default": "json",
             "x-web": {
               "pretty": "Format",
               "input-type": "select",
@@ -994,6 +982,7 @@
             "type": "string",
             "description": "Interval in seconds for collecting/sending data to destination.",
             "format": "irange(1,86400)",
+            "default": "60",
             "x-web": {
               "pretty": "Period",
               "input-type": "input"
@@ -1054,9 +1043,7 @@
           }
         },
         "required": [
-          "name",
-          "input",
-          "output"
+          "name"
         ]
       },
       "data_sender_collections_multi_options": {
@@ -1075,7 +1062,79 @@
           }
         ]
       },
-      "data_sender_input_single_options": {
+      "data_sender_input_single_options_req_1": {
+        "type": "object",
+        "properties": {
+          "mqtt_in_psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading “0x”",
+            "format": "hexstring",
+            "maxLength": 128,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt",
+                  "mqtt_in_tls": "1",
+                  "mqtt_in_tls_type": "psk"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "data_sender_input_single_options_req_2": {
+        "type": "object",
+        "properties": {
+          "mqtt_in_password": {
+            "type": "string",
+            "description": "Password for MQTT authentication",
+            "format": "credentials_validate",
+            "maxLength": 512,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "mqtt"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "data_sender_input_single_options_resp_1": {
+        "type": "object",
+        "properties": {
+          "mqtt_in_psk": {
+            "type": "string",
+            "description": "Indicates if 'mqtt_in_psk' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": [
+              "unset",
+              "set"
+            ]
+          }
+        }
+      },
+      "data_sender_input_single_options_resp_2": {
+        "type": "object",
+        "properties": {
+          "mqtt_in_password": {
+            "type": "string",
+            "description": "Indicates if 'mqtt_in_password' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": [
+              "unset",
+              "set"
+            ]
+          }
+        }
+      },
+      "data_sender_input_single_options_1": {
         "type": "object",
         "properties": {
           "name": {
@@ -1096,6 +1155,7 @@
               "custom",
               "json"
             ],
+            "default": "json",
             "x-web": {
               "pretty": "Format",
               "input-type": "select",
@@ -1162,10 +1222,12 @@
               "mdcollect",
               "mnfinfo",
               "modbus",
+              "modbus_alarm",
               "mqtt",
               "opcua",
               "wifiscan"
             ],
+            "default": "base",
             "x-web": {
               "pretty": "Data Plugin",
               "input-type": "select",
@@ -1179,6 +1241,7 @@
                 "mdcollect": "Mobile usage",
                 "mnfinfo": "MNFinfo",
                 "modbus": "Modbus",
+                "modbus_alarm": "Modbus alarm",
                 "opcua": "OPC UA",
                 "wifiscan": "Wifi scanner"
               }
@@ -1346,6 +1409,76 @@
                 {
                   "plugin": "bluetooth",
                   "bl_segments": "1"
+                }
+              ]
+            }
+          },
+          "modbus_alarm_filter": {
+            "type": "string",
+            "description": "Filter type.",
+            "enum": [
+              "all",
+              "server_id",
+              "alarm_id",
+              "register"
+            ],
+            "x-web": {
+              "pretty": "Data filtering",
+              "input-type": "select",
+              "depends": [
+                {
+                  "plugin": "modbus_alarm"
+                }
+              ],
+              "enum-pretty": {
+                "all": "All",
+                "server_id": "Server ID",
+                "alarm_id": "Alarm ID",
+                "register": "Register number"
+              }
+            }
+          },
+          "modbus_alarm_filter_server_id": {
+            "type": "string",
+            "description": "Filter data by defined server ID.",
+            "format": "irange(1,255)",
+            "x-web": {
+              "pretty": "Server ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus_alarm",
+                  "modbus_alarm_filter": "server_id"
+                }
+              ]
+            }
+          },
+          "modbus_filter_alarm_id": {
+            "type": "string",
+            "description": "Filter data by defined alarm ID.",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Alarm ID",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus_alarm",
+                  "modbus_alarm_filter": "alarm_id"
+                }
+              ]
+            }
+          },
+          "modbus_alarm_filter_register": {
+            "type": "string",
+            "description": "Filter data by Modbus register number of alarm.",
+            "format": "irange(1,65536)",
+            "x-web": {
+              "pretty": "Register number",
+              "input-type": "input",
+              "depends": [
+                {
+                  "plugin": "modbus_alarm",
+                  "modbus_alarm_filter": "register"
                 }
               ]
             }
@@ -1893,7 +2026,7 @@
             "type": "string",
             "description": "Port of MQTT broker",
             "format": "port",
-            "default": "1883",
+            "default": 1883,
             "x-web": {
               "pretty": "MQTT Port",
               "input-type": "input",
@@ -1923,7 +2056,7 @@
             "type": "string",
             "description": "Topic to subscribe",
             "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
-            "maxLength": 64,
+            "maxLength": 65535,
             "x-web": {
               "pretty": "Topic",
               "input-type": "input",
@@ -2017,25 +2150,12 @@
                 "psk": "Pre-Shared-Key based"
               }
             }
-          },
-          "mqtt_in_psk": {
-            "type": "string",
-            "description": "The pre-shared-key in hex format with no leading “0x”",
-            "format": "hexstring",
-            "maxLength": 128,
-            "writeOnly": true,
-            "x-web": {
-              "pretty": "Pre-Shared-Key",
-              "input-type": "input",
-              "depends": [
-                {
-                  "plugin": "mqtt",
-                  "mqtt_in_tls": "1",
-                  "mqtt_in_tls_type": "psk"
-                }
-              ]
-            }
-          },
+          }
+        }
+      },
+      "data_sender_input_single_options_2": {
+        "type": "object",
+        "properties": {
           "mqtt_in_identity": {
             "type": "string",
             "description": "The identity",
@@ -2119,23 +2239,12 @@
                 }
               ]
             }
-          },
-          "mqtt_in_password": {
-            "type": "string",
-            "description": "Password for MQTT authentication",
-            "format": "string",
-            "maxLength": 512,
-            "writeOnly": true,
-            "x-web": {
-              "pretty": "Password",
-              "input-type": "input",
-              "depends": [
-                {
-                  "plugin": "mqtt"
-                }
-              ]
-            }
-          },
+          }
+        }
+      },
+      "data_sender_input_single_options_3": {
+        "type": "object",
+        "properties": {
           "dlms_filter": {
             "type": "string",
             "description": "Filter type.",
@@ -2222,43 +2331,28 @@
               ]
             }
           }
-        },
+        }
+      },
+      "data_sender_input_single_options": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_1"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_req_1"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_2"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_req_2"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_3"
+          }
+        ],
         "required": [
-          "name",
-          "format_str",
-          "na_str",
-          "delimiter",
-          "bl_filter_mac",
-          "bl_filter_name",
-          "bl_segments",
-          "dlms_filter_name",
-          "dlms_segments",
-          "dnp3_filter_address",
-          "dnp3_filter_ip",
-          "dnp3_segments",
-          "gsm_modem_id",
-          "mbus_filter_name",
-          "mbus_segments",
-          "mdc_modem_id",
-          "mdc_period",
-          "mdc_sim",
-          "modbus_filter_request",
-          "modbus_filter_server_id",
-          "modbus_filter_server_ip",
-          "modbus_segments",
-          "mqtt_in_cafile",
-          "mqtt_in_host",
-          "mqtt_in_identity",
-          "mqtt_in_password",
-          "mqtt_in_psk",
-          "mqtt_in_qos",
-          "mqtt_in_tls_type",
-          "mqtt_in_topic",
-          "opcua_segments",
-          "wifi_filter_mac",
-          "wifi_filter_name",
-          "wifi_filter_signal",
-          "wifi_segments"
+          "name"
         ]
       },
       "data_sender_input_multi_options": {
@@ -2274,6 +2368,44 @@
           },
           {
             "$ref": "#/components/schemas/data_sender_input_single_options"
+          }
+        ]
+      },
+      "data_sender_input_single_options_resp": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_1"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_resp_1"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_2"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_resp_2"
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_3"
+          }
+        ],
+        "required": [
+          "name"
+        ]
+      },
+      "data_sender_input_multi_options_resp": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Name of the configuration."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/data_sender_input_single_options_resp"
           }
         ]
       },
@@ -2422,7 +2554,7 @@
             "type": "string",
             "description": "Port number.",
             "format": "port",
-            "default": "1883",
+            "default": 1883,
             "x-web": {
               "pretty": "Port",
               "input-type": "input",
@@ -2452,7 +2584,7 @@
             "type": "string",
             "description": "MQTT topic to be used for publishing the data.",
             "format": "fieldvalidation('^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$',0)",
-            "maxLength": 64,
+            "maxLength": 65535,
             "x-web": {
               "pretty": "Topic",
               "input-type": "input",
@@ -2801,27 +2933,7 @@
           }
         },
         "required": [
-          "azure_connection_string",
-          "azure_connection_type",
-          "azure_id_scope",
-          "azure_registration_id",
-          "azure_x509certificate",
-          "azure_x509privatekey",
-          "http_cafile",
-          "http_certfile",
-          "http_host",
-          "http_keyfile",
-          "mqtt_cafile",
-          "mqtt_certfile",
-          "mqtt_host",
-          "mqtt_identity",
-          "mqtt_keyfile",
-          "mqtt_password",
-          "mqtt_psk",
-          "mqtt_qos",
-          "mqtt_tls_type",
-          "mqtt_topic",
-          "mqtt_username"
+          "name"
         ]
       },
       "data_sender_output_multi_options": {

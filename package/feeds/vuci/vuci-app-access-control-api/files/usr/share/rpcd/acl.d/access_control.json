@@ -63,13 +63,13 @@
     "system/admin/access_control/safety": {
         "description": "access control security",
         "read": {
-			"api": ["/access_control/security/general/*", "/access_control/security/attempts/*"],
+			"api": ["/access_control/security/*"],
             "uci": [
                 "ip_blockd"
             ]
         },
         "write": {
-			"api": ["/access_control/security/general/*", "/access_control/security/attempts/*"],
+			"api": ["/access_control/security/*"],
             "uci": [
                 "ip_blockd"
             ],

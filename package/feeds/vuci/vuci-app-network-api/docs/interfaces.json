@@ -8,18 +8,18 @@
   },
   "tags": [
     {
-      "name": "Network Interfaces",
+      "name": "General",
       "description": "Network interfaces configuration API"
     }
   ],
   "paths": {
     "/interfaces/config": {
       "get": {
-        "summary": "GET All Network Interfaces",
+        "summary": "Returns network interface configurations",
         "operationId": "get-network-interfaces",
         "description": "Returns network interface configurations",
         "tags": [
-          "Network Interfaces"
+          "General"
         ],
         "responses": {
           "200": {
@@ -35,37 +35,39 @@
                     },
                     "data": {
                       "type": "array",
-                      "allOf": [
-                        {
-                          "$ref": "#/components/schemas/network_interface_options_name_index"
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "_area_type": {
-                              "type": "string",
-                              "description": "Interface type",
-                              "enum": [
-                                "lan",
-                                "wan"
-                              ],
-                              "x-web": {
-                                "input-type": "select",
-                                "pretty": "Interface type",
-                                "group": "General Settings",
-                                "enum-pretty": {
-                                  "lan": "LAN",
-                                  "wan": "WAN"
-                                },
-                                "hw_tags": {
-                                  "is_access_point": false,
-                                  "is_switch": false
+                      "items": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/network_interface_options_name_index"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "area_type": {
+                                "type": "string",
+                                "description": "Interface type",
+                                "enum": [
+                                  "lan",
+                                  "wan"
+                                ],
+                                "x-web": {
+                                  "input-type": "select",
+                                  "pretty": "Interface type",
+                                  "group": "General Settings",
+                                  "enum-pretty": {
+                                    "lan": "LAN",
+                                    "wan": "WAN"
+                                  },
+                                  "hw_tags": {
+                                    "is_access_point": false,
+                                    "is_switch": false
+                                  }
                                 }
                               }
                             }
                           }
-                        }
-                      ]
+                        ]
+                      }
                     }
                   }
                 }
@@ -75,7 +77,7 @@
         }
       },
       "post": {
-        "summary": "CREATE All Network Interfaces",
+        "summary": "Creates network interface configuration",
         "operationId": "post-network-interfaces",
         "responses": {
           "201": {
@@ -113,7 +115,7 @@
                       {
                         "type": "object",
                         "properties": {
-                          "_area_type": {
+                          "area_type": {
                             "type": "string",
                             "description": "Interface type",
                             "enum": [
@@ -133,14 +135,27 @@
                                 "is_switch": false
                               }
                             }
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "The ID of the interface configuration",
+                            "x-web": {
+                              "hw_tags": {
+                                "is_switch": true
+                              },
+                              "unique": true,
+                              "pretty": "Interface name",
+                              "input-type": "input"
+                            },
+                            "maxLength": 13
                           }
                         },
                         "required": [
-                          "_area_type"
+                          "area_type"
                         ]
                       },
                       {
-                        "$ref": "#/components/schemas/network_interface_options_name_index"
+                        "$ref": "#/components/schemas/network_interface_opts"
                       }
                     ]
                   }
@@ -151,7 +166,7 @@
           "description": "Interface"
         },
         "tags": [
-          "Network Interfaces"
+          "General"
         ],
         "x-web": {
           "hw_tags": {
@@ -160,7 +175,7 @@
         }
       },
       "put": {
-        "summary": "UPDATE All Network Interfaces",
+        "summary": "Updates network interface configurations",
         "operationId": "put-network-interfaces",
         "responses": {
           "200": {
@@ -212,11 +227,11 @@
           "description": "Interfaces"
         },
         "tags": [
-          "Network Interfaces"
+          "General"
         ]
       },
       "delete": {
-        "summary": "DELETE All Network Interfaces",
+        "summary": "Deletes network interface configurations",
         "operationId": "delete-network-interfaces",
         "responses": {
           "200": {
@@ -228,7 +243,7 @@
         },
         "description": "Delete network interface configuration",
         "tags": [
-          "Network Interfaces"
+          "General"
         ],
         "requestBody": {
           "content": {
@@ -238,7 +253,7 @@
                 "properties": {
                   "data": {
                     "type": "array",
-                    "description": "Names of interfaces to delete.",
+                    "description": "IDs of interfaces to delete.",
                     "items": {
                       "type": "string"
                     }
@@ -265,9 +280,9 @@
     },
     "/interfaces/config/{id}": {
       "get": {
-        "summary": "GET Network Interfaces",
+        "summary": "Returns network interface configuration",
         "tags": [
-          "Network Interfaces"
+          "General"
         ],
         "responses": {
           "200": {
@@ -289,7 +304,7 @@
                         {
                           "type": "object",
                           "properties": {
-                            "_area_type": {
+                            "area_type": {
                               "type": "string",
                               "description": "Interface type",
                               "enum": [
@@ -327,7 +342,7 @@
         "description": ""
       },
       "put": {
-        "summary": "UPDATE Network Interfaces",
+        "summary": "Updates network interface configuration",
         "operationId": "put-network-interfaces-id",
         "responses": {
           "200": {
@@ -358,7 +373,7 @@
         },
         "description": "",
         "tags": [
-          "Network Interfaces"
+          "General"
         ],
         "requestBody": {
           "content": {
@@ -377,7 +392,7 @@
         }
       },
       "delete": {
-        "summary": "DELETE Network Interfaces",
+        "summary": "Deletes network interface configuration",
         "operationId": "delete-network-interfaces-id",
         "responses": {
           "200": {
@@ -389,7 +404,7 @@
         },
         "description": "",
         "tags": [
-          "Network Interfaces"
+          "General"
         ],
         "x-web": {
           "hw_tags": {
@@ -405,7 +420,7 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Interface configuration name"
+          "description": "The ID of the interface configuration"
         }
       ],
       "x-web": {
@@ -418,7 +433,7 @@
     },
     "/interfaces/status": {
       "get": {
-        "summary": "GET All Network Interfaces Status",
+        "summary": "Returns network interfaces status",
         "responses": {
           "200": {
             "description": "OK",
@@ -847,7 +862,7 @@
         "operationId": "get-network-interfaces-status",
         "description": "",
         "tags": [
-          "Network Interfaces Status"
+          "General"
         ]
       },
       "x-web": {
@@ -864,7 +879,7 @@
     },
     "/interfaces/status/{id}": {
       "get": {
-        "summary": "GET Network Interfaces Status",
+        "summary": "Returns network interface status",
         "responses": {
           "200": {
             "description": "OK",
@@ -1009,7 +1024,7 @@
         "operationId": "get-network-interfaces-status-id",
         "description": "",
         "tags": [
-          "Network Interfaces Status"
+          "General"
         ]
       },
       "parameters": [
@@ -1020,829 +1035,9 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Network interface name"
+          "description": "The ID of the network interface"
         }
       ],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Interfaces",
-          "Interfaces"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/devices/status": {
-      "get": {
-        "summary": "GET All Network Devices Status",
-        "tags": [
-          "Network Devices Status"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/network_device_status"
-                      }
-                    }
-                  }
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "success": true,
-                      "data": [
-                        {
-                          "name": "gre0",
-                          "virtual": true
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 1500,
-                          "external": true,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "virtual": false,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "arp_accept": false,
-                          "name": "wlan0",
-                          "carrier": true,
-                          "macaddr": "00:1e:42:4f:95:64",
-                          "present": true,
-                          "mtu6": 1500,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "acceptlocal": false,
-                          "type": "Network device",
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 125,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 0,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 27604,
-                            "collisions": 0,
-                            "rx_bytes": 0,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 0,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 0,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "txqueuelen": 1000,
-                          "rpfilter": 0,
-                          "neigh4locktime": 100,
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "multicast": true,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "ipv6": true,
-                          "neigh4reachabletime": 30000
-                        },
-                        {
-                          "name": "ip6tnl0",
-                          "virtual": true
-                        },
-                        {
-                          "name": "sit0",
-                          "virtual": true
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 1460,
-                          "external": false,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "virtual": false,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "arp_accept": false,
-                          "name": "wwan0",
-                          "carrier": true,
-                          "macaddr": "00:00:00:00:00:00",
-                          "present": true,
-                          "mtu6": 1460,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "acceptlocal": false,
-                          "type": "Network device",
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 418,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 437,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 55231,
-                            "collisions": 0,
-                            "rx_bytes": 51937,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 0,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 0,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "txqueuelen": 1000,
-                          "rpfilter": 0,
-                          "neigh4locktime": 100,
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "multicast": true,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "ipv6": true,
-                          "neigh4reachabletime": 30000
-                        },
-                        {
-                          "name": "erspan0",
-                          "virtual": true
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 1500,
-                          "external": true,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "virtual": false,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "arp_accept": false,
-                          "name": "wlan1",
-                          "carrier": true,
-                          "macaddr": "00:1e:42:4f:95:65",
-                          "present": true,
-                          "mtu6": 1500,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "acceptlocal": false,
-                          "type": "Network device",
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 123,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 0,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 27428,
-                            "collisions": 0,
-                            "rx_bytes": 0,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 0,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 0,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "txqueuelen": 1000,
-                          "rpfilter": 0,
-                          "neigh4locktime": 100,
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "multicast": true,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "ipv6": true,
-                          "neigh4reachabletime": 30000
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 65536,
-                          "external": false,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "virtual": true,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "arp_accept": false,
-                          "name": "lo",
-                          "carrier": true,
-                          "macaddr": "00:00:00:00:00:00",
-                          "present": true,
-                          "mtu6": 65536,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "acceptlocal": false,
-                          "type": "Network device",
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 127,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 127,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 19568,
-                            "collisions": 0,
-                            "rx_bytes": 19568,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 0,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 0,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "txqueuelen": 1000,
-                          "rpfilter": 0,
-                          "neigh4locktime": 100,
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "multicast": false,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "ipv6": true,
-                          "neigh4reachabletime": 30000
-                        },
-                        {
-                          "name": "gretap0",
-                          "virtual": true
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 1500,
-                          "rpfilter": 0,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "virtual": true,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "arp_accept": false,
-                          "name": "br-lan",
-                          "carrier": true,
-                          "macaddr": "00:1e:42:4f:95:62",
-                          "present": true,
-                          "mtu6": 1500,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "acceptlocal": false,
-                          "ipv6": true,
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 732,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 846,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 174016,
-                            "collisions": 0,
-                            "rx_bytes": 131277,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 0,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 116,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "neigh4reachabletime": 30000,
-                          "txqueuelen": 1000,
-                          "external": false,
-                          "type": "bridge",
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "multicast": true,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "neigh4locktime": 100,
-                          "bridge-members": [
-                            "eth0",
-                            "wlan0",
-                            "wlan1"
-                          ]
-                        },
-                        {
-                          "name": "ip6gre0",
-                          "virtual": true
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 1500,
-                          "external": false,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "speed": "1000F",
-                          "virtual": false,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "autoneg": false,
-                          "arp_accept": false,
-                          "name": "eth0",
-                          "carrier": true,
-                          "macaddr": "00:1e:42:4f:95:62",
-                          "present": true,
-                          "mtu6": 1500,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "link-supported": [],
-                          "acceptlocal": false,
-                          "ipv6": false,
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 728,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 865,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 172486,
-                            "collisions": 0,
-                            "rx_bytes": 144949,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 5,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 0,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "link-partner-advertising": [],
-                          "rpfilter": 0,
-                          "txqueuelen": 1000,
-                          "type": "Network device",
-                          "multicast": true,
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "neigh4locktime": 100,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "neigh4reachabletime": 30000,
-                          "link-advertising": []
-                        },
-                        {
-                          "drop_unsolicited_na": false,
-                          "mtu": 1500,
-                          "external": false,
-                          "igmpversion": 0,
-                          "ip6segmentrouting": false,
-                          "drop_v4_unicast_in_l2_multicast": false,
-                          "speed": "-1F",
-                          "virtual": false,
-                          "drop_gratuitous_arp": false,
-                          "mldversion": 0,
-                          "neigh6reachabletime": 30000,
-                          "up": true,
-                          "autoneg": true,
-                          "arp_accept": false,
-                          "name": "eth1",
-                          "carrier": false,
-                          "macaddr": "00:1e:42:4f:95:63",
-                          "present": true,
-                          "mtu6": 1500,
-                          "neigh6gcstaletime": 60,
-                          "dadtransmits": 1,
-                          "link-supported": [
-                            "10baseT-H",
-                            "10baseT-F",
-                            "100baseT-H",
-                            "100baseT-F",
-                            "1000baseT-F"
-                          ],
-                          "acceptlocal": false,
-                          "ipv6": true,
-                          "promisc": false,
-                          "statistics": {
-                            "rx_frame_errors": 0,
-                            "rx_crc_errors": 0,
-                            "tx_heartbeat_errors": 0,
-                            "rx_over_errors": 0,
-                            "rx_errors": 0,
-                            "tx_packets": 0,
-                            "tx_carrier_errors": 0,
-                            "rx_packets": 0,
-                            "rx_length_errors": 0,
-                            "tx_errors": 0,
-                            "tx_aborted_errors": 0,
-                            "tx_window_errors": 0,
-                            "tx_bytes": 0,
-                            "collisions": 0,
-                            "rx_bytes": 0,
-                            "rx_fifo_errors": 0,
-                            "rx_dropped": 0,
-                            "tx_fifo_errors": 0,
-                            "rx_compressed": 0,
-                            "multicast": 0,
-                            "tx_compressed": 0,
-                            "rx_missed_errors": 0,
-                            "tx_dropped": 0
-                          },
-                          "link-partner-advertising": [],
-                          "rpfilter": 0,
-                          "txqueuelen": 1000,
-                          "type": "Network device",
-                          "multicast": true,
-                          "drop_v6_unicast_in_l2_multicast": false,
-                          "auth_status": false,
-                          "neigh4locktime": 100,
-                          "neigh4gcstaletime": 60,
-                          "sendredirects": true,
-                          "neigh4reachabletime": 30000,
-                          "link-advertising": [
-                            "10baseT-H",
-                            "10baseT-F",
-                            "100baseT-H",
-                            "100baseT-F",
-                            "1000baseT-F"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-network-device-status",
-        "description": ""
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Interfaces",
-          "Interfaces"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/devices/status/{id}": {
-      "get": {
-        "summary": "GET Network Devices Status",
-        "tags": [
-          "Network Devices Status"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/network_device_status"
-                    }
-                  }
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "success": true,
-                      "data": {
-                        "drop_unsolicited_na": false,
-                        "mtu": 1500,
-                        "external": false,
-                        "igmpversion": 0,
-                        "ip6segmentrouting": false,
-                        "drop_v4_unicast_in_l2_multicast": false,
-                        "speed": "1000F",
-                        "virtual": false,
-                        "drop_gratuitous_arp": false,
-                        "mldversion": 0,
-                        "neigh6reachabletime": 30000,
-                        "up": true,
-                        "autoneg": false,
-                        "arp_accept": false,
-                        "name": "eth0",
-                        "carrier": true,
-                        "macaddr": "00:1e:42:4f:95:62",
-                        "present": true,
-                        "mtu6": 1500,
-                        "neigh6gcstaletime": 60,
-                        "dadtransmits": 1,
-                        "link-supported": [],
-                        "acceptlocal": false,
-                        "ipv6": false,
-                        "promisc": false,
-                        "statistics": {
-                          "rx_frame_errors": 0,
-                          "rx_crc_errors": 0,
-                          "tx_heartbeat_errors": 0,
-                          "rx_over_errors": 0,
-                          "rx_errors": 0,
-                          "tx_packets": 728,
-                          "tx_carrier_errors": 0,
-                          "rx_packets": 865,
-                          "rx_length_errors": 0,
-                          "tx_errors": 0,
-                          "tx_aborted_errors": 0,
-                          "tx_window_errors": 0,
-                          "tx_bytes": 172486,
-                          "collisions": 0,
-                          "rx_bytes": 144949,
-                          "rx_fifo_errors": 0,
-                          "rx_dropped": 5,
-                          "tx_fifo_errors": 0,
-                          "rx_compressed": 0,
-                          "multicast": 0,
-                          "tx_compressed": 0,
-                          "rx_missed_errors": 0,
-                          "tx_dropped": 0
-                        },
-                        "link-partner-advertising": [],
-                        "rpfilter": 0,
-                        "txqueuelen": 1000,
-                        "type": "Network device",
-                        "multicast": true,
-                        "drop_v6_unicast_in_l2_multicast": false,
-                        "auth_status": false,
-                        "neigh4locktime": 100,
-                        "neigh4gcstaletime": 60,
-                        "sendredirects": true,
-                        "neigh4reachabletime": 30000,
-                        "link-advertising": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "operationId": "get-network-device-status-id",
-        "description": ""
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "device name"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Interfaces",
-          "Interfaces"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/interfaces/actions/clear_mobile_data_limit": {
-      "post": {
-        "summary": "SEND Mobile Interface Data Limit Clear",
-        "operationId": "post-network-interfaces-actions-clear_mobile_data_limit",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "interface": {
-                        "type": "string",
-                        "description": "Mobile interface name (e.g. \"mob1s1a1\")"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Mobile Interface Data Limit Clear"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "Interfaces",
-          "Interfaces"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/interfaces/actions/lan_to_wan": {
-      "post": {
-        "summary": "SEND Network Interfaces LAN to WAN",
-        "operationId": "post-network-interfaces-actions-clear_mobile_data_limit-LAN_TO_WAN",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          }
-        },
-        "description": "Converts lan interface to wan (sets up firewall zone, ifname and proto).",
-        "tags": [
-          "Network Interfaces LAN to WAN"
-        ]
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Interfaces",
-          "Interfaces"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/interfaces/actions/wan_to_lan": {
-      "post": {
-        "summary": "SEND Network Interfaces WAN to LAN",
-        "operationId": "post-network-interfaces-actions-clear_mobile_data_limit-wan_to_lan",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200response"
-          }
-        },
-        "description": "\nReverts lan_to_wan.",
-        "tags": [
-          "Network Interfaces WAN to LAN"
-        ]
-      },
-      "parameters": [],
-      "x-web": {
-        "menu": [
-          "Network",
-          "Interfaces",
-          "Interfaces"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/interfaces/options": {
-      "get": {
-        "summary": "GET All Network Interface Options",
-        "tags": [
-          "Network Interface Options"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "options": {
-                          "type": "array",
-                          "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "x-examples": {
-                    "example-1": {
-                      "success": true,
-                      "data": {
-                        "options": [
-                          ""
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-network-interfaces-options"
-      },
       "x-web": {
         "menu": [
           "Network",
@@ -1868,7 +1063,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Interface name.",
+                "description": "The ID of the interface configuration",
                 "x-web": {
                   "unique": true,
                   "pretty": "Interface name",
@@ -2698,21 +1893,6 @@
             "type": "string",
             "minLength": 1
           },
-          "data_limit": {
-            "type": "number"
-          },
-          "data_used": {
-            "type": "number"
-          },
-          "due_reset_time": {
-            "type": "string"
-          },
-          "data_warning_enabled": {
-            "type": "string"
-          },
-          "data_warning_limit": {
-            "type": "number"
-          },
           "modem_name": {
             "type": "string"
           },
@@ -2857,8 +2037,7 @@
           "link-supported": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {}
+              "type": "string"
             }
           },
           "acceptlocal": {
@@ -2972,8 +2151,7 @@
           "link-partner-advertising": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {}
+              "type": "string"
             }
           },
           "rpfilter": {
@@ -3010,8 +2188,13 @@
           "link-advertising": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {}
+              "type": "string"
+            }
+          },
+          "bridge-members": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
         },
@@ -3129,6 +2312,20 @@
         },
         "type": "object",
         "properties": {
+          "name": {
+            "x-web": {
+              "unique": true,
+              "input-type": "input",
+              "pretty": "Name",
+              "group": "General Settings",
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "description": "Name of the interface"
+          },
           "enabled": {
             "x-web": {
               "input-type": "switch",
@@ -3152,13 +2349,13 @@
               "group": "General Settings",
               "depends": [
                 {
-                  "_area_type": "lan"
+                  "area_type": "lan"
                 },
                 {
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
-                  "_area_type": ""
+                  "area_type": ""
                 }
               ],
               "enum-depends": [
@@ -3169,7 +2366,7 @@
                     "is_switch": false
                   },
                   "depends": {
-                    "_area_type": "wan"
+                    "area_type": "wan"
                   },
                   "values": [
                     "none",
@@ -3187,7 +2384,7 @@
                     "is_switch": false
                   },
                   "depends": {
-                    "_area_type": "wan"
+                    "area_type": "wan"
                   },
                   "values": [
                     "none",
@@ -3204,7 +2401,7 @@
                     "is_switch": false
                   },
                   "depends": {
-                    "_area_type": "wan"
+                    "area_type": "wan"
                   },
                   "values": [
                     "none",
@@ -3219,7 +2416,7 @@
                     "is_switch": false
                   },
                   "depends": {
-                    "_area_type": "lan"
+                    "area_type": "lan"
                   },
                   "values": [
                     "none",
@@ -3283,15 +2480,15 @@
               "depends": [
                 {
                   "proto": "static",
-                  "_area_type": ""
+                  "area_type": ""
                 },
                 {
                   "proto": "static",
-                  "_area_type": "lan"
+                  "area_type": "lan"
                 },
                 {
                   "proto": "static",
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
                   "mode": [
@@ -3313,15 +2510,15 @@
               "depends": [
                 {
                   "proto": "static",
-                  "_area_type": ""
+                  "area_type": ""
                 },
                 {
                   "proto": "static",
-                  "_area_type": "lan"
+                  "area_type": "lan"
                 },
                 {
                   "proto": "static",
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
                   "mode": [
@@ -3348,15 +2545,15 @@
               "depends": [
                 {
                   "proto": "static",
-                  "_area_type": ""
+                  "area_type": ""
                 },
                 {
                   "proto": "static",
-                  "_area_type": "lan"
+                  "area_type": "lan"
                 },
                 {
                   "proto": "static",
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
                   "mode": [
@@ -3369,24 +2566,6 @@
             "type": "string",
             "description": "IPv4 gateway. The address where the router will send all the outgoing traffic"
           },
-          "wan_as_lan": {
-            "x-web": {
-              "input-type": "switch",
-              "pretty": "Use WAN port as LAN",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "_area_type": "lan"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Use WAN port as LAN"
-          },
           "broadcast": {
             "x-web": {
               "input-type": "input",
@@ -3395,11 +2574,11 @@
               "depends": [
                 {
                   "proto": "static",
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
                   "proto": "static",
-                  "_area_type": ""
+                  "area_type": ""
                 }
               ],
               "hw_tags": {
@@ -4434,12 +3613,12 @@
                 {
                   "ip6assign": false,
                   "proto": "static",
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
                   "ip6assign": false,
                   "proto": "static",
-                  "_area_type": ""
+                  "area_type": ""
                 },
                 {
                   "mode": [
@@ -4674,211 +3853,6 @@
             },
             "type": "string",
             "description": "Choose the firewall zone you want to assign to this interface. Pass \"\" to remove the interface from the associated zone or define a new zone and attach the interface to it."
-          },
-          "mob_limit_enabled": {
-            "x-web": {
-              "input-type": "switch",
-              "pretty": "Enable data connection limit",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "proto": "wwan"
-                },
-                {
-                  "proto": "connm"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "description": "Enable data connection limit. Disables mobile data when a limit for current period is reached"
-          },
-          "data_limit": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Data limit (MB)",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Data limit (MB). Disable mobile data after limit value in MB is reached"
-          },
-          "due_reset_time": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Data limit clear due:",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Data limit clear due. The data limit will be automatically cleared on this date.",
-            "readOnly": true
-          },
-          "period": {
-            "x-web": {
-              "input-type": "select",
-              "pretty": "Period",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "enum-pretty": {
-                "day": "Day",
-                "week": "Week",
-                "month": "Month"
-              },
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "enum": [
-              "day",
-              "week",
-              "month"
-            ],
-            "type": "string",
-            "description": "Period for which mobile data limiting should apply."
-          },
-          "reset_day": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Start day",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1",
-                  "period": "month"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Start day. A starting day in a month for mobile data limiting period."
-          },
-          "reset_hour": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Start hour",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1",
-                  "period": "day"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Start hour. A starting hour in a day for mobile data limiting period."
-          },
-          "reset_weekday": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Start day",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1",
-                  "period": "week"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Start day. A starting day in a week for mobile data limiting period."
-          },
-          "enable_warning": {
-            "x-web": {
-              "input-type": "switch",
-              "pretty": "Enable SMS warning",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Enable SMS warning. Enables sending of warning SMS message when mobile data limit is reached.",
-            "enum": [
-              "0",
-              "1"
-            ]
-          },
-          "warning_limit": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Data limit (MB)",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "enable_warning": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Data limit (MB). Send warning SMS message after limit value in MB is reached. Mobile data warning limit cannot be higher than mobile data limit!"
-          },
-          "warning_num": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Phone number",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "enable_warning": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Phone number. A phone number to send warning SMS message to."
           },
           "p2p": {
             "x-web": {
@@ -4951,6 +3925,20 @@
         },
         "type": "object",
         "properties": {
+          "name": {
+            "x-web": {
+              "unique": true,
+              "input-type": "input",
+              "pretty": "Name",
+              "group": "General Settings",
+              "hw_tags": {
+                "is_access_point": false,
+                "is_switch": false
+              }
+            },
+            "type": "string",
+            "description": "Name of the interface"
+          },
           "enabled": {
             "x-web": {
               "input-type": "switch",
@@ -5131,19 +4119,6 @@
             },
             "type": "string",
             "description": "IPv4 gateway. The address where the router will send all the outgoing traffic"
-          },
-          "wan_as_lan": {
-            "x-web": {
-              "input-type": "switch",
-              "pretty": "Use WAN port as LAN",
-              "group": "General Settings",
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Use WAN port as LAN"
           },
           "broadcast": {
             "x-web": {
@@ -6187,12 +5162,12 @@
                 {
                   "ip6assign": false,
                   "proto": "static",
-                  "_area_type": "wan"
+                  "area_type": "wan"
                 },
                 {
                   "ip6assign": false,
                   "proto": "static",
-                  "_area_type": ""
+                  "area_type": ""
                 },
                 {
                   "mode": [
@@ -6428,211 +5403,6 @@
             "type": "string",
             "description": "Choose the firewall zone you want to assign to this interface. Pass \"\" to remove the interface from the associated zone or define a new zone and attach the interface to it."
           },
-          "mob_limit_enabled": {
-            "x-web": {
-              "input-type": "switch",
-              "pretty": "Enable data connection limit",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "proto": "wwan"
-                },
-                {
-                  "proto": "connm"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "description": "Enable data connection limit. Disables mobile data when a limit for current period is reached"
-          },
-          "data_limit": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Data limit (MB)",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Data limit (MB). Disable mobile data after limit value in MB is reached"
-          },
-          "due_reset_time": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Data limit clear due:",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Data limit clear due. The data limit will be automatically cleared on this date.",
-            "readOnly": true
-          },
-          "period": {
-            "x-web": {
-              "input-type": "select",
-              "pretty": "Period",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "enum-pretty": {
-                "day": "Day",
-                "week": "Week",
-                "month": "Month"
-              },
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "enum": [
-              "day",
-              "week",
-              "month"
-            ],
-            "type": "string",
-            "description": "Period for which mobile data limiting should apply."
-          },
-          "reset_day": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Start day",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1",
-                  "period": "month"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Start day. A starting day in a month for mobile data limiting period."
-          },
-          "reset_hour": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Start hour",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1",
-                  "period": "day"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Start hour. A starting hour in a day for mobile data limiting period."
-          },
-          "reset_weekday": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Start day",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1",
-                  "period": "week"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Start day. A starting day in a week for mobile data limiting period."
-          },
-          "enable_warning": {
-            "x-web": {
-              "input-type": "switch",
-              "pretty": "Enable SMS warning",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "mob_limit_enabled": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Enable SMS warning. Enables sending of warning SMS message when mobile data limit is reached.",
-            "enum": [
-              "0",
-              "1"
-            ]
-          },
-          "warning_limit": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Data limit (MB)",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "enable_warning": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Data limit (MB). Send warning SMS message after limit value in MB is reached. Mobile data warning limit cannot be higher than mobile data limit!"
-          },
-          "warning_num": {
-            "x-web": {
-              "input-type": "input",
-              "pretty": "Phone number",
-              "group": "General Settings",
-              "depends": [
-                {
-                  "enable_warning": "1"
-                }
-              ],
-              "hw_tags": {
-                "is_access_point": false,
-                "is_switch": false
-              }
-            },
-            "type": "string",
-            "description": "Phone number. A phone number to send warning SMS message to."
-          },
           "p2p": {
             "x-web": {
               "input-type": "select",
@@ -6704,7 +5474,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "Interface name.",
+                "description": "The ID of the interface configuration",
                 "x-web": {
                   "unique": true,
                   "pretty": "Interface name",

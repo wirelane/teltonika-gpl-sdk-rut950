@@ -13,205 +13,11 @@
     }
   ],
   "paths": {
-    "/igmp_proxy/routes/config": {
+    "/igmp_proxy/global": {
       "get": {
-        "summary": "Get IGMP Proxy routes",
+        "summary": "Returns IGMP Proxy global configuration",
         "tags": [
-          "IGMP Proxy"
-        ],
-        "operationId": "get-services-igmp_proxy-routes-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_igmp_route_multi"
-          }
-        }
-      },
-      "post": {
-        "summary": "Create IGMP Proxy routes",
-        "operationId": "post-services-igmp_proxy-routes-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_igmp_route_multi"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "x-examples": {
-                  "example-1": {
-                    "data": {
-                      "direction": "downstream",
-                      "network": "lan",
-                      "zone": "lan",
-                      "altnet": [
-                        "192.168.1.0/25",
-                        "10.25.6.8/24"
-                      ]
-                    }
-                  }
-                },
-                "properties": {
-                  "data": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/igmp_routes"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "IGMP Proxy"
-        ]
-      },
-      "put": {
-        "summary": "Update IGMP Proxy routes",
-        "operationId": "put-services-igmp_proxy-routes-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_igmp_route_multi"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/igmp_req_body_multi"
-              }
-            }
-          }
-        },
-        "tags": [
-          "IGMP Proxy"
-        ]
-      },
-      "delete": {
-        "summary": "Delete IGMP Proxy route",
-        "operationId": "delete-services-igmp_proxy-routes-id-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "required": [
-                  "data"
-                ]
-              }
-            }
-          }
-        },
-        "tags": [
-          "IGMP Proxy"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "IGMP Proxy"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/igmp_proxy/routes/config/{id}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Route configuration ID"
-        }
-      ],
-      "get": {
-        "summary": "Get IGMP Proxy route",
-        "tags": [
-          "IGMP Proxy"
-        ],
-        "operationId": "get-services-igmp_proxy-routes-id-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_igmp_route_one"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update IGMP Proxy route",
-        "operationId": "put-services-igmp_proxy-routes-id-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_igmp_route_one"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/igmp_routes"
-              }
-            }
-          }
-        },
-        "tags": [
-          "IGMP Proxy"
-        ]
-      },
-      "delete": {
-        "summary": "Delete IGMP Proxy routes",
-        "operationId": "delete-services-igmp_proxy-routes-config",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted_multi"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "tags": [
-          "IGMP Proxy"
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Network",
-          "IGMP Proxy"
-        ],
-        "hw_tags": {
-          "is_access_point": false,
-          "is_switch": false
-        }
-      }
-    },
-    "/igmp_proxy/general/config/general": {
-      "get": {
-        "summary": "Get IGMP Proxy general config",
-        "tags": [
-          "IGMP Proxy"
+          "General"
         ],
         "operationId": "get-services-igmp_proxy-general-config-igmpproxy",
         "responses": {
@@ -221,7 +27,7 @@
         }
       },
       "put": {
-        "summary": "Set IGMP Proxy general config",
+        "summary": "Updates IGMP Proxy global configuration",
         "operationId": "put-services-igmp_proxy-general-config-igmpproxy",
         "requestBody": {
           "content": {
@@ -274,16 +80,240 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_igmp_general"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "name": "IGMP Proxy",
+        "menu": [
+          "Network",
+          "IGMP Proxy",
+          "IGMP Proxy"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/igmp_proxy/routes/config": {
+      "get": {
+        "summary": "Returns IGMP Proxy routes",
+        "tags": [
+          "Routes"
+        ],
+        "operationId": "get-services-igmp_proxy-routes-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_igmp_route_multi"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates IGMP Proxy routes",
+        "operationId": "post-services-igmp_proxy-routes-config",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200_igmp_route_multi"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "data": {
+                      "direction": "downstream",
+                      "network": "lan",
+                      "zone": "lan",
+                      "altnet": [
+                        "192.168.1.0/25",
+                        "10.25.6.8/24"
+                      ]
+                    }
+                  }
+                },
+                "properties": {
+                  "data": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/igmp_routes"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
           "IGMP Proxy"
         ]
       },
-      "parameters": [],
+      "put": {
+        "summary": "Updates IGMP Proxy routes",
+        "operationId": "put-services-igmp_proxy-routes-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_igmp_route_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/igmp_req_body_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routes"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes IGMP Proxy routes",
+        "operationId": "delete-services-igmp_proxy-routes-id-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routes"
+        ]
+      },
       "x-web": {
+        "name": "IGMP Proxy",
         "menu": [
           "Network",
+          "IGMP Proxy",
+          "IGMP Proxy"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        }
+      }
+    },
+    "/igmp_proxy/routes/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the IGMP proxy route configuration"
+        }
+      ],
+      "get": {
+        "summary": "Returns IGMP Proxy route",
+        "tags": [
+          "Routes"
+        ],
+        "operationId": "get-services-igmp_proxy-routes-id-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_igmp_route_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates IGMP Proxy route",
+        "operationId": "put-services-igmp_proxy-routes-id-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_igmp_route_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/igmp_routes"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Routes"
+        ]
+      },
+      "delete": {
+        "summary": "Deletes IGMP Proxy routes",
+        "operationId": "delete-services-igmp_proxy-routes-config",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "Routes"
+        ]
+      },
+      "x-web": {
+        "name": "IGMP Proxy",
+        "menu": [
+          "Network",
+          "IGMP Proxy",
           "IGMP Proxy"
         ],
         "hw_tags": {
@@ -405,12 +435,12 @@
                 {
                   "type": "object",
                   "properties": {
-                    ".name": {
+                    "id": {
                       "type": "string"
                     }
                   },
                   "required": [
-                    ".name"
+                    "id"
                   ]
                 },
                 {
@@ -433,11 +463,10 @@
                 "example-1": {
                   "success": true,
                   "data": {
-                    ".name": "cfg02e6c1",
+                    "id": "cfg02e6c1",
                     "direction": "downstream",
                     "network": "lan",
                     "zone": "lan",
-                    ".type": "phyint",
                     "altnet": [
                       "192.168.1.0/25",
                       "10.25.6.8/24"
@@ -455,12 +484,12 @@
                     {
                       "type": "object",
                       "properties": {
-                        ".name": {
+                        "id": {
                           "type": "string"
                         }
                       },
                       "required": [
-                        ".name"
+                        "id"
                       ]
                     },
                     {
@@ -484,8 +513,7 @@
                   "success": true,
                   "data": [
                     {
-                      ".name": "cfg02e6c1",
-                      ".type": "phyint"
+                      "id": "cfg02e6c1"
                     }
                   ]
                 }
@@ -502,7 +530,7 @@
                       {
                         "type": "object",
                         "properties": {
-                          ".name": {
+                          "id": {
                             "type": "string"
                           }
                         }
@@ -529,9 +557,8 @@
                   "success": true,
                   "data": {
                     "enabled": "0",
-                    ".type": "igmpproxy",
                     "quickleave": "0",
-                    ".name": "igmpproxy"
+                    "id": "igmpproxy"
                   }
                 }
               },
@@ -541,28 +568,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/igmp_general"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        ".type": {
-                          "type": "string",
-                          "enum": [
-                            "igmpproxy"
-                          ]
-                        },
-                        ".name": {
-                          "type": "string",
-                          "enum": [
-                            "igmpproxy"
-                          ]
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "#/components/schemas/igmp_general"
                 }
               }
             }

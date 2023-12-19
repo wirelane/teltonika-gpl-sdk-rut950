@@ -6,185 +6,7 @@
     }
   ],
   "paths": {
-    "/administration/ntp/client/config": {
-      "get": {
-        "summary": "Returns NTP Client configuration in an array",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ntp_client_options_id"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "NTP"
-        ],
-        "operationId": "ntp1"
-      },
-      "put": {
-        "summary": "Updates NTP Client configuration in an array",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/ntp_client_options_id"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "NTP"
-        ],
-        "operationId": "ntp2",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ntp_client_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ]
-      }
-    },
-    "/administration/ntp/client/config/general": {
-      "get": {
-        "summary": "Returns NTP Client configuration",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ntp_client_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "NTP"
-        ],
-        "operationId": "ntp3"
-      },
-      "put": {
-        "summary": "Updates NTP Client configuration",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status."
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/ntp_client_options_id"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "tags": [
-          "NTP"
-        ],
-        "operationId": "ntp4",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/ntp_client_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ]
-      }
-    },
-    "/administration/ntp/client/options": {
+    "/date_time/ntp/client/timezones/options": {
       "get": {
         "summary": "Returns available NTP client options",
         "tags": [
@@ -212,15 +34,17 @@
                             "type": "string"
                           }
                         }
-                      }
+                      },
+                      "required": [
+                        "timezones"
+                      ]
                     }
                   }
                 }
               }
             }
           }
-        },
-        "operationId": "get-services-ntp-client-options"
+        }
       },
       "x-web": {
         "menu": [
@@ -228,12 +52,178 @@
           "Administration",
           "Date & Time",
           "NTP"
+        ],
+        "name": "Date & Time"
+      }
+    },
+    "/date_time/ntp/client/config": {
+      "get": {
+        "summary": "Returns NTP Client configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NTPClientMultiSections"
+          }
+        },
+        "tags": [
+          "NTP"
         ]
+      },
+      "put": {
+        "summary": "Updates NTP Client configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NTPClientMultiSections"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "NTP"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ntp_client_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTP"
+        ],
+        "name": "Date & Time"
+      }
+    },
+    "/date_time/ntp/client/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns NTP Client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NTPClientSingleSection"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "NTP"
+        ]
+      },
+      "put": {
+        "summary": "Updates NTP Client configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NTPClientSingleSection"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "NTP"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntp_client_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": [
+          "System",
+          "Administration",
+          "Date & Time",
+          "NTP"
+        ],
+        "name": "Date & Time"
       }
     }
   },
   "components": {
-    "responses": {},
+    "responses": {
+      "200NTPClientMultiSections": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status."
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ntp_client_options_id"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NTPClientSingleSection": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status."
+                },
+                "data": {
+                  "$ref": "#/components/schemas/ntp_client_options_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "schemas": {
       "ntp_client_options": {
         "type": "object",
@@ -707,6 +697,7 @@
           "enabled": {
             "type": "string",
             "description": "Turns NTP client on or off.",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -722,6 +713,7 @@
               "0",
               "1"
             ],
+            "format": "is_bool",
             "description": "Saves last synchronized time to flash memory.",
             "x-web": {
               "pretty": "Save time to flash",
@@ -731,6 +723,7 @@
           "force": {
             "type": "string",
             "description": "Trust network and NTP servers, no recommended RFC-4330 cross-checks will be made",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -743,9 +736,9 @@
           "interval": {
             "type": "string",
             "description": "How often the device will update the time.",
-            "format": "irange(60, 2147483647)",
-            "minLength": 2,
-            "maxLength": 10,
+            "format": "integer",
+            "minimum": "60",
+            "maximum": "2147483647",
             "x-web": {
               "pretty": "Update interval (in seconds)",
               "input-type": "input"
@@ -763,9 +756,9 @@
           "count": {
             "type": "string",
             "description": "The amount of times that router will perform time synchronizations. Leave empty in order to set to infinite.",
-            "format": "irange(0, 2147483647)",
-            "minLength": 1,
-            "maxLength": 10,
+            "format": "integer",
+            "minimum": "0",
+            "maximum": "2147483647",
             "x-web": {
               "pretty": "Count of time synchronizations",
               "input-type": "input"
@@ -774,6 +767,7 @@
           "sync_enabled": {
             "type": "string",
             "description": "Operator Station Synchronization. Enable time synchronization with connected mobile operator.",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -789,6 +783,7 @@
           "tmz_sync_enabled": {
             "type": "string",
             "description": "Timezone synchronization. Set device's timezone according to the information received from the mobile operator.",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -809,8 +804,7 @@
           "failover": {
             "type": "string",
             "description": "Count of failed NTP requests. How many times should NTP client fail before launching operator station synchronization.",
-            "default": "5",
-            "format": "fieldvalidation('^[0-9]+$',0)",
+            "format": "uinteger",
             "x-web": {
               "pretty": "Count of failed NTP requests",
               "input-type": "input",
@@ -833,6 +827,7 @@
           "gps_sync": {
             "type": "string",
             "description": "Enables periodic time synchronization for the system using the GPS module (does not require an Internet connection). GPS will be turned on if this option is true.",
+            "format": "is_bool",
             "enum": [
               "0",
               "1"
@@ -891,10 +886,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "NTP Client Configuration identifier (ID).",
-                "enum": [
-                  "general"
-                ]
+                "description": "NTP Client Configuration identifier (ID)."
               }
             },
             "required": [

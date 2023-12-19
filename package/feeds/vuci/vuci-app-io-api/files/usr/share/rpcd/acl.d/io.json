@@ -7,7 +7,7 @@
 					"status"
 				]
 			},
-			"api": ["/io/status/*"]
+			"api": ["/io/*"]
 		},
 		"write": {
 			"ubus": {
@@ -15,7 +15,7 @@
 					"update"
 				]
 			},
-			"api": ["/io/status/*"]
+			"api": ["/io/*"]
 		}
 	},
 
@@ -37,11 +37,11 @@
 			"uci": ["ioman"],
 			"api": [
 				"/io/scheduler/*",
-				"/io/status/*",
-				"/io/juggler/config/general/actions/*",
-				"/io/juggler/config/general/inputs/*",
-				"/mobile_utilities/sms_rules/config/*",
-				"/mobile_utilities/call_utilities/rules/config/*"
+				"/io/*",
+				"/io/juggler/operations/config/*",
+				"/io/juggler/inputs/config/*",
+				"/sms_utilities/rules/config/*",
+				"/call_utilities/rules/config/*"
 			]
 		},
 		"write": {
@@ -55,8 +55,8 @@
 		"read": {
 			"api": [
 				"/io/juggler/config/*",
-				"/io/status/config/*",
-				"/io/scheduler/config/general/*"
+				"/io/*",
+				"/io/scheduler/global/*"
 			],
 			"uci": [
 				"iojuggler"
@@ -76,16 +76,16 @@
 		"description": "input.output juggler actions configuration",
 		"read": {
 			"api": [
-				"/io/juggler/options/general/actions/*",
-				"/io/juggler/config/general/actions/*",
-				"/io/juggler/config/general/conditions/*",
-				"/io/status/*",
+				"/io/juggler/operations/options/*",
+				"/io/juggler/operations/config/*",
+				"/io/juggler/conditions/config/*",
+				"/io/*",
 				"/recipients/email_users/config/*",
 				"/recipients/phone_groups/config/*",
-				"/mobile/sim_switch/config/*",
-				"/mobile/modems/status*",
+				"/modems/sim_switch/config/*",
+				"/modems/status*",
 				"/profiles/config/*",
-				"/devices/status/*",
+				"/network/devices/status/*",
 				"/certificates/config/*"
 			],
 			"uci": [
@@ -115,7 +115,7 @@
 		},
 		"write": {
 			"api": [
-				"/io/juggler/config/general/actions/*"
+				"/io/juggler/operations/config/*"
 			],
 			"uci": [
 				"iojuggler"
@@ -127,8 +127,8 @@
 		"description": "input.output juggler conditions configuration",
 		"read": {
 			"api": [
-				"/io/juggler/config/general/conditions/*",
-				"/io/status/*"
+				"/io/juggler/conditions/config/*",
+				"/io/*"
 			],
 			"uci": [
 				"iojuggler"
@@ -136,7 +136,7 @@
 		},
 		"write": {
 			"api": [
-				"/io/juggler/config/general/conditions/*"
+				"/io/juggler/conditions/config/*"
 			],
 			"uci": [
 				"iojuggler"

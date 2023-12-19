@@ -1,54 +1,55 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Hotspot 2",
+    "title": "Hotspot 2.0",
     "version": "1.0",
-    "description": "Hotspot 2 api documentation.",
+    "description": "Hotspot 2.0 API documentation",
     "contact": {}
   },
   "servers": [],
   "tags": [
     {
-      "name": "Venues"
+      "name": "Venue"
     },
     {
       "name": "3GPP"
     },
     {
-      "name": "Network access identifier"
+      "name": "NAI realm"
     },
     {
       "name": "Operator friendly name"
     },
     {
       "name": "Connection capability"
-    },
-    {
-      "name": "Hotspot 2"
     }
   ],
   "paths": {
     "/hotspot2/config": {
       "get": {
-        "summary": "Get Hotspot 2 configurations",
+        "summary": "Returns all Hotspot 2.0 configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_hotspot2_multi"
           }
         },
         "operationId": "get-services-hotspot2",
-        "description": "Gets Hotspot 2 configurations",
-        "tags": [
-          "Hotspot 2"
-        ]
+        "description": "Gets Hotspot 2.0 configurations",
+        "tags": ["General"]
       },
       "parameters": [],
       "put": {
-        "summary": "Update Hotspot 2 configurations",
+        "summary": "Updates sepcified Hotspot 2.0 configurations",
         "operationId": "put-services-hotspot2",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_hotspot2_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -68,53 +69,56 @@
             }
           }
         },
-        "tags": [
-          "Hotspot 2"
-        ],
-        "description": "Updates Hotspot 2 configurations"
+        "tags": ["General"],
+        "description": "Updates Hotspot 2.0 configurations"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "General"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "General"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{sid}": {
+    "/hotspot2/config/{id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         }
       ],
       "get": {
-        "summary": "Get Hotspot 2 configuration",
-        "tags": [
-          "Hotspot 2"
-        ],
+        "summary": "Returns the specified Hotspot 2.0 configuration",
+        "tags": ["General"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_hotspot2"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-hotspot2-sid",
-        "description": "Gets Hotspot 2 configuration"
+        "description": "Gets Hotspot 2.0 configuration"
       },
       "put": {
-        "summary": "Update Hotspot 2 configuration",
+        "summary": "Updates the specified Hotspot 2.0 configuration",
         "operationId": "put-services-hotspot2-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_hotspot2"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -131,53 +135,39 @@
             }
           }
         },
-        "tags": [
-          "Hotspot 2"
-        ],
-        "description": "Updates Hotspot 2 configuration"
+        "tags": ["General"],
+        "description": "Updates Hotspot 2.0 configuration"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "General"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "General"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/venues": {
+    "/hotspot2/{id}/venues/config": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         }
       ],
-      "get": {
-        "summary": "Get venue configurations",
-        "tags": [
-          "Venues"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_venue_multi"
-          }
-        },
-        "operationId": "get-services-hotspot2-hotspot-venues",
-        "description": "Gets venue configurations"
-      },
       "post": {
-        "summary": "Create venue configurations",
+        "summary": "Creates Venue configuration for specified Hotspot 2.0 instance",
         "operationId": "post-services-hotspot2-hotspot-venues",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_venue"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -194,17 +184,32 @@
             }
           }
         },
-        "tags": [
-          "Venues"
-        ],
+        "tags": ["Venue"],
         "description": "Create venue configurations"
       },
+      "get": {
+        "summary": "Returns all Venue configurations for specified Hotspot 2.0 instance",
+        "tags": ["Venue"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_venue_multi"
+          }
+        },
+        "operationId": "get-services-hotspot2-hotspot-venues",
+        "description": "Gets venue configurations"
+      },
       "put": {
-        "summary": "Update venue configurations",
+        "summary": "Updates specified Venue configurations for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-venues",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_venue_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -224,17 +229,18 @@
             }
           }
         },
-        "tags": [
-          "Venues"
-        ],
+        "tags": ["Venue"],
         "description": "Updates venue configurations"
       },
       "delete": {
-        "summary": "Delete venue configurations",
+        "summary": "Deletes specified Venue configurations for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-venues",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -254,61 +260,65 @@
             }
           }
         },
-        "tags": [
-          "Venues"
-        ],
+        "tags": ["Venue"],
         "description": "Deletes venue configurations"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "Venue"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "Venue"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/venues/{sid}": {
+    "/hotspot2/{id}/venues/config/{venue_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "venue_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Venue configuration identifier (ID)"
         }
       ],
       "get": {
-        "summary": "Get venue configuration",
-        "tags": [
-          "Venues"
-        ],
+        "summary": "Returns specified Venue configuration for specified Hotspot 2.0 instance",
+        "tags": ["Venue"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_venue"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-hotspot2-hotspot-venues-sid",
         "description": "Gets venue configuration"
       },
       "put": {
-        "summary": "Update venue configuration",
+        "summary": "Updates specified Venue configuration for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-venues-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_venue"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -325,66 +335,53 @@
             }
           }
         },
-        "tags": [
-          "Venues"
-        ],
+        "tags": ["Venue"],
         "description": "Updates venue configuration"
       },
       "delete": {
-        "summary": "Delete venue configuration",
+        "summary": "Deletes specified Venue configuration for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-venues-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "Venues"
-        ],
+        "tags": ["Venue"],
         "description": "Deletes venue configuration"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "Venue"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "Venue"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/3gpp": {
+    "/hotspot2/{id}/3gpp/config": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         }
       ],
-      "get": {
-        "summary": "Get 3GPP configurations",
-        "tags": [
-          "3GPP"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_gpp_multi"
-          }
-        },
-        "operationId": "get-services-hotspot2-hotspot-gpp",
-        "description": "Gets 3GPP configurations"
-      },
       "post": {
-        "summary": "Create 3GPP configuration",
+        "summary": "Creates 3GPP configuration for specified Hotspot 2.0 instance",
         "operationId": "post-services-hotspot2-hotspot-gpp",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_gpp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -401,17 +398,32 @@
             }
           }
         },
-        "tags": [
-          "3GPP"
-        ],
+        "tags": ["3GPP"],
         "description": "Creates 3GPP configuration"
       },
+      "get": {
+        "summary": "Returns all 3GPP configurations for specified Hotspot 2.0 instance",
+        "tags": ["3GPP"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_gpp_multi"
+          }
+        },
+        "operationId": "get-services-hotspot2-hotspot-gpp",
+        "description": "Gets 3GPP configurations"
+      },
       "put": {
-        "summary": "Update 3GPP configurations",
+        "summary": "Updates specified 3GPP configurations for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-gpp",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_gpp_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -431,17 +443,18 @@
             }
           }
         },
-        "tags": [
-          "3GPP"
-        ],
+        "tags": ["3GPP"],
         "description": "Updates 3GPP configurations"
       },
       "delete": {
-        "summary": "Delete 3GPP configurations",
+        "summary": "Deletes specified 3GPP configurations for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-gpp",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -461,61 +474,65 @@
             }
           }
         },
-        "tags": [
-          "3GPP"
-        ],
+        "tags": ["3GPP"],
         "description": "Deletes 3GPP configurations"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "3GPP"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "3GPP"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/3gpp/{sid}": {
+    "/hotspot2/{id}/3gpp/config/{3gpp_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "3gpp_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "3GPP configuration identifier (ID)"
         }
       ],
       "get": {
-        "summary": "Get 3GPP configuration",
-        "tags": [
-          "3GPP"
-        ],
+        "summary": "Returns specified 3GPP configuration for specified Hotspot 2.0 instance",
+        "tags": ["3GPP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_gpp"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-hotspot2-hotspot-gpp-sid",
         "description": "Gets 3GPP configuration"
       },
       "put": {
-        "summary": "Update 3GPP configuration",
+        "summary": "Updates specified 3GPP configuration for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-gpp-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_gpp"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -532,66 +549,53 @@
             }
           }
         },
-        "tags": [
-          "3GPP"
-        ],
+        "tags": ["3GPP"],
         "description": "Updates 3GPP configuration"
       },
       "delete": {
-        "summary": "Delete 3GPP configuration",
+        "summary": "Deletes specified 3GPP configuration for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-gpp-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "3GPP"
-        ],
+        "tags": ["3GPP"],
         "description": "Deletes 3GPP configuration"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "3GPP"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "3GPP"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/nai": {
+    "/hotspot2/{id}/nai/config": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         }
       ],
-      "get": {
-        "summary": "Get network access identifier configurations",
-        "tags": [
-          "Network access identifier"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_nai_multi"
-          }
-        },
-        "operationId": "get-services-hotspot2-hotspot-nai",
-        "description": "Gets network access identifier configurations"
-      },
       "post": {
-        "summary": "Create network access identifier configuration",
+        "summary": "Creates NAI realm configuration for specified Hotspot 2.0 instance",
         "operationId": "post-services-hotspot2-hotspot-nai",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_nai"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -608,17 +612,32 @@
             }
           }
         },
-        "tags": [
-          "Network access identifier"
-        ],
+        "tags": ["NAI realm"],
         "description": "Creates network access identifier configuration"
       },
+      "get": {
+        "summary": "Returns all NAI realm configurations for specified Hotspot 2.0 instance",
+        "tags": ["NAI realm"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_nai_multi"
+          }
+        },
+        "operationId": "get-services-hotspot2-hotspot-nai",
+        "description": "Gets network access identifier configurations"
+      },
       "put": {
-        "summary": "Update network access identifier configurations",
+        "summary": "Updates specified NAI realm configurations for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-nai",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_nai_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -638,17 +657,18 @@
             }
           }
         },
-        "tags": [
-          "Network access identifier"
-        ],
+        "tags": ["NAI realm"],
         "description": "Updates network access identifier configurations"
       },
       "delete": {
-        "summary": "Delete network access identifier configurations",
+        "summary": "Deletes specified NAI realm configurations for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-nai",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -668,61 +688,65 @@
             }
           }
         },
-        "tags": [
-          "Network access identifier"
-        ],
+        "tags": ["NAI realm"],
         "description": "Deletes network access identifier configurations"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "NAI"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "NAI"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/nai/{sid}": {
+    "/hotspot2/{id}/nai/config/{nai_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "nai_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "NAI realm configuration identifier (ID)"
         }
       ],
       "get": {
-        "summary": "Get network access identifier configuration",
-        "tags": [
-          "Network access identifier"
-        ],
+        "summary": "Returns specified NAI realm configuration for specified Hotspot 2.0 instance",
+        "tags": ["NAI realm"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_nai"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-hotspot2-hotspot-nai-sid",
         "description": "Gets network access identifier configuration"
       },
       "put": {
-        "summary": "Update network access identifier configuration",
+        "summary": "Updates specified NAI realm configuration for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-nai-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_nai"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -739,66 +763,53 @@
             }
           }
         },
-        "tags": [
-          "Network access identifier"
-        ],
+        "tags": ["NAI realm"],
         "description": "Updates network access identifier configuration"
       },
       "delete": {
-        "summary": "Delete network access identifier configuration",
+        "summary": "Deletes specified NAI realm configuration for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-nai-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "Network access identifier"
-        ],
+        "tags": ["NAI realm"],
         "description": "Deletes network access identifier configuration"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "NAI"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "NAI"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/names": {
+    "/hotspot2/{id}/names/config": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         }
       ],
-      "get": {
-        "summary": "Get operator configurations",
-        "tags": [
-          "Operator friendly name"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_operator_multi"
-          }
-        },
-        "operationId": "get-services-hotspot2-hotspot-operator",
-        "description": "Gets operator friendly name configurations"
-      },
       "post": {
-        "summary": "Create operator configuration",
+        "summary": "Creates Operator configuration for specified Hotspot 2.0 instance",
         "operationId": "post-services-hotspot2-hotspot-operator",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_operator"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -815,17 +826,32 @@
             }
           }
         },
-        "tags": [
-          "Operator friendly name"
-        ],
+        "tags": ["Operator friendly name"],
         "description": "Creates operator friendly name configuration"
       },
+      "get": {
+        "summary": "Returns all Operator configurations for specified Hotspot 2.0 instance",
+        "tags": ["Operator friendly name"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_operator_multi"
+          }
+        },
+        "operationId": "get-services-hotspot2-hotspot-operator",
+        "description": "Gets operator friendly name configurations"
+      },
       "put": {
-        "summary": "Update operator configurations",
+        "summary": "Updates specified Operator configurations for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-operator",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_operator_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -845,17 +871,18 @@
             }
           }
         },
-        "tags": [
-          "Operator friendly name"
-        ],
+        "tags": ["Operator friendly name"],
         "description": "Updates operator friendly name configurations"
       },
       "delete": {
-        "summary": "Delete operator configurations",
+        "summary": "Deletes specified Operator configurations for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-operator",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -875,61 +902,65 @@
             }
           }
         },
-        "tags": [
-          "Operator friendly name"
-        ],
+        "tags": ["Operator friendly name"],
         "description": "Deletes operator configurations"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "Names"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "Names"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/names/{sid}": {
+    "/hotspot2/{id}/names/config/{name_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "name_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Operator friendly name configuration identifier (ID)"
         }
       ],
       "get": {
-        "summary": "Get operator configuration",
-        "tags": [
-          "Operator friendly name"
-        ],
+        "summary": "Returns specified Operator configuration for specified Hotspot 2.0 instance",
+        "tags": ["Operator friendly name"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_operator"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-hotspot2-hotspot-operator-sid",
         "description": "Gets operator friendly name configuration"
       },
       "put": {
-        "summary": "Update operator configuration",
+        "summary": "Updates specified Operator configuration for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-operator-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_operator"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -946,66 +977,53 @@
             }
           }
         },
-        "tags": [
-          "Operator friendly name"
-        ],
+        "tags": ["Operator friendly name"],
         "description": "Updates operator friendly name configuration"
       },
       "delete": {
-        "summary": "Delete operator configuration",
+        "summary": "Deletes specified Operator configuration for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-operator-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "Operator friendly name"
-        ],
+        "tags": ["Operator friendly name"],
         "description": "Deletes operator configuration"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "Names"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "Names"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/capabilities": {
+    "/hotspot2/{id}/capabilities/config": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         }
       ],
-      "get": {
-        "summary": "Get connection capabilities configurations",
-        "tags": [
-          "Connection capability"
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200_concap_multi"
-          }
-        },
-        "operationId": "get-services-hotspot2-hotspot-concap",
-        "description": "Gets connection capabilities configurations"
-      },
       "post": {
-        "summary": "Create connection capabilities configuration",
+        "summary": "Creates Connection capability configuration for specified Hotspot 2.0 instance",
         "operationId": "post-services-hotspot2-hotspot-concap",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200_concap"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1022,17 +1040,32 @@
             }
           }
         },
-        "tags": [
-          "Connection capability"
-        ],
+        "tags": ["Connection capability"],
         "description": "Creates connection capabilities configuration"
       },
+      "get": {
+        "summary": "Returns all Connection capability configurations for specified Hotspot 2.0 instance",
+        "tags": ["Connection capability"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_concap_multi"
+          }
+        },
+        "operationId": "get-services-hotspot2-hotspot-concap",
+        "description": "Gets connection capabilities configurations"
+      },
       "put": {
-        "summary": "Update connection capabilities configurations",
+        "summary": "Updates specified Connection capability configurations for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-concap",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_concap_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1052,17 +1085,18 @@
             }
           }
         },
-        "tags": [
-          "Connection capability"
-        ],
+        "tags": ["Connection capability"],
         "description": "Updates connection capabilities configurations"
       },
       "delete": {
-        "summary": "Delete connection capabilities configurations",
+        "summary": "Deletes specified Connection capability configurations for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-concap",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "requestBody": {
@@ -1082,61 +1116,65 @@
             }
           }
         },
-        "tags": [
-          "Connection capability"
-        ],
+        "tags": ["Connection capability"],
         "description": "Deletes connection capabilities configurations"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "Connection Capability"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "Connection capability"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     },
-    "/hotspot2/config/{hotspot}/capabilities/{sid}": {
+    "/hotspot2/{id}/capabilities/config/{capabilities_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "hotspot",
+          "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Hotspot 2.0 configuration identifier (ID)"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "sid",
+          "name": "capabilities_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "Connection capability configuration identifier (ID)"
         }
       ],
       "get": {
-        "summary": "Get connection capabilities configuration",
-        "tags": [
-          "Connection capability"
-        ],
+        "summary": "Returns specified Connection capability configuration for specified Hotspot 2.0 instance",
+        "tags": ["Connection capability"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_concap"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-services-hotspot2-hotspot-concap-sid",
         "description": "Gets connection capabilities configuration"
       },
       "put": {
-        "summary": "Update connection capability configuration",
+        "summary": "Updates specified Connection capability configuration for specified Hotspot 2.0 instance",
         "operationId": "put-services-hotspot2-hotspot-concap-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_concap"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "requestBody": {
@@ -1153,34 +1191,30 @@
             }
           }
         },
-        "tags": [
-          "Connection capability"
-        ],
+        "tags": ["Connection capability"],
         "description": "Updates connection capability configuration"
       },
       "delete": {
-        "summary": "Delete connection capabilities configuration",
+        "summary": "Deletes specified Connection capability configuration for specified Hotspot 2.0 instance",
         "operationId": "delete-services-hotspot2-hotspot-concap-sid",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "Connection capability"
-        ],
+        "tags": ["Connection capability"],
         "description": "Deletes connection capabilities configuration"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Hotspot",
-          "Hotspot 2.0",
-          "Connection Capability"
-        ],
+        "menu": ["Services", "Hotspot", "Hotspot 2.0", "Connection capability"],
         "hw_tags": {
-          "has_hotspot": true
-        }
+          "wifi": true,
+          "is_access_point": false
+        },
+        "name": "Hotspot 2.0"
       }
     }
   },
@@ -1225,15 +1259,7 @@
               "group": "General Setup"
             },
             "type": "string",
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "14"
-            ],
+            "enum": ["0", "1", "2", "3", "4", "5", "14"],
             "description": "The access network type present in beacon and probe response frames"
           },
           "hessid": {
@@ -1271,12 +1297,7 @@
               },
               "group": "General Setup"
             },
-            "enum": [
-              "00",
-              "01",
-              "02",
-              "03"
-            ],
+            "enum": ["00", "01", "02", "03"],
             "description": "Indicates what type of network authentication is used in the network"
           },
           "redirect_url": {
@@ -1310,16 +1331,7 @@
               },
               "group": "General Setup"
             },
-            "enum": [
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
+            "enum": ["0", "1", "2", "3", "4", "5", "6", "7"],
             "description": "Provides information about the IP address version and type and that would be available to a mobile device after it authenticates to the network\n"
           },
           "domain_name": {
@@ -1411,10 +1423,7 @@
             "description": "OSU method list",
             "items": {
               "type": "string",
-              "enum": [
-                "0",
-                "1"
-              ]
+              "enum": ["0", "1"]
             }
           },
           "osu_service_desc_lang": {
@@ -1447,11 +1456,7 @@
               },
               "group": "WAN Metrics"
             },
-            "enum": [
-              "01",
-              "02",
-              "03"
-            ],
+            "enum": ["01", "02", "03"],
             "description": "Provides information about the WAN link that connects the hotspot to the internet"
           },
           "hs20_wan_dw_speed": {
@@ -1630,12 +1635,7 @@
               },
               "group": "Network access identifier (NAI) realm information"
             },
-            "enum": [
-              "13",
-              "21",
-              "25",
-              "43"
-            ],
+            "enum": ["13", "21", "25", "43"],
             "description": "Identifies the EAP method supported by that NAI realm for authentication."
           },
           "param": {
@@ -1654,14 +1654,7 @@
               },
               "group": "Network access identifier (NAI) realm information"
             },
-            "enum": [
-              "[2:1]",
-              "[2:2]",
-              "[2:3]",
-              "[2:4]",
-              "[5:6]",
-              "[5:7]"
-            ],
+            "enum": ["[2:1]", "[2:2]", "[2:3]", "[2:4]", "[5:6]", "[5:7]"],
             "description": "EAP method authentication parameter"
           }
         }
@@ -1749,11 +1742,7 @@
               },
               "group": "Connection capability"
             },
-            "enum": [
-              "0",
-              "1",
-              "2"
-            ],
+            "enum": ["0", "1", "2"],
             "description": "Status"
           },
           "proto": {
@@ -1768,11 +1757,7 @@
               },
               "group": "Connection capability"
             },
-            "enum": [
-              "1",
-              "6",
-              "17"
-            ],
+            "enum": ["1", "6", "17"],
             "description": "Protocol"
           }
         }
@@ -1815,13 +1800,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/venue"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/venue"
+                    }
+                  ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -1848,9 +1843,7 @@
               "x-examples": {
                 "example-1": {
                   "success": true,
-                  "data": [
-                    {}
-                  ]
+                  "data": [{}]
                 }
               },
               "properties": {
@@ -1879,10 +1872,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -1921,13 +1911,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/gpp"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/gpp"
+                    }
+                  ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -1953,9 +1953,7 @@
               "x-examples": {
                 "example-1": {
                   "success": true,
-                  "data": [
-                    {}
-                  ]
+                  "data": [{}]
                 }
               },
               "properties": {
@@ -1984,10 +1982,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2025,13 +2020,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/nai"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/nai"
+                    }
+                  ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2058,9 +2063,7 @@
               "x-examples": {
                 "example-1": {
                   "success": true,
-                  "data": [
-                    {}
-                  ]
+                  "data": [{}]
                 }
               },
               "properties": {
@@ -2089,10 +2092,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2131,13 +2131,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/operator"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/operator"
+                    }
+                  ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2163,9 +2173,7 @@
               "x-examples": {
                 "example-1": {
                   "success": true,
-                  "data": [
-                    {}
-                  ]
+                  "data": [{}]
                 }
               },
               "properties": {
@@ -2194,10 +2202,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2235,13 +2240,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/concap"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/concap"
+                    }
+                  ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2268,9 +2283,7 @@
               "x-examples": {
                 "example-1": {
                   "success": true,
-                  "data": [
-                    {}
-                  ]
+                  "data": [{}]
                 }
               },
               "properties": {
@@ -2299,10 +2312,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2341,13 +2351,23 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/hotspot2"
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/hotspot2"
+                    }
+                  ]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2358,14 +2378,10 @@
                     "internet": "string",
                     "access_network_type": "0",
                     "hessid": "string",
-                    "roaming_consortium": [
-                      "string"
-                    ],
+                    "roaming_consortium": ["string"],
                     "network_auth_type": "00",
                     "ipaddr_type_availability": "0",
-                    "domain_name": [
-                      "string"
-                    ],
+                    "domain_name": ["string"],
                     "venue_group": "string",
                     "venue_type": "string",
                     "osu_ssid": "string",
@@ -2373,9 +2389,7 @@
                     "osu_friendly_name_lang": "string",
                     "osu_friendly_name": "string",
                     "osu_nai": "string",
-                    "osu_method_list": [
-                      "0"
-                    ],
+                    "osu_method_list": ["0"],
                     "osu_service_desc_lang": "string",
                     "osu_service_desc": "string",
                     "hs20_wan_status": "01",
@@ -2400,9 +2414,7 @@
               "x-examples": {
                 "example-1": {
                   "success": true,
-                  "data": [
-                    {}
-                  ]
+                  "data": [{}]
                 }
               },
               "properties": {
@@ -2431,10 +2443,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             },
             "examples": {
               "example-1": {
@@ -2447,14 +2456,10 @@
                       "internet": "string",
                       "access_network_type": "0",
                       "hessid": "string",
-                      "roaming_consortium": [
-                        "string"
-                      ],
+                      "roaming_consortium": ["string"],
                       "network_auth_type": "00",
                       "ipaddr_type_availability": "0",
-                      "domain_name": [
-                        "string"
-                      ],
+                      "domain_name": ["string"],
                       "venue_group": "string",
                       "venue_type": "string",
                       "osu_ssid": "string",
@@ -2462,9 +2467,7 @@
                       "osu_friendly_name_lang": "string",
                       "osu_friendly_name": "string",
                       "osu_nai": "string",
-                      "osu_method_list": [
-                        "0"
-                      ],
+                      "osu_method_list": ["0"],
                       "osu_service_desc_lang": "string",
                       "osu_service_desc": "string",
                       "hs20_wan_status": "01",

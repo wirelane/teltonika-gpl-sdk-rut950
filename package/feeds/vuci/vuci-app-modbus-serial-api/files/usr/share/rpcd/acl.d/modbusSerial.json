@@ -3,18 +3,16 @@
 		"description": "modbus tcl client configuration",
 		"read": {
 			"api": [
-				"/modbus/serial/*",
-				"/io/status/*",
-				"/mobile/modems/*",
-				"/modbus/main/*",
+				"/modbus/client/serial/*",
+				"/io/*",
+				"/modems/*",
 				"/serial/*",
-				"/devices/status/*"
+				"/network/devices/status/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/modbus/serial/*",
-				"/modbus/main/*"
+				"/modbus/client/serial/*"
 			]
 		}
 	}

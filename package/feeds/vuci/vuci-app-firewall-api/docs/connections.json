@@ -1,0 +1,189 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/firewall/connections/status": {
+      "get": {
+        "summary": "Returns current network connections",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": [
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "33658",
+                          "mark": "0",
+                          "packets": 480,
+                          "dport": "22",
+                          "bytes": 46631,
+                          "use": "2"
+                        },
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "60060",
+                          "mark": "0",
+                          "packets": 5,
+                          "dport": "80",
+                          "bytes": 736,
+                          "use": "2"
+                        }
+                      ]
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status"
+                    },
+                    "data": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "layer3": {
+                            "type": "string"
+                          },
+                          "timeout": {
+                            "type": "number"
+                          },
+                          "zone": {
+                            "type": "string"
+                          },
+                          "dst": {
+                            "type": "string"
+                          },
+                          "dst_hostname": {
+                            "type": "string"
+                          },
+                          "layer4": {
+                            "type": "string"
+                          },
+                          "src": {
+                            "type": "string"
+                          },
+                          "sport": {
+                            "type": "string"
+                          },
+                          "mark": {
+                            "type": "string"
+                          },
+                          "packets": {
+                            "type": "number"
+                          },
+                          "dport": {
+                            "type": "string"
+                          },
+                          "bytes": {
+                            "type": "number"
+                          },
+                          "use": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "success": true,
+                      "data": [
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "33658",
+                          "mark": "0",
+                          "packets": 480,
+                          "dport": "22",
+                          "bytes": 46631,
+                          "use": "2"
+                        },
+                        {
+                          "layer3": "ipv4",
+                          "timeout": 7439,
+                          "zone": "0",
+                          "dst": "192.168.1.1",
+                          "dst_hostname": "Teltonika-RUTX11.com",
+                          "layer4": "tcp",
+                          "src": "192.168.1.105",
+                          "sport": "60060",
+                          "mark": "0",
+                          "packets": 5,
+                          "dport": "80",
+                          "bytes": 736,
+                          "use": "2"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-network-routes-connections",
+        "tags": [
+          "Connections"
+        ]
+      },
+      "parameters": [],
+      "x-web": {
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "menu": [
+          "Status",
+          "Realtime Data",
+          "Connections"
+        ],
+        "name": "Firewall"
+      }
+    }
+  },
+  "components": {
+    "responses": {},
+    "schemas": {}
+  },
+  "info": {
+    "title": "Connections",
+    "version": "1.0",
+    "description": "Connections api documentation"
+  },
+  "tags": [
+    {
+      "name": "Connections"
+    }
+  ]
+}

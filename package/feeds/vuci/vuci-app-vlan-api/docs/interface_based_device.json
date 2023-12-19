@@ -2,19 +2,19 @@
   "openapi": "3.0.0",
   "tags": [],
   "paths": {
-    "/vlan/interface_based/config/{id}/devices": {
+    "/interface_based_vlan/{id}/devices/config": {
       "get": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "GET Interface Based Devices",
+        "summary": "Returns Interface Based VLAN Q-in-Q Devices",
         "description": "",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBaseDeviMulti"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -31,12 +31,15 @@
       },
       "put": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "UPDATE Interface Based Devices",
+        "summary": "Updates Interface Based VLAN Q-in-Q Devices",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBaseDeviMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -54,7 +57,7 @@
           }
         ],
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -75,15 +78,15 @@
       },
       "post": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "CREATE Interface Based Devices",
+        "summary": "Creates Interface Based VLAN Q-in-Q Device",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200InteBaseDevi"
           },
-          "201": {
-            "$ref": "#/components/responses/201response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -101,7 +104,7 @@
           }
         ],
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -118,15 +121,15 @@
       },
       "delete": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "DELETE Interface Based Devices",
+        "summary": "Deletes Interface Based VLAN Q-in-Q Devices",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted_multi"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -141,7 +144,7 @@
           }
         ],
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -168,7 +171,8 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of Interface Based VLAN"
         }
       ],
       "x-web": {
@@ -180,20 +184,22 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Interface Based VLAN",
+        "hidden_documentation_page": true
       }
     },
-    "/vlan/interface_based/config/{id}/devices/{id_device}": {
+    "/interface_based_vlan/{id}/devices/config/{device_id}": {
       "get": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "GET Interface Based Devices",
+        "summary": "Returns Interface Based VLAN Q-in-Q Device",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBaseDevi"
           },
-          "422": {
+          "404": {
             "$ref": "#/components/responses/422response"
           }
         },
@@ -220,12 +226,15 @@
       },
       "put": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "UPDATE Interface Based Devices",
+        "summary": "Updates Interface Based VLAN Q-in-Q Device",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200InteBaseDevi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -252,7 +261,7 @@
           }
         ],
         "requestBody": {
-          "description": "Parameter section",
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -269,15 +278,15 @@
       },
       "delete": {
         "tags": [
-          "Interface Based Devices"
+          "Q-in-Q Devices"
         ],
-        "summary": "DELETE Interface Based Devices",
+        "summary": "Deletes Interface Based VLAN Q-in-Q Device",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200response"
+            "$ref": "#/components/responses/200deleted"
           },
-          "422": {
-            "$ref": "#/components/responses/422response"
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "parameters": [
@@ -308,15 +317,17 @@
           },
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of Interface Based VLAN"
         },
         {
           "schema": {
             "type": "string"
           },
-          "name": "id_device",
+          "name": "device_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The ID of Interface Based VLAN Q-in-Q Device"
         }
       ],
       "x-web": {
@@ -328,7 +339,9 @@
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "name": "Interface Based VLAN",
+        "hidden_documentation_page": true
       }
     }
   },
@@ -456,7 +469,9 @@
               "input-type": "input"
             }
           }
-        }
+        },
+        "description": "",
+        "title": ""
       }
     }
   }

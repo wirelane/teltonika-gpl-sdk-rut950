@@ -5,13 +5,130 @@
       "name": "NTRIP"
     }
   ],
-  "info": {
-    "title": "NTRIP",
-    "version": "1.0",
-    "contact": {},
-    "description": "NTRIP documentation"
-  },
   "paths": {
+    "/ntrip/config": {
+      "get": {
+        "tags": [
+          "NTRIP"
+        ],
+        "summary": "Returns all NTRIP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NtripMulti"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "NTRIP"
+        ],
+        "summary": "Creates NTRIP configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200Ntrip"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/ntrip_single_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NTRIP"
+        ],
+        "summary": "Updates specified NTRIP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NtripMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configuration objects",
+                    "items": {
+                      "$ref": "#/components/schemas/ntrip_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NTRIP"
+        ],
+        "summary": "Deletes specified NTRIP configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter configuration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of configuration objects",
+                    "items": {
+                      "type": "string",
+                      "description": "configuration id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "name": "NTRIP",
+        "menu": [
+          "Services",
+          "NTRIP",
+          "NTRIP"
+        ],
+        "hw_tags": {
+          "serial_usb": true
+        }
+      }
+    },
     "/ntrip/config/{id}": {
       "get": {
         "tags": [
@@ -66,7 +183,7 @@
         "summary": "Deletes the specified NTRIP configuration",
         "responses": {
           "200": {
-            "$ref": "#/components/responses/200Ntrip"
+            "$ref": "#/components/responses/200deleted"
           },
           "404": {
             "$ref": "#/components/responses/404response"
@@ -85,135 +202,14 @@
         }
       ],
       "x-web": {
+        "name": "NTRIP",
         "menu": [
           "Services",
           "NTRIP",
           "NTRIP"
         ],
         "hw_tags": {
-          "serial": true
-        }
-      }
-    },
-    "/ntrip/config": {
-      "get": {
-        "tags": [
-          "NTRIP"
-        ],
-        "summary": "Returns all NTRIP configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200NtripMulti"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "NTRIP"
-        ],
-        "summary": "Creates NTRIP configuration",
-        "responses": {
-          "201": {
-            "$ref": "#/components/responses/200Ntrip"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter configuration",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/ntrip_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "NTRIP"
-        ],
-        "summary": "Updates specified NTRIP configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200NtripMulti"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter configuration",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of configuration objects",
-                    "items": {
-                      "$ref": "#/components/schemas/ntrip_options"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "NTRIP"
-        ],
-        "summary": "Deletes specified NTRIP configurations",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Ntrip"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "requestBody": {
-          "description": "Parameter configuration",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "description": "Array of configuration objects",
-                    "items": {
-                      "type": "string",
-                      "description": "configuration id"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "NTRIP",
-          "NTRIP"
-        ],
-        "hw_tags": {
-          "serial": true
+          "serial_usb": true
         }
       }
     }

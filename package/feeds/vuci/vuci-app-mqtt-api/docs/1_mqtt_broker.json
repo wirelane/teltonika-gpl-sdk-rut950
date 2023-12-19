@@ -1,0 +1,1100 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MQTT",
+    "description": "MQTT API documentation",
+    "version": "3.0",
+    "contact": {}
+  },
+  "servers": [],
+  "paths": {
+    "/mqtt/broker/config": {
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "MQTT"
+      },
+      "get": {
+        "summary": "Returns MQTT Broker configuration in an array",
+        "tags": [
+          "Broker"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_multi"
+          }
+        },
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates MQTT Broker configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_multi"
+              }
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "Broker"
+        ]
+      }
+    },
+    "/mqtt/broker/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "x-web": {
+        "menu": [
+          "Services",
+          "MQTT",
+          "Broker"
+        ],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "MQTT"
+      },
+      "get": {
+        "summary": "Returns MQTT Broker configuration",
+        "tags": [
+          "Broker"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates MQTT Broker configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_mqtt_broker_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_mqtt_broker_one"
+              }
+            }
+          }
+        },
+        "tags": [
+          "Broker"
+        ]
+      },
+      "post": {
+        "summary": "Uploads MQTT broker files",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "success": true,
+                      "data": {
+                        "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Uploaded file path."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": [
+          "Broker"
+        ],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "enum": [
+                      "cafile",
+                      "certfile",
+                      "keyfile",
+                      "acl_file_path",
+                      "password_file",
+                      "custom_section_id"
+                    ]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "option",
+                  "file"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_mqtt_broker_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Configuration ID"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/mqtt_broker_resp"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_mqtt_broker_multi": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "",
+              "type": "object",
+              "x-examples": {
+                "example-1": {
+                  "success": true,
+                  "data": [
+                    {
+                      "id": ""
+                    }
+                  ]
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Configuration ID"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      },
+                      {
+                        "$ref": "#/components/schemas/mqtt_broker_resp"
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "mqtt_broker": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Select to enable MQTT",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "MQTT broker",
+              "input-type": "switch",
+              "group": "General"
+            }
+          },
+          "custom_enabled": {
+            "type": "string",
+            "description": "Enables reading of custom configuration",
+            "format": "is_bool",
+            "default": "0",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Custom configuration",
+              "input-type": "switch"
+            }
+          },
+          "custom_section_id": {
+            "type": "string",
+            "description": "Upload configuration file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Custom Configuration file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "custom_enabled": "1"
+                }
+              ]
+            }
+          },
+          "local_port": {
+            "type": "array",
+            "description": "Specify local port which the MQTT will be listen to",
+            "default": [
+              "1883"
+            ],
+            "items": {
+              "type": "string",
+              "format": "port"
+            },
+            "x-web": {
+              "pretty": "Local port",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Set to enable remote access",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Enable remote access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "use_tls_ssl": {
+            "type": "string",
+            "description": "Enable to use TLS/SSL for connection",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Use TLS/SSL",
+              "input-type": "switch",
+              "group": "Security",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "description": "Select the type of TLS encryption",
+            "x-web": {
+              "pretty": "TLS type",
+              "input-type": "select",
+              "group": "Security",
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              },
+              "depends": [
+                {
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "require_certificate": {
+            "type": "string",
+            "description": "Demand client certificate and key from the client.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "1",
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Require certificate",
+              "input-type": "switch",
+              "group": "Security",
+              "depends": [
+                {
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "device_sec_files": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Choose this option if you want to select certificate files from device."
+          },
+          "ca_file": {
+            "type": "string",
+            "description": "Upload CA file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "cert_file": {
+            "type": "string",
+            "description": "Upload certificate file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0",
+                  "require_certificate": "1"
+                }
+              ]
+            }
+          },
+          "key_file": {
+            "type": "string",
+            "description": "Upload key file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0",
+                  "require_certificate": "1"
+                }
+              ]
+            }
+          },
+          "tls_version": {
+            "type": "string",
+            "enum": [
+              "tlsv1",
+              "tlsv1.1",
+              "tlsv1.2",
+              "tlsv1.3",
+              "all"
+            ],
+            "description": "Used TLS version",
+            "default": "all",
+            "x-web": {
+              "pretty": "TLS version",
+              "input-type": "select",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ],
+              "enum-pretty": {
+                "tlsv1": "tlsv1",
+                "tlsv1.1": "tlsv1.1",
+                "tlsv1.2": "tlsv1.2",
+                "tlsv1.3": "tlsv1.3",
+                "all": "Support all"
+              }
+            }
+          },
+          "psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading 0x",
+            "format": "hexstring",
+            "maxLength": 128,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "psk",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "identity": {
+            "type": "string",
+            "description": "Specify the Identity",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "psk",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "acl_file_path": {
+            "type": "string",
+            "description": "Select ACL file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "ACL file",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "password_file": {
+            "type": "string",
+            "description": "Upload passwords/users file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Password file",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "persistence": {
+            "type": "string",
+            "description": "If set, connection, subscription and message data will be written to the disk",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Persistence",
+              "input-type": "switch",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "anonymous_access": {
+            "type": "string",
+            "description": "Allow anonymous access",
+            "default": "0",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Allow anonymous",
+              "input-type": "switch",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "max_queued_messages": {
+            "type": "string",
+            "description": "The maximum number of QoS 1 and 2 messages to hold in a queue per client above those that are currently in-flight. Set to 0 for no maximum (not recommended).",
+            "format": "irange(0, 65535)",
+            "default": "1000",
+            "x-web": {
+              "pretty": "Max queued messages",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "max_packet_size": {
+            "type": "string",
+            "description": "Maximum size of packet before it will be dropped",
+            "default": "1048576",
+            "format": "irange(1, 268435456)",
+            "x-web": {
+              "pretty": "Maximum packet size",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "req_body_mqtt_broker_one": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/mqtt_broker"
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "req_body_mqtt_broker_multi": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Configuration ID"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "$ref": "#/components/schemas/mqtt_broker"
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "mqtt_broker_resp": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Select to enable MQTT",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "MQTT broker",
+              "input-type": "switch",
+              "group": "General"
+            }
+          },
+          "custom_enabled": {
+            "type": "string",
+            "description": "Enables reading of custom configuration",
+            "format": "is_bool",
+            "default": "0",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Custom configuration",
+              "input-type": "switch"
+            }
+          },
+          "custom_section_id": {
+            "type": "string",
+            "description": "Upload configuration file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Custom Configuration file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "custom_enabled": "1"
+                }
+              ]
+            }
+          },
+          "local_port": {
+            "type": "array",
+            "description": "Specify local port which the MQTT will be listen to",
+            "default": [
+              "1883"
+            ],
+            "items": {
+              "type": "string",
+              "format": "port"
+            },
+            "x-web": {
+              "pretty": "Local port",
+              "input-type": "input",
+              "group": "General",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "allow_ra": {
+            "type": "string",
+            "description": "Set to enable remote access",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Enable remote access",
+              "input-type": "switch",
+              "group": "General",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "use_tls_ssl": {
+            "type": "string",
+            "description": "Enable to use TLS/SSL for connection",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Use TLS/SSL",
+              "input-type": "switch",
+              "group": "Security",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": [
+              "cert",
+              "psk"
+            ],
+            "description": "Select the type of TLS encryption",
+            "x-web": {
+              "pretty": "TLS type",
+              "input-type": "select",
+              "group": "Security",
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
+              },
+              "depends": [
+                {
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "require_certificate": {
+            "type": "string",
+            "description": "Demand client certificate and key from the client.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "default": "1",
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Require certificate",
+              "input-type": "switch",
+              "group": "Security",
+              "depends": [
+                {
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "device_sec_files": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "description": "Choose this option if you want to select certificate files from device."
+          },
+          "ca_file": {
+            "type": "string",
+            "description": "Upload CA file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "cert_file": {
+            "type": "string",
+            "description": "Upload certificate file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0",
+                  "require_certificate": "1"
+                }
+              ]
+            }
+          },
+          "key_file": {
+            "type": "string",
+            "description": "Upload key file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0",
+                  "require_certificate": "1"
+                }
+              ]
+            }
+          },
+          "tls_version": {
+            "type": "string",
+            "enum": [
+              "tlsv1",
+              "tlsv1.1",
+              "tlsv1.2",
+              "tlsv1.3",
+              "all"
+            ],
+            "description": "Used TLS version",
+            "default": "all",
+            "x-web": {
+              "pretty": "TLS version",
+              "input-type": "select",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "cert",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ],
+              "enum-pretty": {
+                "tlsv1": "tlsv1",
+                "tlsv1.1": "tlsv1.1",
+                "tlsv1.2": "tlsv1.2",
+                "tlsv1.3": "tlsv1.3",
+                "all": "Support all"
+              }
+            }
+          },
+          "psk": {
+            "type": "string",
+            "description": "Indicates if 'psk' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": [
+              "unset",
+              "set"
+            ]
+          },
+          "identity": {
+            "type": "string",
+            "description": "Specify the Identity",
+            "format": "uciname",
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "group": "Security",
+              "depends": [
+                {
+                  "tls_type": "psk",
+                  "use_tls_ssl": "1",
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "acl_file_path": {
+            "type": "string",
+            "description": "Select ACL file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "ACL file",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "password_file": {
+            "type": "string",
+            "description": "Upload passwords/users file",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Password file",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "persistence": {
+            "type": "string",
+            "description": "If set, connection, subscription and message data will be written to the disk",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Persistence",
+              "input-type": "switch",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "anonymous_access": {
+            "type": "string",
+            "description": "Allow anonymous access",
+            "default": "0",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "format": "is_bool",
+            "x-web": {
+              "pretty": "Allow anonymous",
+              "input-type": "switch",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "max_queued_messages": {
+            "type": "string",
+            "description": "The maximum number of QoS 1 and 2 messages to hold in a queue per client above those that are currently in-flight. Set to 0 for no maximum (not recommended).",
+            "format": "irange(0, 65535)",
+            "default": "1000",
+            "x-web": {
+              "pretty": "Max queued messages",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          },
+          "max_packet_size": {
+            "type": "string",
+            "description": "Maximum size of packet before it will be dropped",
+            "default": "1048576",
+            "format": "irange(1, 268435456)",
+            "x-web": {
+              "pretty": "Maximum packet size",
+              "input-type": "input",
+              "group": "Miscellaneous",
+              "depends": [
+                {
+                  "custom_enabled": "0"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

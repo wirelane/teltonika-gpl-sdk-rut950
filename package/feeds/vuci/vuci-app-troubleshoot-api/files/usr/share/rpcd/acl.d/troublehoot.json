@@ -6,9 +6,9 @@
         "/logging/*",
         "/troubleshoot/*",
         "/diagnostics/*",
-        "/usb_tools/general/mounts/*",
+        "/usb_tools/mount/options/*",
         "/interfaces/status/*",
-        "/mobile/modems/*"
+        "/modems/*"
       ]
     },
     "write": {
@@ -16,7 +16,7 @@
         "/logging/*",
         "/troubleshoot/*",
         "/diagnostics/*",
-        "/mobile/modems/*"
+        "/modems/*"
       ]
     }
   }

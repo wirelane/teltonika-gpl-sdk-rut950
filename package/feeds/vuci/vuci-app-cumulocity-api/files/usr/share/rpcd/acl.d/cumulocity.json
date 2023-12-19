@@ -3,12 +3,12 @@
 		"description": "cumulocity configuration",
 		"read": {
 			"api": [
-				"/cloud_solutions/cumulocity/*"
+				"/cumulocity/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/cloud_solutions/cumulocity/*"
+				"/cumulocity/*"
 			]
 		}
 	},
@@ -16,12 +16,12 @@
 		"description": "cloud of things configuration",
 		"read": {
 			"api": [
-				"/cloud_solutions/cot/*"
+				"/cloud_of_things/*"
 			]
 		},
 		"write": {
 			"api": [
-				"/cloud_solutions/cot/*"
+				"/cloud_of_things/*"
 			]
 		}
 	}

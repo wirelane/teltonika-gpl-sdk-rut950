@@ -1,186 +1,20 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/tinc/config/{tinc_id}/hosts/{tinc_host_id}": {
+    "/tinc/{id}/hosts/config": {
       "get": {
-        "tags": [
-          "Tinc Host"
-        ],
-        "summary": "Returns the specified Tinc VPN Host configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200TincHost"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          },
-          {
-            "name": "tinc_host_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Host Configuration identifier (ID)"
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "Tinc Host"
-        ],
-        "summary": "Updates the specified Tinc VPN Host configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200TincHost"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          },
-          {
-            "name": "tinc_host_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Host Configuration identifier (ID)"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/tinc_host_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Tinc Host"
-        ],
-        "summary": "Deletes the specified Tinc VPN Host configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          },
-          {
-            "name": "tinc_host_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Host Configuration identifier (ID)"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "name": "tinc_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Tinc Configuration identifier (ID)"
-        },
-        {
-          "name": "tinc_host_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "Tinc Host Configuration identifier (ID)"
-        }
-      ],
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Tinc"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
-    "/tinc/config/{tinc_id}/hosts": {
-      "get": {
-        "tags": [
-          "Tinc Host"
-        ],
         "summary": "Returns all Tinc VPN Host configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200TincHostMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ]
+        "tags": ["Host"]
       },
       "post": {
-        "tags": [
-          "Tinc Host"
-        ],
         "summary": "Creates Tinc VPN Host configuration",
         "responses": {
           "201": {
@@ -190,17 +24,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -215,12 +38,10 @@
               }
             }
           }
-        }
+        },
+        "tags": ["Host"]
       },
       "put": {
-        "tags": [
-          "Tinc Host"
-        ],
         "summary": "Updates specified Tinc VPN Hosts configurations",
         "responses": {
           "200": {
@@ -233,17 +54,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -262,12 +72,11 @@
               }
             }
           }
-        }
+        },
+        "tags": ["Host"],
+        "operationId": ""
       },
       "delete": {
-        "tags": [
-          "Tinc Host"
-        ],
         "summary": "Deletes specified Tinc VPN Host configurations",
         "responses": {
           "200": {
@@ -277,17 +86,6 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "parameters": [
-          {
-            "name": "tinc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Tinc Configuration identifier (ID)"
-          }
-        ],
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -307,26 +105,110 @@
               }
             }
           }
-        }
+        },
+        "tags": ["Host"],
+        "description": "",
+        "operationId": ""
       },
       "parameters": [
         {
-          "name": "tinc_id",
-          "in": "path",
-          "required": true,
           "schema": {
             "type": "string"
           },
+          "name": "id",
+          "in": "path",
+          "required": true,
           "description": "Tinc Configuration identifier (ID)"
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Tinc"
-        ],
+        "menu": ["Services", "VPN", "Tinc"],
         "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/tinc/{id}/hosts/config/{hosts_id}": {
+      "get": {
+        "summary": "Returns the specified Tinc VPN Host configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TincHost"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Host"]
+      },
+      "put": {
+        "summary": "Updates the specified Tinc VPN Host configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200TincHost"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/tinc_host_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Host"],
+        "description": ""
+      },
+      "delete": {
+        "summary": "Deletes the specified Tinc VPN Host configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Host"]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Tinc Configuration identifier (ID)"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "hosts_id",
+          "in": "path",
+          "required": true,
+          "description": "Tinc Host Configuration identifier (ID)"
+        }
+      ],
+      "x-web": {
+        "menu": ["Services", "VPN", "Tinc"],
+        "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
         }
       }
@@ -346,7 +228,7 @@
                   "description": "Operation status"
                 },
                 "data": {
-                  "$ref": "#/components/schemas/tinc_host_options"
+                  "$ref": "#/components/schemas/tinc_host_option_net"
                 }
               }
             }
@@ -368,7 +250,7 @@
                   "type": "array",
                   "description": "Array of section objects",
                   "items": {
-                    "$ref": "#/components/schemas/tinc_host_options"
+                    "$ref": "#/components/schemas/tinc_host_option_net"
                   }
                 }
               }
@@ -393,9 +275,7 @@
                 "description": "Tinc Host Configuration identifier (ID)."
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           },
           {
             "$ref": "#/components/schemas/tinc_host_single_options"
@@ -413,10 +293,7 @@
             "type": "string",
             "description": "Enables/disables Tinc Host instance.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "address": {
             "x-web": {
@@ -424,11 +301,11 @@
               "input-type": "input"
             },
             "type": "array",
-            "items": {
-                "type": "string"
-            },
             "description": "It must resolve to the external IP address where the host can be reached, not the one that is internal to the VPN.",
-            "format": "host"
+            "format": "host",
+            "items": {
+              "type": "string"
+            }
           },
           "subnet": {
             "x-web": {
@@ -436,11 +313,11 @@
               "input-type": "input"
             },
             "type": "array",
-            "items": {
-                "type": "string"
-            },
             "description": "The subnet which this tinc daemon will serve. Multiple subnet lines can be specified for each Daemon.",
-            "format": "ipmask"
+            "format": "ipmask",
+            "items": {
+              "type": "string"
+            }
           },
           "publickeyfile": {
             "x-web": {
@@ -450,9 +327,47 @@
             "type": "string",
             "format": "binary",
             "description": "RSA public key generated by host."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of host."
           }
         }
+      },
+      "tinc_host_option_net": {
+        "title": "tinc_host_option_net",
+        "x-stoplight": {
+          "id": "zfvx1bnr5dhd7"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Tinc Host Configuration identifier (ID)."
+              },
+              "net": {
+                "type": "string",
+                "description": "Instance name to which the host belongs."
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/tinc_host_single_options"
+          }
+        ]
       }
     }
-  }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Tinc host",
+    "description": "Tinc host api documentation"
+  },
+  "tags": [
+    {
+      "name": "Host"
+    }
+  ]
 }

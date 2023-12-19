@@ -1,128 +1,17 @@
 {
   "openapi": "3.0.0",
-  "tags": [],
   "paths": {
-    "/zerotier/config/{zerotier_id}": {
-      "put": {
-        "tags": [
-          "Zerotier"
-        ],
-        "summary": "Updates the specified Zerotier configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Zero"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "zerotier_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Zerotier Configuration identifier (ID)"
-          }
-        ],
-        "requestBody": {
-          "description": "Parameter section",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "$ref": "#/components/schemas/zerotier_single_options"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Zerotier"
-        ],
-        "summary": "Returns the specified Zerotier configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200Zero"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "zerotier_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Zerotier Configuration identifier (ID)"
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "Zerotier"
-        ],
-        "summary": "Deletes the specified Zerotier configuration",
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/200deleted"
-          },
-          "404": {
-            "$ref": "#/components/responses/404response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "zerotier_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Zerotier Configuration identifier (ID)"
-          }
-        ]
-      },
-      "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Zerotier"
-        ],
-        "hw_tags": {
-          "is_access_point": false
-        }
-      }
-    },
     "/zerotier/config": {
       "get": {
-        "tags": [
-          "Zerotier"
-        ],
         "summary": "Returns all Zerotier configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200ZeroMulti"
           }
-        }
+        },
+        "tags": ["General"]
       },
       "post": {
-        "tags": [
-          "Zerotier"
-        ],
         "summary": "Creates Zerotier configuration",
         "responses": {
           "201": {
@@ -146,12 +35,10 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "delete": {
-        "tags": [
-          "Zerotier"
-        ],
         "summary": "Deletes specified Zerotier configurations",
         "responses": {
           "200": {
@@ -180,12 +67,10 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "put": {
-        "tags": [
-          "Zerotier"
-        ],
         "summary": "Updates specified Zerotier configurations",
         "responses": {
           "200": {
@@ -216,18 +101,92 @@
               }
             }
           }
-        }
+        },
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "VPN",
-          "Zerotier"
-        ],
+        "menu": ["Services", "VPN", "ZeroTier"],
         "hw_tags": {
+          "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "name": "ZeroTier"
       }
+    },
+    "/zerotier/config/{id}": {
+      "put": {
+        "summary": "Updates the specified Zerotier configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Zero"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/zerotier_single_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["General"]
+      },
+      "get": {
+        "summary": "Returns the specified Zerotier configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200Zero"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["General"]
+      },
+      "delete": {
+        "summary": "Deletes the specified Zerotier configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["General"]
+      },
+      "x-web": {
+        "menu": ["Services", "VPN", "ZeroTier"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "ZeroTier"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Zerotier Configuration identifier (ID)"
+        }
+      ]
     }
   },
   "components": {
@@ -319,7 +278,7 @@
                   "pretty": "Configuration name",
                   "input-type": "input"
                 },
-                "required": [ "id" ],
+                "required": ["id"],
                 "type": "string",
                 "description": "Zerotier Configuration identifier (ID)."
               }
@@ -331,5 +290,15 @@
         ]
       }
     }
-  }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "ZeroTier",
+    "description": "ZeroTier api documentation"
+  },
+  "tags": [
+    {
+      "name": "General"
+    }
+  ]
 }

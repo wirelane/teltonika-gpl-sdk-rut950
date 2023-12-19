@@ -6,33 +6,34 @@
     "description": "Ports configuration documentation"
   },
   "servers": [],
-  "tags": [
-    {
-      "name": "Ports"
-    }
-  ],
   "paths": {
     "/ports_settings/config": {
       "get": {
-        "summary": "Returns ports configurations",
+        "summary": "Returns port configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ports_settings_multi"
           }
         },
         "operationId": "get-network-ports_settings",
-        "tags": ["Ports"]
+        "tags": ["General"]
       },
       "parameters": [],
       "put": {
-        "summary": "Updates ports configurations",
+        "summary": "Updates port configurations",
         "operationId": "put-network-ports_settings-config",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ports_settings_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "tags": ["Ports"],
+        "tags": ["General"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -52,7 +53,8 @@
                           "type": "object",
                           "properties": {
                             "id": {
-                              "type": "string"
+                              "type": "string",
+                              "description": "The ID of the port configuration"
                             }
                           }
                         },
@@ -69,6 +71,7 @@
         }
       },
       "x-web": {
+        "name": "Ports Settings",
         "menu": ["Network", "Ports", "Ports Settings"],
         "hw_tags": {
           "is_access_point": false,
@@ -85,28 +88,37 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "Port configuration ID"
+          "description": "The ID of the port configuration"
         }
       ],
       "get": {
-        "summary": "Returns specified port settings configuration",
-        "tags": ["Ports"],
+        "summary": "Returns port configuration",
+        "tags": ["General"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ports_settings_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "operationId": "get-network-ports_settings-config-id"
       },
       "put": {
-        "summary": "Updates port settings configuration",
+        "summary": "Updates port configuration",
         "operationId": "put-network-ports_settings-config-id",
         "responses": {
           "200": {
             "$ref": "#/components/responses/ports_settings_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "tags": ["Ports"],
+        "tags": ["General"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -128,6 +140,7 @@
         }
       },
       "x-web": {
+        "name": "Ports Settings",
         "menu": ["Network", "Ports", "Ports Settings"],
         "hw_tags": {
           "is_access_point": false,
@@ -137,8 +150,8 @@
     },
     "/ports_settings/status": {
       "get": {
-        "summary": "Gets ports status",
-        "tags": ["Ports"],
+        "summary": "Returns port status",
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -152,7 +165,10 @@
                       "description": "Operation status"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/ports_status"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ports_status"
+                      }
                     }
                   }
                 }
@@ -160,10 +176,11 @@
             }
           }
         },
-        "description": "Gets ports status"
+        "description": "Returns ports status"
       },
       "parameters": [],
       "x-web": {
+        "name": "Ports Settings",
         "menu": ["Network", "Ports", "Ports Settings"],
         "hw_tags": {
           "is_access_point": false,
@@ -188,7 +205,8 @@
               }
             },
             "type": "string",
-            "enum": ["1", "0"]
+            "enum": ["1", "0"],
+            "description": "Toggle port on or off."
           },
           "eee_enable": {
             "x-web": {
@@ -241,7 +259,8 @@
               }
             },
             "type": "string",
-            "enum": ["1", "0"]
+            "enum": ["1", "0"],
+            "description": "Toggle port on or off."
           },
           "mtu": {
             "x-web": {
@@ -254,7 +273,8 @@
               }
             },
             "type": "string",
-            "format": "irange(68,9200)"
+            "format": "irange(68,9200)",
+            "mtu": "Sets the maximum transmission unit (MTU) size. It is the largest size of a protocol data unit (PDU) that can be transmitted in a single network layer transaction."
           },
           "autoneg": {
             "x-web": {
@@ -270,7 +290,8 @@
               }
             },
             "type": "string",
-            "enum": ["on", "off"]
+            "enum": ["on", "off"],
+            "description": "Auto negotiation allows the device to communicate with devices on the other end of the link to determine the optimal duplex mode and speed for the port."
           },
           "speed": {
             "x-web": {
@@ -300,7 +321,8 @@
               }
             },
             "type": "string",
-            "enum": ["10", "100"]
+            "enum": ["10", "100"],
+            "description": "A measure of how fast ports are able to transmit and receive data."
           },
           "duplex": {
             "x-web": {
@@ -318,42 +340,88 @@
               }
             },
             "type": "string",
-            "enum": ["full", "half"]
+            "enum": ["full", "half"],
+            "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals. Full - sends and receives simultaneously. Half - sends or receives one path at a time."
           },
           "advert": {
             "x-web": {
-              "input-type": "select",
+              "input-type": "multiselect",
               "pretty": "Advertisement",
               "group": "All Ports",
-              "depends": [
-                {
-                  "autoneg": "on"
-                }
-              ],
               "enum-pretty": {
-                "0": "Auto",
-                "1": "10M-Half",
-                "2": "10M-Full",
-                "3": "10M-Half 10M-Full",
-                "4": "100M-Half",
-                "5": "10M-Half 100M-Half",
-                "6": "10M-Full 100M-Half",
-                "7": "10M-Half 10M-Full 100M-Half",
-                "8": "100M-Full",
-                "9": "10M-Half 100M-Full",
-                "10": "10M-Full 100M-Full",
-                "11": "10M-Half 10M-Full 100M-Full",
-                "12": "100M-Half 100M-Full",
-                "13": "10M-Half 100M-Half 100M-Full",
-                "14": "10M-Full 100M-Half 100M-Full",
-                "15": "10M-Half 10M-Full 100M-Half 100M-Full"
+                "10mh": "10M-Half",
+                "10mf": "10M-Full",
+                "100mh": "100M-Half",
+                "100mf": "100M-Full",
+                "1000mf": "1000M-Full",
+                "2500mf": "2500M-Full"
               },
-              "hw_tags": {
-                "is_switch": false
-              }
+              "enum-depends": [
+                {
+                  "depends": [
+                    {
+                      "autoneg": "on"
+                    }
+                  ],
+                  "hw_tags": {
+                    "gigabit_port": false,
+                    "2_5_gigabit_port": false,
+                    "is_switch": false
+                  },
+                  "values": [
+                    "10mh",
+                    "10mf",
+                    "100mh",
+                    "100mf"
+                  ]
+                },
+                {
+                  "depends": [
+                    {
+                      "autoneg": "on"
+                    }
+                  ],
+                  "hw_tags": {
+                    "gigabit_port": true,
+                    "2_5_gigabit_port": false,
+                    "is_switch": false
+                  },
+                  "values": [
+                    "10mh",
+                    "10mf",
+                    "100mh",
+                    "100mf",
+                    "1000mf"
+                  ]
+                },
+                {
+                  "depends": [
+                    {
+                      "autoneg": "on"
+                    }
+                  ],
+                  "hw_tags": {
+                    "gigabit_port": true,
+                    "2_5_gigabit_port": true,
+                    "is_switch": false
+                  },
+                  "values": [
+                    "10mh",
+                    "10mf",
+                    "100mh",
+                    "100mf",
+                    "1000mf",
+                    "2500mf"
+                  ]
+                }
+              ]
             },
-            "type": "string",
-            "enum": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "enum": ["10mh", "10mf", "100mh", "100mf", "1000mf", "2500mf"],
+            "description": "Advertises preferred duplex mode and speed for negotiation with other devices."
           },
           "qos_pri_group": {
             "x-web": {
@@ -460,169 +528,161 @@
         "title": "ports_status",
         "type": "object",
         "properties": {
-          "data": {
+          "name": {
+            "type": "string",
+            "description": "Name of the port.",
+            "x-web": {
+              "pretty": "Port",
+              "hw_tags": {
+                "is_switch": false
+              }
+            }
+          },
+          "num": {
+            "type": "number",
+            "x-web": {
+              "pretty": "Num",
+              "hw_tags": {
+                "is_switch": false
+              }
+            }
+          },
+          "position": {
+            "type": "number",
+            "description": "Physical port position.",
+            "x-web": {
+              "pretty": "Position",
+              "hw_tags": {
+                "is_switch": false
+              }
+            }
+          },
+          "state": {
+            "type": "string",
+            "description": "Port link.",
+            "enum": ["up", "down"],
+            "x-web": {
+              "pretty": "Link",
+              "hw_tags": {
+                "is_switch": false
+              }
+            }
+          },
+          "speed": {
+            "type": "number",
+            "description": "Link speed."
+          },
+          "duplex": {
+            "type": "string",
+            "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals."
+          },
+          "topology": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Name of the port.",
-                  "x-web": {
-                    "pretty": "Port",
-                    "hw_tags": {
-                      "is_switch": false
-                    }
-                  }
+                "MAC": {
+                  "type": "string"
                 },
-                "num": {
-                  "type": "number",
-                  "x-web": {
-                    "pretty": "Num",
-                    "hw_tags": {
-                      "is_switch": false
-                    }
-                  }
-                },
-                "position": {
-                  "type": "number",
-                  "description": "Physical port position.",
-                  "x-web": {
-                    "pretty": "Position",
-                    "hw_tags": {
-                      "is_switch": false
-                    }
-                  }
-                },
-                "state": {
-                  "type": "string",
-                  "description": "Port link.",
-                  "enum": ["up", "down"],
-                  "x-web": {
-                    "pretty": "Link",
-                    "hw_tags": {
-                      "is_switch": false
-                    }
-                  }
-                },
-                "speed": {
-                  "type": "number",
-                  "description": "Link speed."
-                },
-                "duplex": {
-                  "type": "string",
-                  "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals."
-                },
-                "topology": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "MAC": {
-                        "type": "string"
-                      },
-                      "VID": {
-                        "type": "number"
-                      }
-                    }
-                  },
-                  "x-web": {
-                    "pretty": "Topology",
-                    "hw_tags": {
-                      "is_switch": false
-                    }
-                  }
-                },
-                "id": {
-                  "type": "string",
-                  "description": "Port ID.",
-                  "x-web": {
-                    "pretty": "Port",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "rx_bytes": {
-                  "type": "string",
-                  "description": "Received data.",
-                  "x-web": {
-                    "pretty": "TX sum",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "tx_bytes": {
-                  "type": "string",
-                  "description": "Transmitted data.",
-                  "x-web": {
-                    "pretty": "RX sum",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "rx_rate": {
-                  "type": "string",
-                  "description": "Received data per second.",
-                  "x-web": {
-                    "pretty": "RX rate",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "tx_rate": {
-                  "type": "string",
-                  "description": "Transmitted data per second.",
-                  "x-web": {
-                    "pretty": "TX rate",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "link": {
-                  "type": "string",
-                  "description": "Port link.",
-                  "x-web": {
-                    "pretty": "Status",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "budget": {
-                  "type": "string",
-                  "description": "PoE available power budget.",
-                  "x-web": {
-                    "pretty": "Budget",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "full_duplex": {
-                  "type": "string",
-                  "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals.",
-                  "x-web": {
-                    "pretty": "Duplex",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
-                },
-                "power": {
-                  "type": "string",
-                  "description": "PoE port power usage in watts.",
-                  "x-web": {
-                    "pretty": "Power",
-                    "hw_tags": {
-                      "is_switch": true
-                    }
-                  }
+                "VID": {
+                  "type": "number"
                 }
+              }
+            },
+            "x-web": {
+              "pretty": "Topology",
+              "hw_tags": {
+                "is_switch": false
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the port configuration",
+            "x-web": {
+              "pretty": "Port",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "rx_bytes": {
+            "type": "string",
+            "description": "Received data.",
+            "x-web": {
+              "pretty": "TX sum",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "tx_bytes": {
+            "type": "string",
+            "description": "Transmitted data.",
+            "x-web": {
+              "pretty": "RX sum",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "rx_rate": {
+            "type": "string",
+            "description": "Received data per second.",
+            "x-web": {
+              "pretty": "RX rate",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "tx_rate": {
+            "type": "string",
+            "description": "Transmitted data per second.",
+            "x-web": {
+              "pretty": "TX rate",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "link": {
+            "type": "string",
+            "description": "Port link.",
+            "x-web": {
+              "pretty": "Status",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "budget": {
+            "type": "string",
+            "description": "PoE available power budget.",
+            "x-web": {
+              "pretty": "Budget",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "full_duplex": {
+            "type": "string",
+            "description": "Bidirectional communication system that allows both end nodes to send and receive communication data or signals.",
+            "x-web": {
+              "pretty": "Duplex",
+              "hw_tags": {
+                "is_switch": true
+              }
+            }
+          },
+          "power": {
+            "type": "string",
+            "description": "PoE port power usage in watts.",
+            "x-web": {
+              "pretty": "Power",
+              "hw_tags": {
+                "is_switch": true
               }
             }
           }
@@ -653,7 +713,8 @@
                       "type": "object",
                       "properties": {
                         "id": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "The ID of the port configuration"
                         }
                       }
                     },
@@ -692,7 +753,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the port configuration"
                           }
                         }
                       },

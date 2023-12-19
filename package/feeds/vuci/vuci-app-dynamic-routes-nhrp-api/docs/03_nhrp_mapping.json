@@ -1,0 +1,373 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/nhrp/interface/{id}/mapping/config/": {
+      "get": {
+        "summary": "Returns all NHRP mapping configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMaMulti"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configures NHRP interface identifier"
+          }
+        ],
+        "tags": ["Mappings Configuration"]
+      },
+      "post": {
+        "summary": "Creates NHRP mapping configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200NhMa"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configures NHRP interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_mapping_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Mappings Configuration"]
+      },
+      "put": {
+        "summary": "Updates specified NHRP mapping configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMaMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configures NHRP interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/nhrp_mapping_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Mappings Configuration"]
+      },
+      "delete": {
+        "summary": "Deletes specified NHRP mapping configurations",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configures NHRP interface identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Mappings Configuration"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "NHRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        }
+      }
+    },
+    "/nhrp/interface/{id}/mapping/config/{mapping_id}": {
+      "get": {
+        "summary": "Returns specified NHRP mapping configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": ["Mappings Configuration"],
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates specified NHRP mapping configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200NhMa"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/nhrp_mapping_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Mappings Configuration"]
+      },
+      "delete": {
+        "summary": "Deletes specified NHRP mapping configuration",
+        "tags": ["Mappings Configuration"],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Configures NHRP interface identifier"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "mapping_id",
+          "in": "path",
+          "required": true,
+          "description": "Configures NHRP mapping identifier"
+        }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "NHRP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "NHRP"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200NhMa": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/components/schemas/nhrp_mapping_options_multi"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "200NhMaMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/nhrp_mapping_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "nhrp_mapping_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string"
+          },
+          "ip_addr": {
+            "x-web": {
+              "pretty": "IP Address",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "IP address of a station."
+          },
+          "nbma": {
+            "x-web": {
+              "pretty": "NBMA",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Non-Broadcast Multi-Access(NBMA) network IP address."
+          }
+        }
+      },
+      "nhrp_mapping_options_multi": {
+        "title": "nhrp_mapping_options_multi",
+        "x-stoplight": {
+          "id": "c805x90wxfs0m"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/nhrp_mapping_options"
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "NHRP Mappings Configuration",
+    "version": "1.0",
+    "description": "NHRP mappings configuration api documentation"
+  },
+  "tags": [
+    {
+      "name": "Mappings Configuration"
+    }
+  ]
+}

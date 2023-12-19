@@ -9,29 +9,35 @@
   "servers": [],
   "tags": [
     {
-      "name": "VRRP"
+      "name": "General"
+    },
+    {
+      "name": "Status"
     }
   ],
   "paths": {
     "/vrrp/config": {
       "get": {
-        "summary": "Get vrrp configurations",
-        "description": "Gets vrrp configurations",
+        "summary": "Returns VRRP configurations",
+        "description": "Returns VRRP configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200vrrpMulti"
           }
         },
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "get-services-vrrp-config"
       },
       "post": {
-        "summary": "Create vrrp configuration",
+        "summary": "Creates VRRP configurations",
         "responses": {
-          "200": {
+          "201": {
             "$ref": "#/components/responses/200vrrp"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Creates vrrp configuration",
@@ -45,15 +51,21 @@
           }
         },
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "post-services-vrrp-config"
       },
       "put": {
-        "summary": "Update vrrp configurations",
+        "summary": "Updates VRRP configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200vrrpMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Updates vrrp configurations",
@@ -67,12 +79,12 @@
           }
         },
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "put-services-vrrp-config"
       },
       "delete": {
-        "summary": "Delete vrrp configurations",
+        "summary": "Deletes VRRP configurations",
         "requestBody": {
           "description": "Parameter section",
           "content": {
@@ -95,55 +107,21 @@
         },
         "description": "Deletes vrrp configurations",
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "delete-services-vrrp-config",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "array",
-                      "uniqueItems": true,
-                      "minItems": 1,
-                      "items": {
-                        "required": [
-                          "id"
-                        ],
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "description": "VRRP configuration name",
-                            "x-web": {
-                              "pretty": "VRRP configuration name",
-                              "input-type": "input"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "data"
-                  ]
-                }
-              }
-            }
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "parameters": [],
       "x-web": {
+        "name": "VRRP",
         "menu": [
           "Network",
           "Failover",
@@ -157,23 +135,32 @@
     },
     "/vrrp/config/{id}": {
       "get": {
-        "summary": "Get vrrp configuration",
+        "summary": "Returns VRRP configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200vrrp"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": "Gets vrrp configuration",
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "get-services-vrrp-config-sid"
       },
       "put": {
-        "summary": "Update vrrp configuration",
+        "summary": "Updates VRRP configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200vrrp"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Updates vrrp configuration",
@@ -187,54 +174,23 @@
           }
         },
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "put-services-vrrp-config-sid"
       },
       "delete": {
-        "summary": "Delete vrrp configuration",
+        "summary": "Deletes VRRP configuration",
         "description": "Deletes vrrp configuration",
         "tags": [
-          "VRRP"
+          "General"
         ],
         "operationId": "delete-services-vrrp-config-sid",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Operation status"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "VRRP configuration name",
-                          "x-web": {
-                            "pretty": "VRRP configuration name",
-                            "input-type": "input"
-                          }
-                        }
-                      },
-                      "required": [
-                        "id"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "data"
-                  ]
-                }
-              }
-            }
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
@@ -246,10 +202,11 @@
           "name": "id",
           "in": "path",
           "required": true,
-          "description": "VRRP configuration name"
+          "description": "The ID of the VRRP configuration"
         }
       ],
       "x-web": {
+        "name": "VRRP",
         "menu": [
           "Network",
           "Failover",
@@ -264,7 +221,7 @@
     "/vrrp/status": {
       "parameters": [],
       "get": {
-        "summary": "Get vrrp status",
+        "summary": "Returns VRRP status",
         "operationId": "get-services-vrrp-actions-status",
         "responses": {
           "200": {
@@ -273,10 +230,11 @@
         },
         "description": "Gets vrrp status",
         "tags": [
-          "VRRP"
+          "General"
         ]
       },
       "x-web": {
+        "name": "VRRP",
         "menu": [
           "Network",
           "Failover",
@@ -493,7 +451,7 @@
                 "properties": {
                   "id": {
                     "type": "string",
-                    "description": "VRRP configuration name",
+                    "description": "The ID of the VRRP configuration",
                     "x-web": {
                       "pretty": "VRRP configuration name",
                       "input-type": "input"
@@ -530,6 +488,7 @@
                   "properties": {
                     "id": {
                       "type": "string",
+                      "description": "The ID of the VRRP configuration",
                       "x-web": {
                         "pretty": "VRRP configuration name",
                         "input-type": "input"
@@ -579,7 +538,8 @@
                       "type": "object",
                       "properties": {
                         "id": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "The ID of the VRRP configuration"
                         }
                       },
                       "required": [
@@ -632,7 +592,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "The ID of the VRRP configuration"
                           }
                         },
                         "required": [

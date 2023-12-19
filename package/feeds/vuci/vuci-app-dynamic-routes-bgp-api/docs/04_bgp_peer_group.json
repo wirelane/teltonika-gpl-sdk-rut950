@@ -1,0 +1,401 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/bgp/peer_group/config": {
+      "get": {
+        "summary": "Returns all BGP peer group configurations",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgPeGrMulti"
+          }
+        },
+        "tags": ["Peer Groups"]
+      },
+      "post": {
+        "summary": "Creates BGP peer group configuration",
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/200BgPeGrMulti"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_peer_group_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Peer Groups"],
+        "description": ""
+      },
+      "put": {
+        "summary": "Updates specified BGP peer group configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgPeGrMulti"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "$ref": "#/components/schemas/bgp_peer_group_options_multi"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Peer Groups"]
+      },
+      "delete": {
+        "summary": "Deletes specified BGP peer group configurations",
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "description": "Array of section objects",
+                    "items": {
+                      "type": "string",
+                      "description": "Section id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Peer Groups"],
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "BGP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "BGP"
+      }
+    },
+    "/bgp/peer_group/config/{id}": {
+      "get": {
+        "summary": "Returns specified BGP peer group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgPeGr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration BGP peer group identifier"
+          }
+        ],
+        "tags": ["Peer Groups"]
+      },
+      "put": {
+        "summary": "Updates specified BGP peer group configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200BgPeGr"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration BGP peer group identifier"
+          }
+        ],
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/bgp_peer_group_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Peer Groups"],
+        "description": ""
+      },
+      "delete": {
+        "summary": "Deletes specified BGP peer group configuration",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Configuration BGP peer group identifier"
+          }
+        ],
+        "tags": ["Peer Groups"],
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "x-web": {
+        "menu": ["Network", "Routing", "Dynamic Routes", "BGP"],
+        "hw_tags": {
+          "is_switch": false,
+          "is_access_point": false
+        },
+        "name": "BGP"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200BgPeGr": {
+        "description": "Returns section",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/bgp_peer_group_options_multi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200BgPeGrMulti": {
+        "description": "Returns sections",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "Array of section objects",
+                  "items": {
+                    "$ref": "#/components/schemas/bgp_peer_group_options_multi"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "bgp_peer_group_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Enable/Disable BGP peer."
+          },
+          "as": {
+            "x-web": {
+              "pretty": "AS",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Neighbour's remote AS."
+          },
+          "neighbor": {
+            "x-web": {
+              "pretty": "Neighbor Address",
+              "input-type": "input"
+            },
+            "type": "array",
+            "description": "Neighbour's remote IPv4 address.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "listen_range": {
+            "x-web": {
+              "pretty": "Listen range",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Accept connections from any peers in the specified prefix."
+          },
+          "adv_int": {
+            "x-web": {
+              "pretty": "Advertisement interval",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Delay between updates for a neighbor session."
+          },
+          "cl_config_type": {
+            "x-web": {
+              "pretty": "Neighbor configuration",
+              "input-type": "select",
+              "enum-pretty": {
+                "none": "None",
+                "route-reflector-client": "Route Reflector Client",
+                "route-server-client": "Route Reflector Server"
+              }
+            },
+            "type": "string",
+            "enum": ["route-reflector-client", "route-server-client"],
+            "description": "Configure a neighbor as Route Reflector or Route Server client."
+          },
+          "next_hop_self": {
+            "x-web": {
+              "pretty": "Disable next hop calculation",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Disable the next hop calculation for this group."
+          },
+          "next_hop_self_all": {
+            "x-web": {
+              "pretty": "Apply also to ibgp-learned routes",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Apply also to ibgp-learned routes when acting as a route reflector."
+          },
+          "soft_rec_inbound": {
+            "x-web": {
+              "pretty": "Inbound soft-reconfiguration",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "Allow inbound soft reconfiguration for this neighbor."
+          },
+          "con_check": {
+            "x-web": {
+              "pretty": "Disable connected check",
+              "input-type": "switch"
+            },
+            "type": "string",
+            "description": "One-hop away EBGP peer using loopback address."
+          }
+        }
+      },
+      "bgp_peer_group_options_multi": {
+        "title": "bgp_peer_group_options_multi",
+        "x-stoplight": {
+          "id": "8rsjc712jxgru"
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/bgp_peer_group_options"
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "BGP Peer Groups",
+    "version": "1.0",
+    "description": "BGP peer groups api documentation"
+  },
+  "tags": [
+    {
+      "name": "Peer Groups"
+    }
+  ]
+}
