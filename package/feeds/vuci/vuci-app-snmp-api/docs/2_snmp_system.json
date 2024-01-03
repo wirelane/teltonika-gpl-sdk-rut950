@@ -4,9 +4,7 @@
   "paths": {
     "/snmp/system/config": {
       "get": {
-        "tags": [
-          "System Summary"
-        ],
+        "tags": ["System Summary"],
         "summary": "Returns the general SNMP configuration in an array",
         "responses": {
           "200": {
@@ -16,9 +14,7 @@
         "operationId": "snmp3"
       },
       "put": {
-        "tags": [
-          "System Summary"
-        ],
+        "tags": ["System Summary"],
         "summary": "Updates the general SNMP configuration in an array",
         "responses": {
           "200": {
@@ -45,7 +41,8 @@
                       "$ref": "#/components/schemas/snmp_system_options_id"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
@@ -53,11 +50,7 @@
         "operationId": "snmp4"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP Settings"
-        ],
+        "menu": ["Services", "SNMP", "SNMP Settings"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -77,9 +70,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "System Summary"
-        ],
+        "tags": ["System Summary"],
         "summary": "Returns the general SNMP configuration",
         "responses": {
           "200": {
@@ -89,9 +80,7 @@
         "operationId": "snmp1"
       },
       "put": {
-        "tags": [
-          "System Summary"
-        ],
+        "tags": ["System Summary"],
         "summary": "Updates the general SNMP configuration",
         "responses": {
           "200": {
@@ -111,7 +100,8 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_system_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
@@ -119,11 +109,7 @@
         "operationId": "snmp2"
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP Settings"
-        ],
+        "menu": ["Services", "SNMP", "SNMP Settings"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -133,9 +119,7 @@
     "/snmp/system/actions/download_mib": {
       "post": {
         "summary": "Downloads MIB File",
-        "tags": [
-          "System Summary"
-        ],
+        "tags": ["System Summary"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_mib_download"
@@ -143,11 +127,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP Settings"
-        ],
+        "menu": ["Services", "SNMP", "SNMP Settings"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -171,7 +151,8 @@
                 "data": {
                   "$ref": "#/components/schemas/snmp_system_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -193,7 +174,8 @@
                     "$ref": "#/components/schemas/snmp_system_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -267,9 +249,7 @@
                 "description": "SNMP System Configuration identifier (ID)."
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           }
         ],
         "title": ""

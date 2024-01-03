@@ -10,9 +10,7 @@
             "$ref": "#/components/responses/200CoTMulti"
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "put": {
         "summary": "Updates Cloud of Things configuration in an array",
@@ -40,21 +38,16 @@
                       "$ref": "#/components/schemas/cloud_of_things_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cloud of Things"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Cloud of Things"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -79,17 +72,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200CoT"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "put": {
         "summary": "Updates Cloud of Things configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200CoT"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -105,21 +102,16 @@
                   "data": {
                     "$ref": "#/components/schemas/cloud_of_things_options_single_put"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cloud of Things"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Cloud of Things"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -133,21 +125,12 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200CoT"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cloud of Things"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Cloud of Things"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -172,7 +155,8 @@
                 "data": {
                   "$ref": "#/components/schemas/cloud_of_things_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -195,7 +179,8 @@
                     "$ref": "#/components/schemas/cloud_of_things_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -209,10 +194,7 @@
             "type": "string",
             "description": "Enable Cloud of Things application",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -248,9 +230,7 @@
                 "description": "Cloud of Things Configuration identifier (ID)."
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           },
           {
             "$ref": "#/components/schemas/cloud_of_things_options_single_put"

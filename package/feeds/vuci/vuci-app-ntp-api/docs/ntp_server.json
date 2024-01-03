@@ -27,15 +27,14 @@
                         "$ref": "#/components/schemas/ntp_server_options"
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
           }
         },
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "operationId": "ntp_ser1"
       },
       "put": {
@@ -58,7 +57,8 @@
                         "$ref": "#/components/schemas/ntp_server_options"
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -70,9 +70,7 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -85,7 +83,8 @@
                       "$ref": "#/components/schemas/ntp_server_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
@@ -93,12 +92,7 @@
         "operationId": "ntp_ser2"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTP"],
         "hw_tags": {
           "is_switch": false,
           "is_access_point": false
@@ -135,7 +129,8 @@
                     "data": {
                       "$ref": "#/components/schemas/ntp_server_options"
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -144,9 +139,7 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "operationId": "ntp_ser3"
       },
       "put": {
@@ -166,7 +159,8 @@
                     "data": {
                       "$ref": "#/components/schemas/ntp_server_options"
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -178,9 +172,7 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -190,7 +182,8 @@
                   "data": {
                     "$ref": "#/components/schemas/ntp_server_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
@@ -198,12 +191,7 @@
         "operationId": "ntp_ser4"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTP"],
         "hw_tags": {
           "is_switch": false,
           "is_access_point": false
@@ -221,10 +209,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable NTP Server. Turns NTP server on or off.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable NTP server",
               "input-type": "switch"
@@ -240,19 +226,15 @@
               "id": {
                 "type": "string",
                 "description": "NTP Server Configuration identifier (ID).",
-                "enum": [
-                  "general"
-                ]
+                "enum": ["general"]
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/ntp_server_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

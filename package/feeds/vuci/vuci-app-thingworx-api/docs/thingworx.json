@@ -4,9 +4,7 @@
   "paths": {
     "/thingworx/config": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns the ThingWorx configuration in an array",
         "description": "",
         "responses": {
@@ -16,9 +14,7 @@
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates the ThingWorx configuration in an array",
         "description": "",
         "responses": {
@@ -53,11 +49,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "ThingWorx"
-        ],
+        "menu": ["Services", "Cloud Solutions", "ThingWorx"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -78,9 +70,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns the ThingWorx configuration",
         "description": "",
         "responses": {
@@ -93,9 +83,7 @@
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates the ThingWorx configuration",
         "description": "",
         "responses": {
@@ -126,11 +114,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "ThingWorx"
-        ],
+        "menu": ["Services", "Cloud Solutions", "ThingWorx"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -191,6 +175,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable ThingWorx Application",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -228,7 +214,8 @@
             "type": "string",
             "description": "Application key generated in ThingWorx CP",
             "maxLength": 128,
-            "format": "fieldvalidation('^[a-zA-Z0-9_-]+$')",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9_-]+$",
             "writeOnly": true,
             "x-web": {
               "pretty": "Application key",
@@ -246,14 +233,7 @@
               }
             }
           }
-        },
-        "required": [
-          "server",
-          "port",
-          "thing",
-          "appkey",
-          "iface"
-        ]
+        }
       },
       "thingworx_single_options_resp": {
         "type": "object",
@@ -261,6 +241,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable ThingWorx Application",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -298,10 +280,7 @@
             "type": "string",
             "description": "Indicates if 'appkey' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           },
           "iface": {
             "type": "string",
@@ -314,14 +293,7 @@
               }
             }
           }
-        },
-        "required": [
-          "server",
-          "port",
-          "thing",
-          "appkey",
-          "iface"
-        ]
+        }
       },
       "thingworx_options_resp": {
         "allOf": [
@@ -332,15 +304,13 @@
                 "type": "string",
                 "description": "Configuration ID"
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/thingworx_single_options_resp"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "thingworx_options": {
         "allOf": [
@@ -351,15 +321,13 @@
                 "type": "string",
                 "description": "Configuration ID"
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/thingworx_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

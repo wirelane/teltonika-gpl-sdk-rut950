@@ -4,9 +4,7 @@
   "paths": {
     "/io/scheduler/global": {
       "get": {
-        "tags": [
-          "Scheduler Global"
-        ],
+        "tags": ["Scheduler Global"],
         "summary": "Returns the general I/O Scheduler configuration",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Scheduler Global"
-        ],
+        "tags": ["Scheduler Global"],
         "summary": "Updates the general I/O Scheduler configuration",
         "responses": {
           "200": {
@@ -37,18 +33,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_scheduler_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Scheduler"
-        ],
+        "menu": ["Services", "Input/Output", "Scheduler"],
         "hw_tags": {
           "ios": true
         },
@@ -72,7 +65,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_scheduler_single_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -85,10 +79,7 @@
           "enabled": {
             "type": "string",
             "description": "Enables/disables the I/O Scheduler.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Enable Scheduler",

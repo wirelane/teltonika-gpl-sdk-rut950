@@ -4,9 +4,7 @@
   "paths": {
     "/azure_iot_hub/config": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns Azure IoT Hub configuration in an array",
         "responses": {
           "200": {
@@ -15,11 +13,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Azure IoT Hub"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Azure IoT Hub"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -27,9 +21,7 @@
         "name": "Azure IoT Hub"
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates Azure IoT Hub configuration in an array",
         "responses": {
           "200": {
@@ -76,9 +68,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns Azure IoT Hub configuration",
         "responses": {
           "200": {
@@ -90,9 +80,7 @@
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates Azure IoT Hub configuration",
         "responses": {
           "200": {
@@ -122,11 +110,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Azure IoT Hub"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Azure IoT Hub"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -187,10 +171,7 @@
           "enabled": {
             "description": "Enable Azure IoT Hub monitoring",
             "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Enable Azure IoT Hub monitoring",
@@ -209,10 +190,7 @@
           "msg_type": {
             "type": "string",
             "description": "Messages Type",
-            "enum": [
-              "mqtt",
-              "gsmctl"
-            ],
+            "enum": ["mqtt", "gsmctl"],
             "x-web": {
               "pretty": "Messages Type",
               "input-type": "select",
@@ -225,18 +203,13 @@
                   "hw_tags": {
                     "mobile": true
                   },
-                  "values": [
-                    "mqtt",
-                    "gsmctl"
-                  ]
+                  "values": ["mqtt", "gsmctl"]
                 },
                 {
                   "hw_tags": {
                     "mobile": false
                   },
-                  "values": [
-                    "mqtt"
-                  ]
+                  "values": ["mqtt"]
                 }
               ]
             }
@@ -492,10 +465,7 @@
           "enabled": {
             "description": "Enable Azure IoT Hub monitoring",
             "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Enable Azure IoT Hub monitoring",
@@ -514,10 +484,7 @@
           "msg_type": {
             "type": "string",
             "description": "Messages Type",
-            "enum": [
-              "mqtt",
-              "gsmctl"
-            ],
+            "enum": ["mqtt", "gsmctl"],
             "x-web": {
               "pretty": "Messages Type",
               "input-type": "select",
@@ -530,18 +497,13 @@
                   "hw_tags": {
                     "mobile": true
                   },
-                  "values": [
-                    "mqtt",
-                    "gsmctl"
-                  ]
+                  "values": ["mqtt", "gsmctl"]
                 },
                 {
                   "hw_tags": {
                     "mobile": false
                   },
-                  "values": [
-                    "mqtt"
-                  ]
+                  "values": ["mqtt"]
                 }
               ]
             }
@@ -607,10 +569,7 @@
           "mqtt_password": {
             "type": "string",
             "description": "Indicates if 'mqtt_password' option is set. 'unset' for not set, 'set' for configured.",
-            "enum": [
-              "unset",
-              "set"
-            ],
+            "enum": ["unset", "set"],
             "readOnly": true
           },
           "message_interval": {
@@ -778,7 +737,8 @@
               ]
             }
           }
-        }
+        },
+        "required": ["id"]
       },
       "azure_iothub_options": {
         "allOf": [
@@ -790,9 +750,7 @@
                 "description": "Configuration ID"
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           },
           {
             "$ref": "#/components/schemas/azure_iothub_single_options"

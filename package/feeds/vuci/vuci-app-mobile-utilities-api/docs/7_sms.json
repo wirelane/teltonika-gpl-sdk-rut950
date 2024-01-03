@@ -9,9 +9,7 @@
     "/messages/status": {
       "get": {
         "summary": "Returns all SMS Messages",
-        "tags": [
-          "Read Messages"
-        ],
+        "tags": ["Read Messages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_read_multi"
@@ -20,16 +18,66 @@
         "description": ""
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Messages",
-          "Read Messages"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Messages", "Read Messages"],
         "hw_tags": {
           "mobile": true
         },
-        "name": "Messages"
+        "name": "Messages",
+        "hidden": true
+      }
+    },
+    "/messages/actions/remove_messages": {
+      "post": {
+        "summary": "Deletes the selected SMS Messages",
+        "tags": ["Read Messages"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "string",
+                          "description": "Success message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/req_body_remove_sms"
+              }
+            }
+          }
+        }
+      },
+      "x-web": {
+        "menu": ["Services", "Mobile Utilities", "Messages", "Read Messages"],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "Messages",
+        "hidden": true
       }
     },
     "/messages/modem/{id}/status": {
@@ -46,9 +94,7 @@
       ],
       "get": {
         "summary": "Returns all SMS messages for a specified modem ID",
-        "tags": [
-          "Read Messages"
-        ],
+        "tags": ["Read Messages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_read_multi"
@@ -70,21 +116,16 @@
           "$ref": "#/components/requestBodies/delete_multi"
         },
         "description": "",
-        "tags": [
-          "Read Messages"
-        ]
+        "tags": ["Read Messages"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Messages",
-          "Read Messages"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Messages", "Read Messages"],
         "hw_tags": {
           "mobile": true
         },
-        "name": "Messages"
+        "name": "Messages",
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
     "/messages/modem/{id}/sms/{sms_id}/status": {
@@ -110,9 +151,7 @@
       ],
       "get": {
         "summary": "Returns a specific SMS message by its ID for a given modem ID.",
-        "tags": [
-          "Read Messages"
-        ],
+        "tags": ["Read Messages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_read_single"
@@ -131,21 +170,16 @@
           }
         },
         "description": "",
-        "tags": [
-          "Read Messages"
-        ]
+        "tags": ["Read Messages"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Messages",
-          "Read Messages"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Messages", "Read Messages"],
         "hw_tags": {
           "mobile": true
         },
-        "name": "Messages"
+        "name": "Messages",
+        "hidden": true,
+        "hidden_documentation_page": true
       }
     },
     "/messages/actions/send": {
@@ -195,45 +229,87 @@
             }
           }
         },
-        "tags": [
-          "Send Messages"
-        ]
+        "tags": ["Send Messages"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Messages",
-          "Send Messages"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Messages", "Send Messages"],
         "hw_tags": {
           "mobile": true
         },
-        "name": "Messages"
+        "name": "Messages",
+        "hidden": true
       }
     }
   },
   "components": {
     "schemas": {
+      "sms_remove": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "modem_id": {
+            "type": "string",
+            "description": "Identifier of the modem from which messages will be deleted",
+            "x-web": {
+              "pretty": "",
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "sms_id": {
+            "type": "array",
+            "description": "Array of message identifiers to be deleted from the specified modem",
+            "items": {
+              "type": "string",
+              "format": "integer"
+            }
+          }
+        },
+        "required": ["modem_id", "sms_id"]
+      },
       "sms_send": {
         "description": "",
         "type": "object",
         "properties": {
-          "modem": {
-            "type": "string"
+          "number": {
+            "type": "string",
+            "format": "phonedigit",
+            "description": "To whom the message will be sent. The number must be specified in full format, country code included. e.g., +37000000000",
+            "x-web": {
+              "pretty": "Phone number",
+              "input-type": "input"
+            }
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "description": "Message to send",
+            "format": "string",
+            "x-web": {
+              "pretty": "Message",
+              "input-type": "input"
+            }
           },
-          "number": {
-            "type": "string"
+          "modem": {
+            "type": "string",
+            "description": "Identifier of the modem from which messages will be send",
+            "x-web": {
+              "pretty": "",
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
           }
         },
-        "required": [
-          "modem",
-          "message",
-          "number"
-        ]
+        "required": ["modem", "message", "number"]
       },
       "sms_message": {
         "type": "object",
@@ -272,9 +348,17 @@
             "$ref": "#/components/schemas/sms_send"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
+      },
+      "req_body_remove_sms": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/sms_remove"
+          }
+        },
+        "required": ["data"]
       }
     },
     "responses": {
@@ -312,7 +396,6 @@
                 "data": {
                   "type": "array",
                   "uniqueItems": true,
-                  "minItems": 1,
                   "items": {
                     "$ref": "#/components/schemas/sms_message"
                   }

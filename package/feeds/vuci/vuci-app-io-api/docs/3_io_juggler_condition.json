@@ -4,21 +4,14 @@
   "paths": {
     "/io/juggler/conditions/config": {
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "Conditions"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "Conditions"],
         "hw_tags": {
           "ios": true
         },
         "name": "Input/Output"
       },
       "get": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Returns all I/O Juggler Condition configurations",
         "responses": {
           "200": {
@@ -27,9 +20,7 @@
         }
       },
       "post": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Creates a new I/O Juggler Condition configuration",
         "responses": {
           "201": {
@@ -49,16 +40,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_condition_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Updates the specified I/O Juggler Condition configurations",
         "responses": {
           "200": {
@@ -85,16 +75,15 @@
                       "$ref": "#/components/schemas/io_juggler_condition_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Deletes the specified I/O Juggler Condition configurations",
         "responses": {
           "200": {
@@ -122,9 +111,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Returns the specified I/O Juggler Condition configuration",
         "responses": {
           "200": {
@@ -136,9 +123,7 @@
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Updates the specified I/O Juggler Condition configuration",
         "responses": {
           "200": {
@@ -161,16 +146,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_condition_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "I/O Juggler Conditions"
-        ],
+        "tags": ["I/O Juggler Conditions"],
         "summary": "Deletes the specified I/O Juggler Condition configuration",
         "responses": {
           "200": {
@@ -182,12 +166,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "Conditions"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "Conditions"],
         "hw_tags": {
           "ios": true
         },
@@ -211,7 +190,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_juggler_condition_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -234,7 +214,8 @@
                     "$ref": "#/components/schemas/io_juggler_condition_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -258,16 +239,7 @@
           "type": {
             "type": "string",
             "description": "Type of the condition.",
-            "enum": [
-              "io",
-              "minute",
-              "hour",
-              "weekday",
-              "monthday",
-              "yearday",
-              "bool",
-              "analog"
-            ],
+            "enum": ["io", "minute", "hour", "weekday", "monthday", "yearday", "bool", "analog"],
             "x-web": {
               "pretty": "Condition type",
               "input-type": "select",
@@ -286,31 +258,13 @@
           "name": {
             "type": "string",
             "description": "Specifies the I/O to which the condition is listening to.",
-            "enum": [
-              "dio0",
-              "dio1",
-              "dio2",
-              "dwi0",
-              "dwi1",
-              "relay0",
-              "relay1",
-              "din1",
-              "din2",
-              "dout1",
-              "dout2",
-              "iio",
-              "acl0",
-              "adc0"
-            ],
+            "enum": ["dio0", "dio1", "dio2", "dwi0", "dwi1", "relay0", "relay1", "din1", "din2", "dout1", "dout2", "iio", "acl0", "adc0"],
             "x-web": {
               "pretty": "I/O",
               "input-type": "select",
               "depends": [
                 {
-                  "type": [
-                    "analog",
-                    "io"
-                  ]
+                  "type": ["analog", "io"]
                 }
               ],
               "enum-depends": [
@@ -331,12 +285,7 @@
                     "acl0": false,
                     "adc0": true
                   },
-                  "values": [
-                    "dio0",
-                    "dio1",
-                    "dio2",
-                    "adc0"
-                  ]
+                  "values": ["dio0", "dio1", "dio2", "adc0"]
                 },
                 {
                   "hw_tags": {
@@ -355,11 +304,7 @@
                     "acl0": false,
                     "adc0": false
                   },
-                  "values": [
-                    "dio0",
-                    "dio1",
-                    "dio2"
-                  ]
+                  "values": ["dio0", "dio1", "dio2"]
                 },
                 {
                   "hw_tags": {
@@ -378,17 +323,7 @@
                     "acl0": true,
                     "adc0": true
                   },
-                  "values": [
-                    "dio0",
-                    "dio1",
-                    "dwi0",
-                    "dwi1",
-                    "relay0",
-                    "relay1",
-                    "iio",
-                    "acl0",
-                    "adc0"
-                  ]
+                  "values": ["dio0", "dio1", "dwi0", "dwi1", "relay0", "relay1", "iio", "acl0", "adc0"]
                 },
                 {
                   "hw_tags": {
@@ -407,10 +342,7 @@
                     "acl0": false,
                     "adc0": false
                   },
-                  "values": [
-                    "dio0",
-                    "dio1"
-                  ]
+                  "values": ["dio0", "dio1"]
                 },
                 {
                   "hw_tags": {
@@ -429,16 +361,7 @@
                     "acl0": true,
                     "adc0": true
                   },
-                  "values": [
-                    "relay0",
-                    "din1",
-                    "din2",
-                    "dout1",
-                    "dout2",
-                    "iio",
-                    "acl0",
-                    "adc0"
-                  ]
+                  "values": ["relay0", "din1", "din2", "dout1", "dout2", "iio", "acl0", "adc0"]
                 },
                 {
                   "hw_tags": {
@@ -457,10 +380,7 @@
                     "acl0": false,
                     "adc0": false
                   },
-                  "values": [
-                    "din1",
-                    "dout1"
-                  ]
+                  "values": ["din1", "dout1"]
                 }
               ]
             }
@@ -468,22 +388,13 @@
           "not": {
             "type": "string",
             "description": "Inverts the selected condition type. Makes the condition true if the time/date is outside the specified interval. | Whether to evaluate the condition as true inside or outside the specified ADC/ACL range",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Condition | Inverted function",
               "input-type": "select",
               "depends": [
                 {
-                  "type": [
-                    "analog",
-                    "minute",
-                    "hour",
-                    "weekday",
-                    "yearday"
-                  ]
+                  "type": ["analog", "minute", "hour", "weekday", "yearday"]
                 }
               ],
               "enum-pretty": {
@@ -496,10 +407,7 @@
             "type": "string",
             "description": "If the option is selected the condition uses the last day of the month if the specified day is not in the month.",
             "format": "is_bool",
-            "enum":[
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Month override",
               "input-type": "switch",
@@ -513,12 +421,7 @@
           "operation": {
             "type": "string",
             "description": "This boolean group will be evaluated true, if: \nAND - All added conditions evaluate true \nNAND - At least one condition evaluates false \nOR - At least one condition evaluates true \nNOR - None of the conditions evaluate true",
-            "enum": [
-              "and",
-              "nand",
-              "or",
-              "nor"
-            ],
+            "enum": ["and", "nand", "or", "nor"],
             "x-web": {
               "pretty": "Boolean type",
               "input-type": "select",
@@ -555,22 +458,13 @@
             "type": "string",
             "description": "Switch between a specific value and a time interval.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Interval",
               "input-type": "switch",
               "depends": [
                 {
-                  "type": [
-                    "minute",
-                    "hour",
-                    "weekday",
-                    "monthday",
-                    "yearday"
-                  ]
+                  "type": ["minute", "hour", "weekday", "monthday", "yearday"]
                 }
               ]
             }
@@ -587,13 +481,7 @@
               "depends": [
                 {
                   "ui_timetype": "0",
-                  "type": [
-                    "minute",
-                    "hour",
-                    "weekday",
-                    "monthday",
-                    "yearday"
-                  ]
+                  "type": ["minute", "hour", "weekday", "monthday", "yearday"]
                 }
               ]
             }
@@ -633,10 +521,7 @@
           "state": {
             "type": "string",
             "description": "Specifies in what state the pin has to be.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "State",
               "input-type": "select",
@@ -684,10 +569,7 @@
           "acl": {
             "type": "string",
             "description": "Select which property - ampere or percentage the condition listens to.",
-            "enum": [
-              "current",
-              "percent"
-            ],
+            "enum": ["current", "percent"],
             "x-web": {
               "pretty": "ACL Property",
               "input-type": "select",
@@ -776,10 +658,7 @@
             }
           }
         },
-        "required": [
-          "ui_name",
-          "type"
-        ]
+        "required": ["ui_name", "type"]
       },
       "io_juggler_condition_options": {
         "allOf": [
@@ -790,15 +669,13 @@
                 "type": "string",
                 "description": "I/O Juggler Condition Configuration identifier (ID)."
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/io_juggler_condition_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

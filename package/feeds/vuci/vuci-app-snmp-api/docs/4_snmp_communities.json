@@ -4,9 +4,7 @@
   "paths": {
     "/snmp/communities/config": {
       "get": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Returns all SNMP Communities configurations",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Creates SNMP Communities configuration.",
         "responses": {
           "201": {
@@ -37,16 +33,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_communities_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Updates the specified SNMP Communities configurations",
         "responses": {
           "200": {
@@ -73,16 +68,15 @@
                       "$ref": "#/components/schemas/snmp_communities_options_id"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Deletes specified SNMP Communities configurations.",
         "responses": {
           "200": {
@@ -97,11 +91,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "Communities"
-        ],
+        "menu": ["Services", "SNMP", "Communities"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -121,9 +111,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Returns the specified SNMP Communities configuration",
         "responses": {
           "200": {
@@ -136,9 +124,7 @@
         "description": ""
       },
       "put": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Updates the specified SNMP Communities configuration",
         "responses": {
           "200": {
@@ -161,16 +147,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_communities_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Communities"
-        ],
+        "tags": ["Communities"],
         "summary": "Deletes the specified SNMP Communities configuration.",
         "responses": {
           "200": {
@@ -182,11 +167,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "Communities"
-        ],
+        "menu": ["Services", "SNMP", "Communities"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -210,7 +191,8 @@
                 "data": {
                   "$ref": "#/components/schemas/snmp_communities_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -233,7 +215,8 @@
                     "$ref": "#/components/schemas/snmp_communities_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -246,6 +229,7 @@
           "community": {
             "type": "string",
             "description": "SNMP community name is an ID that allows access to a routers SNMP data.",
+            "format": "default_validation",
             "x-web": {
               "pretty": "Community name",
               "input-type": "input",
@@ -272,10 +256,7 @@
           },
           "secname": {
             "type": "string",
-            "enum": [
-              "ro",
-              "rw"
-            ],
+            "enum": ["ro", "rw"],
             "description": "Access mode specifies if you can only read or read and write information from and to the device.",
             "x-web": {
               "pretty": "Access mode",
@@ -302,7 +283,8 @@
           {
             "$ref": "#/components/schemas/snmp_communities_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

@@ -213,6 +213,10 @@ define KernelPackage/ath9k_54
   CONFLICTS:=kmod-ath9k
 endef
 
+define KernelPackage/ath9k_54/teltonika_tcr1xx
+  AUTOLOAD:=$(call AutoLoad,90,ath9k)
+endef
+
 define KernelPackage/ath9k_54/description
 This module adds support for wireless adapters based on
 Atheros IEEE 802.11n AR5008 and AR9001 family of chipsets.
@@ -269,6 +273,10 @@ define KernelPackage/ath10k_54
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath10k/ath10k_pci.ko
   CONFLICTS:=kmod-ath10k
   AUTOLOAD:=$(call AutoProbe,ath10k_pci)
+endef
+
+define KernelPackage/ath10k_54/teltonika_tcr1xx
+  AUTOLOAD:=$(call AutoLoad,91,ath10k_pci)
 endef
 
 define KernelPackage/ath10k_54/description

@@ -300,6 +300,7 @@
             "x-web": {
               "pretty": "Device",
               "input-type": "select",
+              "group": "Device configuration",
               "enum-pretty": {
                 "/dev/rs232": "rs232",
                 "/dev/rs485": "rs485",
@@ -371,6 +372,7 @@
             "x-web": {
               "pretty": "Baud rate",
               "input-type": "select",
+              "group": "Device configuration",
               "enum-depends": [
                 {
                   "depends": {
@@ -472,6 +474,7 @@
             "x-web": {
               "pretty": "Data bits",
               "input-type": "select",
+              "group": "Device configuration",
               "enum-depends": [
                 {
                   "depends": {
@@ -564,6 +567,7 @@
             "x-web": {
               "pretty": "Stop bits",
               "input-type": "select",
+              "group": "Device configuration",
               "enum-depends": [
                 {
                   "depends": {
@@ -633,6 +637,7 @@
                 "none": "None"
               },
               "input-type": "select",
+              "group": "Device configuration",
               "enum-depends": [
                 {
                   "depends": {
@@ -711,6 +716,7 @@
                 "xon/xoff": "Xon/Xoff"
               },
               "input-type": "select",
+              "group": "Device configuration",
               "enum-depends": [
                 {
                   "depends": {
@@ -807,7 +813,7 @@
             "x-web": {
               "pretty": "Protocol",
               "input-type": "select",
-              "group": "Over IP configuration",
+              "group": "General Over IP configuration",
               "enum-pretty": {
                 "0": "TCP",
                 "1": "UDP"
@@ -847,7 +853,7 @@
             "x-web": {
               "pretty": "Raw mode",
               "input-type": "switch",
-              "group": "Over IP configuration"
+              "group": "Advanced Over IP configuration"
             }
           },
           "mode": {
@@ -856,31 +862,33 @@
             "enum": [
               "server",
               "client",
-              "bidirect"
+              "bidirect",
+              "client_server"
             ],
             "x-web": {
               "pretty": "Mode",
               "input-type": "select",
-              "group": "Over IP configuration",
+              "group": "General Over IP configuration",
               "enum-pretty": {
                 "server": "Server",
                 "client": "Client",
-                "bidirect": "Bidirect"
+                "bidirect": "Bidirect (legacy mode, not recommended)",
+                "client_server": "Client + server"
               }
             }
           },
-          "remove_all_zeros": {
+          "no_leading_zeros": {
             "type": "string",
-            "description": "Remove all zero bytes from received data.",
+            "description": "Check this to skip hex first zeros.",
             "format": "is_bool",
             "enum": [
               "0",
               "1"
             ],
             "x-web": {
-              "pretty": "Remove all zeros",
+              "pretty": "No leading zeros",
               "input-type": "switch",
-              "group": "Over IP configuration"
+              "group": "Advanced Over IP configuration"
             }
           },
           "port_connect": {
@@ -907,18 +915,16 @@
             "format": "irange(0, 36000)",
             "default": "300",
             "x-web": {
-              "pretty": "Timeout (s)",
+              "pretty": "Inactivity timeout",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
                   "mode": [
                     "client",
-                    "bidirect"
-                  ]
-                },
-                {
-                  "mode": "server",
+                    "server",
+                    "client_server"
+                  ],
                   "protocol": "0"
                 }
               ]
@@ -926,49 +932,65 @@
           },
           "read_duration": {
             "type": "string",
-            "description": "Specify custom read time for the serial device (0-900ms)",
-            "format": "irange(0, 900)",
+            "description": "Specifies the maximum milliseconds to wait for serial data",
+            "format": "irange(0, 1000)",
+            "default": "5",
             "x-web": {
-              "pretty": "Specify device read time",
+              "pretty": "Serial timeout",
               "input-type": "input",
-              "group": "Over IP configuration"
-            }
-          },
-          "echo": {
-            "type": "string",
-            "description": "Check to enable RS232 echo",
-            "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
-            "x-web": {
-              "pretty": "Echo",
-              "input-type": "switch",
-              "group": "Over IP configuration",
-              "depends": [
-                {
-                  "device": "/dev/rs232"
-                }
-              ]
+              "group": "Advanced Over IP configuration"
             }
           },
           "max_clients": {
             "type": "string",
-            "description": "How many clients are allowed to connect simultaneously.",
+            "description": "Specify (1-32) how many clients are allowed to connect simultaneously",
             "format": "irange(1, 32)",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "23",
+              "24",
+              "25",
+              "26",
+              "27",
+              "28",
+              "29",
+              "30",
+              "31",
+              "32"
+            ],
             "default": "32",
             "x-web": {
               "pretty": "Max clients",
-              "input-type": "input",
-              "group": "Over IP configuration",
+              "input-type": "select",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
-                  "mode": "bidirect"
-                },
-                {
-                  "mode": "server",
-                  "protocol": "0"
+                  "mode": [
+                    "server",
+                    "bidirect",
+                    "client_server"
+                  ]
                 }
               ]
             }
@@ -987,7 +1009,12 @@
               "group": "Over IP configuration",
               "depends": [
                 {
-                  "protocol": "0"
+                  "protocol": "0",
+                  "mode": [
+                    "client",
+                    "server",
+                    "client_server"
+                  ]
                 }
               ]
             }
@@ -1036,19 +1063,20 @@
               ]
             }
           },
-          "ip_connect": {
+          "address_connect": {
             "type": "string",
-            "description": "Specify server address which client have to connect.",
+            "description": "Specify server address and port for client to connect to. E.g 192.168.1.1:80.",
             "format": "host",
             "x-web": {
-              "pretty": "Server address",
+              "pretty": "Destination address",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "General Over IP configuration",
               "depends": [
                 {
                   "mode": [
                     "client",
-                    "bidirect"
+                    "bidirect",
+                    "client_server"
                   ]
                 }
               ]
@@ -1059,28 +1087,29 @@
             "description": "Specify intervals connection to server if it fails.",
             "format": "uinteger",
             "x-web": {
-              "pretty": "Reconnect interval (s)",
+              "pretty": "Reconnect interval",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
-                  "mode": "client",
+                  "mode": [
+                    "client",
+                    "client_server",
+                    "bidirect"
+                  ],
                   "protocol": "0"
-                },
-                {
-                  "mode": "bidirect"
                 }
               ]
             }
           },
           "keepalive_time": {
             "type": "string",
-            "description": "Duration until the first probe will be sent",
+            "description": "The interval between last data packet sent",
             "format": "irange(0, 32000)",
             "x-web": {
               "pretty": "Keep alive time",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
                   "protocol": "0"
@@ -1090,12 +1119,12 @@
           },
           "keepalive_interval": {
             "type": "string",
-            "description": "The interval between subsequent keepalive probes",
+            "description": "The interval between subsequential keepalive probes",
             "format": "irange(0, 32000)",
             "x-web": {
               "pretty": "Keep alive interval",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
                   "protocol": "0"
@@ -1105,12 +1134,12 @@
           },
           "keepalive_probes": {
             "type": "string",
-            "description": "The number of unacknowledged probes needed to consider the connection lost",
+            "description": "The number of unacknowledged probes",
             "format": "irange(0, 32000)",
             "x-web": {
               "pretty": "Keep alive probes",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
                   "protocol": "0"
@@ -1125,13 +1154,14 @@
             "x-web": {
               "pretty": "Port",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
-                  "mode": "server"
-                },
-                {
-                  "mode": "bidirect"
+                  "mode": [
+                    "server",
+                    "client_server",
+                    "bidirect"
+                  ]
                 }
               ]
             }
@@ -1147,10 +1177,9 @@
             "x-web": {
               "pretty": "TCP echo",
               "input-type": "switch",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "depends": [
                 {
-                  "mode": "server",
                   "protocol": "0"
                 }
               ]
@@ -1167,17 +1196,18 @@
             "x-web": {
               "pretty": "CD enable",
               "input-type": "switch",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "hw_tags": {
                 "pin_inversion": true
               },
               "depends": [
                 {
-                  "mode": "server",
-                  "protocol": "0"
-                },
-                {
-                  "mode": "client"
+                  "mode": [
+                    "server",
+                    "client"
+                  ],
+                  "protocol": "0",
+                  "device": "/dev/rs232"
                 }
               ]
             }
@@ -1193,17 +1223,18 @@
             "x-web": {
               "pretty": "DSR enable",
               "input-type": "switch",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "hw_tags": {
                 "pin_inversion": true
               },
               "depends": [
                 {
-                  "mode": "server",
-                  "protocol": "0"
-                },
-                {
-                  "mode": "client"
+                  "mode": [
+                    "server",
+                    "client"
+                  ],
+                  "protocol": "0",
+                  "device": "/dev/rs232"
                 }
               ]
             }
@@ -1219,17 +1250,19 @@
             "x-web": {
               "pretty": "CD invert",
               "input-type": "switch",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "hw_tags": {
                 "pin_inversion": true
               },
               "depends": [
                 {
-                  "mode": "server",
-                  "protocol": "0"
-                },
-                {
-                  "mode": "client"
+                  "mode": [
+                    "server",
+                    "client"
+                  ],
+                  "protocol": "0",
+                  "device": "/dev/rs232",
+                  "cd_enable": "1"
                 }
               ]
             }
@@ -1245,108 +1278,36 @@
             "x-web": {
               "pretty": "DSR invert",
               "input-type": "switch",
-              "group": "Over IP configuration",
+              "group": "Advanced Over IP configuration",
               "hw_tags": {
                 "pin_inversion": true
               },
               "depends": [
                 {
-                  "mode": "server",
-                  "protocol": "0"
-                },
-                {
-                  "mode": "client"
+                  "mode": [
+                    "server",
+                    "client"
+                  ],
+                  "protocol": "0",
+                  "device": "/dev/rs232",
+                  "dsr_enable": "1"
                 }
               ]
             }
           },
-          "udp_client_count": {
+          "predefined_address": {
             "type": "string",
-            "description": "Select how many UDP clients will be supported simultaneously (Predefined clients does not count towards this limit)",
-            "format": "integer",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10"
-            ],
+            "description": "Set predefined IP and port for UDP connection. E.g 192.168.1.1:80",
             "x-web": {
-              "pretty": "Number of clients",
-              "input-type": "select",
-              "group": "Over IP configuration",
-              "depends": [
-                {
-                  "mode": "server",
-                  "protocol": "1"
-                }
-              ]
-            }
-          },
-          "predefined_addr1": {
-            "type": "string",
-            "description": "Set first predefined IP for UDP connection.",
-            "format": "ipaddr",
-            "x-web": {
-              "pretty": "Predefined client1 ip",
+              "pretty": "Predefined addresses",
               "input-type": "input",
-              "group": "Over IP configuration",
+              "group": "General Over IP configuration",
               "depends": [
                 {
-                  "mode": "server",
-                  "protocol": "1"
-                }
-              ]
-            }
-          },
-          "predefined_port1": {
-            "type": "string",
-            "description": "Set first predefined port for UDP connection.",
-            "format": "port",
-            "x-web": {
-              "pretty": "Predefined client1 port",
-              "input-type": "input",
-              "group": "Over IP configuration",
-              "depends": [
-                {
-                  "mode": "server",
-                  "protocol": "1"
-                }
-              ]
-            }
-          },
-          "predefined_addr2": {
-            "type": "string",
-            "description": "Set second predefined client ip for UDP connection.",
-            "format": "ipaddr",
-            "x-web": {
-              "pretty": "Predefined client2 ip",
-              "input-type": "input",
-              "group": "Over IP configuration",
-              "depends": [
-                {
-                  "mode": "server",
-                  "protocol": "1"
-                }
-              ]
-            }
-          },
-          "predefined_port2": {
-            "type": "string",
-            "description": "Set second predefined client port for UDP connection.",
-            "format": "port",
-            "x-web": {
-              "pretty": "Predefined client2 port",
-              "input-type": "input",
-              "group": "Over IP configuration",
-              "depends": [
-                {
-                  "mode": "server",
+                  "mode": [
+                    "server",
+                    "client_server"
+                  ],
                   "protocol": "1"
                 }
               ]
@@ -1577,7 +1538,10 @@
               "psk": {
                 "type": "string",
                 "description": "The pre-shared-key in hex format with no leading 0x",
-                "enum": ["set", "unset"],
+                "enum": [
+                  "set",
+                  "unset"
+                ],
                 "x-web": {
                   "pretty": "Pre-Shared-Key",
                   "input-type": "input",

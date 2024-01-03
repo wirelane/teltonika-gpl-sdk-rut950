@@ -3,9 +3,7 @@
   "paths": {
     "/tr069/config": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns the TR-069 configuration in an array",
         "description": "",
         "responses": {
@@ -15,9 +13,7 @@
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates the TR-069 configuration in an array",
         "responses": {
           "200": {
@@ -44,18 +40,15 @@
                       "$ref": "#/components/schemas/tr069_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "TR-069",
-          "TR-069"
-        ],
+        "menu": ["Services", "TR-069", "TR-069"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -76,9 +69,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns the TR-069 configuration",
         "responses": {
           "200": {
@@ -87,9 +78,7 @@
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates the TR-069 configuration",
         "responses": {
           "200": {
@@ -109,18 +98,15 @@
                   "data": {
                     "$ref": "#/components/schemas/tr069_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "TR-069",
-          "TR-069"
-        ],
+        "menu": ["Services", "TR-069", "TR-069"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -145,7 +131,8 @@
                 "data": {
                   "$ref": "#/components/schemas/tr069_options_resp"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -168,7 +155,8 @@
                     "$ref": "#/components/schemas/tr069_options_resp"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -182,10 +170,7 @@
             "type": "string",
             "description": "Enables TR-069 client",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -194,6 +179,8 @@
           "periodic_enable": {
             "type": "string",
             "description": "Enables TR-069 client periodic data transmission to TR-069 server",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Periodic enable",
               "input-type": "switch"
@@ -203,10 +190,7 @@
             "type": "string",
             "description": "Accept server request",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Accept server request",
               "input-type": "switch"
@@ -215,10 +199,8 @@
           "periodic_interval": {
             "type": "string",
             "description": "Periodic data transmission interval (allowed: 60s-9999999s)",
-            "format": "integer",
+            "format": "irange(60, 9999999)",
             "default": "3600",
-            "minimum": "60",
-            "maximum": "9999999",
             "x-web": {
               "pretty": "Sending interval",
               "input-type": "input"
@@ -266,10 +248,7 @@
             "type": "string",
             "description": "Enables TR-069 client",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -278,6 +257,8 @@
           "periodic_enable": {
             "type": "string",
             "description": "Enables TR-069 client periodic data transmission to TR-069 server",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Periodic enable",
               "input-type": "switch"
@@ -287,10 +268,7 @@
             "type": "string",
             "description": "Accept server request",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Accept server request",
               "input-type": "switch"
@@ -299,10 +277,8 @@
           "periodic_interval": {
             "type": "string",
             "description": "Periodic data transmission interval (allowed: 60s-9999999s)",
-            "format": "integer",
+            "format": "irange(60, 9999999)",
             "default": "3600",
-            "minimum": "60",
-            "maximum": "9999999",
             "x-web": {
               "pretty": "Sending interval",
               "input-type": "input"
@@ -323,10 +299,7 @@
             "type": "string",
             "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           },
           "url": {
             "type": "string",
@@ -355,7 +328,8 @@
           {
             "$ref": "#/components/schemas/tr069_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "tr069_options_resp": {
         "allOf": [
@@ -371,7 +345,8 @@
           {
             "$ref": "#/components/schemas/tr069_single_options_resp"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

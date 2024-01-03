@@ -3,9 +3,7 @@
   "paths": {
     "/data_to_server/collections/config": {
       "get": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Returns all Data to Server Collections configurations",
         "responses": {
           "200": {
@@ -14,9 +12,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Creates a new Data to Server Collection configuration",
         "responses": {
           "201": {
@@ -31,9 +27,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Updates the selected Data to Server Collections configurations",
         "responses": {
           "200": {
@@ -51,9 +45,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Deletes the selected Data to Server Collections configurations",
         "responses": {
           "200": {
@@ -69,11 +61,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Collections"
-        ],
+        "menu": ["Services", "Data to Server", "Collections"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -93,9 +81,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Returns the specified Data to Server Collection configuration",
         "responses": {
           "200": {
@@ -107,9 +93,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Updates the specified Data to Server Collection configuration",
         "responses": {
           "200": {
@@ -127,9 +111,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Collections"
-        ],
+        "tags": ["Collections"],
         "summary": "Deletes the specified Data to Server configuration",
         "responses": {
           "200": {
@@ -141,11 +123,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Collections"
-        ],
+        "menu": ["Services", "Data to Server", "Collections"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -155,9 +133,7 @@
     "/data_to_server/data/options": {
       "get": {
         "summary": "Returns Data to Server all available data plugin names, description and tags",
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_data_sender_available_plugin_names"
@@ -165,11 +141,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Data Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -189,9 +161,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Creates a new Data to Server Data Plugin configuration",
         "responses": {
           "201": {
@@ -209,11 +179,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Data Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -222,9 +188,7 @@
     },
     "/data_to_server/data/config": {
       "get": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Returns all Data to Server Data Plugins configuration",
         "responses": {
           "200": {
@@ -233,9 +197,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Updates the selected Data to Server Data Plugins configurations",
         "responses": {
           "200": {
@@ -253,9 +215,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Deletes the selected Data to Server Plugins configurations",
         "responses": {
           "200": {
@@ -271,11 +231,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Data Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -295,9 +251,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Returns the specified Data to Server Data Plugin configuration",
         "responses": {
           "200": {
@@ -309,9 +263,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Uploads the Data Plugin necessary files",
         "responses": {
           "200": {
@@ -334,7 +286,8 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -353,11 +306,7 @@
                   "option": {
                     "type": "string",
                     "description": "Parameter to upload the file to.",
-                    "enum": [
-                      "mqtt_in_cafile",
-                      "mqtt_in_certfile",
-                      "mqtt_in_keyfile"
-                    ]
+                    "enum": ["mqtt_in_cafile", "mqtt_in_certfile", "mqtt_in_keyfile"]
                   },
                   "file": {
                     "type": "string",
@@ -365,19 +314,14 @@
                     "description": "The config file"
                   }
                 },
-                "required": [
-                  "option",
-                  "file"
-                ]
+                "required": ["option", "file"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Updates the selected Data to Server Data Plugins configurations",
         "responses": {
           "200": {
@@ -395,9 +339,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Data Plugins"
-        ],
+        "tags": ["Data Plugins"],
         "summary": "Deletes the specified Data to Server Data Plugins configurations",
         "responses": {
           "200": {
@@ -409,11 +351,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Data Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Data Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -423,9 +361,7 @@
     "/data_to_server/servers/options": {
       "get": {
         "summary": "Returns Data to Server all available Server Plugin names, description and tags",
-        "tags": [
-          "Server Plugins"
-        ],
+        "tags": ["Server Plugins"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_data_sender_available_plugin_names"
@@ -433,11 +369,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Server Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -446,9 +378,7 @@
     },
     "/data_to_server/servers/config": {
       "get": {
-        "tags": [
-          "Server Plugins"
-        ],
+        "tags": ["Server Plugins"],
         "summary": "Returns all Data to Server Server Plugins configuration",
         "responses": {
           "200": {
@@ -457,9 +387,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Server Plugins"
-        ],
+        "tags": ["Server Plugins"],
         "summary": "Updates the selected Data to Server Server Plugins configurations",
         "responses": {
           "200": {
@@ -477,11 +405,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Server Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -501,9 +425,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Server Plugins"
-        ],
+        "tags": ["Server Plugins"],
         "summary": "Returns the specified Data to Server Server Plugin configuration",
         "responses": {
           "200": {
@@ -515,9 +437,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Server Plugins"
-        ],
+        "tags": ["Server Plugins"],
         "summary": "Uploads the Server Plugin necessary files",
         "responses": {
           "200": {
@@ -540,7 +460,8 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -559,16 +480,7 @@
                   "option": {
                     "type": "string",
                     "description": "Parameter to upload the file to.",
-                    "enum": [
-                      "http_cafile",
-                      "http_certfile",
-                      "http_keyfile",
-                      "mqtt_cafile",
-                      "mqtt_certfile",
-                      "mqtt_keyfile",
-                      "azure_x509certificate",
-                      "azure_x509privatekey"
-                    ]
+                    "enum": ["http_cafile", "http_certfile", "http_keyfile", "mqtt_cafile", "mqtt_certfile", "mqtt_keyfile", "azure_x509certificate", "azure_x509privatekey"]
                   },
                   "file": {
                     "type": "string",
@@ -576,19 +488,14 @@
                     "description": "The config file"
                   }
                 },
-                "required": [
-                  "option",
-                  "file"
-                ]
+                "required": ["option", "file"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "Server Plugins"
-        ],
+        "tags": ["Server Plugins"],
         "summary": "Updates the specified Data to Server Server Plugin configuration",
         "responses": {
           "200": {
@@ -606,11 +513,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Data to Server",
-          "Server Plugins"
-        ],
+        "menu": ["Services", "Data to Server", "Server Plugins"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -630,7 +533,8 @@
                 "data": {
                   "$ref": "#/components/schemas/data_sender_collections_single_options"
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -648,7 +552,8 @@
                     "$ref": "#/components/schemas/data_sender_collections_multi_options"
                   }
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -663,7 +568,8 @@
                 "data": {
                   "$ref": "#/components/schemas/data_sender_input_single_options"
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -681,7 +587,8 @@
                     "$ref": "#/components/schemas/data_sender_input_multi_options"
                   }
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -699,7 +606,8 @@
                     "$ref": "#/components/schemas/data_sender_output_multi_options"
                   }
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -714,7 +622,8 @@
                 "data": {
                   "$ref": "#/components/schemas/data_sender_output_single_options"
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -775,7 +684,8 @@
                     }
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -794,7 +704,8 @@
                 "data": {
                   "$ref": "#/components/schemas/data_sender_collections_multi_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -817,7 +728,8 @@
                     "$ref": "#/components/schemas/data_sender_collections_multi_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -836,7 +748,8 @@
                 "data": {
                   "$ref": "#/components/schemas/data_sender_input_multi_options_resp"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -859,7 +772,8 @@
                     "$ref": "#/components/schemas/data_sender_input_multi_options_resp"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -878,7 +792,8 @@
                 "data": {
                   "$ref": "#/components/schemas/data_sender_output_multi_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -901,7 +816,8 @@
                     "$ref": "#/components/schemas/data_sender_output_multi_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -914,10 +830,7 @@
           "enabled": {
             "type": "string",
             "description": "Check to enable this Data to Server.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -936,10 +849,7 @@
           "format": {
             "type": "string",
             "description": "Specifies custom format string.",
-            "enum": [
-              "custom",
-              "json"
-            ],
+            "enum": ["custom", "json"],
             "default": "json",
             "x-web": {
               "pretty": "Format",
@@ -991,10 +901,7 @@
           "retry": {
             "type": "string",
             "description": "In case of a failed attempt, retry to send the same data to destination later.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Retry",
               "input-type": "switch"
@@ -1042,9 +949,7 @@
             "readOnly": true
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "data_sender_collections_multi_options": {
         "allOf": [
@@ -1060,7 +965,8 @@
           {
             "$ref": "#/components/schemas/data_sender_collections_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "data_sender_input_single_options_req_1": {
         "type": "object",
@@ -1113,10 +1019,7 @@
             "type": "string",
             "description": "Indicates if 'mqtt_in_psk' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           }
         }
       },
@@ -1127,10 +1030,7 @@
             "type": "string",
             "description": "Indicates if 'mqtt_in_password' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           }
         }
       },
@@ -1151,10 +1051,7 @@
           "format": {
             "type": "string",
             "description": "Specifies custom format string.",
-            "enum": [
-              "custom",
-              "json"
-            ],
+            "enum": ["custom", "json"],
             "default": "json",
             "x-web": {
               "pretty": "Format",
@@ -1212,21 +1109,7 @@
           "plugin": {
             "type": "string",
             "description": "Data plugin module name.",
-            "enum": [
-              "base",
-              "bluetooth",
-              "dlms",
-              "dnp3",
-              "gsm",
-              "mbus",
-              "mdcollect",
-              "mnfinfo",
-              "modbus",
-              "modbus_alarm",
-              "mqtt",
-              "opcua",
-              "wifiscan"
-            ],
+            "enum": ["base", "bluetooth", "dlms", "dnp3", "gsm", "mbus", "mdcollect", "mnfinfo", "modbus", "modbus_alarm", "mqtt", "opcua", "wifiscan"],
             "default": "base",
             "x-web": {
               "pretty": "Data Plugin",
@@ -1250,11 +1133,7 @@
           "mdc_period": {
             "type": "string",
             "description": "Data period.",
-            "enum": [
-              "day",
-              "week",
-              "month"
-            ],
+            "enum": ["day", "week", "month"],
             "x-web": {
               "pretty": "Data period",
               "input-type": "select",
@@ -1273,10 +1152,7 @@
           "mdc_current": {
             "type": "string",
             "description": "Current day/week/month.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Current",
               "input-type": "switch",
@@ -1330,11 +1206,7 @@
           "bl_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "mac",
-              "name"
-            ],
+            "enum": ["all", "mac", "name"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1398,10 +1270,7 @@
           "bl_object": {
             "type": "string",
             "description": "Format segment as object and not as array element",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -1416,12 +1285,7 @@
           "modbus_alarm_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "server_id",
-              "alarm_id",
-              "register"
-            ],
+            "enum": ["all", "server_id", "alarm_id", "register"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1486,12 +1350,7 @@
           "modbus_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "ip",
-              "id",
-              "name"
-            ],
+            "enum": ["all", "ip", "id", "name"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1571,10 +1430,7 @@
           "modbus_object": {
             "type": "string",
             "description": "Format segment as object and not as array element.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -1608,11 +1464,7 @@
           "dnp3_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "address",
-              "ip"
-            ],
+            "enum": ["all", "address", "ip"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1661,10 +1513,7 @@
           "dnp3_db": {
             "type": "string",
             "description": "Database location.",
-            "enum": [
-              "/tmp/dnp3.db",
-              "/usr/share/dnp3.db"
-            ],
+            "enum": ["/tmp/dnp3.db", "/usr/share/dnp3.db"],
             "format": "string",
             "x-web": {
               "pretty": "Database",
@@ -1697,10 +1546,7 @@
           "dnp3_object": {
             "type": "string",
             "description": "Format segment as object and not as array element.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -1715,10 +1561,7 @@
           "mbus_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "name"
-            ],
+            "enum": ["all", "name"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1751,10 +1594,7 @@
           "mbus_filter_invert": {
             "type": "string",
             "description": "Inverts filter condition.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Invert filter",
               "input-type": "switch",
@@ -1769,10 +1609,7 @@
           "mbus_db": {
             "type": "string",
             "description": "Database location.",
-            "enum": [
-              "/tmp/mbus_db",
-              "/usr/share/mbus_db"
-            ],
+            "enum": ["/tmp/mbus_db", "/usr/share/mbus_db"],
             "format": "string",
             "x-web": {
               "pretty": "Database",
@@ -1805,10 +1642,7 @@
           "mbus_object": {
             "type": "string",
             "description": "Format segment as object and not as array element.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -1823,10 +1657,7 @@
           "opcua_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "name"
-            ],
+            "enum": ["all", "name"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1859,10 +1690,7 @@
           "opcua_filter_invert": {
             "type": "string",
             "description": "Inverts filter condition.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Invert filter",
               "input-type": "switch",
@@ -1891,10 +1719,7 @@
           "opcua_object": {
             "type": "string",
             "description": "Format segment as object and not as array element.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -1909,12 +1734,7 @@
           "wifi_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "name",
-              "mac",
-              "singal"
-            ],
+            "enum": ["all", "name", "mac", "singal"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -1993,10 +1813,7 @@
           "wifi_object": {
             "type": "string",
             "description": "Format segment as object and not as array element.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -2086,11 +1903,7 @@
             "type": "string",
             "description": "Quality of Service to be used for the message",
             "format": "string",
-            "enum": [
-              "0",
-              "1",
-              "2"
-            ],
+            "enum": ["0", "1", "2"],
             "x-web": {
               "pretty": "QoS",
               "input-type": "select",
@@ -2131,10 +1944,7 @@
           },
           "mqtt_in_tls_type": {
             "type": "string",
-            "enum": [
-              "cert",
-              "psk"
-            ],
+            "enum": ["cert", "psk"],
             "description": "Type of TLS connection",
             "x-web": {
               "pretty": "TLS Type",
@@ -2193,6 +2003,11 @@
               ]
             }
           },
+          "mqtt_in_cafile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "mqtt_in_certfile": {
             "type": "string",
             "description": "Certificate file path",
@@ -2209,6 +2024,11 @@
               ]
             }
           },
+          "mqtt_in_certfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "mqtt_in_keyfile": {
             "type": "string",
             "description": "Key file path",
@@ -2224,6 +2044,11 @@
                 }
               ]
             }
+          },
+          "mqtt_in_keyfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
           },
           "mqtt_in_username": {
             "type": "string",
@@ -2248,10 +2073,7 @@
           "dlms_filter": {
             "type": "string",
             "description": "Filter type.",
-            "enum": [
-              "all",
-              "name"
-            ],
+            "enum": ["all", "name"],
             "x-web": {
               "pretty": "Data filtering",
               "input-type": "select",
@@ -2284,10 +2106,7 @@
           "dlms_filter_invert": {
             "type": "string",
             "description": "Inverts filter condition.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Invert filter",
               "input-type": "switch",
@@ -2316,10 +2135,7 @@
           "dlms_object": {
             "type": "string",
             "description": "Format segment as object and not as array element.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Send as object",
               "input-type": "switch",
@@ -2351,9 +2167,7 @@
             "$ref": "#/components/schemas/data_sender_input_single_options_3"
           }
         ],
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "data_sender_input_multi_options": {
         "allOf": [
@@ -2369,7 +2183,8 @@
           {
             "$ref": "#/components/schemas/data_sender_input_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "data_sender_input_single_options_resp": {
         "allOf": [
@@ -2389,9 +2204,7 @@
             "$ref": "#/components/schemas/data_sender_input_single_options_3"
           }
         ],
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "data_sender_input_multi_options_resp": {
         "allOf": [
@@ -2407,7 +2220,8 @@
           {
             "$ref": "#/components/schemas/data_sender_input_single_options_resp"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "data_sender_output_single_options": {
         "type": "object",
@@ -2423,11 +2237,7 @@
           "plugin": {
             "type": "string",
             "description": "Plugin type.",
-            "enum": [
-              "azure",
-              "http",
-              "mqtt"
-            ],
+            "enum": ["azure", "http", "mqtt"],
             "x-web": {
               "pretty": "Plugin type",
               "input-type": "select",
@@ -2473,10 +2283,7 @@
           "http_tls": {
             "type": "string",
             "description": "Enable secuire connection.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable secuire connection",
               "input-type": "switch",
@@ -2506,6 +2313,11 @@
               ]
             }
           },
+          "http_cafile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "http_certfile": {
             "type": "string",
             "description": "Client certificate.",
@@ -2521,6 +2333,11 @@
               ]
             }
           },
+          "http_certfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "http_keyfile": {
             "type": "string",
             "description": "Client private keyfile.",
@@ -2535,6 +2352,11 @@
                 }
               ]
             }
+          },
+          "http_keyfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
           },
           "mqtt_host": {
             "type": "string",
@@ -2613,11 +2435,7 @@
           "mqtt_qos": {
             "type": "string",
             "description": "MQTT Quality of Service. Allowed values:\n0 - when we prefer that the message will not arrive at all rather than arrive twice\n1 - when we want the message to arrive at least once but 't care if it arrives twice (or more)\n2 - when we want the message to arrive exactly once. A higher QoS value means a slower transfer.",
-            "enum": [
-              "0",
-              "1",
-              "2"
-            ],
+            "enum": ["0", "1", "2"],
             "x-web": {
               "pretty": "QoS",
               "input-type": "select",
@@ -2631,10 +2449,7 @@
           "mqtt_tls": {
             "type": "string",
             "description": "Enable TLS connections.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Use TLS",
               "input-type": "switch",
@@ -2663,10 +2478,7 @@
           "mqtt_tls_type": {
             "type": "string",
             "description": "Choose TLS type.",
-            "enum": [
-              "cert",
-              "psk"
-            ],
+            "enum": ["cert", "psk"],
             "x-web": {
               "pretty": "TLS type",
               "input-type": "select",
@@ -2702,6 +2514,11 @@
               ]
             }
           },
+          "mqtt_cafile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "mqtt_certfile": {
             "type": "string",
             "description": "Client certificate.",
@@ -2718,6 +2535,11 @@
               ]
             }
           },
+          "mqtt_certfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "mqtt_keyfile": {
             "type": "string",
             "description": "Client private keyfile.",
@@ -2733,6 +2555,11 @@
                 }
               ]
             }
+          },
+          "mqtt_keyfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
           },
           "mqtt_psk": {
             "type": "string",
@@ -2771,10 +2598,7 @@
           "mqtt_use_credentials": {
             "type": "string",
             "description": "Enables use of username and password for authentication.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Use credentials",
               "input-type": "switch",
@@ -2820,10 +2644,7 @@
           "azure_connection_type": {
             "type": "string",
             "description": "Select the attestation method to connect to Azure IoT Cloud",
-            "enum": [
-              "iothub",
-              "provisioning"
-            ],
+            "enum": ["iothub", "provisioning"],
             "x-web": {
               "pretty": "Attestation method",
               "input-type": "select",
@@ -2901,6 +2722,11 @@
               ]
             }
           },
+          "azure_x509certificate:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "azure_x509privatekey": {
             "type": "string",
             "description": "Upload the 'leaf' key file.",
@@ -2915,6 +2741,11 @@
                 }
               ]
             }
+          },
+          "azure_x509privatekey:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
           },
           "azure_global_prov_uri": {
             "type": "string",
@@ -2932,9 +2763,7 @@
             }
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       },
       "data_sender_output_multi_options": {
         "allOf": [
@@ -2950,7 +2779,8 @@
           {
             "$ref": "#/components/schemas/data_sender_output_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

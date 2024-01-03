@@ -5,9 +5,7 @@
     "/io/juggler/operations/options": {
       "get": {
         "summary": "Returns options needed for I/O juggler action configuration",
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "responses": {
           "200": {
             "description": "OK",
@@ -31,7 +29,8 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -39,12 +38,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "Actions"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "Actions"],
         "hw_tags": {
           "ios": true
         },
@@ -53,9 +47,7 @@
     },
     "/io/juggler/operations/config": {
       "get": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Returns all I/O Juggler Action configurations",
         "responses": {
           "200": {
@@ -64,9 +56,7 @@
         }
       },
       "post": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Creates a new I/O Juggler Action configuration",
         "responses": {
           "201": {
@@ -86,16 +76,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_action_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Updates the specified I/O Juggler Action configurations",
         "responses": {
           "200": {
@@ -122,16 +111,15 @@
                       "$ref": "#/components/schemas/io_juggler_action_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Deletes the specified I/O Juggler Action configurations",
         "responses": {
           "200": {
@@ -146,12 +134,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "Actions"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "Actions"],
         "hw_tags": {
           "ios": true
         },
@@ -171,9 +154,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Returns the specified I/O Juggler Action configuration",
         "responses": {
           "200": {
@@ -185,9 +166,7 @@
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Updates the specified I/O Juggler Action configuration",
         "responses": {
           "200": {
@@ -210,16 +189,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_action_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Deletes the specified I/O Juggler Action configuration",
         "responses": {
           "200": {
@@ -231,9 +209,7 @@
         }
       },
       "post": {
-        "tags": [
-          "I/O Juggler Actions"
-        ],
+        "tags": ["I/O Juggler Actions"],
         "summary": "Uploads I/O Juggler Action certificate files or script file",
         "responses": {
           "200": {
@@ -242,14 +218,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "x-examples": {
-                    "example-1": {
-                      "success": true,
-                      "data": {
-                        "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
-                      }
-                    }
-                  },
                   "properties": {
                     "success": {
                       "type": "boolean",
@@ -264,7 +232,8 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -282,34 +251,21 @@
                 "properties": {
                   "option": {
                     "type": "string",
-                    "enum": [
-                      "cafile",
-                      "certfile",
-                      "keyfile",
-                      "upload"
-                    ]
+                    "enum": ["cafile", "certfile", "keyfile", "upload"]
                   },
                   "file": {
                     "type": "string",
                     "format": "binary"
                   }
                 },
-                "required": [
-                  "option",
-                  "file"
-                ]
+                "required": ["option", "file"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "Actions"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "Actions"],
         "hw_tags": {
           "ios": true
         },
@@ -333,7 +289,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_juggler_action_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -356,7 +313,8 @@
                     "$ref": "#/components/schemas/io_juggler_action_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -379,19 +337,7 @@
           "type": {
             "type": "string",
             "description": "Type of action.",
-            "enum": [
-              "email",
-              "dout",
-              "http",
-              "script",
-              "reboot",
-              "profile",
-              "mqtt",
-              "rms",
-              "sms",
-              "sim_switch",
-              "wifi"
-            ],
+            "enum": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms", "sms", "sim_switch", "wifi"],
             "x-web": {
               "pretty": "Type",
               "input-type": "select",
@@ -402,19 +348,7 @@
                     "dual_sim": true,
                     "wifi": true
                   },
-                  "values": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "mqtt",
-                    "rms",
-                    "sms",
-                    "sim_switch",
-                    "wifi"
-                  ]
+                  "values": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms", "sms", "sim_switch", "wifi"]
                 },
                 {
                   "hw_tags": {
@@ -422,18 +356,7 @@
                     "dual_sim": true,
                     "wifi": false
                   },
-                  "values": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "mqtt",
-                    "rms",
-                    "sms",
-                    "sim_switch"
-                  ]
+                  "values": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms", "sms", "sim_switch"]
                 },
                 {
                   "hw_tags": {
@@ -441,18 +364,7 @@
                     "dual_sim": false,
                     "wifi": true
                   },
-                  "values": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "mqtt",
-                    "rms",
-                    "sms",
-                    "wifi"
-                  ]
+                  "values": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms", "sms", "wifi"]
                 },
                 {
                   "hw_tags": {
@@ -460,17 +372,7 @@
                     "dual_sim": false,
                     "wifi": false
                   },
-                  "values": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "mqtt",
-                    "rms",
-                    "sms"
-                  ]
+                  "values": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms", "sms"]
                 },
                 {
                   "hw_tags": {
@@ -478,17 +380,7 @@
                     "dual_sim": false,
                     "wifi": true
                   },
-                  "values": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "mqtt",
-                    "rms",
-                    "wifi"
-                  ]
+                  "values": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms", "wifi"]
                 },
                 {
                   "hw_tags": {
@@ -496,16 +388,7 @@
                     "dual_sim": false,
                     "wifi": false
                   },
-                  "values": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "mqtt",
-                    "rms"
-                  ]
+                  "values": ["email", "dout", "http", "script", "reboot", "profile", "mqtt", "rms"]
                 }
               ],
               "enum-pretty": {
@@ -541,10 +424,7 @@
           "post": {
             "type": "string",
             "description": "HTTP request type.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Method",
               "input-type": "select",
@@ -578,10 +458,7 @@
             "type": "string",
             "description": "Verifies the validity of certificates, only works for https.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Verify",
               "input-type": "switch",
@@ -596,10 +473,7 @@
             "type": "string",
             "description": "Choose a different way to pass parameters. If method is POST parameters are passed in request body. If method is GET parameters are passed throught the URL.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Alt. parameter mode",
               "input-type": "switch",
@@ -620,11 +494,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "type": [
-                    "email",
-                    "sms",
-                    "mqtt"
-                  ]
+                  "type": ["email", "sms", "mqtt"]
                 },
                 {
                   "type": "http",
@@ -693,18 +563,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "type": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "rms",
-                    "sms",
-                    "sim_switch",
-                    "wifi"
-                  ]
+                  "type": ["email", "dout", "http", "script", "reboot", "profile", "rms", "sms", "sim_switch", "wifi"]
                 }
               ]
             }
@@ -726,12 +585,7 @@
               },
               "depends": [
                 {
-                  "type": [
-                    "email",
-                    "sms",
-                    "http",
-                    "script"
-                  ]
+                  "type": ["email", "sms", "http", "script"]
                 }
               ]
             }
@@ -761,10 +615,7 @@
           "ui_recipient_format": {
             "type": "string",
             "description": "Choose between single numbers in a list or usage a phone group list.",
-            "enum": [
-              "single",
-              "group"
-            ],
+            "enum": ["single", "group"],
             "x-web": {
               "pretty": "Recipients",
               "input-type": "select",
@@ -811,10 +662,7 @@
             "type": "string",
             "description": "Enable/Disable RMS functionality.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable RMS",
               "input-type": "switch",
@@ -829,10 +677,7 @@
             "type": "string",
             "description": "Enable/Disable all WiFi interfaces.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable WiFi",
               "input-type": "switch",
@@ -846,15 +691,7 @@
           "dest": {
             "type": "string",
             "description": "Specifies the output/relay of which the state will be changed.",
-            "enum": [
-              "dio0",
-              "dio1",
-              "dio2",
-              "dout2",
-              "dout1",
-              "relay1",
-              "relay0"
-            ],
+            "enum": ["dio0", "dio1", "dio2", "dout2", "dout1", "relay1", "relay0"],
             "x-web": {
               "pretty": "Control",
               "input-type": "select",
@@ -888,10 +725,7 @@
             "description": "Maintain this IO state after reboot.",
             "default": "1",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Maintain",
               "input-type": "switch",
@@ -906,10 +740,7 @@
             "type": "string",
             "description": "On action inverts pin state.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Invert",
               "input-type": "switch",
@@ -924,10 +755,7 @@
             "type": "string",
             "description": "Copies the state from selected input to selected output.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "State copying",
               "input-type": "switch",
@@ -941,10 +769,7 @@
           "state": {
             "type": "string",
             "description": "Specifies what state the output pin will be set to.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "State",
               "input-type": "select",
@@ -975,114 +800,89 @@
               ],
               "enum-depends": [
                 {
-                    "hw_tags": {
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": true,
-                        "dwi0": false,
-                        "dwi1": false,
-                        "relay0": false,
-                        "relay1": false,
-                        "din1": false,
-                        "din2": false,
-                        "dout1": false,
-                        "dout2": false,
-                        "iio": false
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1",
-                        "dio2"
-                    ]
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": true,
+                    "dwi0": false,
+                    "dwi1": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "iio": false
+                  },
+                  "values": ["dio0", "dio1", "dio2"]
                 },
                 {
-                    "hw_tags": {
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": false,
-                        "dwi0": true,
-                        "dwi1": true,
-                        "relay0": true,
-                        "relay1": true,
-                        "din1": false,
-                        "din2": false,
-                        "dout1": false,
-                        "dout2": false,
-                        "iio": true
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1",
-                        "dwi0",
-                        "dwi1",
-                        "relay0",
-                        "relay1",
-                        "iio"
-                    ]
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "dwi0": true,
+                    "dwi1": true,
+                    "relay0": true,
+                    "relay1": true,
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "iio": true
+                  },
+                  "values": ["dio0", "dio1", "dwi0", "dwi1", "relay0", "relay1", "iio"]
                 },
                 {
-                    "hw_tags": {
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": false,
-                        "dwi0": false,
-                        "dwi1": false,
-                        "relay0": false,
-                        "relay1": false,
-                        "din1": false,
-                        "din2": false,
-                        "dout1": false,
-                        "dout2": false,
-                        "iio": false
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1"
-                    ]
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "dwi0": false,
+                    "dwi1": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "iio": false
+                  },
+                  "values": ["dio0", "dio1"]
                 },
                 {
-                    "hw_tags": {
-                        "dio0": false,
-                        "dio1": false,
-                        "dio2": false,
-                        "dwi0": false,
-                        "dwi1": false,
-                        "relay0": true,
-                        "relay1": false,
-                        "din1": true,
-                        "din2": true,
-                        "dout1": true,
-                        "dout2": true,
-                        "iio": true
-                    },
-                    "values": [
-                        "relay0",
-                        "din1",
-                        "din2",
-                        "dout1",
-                        "dout2",
-                        "iio"
-                    ]
+                  "hw_tags": {
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "dwi0": false,
+                    "dwi1": false,
+                    "relay0": true,
+                    "relay1": false,
+                    "din1": true,
+                    "din2": true,
+                    "dout1": true,
+                    "dout2": true,
+                    "iio": true
+                  },
+                  "values": ["relay0", "din1", "din2", "dout1", "dout2", "iio"]
                 },
                 {
-                    "hw_tags": {
-                        "dio0": false,
-                        "dio1": false,
-                        "dio2": false,
-                        "dwi0": false,
-                        "dwi1": false,
-                        "relay0": false,
-                        "relay1": false,
-                        "din1": true,
-                        "din2": false,
-                        "dout1": true,
-                        "dout2": false,
-                        "iio": false
-                    },
-                    "values": [
-                        "din1",
-                        "dout1"
-                    ]
+                  "hw_tags": {
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "dwi0": false,
+                    "dwi1": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "din1": true,
+                    "din2": false,
+                    "dout1": true,
+                    "dout2": false,
+                    "iio": false
+                  },
+                  "values": ["din1", "dout1"]
                 }
               ]
             }
@@ -1120,10 +920,7 @@
           "ui_file_path": {
             "type": "string",
             "description": "Choose to upload a script or specify its absolute path in router.",
-            "enum": [
-              "upload",
-              "path"
-            ],
+            "enum": ["upload", "path"],
             "x-web": {
               "pretty": "Specify path",
               "input-type": "select",
@@ -1152,6 +949,11 @@
                 }
               ]
             }
+          },
+          "upload:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
           },
           "path": {
             "type": "string",
@@ -1199,10 +1001,7 @@
             "type": "string",
             "description": "Switches to a different inserted SIM card.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Flip",
               "input-type": "switch",
@@ -1217,10 +1016,7 @@
             "type": "string",
             "description": "Enables simd service to change primary card while switching sims.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable primary option transfer",
               "input-type": "switch",
@@ -1234,10 +1030,7 @@
           "target": {
             "type": "string",
             "description": "A SIM to switch to.",
-            "enum": [
-              "1",
-              "2"
-            ],
+            "enum": ["1", "2"],
             "x-web": {
               "pretty": "Target",
               "input-type": "select",
@@ -1264,18 +1057,7 @@
               "input-type": "multiselect",
               "depends": [
                 {
-                  "type": [
-                    "email",
-                    "dout",
-                    "http",
-                    "script",
-                    "reboot",
-                    "profile",
-                    "rms",
-                    "sms",
-                    "sim_switch",
-                    "wifi"
-                  ]
+                  "type": ["email", "dout", "http", "script", "reboot", "profile", "rms", "sms", "sim_switch", "wifi"]
                 }
               ]
             }
@@ -1326,11 +1108,7 @@
           "qos": {
             "type": "string",
             "description": "Quality of Service to be used for the message.",
-            "enum": [
-              "0",
-              "1",
-              "2"
-            ],
+            "enum": ["0", "1", "2"],
             "x-web": {
               "pretty": "QoS",
               "input-type": "select",
@@ -1381,10 +1159,7 @@
             "type": "string",
             "description": "Enable TLS connection",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "TLS",
               "input-type": "switch",
@@ -1397,10 +1172,7 @@
           },
           "tls_type": {
             "type": "string",
-            "enum": [
-              "cert",
-              "psk"
-            ],
+            "enum": ["cert", "psk"],
             "description": "Type of TLS connection",
             "x-web": {
               "pretty": "TLS Type",
@@ -1421,10 +1193,7 @@
             "type": "string",
             "description": "Allow not verifying server authenticity",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Allow insecure connection",
               "input-type": "switch",
@@ -1441,10 +1210,7 @@
             "type": "string",
             "description": "Use certificate files from device",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ]
+            "enum": ["0", "1"]
           },
           "cafile": {
             "type": "string",
@@ -1462,6 +1228,11 @@
               ]
             }
           },
+          "cafile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "certfile": {
             "type": "string",
             "description": "Certificate file path",
@@ -1478,6 +1249,11 @@
               ]
             }
           },
+          "certfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
           "keyfile": {
             "type": "string",
             "description": "Key file path",
@@ -1493,6 +1269,11 @@
                 }
               ]
             }
+          },
+          "keyfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
           },
           "psk": {
             "type": "string",
@@ -1529,10 +1310,7 @@
             }
           }
         },
-        "required": [
-          "ui_name",
-          "type"
-        ]
+        "required": ["ui_name", "type"]
       },
       "io_juggler_action_options": {
         "allOf": [
@@ -1543,15 +1321,13 @@
                 "type": "string",
                 "description": "I/O Juggler Action Configuration identifier (ID)."
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/io_juggler_action_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

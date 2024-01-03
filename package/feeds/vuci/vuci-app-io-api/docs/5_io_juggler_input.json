@@ -4,9 +4,7 @@
   "paths": {
     "/io/juggler/inputs/config": {
       "get": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Returns all I/O Juggler Input configurations",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "post": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Creates a new I/O Juggler Input configuration",
         "responses": {
           "201": {
@@ -37,16 +33,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_input_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Updates the specified I/O Juggler Input configurations",
         "responses": {
           "200": {
@@ -73,16 +68,15 @@
                       "$ref": "#/components/schemas/io_juggler_input_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Deletes the specified I/O Juggler Input configurations",
         "responses": {
           "200": {
@@ -97,12 +91,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "General"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "General"],
         "hw_tags": {
           "ios": true
         },
@@ -122,9 +111,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Returns the specified I/O Juggler Input configuration",
         "responses": {
           "200": {
@@ -136,9 +123,7 @@
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Updates the specified I/O Juggler Input configuration",
         "responses": {
           "200": {
@@ -161,16 +146,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_input_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "I/O Juggler Inputs"
-        ],
+        "tags": ["I/O Juggler Inputs"],
         "summary": "Deletes the specified I/O Juggler Input configuration",
         "responses": {
           "200": {
@@ -182,12 +166,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "General"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "General"],
         "hw_tags": {
           "ios": true
         },
@@ -211,7 +190,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_juggler_input_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -234,7 +214,8 @@
                     "$ref": "#/components/schemas/io_juggler_input_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -248,10 +229,7 @@
             "type": "string",
             "description": "Enable or disable I/O juggler for this pin",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enabled",
               "input-type": "switch"
@@ -260,140 +238,101 @@
           "name": {
             "type": "string",
             "description": "Specifies I/O Input name",
-            "enum": [
-                "din1",
-                "din2",
-                "dio0",
-                "dio1",
-                "dio2",
-                "iio",
-                "adc0",
-                "acl0",
-                "dwi0",
-                "dwi1"
-            ],
+            "enum": ["din1", "din2", "dio0", "dio1", "dio2", "iio", "adc0", "acl0", "dwi0", "dwi1"],
             "x-web": {
               "pretty": "Role",
               "input-type": "select",
               "unique": true,
               "enum-depends": [
                 {
-                    "hw_tags": {
-                        "din1": true,
-                        "din2": true,
-                        "dio0": false,
-                        "dio1": false,
-                        "dio2": false,
-                        "iio": true,
-                        "adc0": true,
-                        "acl0": true,
-                        "dwi0": false,
-                        "dwi1": false
-                    },
-                    "values": [
-                        "din1",
-                        "din2",
-                        "iio",
-                        "adc0",
-                        "acl0"
-                    ]
+                  "hw_tags": {
+                    "din1": true,
+                    "din2": true,
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "iio": true,
+                    "adc0": true,
+                    "acl0": true,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["din1", "din2", "iio", "adc0", "acl0"]
                 },
                 {
-                    "hw_tags": {
-                        "din1": true,
-                        "din2": false,
-                        "dio0": false,
-                        "dio1": false,
-                        "dio2": false,
-                        "iio": false,
-                        "adc0": false,
-                        "acl0": false,
-                        "dwi0": false,
-                        "dwi1": false
-                    },
-                    "values": [
-                        "din1"
-                    ]
+                  "hw_tags": {
+                    "din1": true,
+                    "din2": false,
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "iio": false,
+                    "adc0": false,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["din1"]
                 },
                 {
-                    "hw_tags": {
-                        "din1": false,
-                        "din2": false,
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": true,
-                        "iio": false,
-                        "adc0": true,
-                        "acl0": false,
-                        "dwi0": false,
-                        "dwi1": false
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1",
-                        "dio2",
-                        "adc0"
-                    ]
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": true,
+                    "iio": false,
+                    "adc0": true,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["dio0", "dio1", "dio2", "adc0"]
                 },
                 {
-                    "hw_tags": {
-                        "din1": false,
-                        "din2": false,
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": true,
-                        "iio": false,
-                        "adc0": false,
-                        "acl0": false,
-                        "dwi0": false,
-                        "dwi1": false
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1",
-                        "dio2"
-                    ]
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": true,
+                    "iio": false,
+                    "adc0": false,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["dio0", "dio1", "dio2"]
                 },
                 {
-                    "hw_tags": {
-                        "din1": false,
-                        "din2": false,
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": false,
-                        "iio": true,
-                        "adc0": true,
-                        "acl0": true,
-                        "dwi0": true,
-                        "dwi1": true
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1",
-                        "iio",
-                        "adc0",
-                        "acl0",
-                        "dwi0",
-                        "dwi1"
-                    ]
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "iio": true,
+                    "adc0": true,
+                    "acl0": true,
+                    "dwi0": true,
+                    "dwi1": true
+                  },
+                  "values": ["dio0", "dio1", "iio", "adc0", "acl0", "dwi0", "dwi1"]
                 },
                 {
-                    "hw_tags": {
-                        "din1": false,
-                        "din2": false,
-                        "dio0": true,
-                        "dio1": true,
-                        "dio2": false,
-                        "iio": false,
-                        "adc0": false,
-                        "acl0": false,
-                        "dwi0": false,
-                        "dwi1": false
-                    },
-                    "values": [
-                        "dio0",
-                        "dio1"
-                    ]
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "iio": false,
+                    "adc0": false,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["dio0", "dio1"]
                 }
               ]
             }
@@ -409,16 +348,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "name": [
-                    "din1",
-                    "din2",
-                    "dio0",
-                    "dio1",
-                    "dio2",
-                    "iio",
-                    "dwi0",
-                    "dwi1"
-                  ]
+                  "name": ["din1", "din2", "dio0", "dio1", "dio2", "iio", "dwi0", "dwi1"]
                 }
               ]
             }
@@ -427,10 +357,7 @@
             "type": "string",
             "description": "Specifies to react when voltage is within specified min max range, otherwise react when voltage is out of range.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Inside range",
               "input-type": "switch",
@@ -444,26 +371,13 @@
           "trigger": {
             "type": "string",
             "description": "Specifies the reaction trigger.",
-            "enum": [
-              "rising",
-              "falling",
-              "both"
-            ],
+            "enum": ["rising", "falling", "both"],
             "x-web": {
               "pretty": "Trigger",
               "input-type": "select",
               "depends": [
                 {
-                  "name": [
-                    "din1",
-                    "din2",
-                    "dio0",
-                    "dio1",
-                    "dio2",
-                    "iio",
-                    "dwi0",
-                    "dwi1"
-                  ]
+                  "name": ["din1", "din2", "dio0", "dio1", "dio2", "iio", "dwi0", "dwi1"]
                 }
               ],
               "enum-pretty": {
@@ -482,9 +396,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "name": [
-                    "adc0"
-                  ]
+                  "name": ["adc0"]
                 }
               ]
             }
@@ -498,9 +410,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "name": [
-                    "adc0"
-                  ]
+                  "name": ["adc0"]
                 }
               ]
             }
@@ -508,10 +418,7 @@
           "acl": {
             "type": "string",
             "description": "Select which property - ampere or percentage the condition listens to.",
-            "enum": [
-              "current",
-              "percent"
-            ],
+            "enum": ["current", "percent"],
             "default": "current",
             "x-web": {
               "pretty": "ACL Property",
@@ -618,10 +525,7 @@
             }
           }
         },
-        "required": [
-          "name",
-          "actions"
-        ]
+        "required": ["name"]
       },
       "io_juggler_input_options": {
         "allOf": [
@@ -632,15 +536,13 @@
                 "type": "string",
                 "description": "I/O Juggler Input Configuration identifier (ID)."
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/io_juggler_input_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

@@ -10,9 +10,7 @@
     "/sms_gateway/post_get/config": {
       "get": {
         "summary": "Returns Mobile Post/Get configuration in an array",
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/post_get_many"
@@ -21,9 +19,7 @@
       },
       "put": {
         "summary": "Updates Mobile Post/Get configuration in an array",
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/post_get_many"
@@ -46,12 +42,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "Post/Get"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "Post/Get"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -73,9 +64,7 @@
       ],
       "get": {
         "summary": "Returns Mobile Post/Get configuration",
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/post_get_one"
@@ -87,9 +76,7 @@
       },
       "put": {
         "summary": "Updates Mobile Post/Get configuration",
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/post_get_one"
@@ -112,12 +99,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "Post/Get"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "Post/Get"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -135,6 +117,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable SMS management functionality through POST/GET",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -179,15 +163,7 @@
             "description": "Accessible methods. All methods are allowed if a list is empty.",
             "items": {
               "type": "string",
-              "enum": [
-                "mobile_data",
-                "mobile_sim_pin",
-                "sms_delete",
-                "sms_list",
-                "sms_read",
-                "sms_send",
-                "sms_total"
-              ]
+              "enum": ["mobile_data", "mobile_sim_pin", "sms_delete", "sms_list", "sms_read", "sms_send", "sms_total"]
             },
             "x-web": {
               "pretty": "Access",
@@ -223,10 +199,7 @@
               "input-type": "input"
             }
           }
-        },
-        "required": [
-          "username"
-        ]
+        }
       },
       "post_get_update_resp": {
         "title": "post_get_update_resp",
@@ -235,6 +208,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable SMS management functionality through POST/GET",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -279,15 +254,7 @@
             "description": "Accessible methods. All methods are allowed if a list is empty.",
             "items": {
               "type": "string",
-              "enum": [
-                "mobile_data",
-                "mobile_sim_pin",
-                "sms_delete",
-                "sms_list",
-                "sms_read",
-                "sms_send",
-                "sms_total"
-              ]
+              "enum": ["mobile_data", "mobile_sim_pin", "sms_delete", "sms_list", "sms_read", "sms_send", "sms_total"]
             },
             "x-web": {
               "pretty": "Access",
@@ -307,15 +274,9 @@
             "type": "string",
             "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           }
-        },
-        "required": [
-          "username"
-        ]
+        }
       },
       "req_body_post_get_one": {
         "description": "",
@@ -325,9 +286,7 @@
             "$ref": "#/components/schemas/post_get_update"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "req_body_post_get_many": {
         "description": "",
@@ -336,7 +295,6 @@
           "data": {
             "type": "array",
             "uniqueItems": true,
-            "minItems": 1,
             "items": {
               "allOf": [
                 {
@@ -346,9 +304,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id"
-                  ]
+                  "required": ["id"]
                 },
                 {
                   "$ref": "#/components/schemas/post_get_update"
@@ -357,9 +313,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       }
     },
     "responses": {
@@ -384,9 +338,7 @@
                           "type": "string"
                         }
                       },
-                      "required": [
-                        "id"
-                      ]
+                      "required": ["id"]
                     },
                     {
                       "$ref": "#/components/schemas/post_get_update_resp"
@@ -394,9 +346,7 @@
                   ]
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -416,7 +366,6 @@
                 "data": {
                   "type": "array",
                   "uniqueItems": true,
-                  "minItems": 1,
                   "items": {
                     "allOf": [
                       {
@@ -426,9 +375,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id"
-                        ]
+                        "required": ["id"]
                       },
                       {
                         "$ref": "#/components/schemas/post_get_update_resp"
@@ -437,10 +384,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }

@@ -15,11 +15,7 @@
   "paths": {
     "/events_reporting/options": {
       "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
+        "menu": ["Services", "Events Reporting", "Events Reporting"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -27,9 +23,7 @@
       },
       "get": {
         "summary": "Returns Events Reporting options",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/events_options"
@@ -40,11 +34,7 @@
     },
     "/events_reporting/config": {
       "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
+        "menu": ["Services", "Events Reporting", "Events Reporting"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -52,9 +42,7 @@
       },
       "get": {
         "summary": "Returns all Events Reporting configurations",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/events_reporting_multi"
@@ -82,9 +70,7 @@
             }
           }
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       },
       "put": {
         "summary": "Updates the selected Events Reporting configurations",
@@ -109,9 +95,7 @@
             }
           }
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       },
       "delete": {
         "summary": "Deletes the selected Events Reporting configurations",
@@ -127,18 +111,12 @@
         "requestBody": {
           "$ref": "#/components/requestBodies/delete_multi"
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       }
     },
     "/events_reporting/config/{id}": {
       "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
+        "menu": ["Services", "Events Reporting", "Events Reporting"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -156,9 +134,7 @@
       ],
       "get": {
         "summary": "Returns the selected Events Reporting configuration",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/events_reporting_one"
@@ -192,9 +168,7 @@
             }
           }
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       },
       "delete": {
         "summary": "Deletes the selected Events Reporting configuration",
@@ -207,18 +181,12 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       }
     },
     "/events_reporting/actions/send_test_email": {
       "x-web": {
-        "menu": [
-          "Services",
-          "Events Reporting",
-          "Events Reporting"
-        ],
+        "menu": ["Services", "Events Reporting", "Events Reporting"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -241,9 +209,7 @@
                       "description": "Operation status"
                     }
                   },
-                  "required": [
-                    "success"
-                  ],
+                  "required": ["success"],
                   "x-examples": {
                     "example-1": {
                       "success": true
@@ -266,9 +232,7 @@
             }
           }
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       }
     }
   },
@@ -281,10 +245,7 @@
             "description": "Turns the rule on or off",
             "type": "string",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -293,37 +254,16 @@
           "event": {
             "type": "string",
             "description": "Event that will trigger the rule",
-            "enum": [
-              "Config",
-              "DHCP",
-              "Reboot",
-              "Startup",
-              "SSH",
-              "Web UI",
-              "WiFi",
-              "Mobile Data",
-              "Failover",
-              "SMS",
-              "Signal strength",
-              "SIM switch",
-              "Switch Events",
-              "Switch Topology",
-              "GPS"
-            ],
+            "enum": ["Config", "DHCP", "Reboot", "Startup", "SSH", "Web UI", "WiFi", "Mobile Data", "Failover", "SMS", "Signal strength", "SIM switch", "Switch Events", "Switch Topology", "GPS"],
             "x-web": {
               "pretty": "Event type",
               "input-type": "select",
               "enum-pretty": {
                 "$ref": "#/x-schemas/event_names"
               },
-              "enum-depends": [
-                {
-                  "hw_tags": {
-                    "gps": false
-                  },
-                  "values": ["", "10", "100"]
-                }
-              ],
+              "enum-depends": {
+                "$ref": "#/x-schemas/event_select"
+              },
               "unique": true
             }
           },
@@ -344,9 +284,7 @@
           },
           "action": {
             "type": "string",
-            "enum": [
-              "sendEmail"
-            ],
+            "enum": ["sendEmail"],
             "description": "Action that will be executed when the rule is triggered",
             "x-web": {
               "pretty": "Action",
@@ -356,10 +294,7 @@
                   "hw_tags": {
                     "mobile": true
                   },
-                  "values": [
-                    "sendEmail",
-                    "sendSMS"
-                  ]
+                  "values": ["sendEmail", "sendSMS"]
                 }
               ],
               "enum-pretty": {
@@ -441,10 +376,7 @@
           },
           "recipient_format": {
             "type": "string",
-            "enum": [
-              "single",
-              "group"
-            ],
+            "enum": ["single", "group"],
             "description": "You can choose to add a single number or use a phone group list",
             "x-web": {
               "pretty": "Recipients",
@@ -519,14 +451,7 @@
               ]
             }
           }
-        },
-        "required": [
-          "subject",
-          "message",
-          "telnum",
-          "emailgroup",
-          "recipEmail"
-        ]
+        }
       },
       "events_reporting_available_events": {
         "type": "object",
@@ -717,74 +642,18 @@
                 "wireless",
                 "xl2tpd"
               ],
-              "WiFi": [
-                "all",
-                "client connected",
-                "client disconnected"
-              ],
-              "GPS": [
-                "all",
-                "left geofence",
-                "entered geofence"
-              ],
-              "SSH": [
-                "all",
-                "succeeded",
-                "bad"
-              ],
-              "Switch Topology": [
-                "Changes in topology"
-              ],
-              "Switch Events": [
-                "all",
-                "Port link state",
-                "Port speed for",
-                "changed to DOWN",
-                "changed to UP",
-                "LAN1",
-                "LAN2",
-                "LAN3",
-                "LAN4",
-                "WAN"
-              ],
-              "Reboot": [
-                "all",
-                "web ui",
-                "input/output",
-                "ping reboot",
-                "wget reboot",
-                "reboot scheduler",
-                "from button",
-                "sms reboot"
-              ],
-              "Failover": [
-                "all",
-                "Switched to main",
-                "Switched to backup"
-              ],
-              "Mobile Data": [
-                "all",
-                "data connected",
-                "data disconnected"
-              ],
-              "SMS": [
-                "received from"
-              ],
-              "Web UI": [
-                "all",
-                "Password auth succeeded",
-                "Bad password attempt"
-              ],
-              "SIM switch": [
-                "all",
-                "to SIM1",
-                "to SIM2"
-              ],
-              "DHCP": [
-                "all",
-                "lan",
-                "wifi"
-              ]
+              "WiFi": ["all", "client connected", "client disconnected"],
+              "GPS": ["all", "left geofence", "entered geofence"],
+              "SSH": ["all", "succeeded", "bad"],
+              "Switch Topology": ["Changes in topology"],
+              "Switch Events": ["all", "Port link state", "Port speed for", "changed to DOWN", "changed to UP", "LAN1", "LAN2", "LAN3", "LAN4", "WAN"],
+              "Reboot": ["all", "web ui", "input/output", "ping reboot", "wget reboot", "reboot scheduler", "from button", "sms reboot"],
+              "Failover": ["all", "Switched to main", "Switched to backup"],
+              "Mobile Data": ["all", "data connected", "data disconnected"],
+              "SMS": ["received from"],
+              "Web UI": ["all", "Password auth succeeded", "Bad password attempt"],
+              "SIM switch": ["all", "to SIM1", "to SIM2"],
+              "DHCP": ["all", "lan", "wifi"]
             }
           }
         }
@@ -797,22 +666,11 @@
             "$ref": "#/components/schemas/events_reporting"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "req_body_events_reporting_multi": {
         "description": "",
         "type": "object",
-        "x-examples": {
-          "example-1": {
-            "data": [
-              {
-                "id": ""
-              }
-            ]
-          }
-        },
         "properties": {
           "data": {
             "type": "array",
@@ -826,51 +684,40 @@
                     "id": {
                       "type": "string"
                     }
-                  },
-                  "required": [
-                    "id"
-                  ]
+                  }
                 },
                 {
                   "$ref": "#/components/schemas/events_reporting"
                 }
-              ]
+              ],
+              "required": ["id"]
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "req_body_send_email": {
         "description": "",
         "type": "object",
-        "x-examples": {
-          "example-1": {
-            "data": {
-              "event": "",
-              "group": "",
-              "message": "",
-              "subject": "",
-              "recipients": [
-                "example@example.com"
-              ]
-            }
-          }
-        },
         "properties": {
           "data": {
             "type": "object",
-            "required": [
-              "event",
-              "group",
-              "message",
-              "subject",
-              "recipients"
-            ],
+            "required": ["event", "group", "message", "subject", "recipients"],
             "properties": {
               "event": {
-                "type": "string"
+                "type": "string",
+                "enum": ["Config", "DHCP", "Reboot", "Startup", "SSH", "Web UI", "WiFi", "Mobile Data", "Failover", "SMS", "Signal strength", "SIM switch", "Switch Events", "Switch Topology", "GPS"],
+                "x-web": {
+                  "pretty": "Event type",
+                  "input-type": "select",
+                  "enum-pretty": {
+                    "$ref": "#/x-schemas/event_names"
+                  },
+                  "enum-depends": {
+                    "$ref": "#/x-schemas/event_select"
+                  },
+                  "unique": true
+                }
               },
               "group": {
                 "type": "string"
@@ -879,12 +726,16 @@
                 "type": "string"
               },
               "subject": {
-                "type": "string"
+                "type": "string",
+                "format": "regex",
+                "pattern": "^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$",
+                "maxLength": 256
               },
               "recipients": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "format": "email"
                 }
               },
               "info_modem_id": {
@@ -894,9 +745,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       }
     },
     "responses": {
@@ -925,13 +774,11 @@
                     {
                       "$ref": "#/components/schemas/events_reporting"
                     }
-                  ]
+                  ],
+                  "required": ["id"]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -959,22 +806,17 @@
                           "id": {
                             "type": "string"
                           }
-                        },
-                        "required": [
-                          "id"
-                        ]
+                        }
                       },
                       {
                         "$ref": "#/components/schemas/events_reporting"
                       }
-                    ]
+                    ],
+                    "required": ["id"]
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -995,10 +837,7 @@
                   "$ref": "#/components/schemas/events_reporting_available_events"
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }

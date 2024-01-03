@@ -6,9 +6,7 @@
     "/ulog/available_interfaces/options": {
       "get": {
         "summary": "Returns Traffic Logging options",
-        "tags": [
-          "Settings"
-        ],
+        "tags": ["Settings"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_options"
@@ -18,11 +16,7 @@
         "description": ""
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Traffic Logging",
-          "Traffic Logging"
-        ],
+        "menu": ["Services", "Traffic Logging", "Traffic Logging"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -33,9 +27,7 @@
     "/ulog/config": {
       "get": {
         "summary": "Returns the Traffic Logging configuration in an array",
-        "tags": [
-          "Settings"
-        ],
+        "tags": ["Settings"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_many"
@@ -62,16 +54,10 @@
           "$ref": "#/components/requestBodies/ulog_many"
         },
         "description": "",
-        "tags": [
-          "Settings"
-        ]
+        "tags": ["Settings"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Traffic Logging",
-          "Traffic Logging"
-        ],
+        "menu": ["Services", "Traffic Logging", "Traffic Logging"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -93,9 +79,7 @@
       ],
       "get": {
         "summary": "Returns the Traffic Logging configuration",
-        "tags": [
-          "Settings"
-        ],
+        "tags": ["Settings"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_one"
@@ -125,16 +109,10 @@
           "$ref": "#/components/requestBodies/ulog_one"
         },
         "description": "",
-        "tags": [
-          "Settings"
-        ]
+        "tags": ["Settings"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Traffic Logging",
-          "Traffic Logging"
-        ],
+        "menu": ["Services", "Traffic Logging", "Traffic Logging"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -145,9 +123,7 @@
     "/ulog/status": {
       "get": {
         "summary": "Returns Traffic Logging status",
-        "tags": [
-          "Settings"
-        ],
+        "tags": ["Settings"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_status"
@@ -157,11 +133,7 @@
         "description": ""
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Maintenance",
-          "Traffic Log"
-        ],
+        "menu": ["System", "Maintenance", "Traffic Log"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -172,9 +144,7 @@
     "/ulog/ftp/config": {
       "get": {
         "summary": "Returns the Traffic Logging FTP configuration",
-        "tags": [
-          "FTP Settings"
-        ],
+        "tags": ["FTP Settings"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_ftp_many"
@@ -201,16 +171,10 @@
           "$ref": "#/components/requestBodies/ulog_ftp_many"
         },
         "description": "",
-        "tags": [
-          "FTP Settings"
-        ]
+        "tags": ["FTP Settings"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Traffic Logging",
-          "Traffic Logging"
-        ],
+        "menu": ["Services", "Traffic Logging", "Traffic Logging"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -232,9 +196,7 @@
       ],
       "get": {
         "summary": "Returns the Traffic Logging FTP configuration",
-        "tags": [
-          "FTP Settings"
-        ],
+        "tags": ["FTP Settings"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/ulog_ftp_one"
@@ -264,16 +226,10 @@
           "$ref": "#/components/requestBodies/ulog_ftp_one"
         },
         "description": "",
-        "tags": [
-          "FTP Settings"
-        ]
+        "tags": ["FTP Settings"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Traffic Logging",
-          "Traffic Logging"
-        ],
+        "menu": ["Services", "Traffic Logging", "Traffic Logging"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -291,6 +247,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable Traffic Logging",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -299,10 +257,7 @@
           "network": {
             "type": "array",
             "description": "Networks",
-            "enum": [
-              "lan",
-              "hotspot"
-            ],
+            "enum": ["lan", "hotspot"],
             "items": {
               "type": "string"
             },
@@ -376,11 +331,7 @@
               ]
             }
           }
-        },
-        "required": [
-          "enabled",
-          "network"
-        ]
+        }
       },
       "ulog_ftp": {
         "description": "",
@@ -400,6 +351,7 @@
             "type": "string",
             "description": "The user name of the FTP server that will be used for logs uploading",
             "format": "credentials_validate",
+            "maxLength": 512,
             "x-web": {
               "pretty": "Username",
               "input-type": "input",
@@ -410,6 +362,7 @@
             "type": "string",
             "description": "The password of the FTP server that will be used for logs uploading",
             "format": "credentials_validate",
+            "maxLength": 512,
             "writeOnly": true,
             "x-web": {
               "pretty": "Password",
@@ -430,7 +383,7 @@
           },
           "remote_file_path": {
             "type": "string",
-            "description": "FTP server's subfolder in which received file will be stored. Entry should end with a slash (either \"\/\" or \"\\\")",
+            "description": "FTP server's subfolder in which received file will be stored. Entry should end with a slash (either \"/\" or \"\\\")",
             "format": "string",
             "x-web": {
               "pretty": "Subfolder",
@@ -441,12 +394,7 @@
           "extra_name_info": {
             "type": "string",
             "description": "Extra information to be added to file name",
-            "enum": [
-              "none",
-              "mac",
-              "serial",
-              "custom"
-            ],
+            "enum": ["none", "mac", "serial", "custom"],
             "x-web": {
               "pretty": "File name extras",
               "input-type": "select",
@@ -478,10 +426,7 @@
           "fixed": {
             "type": "string",
             "description": "The schedule mode to be used for uploading to FTP server",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Mode",
               "input-type": "select",
@@ -526,14 +471,7 @@
             "type": "string",
             "description": "Upload logs to server every x hours",
             "default": "1",
-            "enum": [
-              "1",
-              "2",
-              "4",
-              "8",
-              "12",
-              "24"
-            ],
+            "enum": ["1", "2", "4", "8", "12", "24"],
             "x-web": {
               "pretty": "Upload interval",
               "input-type": "select",
@@ -558,15 +496,7 @@
             "description": "Uploading will be performed on these days only",
             "items": {
               "type": "string",
-              "enum": [
-                "mon",
-                "tue",
-                "wed",
-                "thu",
-                "fri",
-                "sat",
-                "sun"
-              ]
+              "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
             },
             "x-web": {
               "pretty": "Days",
@@ -583,15 +513,7 @@
               }
             }
           }
-        },
-        "required": [
-          "host",
-          "port",
-          "hours",
-          "minutes",
-          "interval",
-          "weekdays"
-        ]
+        }
       },
       "ulog_ftp_resp": {
         "description": "",
@@ -611,6 +533,7 @@
             "type": "string",
             "description": "The user name of the FTP server that will be used for logs uploading",
             "format": "credentials_validate",
+            "maxLength": 512,
             "x-web": {
               "pretty": "Username",
               "input-type": "input",
@@ -620,10 +543,7 @@
           "password": {
             "type": "string",
             "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
-            "enum": [
-              "unset",
-              "set"
-            ],
+            "enum": ["unset", "set"],
             "readOnly": true
           },
           "port": {
@@ -639,7 +559,7 @@
           },
           "remote_file_path": {
             "type": "string",
-            "description": "FTP server's subfolder in which received file will be stored. Entry should end with a slash (either \"\/\" or \"\\\")",
+            "description": "FTP server's subfolder in which received file will be stored. Entry should end with a slash (either \"/\" or \"\\\")",
             "format": "string",
             "x-web": {
               "pretty": "Subfolder",
@@ -650,12 +570,7 @@
           "extra_name_info": {
             "type": "string",
             "description": "Extra information to be added to file name",
-            "enum": [
-              "none",
-              "mac",
-              "serial",
-              "custom"
-            ],
+            "enum": ["none", "mac", "serial", "custom"],
             "x-web": {
               "pretty": "File name extras",
               "input-type": "select",
@@ -687,10 +602,7 @@
           "fixed": {
             "type": "string",
             "description": "The schedule mode to be used for uploading to FTP server",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Mode",
               "input-type": "select",
@@ -735,14 +647,7 @@
             "type": "string",
             "description": "Upload logs to server every x hours",
             "default": "1",
-            "enum": [
-              "1",
-              "2",
-              "4",
-              "8",
-              "12",
-              "24"
-            ],
+            "enum": ["1", "2", "4", "8", "12", "24"],
             "x-web": {
               "pretty": "Upload interval",
               "input-type": "select",
@@ -767,15 +672,7 @@
             "description": "Uploading will be performed on these days only",
             "items": {
               "type": "string",
-              "enum": [
-                "mon",
-                "tue",
-                "wed",
-                "thu",
-                "fri",
-                "sat",
-                "sun"
-              ]
+              "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
             },
             "x-web": {
               "pretty": "Days",
@@ -792,15 +689,7 @@
               }
             }
           }
-        },
-        "required": [
-          "host",
-          "port",
-          "hours",
-          "minutes",
-          "interval",
-          "weekdays"
-        ]
+        }
       },
       "ulog_status": {
         "description": "",
@@ -828,21 +717,14 @@
             "description": "FTP enabled or disabled"
           }
         },
-        "required": [
-          "enabled",
-          "traffic_log",
-          "ftp_enabled"
-        ]
+        "required": ["enabled", "traffic_log", "ftp_enabled"]
       },
       "ulog_options": {
         "description": "",
         "type": "object",
         "x-examples": {
           "example-1": {
-            "network": [
-              "lan",
-              "hotspot"
-            ]
+            "network": ["lan", "hotspot"]
           }
         },
         "properties": {
@@ -854,9 +736,7 @@
             }
           }
         },
-        "required": [
-          "network"
-        ]
+        "required": ["network"]
       }
     },
     "requestBodies": {
@@ -871,9 +751,7 @@
                   "$ref": "#/components/schemas/ulog"
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["data"]
             }
           }
         }
@@ -884,15 +762,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "data": [
-                    {
-                      "id": ""
-                    }
-                  ]
-                }
-              },
               "properties": {
                 "data": {
                   "type": "array",
@@ -907,21 +776,17 @@
                             "type": "string",
                             "description": "Configuration ID"
                           }
-                        },
-                        "required": [
-                          "id"
-                        ]
+                        }
                       },
                       {
                         "$ref": "#/components/schemas/ulog"
                       }
-                    ]
+                    ],
+                    "required": ["id"]
                   }
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["data"]
             }
           }
         }
@@ -937,9 +802,7 @@
                   "$ref": "#/components/schemas/ulog_ftp"
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["data"]
             }
           }
         }
@@ -950,15 +813,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "data": [
-                    {
-                      "id": ""
-                    }
-                  ]
-                }
-              },
               "properties": {
                 "data": {
                   "type": "array",
@@ -973,21 +827,17 @@
                             "type": "string",
                             "description": "Configuration ID"
                           }
-                        },
-                        "required": [
-                          "id"
-                        ]
+                        }
                       },
                       {
                         "$ref": "#/components/schemas/ulog_ftp"
                       }
-                    ]
+                    ],
+                    "required": ["id"]
                   }
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["data"]
             }
           }
         }
@@ -1020,13 +870,11 @@
                     {
                       "$ref": "#/components/schemas/ulog"
                     }
-                  ]
+                  ],
+                  "required": ["id"]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -1038,16 +886,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": [
-                    {
-                      "id": ""
-                    }
-                  ]
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1066,22 +904,17 @@
                             "type": "string",
                             "description": "Configuration ID"
                           }
-                        },
-                        "required": [
-                          "id"
-                        ]
+                        }
                       },
                       {
                         "$ref": "#/components/schemas/ulog"
                       }
-                    ]
+                    ],
+                    "required": ["id"]
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -1093,16 +926,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": [
-                    {
-                      "id": ""
-                    }
-                  ]
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1121,22 +944,17 @@
                             "type": "string",
                             "description": "Configuration ID"
                           }
-                        },
-                        "required": [
-                          "id"
-                        ]
+                        }
                       },
                       {
                         "$ref": "#/components/schemas/ulog_ftp_resp"
                       }
-                    ]
+                    ],
+                    "required": ["id"]
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -1167,13 +985,11 @@
                     {
                       "$ref": "#/components/schemas/ulog_ftp_resp"
                     }
-                  ]
+                  ],
+                  "required": ["id"]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -1185,16 +1001,6 @@
             "schema": {
               "description": "",
               "type": "object",
-              "x-examples": {
-                "example-1": {
-                  "success": true,
-                  "data": {
-                    "enabled": "0",
-                    "data": "",
-                    "ftp_enabled": "1"
-                  }
-                }
-              },
               "properties": {
                 "success": {
                   "type": "boolean",
@@ -1204,10 +1010,7 @@
                   "$ref": "#/components/schemas/ulog_status"
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -1228,10 +1031,7 @@
                   "$ref": "#/components/schemas/ulog_options"
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }

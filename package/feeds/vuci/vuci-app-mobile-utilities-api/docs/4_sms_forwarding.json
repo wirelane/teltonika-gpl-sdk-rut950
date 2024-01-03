@@ -9,9 +9,7 @@
     "/sms_gateway/sms_forwarding/to_http/config": {
       "get": {
         "summary": "Returns SMS Forwarding to HTTP configuration in an array",
-        "tags": [
-          "SMS Forwarding to HTTP"
-        ],
+        "tags": ["SMS Forwarding to HTTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_http_many"
@@ -20,9 +18,7 @@
       },
       "put": {
         "summary": "Updates SMS Forwarding to HTTP configuration in an array",
-        "tags": [
-          "SMS Forwarding to HTTP"
-        ],
+        "tags": ["SMS Forwarding to HTTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_http_many"
@@ -40,13 +36,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMS Forwarding",
-          "SMS Forwarding to HTTP"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMS Forwarding", "SMS Forwarding to HTTP"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -68,23 +58,25 @@
       ],
       "get": {
         "summary": "Returns SMS Forwarding to HTTP configuration",
-        "tags": [
-          "SMS Forwarding to HTTP"
-        ],
+        "tags": ["SMS Forwarding to HTTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_http"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "put": {
         "summary": "Updates SMS Forwarding to HTTP configuration",
-        "tags": [
-          "SMS Forwarding to HTTP"
-        ],
+        "tags": ["SMS Forwarding to HTTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_http"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -96,13 +88,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMS Forwarding",
-          "SMS Forwarding to HTTP"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMS Forwarding", "SMS Forwarding to HTTP"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -113,9 +99,7 @@
     "/sms_gateway/sms_forwarding/to_sms/config": {
       "get": {
         "summary": "Returns SMS Forwarding to SMS configuration in an array",
-        "tags": [
-          "SMS Forwarding to SMS"
-        ],
+        "tags": ["SMS Forwarding to SMS"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_sms_many"
@@ -124,9 +108,7 @@
       },
       "put": {
         "summary": "Updates SMS Forwarding to SMS configuration in an array",
-        "tags": [
-          "SMS Forwarding to SMS"
-        ],
+        "tags": ["SMS Forwarding to SMS"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_sms_many"
@@ -144,13 +126,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMS Forwarding",
-          "SMS Forwarding to SMS"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMS Forwarding", "SMS Forwarding to SMS"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -172,23 +148,25 @@
       ],
       "get": {
         "summary": "Returns SMS Forwarding to SMS configuration",
-        "tags": [
-          "SMS Forwarding to SMS"
-        ],
+        "tags": ["SMS Forwarding to SMS"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_sms"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "put": {
         "summary": "Updates SMS Forwarding to SMS configuration",
-        "tags": [
-          "SMS Forwarding to SMS"
-        ],
+        "tags": ["SMS Forwarding to SMS"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_sms"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -200,13 +178,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMS Forwarding",
-          "SMS Forwarding to SMS"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMS Forwarding", "SMS Forwarding to SMS"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -217,9 +189,7 @@
     "/sms_gateway/sms_forwarding/to_smtp/config": {
       "get": {
         "summary": "Returns SMS Forwarding to SMTP configuration in an array",
-        "tags": [
-          "SMS Forwarding to SMTP"
-        ],
+        "tags": ["SMS Forwarding to SMTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_smtp_many"
@@ -228,9 +198,7 @@
       },
       "put": {
         "summary": "Updates SMS Forwarding to SMTP configuration in an array",
-        "tags": [
-          "SMS Forwarding to SMTP"
-        ],
+        "tags": ["SMS Forwarding to SMTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_smtp_many"
@@ -248,13 +216,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMS Forwarding",
-          "SMS Forwarding to SMTP"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMS Forwarding", "SMS Forwarding to SMTP"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -276,23 +238,25 @@
       ],
       "get": {
         "summary": "Returns SMS Forwarding to SMTP configuration",
-        "tags": [
-          "SMS Forwarding to SMTP"
-        ],
+        "tags": ["SMS Forwarding to SMTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_smtp"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "put": {
         "summary": "Updates SMS Forwarding to SMTP configuration",
-        "tags": [
-          "SMS Forwarding to SMTP"
-        ],
+        "tags": ["SMS Forwarding to SMTP"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/sms_forwarding_to_smtp"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -304,13 +268,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMS Forwarding",
-          "SMS Forwarding to SMTP"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMS Forwarding", "SMS Forwarding to SMTP"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -328,6 +286,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable/disable SMS Forwarding to HTTP",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -336,6 +296,8 @@
           "every_sms": {
             "type": "string",
             "description": "Enable/disable SMS-utilities rules Forwarding",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Forward SMS-Utilities rules",
               "input-type": "switch"
@@ -344,6 +306,8 @@
           "delete_sms": {
             "type": "string",
             "description": "Don't save received message",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Don't save received message",
               "input-type": "switch"
@@ -352,6 +316,8 @@
           "sender_num": {
             "type": "string",
             "description": "Enable/disable adding original message sender phone number",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Include sender's number",
               "input-type": "switch"
@@ -361,6 +327,7 @@
             "type": "string",
             "description": "Sender phone number codename for query string name/value pair",
             "maxLength": 16,
+            "format": "default_validation",
             "x-web": {
               "pretty": "Number value name",
               "input-type": "input",
@@ -371,120 +338,10 @@
               ]
             }
           },
-          "message_encode_b64": {
-            "type": "string",
-            "description": "Message text will be encoded to a Base64 string. Enable this to preserve Unicode characters in the message text.",
-            "x-web": {
-              "pretty": "Encode message text to Base64",
-              "input-type": "switch"
-            }
-          },
-          "verify_cert": {
-            "type": "string",
-            "description": "Select whether to ignore or verify server certificate",
-            "enum": [
-              "ignore",
-              "verify"
-            ],
-            "default": "ignore",
-            "x-web": {
-              "pretty": "HTTPS certificate verification",
-              "input-type": "select",
-              "enum-pretty": {
-                "ignore": "ignore",
-                "verify": "Verify"
-              }
-            }
-          },
-          "method": {
-            "type": "string",
-            "description": "Witch HTTP request method will be used",
-            "enum": [
-              "get",
-              "post"
-            ],
-            "default": "get",
-            "x-web": {
-              "pretty": "Method",
-              "input-type": "select",
-              "enum-pretty": {
-                "get": "Get",
-                "post": "Post"
-              }
-            }
-          },
-          "url": {
-            "type": "string",
-            "description": "URL to which message is going to be forwarded",
-            "format": "url",
-            "x-web": {
-              "pretty": "URL",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "message_name": {
-            "type": "string",
-            "description": "Message codename for query string name/value pair",
-            "maxLength": 16,
-            "x-web": {
-              "pretty": "Message value name",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
-            }
-          },
-          "extra_name1": {
-            "type": "string",
-            "description": "Extra html query name.",
-            "maxLength": 64,
-            "x-web": {
-              "pretty": "Extra name 1",
-              "input-type": "input"
-            }
-          },
-          "extra_value1": {
-            "type": "string",
-            "description": "Extra html query value.",
-            "maxLength": 64,
-            "x-web": {
-              "pretty": "Extra value 1",
-              "input-type": "input"
-            }
-          },
-          "extra_name2": {
-            "type": "string",
-            "description": "Extra html query name.",
-            "maxLength": 64,
-            "x-web": {
-              "pretty": "Extra name 2",
-              "input-type": "input"
-            }
-          },
-          "extra_value2": {
-            "type": "string",
-            "description": "Extra html query value.",
-            "maxLength": 64,
-            "x-web": {
-              "pretty": "Extra value 2",
-              "input-type": "input"
-            }
-          },
           "mode": {
             "type": "string",
             "description": "Choose which messages are going to be forwarded",
-            "enum": [
-              "everyone",
-              "list_number",
-              "user_group"
-            ],
+            "enum": ["everyone", "list_number", "user_group"],
             "default": "everyone",
             "x-web": {
               "pretty": "Mode",
@@ -508,8 +365,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "list_number",
-                  "enabled": "1"
+                  "mode": "list_number"
                 }
               ]
             }
@@ -526,14 +382,104 @@
                 }
               ]
             }
+          },
+          "message_encode_b64": {
+            "type": "string",
+            "description": "Message text will be encoded to a Base64 string. Enable this to preserve Unicode characters in the message text.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Encode message text to Base64",
+              "input-type": "switch"
+            }
+          },
+          "verify_cert": {
+            "type": "string",
+            "description": "Select whether to ignore or verify server certificate",
+            "enum": ["ignore", "verify"],
+            "default": "ignore",
+            "x-web": {
+              "pretty": "HTTPS certificate verification",
+              "input-type": "select",
+              "enum-pretty": {
+                "ignore": "Ignore",
+                "verify": "Verify"
+              }
+            }
+          },
+          "method": {
+            "type": "string",
+            "description": "Witch HTTP request method will be used",
+            "enum": ["get", "post"],
+            "default": "get",
+            "x-web": {
+              "pretty": "Method",
+              "input-type": "select",
+              "enum-pretty": {
+                "get": "Get",
+                "post": "Post"
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to which message is going to be forwarded",
+            "format": "url",
+            "x-web": {
+              "pretty": "URL",
+              "input-type": "input"
+            }
+          },
+          "message_name": {
+            "type": "string",
+            "description": "Message codename for query string name/value pair",
+            "maxLength": 16,
+            "x-web": {
+              "pretty": "Message value name",
+              "input-type": "input"
+            }
+          },
+          "extra_name1": {
+            "type": "string",
+            "description": "Extra html query name.",
+            "maxLength": 64,
+            "format": "default_validation",
+            "x-web": {
+              "pretty": "Extra name 1",
+              "input-type": "input"
+            }
+          },
+          "extra_value1": {
+            "type": "string",
+            "description": "Extra html query value.",
+            "maxLength": 64,
+            "format": "default_validation",
+            "x-web": {
+              "pretty": "Extra value 1",
+              "input-type": "input"
+            }
+          },
+          "extra_name2": {
+            "type": "string",
+            "description": "Extra html query name.",
+            "maxLength": 64,
+            "format": "default_validation",
+            "x-web": {
+              "pretty": "Extra name 2",
+              "input-type": "input"
+            }
+          },
+          "extra_value2": {
+            "type": "string",
+            "description": "Extra html query value.",
+            "maxLength": 64,
+            "format": "default_validation",
+            "x-web": {
+              "pretty": "Extra value 2",
+              "input-type": "input"
+            }
           }
-        },
-        "required": [
-          "number_name",
-          "url",
-          "message_name",
-          "tel"
-        ]
+        }
       },
       "sms_forwarding_to_sms_opts": {
         "description": "",
@@ -541,6 +487,8 @@
         "properties": {
           "enabled": {
             "type": "string",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "description": "Enable/disable SMS Forwarding",
             "x-web": {
               "pretty": "Enable",
@@ -550,6 +498,8 @@
           "every_sms": {
             "type": "string",
             "description": "Enable/disable SMS-utilities rules Forwarding",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Forward SMS-Utilities rules",
               "input-type": "switch"
@@ -558,6 +508,8 @@
           "delete_sms": {
             "type": "string",
             "description": "Set to do not save received message",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Don't save received message",
               "input-type": "switch"
@@ -566,6 +518,8 @@
           "sender_num": {
             "type": "string",
             "description": "Enable/disable adding original message sender phone number at the end of message text. Only added if total message length is up to 480 characters",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Add sender number",
               "input-type": "switch"
@@ -591,11 +545,7 @@
           "mode": {
             "type": "string",
             "description": "Choose which messages are going to be forwarded",
-            "enum": [
-              "everyone",
-              "list_number",
-              "user_group"
-            ],
+            "enum": ["everyone", "list_number", "user_group"],
             "default": "everyone",
             "x-web": {
               "pretty": "Mode",
@@ -619,8 +569,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "list_number",
-                  "enabled": "1"
+                  "mode": "list_number"
                 }
               ]
             }
@@ -647,19 +596,10 @@
             },
             "x-web": {
               "pretty": "Recipients phone numbers",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           }
-        },
-        "required": [
-          "tel",
-          "fwd_number"
-        ]
+        }
       },
       "sms_forwarding_to_smtp_opts": {
         "description": "",
@@ -668,6 +608,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable/disable SMS Forwarding",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -676,6 +618,8 @@
           "every_sms": {
             "type": "string",
             "description": "Enable/disable SMS-utilities rules Forwarding",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Forward SMS-Utilities rules",
               "input-type": "switch"
@@ -684,6 +628,8 @@
           "delete_sms": {
             "type": "string",
             "description": "Set to do not save received message",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Don't save received message",
               "input-type": "switch"
@@ -692,6 +638,8 @@
           "sender_num": {
             "type": "string",
             "description": "Enable/disable adding sender phone number at the end of email text body",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Add sender number",
               "input-type": "switch"
@@ -701,7 +649,8 @@
             "type": "string",
             "description": "Subject of an email. Allowed characters (a-zA-Z0-9!@#$%&*+-/=?^_`{|}~. )",
             "maxLength": 255,
-            "format": "subject_rule",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#$%&*+/=?^_`{|}~. -]+$",
             "x-web": {
               "pretty": "Subject",
               "input-type": "input"
@@ -712,34 +661,25 @@
             "description": "Sender's email configuration",
             "x-web": {
               "pretty": "Sender's email",
-              "input-type": "select"
+              "input-type": "input"
             }
           },
           "recipemail": {
             "type": "array",
-            "description": "For whom you want to send an email to. Allowed characters (a-zA-Z0-9._%+-)",
+            "description": "For whom you want to send an email to",
             "items": {
               "type": "string",
               "format": "email"
             },
             "x-web": {
               "pretty": "Recipient's email address",
-              "input-type": "input",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           },
           "mode": {
             "type": "string",
             "description": "Choose which messages are going to be forwarded",
-            "enum": [
-              "everyone",
-              "list_number",
-              "user_group"
-            ],
+            "enum": ["everyone", "list_number", "user_group"],
             "default": "everyone",
             "x-web": {
               "pretty": "Mode",
@@ -763,8 +703,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "mode": "list_number",
-                  "enabled": "1"
+                  "mode": "list_number"
                 }
               ]
             }
@@ -782,11 +721,7 @@
               ]
             }
           }
-        },
-        "required": [
-          "recipemail",
-          "tel"
-        ]
+        }
       },
       "sms_forwarding_to_http": {
         "title": "sms_forwarding_to_http",
@@ -802,13 +737,11 @@
           {
             "$ref": "#/components/schemas/sms_forwarding_to_http_opts"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "sms_forwarding_to_sms": {
         "title": "sms_forwarding_to_sms",
-        "x-stoplight": {
-          "id": "pb59rm43pxgeb"
-        },
         "allOf": [
           {
             "type": "object",
@@ -821,7 +754,8 @@
           {
             "$ref": "#/components/schemas/sms_forwarding_to_sms_opts"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "sms_forwarding_smtp": {
         "allOf": [
@@ -836,7 +770,8 @@
           {
             "$ref": "#/components/schemas/sms_forwarding_to_smtp_opts"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     },
     "responses": {
@@ -854,7 +789,8 @@
                 "data": {
                   "$ref": "#/components/schemas/sms_forwarding_to_http"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -876,7 +812,8 @@
                     "$ref": "#/components/schemas/sms_forwarding_to_http"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -895,7 +832,8 @@
                 "data": {
                   "$ref": "#/components/schemas/sms_forwarding_to_sms"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -917,7 +855,8 @@
                     "$ref": "#/components/schemas/sms_forwarding_to_sms"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -936,7 +875,8 @@
                 "data": {
                   "$ref": "#/components/schemas/sms_forwarding_smtp"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -958,7 +898,8 @@
                     "$ref": "#/components/schemas/sms_forwarding_smtp"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -974,7 +915,8 @@
                 "data": {
                   "$ref": "#/components/schemas/sms_forwarding_to_http_opts"
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -991,7 +933,8 @@
                     "$ref": "#/components/schemas/sms_forwarding_to_http"
                   }
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -1005,7 +948,8 @@
                 "data": {
                   "$ref": "#/components/schemas/sms_forwarding_to_sms_opts"
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -1022,7 +966,8 @@
                     "$ref": "#/components/schemas/sms_forwarding_to_sms"
                   }
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -1036,7 +981,8 @@
                 "data": {
                   "$ref": "#/components/schemas/sms_forwarding_to_smtp_opts"
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }
@@ -1053,7 +999,8 @@
                     "$ref": "#/components/schemas/sms_forwarding_smtp"
                   }
                 }
-              }
+              },
+              "required": ["data"]
             }
           }
         }

@@ -4,9 +4,7 @@
   "paths": {
     "/io/scheduler/config": {
       "get": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Returns all I/O Scheduler Instance configurations",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Creates a new I/O Scheduler Instance configuration",
         "responses": {
           "201": {
@@ -37,16 +33,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_scheduler_instance_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Updates the specified I/O Scheduler Instance configurations",
         "responses": {
           "200": {
@@ -73,16 +68,15 @@
                       "$ref": "#/components/schemas/io_scheduler_instance_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Deletes the specified I/O Scheduler Instance configurations",
         "responses": {
           "200": {
@@ -97,11 +91,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Scheduler"
-        ],
+        "menu": ["Services", "Input/Output", "Scheduler"],
         "hw_tags": {
           "ios": true
         },
@@ -121,9 +111,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Returns the specified I/O Scheduler Instance configuration",
         "responses": {
           "200": {
@@ -135,9 +123,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Updates the specified I/O Scheduler Instance configuration",
         "responses": {
           "200": {
@@ -160,16 +146,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_scheduler_instance_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Scheduler Instances"
-        ],
+        "tags": ["Scheduler Instances"],
         "summary": "Deletes the specified I/O Scheduler Instance configuration",
         "responses": {
           "200": {
@@ -181,11 +166,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Scheduler"
-        ],
+        "menu": ["Services", "Input/Output", "Scheduler"],
         "hw_tags": {
           "ios": true
         },
@@ -209,7 +190,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_scheduler_instance_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -232,7 +214,8 @@
                     "$ref": "#/components/schemas/io_scheduler_instance_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -253,15 +236,7 @@
           "pin": {
             "type": "string",
             "description": "Pin whose output will be enabled for the selected interval.",
-            "enum": [
-              "dio0",
-              "dio1",
-              "dio2",
-              "dout2",
-              "dout1",
-              "relay1",
-              "relay0"
-            ],
+            "enum": ["dio0", "dio1", "dio2", "dout2", "dout1", "relay1", "relay0"],
             "x-web": {
               "pretty": "Pin",
               "input-type": "select",
@@ -274,10 +249,7 @@
           "period": {
             "type": "string",
             "description": "Allows selecting between week and month days for instance intervals.",
-            "enum": [
-              "week",
-              "month"
-            ],
+            "enum": ["week", "month"],
             "x-web": {
               "pretty": "Interval type",
               "input-type": "select",
@@ -332,10 +304,7 @@
           "force_last": {
             "type": "string",
             "description": "Forces intervals to accept last day of month as valid option if selected day doesn't exist in ongoing month.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Force last day",
@@ -347,10 +316,7 @@
               ]
             }
           }
-        },
-        "required": [
-          "pin"
-        ]
+        }
       },
       "io_scheduler_instance_options": {
         "allOf": [
@@ -361,15 +327,13 @@
                 "type": "string",
                 "description": "I/O Scheduler Instance Configuration identifier (ID)."
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/io_scheduler_instance_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

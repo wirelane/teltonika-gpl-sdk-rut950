@@ -4,9 +4,7 @@
   "paths": {
     "/cumulocity/config": {
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns Cumulocity configuration in an array",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates Cumulocity configuration in an array",
         "responses": {
           "200": {
@@ -52,11 +48,7 @@
         "description": ""
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cumulocity"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Cumulocity"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -77,24 +69,26 @@
         }
       ],
       "get": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Returns Cumulocity configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200Cumulocity"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "put": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Updates Cumulocity configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200Cumulocity"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -129,11 +123,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cumulocity"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Cumulocity"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -143,27 +133,18 @@
     },
     "/cumulocity/actions/reset_auth": {
       "post": {
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "summary": "Resets authentication data",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200Cumulocity"
-          },
-          "422": {
-            "$ref": "#/components/responses/422response"
           }
         },
         "description": "Used to reset saved internal Authentication data"
       },
       "parameters": [],
       "x-web": {
-        "menu": [
-          "Services",
-          "Cloud Solutions",
-          "Cumulocity"
-        ],
+        "menu": ["Services", "Cloud Solutions", "Cumulocity"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -188,7 +169,8 @@
                 "data": {
                   "$ref": "#/components/schemas/cumulocity_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -211,7 +193,8 @@
                     "$ref": "#/components/schemas/cumulocity_options"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -226,10 +209,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable cumulocity application",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -238,10 +219,7 @@
           "ssl": {
             "type": "string",
             "description": "Use SSL/TLS Protocol",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Use SSL/TLS",
@@ -284,9 +262,7 @@
                 "description": "Cumulocity Configuration identifier (ID)."
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           },
           {
             "$ref": "#/components/schemas/cumulocity_single_options"

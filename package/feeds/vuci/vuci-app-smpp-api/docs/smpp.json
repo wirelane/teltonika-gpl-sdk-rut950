@@ -3,12 +3,7 @@
   "paths": {
     "/smpp/config": {
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMPP"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMPP"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -17,9 +12,7 @@
       },
       "get": {
         "summary": "Returns SMPP configuration in an array",
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -38,7 +31,8 @@
                         "$ref": "#/components/schemas/smpp_options_resp"
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -67,7 +61,8 @@
                         "$ref": "#/components/schemas/smpp_options_resp"
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -91,14 +86,13 @@
                       "$ref": "#/components/schemas/smpp_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       }
     },
     "/smpp/config/{id}": {
@@ -114,12 +108,7 @@
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "SMPP"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "SMPP"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -128,9 +117,7 @@
       },
       "get": {
         "summary": "Returns SMPP configuration",
-        "tags": [
-          "General"
-        ],
+        "tags": ["General"],
         "responses": {
           "200": {
             "description": "OK",
@@ -146,7 +133,8 @@
                     "data": {
                       "$ref": "#/components/schemas/smpp_options_resp"
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -175,7 +163,8 @@
                     "data": {
                       "$ref": "#/components/schemas/smpp_options_resp"
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -196,14 +185,13 @@
                   "data": {
                     "$ref": "#/components/schemas/smpp_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       }
     }
   },
@@ -225,7 +213,8 @@
           {
             "$ref": "#/components/schemas/smpp_single_options"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "smpp_single_options": {
         "title": "smpp_general",
@@ -233,10 +222,7 @@
         "properties": {
           "enabled": {
             "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "description": "Enables or disables smpp server",
             "x-web": {
               "pretty": "Enable",
@@ -246,7 +232,7 @@
           "username": {
             "type": "string",
             "description": "Username for authentication on SMPP server. All characters are allowed except ` and space.",
-            "format": "credentials_validate(15)",
+            "format": "credentials_validate",
             "maxLength": 15,
             "default": "admin",
             "x-web": {
@@ -257,7 +243,7 @@
           "password": {
             "type": "string",
             "description": "Password for authentication on SMPP server. All characters are allowed except ` and space.",
-            "format": "credentials_validate(8)",
+            "format": "credentials_validate",
             "maxLength": 8,
             "writeOnly": true,
             "x-web": {
@@ -292,11 +278,7 @@
               }
             }
           }
-        },
-        "required": [
-          "username",
-          "password"
-        ]
+        }
       },
       "smpp_single_options_resp": {
         "title": "smpp_general",
@@ -304,10 +286,7 @@
         "properties": {
           "enabled": {
             "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "description": "Enables or disables smpp server",
             "x-web": {
               "pretty": "Enable",
@@ -317,7 +296,7 @@
           "username": {
             "type": "string",
             "description": "Username for authentication on SMPP server. All characters are allowed except ` and space.",
-            "format": "credentials_validate(15)",
+            "format": "credentials_validate",
             "maxLength": 15,
             "default": "admin",
             "x-web": {
@@ -329,10 +308,7 @@
             "type": "string",
             "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           },
           "port": {
             "type": "string",
@@ -361,11 +337,7 @@
               }
             }
           }
-        },
-        "required": [
-          "username",
-          "password"
-        ]
+        }
       },
       "smpp_options_resp": {
         "title": "smpp_general",
@@ -382,7 +354,8 @@
           {
             "$ref": "#/components/schemas/smpp_single_options_resp"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

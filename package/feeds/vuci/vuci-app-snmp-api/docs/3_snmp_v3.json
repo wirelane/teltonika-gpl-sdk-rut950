@@ -4,9 +4,7 @@
   "paths": {
     "/snmp/users/config": {
       "get": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Returns all SNMP V3 user configurations",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "post": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Creates a new SNMP V3 user configuration",
         "responses": {
           "201": {
@@ -37,16 +33,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_v3_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Updates the specified SNMP V3 user configurations",
         "responses": {
           "200": {
@@ -73,16 +68,15 @@
                       "$ref": "#/components/schemas/snmp_v3_options_id"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Deletes the specified SNMP V3 user configurations",
         "responses": {
           "200": {
@@ -97,11 +91,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP V3 Users"
-        ],
+        "menu": ["Services", "SNMP", "SNMP V3 Users"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -110,9 +100,7 @@
     },
     "/snmp/users/config/{id}": {
       "get": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Returns the specified SNMP V3 user configuration",
         "responses": {
           "200": {
@@ -135,9 +123,7 @@
         ]
       },
       "put": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Updates the specified SNMP V3 user configuration",
         "responses": {
           "200": {
@@ -171,16 +157,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_v3_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "V3 users"
-        ],
+        "tags": ["V3 users"],
         "summary": "Deletes the specified SNMP V3 user configuration",
         "responses": {
           "200": {
@@ -214,11 +199,7 @@
         }
       ],
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP V3 Users"
-        ],
+        "menu": ["Services", "SNMP", "SNMP V3 Users"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -242,7 +223,8 @@
                 "data": {
                   "$ref": "#/components/schemas/snmp_v3_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -265,7 +247,8 @@
                     "$ref": "#/components/schemas/snmp_v3_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -278,6 +261,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable SNMP user configuration.'",
+            "enum": ["0", "1"],
+            "format": "is_bool",
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -296,10 +281,7 @@
           },
           "rights": {
             "type": "string",
-            "enum": [
-              "ro",
-              "rw"
-            ],
+            "enum": ["ro", "rw"],
             "description": "Access mode specifies which access the host has in the community and if they are allowed to retrieve and modify MIB variables from a specific SNMP agent.",
             "x-web": {
               "pretty": "Access mode",
@@ -322,11 +304,7 @@
           },
           "seclevel": {
             "type": "string",
-            "enum": [
-              "noauth",
-              "auth",
-              "priv"
-            ],
+            "enum": ["noauth", "auth", "priv"],
             "description": "A security level is an authentication strategy that is set up for the user. No authentication, no privacy - authenticates with a username.\nAuthentication - provides MD5 or SHA algorithms for authentication.\nPrivacy - Provides DES or AES encryption.",
             "x-web": {
               "pretty": "Security level",
@@ -340,10 +318,7 @@
           },
           "authtype": {
             "type": "string",
-            "enum": [
-              "SHA",
-              "MD5"
-            ],
+            "enum": ["SHA", "MD5"],
             "description": "Set authentication type to use with SNMPv3.",
             "x-web": {
               "pretty": "Authentication type",
@@ -361,7 +336,7 @@
           "authpass": {
             "type": "string",
             "description": "Set authentication passphrase to generate key for SNMPv3.",
-            "format": "dashname",
+            "format": "uciname",
             "minLength": 8,
             "maxLength": 64,
             "x-web": {
@@ -379,10 +354,7 @@
           },
           "privtype": {
             "type": "string",
-            "enum": [
-              "DES",
-              "AES"
-            ],
+            "enum": ["DES", "AES"],
             "description": "Set privacy type to use with SNMPv3.",
             "x-web": {
               "pretty": "Privacy type",
@@ -393,14 +365,15 @@
                 }
               ],
               "enum-pretty": {
-                "AES": "AES128"
+                "AES": "AES128",
+                "DES": "DES"
               }
             }
           },
           "privpass": {
             "type": "string",
             "description": "Set privacy passpharse to generate key for SNMPv3.",
-            "format": "dashname",
+            "format": "uciname",
             "minLength": 8,
             "maxLength": 64,
             "x-web": {
@@ -414,11 +387,7 @@
             }
           }
         },
-        "required": [
-          "username",
-          "authpass",
-          "privpass"
-        ]
+        "required": ["username"]
       },
       "snmp_v3_options_id": {
         "allOf": [

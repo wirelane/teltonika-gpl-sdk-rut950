@@ -10,9 +10,7 @@
             "$ref": "#/components/responses/200rmsStatus"
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
         "menu-depends": [
@@ -20,21 +18,13 @@
             "hw_tags": {
               "is_access_point": false
             },
-            "values": [
-              "Services",
-              "Cloud Solutions",
-              "RMS"
-            ]
+            "values": ["Services", "Cloud Solutions", "RMS"]
           },
           {
             "hw_tags": {
               "is_access_point": true
             },
-            "values": [
-              "System",
-              "RMS",
-              "RMS"
-            ]
+            "values": ["System", "RMS", "RMS"]
           }
         ],
         "name": "RMS"
@@ -48,9 +38,7 @@
             "$ref": "#/components/responses/200rmsMulti"
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "put": {
         "summary": "Updates RMS configuration in an array",
@@ -82,9 +70,7 @@
             }
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
       "summary": "RMS settings",
@@ -94,21 +80,13 @@
             "hw_tags": {
               "is_access_point": false
             },
-            "values": [
-              "Services",
-              "Cloud Solutions",
-              "RMS"
-            ]
+            "values": ["Services", "Cloud Solutions", "RMS"]
           },
           {
             "hw_tags": {
               "is_access_point": true
             },
-            "values": [
-              "System",
-              "RMS",
-              "RMS"
-            ]
+            "values": ["System", "RMS", "RMS"]
           }
         ],
         "name": "RMS"
@@ -131,17 +109,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/200rms"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "put": {
         "summary": "Updates RMS configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200rms"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -161,9 +143,7 @@
             }
           }
         },
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "description": "This section is used to configure the main settings required to connect the router to RMS (Remote Management System).",
       "summary": "RMS settings",
@@ -173,21 +153,13 @@
             "hw_tags": {
               "is_access_point": false
             },
-            "values": [
-              "Services",
-              "Cloud Solutions",
-              "RMS"
-            ]
+            "values": ["Services", "Cloud Solutions", "RMS"]
           },
           {
             "hw_tags": {
               "is_access_point": true
             },
-            "values": [
-              "System",
-              "RMS",
-              "RMS"
-            ]
+            "values": ["System", "RMS", "RMS"]
           }
         ],
         "name": "RMS"
@@ -220,9 +192,7 @@
           }
         },
         "description": "",
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
         "menu-depends": [
@@ -230,21 +200,13 @@
             "hw_tags": {
               "is_access_point": false
             },
-            "values": [
-              "Services",
-              "Cloud Solutions",
-              "RMS"
-            ]
+            "values": ["Services", "Cloud Solutions", "RMS"]
           },
           {
             "hw_tags": {
               "is_access_point": true
             },
-            "values": [
-              "System",
-              "RMS",
-              "RMS"
-            ]
+            "values": ["System", "RMS", "RMS"]
           }
         ],
         "name": "RMS"
@@ -277,9 +239,7 @@
           }
         },
         "description": "",
-        "tags": [
-          "General"
-        ]
+        "tags": ["General"]
       },
       "x-web": {
         "menu-depends": [
@@ -287,21 +247,13 @@
             "hw_tags": {
               "is_access_point": false
             },
-            "values": [
-              "Services",
-              "Cloud Solutions",
-              "RMS"
-            ]
+            "values": ["Services", "Cloud Solutions", "RMS"]
           },
           {
             "hw_tags": {
               "is_access_point": true
             },
-            "values": [
-              "System",
-              "RMS",
-              "RMS"
-            ]
+            "values": ["System", "RMS", "RMS"]
           }
         ],
         "name": "RMS"
@@ -379,11 +331,7 @@
           "enable": {
             "type": "string",
             "description": "Enabled - RMS functionality is always on. When disconnected from RMS, the router will try connecting every 2-5 minutes (every 2 minutes the first hour; then every 5 minutes). If the router is disconnected from RMS for 14 days, it will go into Standby mode. When trying to connect to rms without internet connection, the router will try to reestablish connection every 10 seconds.\nStandby - The router tries to establish a connection with the server infrequently (6 hours in-between attempts). This is done in order to reduce mobile traffic. In order to start using RMS, user intervention is not necessary from the router's side. Worst case scenario - RMS connection will be established 6 hours after the router was added to RMS.\nDisabled - RMS functionality is completely disabled; therefore, no connection attempts are made. In order to start using RMS, the user must enable the service on the router's side",
-            "enum": [
-              "1",
-              "2",
-              "0"
-            ],
+            "enum": ["1", "2", "0"],
             "default": "2",
             "x-web": {
               "pretty": "Connection type",
@@ -430,7 +378,8 @@
           {
             "$ref": "#/components/schemas/rms_options"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "rms_status_options": {
         "type": "object",

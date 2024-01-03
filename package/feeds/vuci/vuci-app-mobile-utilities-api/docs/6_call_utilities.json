@@ -9,9 +9,7 @@
     "/call_utilities/global": {
       "get": {
         "summary": "Returns the Call Utilities Global Configuration",
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_general_one"
@@ -20,9 +18,7 @@
       },
       "put": {
         "summary": "Updates the Call Utilities Global configuration",
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_general_one"
@@ -43,11 +39,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Call Utilities"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Call Utilities"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false,
@@ -60,9 +52,7 @@
     "/call_utilities/rules/options": {
       "get": {
         "summary": "Returns Call Utilities options",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_rules_options"
@@ -70,11 +60,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Call Utilities"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Call Utilities"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false,
@@ -87,9 +73,7 @@
     "/call_utilities/rules/config": {
       "get": {
         "summary": "Returns all Call Utilities Rules configurations",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_rules_many"
@@ -116,15 +100,11 @@
             }
           }
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       },
       "put": {
         "summary": "Updates the selected Call Utilities Rules configurations",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_rules_many"
@@ -161,16 +141,10 @@
         "requestBody": {
           "$ref": "#/components/requestBodies/delete_multi"
         },
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Call Utilities"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Call Utilities"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false,
@@ -194,9 +168,7 @@
       ],
       "get": {
         "summary": "Returns the selected Call Utilities rule configuration",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_rules_one"
@@ -208,9 +180,7 @@
       },
       "put": {
         "summary": "Updates the selected Call Utilities rule configuration",
-        "tags": [
-          "Rules"
-        ],
+        "tags": ["Rules"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/call_rules_one"
@@ -244,16 +214,10 @@
           }
         },
         "description": "",
-        "tags": [
-          "Rules"
-        ]
+        "tags": ["Rules"]
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "Call Utilities"
-        ],
+        "menu": ["Services", "Mobile Utilities", "Call Utilities"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false,
@@ -273,11 +237,7 @@
           "action": {
             "type": "string",
             "description": "The action to be performed on incoming calls. Call Utilities Rules will keep getting executed while the call is active.",
-            "enum": [
-              "reject",
-              "answer",
-              "ignore"
-            ],
+            "enum": ["reject", "answer", "ignore"],
             "x-web": {
               "pretty": "Action",
               "input-type": "select",
@@ -303,9 +263,7 @@
             }
           }
         },
-        "required": [
-          "action"
-        ]
+        "required": ["action"]
       },
       "call_rules": {
         "description": "",
@@ -315,10 +273,7 @@
             "type": "string",
             "description": "Turns the rule on or off.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -327,17 +282,57 @@
           "action": {
             "type": "string",
             "description": "Action that will happen when the rule is triggered",
-            "enum": [
-              "reboot",
-              "send_status",
-              "mobile",
-              "dout",
-              "wifi",
-              "relay"
-            ],
+            "enum": ["reboot", "send_status", "mobile", "dout", "wifi", "relay"],
             "x-web": {
               "pretty": "Action",
               "input-type": "select",
+              "enum-depends": [
+                {
+                  "hw_tags": {
+                    "ios": true,
+                    "wifi": true,
+                    "relay0": true,
+                    "relay1": false
+                  },
+                  "values": ["reboot", "send_status", "mobile", "dout", "wifi", "relay"]
+                },
+                {
+                  "hw_tags": {
+                    "ios": true,
+                    "wifi": true,
+                    "relay0": false,
+                    "relay1": false
+                  },
+                  "values": ["reboot", "send_status", "mobile", "dout", "wifi"]
+                },
+                {
+                  "hw_tags": {
+                    "ios": true,
+                    "wifi": false,
+                    "relay0": true,
+                    "relay1": true
+                  },
+                  "values": ["reboot", "send_status", "mobile", "dout", "relay"]
+                },
+                {
+                  "hw_tags": {
+                    "ios": true,
+                    "wifi": false,
+                    "relay0": false,
+                    "relay1": false
+                  },
+                  "values": ["reboot", "send_status", "mobile", "dout"]
+                },
+                {
+                  "hw_tags": {
+                    "ios": false,
+                    "wifi": true,
+                    "relay0": false,
+                    "relay1": false
+                  },
+                  "values": ["reboot", "send_status", "mobile", "wifi"]
+                }
+              ],
               "enum-pretty": {
                 "reboot": "Reboot",
                 "send_status": "Get status",
@@ -370,21 +365,13 @@
             "type": "string",
             "description": "Indicates whether the rule should turn the service on or off.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "State",
               "input-type": "switch",
               "depends": [
                 {
-                  "action": [
-                    "wifi",
-                    "mobile",
-                    "dout",
-                    "relay"
-                  ]
+                  "action": ["wifi", "mobile", "dout", "relay"]
                 }
               ]
             }
@@ -393,19 +380,13 @@
             "type": "string",
             "description": "Indicates whether the changes will be written to config",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Write to config",
               "input-type": "switch",
               "depends": [
                 {
-                  "action": [
-                    "dout",
-                    "relay"
-                  ]
+                  "action": ["dout", "relay"]
                 }
               ]
             }
@@ -414,19 +395,13 @@
             "type": "string",
             "description": "Rule active for a specified time",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Active timeout",
               "input-type": "switch",
               "depends": [
                 {
-                  "action": [
-                    "dout",
-                    "relay"
-                  ]
+                  "action": ["dout", "relay"]
                 }
               ]
             }
@@ -450,10 +425,7 @@
             "type": "string",
             "description": "Receive router status information via SMS after reboot",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Get status via SMS after reboot",
               "input-type": "switch",
@@ -472,10 +444,7 @@
               "input-type": "select",
               "depends": [
                 {
-                  "action": [
-                    "send_status",
-                    "mobile"
-                  ]
+                  "action": ["send_status", "mobile"]
                 },
                 {
                   "status_sms": "1"
@@ -521,10 +490,7 @@
             "type": "string",
             "description": "Indicates whether the action should save the changed wireless state permanently by writing a new value into the wireless configuration. When turned off, the rule will switch the state temporarily meaning what WiFi will return to its previous state if the device or the wireless service restarts",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Write to config",
               "input-type": "switch",
@@ -539,10 +505,7 @@
             "type": "string",
             "description": "Permanently save mobile network state to configuration",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Write to config",
               "input-type": "switch",
@@ -575,37 +538,128 @@
           "pin": {
             "type": "string",
             "description": "The output or relay which will be changed",
+            "enum": ["dio0", "dio1", "dio2", "dout2", "dout1", "relay1", "relay0"],
             "x-web": {
               "pretty": "Output/Relay",
               "input-type": "select",
               "depends": [
                 {
-                  "action": [
-                    "relay",
-                    "dout"
-                  ]
+                  "action": ["relay", "dout"]
                 }
               ],
               "enum-depends": [
-                { "hw_tags": { "relay0": true }, "values": ["relay0"], "depends": { "action": "relay" } },
-                { "hw_tags": { "relay1": true }, "values": ["relay1"], "depends": { "action": "relay" } },
-                { "hw_tags": { "dout1": true }, "values": ["dout1"], "depends": { "action": "dout" } },
-                { "hw_tags": { "dout2": true }, "values": ["dout2"], "depends": { "action": "dout" } },
-                { "hw_tags": { "dio0": true }, "values": ["dio0"], "depends": { "action": "dout" } },
-                { "hw_tags": { "dio1": true }, "values": ["dio1"], "depends": { "action": "dout" } },
-                { "hw_tags": { "dio2": true }, "values": ["dio2"], "depends": { "action": "dout" } },
-                { "hw_tags": { "iio": true }, "values": ["iio"], "depends": { "action": "dout" } }
+                {
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": true,
+                    "dout2": false,
+                    "dout1": false,
+                    "relay1": false,
+                    "relay0": false
+                  },
+                  "values": ["dio0", "dio1", "dio2"],
+                  "depends": {
+                    "action": "dout"
+                  }
+                },
+                {
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "dout2": false,
+                    "dout1": false,
+                    "relay1": true,
+                    "relay0": true
+                  },
+                  "values": ["dio0", "dio1"],
+                  "depends": {
+                    "action": "dout"
+                  }
+                },
+                {
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "dout2": false,
+                    "dout1": false,
+                    "relay1": true,
+                    "relay0": true
+                  },
+                  "values": ["relay1", "relay0"],
+                  "depends": {
+                    "action": "relay"
+                  }
+                },
+                {
+                  "hw_tags": {
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "dout2": false,
+                    "dout1": false,
+                    "relay1": false,
+                    "relay0": false
+                  },
+                  "values": ["dio0", "dio1"],
+                  "depends": {
+                    "action": "dout"
+                  }
+                },
+                {
+                  "hw_tags": {
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "dout2": true,
+                    "dout1": true,
+                    "relay1": false,
+                    "relay0": true
+                  },
+                  "values": ["dout2", "dout1"],
+                  "depends": {
+                    "action": "dout"
+                  }
+                },
+                {
+                  "hw_tags": {
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "dout2": true,
+                    "dout1": true,
+                    "relay1": false,
+                    "relay0": true
+                  },
+                  "values": ["relay0"],
+                  "depends": {
+                    "action": "relay"
+                  }
+                },
+                {
+                  "hw_tags": {
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "dout2": false,
+                    "dout1": true,
+                    "relay1": false,
+                    "relay0": false
+                  },
+                  "values": ["dout1"],
+                  "depends": {
+                    "action": "dout"
+                  }
+                }
               ]
             }
           },
           "allowed_phone": {
             "type": "string",
             "description": "Which users (based on phone numbers) are allowed to trigger the rule",
-            "enum": [
-              "all",
-              "group",
-              "single"
-            ],
+            "enum": ["all", "group", "single"],
             "x-web": {
               "pretty": "Allowed users",
               "input-type": "select",
@@ -653,9 +707,7 @@
             "$ref": "#/components/schemas/call_general"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "req_body_call_rules_one": {
         "description": "",
@@ -665,9 +717,7 @@
             "$ref": "#/components/schemas/call_rules"
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       },
       "req_body_call_rules_many": {
         "description": "",
@@ -686,9 +736,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "id"
-                  ]
+                  "required": ["id"]
                 },
                 {
                   "$ref": "#/components/schemas/call_rules"
@@ -697,9 +745,7 @@
             }
           }
         },
-        "required": [
-          "data"
-        ]
+        "required": ["data"]
       }
     },
     "responses": {
@@ -723,9 +769,7 @@
                   ]
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -745,14 +789,21 @@
                 "data": {
                   "allOf": [
                     {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    {
                       "$ref": "#/components/schemas/call_rules"
                     }
-                  ]
+                  ],
+                  "required": ["id"]
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -772,7 +823,6 @@
                 "data": {
                   "type": "array",
                   "uniqueItems": true,
-                  "minItems": 1,
                   "items": {
                     "allOf": [
                       {
@@ -782,9 +832,7 @@
                             "type": "string"
                           }
                         },
-                        "required": [
-                          "id"
-                        ]
+                        "required": ["id"]
                       },
                       {
                         "$ref": "#/components/schemas/call_rules"
@@ -793,10 +841,7 @@
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -829,16 +874,10 @@
                       }
                     }
                   },
-                  "required": [
-                    "actions",
-                    "params"
-                  ]
+                  "required": ["actions", "params"]
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }

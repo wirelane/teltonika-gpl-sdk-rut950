@@ -4,9 +4,7 @@
   "paths": {
     "/package_manager/all_packages/status": {
       "get": {
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "summary": "Returns all package manager configuration sections",
         "description": "Returns all sections with their parameters from package manager configuration",
         "responses": {
@@ -16,11 +14,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -30,9 +24,7 @@
     "/package_manager/installed_packages/status": {
       "get": {
         "summary": "Returns installed packages section",
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_installed_packages"
@@ -42,11 +34,7 @@
         "description": "Returns installed sections with their parameters from packages"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -56,9 +44,7 @@
     "/package_manager/pending_packages/status": {
       "get": {
         "summary": "Returns pending packages section",
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_packages_data"
@@ -68,11 +54,7 @@
         "description": "Returns pending sections with their parameters from packages"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -82,9 +64,7 @@
     "/package_manager/available_packages/status": {
       "get": {
         "summary": "Returns available packages section",
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_packages_data"
@@ -94,11 +74,7 @@
         "description": "Returns available sections with their parameters from packages"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -108,9 +84,7 @@
     "/package_manager/language_packages/status": {
       "get": {
         "summary": "Returns language packages section",
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/200_language_package"
@@ -120,11 +94,7 @@
         "description": "Returns language sections with their parameters from packages"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -133,9 +103,7 @@
     },
     "/package_manager/repository_link/options": {
       "get": {
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "summary": "Returns information about packages",
         "description": "",
         "responses": {
@@ -145,15 +113,12 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "hidden": true
       }
     },
     "/package_manager/actions/upload_package": {
@@ -178,9 +143,7 @@
                   "option": {
                     "type": "string",
                     "description": "Parameter to upload the file to.",
-                    "enum": [
-                      "package_file"
-                    ]
+                    "enum": ["package_file"]
                   },
                   "file": {
                     "type": "string",
@@ -188,36 +151,26 @@
                     "description": "File to upload"
                   }
                 },
-                "required": [
-                  "option",
-                  "file"
-                ]
+                "required": ["option", "file"]
               },
               "examples": {}
             }
           }
         },
-        "tags": [
-          "Packages"
-        ]
+        "tags": ["Packages"]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_switch": false,
           "is_access_point": false
-        }
+        },
+        "hidden": true
       }
     },
     "/package_manager/actions/install_package": {
       "post": {
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "summary": "Install package",
         "responses": {
           "200": {
@@ -244,22 +197,17 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
-        }
+        },
+        "hidden": true
       }
     },
     "/package_manager/actions/update_package": {
       "post": {
-        "tags": [
-          "Packages"
-        ],
+        "tags": ["Packages"],
         "summary": "Update package from a server if possible",
         "responses": {
           "200": {
@@ -286,11 +234,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -326,16 +270,10 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "Packages"
-        ]
+        "tags": ["Packages"]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hidden": true
       }
     },
@@ -348,16 +286,10 @@
             "$ref": "#/components/responses/200response"
           }
         },
-        "tags": [
-          "Packages"
-        ]
+        "tags": ["Packages"]
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Package Manager",
-          "Package Manager"
-        ],
+        "menu": ["System", "Package Manager", "Package Manager"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -787,21 +719,14 @@
           "custom": {
             "type": "string",
             "description": "Specifies if package is from server or not",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool"
           },
           "language": {
             "type": "string",
             "description": "Specifies if package is language pack.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool"
-
           },
           "package": {
             "type": "string",

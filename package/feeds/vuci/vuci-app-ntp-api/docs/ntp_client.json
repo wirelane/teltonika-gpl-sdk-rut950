@@ -9,9 +9,7 @@
     "/date_time/ntp/client/timezones/options": {
       "get": {
         "summary": "Returns available NTP client options",
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "responses": {
           "200": {
             "description": "OK",
@@ -35,11 +33,10 @@
                           }
                         }
                       },
-                      "required": [
-                        "timezones"
-                      ]
+                      "required": ["timezones"]
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -47,12 +44,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTP"],
         "name": "Date & Time"
       }
     },
@@ -64,9 +56,7 @@
             "$ref": "#/components/responses/200NTPClientMultiSections"
           }
         },
-        "tags": [
-          "NTP"
-        ]
+        "tags": ["NTP"]
       },
       "put": {
         "summary": "Updates NTP Client configuration in an array",
@@ -81,9 +71,7 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -96,19 +84,15 @@
                       "$ref": "#/components/schemas/ntp_client_options_id"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTP"],
         "name": "Date & Time"
       }
     },
@@ -134,9 +118,7 @@
             "$ref": "#/components/responses/404response"
           }
         },
-        "tags": [
-          "NTP"
-        ]
+        "tags": ["NTP"]
       },
       "put": {
         "summary": "Updates NTP Client configuration",
@@ -151,9 +133,7 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "tags": [
-          "NTP"
-        ],
+        "tags": ["NTP"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -163,19 +143,15 @@
                   "data": {
                     "$ref": "#/components/schemas/ntp_client_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTP"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTP"],
         "name": "Date & Time"
       }
     }
@@ -199,7 +175,8 @@
                     "$ref": "#/components/schemas/ntp_client_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -218,7 +195,8 @@
                 "data": {
                   "$ref": "#/components/schemas/ntp_client_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -698,10 +676,7 @@
             "type": "string",
             "description": "Turns NTP client on or off.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable NTP client",
               "input-type": "switch"
@@ -709,10 +684,7 @@
           },
           "save": {
             "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "description": "Saves last synchronized time to flash memory.",
             "x-web": {
@@ -724,10 +696,7 @@
             "type": "string",
             "description": "Trust network and NTP servers, no recommended RFC-4330 cross-checks will be made",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Force servers",
               "input-type": "switch"
@@ -736,9 +705,7 @@
           "interval": {
             "type": "string",
             "description": "How often the device will update the time.",
-            "format": "integer",
-            "minimum": "60",
-            "maximum": "2147483647",
+            "format": "irange(60, 2147483647)",
             "x-web": {
               "pretty": "Update interval (in seconds)",
               "input-type": "input"
@@ -768,10 +735,7 @@
             "type": "string",
             "description": "Operator Station Synchronization. Enable time synchronization with connected mobile operator.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Operator station synchronization",
               "input-type": "switch",
@@ -784,10 +748,7 @@
             "type": "string",
             "description": "Timezone synchronization. Set device's timezone according to the information received from the mobile operator.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Timezone synchronization",
               "input-type": "switch",
@@ -828,10 +789,7 @@
             "type": "string",
             "description": "Enables periodic time synchronization for the system using the GPS module (does not require an Internet connection). GPS will be turned on if this option is true.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "GPS synchronization",
               "input-type": "switch",
@@ -844,16 +802,7 @@
             "type": "string",
             "description": "How often the device will update the time using the GPS module.",
             "default": "86400",
-            "enum": [
-              "300",
-              "1800",
-              "3600",
-              "21600",
-              "43200",
-              "86400",
-              "604800",
-              "2592000"
-            ],
+            "enum": ["300", "1800", "3600", "21600", "43200", "86400", "604800", "2592000"],
             "x-web": {
               "pretty": "GPS time update interval",
               "input-type": "select",
@@ -889,9 +838,7 @@
                 "description": "NTP Client Configuration identifier (ID)."
               }
             },
-            "required": [
-              "id"
-            ]
+            "required": ["id"]
           },
           {
             "$ref": "#/components/schemas/ntp_client_options"

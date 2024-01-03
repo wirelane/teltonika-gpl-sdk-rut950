@@ -4,9 +4,7 @@
   "paths": {
     "/io/juggler/global": {
       "get": {
-        "tags": [
-          "I/O Juggler Global"
-        ],
+        "tags": ["I/O Juggler Global"],
         "summary": "Returns general I/O Juggler configuration",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "put": {
-        "tags": [
-          "I/O Juggler Global"
-        ],
+        "tags": ["I/O Juggler Global"],
         "summary": "Updates general I/O Juggler configuration",
         "responses": {
           "200": {
@@ -37,19 +33,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_juggler_single_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "I/O Juggler",
-          "General"
-        ],
+        "menu": ["Services", "Input/Output", "I/O Juggler", "General"],
         "hw_tags": {
           "ios": true
         },
@@ -73,7 +65,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_juggler_single_options"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -87,10 +80,7 @@
             "type": "string",
             "description": "Enable/Disable the I/O juggler configuration.",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"

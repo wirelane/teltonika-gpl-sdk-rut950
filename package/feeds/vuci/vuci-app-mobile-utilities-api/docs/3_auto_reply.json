@@ -9,9 +9,7 @@
     "/sms_gateway/auto_reply/config": {
       "get": {
         "summary": "Returns Auto Reply configuration in an array",
-        "tags": [
-          "Auto Reply"
-        ],
+        "tags": ["Auto Reply"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/auto_reply_many"
@@ -21,9 +19,7 @@
       },
       "put": {
         "summary": "Updates Auto Reply configuration in an array",
-        "tags": [
-          "Auto Reply"
-        ],
+        "tags": ["Auto Reply"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/auto_reply_many"
@@ -41,12 +37,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "Auto Reply"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "Auto Reply"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -68,24 +59,26 @@
       ],
       "get": {
         "summary": "Returns Auto Reply configuration",
-        "tags": [
-          "Auto Reply"
-        ],
+        "tags": ["Auto Reply"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/auto_reply"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         },
         "description": ""
       },
       "put": {
         "summary": "Updates Auto Reply configuration",
-        "tags": [
-          "Auto Reply"
-        ],
+        "tags": ["Auto Reply"],
         "responses": {
           "200": {
             "$ref": "#/components/responses/auto_reply"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -97,12 +90,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Mobile Utilities",
-          "SMS Gateway",
-          "Auto Reply"
-        ],
+        "menu": ["Services", "Mobile Utilities", "SMS Gateway", "Auto Reply"],
         "hw_tags": {
           "mobile": true,
           "is_access_point": false
@@ -120,6 +108,8 @@
           "enabled": {
             "type": "string",
             "description": "Set to enable Auto Reply",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -128,6 +118,8 @@
           "every_sms": {
             "type": "string",
             "description": "It will reply to SMS rules, from SMS-Utilities",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Reply SMS-Utilities rules",
               "input-type": "switch"
@@ -136,6 +128,8 @@
           "delete_sms": {
             "type": "string",
             "description": "If enabled, the router will delete received SMS messages",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Don't save received message",
               "input-type": "switch"
@@ -161,11 +155,7 @@
           "mode": {
             "type": "string",
             "description": "To whom the configuration applies to",
-            "enum": [
-              "everyone",
-              "list_number",
-              "user_group"
-            ],
+            "enum": ["everyone", "list_number", "user_group"],
             "default": "everyone",
             "x-web": {
               "pretty": "Mode",
@@ -199,7 +189,7 @@
             "description": "A recipient's phone number users group",
             "x-web": {
               "pretty": "Phone group",
-              "input-type": "select",
+              "input-type": "input",
               "depends": [
                 {
                   "mode": "user_group"
@@ -210,20 +200,13 @@
           "msg": {
             "type": "string",
             "description": "Message to be sent",
+            "maxLength": 459,
             "x-web": {
               "pretty": "Message text",
-              "input-type": "select",
-              "depends": [
-                {
-                  "enabled": "1"
-                }
-              ]
+              "input-type": "input"
             }
           }
-        },
-        "required": [
-          "msg"
-        ]
+        }
       },
       "auto_reply": {
         "title": "auto_reply",
@@ -239,7 +222,8 @@
           {
             "$ref": "#/components/schemas/auto_reply_opts"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     },
     "responses": {
@@ -259,9 +243,7 @@
                   "$ref": "#/components/schemas/auto_reply"
                 }
               },
-              "required": [
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }
@@ -281,16 +263,12 @@
                 "data": {
                   "type": "array",
                   "uniqueItems": true,
-                  "minItems": 1,
                   "items": {
                     "$ref": "#/components/schemas/auto_reply"
                   }
                 }
               },
-              "required": [
-                "success",
-                "data"
-              ]
+              "required": ["success", "data"]
             }
           }
         }

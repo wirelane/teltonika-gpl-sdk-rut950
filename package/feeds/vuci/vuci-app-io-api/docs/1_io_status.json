@@ -4,9 +4,7 @@
   "paths": {
     "/io/status": {
       "get": {
-        "tags": [
-          "Status"
-        ],
+        "tags": ["Status"],
         "summary": "Returns all I/O Status pin configurations",
         "responses": {
           "200": {
@@ -15,11 +13,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Status"
-        ],
+        "menu": ["Services", "Input/Output", "Status"],
         "hw_tags": {
           "ios": true
         },
@@ -39,9 +33,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Status"
-        ],
+        "tags": ["Status"],
         "summary": "Returns the specified I/O Status pin configuration",
         "responses": {
           "200": {
@@ -53,11 +45,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Status"
-        ],
+        "menu": ["Services", "Input/Output", "Status"],
         "hw_tags": {
           "ios": true
         },
@@ -77,9 +65,7 @@
         }
       ],
       "post": {
-        "tags": [
-          "Status"
-        ],
+        "tags": ["Status"],
         "summary": "Updates the specified I/O Status pin configuration",
         "responses": {
           "200": {
@@ -102,18 +88,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_status_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Status"
-        ],
+        "menu": ["Services", "Input/Output", "Status"],
         "hw_tags": {
           "ios": true
         },
@@ -137,7 +120,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_status_response_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -160,7 +144,8 @@
                     "$ref": "#/components/schemas/io_status_response_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -174,10 +159,7 @@
             "type": "string",
             "description": "Pin value",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Pin value",
               "input-type": "switch"
@@ -187,10 +169,7 @@
             "type": "string",
             "description": "Enables pin inversion",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Invert input",
               "input-type": "switch"
@@ -277,27 +256,8 @@
           }
         }
       },
-      "io_status_options_id": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/io_status_options"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "I/O Status Pin identifier (ID)."
-              }
-            }
-          }
-        ]
-      },
       "io_status_response_options_id": {
         "allOf": [
-          {
-            "$ref": "#/components/schemas/io_status_options_id"
-          },
           {
             "type": "object",
             "properties": {
@@ -375,16 +335,17 @@
                   {
                     "type": "string",
                     "readOnly": true,
-                    "enum": [
-                      "inf",
-                      "-inf"
-                    ]
+                    "enum": ["inf", "-inf"]
                   }
                 ]
               }
             }
+          },
+          {
+            "$ref": "#/components/schemas/io_status_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

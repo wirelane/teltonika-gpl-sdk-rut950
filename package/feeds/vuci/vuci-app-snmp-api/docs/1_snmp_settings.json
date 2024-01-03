@@ -4,9 +4,7 @@
   "paths": {
     "/snmp/agent/config": {
       "get": {
-        "tags": [
-          "Agent Settings"
-        ],
+        "tags": ["Agent Settings"],
         "summary": "Returns the general SNMP Settings configuration in an array",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Agent Settings"
-        ],
+        "tags": ["Agent Settings"],
         "summary": "Updates the general SNMP Settings configuration in an array",
         "responses": {
           "200": {
@@ -44,18 +40,15 @@
                       "$ref": "#/components/schemas/snmp_options_id"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP Settings"
-        ],
+        "menu": ["Services", "SNMP", "SNMP Settings"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -75,24 +68,26 @@
         }
       ],
       "get": {
-        "tags": [
-          "Agent Settings"
-        ],
+        "tags": ["Agent Settings"],
         "summary": "Returns the general SNMP Settings configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200snmp_settings"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           }
         }
       },
       "put": {
-        "tags": [
-          "Agent Settings"
-        ],
+        "tags": ["Agent Settings"],
         "summary": "Updates the general SNMP Settings configuration",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200snmp_settings"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
           "422": {
             "$ref": "#/components/responses/422response"
@@ -108,18 +103,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "SNMP Settings"
-        ],
+        "menu": ["Services", "SNMP", "SNMP Settings"],
         "hw_tags": {
           "is_access_point": false
         },
@@ -143,7 +135,8 @@
                 "data": {
                   "$ref": "#/components/schemas/snmp_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -166,7 +159,8 @@
                     "$ref": "#/components/schemas/snmp_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -179,6 +173,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable SNMP (Simple Network Management Protocol) service on systems startup.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable SNMP service",
               "input-type": "switch"
@@ -187,6 +183,8 @@
           "allow_ra": {
             "type": "string",
             "description": "Create a firewall rule that allows access to SNMP for remote hosts.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable remote access",
               "input-type": "switch"
@@ -194,11 +192,7 @@
           },
           "ip_type": {
             "type": "string",
-            "enum": [
-              "ipv4",
-              "ipv6",
-              "ipv4v6"
-            ],
+            "enum": ["ipv4", "ipv6", "ipv4v6"],
             "description": "IP type used by SNMP.",
             "default": "ipv4",
             "x-web": {
@@ -224,6 +218,8 @@
           "v1mode": {
             "type": "string",
             "description": "Enable SNMP v1 compatibility.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "SNMP v1 mode",
               "input-type": "switch"
@@ -232,6 +228,8 @@
           "v2cmode": {
             "type": "string",
             "description": "Enable SNMP v2 compatibility.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "SNMP v2c mode",
               "input-type": "switch"
@@ -240,15 +238,14 @@
           "v3mode": {
             "type": "string",
             "description": "Enable SNMP v3 compatibility.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "SNMP v3 mode",
               "input-type": "switch"
             }
           }
-        },
-        "required": [
-          "port"
-        ]
+        }
       },
       "snmp_options_id": {
         "allOf": [
@@ -264,7 +261,8 @@
           {
             "$ref": "#/components/schemas/snmp_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

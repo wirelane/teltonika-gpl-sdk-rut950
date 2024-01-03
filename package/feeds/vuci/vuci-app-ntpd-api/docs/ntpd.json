@@ -8,9 +8,7 @@
   "paths": {
     "/date_time/ntpd/config": {
       "get": {
-        "tags": [
-          "NTPD"
-        ],
+        "tags": ["NTPD"],
         "summary": "Returns the NTPD configuration in an array",
         "operationId": "ntpd4",
         "responses": {
@@ -31,7 +29,8 @@
                         "$ref": "#/components/schemas/ntpd_options_name_index"
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -39,9 +38,7 @@
         }
       },
       "put": {
-        "tags": [
-          "NTPD"
-        ],
+        "tags": ["NTPD"],
         "summary": "Updates the NTPD configuration in an array",
         "responses": {
           "200": {
@@ -61,7 +58,8 @@
                         "$ref": "#/components/schemas/ntpd_options_name_index"
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -86,7 +84,8 @@
                       "$ref": "#/components/schemas/ntpd_options_name_index"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
@@ -94,12 +93,7 @@
         "operationId": "ntpd5"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTPD"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTPD"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -120,9 +114,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "NTPD"
-        ],
+        "tags": ["NTPD"],
         "summary": "Returns the NTPD configuration",
         "operationId": "ntpd1",
         "responses": {
@@ -140,7 +132,8 @@
                     "data": {
                       "$ref": "#/components/schemas/ntpd_options_name_index"
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -151,9 +144,7 @@
         }
       },
       "put": {
-        "tags": [
-          "NTPD"
-        ],
+        "tags": ["NTPD"],
         "summary": "Updates the NTPD configuration",
         "responses": {
           "200": {
@@ -170,7 +161,8 @@
                     "data": {
                       "$ref": "#/components/schemas/ntpd_options_name_index"
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -192,7 +184,8 @@
                   "data": {
                     "$ref": "#/components/schemas/ntpd_options_index"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
@@ -200,9 +193,7 @@
         "operationId": "ntpd123"
       },
       "post": {
-        "tags": [
-          "NTPD"
-        ],
+        "tags": ["NTPD"],
         "summary": "Uploads the NTPD config file",
         "responses": {
           "200": {
@@ -225,7 +216,8 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "required": ["success", "data"]
                 }
               }
             }
@@ -244,9 +236,7 @@
                   "option": {
                     "type": "string",
                     "description": "Parameter to upload the file to.",
-                    "enum": [
-                      "config_file"
-                    ]
+                    "enum": ["config_file"]
                   },
                   "file": {
                     "type": "string",
@@ -254,10 +244,7 @@
                     "description": "The config file"
                   }
                 },
-                "required": [
-                  "option",
-                  "file"
-                ]
+                "required": ["option", "file"]
               }
             }
           }
@@ -265,12 +252,7 @@
         "operationId": "ntpd2"
       },
       "x-web": {
-        "menu": [
-          "System",
-          "Administration",
-          "Date & Time",
-          "NTPD"
-        ],
+        "menu": ["System", "Administration", "Date & Time", "NTPD"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -296,7 +278,8 @@
           {
             "$ref": "#/components/schemas/ntpd_options_index"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "ntpd_options_index": {
         "type": "object",
@@ -304,10 +287,7 @@
           "enabled": {
             "type": "string",
             "description": "Enable NTPD",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Enable",
@@ -317,10 +297,7 @@
           "file_flag": {
             "type": "string",
             "description": "Run NTPD with uploaded configuration file",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Enable NTP config from file",
@@ -330,7 +307,7 @@
           "config_file": {
             "type": "string",
             "description": "Warning! This will overwrite your current configuration.",
-            "format": "path",
+            "format": "file_validation",
             "x-web": {
               "pretty": "NTP configuration file",
               "input-type": "input",
@@ -366,10 +343,7 @@
           "enable_server": {
             "type": "string",
             "description": "This is used to make the router act as an NTP server so that it can provide time synchronization services for other network devices.",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "format": "is_bool",
             "x-web": {
               "pretty": "Enable server",

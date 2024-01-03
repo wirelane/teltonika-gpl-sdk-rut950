@@ -4,9 +4,7 @@
   "paths": {
     "/io/post_get/config": {
       "get": {
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "summary": "Returns the I/O Post/Get configuration in an array",
         "responses": {
           "200": {
@@ -15,9 +13,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "summary": "Updates the I/O Post/Get configuration in an array",
         "responses": {
           "200": {
@@ -44,18 +40,15 @@
                       "$ref": "#/components/schemas/io_post_get_put_options"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Post/Get"
-        ],
+        "menu": ["Services", "Input/Output", "Post/Get"],
         "hw_tags": {
           "ios": true
         },
@@ -75,9 +68,7 @@
         }
       ],
       "get": {
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "summary": "Returns the I/O Post/Get configuration",
         "responses": {
           "200": {
@@ -89,9 +80,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Post/Get"
-        ],
+        "tags": ["Post/Get"],
         "summary": "Updates the I/O Post/Get configuration",
         "responses": {
           "200": {
@@ -114,18 +103,15 @@
                   "data": {
                     "$ref": "#/components/schemas/io_post_get_single_put_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "Input/Output",
-          "Post/Get"
-        ],
+        "menu": ["Services", "Input/Output", "Post/Get"],
         "hw_tags": {
           "ios": true
         },
@@ -149,7 +135,8 @@
                 "data": {
                   "$ref": "#/components/schemas/io_post_get_put_options_resp"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -172,7 +159,8 @@
                     "$ref": "#/components/schemas/io_post_get_put_options_resp"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -186,10 +174,7 @@
             "type": "string",
             "description": "Enable SMS management functionality through POST/GET",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -200,11 +185,7 @@
             "description": "Accessible methods. All methods are allowed if a list is empty.",
             "items": {
               "type": "string",
-              "enum": [
-                "io_state",
-                "io_type",
-                "io_value"
-              ]
+              "enum": ["io_state", "io_type", "io_value"]
             },
             "x-web": {
               "pretty": "Access",
@@ -251,10 +232,7 @@
             "type": "string",
             "description": "Enable SMS management functionality through POST/GET",
             "format": "is_bool",
-            "enum": [
-              "0",
-              "1"
-            ],
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -265,11 +243,7 @@
             "description": "Accessible methods. All methods are allowed if a list is empty.",
             "items": {
               "type": "string",
-              "enum": [
-                "io_state",
-                "io_type",
-                "io_value"
-              ]
+              "enum": ["io_state", "io_type", "io_value"]
             },
             "x-web": {
               "pretty": "Access",
@@ -290,10 +264,7 @@
             "type": "string",
             "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
             "readOnly": true,
-            "enum": [
-              "unset",
-              "set"
-            ]
+            "enum": ["unset", "set"]
           }
         }
       },
@@ -306,15 +277,13 @@
                 "type": "string",
                 "description": "I/O Post/Get Configuration identifier (ID)."
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/io_post_get_single_put_options"
           }
-        ]
+        ],
+        "required": ["id"]
       },
       "io_post_get_put_options_resp": {
         "allOf": [
@@ -325,15 +294,13 @@
                 "type": "string",
                 "description": "I/O Post/Get Configuration identifier (ID)."
               }
-            },
-            "required": [
-              "id"
-            ]
+            }
           },
           {
             "$ref": "#/components/schemas/io_post_get_single_put_options_resp"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }

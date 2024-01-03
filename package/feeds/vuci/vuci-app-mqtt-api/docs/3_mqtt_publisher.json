@@ -1,772 +1,740 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "MQTT",
-      "description": "MQTT API documentation",
-      "version": "3.0",
-      "contact": {}
-    },
-    "servers": [],
-    "paths": {
-      "/mqtt/publisher/config": {
-        "get": {
-          "tags": [
-            "Publisher"
-          ],
-          "summary": "Returns MQTT Publisher configuration in an array",
-          "description": "",
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/200mqttMulti"
-            }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MQTT",
+    "description": "MQTT API documentation",
+    "version": "3.0",
+    "contact": {}
+  },
+  "servers": [],
+  "paths": {
+    "/mqtt/publisher/config": {
+      "get": {
+        "tags": ["Publisher"],
+        "summary": "Returns MQTT Publisher configuration in an array",
+        "description": "",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqttMulti"
           }
-        },
-        "put": {
-          "tags": [
-            "Publisher"
-          ],
-          "summary": "Updates MQTT Publisher configuration in an array",
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/200mqttMulti"
-            },
-            "404": {
-              "$ref": "#/components/responses/404response"
-            },
-            "422": {
-              "$ref": "#/components/responses/422response"
-            }
-          },
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/mqtt_options_id"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "description": ""
-        },
-        "x-web": {
-          "menu": [
-            "Services",
-            "MQTT",
-            "Publisher"
-          ],
-          "hw_tags": {
-            "is_access_point": false,
-            "is_switch": false
-          },
-          "name": "MQTT"
         }
       },
-      "/mqtt/publisher/config/{id}": {
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Configuration ID"
-          }
-        ],
-        "get": {
-          "tags": [
-            "Publisher"
-          ],
-          "summary": "Returns MQTT Publisher configuration",
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/200mqtt"
-            },
-            "404": {
-              "$ref": "#/components/responses/404response"
-            }
+      "put": {
+        "tags": ["Publisher"],
+        "summary": "Updates MQTT Publisher configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqttMulti"
           },
-          "description": ""
-        },
-        "put": {
-          "tags": [
-            "Publisher"
-          ],
-          "summary": "Updates MQTT Publisher configuration",
-          "responses": {
-            "200": {
-              "$ref": "#/components/responses/200mqtt"
-            },
-            "404": {
-              "$ref": "#/components/responses/404response"
-            },
-            "422": {
-              "$ref": "#/components/responses/422response"
-            }
+          "404": {
+            "$ref": "#/components/responses/404response"
           },
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/mqtt_options"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "description": ""
-        },
-        "post": {
-          "summary": "Uploads MQTT Publisher certificate files",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "x-examples": {
-                      "example-1": {
-                        "success": true,
-                        "data": {
-                          "path": "/etc/vuci-uploads/cbid.file.id.parameter.file_name.ext"
-                        }
-                      }
-                    },
-                    "properties": {
-                      "success": {
-                        "type": "boolean",
-                        "description": "Operation status."
-                      },
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "path": {
-                            "type": "string",
-                            "description": "Uploaded file path."
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "422": {
-              "$ref": "#/components/responses/422response"
-            }
-          },
-          "tags": [
-            "Publisher"
-          ],
-          "description": "",
-          "requestBody": {
-            "content": {
-              "multipart/form-data": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "option": {
-                      "type": "string",
-                      "enum": [
-                        "cafile",
-                        "certfile",
-                        "keyfile"
-                      ]
-                    },
-                    "file": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  },
-                  "required": [
-                    "option",
-                    "file"
-                  ]
-                }
-              }
-            }
+          "422": {
+            "$ref": "#/components/responses/422response"
           }
         },
-        "x-web": {
-          "menu": [
-            "Services",
-            "MQTT",
-            "Publisher"
-          ],
-          "hw_tags": {
-            "is_access_point": false,
-            "is_switch": false
-          },
-          "name": "MQTT"
-        }
-      }
-    },
-    "components": {
-      "responses": {
-        "200mqtt": {
-          "description": "",
+        "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "success": {
-                    "type": "boolean",
-                    "description": "Operation status"
-                  },
-                  "data": {
-                    "$ref": "#/components/schemas/mqtt_options_id_resp"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "200mqttMulti": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "success": {
-                    "type": "boolean",
-                    "description": "Operation status"
-                  },
                   "data": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/mqtt_options_id_resp"
+                      "$ref": "#/components/schemas/mqtt_options_id"
                     }
                   }
+                },
+                "required": ["data"]
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "x-web": {
+        "menu": ["Services", "MQTT", "Publisher"],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "MQTT"
+      }
+    },
+    "/mqtt/publisher/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "tags": ["Publisher"],
+        "summary": "Returns MQTT Publisher configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqtt"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "description": ""
+      },
+      "put": {
+        "tags": ["Publisher"],
+        "summary": "Updates MQTT Publisher configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200mqtt"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/mqtt_options"
+                  }
+                },
+                "required": ["data"]
+              }
+            }
+          }
+        },
+        "description": ""
+      },
+      "post": {
+        "summary": "Uploads MQTT Publisher certificate files",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Operation status."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "Uploaded file path."
+                        }
+                      }
+                    }
+                  },
+                  "required": ["success", "data"]
                 }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "tags": ["Publisher"],
+        "description": "",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "enum": ["cafile", "certfile", "keyfile"]
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": ["option", "file"]
               }
             }
           }
         }
       },
-      "schemas": {
-        "mqtt_options_id": {
-          "allOf": [
-            {
+      "x-web": {
+        "menu": ["Services", "MQTT", "Publisher"],
+        "hw_tags": {
+          "is_access_point": false,
+          "is_switch": false
+        },
+        "name": "MQTT"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200mqtt": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Configuration ID"
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/mqtt_options_id_resp"
                 }
               },
-              "required": [
-                "id"
-              ]
-            },
-            {
-              "$ref": "#/components/schemas/mqtt_options"
-            }
-          ]
-        },
-        "mqtt_options": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "string",
-              "description": "Select to enable MQTT Publisher",
-              "format": "is_bool",
-              "enum": [
-                "0",
-                "1"
-              ],
-              "x-web": {
-                "pretty": "Enable",
-                "input-type": "switch"
-              }
-            },
-            "remote_addr": {
-              "type": "string",
-              "description": "Specify address of the MQTT broker",
-              "format": "host",
-              "x-web": {
-                "pretty": "Hostname",
-                "input-type": "input"
-              }
-            },
-            "remote_port": {
-              "type": "string",
-              "description": "Port of the MQTT broker",
-              "format": "port",
-              "default": "1883",
-              "x-web": {
-                "pretty": "Hostname",
-                "input-type": "input"
-              }
-            },
-            "client_id": {
-              "type": "string",
-              "description": "Client ID to send with the data.",
-              "format": "regex",
-              "pattern": "^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$",
-              "maxLength": 64,
-              "x-web": {
-                "pretty": "Client ID",
-                "input-type": "input"
-              }
-            },
-            "modem_id": {
-              "type": "string",
-              "description": "Select which modem to use when getting information",
-              "x-web": {
-                "pretty": "Modem",
-                "input-type": "select",
-                "hw_tags": {
-                  "dual_modem": true
-                },
-                "enum-pretty": {
-                  "$ref": "#/x-schemas/modem_names"
-                },
-                "enum-depends": {
-                  "$ref": "#/x-schemas/modem_select"
-                }
-              }
-            },
-            "username": {
-              "type": "string",
-              "description": "Username of remote host.",
-              "maxLength": 512,
-              "format": "credentials_validate",
-              "x-web": {
-                "pretty": "Username",
-                "input-type": "input"
-              }
-            },
-            "password": {
-              "type": "string",
-              "description": "Password of remote host",
-              "format": "credentials_validate",
-              "maxLength": 512,
-              "writeOnly": true,
-              "x-web": {
-                "pretty": "Password",
-                "input-type": "input"
-              }
-            },
-            "tls": {
-              "type": "string",
-              "description": "Enable TLS connection",
-              "format": "is_bool",
-              "enum": [
-                "0",
-                "1"
-              ],
-              "x-web": {
-                "pretty": "TLS",
-                "input-type": "switch"
-              }
-            },
-            "tls_type": {
-              "type": "string",
-              "enum": [
-                "cert",
-                "psk"
-              ],
-              "description": "Type of TLS connection",
-              "x-web": {
-                "pretty": "TLS Type",
-                "input-type": "select",
-                "depends": [
-                  {
-                    "tls": "1"
-                  }
-                ],
-                "enum-pretty": {
-                  "cert": "Certificate based",
-                  "psk": "Pre-Shared-Key based"
-                }
-              }
-            },
-            "tls_insecure": {
-              "type": "string",
-              "description": "Allow not verifying server authenticity",
-              "format": "is_bool",
-              "enum": [
-                "0",
-                "1"
-              ],
-              "x-web": {
-                "pretty": "Allow insecure connection",
-                "input-type": "switch",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "device_files": {
-              "type": "string",
-              "description": "Use certificate files from device"
-            },
-            "cafile": {
-              "type": "string",
-              "description": "CA file path",
-              "format": "file_validation",
-              "x-web": {
-                "pretty": "CA file",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "certfile": {
-              "type": "string",
-              "description": "Certificate file path",
-              "format": "file_validation",
-              "x-web": {
-                "pretty": "Certificate file",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "keyfile": {
-              "type": "string",
-              "description": "Key file path",
-              "format": "file_validation",
-              "x-web": {
-                "pretty": "Key file",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "psk": {
-              "type": "string",
-              "description": "The pre-shared-key in hex format with no leading “0x”",
-              "format": "hexstring",
-              "maxLength": 128,
-              "writeOnly": true,
-              "x-web": {
-                "pretty": "Pre-Shared-Key",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "psk"
-                  }
-                ]
-              }
-            },
-            "identity": {
-              "type": "string",
-              "description": "The identity",
-              "format": "uciname",
-              "maxLength": 128,
-              "x-web": {
-                "pretty": "Identity",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "psk"
-                  }
-                ]
-              }
-            },
-            "pub_prefix": {
-              "type": "string",
-              "description": "Prefix of the topic to be used during publish",
-              "format": "regex",
-              "pattern": "^[^#+]+$",
-              "x-web": {
-                "pretty": "Publish topic prefix",
-                "input-type": "input"
-              }
-            },
-            "sub_prefix": {
-              "type": "string",
-              "description": "Prefix of the topic to be used during subscription",
-              "format": "string",
-              "x-web": {
-                "pretty": "Subscribe topic prefix",
-                "input-type": "input"
-              }
+              "required": ["success", "data"]
             }
           }
-        },
-        "mqtt_options_id_resp": {
-          "allOf": [
-            {
+        }
+      },
+      "200mqttMulti": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "Configuration ID"
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/mqtt_options_id_resp"
+                  }
                 }
               },
-              "required": [
-                "id"
-              ]
-            },
-            {
-              "$ref": "#/components/schemas/mqtt_options_resp"
+              "required": ["success", "data"]
             }
-          ]
-        },
-        "mqtt_options_resp": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "string",
-              "description": "Select to enable MQTT Publisher",
-              "format": "is_bool",
-              "enum": [
-                "0",
-                "1"
-              ],
-              "x-web": {
-                "pretty": "Enable",
-                "input-type": "switch"
+          }
+        }
+      }
+    },
+    "schemas": {
+      "mqtt_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
               }
-            },
-            "remote_addr": {
-              "type": "string",
-              "description": "Specify address of the MQTT broker",
-              "format": "host",
-              "x-web": {
-                "pretty": "Hostname",
-                "input-type": "input"
+            }
+          },
+          {
+            "$ref": "#/components/schemas/mqtt_options"
+          }
+        ],
+        "required": ["id"]
+      },
+      "mqtt_options": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Select to enable MQTT Publisher",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Specify address of the MQTT broker",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "remote_port": {
+            "type": "string",
+            "description": "Port of the MQTT broker",
+            "format": "port",
+            "default": "1883",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "client_id": {
+            "type": "string",
+            "description": "Client ID to send with the data.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Client ID",
+              "input-type": "input"
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Select which modem to use when getting information",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
               }
-            },
-            "remote_port": {
-              "type": "string",
-              "description": "Port of the MQTT broker",
-              "format": "port",
-              "default": "1883",
-              "x-web": {
-                "pretty": "Hostname",
-                "input-type": "input"
-              }
-            },
-            "client_id": {
-              "type": "string",
-              "description": "Client ID to send with the data.",
-              "format": "regex",
-              "pattern": "^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$",
-              "maxLength": 64,
-              "x-web": {
-                "pretty": "Client ID",
-                "input-type": "input"
-              }
-            },
-            "modem_id": {
-              "type": "string",
-              "description": "Select which modem to use when getting information",
-              "x-web": {
-                "pretty": "Modem",
-                "input-type": "select",
-                "hw_tags": {
-                  "dual_modem": true
-                },
-                "enum-pretty": {
-                  "$ref": "#/x-schemas/modem_names"
-                },
-                "enum-depends": {
-                  "$ref": "#/x-schemas/modem_select"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of remote host.",
+            "maxLength": 512,
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of remote host",
+            "format": "credentials_validate",
+            "maxLength": 512,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Password",
+              "input-type": "input"
+            }
+          },
+          "tls": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "TLS",
+              "input-type": "switch"
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": ["cert", "psk"],
+            "description": "Type of TLS connection",
+            "x-web": {
+              "pretty": "TLS Type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "tls": "1"
                 }
-              }
-            },
-            "username": {
-              "type": "string",
-              "description": "Username of remote host.",
-              "maxLength": 512,
-              "format": "credentials_validate",
-              "x-web": {
-                "pretty": "Username",
-                "input-type": "input"
-              }
-            },
-            "password": {
-              "type": "string",
-              "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
-              "readOnly": true,
-              "enum": [
-                "unset",
-                "set"
-              ]
-            },
-            "tls": {
-              "type": "string",
-              "description": "Enable TLS connection",
-              "format": "is_bool",
-              "enum": [
-                "0",
-                "1"
               ],
-              "x-web": {
-                "pretty": "TLS",
-                "input-type": "switch"
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
               }
-            },
-            "tls_type": {
-              "type": "string",
-              "enum": [
-                "cert",
-                "psk"
-              ],
-              "description": "Type of TLS connection",
-              "x-web": {
-                "pretty": "TLS Type",
-                "input-type": "select",
-                "depends": [
-                  {
-                    "tls": "1"
-                  }
-                ],
-                "enum-pretty": {
-                  "cert": "Certificate based",
-                  "psk": "Pre-Shared-Key based"
+            }
+          },
+          "tls_insecure": {
+            "type": "string",
+            "description": "Allow not verifying server authenticity",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Allow insecure connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
                 }
-              }
-            },
-            "tls_insecure": {
-              "type": "string",
-              "description": "Allow not verifying server authenticity",
-              "format": "is_bool",
-              "enum": [
-                "0",
-                "1"
-              ],
-              "x-web": {
-                "pretty": "Allow insecure connection",
-                "input-type": "switch",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "device_files": {
-              "type": "string",
-              "description": "Use certificate files from device"
-            },
-            "cafile": {
-              "type": "string",
-              "description": "CA file path",
-              "format": "file_validation",
-              "x-web": {
-                "pretty": "CA file",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "certfile": {
-              "type": "string",
-              "description": "Certificate file path",
-              "format": "file_validation",
-              "x-web": {
-                "pretty": "Certificate file",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "keyfile": {
-              "type": "string",
-              "description": "Key file path",
-              "format": "file_validation",
-              "x-web": {
-                "pretty": "Key file",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "cert"
-                  }
-                ]
-              }
-            },
-            "psk": {
-              "type": "string",
-              "description": "Indicates if 'psk' option is set. 'unset' for not set, 'set' for configured.",
-              "readOnly": true,
-              "enum": [
-                "unset",
-                "set"
               ]
-            },
-            "identity": {
-              "type": "string",
-              "description": "The identity",
-              "format": "uciname",
-              "maxLength": 128,
-              "x-web": {
-                "pretty": "Identity",
-                "input-type": "input",
-                "depends": [
-                  {
-                    "tls": "1",
-                    "tls_type": "psk"
-                  }
-                ]
+            }
+          },
+          "device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "cafile": {
+            "type": "string",
+            "description": "CA file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "cafile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
+          "certfile": {
+            "type": "string",
+            "description": "Certificate file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "certfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
+          "keyfile": {
+            "type": "string",
+            "description": "Key file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "keyfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
+          "psk": {
+            "type": "string",
+            "description": "The pre-shared-key in hex format with no leading “0x”",
+            "format": "hexstring",
+            "maxLength": 128,
+            "writeOnly": true,
+            "x-web": {
+              "pretty": "Pre-Shared-Key",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "identity": {
+            "type": "string",
+            "description": "The identity",
+            "format": "uciname",
+            "maxLength": 128,
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "pub_prefix": {
+            "type": "string",
+            "description": "Prefix of the topic to be used during publish",
+            "format": "regex",
+            "pattern": "^[^#+]+$",
+            "x-web": {
+              "pretty": "Publish topic prefix",
+              "input-type": "input"
+            }
+          },
+          "sub_prefix": {
+            "type": "string",
+            "description": "Prefix of the topic to be used during subscription",
+            "format": "string",
+            "x-web": {
+              "pretty": "Subscribe topic prefix",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "mqtt_options_id_resp": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
               }
-            },
-            "pub_prefix": {
-              "type": "string",
-              "description": "Prefix of the topic to be used during publish",
-              "format": "regex",
-              "pattern": "^[^#+]+$",
-              "x-web": {
-                "pretty": "Publish topic prefix",
-                "input-type": "input"
+            }
+          },
+          {
+            "$ref": "#/components/schemas/mqtt_options_resp"
+          }
+        ],
+        "required": ["id"]
+      },
+      "mqtt_options_resp": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Select to enable MQTT Publisher",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "remote_addr": {
+            "type": "string",
+            "description": "Specify address of the MQTT broker",
+            "format": "host",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "remote_port": {
+            "type": "string",
+            "description": "Port of the MQTT broker",
+            "format": "port",
+            "default": "1883",
+            "x-web": {
+              "pretty": "Hostname",
+              "input-type": "input"
+            }
+          },
+          "client_id": {
+            "type": "string",
+            "description": "Client ID to send with the data.",
+            "format": "regex",
+            "pattern": "^[a-zA-Z0-9!@#:%$%%&%*%+%-/=%?%^_`%[%]{|}~%.]+$",
+            "maxLength": 64,
+            "x-web": {
+              "pretty": "Client ID",
+              "input-type": "input"
+            }
+          },
+          "modem_id": {
+            "type": "string",
+            "description": "Select which modem to use when getting information",
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "hw_tags": {
+                "dual_modem": true
+              },
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
               }
-            },
-            "sub_prefix": {
-              "type": "string",
-              "description": "Prefix of the topic to be used during subscription",
-              "format": "string",
-              "x-web": {
-                "pretty": "Subscribe topic prefix",
-                "input-type": "input"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "Username of remote host.",
+            "maxLength": 512,
+            "format": "credentials_validate",
+            "x-web": {
+              "pretty": "Username",
+              "input-type": "input"
+            }
+          },
+          "password": {
+            "type": "string",
+            "description": "Indicates if 'password' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": ["unset", "set"]
+          },
+          "tls": {
+            "type": "string",
+            "description": "Enable TLS connection",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "TLS",
+              "input-type": "switch"
+            }
+          },
+          "tls_type": {
+            "type": "string",
+            "enum": ["cert", "psk"],
+            "description": "Type of TLS connection",
+            "x-web": {
+              "pretty": "TLS Type",
+              "input-type": "select",
+              "depends": [
+                {
+                  "tls": "1"
+                }
+              ],
+              "enum-pretty": {
+                "cert": "Certificate based",
+                "psk": "Pre-Shared-Key based"
               }
+            }
+          },
+          "tls_insecure": {
+            "type": "string",
+            "description": "Allow not verifying server authenticity",
+            "format": "is_bool",
+            "enum": ["0", "1"],
+            "x-web": {
+              "pretty": "Allow insecure connection",
+              "input-type": "switch",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "device_files": {
+            "type": "string",
+            "description": "Use certificate files from device"
+          },
+          "cafile": {
+            "type": "string",
+            "description": "CA file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "CA file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "cafile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
+          "certfile": {
+            "type": "string",
+            "description": "Certificate file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Certificate file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "certfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
+          "keyfile": {
+            "type": "string",
+            "description": "Key file path",
+            "format": "file_validation",
+            "x-web": {
+              "pretty": "Key file",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "cert"
+                }
+              ]
+            }
+          },
+          "keyfile:file_size": {
+            "description": "Uploaded file size in bytes.",
+            "type": "number",
+            "readOnly": true
+          },
+          "psk": {
+            "type": "string",
+            "description": "Indicates if 'psk' option is set. 'unset' for not set, 'set' for configured.",
+            "readOnly": true,
+            "enum": ["unset", "set"]
+          },
+          "identity": {
+            "type": "string",
+            "description": "The identity",
+            "format": "uciname",
+            "maxLength": 128,
+            "x-web": {
+              "pretty": "Identity",
+              "input-type": "input",
+              "depends": [
+                {
+                  "tls": "1",
+                  "tls_type": "psk"
+                }
+              ]
+            }
+          },
+          "pub_prefix": {
+            "type": "string",
+            "description": "Prefix of the topic to be used during publish",
+            "format": "regex",
+            "pattern": "^[^#+]+$",
+            "x-web": {
+              "pretty": "Publish topic prefix",
+              "input-type": "input"
+            }
+          },
+          "sub_prefix": {
+            "type": "string",
+            "description": "Prefix of the topic to be used during subscription",
+            "format": "string",
+            "x-web": {
+              "pretty": "Subscribe topic prefix",
+              "input-type": "input"
             }
           }
         }
       }
     }
   }
+}

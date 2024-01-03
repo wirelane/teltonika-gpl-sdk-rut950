@@ -6,9 +6,7 @@
       "summary": "Modify trap rule",
       "description": "This section is used to configure the settings of the SNMP trap rule. Scroll your mouse pointer over field names in order to see helpful hints.",
       "get": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Returns all SNMP Trap Rules configurations",
         "responses": {
           "200": {
@@ -17,9 +15,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Creates a new SNMP Trap Rules configuration",
         "responses": {
           "201": {
@@ -39,16 +35,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_trap_rules_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "put": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Updates the specified SNMP Trap Rules configurations",
         "responses": {
           "200": {
@@ -75,16 +70,15 @@
                       "$ref": "#/components/schemas/snmp_trap_rules_options_id"
                     }
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Deletes the specified SNMP Trap Rules configurations",
         "responses": {
           "200": {
@@ -99,11 +93,7 @@
         }
       },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "Trap Settings"
-        ],
+        "menu": ["Services", "SNMP", "Trap Settings"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -114,10 +104,19 @@
     "/snmp/trap/config/{id}": {
       "summary": "Modify trap rule",
       "description": "This section is used to configure the settings of the SNMP trap rule. Scroll your mouse pointer over field names in order to see helpful hints.",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "SNMP Trap Rules instance identifier (ID)."
+        }
+      ],
       "get": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Returns the specified SNMP Trap Rules configuration",
         "responses": {
           "200": {
@@ -126,23 +125,10 @@
           "404": {
             "$ref": "#/components/responses/404response"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SNMP Trap Rules instance identifier (ID)."
-          }
-        ]
+        }
       },
       "put": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Updates the specified SNMP Trap Rules configuration",
         "responses": {
           "200": {
@@ -155,17 +141,6 @@
             "$ref": "#/components/responses/422response"
           }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SNMP Trap Rules instance identifier (ID)."
-          }
-        ],
         "requestBody": {
           "description": "Update specified configuration options",
           "content": {
@@ -176,16 +151,15 @@
                   "data": {
                     "$ref": "#/components/schemas/snmp_trap_rules_options"
                   }
-                }
+                },
+                "required": ["data"]
               }
             }
           }
         }
       },
       "delete": {
-        "tags": [
-          "Trap Rules"
-        ],
+        "tags": ["Trap Rules"],
         "summary": "Deletes the specified SNMP Trap Rules configuration",
         "responses": {
           "200": {
@@ -194,36 +168,10 @@
           "404": {
             "$ref": "#/components/responses/404response"
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "SNMP Trap Rules instance identifier (ID)."
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Configuration ID"
         }
-      ],
+      },
       "x-web": {
-        "menu": [
-          "Services",
-          "SNMP",
-          "Trap Settings"
-        ],
+        "menu": ["Services", "SNMP", "Trap Settings"],
         "hw_tags": {
           "is_access_point": false,
           "is_switch": false
@@ -248,7 +196,8 @@
                 "data": {
                   "$ref": "#/components/schemas/snmp_trap_rules_options_id"
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -271,7 +220,8 @@
                     "$ref": "#/components/schemas/snmp_trap_rules_options_id"
                   }
                 }
-              }
+              },
+              "required": ["success", "data"]
             }
           }
         }
@@ -284,6 +234,8 @@
           "enabled": {
             "type": "string",
             "description": "Enable SNMP trap rule.",
+            "format": "is_bool",
+            "enum": ["0", "1"],
             "x-web": {
               "pretty": "Enable",
               "input-type": "switch"
@@ -291,12 +243,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "gsm",
-              "iotrap",
-              "eventtrap",
-              "chilli"
-            ],
+            "enum": ["gsm", "iotrap", "eventtrap", "chilli"],
             "description": "Trap type",
             "x-web": {
               "pretty": "Trap type",
@@ -313,44 +260,28 @@
                     "mobile": true,
                     "ios": true
                   },
-                  "values": [
-                    "gsm",
-                    "iotrap",
-                    "eventtrap",
-                    "chilli"
-                  ]
+                  "values": ["gsm", "iotrap", "eventtrap", "chilli"]
                 },
                 {
                   "hw_tags": {
                     "mobile": false,
                     "ios": true
                   },
-                  "values": [
-                    "iotrap",
-                    "eventtrap",
-                    "chilli"
-                  ]
+                  "values": ["iotrap", "eventtrap", "chilli"]
                 },
                 {
                   "hw_tags": {
                     "mobile": true,
                     "ios": false
                   },
-                  "values": [
-                    "gsm",
-                    "eventtrap",
-                    "chilli"
-                  ]
+                  "values": ["gsm", "eventtrap", "chilli"]
                 },
                 {
                   "hw_tags": {
                     "mobile": false,
                     "ios": false
                   },
-                  "values": [
-                    "eventtrap",
-                    "chilli"
-                  ]
+                  "values": ["eventtrap", "chilli"]
                 }
               ],
               "unique": true
@@ -389,34 +320,134 @@
                   "depends": {
                     "type": "gsm"
                   },
-                  "values": [
-                    "signalstrtrap",
-                    "conntypetrap"
-                  ]
+                  "values": ["signalstrtrap", "conntypetrap"]
                 },
                 {
                   "depends": {
                     "type": "chilli"
                   },
-                  "values": [
-                    "connectedtrap",
-                    "disconnectedtrap"
-                  ]
+                  "values": ["connectedtrap", "disconnectedtrap"]
                 },
-                { "hw_tags": { "din1": true }, "values": ["din1"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "din2": true }, "values": ["din2"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dout1": true }, "values": ["dout1"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dout2": true }, "values": ["dout2"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dio0": true }, "values": ["dio0"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dio1": true }, "values": ["dio1"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dio2": true }, "values": ["dio2"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "iio": true }, "values": ["iio"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "relay0": true }, "values": ["relay0"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "relay1": true }, "values": ["relay1"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "adc0": true }, "values": ["adc0"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "acl0": true }, "values": ["acl0"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dwi0": true }, "values": ["dwi0"], "depends": { "type": "iotrap" } },
-                { "hw_tags": { "dwi1": true }, "values": ["dwi1"], "depends": { "type": "iotrap" } }
+                {
+                  "hw_tags": {
+                    "din1": true,
+                    "din2": true,
+                    "dout1": true,
+                    "dout2": true,
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "iio": true,
+                    "relay0": true,
+                    "relay1": false,
+                    "adc0": true,
+                    "acl0": true,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["din1", "din2", "dout1", "dout2", "iio", "relay0", "adc0", "acl0"],
+                  "depends": { "type": "iotrap" }
+                },
+                {
+                  "hw_tags": {
+                    "din1": true,
+                    "din2": false,
+                    "dout1": true,
+                    "dout2": false,
+                    "dio0": false,
+                    "dio1": false,
+                    "dio2": false,
+                    "iio": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "adc0": false,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["din1", "dout1"],
+                  "depends": { "type": "iotrap" }
+                },
+                {
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": true,
+                    "iio": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "adc0": true,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["dio0", "dio1", "dio2", "adc0"],
+                  "depends": { "type": "iotrap" }
+                },
+                {
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": true,
+                    "iio": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "adc0": false,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["dio0", "dio1", "dio2"],
+                  "depends": { "type": "iotrap" }
+                },
+                {
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "iio": true,
+                    "relay0": true,
+                    "relay1": true,
+                    "adc0": true,
+                    "acl0": true,
+                    "dwi0": true,
+                    "dwi1": true
+                  },
+                  "values": ["dio0", "dio1", "iio", "relay0", "relay1", "adc0", "acl0", "dwi0", "dwi1"],
+                  "depends": { "type": "iotrap" }
+                },
+                {
+                  "hw_tags": {
+                    "din1": false,
+                    "din2": false,
+                    "dout1": false,
+                    "dout2": false,
+                    "dio0": true,
+                    "dio1": true,
+                    "dio2": false,
+                    "iio": false,
+                    "relay0": false,
+                    "relay1": false,
+                    "adc0": false,
+                    "acl0": false,
+                    "dwi0": false,
+                    "dwi1": false
+                  },
+                  "values": ["dio0", "dio1"],
+                  "depends": { "type": "iotrap" }
+                }
               ],
               "enum-pretty": {
                 "signalstrtrap": "Signal strength",
@@ -442,17 +473,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "open",
-              "closed",
-              "rising",
-              "falling",
-              "both",
-              "in_range",
-              "out_of_range"
-            ],
+            "enum": ["active", "inactive", "open", "closed", "rising", "falling", "both", "in_range", "out_of_range"],
             "description": "Selects which pin state will trigger the SNMP trap.",
             "x-web": {
               "pretty": "State change",
@@ -465,61 +486,27 @@
               "enum-depends": [
                 {
                   "depends": {
-                    "name": [
-                      "din1",
-                      "din2",
-                      "dout1",
-                      "dout2",
-                      "iio",
-                      "dio0",
-                      "dio1",
-                      "dio2"
-                    ]
+                    "name": ["din1", "din2", "dout1", "dout2", "iio", "dio0", "dio1", "dio2"]
                   },
-                  "values": [
-                    "both",
-                    "active",
-                    "inactive"
-                  ]
+                  "values": ["both", "active", "inactive"]
                 },
                 {
                   "depends": {
-                    "name": [
-                      "relay0",
-                      "relay1"
-                    ]
+                    "name": ["relay0", "relay1"]
                   },
-                  "values": [
-                    "both",
-                    "open",
-                    "closed"
-                  ]
+                  "values": ["both", "open", "closed"]
                 },
                 {
                   "depends": {
-                    "name": [
-                      "dwi0",
-                      "dwi1"
-                    ]
+                    "name": ["dwi0", "dwi1"]
                   },
-                  "values": [
-                    "both",
-                    "rising",
-                    "falling"
-                  ]
+                  "values": ["both", "rising", "falling"]
                 },
                 {
                   "depends": {
-                    "name": [
-                      "adc0",
-                      "acl0"
-                    ]
+                    "name": ["adc0", "acl0"]
                   },
-                  "values": [
-                    "both",
-                    "in_range",
-                    "out_of_range"
-                  ]
+                  "values": ["both", "in_range", "out_of_range"]
                 }
               ],
               "enum-pretty": {
@@ -544,10 +531,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "name": [
-                    "adc0",
-                    "acl0"
-                  ]
+                  "name": ["adc0", "acl0"]
                 }
               ]
             }
@@ -561,10 +545,7 @@
               "input-type": "input",
               "depends": [
                 {
-                  "name": [
-                    "adc0",
-                    "acl0"
-                  ]
+                  "name": ["adc0", "acl0"]
                 }
               ]
             }
@@ -572,23 +553,7 @@
           "event": {
             "type": "string",
             "description": "Event that will trigger the rule",
-            "enum": [
-              "Config",
-              "DHCP",
-              "Reboot",
-              "Startup",
-              "SSH",
-              "Web UI",
-              "WiFi",
-              "Mobile Data",
-              "Failover",
-              "SMS",
-              "Signal strength",
-              "SIM switch",
-              "Switch Events",
-              "Switch Topology",
-              "GPS"
-            ],
+            "enum": ["Config", "DHCP", "Reboot", "Startup", "SSH", "Web UI", "WiFi", "Mobile Data", "Failover", "SMS", "Signal strength", "SIM switch", "Switch Events", "Switch Topology", "GPS"],
             "x-web": {
               "pretty": "Event type",
               "input-type": "select",
@@ -623,14 +588,7 @@
               "unique": true
             }
           }
-        },
-        "required": [
-          "type",
-          "name",
-          "signal",
-          "from",
-          "to"
-        ]
+        }
       },
       "snmp_trap_rules_options_id": {
         "allOf": [
@@ -646,7 +604,8 @@
           {
             "$ref": "#/components/schemas/snmp_trap_rules_options"
           }
-        ]
+        ],
+        "required": ["id"]
       }
     }
   }
