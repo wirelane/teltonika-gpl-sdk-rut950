@@ -1756,10 +1756,19 @@
               "input-type": "switch"
             }
           },
+          "host_info": {
+            "type": "string",
+            "description": "Specify address and port and protocol for host configuration to. E.g 192.168.1.1;80;tcp.",
+            "x-web": {
+              "pretty": "Host info",
+              "input-type": "input"
+            }
+          },
           "hostname": {
             "type": "string",
             "description": "IP address or hostname of the server to which NMEA data will be forwarded.",
             "format": "host",
+            "deprecated": true,
             "x-web": {
               "pretty": "Hostname",
               "input-type": "input"
@@ -1768,6 +1777,7 @@
           "proto": {
             "type": "string",
             "description": "Communication protocol used for NMEA sentence forwarding.",
+            "deprecated": true,
             "enum": [
               "tcp",
               "udp"
@@ -1785,6 +1795,7 @@
             "type": "string",
             "description": "TCP/UDP port number of the server.",
             "format": "port",
+            "deprecated": true,
             "x-web": {
               "pretty": "Port",
               "input-type": "input"
@@ -2286,9 +2297,18 @@
               "input-type": "switch"
             }
           },
+          "host_info": {
+            "type": "string",
+            "description": "Specify address and port and protocol for host configuration to. E.g 192.168.1.1;80;tcp.",
+            "x-web": {
+              "pretty": "Host info",
+              "input-type": "input"
+            }
+          },
           "hostname": {
             "type": "string",
             "description": "Hostname of the remote server",
+            "deprecated": true,
             "x-web": {
               "pretty": "Hostname",
               "input-type": "input"
@@ -2297,6 +2317,7 @@
           "proto": {
             "type": "string",
             "description": "Protocol to be used for sending AVL to the remote server",
+            "deprecated": true,
             "enum": [
               "tcp",
               "udp"
@@ -2313,6 +2334,7 @@
           "port": {
             "type": "string",
             "description": "Port of the remote server",
+            "deprecated": true,
             "x-web": {
               "pretty": "Port",
               "input-type": "input"
@@ -2941,8 +2963,8 @@
         },
         "properties": {
           "data": {
-              "$ref": "#/components/schemas/geofencing"
-            }
+            "$ref": "#/components/schemas/geofencing"
+          }
         },
         "required": [
           "data"
@@ -3952,16 +3974,16 @@
                 "data": {
                   "allOf": [
                     {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "description": "GPS HTTPS Configuration identifier (ID)."
-                            }
-                        },
-                        "required": [
-                            "id"
-                        ]
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "GPS HTTPS Configuration identifier (ID)."
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
                     },
                     {
                       "$ref": "#/components/schemas/https_general"
@@ -4226,16 +4248,16 @@
                 "data": {
                   "allOf": [
                     {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "description": "AVL IO Configuration identifier (ID)."
-                            }
-                        },
-                        "required": [
-                            "id"
-                        ]
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "AVL IO Configuration identifier (ID)."
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
                     },
                     {
                       "$ref": "#/components/schemas/avl_io"
@@ -4322,16 +4344,16 @@
                 "data": {
                   "allOf": [
                     {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "description": "AVL Configuration identifier (ID)."
-                            }
-                        },
-                        "required": [
-                            "id"
-                        ]
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "AVL Configuration identifier (ID)."
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
                     },
                     {
                       "$ref": "#/components/schemas/avl_general"
@@ -4596,16 +4618,16 @@
                 "data": {
                   "allOf": [
                     {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "description": "AVL main configuration identifier (ID)."
-                            }
-                        },
-                        "required": [
-                            "id"
-                        ]
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "AVL main configuration identifier (ID)."
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
                     },
                     {
                       "$ref": "#/components/schemas/avl_main"
@@ -4691,16 +4713,16 @@
                 "data": {
                   "allOf": [
                     {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "description": "Secondary rule configuration identifier (ID)."
-                            }
-                        },
-                        "required": [
-                            "id"
-                        ]
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "Secondary rule configuration identifier (ID)."
+                        }
+                      },
+                      "required": [
+                        "id"
+                      ]
                     },
                     {
                       "$ref": "#/components/schemas/avl_rules"

@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uboot-ath79
 
-PKG_SOURCE_VERSION:=4.3.0
+PKG_SOURCE_VERSION:=4.3.1
 
 PKG_LICENSE:=LGPL-2.1
 PKG_ORIGIN_URL:=https://github.com/pepe2k/u-boot_mod

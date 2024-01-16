@@ -39,6 +39,33 @@
               "type": "number"
             },
             "description": "Number of items to skip from the beginning"
+          },
+          {
+            "name": "sortby",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Field to sort by. One of the following values [id, event, event_type, date]"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Specify sorting order. One of the following values [asc, desc]"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in every field"
           }
         ]
       },
@@ -60,6 +87,33 @@
             "type": "number"
           },
           "description": "Number of items to skip from the beginning"
+        },
+        {
+          "name": "sortby",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Field to sort by. One of the following values [id, event, event_type, date]"
+        },
+        {
+          "name": "orderby",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Specify sorting order. One of the following values [asc, desc]"
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Search in every field"
         }
       ],
       "x-web": {
@@ -111,6 +165,33 @@
               "type": "number"
             },
             "description": "Number of items to skip from the beginning"
+          },
+          {
+            "name": "sortby",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Field to sort by. One of the following values [id, event, event_type, date]"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Specify sorting order. One of the following values [asc, desc]"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in every field"
           }
         ]
       },
@@ -141,6 +222,33 @@
             "type": "number"
           },
           "description": "Number of items to skip from the beginning"
+        },
+        {
+          "name": "sortby",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Field to sort by. One of the following values [id, event, event_type, date]"
+        },
+        {
+          "name": "orderby",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Specify sorting order. One of the following values [asc, desc]"
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Search in every field"
         }
       ],
       "x-web": {

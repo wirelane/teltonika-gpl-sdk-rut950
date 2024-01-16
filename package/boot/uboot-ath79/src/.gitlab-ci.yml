@@ -75,7 +75,7 @@ rut300:
     include:
       - local: .gitlab/ci/rut300.yml
     strategy: depend
-  
+
 rut301:
   stage: parent
   only:
@@ -102,6 +102,20 @@ rut360:
   trigger:
     include:
       - local: .gitlab/ci/rut360.yml
+    strategy: depend
+
+rut361:
+  stage: parent
+  only:
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^master$/
+      - $CI_COMMIT_REF_NAME =~ /^develop$/
+      - $CI_COMMIT_REF_NAME =~ /^release\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^hotfix\/.*$/
+      - $CI_COMMIT_REF_NAME =~ /^[0-9]+-.*$/
+  trigger:
+    include:
+      - local: .gitlab/ci/rut361.yml
     strategy: depend
 
 rut9m:

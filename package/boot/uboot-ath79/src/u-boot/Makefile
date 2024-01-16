@@ -743,7 +743,7 @@ tlt-rut300: qca953x_common
 	@$(MKCONFIG) -a ap143 mips mips ap143 ar7240 ar7240
 
 tlt-rut301: rt2880_common
-	@$(call config_init,Teltonika RUT301,tlt-rut301,16,38,1,MTK_MT7628_SOC)
+	@$(call config_init,Teltonika RUT301,tlt-rut301,16,46,1,MTK_MT7628_SOC)
 	@$(call define_add,CONFIG_FOR_TELTONIKA_RUT301,1)
 	@$(call define_add,CONFIG_CMD_PHY_POWER,1)
 	@$(call define_add,ON_BOARD_1024M_DRAM_COMPONENT,1)
@@ -773,7 +773,7 @@ tlt-rut360: qca953x_common
 	@$(MKCONFIG) -a ap143 mips mips ap143 ar7240 ar7240
 
 tlt-rut361: rt2880_common
-	@$(call config_init,Teltonika RUT361,tlt-rut361,16,38,1,MTK_MT7628_SOC)
+	@$(call config_init,Teltonika RUT361,tlt-rut361,16,46,1,MTK_MT7628_SOC)
 	@$(call define_add,CONFIG_FOR_TELTONIKA_RUT361,1)
 	@$(call define_add,CONFIG_CMD_PHY_POWER,1)
 	@$(call define_add,ON_BOARD_1024M_DRAM_COMPONENT,1)

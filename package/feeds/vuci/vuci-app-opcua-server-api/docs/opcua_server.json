@@ -208,7 +208,10 @@
               "input-type": "input"
             }
           }
-        }
+        },
+        "required": [
+          "port"
+        ]
       },
       "opcua_destination_server_options_for_get": {
         "allOf": [
