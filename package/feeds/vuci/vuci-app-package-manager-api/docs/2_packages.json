@@ -740,7 +740,7 @@
         "properties": {
           "package": {
             "type": "string",
-            "description": "Name of package to be installed. Needs to be specified if package is being installed from online server.",
+            "description": "Name of the package to be removed.",
             "format": "default_validation"
           }
         }

@@ -383,8 +383,15 @@ detect_mac80211() {
 			fi
 		fi
 
+		local model=$(/sbin/mnf_info --name 2>/dev/null)
 		local router_mac=$(/sbin/mnf_info --mac 2>/dev/null)
-		router_mac=$(printf "%X" $((0x$router_mac + $mac_add + $devidx)))
+		local mac_add_idx=$devidx
+
+		if [ ${model:0:6} == "TCR100" ]; then
+			[ $mac_add_idx = 1 ] && mac_add_idx=0 || mac_add_idx=1
+		fi
+
+		router_mac=$(printf "%X" $((0x$router_mac + $mac_add + $mac_add_idx)))
 		if [ ${#router_mac} -lt 12 ]; then
 			local zero_count=$(printf "%$((12 - ${#router_mac}))s")
 			local zero_add=${zero_count// /0}
@@ -402,7 +409,6 @@ detect_mac80211() {
 		if [ -n "$wifi_mac" ]; then
 			router_mac_end=$(echo -n ${wifi_mac} | sed 's/\://g' | tail -c 4 | tr '[a-f]' '[A-F]')
 			local dual_band_ssid=$(jsonfilter -i /etc/board.json -e '@.hwinfo.dual_band_ssid')
-			local model=$(/sbin/mnf_info --name 2>/dev/null)
 			if [ "$dual_band_ssid" != "true" ]; then
 				ssid="${model:0:6}_${router_mac_end}"
 			else

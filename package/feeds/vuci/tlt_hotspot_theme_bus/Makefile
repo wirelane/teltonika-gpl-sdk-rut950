@@ -18,6 +18,10 @@ define Package/$(PKG_NAME)
 	DEPENDS:=+vuci-app-landingpage +coova-chilli
 endef
 
+define Package/$(PKG_NAME)/mdm9x07
+	PKG_ROUTER:=TRB140 TRB143
+endef
+
 define Package/$(PKG_NAME)/description
 	Hotspot landing page bus theme.
 endef
