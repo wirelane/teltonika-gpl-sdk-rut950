@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=vuci-ui-core
-PKG_VERSION:=2024-02-14-400f2ed189
+PKG_VERSION:=2024-02-29-c9c05dde65
 PKG_RELEASE:=2
 
 PKG_BUILD_PARALLEL:=1
@@ -125,32 +125,30 @@ define Package/vuci-ui-core/install
 	$(if $(CONFIG_VUCI_MINIFY_JSON),$(call JsonMin,$(1)/),true);
 
 	$(if $(CONFIG_DUAL_SIM_SUPPORT),, \
-		$(RM) $(1)/www/tlt-icons/modem-icons/simcard-secondary.svg; \
+		$(RM) $(1)/www/tlt-icons/modem-icons/simcard-secondary.svg.gz; \
 	)
 	$(if $(CONFIG_MOBILE_SUPPORT),, \
 		$(RM) -r $(1)/www/tlt-icons/modem-icons; \
-		$(RM) $(1)/www/tlt-icons/mobile.svg \
-		$(RM) $(1)/www/tlt-icons/side-sim.svg; \
+		$(RM) $(1)/www/tlt-icons/mobile.svg.gz; \
+		$(RM) $(1)/www/tlt-icons/side-sim.svg.gz; \
 		$(RM) $(1)/www/tlt-icons/signal*.png; \
-		$(RM) $(1)/www/tlt-icons/sim-*.svg; \
+		$(RM) $(1)/www/tlt-icons/sim-*.svg.gz; \
 	)
 	$(if $(CONFIG_BLUETOOTH_SUPPORT),, \
-		$(RM) $(1)/www/tlt-icons/side-bluetooth.svg; \
+		$(RM) $(1)/www/tlt-icons/side-bluetooth.svg.gz; \
 	)
 	$(if $(CONFIG_WIFI_SUPPORT),, \
-		$(RM) $(1)/www/tlt-icons/side-navbar/wireless.svg; \
 		$(RM) $(1)/www/tlt-icons/side-navbar/wireless.svg.gz; \
-		$(RM) $(1)/www/tlt-icons/side-wifi.svg; \
+		$(RM) $(1)/www/tlt-icons/side-wifi.svg.gz; \
 		$(RM) $(1)/www/tlt-icons/wifi*.png; \
-		$(RM) $(1)/www/tlt-icons/wifi*.svg; \
 		$(RM) $(1)/www/tlt-icons/wifi*.svg.gz; \
 	)
 	$(if $(CONFIG_SPEEDTEST_SUPPORT),, \
-		$(RM) $(1)/www/tlt-icons/speedtest_*.svg; \
+		$(RM) $(1)/www/tlt-icons/speedtest_*.svg.gz; \
 	)
 	$(if $(TLT_PLATFORM_TSW2), \
 		$(RM) -r $(1)/www/tlt-icons/signal-bars; \
-		$(RM) $(1)/www/tlt-icons/connection-big-*.svg; \
+		$(RM) $(1)/www/tlt-icons/connection-big-*.svg.gz; \
 	)
 
 endef

@@ -791,6 +791,36 @@
             },
             "description": "Specifies the group of trial users."
           },
+          "subdomain": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Subdomain",
+              "input-type": "input",
+              "group": "General settings Advanced",
+              "depends": [
+                {
+                  "landingpage": "ext"
+                }
+              ]
+            },
+            "description": "Combined with Domain to make a DNS alias for the Hotspot IP address.",
+            "format": "fieldvalidation('^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$',0)"
+          },
+          "domain": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Domain",
+              "input-type": "input",
+              "group": "General settings Advanced",
+              "depends": [
+                {
+                  "landingpage": "ext"
+                }
+              ]
+            },
+            "description": "Combined with Subdomain to make a DNS alias for the Hotspot IP address.",
+            "format": "hostname"
+          },
           "https_redirect": {
             "type": "string",
             "x-web": {
