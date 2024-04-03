@@ -127,7 +127,7 @@
                     "description": "Array of section objects",
                     "items": {
                       "type": "string",
-                      "description": "Section id"
+                      "description": "Section ID"
                     }
                   }
                 }

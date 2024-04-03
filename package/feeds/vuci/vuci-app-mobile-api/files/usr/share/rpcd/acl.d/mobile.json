@@ -71,5 +71,14 @@
     "write": {
       "api": ["/apn_database/*"]
     }
+  },
+
+  "network/mobile/esim_profiles": {
+    "read": {
+      "api": ["/modems/*", "/esim/*"]
+    },
+    "write": {
+      "api": ["/modems/*", "/esim/*"]
+    }
   }
 }

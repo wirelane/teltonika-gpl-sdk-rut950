@@ -11,7 +11,7 @@
         "tags": [
           "Serial Outstation"
         ],
-        "summary": "Returns all Serial Outstation configurations",
+        "summary": "Returns all Serial outstation configurations",
         "responses": {
           "200": {
             "$ref": "#/components/responses/200Dnp3SerialOutstationMulti"

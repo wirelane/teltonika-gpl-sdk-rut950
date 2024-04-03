@@ -1,0 +1,628 @@
+{
+  "openapi": "3.0.0",
+  "tags": [
+    {
+      "name": "eSIM configuration"
+    },
+    {
+      "name": "eSIM actions"
+    }
+  ],
+  "paths": {
+    "/esim/status": {
+      "get": {
+        "summary": "Returns eSIM status",
+        "tags": [
+          "eSIM configuration"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_esim_status_multiple"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-esim-status"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "eSIM"
+      }
+    },
+    "/esim/status/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "x-web": {
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Modem ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns specified eSIM status",
+        "tags": [
+          "eSIM configuration"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_esim_status_one"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "operationId": "get-esim-status-id"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "eSIM"
+      }
+    },
+    "/esim/config": {
+      "get": {
+        "summary": "Get eSIM configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_esim_multiple"
+          }
+        },
+        "tags": [
+          "eSIM configuration"
+        ]
+      },
+      "put": {
+        "summary": "Update eSIM configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_esim_multiple"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/esim_options_id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "eSIM configuration"
+        ]
+      },
+      "delete": {
+        "summary": "Delete eSIM configurations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/delete_multi"
+              }
+            }
+          }
+        },
+        "tags": [
+          "eSIM configuration"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "eSIM"
+      }
+    },
+    "/esim/config/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "eSIM configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Get eSIM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_esim_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "eSIM configuration"
+        ]
+      },
+      "put": {
+        "summary": "Update eSIM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200_esim_one"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/esim_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "eSIM configuration"
+        ]
+      },
+      "delete": {
+        "summary": "Delete eSIM configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200deleted"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "eSIM configuration"
+        ]
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "eSIM"
+      }
+    },
+    "/esim/actions/download": {
+      "post": {
+        "summary": "Downloads eSIM profile",
+        "tags": [
+          "eSIM actions"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem": {
+                        "type": "string",
+                        "description": "Modem to download eSIM profile to.",
+                        "x-web": {
+                          "pretty": "Modem",
+                          "input-type": "select",
+                          "enum-pretty": {
+                            "$ref": "#/x-schemas/modem_names"
+                          },
+                          "enum-depends": {
+                            "$ref": "#/x-schemas/modem_select"
+                          }
+                        }
+                      },
+                      "activation_code": {
+                        "type": "string",
+                        "description": "eSIM activation code in eSIM format.",
+                        "x-web": {
+                          "pretty": "eSIM activation code",
+                          "input-type": "input"
+                        }
+                      },
+                      "name": {
+                        "type": "string",
+                        "maxLength": 64,
+                        "description": "Custom eSIM profile name.",
+                        "x-web": {
+                          "pretty": "eSIM profile name",
+                          "input-type": "input"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-esim-actions-download"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "eSIM"
+      }
+    },
+    "/esim/actions/process_notifications": {
+      "post": {
+        "summary": "Processes pending eSIM noitifications",
+        "tags": [
+          "eSIM actions"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "description": "Parameter section",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "modem": {
+                        "type": "string",
+                        "description": "Modem to process notifications for.",
+                        "x-web": {
+                          "pretty": "Modem",
+                          "input-type": "select",
+                          "enum-pretty": {
+                            "$ref": "#/x-schemas/modem_names"
+                          },
+                          "enum-depends": {
+                            "$ref": "#/x-schemas/modem_select"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-esim-actions-process-notifications"
+      },
+      "x-web": {
+        "menu": [
+          "Network",
+          "Mobile",
+          "Mobile"
+        ],
+        "hw_tags": {
+          "mobile": true
+        },
+        "name": "eSIM"
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200_esim_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/esim_options_id"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_esim_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/esim_options_id"
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_esim_status_one": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/esim_status"
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      },
+      "200_esim_status_multiple": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/esim_status"
+                  }
+                }
+              },
+              "required": [
+                "success",
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "esim_options": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "string",
+            "description": "Enable or disable eSIM profile.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Enable",
+              "input-type": "switch"
+            }
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "eSIM profile name.",
+            "x-web": {
+              "pretty": "Profile name",
+              "input-type": "input"
+            }
+          },
+          "modem": {
+            "type": "string",
+            "description": "Modem ID",
+            "readOnly": true,
+            "x-web": {
+              "pretty": "Modem",
+              "input-type": "select",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "provider": {
+            "type": "string",
+            "description": "eSIM profile provider name.",
+            "readOnly": true,
+            "x-web": {
+              "pretty": "eSIM profile provider",
+              "input-type": "input"
+            }
+          }
+        },
+        "required": [
+          "enabled"
+        ]
+      },
+      "esim_options_id": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the eSIM profile configuration",
+                "x-web": {
+                  "pretty": "Configuration ID",
+                  "input-type": "input"
+                }
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/esim_options"
+          }
+        ]
+      },
+      "esim_status": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Modem ID",
+            "x-web": {
+              "pretty": "Modem",
+              "enum-pretty": {
+                "$ref": "#/x-schemas/modem_names"
+              },
+              "enum-depends": {
+                "$ref": "#/x-schemas/modem_select"
+              }
+            }
+          },
+          "eid": {
+            "type": "string",
+            "description": "eSIM ID"
+          },
+          "pending_notifications": {
+            "type": "array",
+            "description": "Pending notifications",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sequence_number": {
+                  "type": "string",
+                  "description": "Pending notification sequence number"
+                },
+                "event": {
+                  "enum": [
+                    "0",
+                    "1",
+                    "2",
+                    "3"
+                  ],
+                  "x-web": {
+                    "pretty": "Notification type",
+                    "enum-pretty": {
+                      "0": "Install profile",
+                      "1": "Enable profile",
+                      "2": "Disable profile",
+                      "3": "Delete profile"
+                    }
+                  },
+                  "type": "string",
+                  "description": "Pending notification type"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "Server address of pending notification"
+                },
+                "iccid": {
+                  "type": "string",
+                  "description": "ICCID of pending notification eSIM"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
