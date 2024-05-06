@@ -272,7 +272,7 @@
           "name": {
             "type": "string",
             "maxLength": 200,
-            "description": "Name of serial device",
+            "description": "Name of serial device used for Over IP communication",
             "x-web": {
               "pretty": "Name",
               "input-type": "input",

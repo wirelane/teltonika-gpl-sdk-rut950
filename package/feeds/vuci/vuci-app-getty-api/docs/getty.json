@@ -872,7 +872,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Configuration ID"
                     }
                   }
                 }

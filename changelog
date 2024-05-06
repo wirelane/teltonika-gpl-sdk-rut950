@@ -1,3 +1,22 @@
+# 2024-05-03 00.07.06.11
+
+### New
+
+* WebUI: added 'starting' status when interface is just enabled (ID: 16576)
+
+### Improvements
+
+* Dnsmasq: updated to version 2.89 (ID: 17817)
+* Certificates: updated Root CA certificates (ID: 17780)
+
+### Fix
+
+* WebUI: fixed 'unknown' status being displayed for disabled interfaces initially (ID: 16576)
+* Firewall: fixed higher amounts of custom firewall rules not saving (ID: 17153)
+* WebUI: fixed network and multiwan interface metric sorting synchronization issue (ID: 16582)
+* WebUI: fixed mobile connection reload when changing DHCP server settings (ID: 17742)
+* Events Log: fixed log.db hangs on rare occasions (ID: 17468)
+
 # 2024-04-02 00.07.06.10
 
 ### Fix

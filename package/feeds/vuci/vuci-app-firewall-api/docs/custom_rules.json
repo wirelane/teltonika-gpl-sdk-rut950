@@ -50,6 +50,7 @@
                         "custom_rules": {
                           "type": "string",
                           "description": "custom rules data",
+                          "maxLength": 65535,
                           "x-web": {
                             "input-type": "input",
                             "pretty": "Firewall - Custom Rules"
@@ -137,6 +138,7 @@
                       "custom_rules": {
                         "type": "string",
                         "description": "custom rules data",
+                        "maxLength": 65535,
                         "x-web": {
                           "input-type": "input",
                           "pretty": "Firewall - Custom Rules"
