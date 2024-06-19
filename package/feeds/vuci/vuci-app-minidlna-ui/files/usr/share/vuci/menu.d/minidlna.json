@@ -3,7 +3,7 @@
       "title": "DLNA",
       "index": 40,
       "acls": ["services/usb_tools/minidlna"],
-      "view": "services/DLNA_aeaafe",
+      "view": "services/DLNA_41f06b",
       "files": ["/etc/config/minidlna"]
     }
 }

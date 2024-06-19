@@ -2,65 +2,41 @@
   "network/mobile/general": {
     "description": "mobile general configuration",
     "write": {
-      "api": ["/modems/*", "/sim_cards/*", "/operator_lists/*"],
-      "uci": ["simcard", "overview", "operctl"]
+      "api": ["/modems/*", "/sim_cards/*", "/operator_lists/*"]
     },
     "read": {
-      "api": ["/modems/*", "/sim_cards/*", "/operator_lists/*"],
-      "uci": ["simcard", "operctl", "overview"],
-      "ubus": {
-        "gsmd": ["reinit_modems"]
-      }
+      "api": ["/modems/*", "/sim_cards/*", "/operator_lists/*"]
     }
   },
 
   "network/mobile/sim_switch": {
     "description": "mobile sim switch configuration",
     "read": {
-      "api": ["/modems/*", "/sim_cards/*", "/sim_switch/*"],
-      "uci": ["sim_switch", "simcard"],
-      "ubus": {
-        "vuci.network.mobile": ["get_all_modems"],
-        "sim": ["get"]
-      }
+      "api": ["/modems/*", "/sim_cards/*", "/sim_switch/*"]
+
     },
     "write": {
-      "api": ["/modems/*", "/sim_cards/*", "/sim_switch/*"],
-      "uci": ["sim_switch", "simcard"]
+      "api": ["/modems/*", "/sim_cards/*", "/sim_switch/*"]
     }
   },
 
   "network/mobile/operators/scan": {
     "description": "mobile operators configuration",
     "read": {
-      "api": ["/modems/*", "/sim_cards/*"],
-      "uci": ["simcard"],
-      "ubus": {
-        "vuci.network.mobile": ["get_all_modems"],
-        "sim": ["get"]
-      }
+      "api": ["/modems/*", "/sim_cards/*"]
     },
     "write": {
-      "api": ["/modems/*", "/sim_cards/*"],
-      "uci": ["simcard"],
-      "ubus": {
-        "gsmd": ["reinit_modems"]
-      }
+      "api": ["/modems/*", "/sim_cards/*"]
     }
   },
 
   "network/mobile/operators/list": {
     "description": "mobile operators configuration",
     "write": {
-      "api": ["/modems/*", "/operator_lists/*"],
-      "uci": ["operctl", "simcard"],
-      "ubus": {
-        "gsmd": ["reinit_modems"]
-      }
+      "api": ["/modems/*", "/operator_lists/*"]
     },
     "read": {
-      "api": ["/modems/*", "/operator_lists/*"],
-      "uci": ["operctl", "simcard"]
+      "api": ["/modems/*", "/operator_lists/*"]
     }
   },
 
@@ -70,15 +46,6 @@
     },
     "write": {
       "api": ["/apn_database/*"]
-    }
-  },
-
-  "network/mobile/esim_profiles": {
-    "read": {
-      "api": ["/modems/*", "/esim/*"]
-    },
-    "write": {
-      "api": ["/modems/*", "/esim/*"]
     }
   }
 }

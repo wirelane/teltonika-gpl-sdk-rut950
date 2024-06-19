@@ -6,7 +6,7 @@
 	"services/vpn/stunnel": {
 		"title": "Stunnel",
 		"index": 90,
-		"view": "services/STunnel_aeaafe",
+		"view": "services/STunnel_41f06b",
 		"acls": [ "services/vpn/stunnel" ],
 		"files": [ "/etc/config/stunnel" ]
 	}

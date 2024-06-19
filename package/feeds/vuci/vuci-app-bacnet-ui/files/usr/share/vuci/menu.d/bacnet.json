@@ -2,7 +2,7 @@
 	"services/bacnet": {
 		"title": "BACnet",
 		"index": 95,
-		"view": "services/Bacnet_aeaafe",
+		"view": "services/Bacnet_41f06b",
 		"files": [ "/etc/config/bacnet_router" ]
 	}
 }

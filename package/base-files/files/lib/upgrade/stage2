@@ -95,6 +95,9 @@ kill_remaining() { # [ <signal> [ <loop> ] ]
 			read pid name state ppid rest < $stat
 			name="${name#(}"; name="${name%)}"
 
+			# Skip watchdog process
+			[ "$name" = "watchdog" ] && continue
+
 			# Skip PID1, our parent, ourself and our children
 			[ $pid -ne 1 -a $pid -ne $proc_ppid -a $pid -ne $$ -a $ppid -ne $$ ] || continue
 
@@ -114,7 +117,7 @@ kill_remaining() { # [ <signal> [ <loop> ] ]
 		[ $loop_limit -eq 0 ] && {
 			_v
 			v "Failed to kill all processes."
-			exit 1
+			ps
 		}
 	done
 	_v

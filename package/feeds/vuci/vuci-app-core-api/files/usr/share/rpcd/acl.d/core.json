@@ -2,18 +2,7 @@
 	"unauthenticated": {
 		"description": "Functions allowed for unauthenticated requests",
 		"read": {
-			"ubus": {
-				"vuci.ui": [
-					"lang"
-				],
-				"vuci.system": [
-					"get_routername"
-				],
-				"session": [
-					"access",
-					"login"
-				]
-			}
+			"api": ["/unauthorized/status/*"]
 		}
 	},
 	"core": {
@@ -26,97 +15,17 @@
 				"/ui/config/*",
 				"/interfaces/config/*",
 				"/modems/*",
-				"/system/actions/change_password_firstlogin/*"
-			],
-			"uci": [
-				"vuci",
-				"simcard",
-				"sim_switch",
-				"system",
-				"profiles",
-				"widget"
-			],
-			"ubus": {
-				"vuci.ui": [
-					"*"
-				],
-				"vuci.system": [
-					"get_board",
-					"file_stats",
-					"get_switch_topologies",
-					"system_status"
-				],
-				"session": [
-					"access",
-					"destroy",
-					"get",
-					"login"
-				],
-				"system": [
-					"reboot",
-					"board"
-				],
-				"network.device": [
-					"status"
-				],
-				"network.interface": [
-					"dump"
-				],
-				"vuci.network.network": [
-					"get_devices",
-					"network_netlist"
-				],
-				"network.wireless": [
-					"status"
-				],
-				"iwinfo": [
-					"devices",
-					"assoclist",
-					"info"
-				],
-				"vuci.network.mobile": [
-					"get_all_modems",
-					"modem_update_state"
-				],
-				"vuci.network.wireless": [
-					"wifi_interface_status"
-				],
-				"sim": [
-					"get"
-				],
-				"uci": [
-					"get"
-				]
-			}
+				"/system/actions/change_password_firstlogin/*",
+				"/profiles/status/*",
+				"/users/acls/options/*",
+				"/session/*"
+			]
 		},
 		"write": {
 			"api": [
 				"/system/actions/change_password_firstlogin/*",
 				"/logout*"
-			],
-			"uci": [
-				"vuci",
-				"widget"
-			],
-			"ubus": {
-				"uci": [
-					"set",
-					"order",
-					"delete",
-					"add",
-					"apply"
-				],
-				"vuci.system.profiles": [
-					"update_profile"
-				],
-				"vuci.system": [
-					"remove_vuci_uploads",
-					"diskfree"
-				],
-				"vuci.services.services": [
-					"update_configs"
-				]
-			}
+			]
 		}
 	}
 }

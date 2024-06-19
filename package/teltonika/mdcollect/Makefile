@@ -23,7 +23,7 @@ define Package/mdcollectd
 	CATEGORY:=Base system
 	TITLE:=mdcollectd
 	DEPENDS:=+lsqlite3 +libuci +libtlt_uci +libmdcollect +libubus +libubox \
-		+libtlt-logger +libgsm +iptables-mod-quota2 +libnftnl
+		+libtlt-logger +libgsm +libnftnl
 endef
 
 define Package/libmdcollect

@@ -6,14 +6,14 @@
         "services/usb_tools/samba/general": {
             "title": "General",
             "acls": [ "services/usb_tools/samba/general" ],
-            "view": "services/Samba_aeaafe",
+            "view": "services/Samba_41f06b",
             "index": 10,
             "files": [ "/etc/config/samba" ]
         },
         "services/usb_tools/samba/users": {
             "title": "Users",
             "acls": [ "services/usb_tools/samba/users" ],
-            "view": "services/SambaUsers_aeaafe",
+            "view": "services/SambaUsers_41f06b",
             "index": 20,
             "files": [ "/etc/config/samba" ]
         }

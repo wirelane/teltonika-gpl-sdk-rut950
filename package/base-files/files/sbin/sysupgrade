@@ -275,7 +275,6 @@ do_save_conffiles() {
 			find /greengrass/certs/ -name "*.key"						# AWS Greengrass private and public keys
 		}
 		[ -d /etc/hostapd ] && find "/etc/hostapd/" -name "*.psk"		# hostapd psk files
-		[ -e /etc/lpac_config.json ] && echo "/etc/lpac_config.json"            # lpac library config file
 	} >>"$CONFFILES"
 
 	ask_bool 0 "Edit config file list" && vi "$CONFFILES"
@@ -493,13 +492,14 @@ clean_tmp_dir() {
 }
 
 if [ -n "$CONF_BACKUP" ]; then
+	profile_path=$(uci_get profiles general path)
 	curr_profile=$(uci_get profiles general profile)
 	tarfile=$(uci_get profiles "$curr_profile" archive)
 	md5file=$(uci_get profiles "$curr_profile" md5file)
 	[ -z "$curr_profile" ] || [ -z "$tarfile" ] || [ -z "$md5file" ] || {
 		echo "Updating profile $curr_profile"
-		/usr/sbin/profile.sh -b "$tarfile"
-		/usr/sbin/profile.sh -m "$md5file"
+		/usr/sbin/profile.sh -b "${profile_path:-"/etc/profiles/"}$tarfile"
+		/usr/sbin/profile.sh -m "${profile_path:-"/etc/profiles/"}$md5file"
 		uci_set profiles "$curr_profile" updated $(date +%s)
 		uci_commit profiles
 	}
@@ -658,9 +658,6 @@ if [ $TEST -eq 1 ]; then
 	exit 0
 fi
 
-# allow init(procd) to handle watchdog in cpu intensive tasks
-[ -e "/usr/bin/renice" ] && /usr/bin/renice -20 -p 1
-
 run_hooks "" $fwtool_pre_upgrade
 
 # If ledman daemon is dead, this should not have any effect
@@ -673,6 +670,19 @@ fi
 
 install_bin /sbin/upgraded
 v "Commencing upgrade. Closing all shell sessions."
+
+# switch watchdog handling
+ubus call system watchdog '{"magicclose":true}'
+ubus call system watchdog '{"stop":true}'
+sleep 2
+/sbin/watchdog -F -t 15 /dev/watchdog &
+
+# disable hotplug.d subsystem
+rm -rf /etc/hotplug.d
+ln -sf /dev/null /etc/hotplug.d
+
+# perform early service stopping
+[ -e "/usr/sbin/prff.sh" ] && /usr/sbin/prff.sh stage2
 
 COMMAND='/lib/upgrade/do_stage2'
 
@@ -696,6 +706,9 @@ else
 	json_add_object options
 	json_add_int save_partitions "$SAVE_PARTITIONS"
 	json_close_object
+
+	v "Waiting for CPU time..."
+	sleep 5
 
 	ubus call system sysupgrade "$(json_dump)"
 fi

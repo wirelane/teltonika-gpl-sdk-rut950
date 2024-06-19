@@ -1659,7 +1659,7 @@ config BUSYBOX_DEFAULT_MKFS_VFAT
 	default n
 config BUSYBOX_DEFAULT_MKSWAP
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_FEATURE_MKSWAP_UUID
 	bool
 	default n
@@ -1761,16 +1761,16 @@ config BUSYBOX_DEFAULT_SETSID
 	default n
 config BUSYBOX_DEFAULT_SWAPON
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_FEATURE_SWAPON_DISCARD
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_FEATURE_SWAPON_PRI
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_SWAPOFF
 	bool
-	default y
+	default n
 config BUSYBOX_DEFAULT_FEATURE_SWAPONOFF_LABEL
 	bool
 	default n
@@ -2181,7 +2181,7 @@ config BUSYBOX_DEFAULT_VOLNAME
 	default n
 config BUSYBOX_DEFAULT_WATCHDOG
 	bool
-	default n
+	default y
 config BUSYBOX_DEFAULT_FEATURE_IPV6
 	bool
 	default y if IPV6

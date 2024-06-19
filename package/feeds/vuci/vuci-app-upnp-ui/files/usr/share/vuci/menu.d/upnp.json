@@ -2,7 +2,7 @@
 	"services/upnp": {
 		"title": "UPNP",
 		"index": 220,
-		"view": "services/Upnp_aeaafe",
+		"view": "services/Upnp_41f06b",
 		"acls": [ "services/upnp" ],
 		"files": [ "/etc/config/upnpd" ]
 	}

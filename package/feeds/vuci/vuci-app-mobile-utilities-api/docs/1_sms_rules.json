@@ -287,10 +287,7 @@
               "wifi",
               "exec",
               "config_reload",
-              "api",
-              "esim_list",
-              "esim_change",
-              "esim_install"
+              "api"
             ],
             "x-web": {
               "pretty": "Enable",
@@ -329,10 +326,7 @@
                 "wifi": "Switch WiFi",
                 "exec": "Execute custom script",
                 "config_reload": "Reload config",
-                "api": "API",
-                "esim_list": "eSIM list",
-                "esim_change": "eSIM change",
-                "esim_install": "eSIM install"
+                "api": "API"
               },
               "enum-depends": [
                 {
@@ -341,8 +335,7 @@
                     "dual_sim": true,
                     "gps": true,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": false
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -386,8 +379,7 @@
                     "dual_sim": true,
                     "gps": true,
                     "ethernet": true,
-                    "wifi": false,
-                    "esim": false
+                    "wifi": false
                   },
                   "values": [
                     "reboot",
@@ -430,8 +422,7 @@
                     "dual_sim": true,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": true
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -464,10 +455,7 @@
                     "io_set",
                     "switch_sim",
                     "wol",
-                    "wifi",
-                    "esim_list",
-                    "esim_change",
-                    "esim_install"
+                    "wifi"
                   ]
                 },
                 {
@@ -476,8 +464,7 @@
                     "dual_sim": true,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": false
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -519,8 +506,7 @@
                     "dual_sim": false,
                     "gps": true,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": false
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -563,8 +549,7 @@
                     "dual_sim": false,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": false
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -605,8 +590,7 @@
                     "dual_sim": false,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": false,
-                    "esim": false
+                    "wifi": false
                   },
                   "values": [
                     "reboot",
@@ -646,8 +630,7 @@
                     "dual_sim": false,
                     "gps": false,
                     "ethernet": false,
-                    "wifi": false,
-                    "esim": false
+                    "wifi": false
                   },
                   "values": [
                     "reboot",
@@ -686,8 +669,7 @@
                     "dual_sim": true,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": false
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -728,8 +710,7 @@
                     "dual_sim": true,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": false,
-                    "esim": false
+                    "wifi": false
                   },
                   "values": [
                     "reboot",
@@ -769,8 +750,7 @@
                     "dual_sim": false,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": true,
-                    "esim": false
+                    "wifi": true
                   },
                   "values": [
                     "reboot",
@@ -810,8 +790,7 @@
                     "dual_sim": false,
                     "gps": false,
                     "ethernet": true,
-                    "wifi": false,
-                    "esim": false
+                    "wifi": false
                   },
                   "values": [
                     "reboot",

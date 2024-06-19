@@ -10,24 +10,9 @@
 	"services/mqtt/broker": {
 		"description": "mqtt broker configuration",
 		"read": {
-			"uci": [
-				"mosquitto",
-				"firewall"
-			],
-			"ubus": {
-				"vuci.system.certificates": [
-					"get_keys",
-					"get_ca_files",
-					"get_only_certificates"
-				]
-			},
 			"api": ["/mqtt/broker/*", "/mqtt/bridge/*", "/certificates/config/*"]
 		},
 		"write": {
-			"uci": [
-				"mosquitto",
-				"firewall"
-			],
 			"api": ["/mqtt/broker/*", "/mqtt/bridge/*"]
 		}
 	}

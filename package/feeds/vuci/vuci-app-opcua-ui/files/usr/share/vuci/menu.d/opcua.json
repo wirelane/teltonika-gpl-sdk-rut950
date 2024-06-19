@@ -2,7 +2,7 @@
     "services/opcua": {
         "title": "OPC UA",
         "index": 140,
-        "view": "services/Opcua_aeaafe",
+        "view": "services/Opcua_41f06b",
         "acls": [ "services/opcua" ],
         "files": [ "/etc/config/opcua_client" ],
         "i18nfile": true

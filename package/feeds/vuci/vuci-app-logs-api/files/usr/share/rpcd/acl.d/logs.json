@@ -3,9 +3,6 @@
 		"description": "all events",
 		"read": {
 		  "api": ["/events_log/config/*"]
-		},
-		"write": {
-		  "uci": [" "]
 		}
 	  },
 	
@@ -13,9 +10,6 @@
 		"description": "general events",
 		"read": {
 		  "api": ["/events_log/config/events/*"]
-		},
-		"write": {
-		  "uci": [" "]
 		}
 	  },
 	
@@ -23,9 +17,6 @@
 		"description": "system events",
 		"read": {
 		  "api": ["/events_log/config/system/*"]
-		},
-		"write": {
-		  "uci": [" "]
 		}
 	  },
 	
@@ -33,9 +24,6 @@
 		"description": "network events",
 		"read": {
 		  "api": ["/events_log/config/network/*"]
-		},
-		"write": {
-		  "uci": [" "]
 		}
 	  },
 	
@@ -43,9 +31,6 @@
 		"description": "connections events",
 		"read": {
 		  "api": ["/events_log/config/connections/*"]
-		},
-		"write": {
-		  "uci": [" "]
 		}
 	  }
 }

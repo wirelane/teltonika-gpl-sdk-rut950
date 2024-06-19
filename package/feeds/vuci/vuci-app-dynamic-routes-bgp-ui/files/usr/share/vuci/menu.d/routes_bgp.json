@@ -14,7 +14,7 @@
 			"network/routes/dynamic_routes/proto_bgp": {
 				"title": "BGP",
 				"index": 10,
-				"view": "network/ProtoBgp_aeaafe",
+				"view": "network/ProtoBgp_41f06b",
 				"acls": [ "network/routes/dynamic_routes/proto_bgp" ],
 				"files": [ "/etc/config/bgp" ],
 				"orfiles": [ "/usr/lib/opkg/info/frr5-bgpd.control", "/usr/lib/opkg/info/frr-bgpd.control"]
@@ -35,7 +35,7 @@
 			"status/routes/dynamic/bgp": {
 				"title": "BGP",
 				"index": 10,
-				"view": "status/ProtoBgp_aeaafe",
+				"view": "status/ProtoBgp_41f06b",
 				"acls": [ "status/routes/dynamic/bgp"],
 				"files": [ "/etc/config/bgp" ],
 				"orfiles": [ "/usr/lib/opkg/info/frr5-bgpd.control", "/usr/lib/opkg/info/frr-bgpd.control" ]

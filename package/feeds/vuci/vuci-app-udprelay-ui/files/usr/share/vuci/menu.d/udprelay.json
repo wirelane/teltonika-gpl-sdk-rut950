@@ -6,7 +6,7 @@
 	"network/other/udprelay": {
 		"title": "UDP Broadcast Relay",
 		"index": 10,
-		"view": "network/UdpRelay_aeaafe",
+		"view": "network/UdpRelay_41f06b",
 		"acls": [ "network/other/udprelay" ],
 		"files": [ "/etc/config/udprelay" ]
 	}

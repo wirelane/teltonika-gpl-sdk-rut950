@@ -36,7 +36,6 @@ sysntpd \
 system \
 uhttpd \
 umount \
-vuci \
 wpad \
 xl2tpd \
 tinc \
@@ -55,9 +54,11 @@ show_help() {
     echo "    help      Show this help message."
     echo "    kill      Stop running services excluding those in EXCLUDE_SERVICES."
     echo "    restore   Restore previously killed services."
+    echo "    stage2    Stop running services without any excludes."
 }
 
 kill_services() {
+    local stage="$1"
     # Empty the OUTPUT_FILE to start fresh
     : > "$OUTPUT_FILE"
 
@@ -73,7 +74,7 @@ kill_services() {
         case " $TRANSFORMED_EXCLUDE " in
             *" $SERVICE_NAME "*)
                 # Service is in the exclude list; skip it
-                continue
+                [ -n "$stage" ] || continue
                 ;;
         esac
 
@@ -85,7 +86,7 @@ kill_services() {
             *running*)
                 "$DIR/$SERVICE_NAME" stop
                 echo "Killed $SERVICE_NAME"
-                
+
                 # Save the killed service to the file
                 echo "$SERVICE_NAME" >> "$OUTPUT_FILE"
                 ;;
@@ -111,6 +112,9 @@ case "$1" in
         ;;
     "restore")
         restore_services
+        ;;
+    "stage2")
+        kill_services stage2
         ;;
     *)
         show_help

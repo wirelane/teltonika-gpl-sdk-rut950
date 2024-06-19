@@ -6,7 +6,7 @@
 	"services/vpn/zerotier": {
 		"title": "ZeroTier",
 		"index": 120,
-		"view": "services/ZeroTier_aeaafe",
+		"view": "services/ZeroTier_41f06b",
 		"acls": [ "services/vpn/zerotier" ],
 		"files": [ "/etc/config/zerotier" ]
 	}

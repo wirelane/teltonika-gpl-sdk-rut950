@@ -101,7 +101,7 @@ endif
 
 define Package/base-files/generate-banner
 	(\
-		max_line_len="$$$$($(TOPDIR)/scripts/get_tlt_version.sh | wc -c)"; \
+		max_line_len="$$$$(echo "$(TLT_VERSION)" | wc -c)"; \
 		max_line_len="$$$$((max_line_len + 18))"; \
 		label="$$$$(echo "Teltonika $(TLT_PLATFORM_NAME) series $$$$(date +'%Y')")"; \
 		label_len="$$$$(echo $$$$label | wc -c)"; \
@@ -213,7 +213,7 @@ define Package/base-files/install
 	$(SED) "s#%%KERNEL%%#$(LINUX_VERSION)#g" $(1)/etc/banner
 
 	# set firmware in banner
-	$(SED) "s#%%FIRMWARE%%#$$$$($(TOPDIR)/scripts/get_tlt_version.sh)#g" $(1)/etc/banner
+	$(SED) "s#%%FIRMWARE%%#$(TLT_VERSION)#g" $(1)/etc/banner
 
 	# set build-rev in banner
 	$(SED) "s#%%BUILD_REV%%#$$$$(git rev-parse --short HEAD)#g" $(1)/etc/banner

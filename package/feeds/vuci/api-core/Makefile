@@ -65,7 +65,6 @@ define install_closed_gpl
 		$(PKG_GPL_BUILD_DIR)/files/usr/lib/lua/api/network
 
 	$(CP) $(GPL_FILES_DIR)/etc/config/vuci $(PKG_GPL_BUILD_DIR)/files/etc/config
-	$(CP) $(GPL_FILES_DIR)/etc/init.d/vuci.init $(PKG_GPL_BUILD_DIR)/files/etc/init.d
 	$(CP) $(GPL_FILES_DIR)/etc/init.d/event_server.init $(PKG_GPL_BUILD_DIR)/files/etc/init.d
 	$(CP) $(GPL_FILES_DIR)/sbin/generate_user_acls.sh $(PKG_GPL_BUILD_DIR)/files/sbin
 	$(CP) $(GPL_FILES_DIR)/sbin/tls_generate_lua.lua $(PKG_GPL_BUILD_DIR)/files/sbin
@@ -76,7 +75,6 @@ define install_closed_gpl
 	$(CP) $(GPL_FILES_DIR)/usr/lib/lua/api/*.lua $(PKG_GPL_BUILD_DIR)/files/usr/lib/lua/api
 	$(CP) $(GPL_FILES_DIR)/usr/lib/lua/vuci/*.lua $(PKG_GPL_BUILD_DIR)/files/usr/lib/lua/vuci
 	$(CP) $(GPL_FILES_DIR)/usr/lib/lua/vuci/network/* $(PKG_GPL_BUILD_DIR)/files/usr/lib/lua/vuci/network
-	$(CP) $(GPL_FILES_DIR)/usr/sbin/vuci.lua $(PKG_GPL_BUILD_DIR)/files/usr/sbin
 	$(CP) $(GPL_FILES_DIR)/www/cgi-bin/subscribe.lua $(PKG_GPL_BUILD_DIR)/files/www/cgi-bin
 	$(CP) $(GPL_FILES_DIR)/www/cgi-bin/luci.lua $(PKG_GPL_BUILD_DIR)/files/www/cgi-bin
 	$(CP) $(GPL_FILES_DIR)/www/cgi-bin/index.lua $(PKG_GPL_BUILD_DIR)/files/www/cgi-bin
@@ -106,13 +104,11 @@ define Package/api-core/install
 				$(1)/usr/lib/lua/ubus/services \
 				$(1)/etc/vuci-uploads ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/etc/config/vuci $(1)/etc/config/vuci ; \
-	$(INSTALL_BIN) -D "$$$$files_dir"/etc/init.d/vuci.init $(1)/etc/init.d/vuci ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/etc/init.d/event_server.init $(1)/etc/init.d/event_server ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/sbin/generate_user_acls.sh $(1)/sbin/generate_user_acls ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/sbin/tls_generate_lua.lua $(1)/sbin/tls_generate_lua ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/sbin/event_server.lua $(1)/sbin/event_server ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/sbin/api.lua $(1)/sbin/api ; \
-	$(INSTALL_BIN) -D "$$$$files_dir"/usr/sbin/vuci.lua $(1)/usr/sbin/vuci ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/usr/lib/lua/vuci/*.lua $(1)/usr/lib/lua/vuci ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/usr/lib/lua/vuci/network/* $(1)/usr/lib/lua/vuci/network ; \
 	$(INSTALL_BIN) -D "$$$$files_dir"/www/cgi-bin/subscribe.lua $(1)/www/cgi-bin/subscribe.lua ; \

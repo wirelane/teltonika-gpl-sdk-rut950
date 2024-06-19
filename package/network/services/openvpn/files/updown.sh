@@ -26,6 +26,16 @@ case $script_type in
 		}
 		json_add_string "time" "$daemon_start_time"
 		json_dump > "$STATUS_FILE"
+		if [ "$dev" != "${dev/tun_c/}" ] && [ -n "$route_network_1" ]; then
+			i=1
+			route_network="$route_network_1"
+			while [ -n "$route_network" ]; do
+				[ "${route_network##*.}" = "0" ] && route_network="${route_network%.*}.1"
+				{ sleep 3 && ping -c1 -W1 -I "$dev" "$route_network" >/dev/null 2>&1; } &
+				i=$(( i+1 ))
+				eval "route_network=\$route_network_$i"
+			done
+		fi
 		;;
 	down)
 		[ "$TYPE" = "client" ] && rm /tmp/dnsmasq.d/$dev.dns 2> /dev/null

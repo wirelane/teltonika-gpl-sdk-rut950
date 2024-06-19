@@ -10,12 +10,7 @@
             "api": [
                 "/usb_tools/*",
                 "/system/actions/reboot/*"
-            ],
-            "ubus": {
-                "vuci.system": [
-                    "reboot"
-                ]
-            }
+            ]
         }
     }
 }

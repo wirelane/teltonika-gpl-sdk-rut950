@@ -419,6 +419,24 @@
             "type": "string",
             "description": "Specifies how device will be seen by other devices.",
             "format": "host"
+          },
+          "api_session_timeout": {
+            "x-web": {
+              "pretty": "API session timeout",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the timeout of the API session.",
+            "format": "irange(1, 2147483)"
+          },
+		  "session_timeout": {
+            "x-web": {
+              "pretty": "API session timeout",
+              "input-type": "input"
+            },
+            "type": "string",
+            "description": "Specifies the timeout of the WebUI session.",
+            "format": "min(1)"
           }
         }
       }

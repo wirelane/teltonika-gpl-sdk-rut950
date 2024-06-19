@@ -6,7 +6,7 @@
 		"system/admin/datetime/ntpd": {
 			"title": "NTPD",
 			"index": 30,
-			"view": "services/Ntpd_aeaafe",
+			"view": "services/Ntpd_41f06b",
 			"acls": [ "system/admin/datetime/ntpd" ],
 			"files": [ "/etc/config/ntpd" ]
 		}

@@ -14,7 +14,7 @@
 			"network/routes/dynamic_routes/proto_nhrp": {
 				"title": "NHRP",
 				"index": 50,
-				"view": "network/ProtoNhrp_aeaafe",
+				"view": "network/ProtoNhrp_41f06b",
 				"acls": [ "network/routes/dynamic_routes/proto_nhrp"],
 				"files": [ "/etc/config/nhrp" ],
 				"orfiles": [ "/usr/lib/opkg/info/frr5-nhrp.control", "/usr/lib/opkg/info/frr-nhrp.control" ]
@@ -35,7 +35,7 @@
 			"status/routes/dynamic/nhrp": {
 				"title": "NHRP",
 				"index": 50,
-				"view": "status/ProtoNhrp_aeaafe",
+				"view": "status/ProtoNhrp_41f06b",
 				"acls": [ "status/routes/dynamic/nhrp"],
 				"files": [ "/etc/config/nhrp" ],
 				"orfiles": [ "/usr/lib/opkg/info/frr5-nhrp.control", "/usr/lib/opkg/info/frr-nhrp.control" ]

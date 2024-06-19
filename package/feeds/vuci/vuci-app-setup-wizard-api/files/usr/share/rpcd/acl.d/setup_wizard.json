@@ -7,25 +7,9 @@
                 "/package_manager/language_packages/*",
                 "/system/languages/*",
                 "/system/config/*"
-            ],
-            "uci": [
-                "system",
-                "vuci",
-                "firewall",
-                "ntpclient"
-            ],
-            "ubus": {
-                "vuci.system": [
-                    "clock_status"
-                ]
-            }
+            ]
         },
         "write": {
-            "uci": [
-                "system",
-                "vuci",
-                "ntpclient"
-            ],
             "api": [
                 "/date_time/ntp/client/*",
                 "/system/config/*"
@@ -39,25 +23,12 @@
                 "/modems/status*",
                 "/interfaces/config/*",
                 "/dhcp/servers/*"
-            ],
-            "uci": [
-                "network",
-                "dhcp"
-            ],
-            "ubus": {
-                "vuci.network.mobile": [
-                    "get_all_modems"
-                ]
-            }
+            ]
         },
         "write": {
             "api": [
                 "/interfaces/config/*",
                 "/dhcp/servers/*"
-            ],
-            "uci": [
-                "network",
-                "dhcp"
             ]
         }
     },
@@ -68,25 +39,12 @@
                 "/modems/status*",
                 "/interfaces/*",
                 "/sim_cards/*"
-            ],
-            "uci": [
-                "network",
-                "simcard"
-            ],
-            "ubus": {
-                "network.interface.*": [
-                    "status"
-                ]
-            }
+            ]
         },
         "write": {
             "api": [
                 "/interfaces/*",
                 "/sim_cards/*"
-            ],
-            "uci": [
-                "network",
-                "simcard"
             ]
         }
     },
@@ -96,17 +54,11 @@
             "api": [
                 "/wireless/*",
                 "/modems/status*"
-            ],
-            "uci": [
-                "wireless"
             ]
         },
         "write": {
             "api": [
                 "/wireless/interfaces/*"
-            ],
-            "uci": [
-                "wireless"
             ]
         }
     },

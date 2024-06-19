@@ -2,7 +2,7 @@
     "system/admin/access_control/pam": {
         "title": "PAM",
         "acls": [ "system/admin/access_control/pam" ],
-        "view": "services/Pamd_aeaafe",
+        "view": "services/Pamd_41f06b",
         "index": 20
     }
 }

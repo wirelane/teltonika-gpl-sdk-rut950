@@ -308,16 +308,18 @@ proto_ncm_setup() {
 }
 
 proto_ncm_teardown() {
-	local interface="$1" pdp bridge_ipaddr method braddr_f
+	local interface="$1" pdp bridge_ipaddr method
+	local braddr_f="/var/run/${interface}_braddr"
 	json_get_vars pdp modem
 
 	mdm_ubus_obj="$(find_mdm_ubus_obj "$modem")"
 
 	echo "Stopping network ${interface}"
 
-	braddr_f="/var/run/${interface}_braddr"
-	method=$(grep -o 'method:[^ ]*' $braddr_f 2> /dev/null | cut -d':' -f2)
-	bridge_ipaddr=$(grep -o 'bridge_ipaddr:[^ ]*' $braddr_f 2> /dev/null | cut -d':' -f2)
+	[ -f "$braddr_f" ] && {
+		method=$(get_braddr_var method "$interface")
+		bridge_ipaddr=$(get_braddr_var bridge_ipaddr "$interface")
+	}
 
 	#Kill udhcpc instance
 	proto_kill_command "$interface"
@@ -343,15 +345,16 @@ proto_ncm_teardown() {
 		rm -f "/tmp/dnsmasq.d/bridge"
 		swconfig dev switch0 set soft_reset 5 &
 		rm -f "$braddr_f" 2> /dev/null
+
+		#Clear passthrough and bridge params
+		iptables -t nat -F postrouting_rule
+
+		local zone="$(fw3 -q network "$interface" 2>/dev/null)"
+		iptables -F forwarding_${zone}_rule
+
+		ip neigh flush proxy
+		ip neigh flush dev br-lan
 	}
-
-	#Clear passthrough and bridge params
-	iptables -t nat -F postrouting_rule
-
-	local zone="$(fw3 -q network "$interface" 2>/dev/null)"
-	iptables -F forwarding_${zone}_rule
-
-	ip neigh flush proxy
 
 	proto_init_update "*" 0
 	proto_send_update "$interface"

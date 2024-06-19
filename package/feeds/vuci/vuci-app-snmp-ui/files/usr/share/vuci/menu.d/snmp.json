@@ -6,28 +6,28 @@
         "services/snmp/snmp_settings": {
             "title": "SNMP Settings",
             "acls": [ "services/snmp/snmp_settings" ],
-            "view": "services/Snmp_aeaafe",
+            "view": "services/Snmp_41f06b",
             "index": 1,
             "files": [ "/etc/config/snmpd" ]
         },
         "services/snmp/snmpv3": {
             "title": "SNMP V3 Users",
             "acls": [ "services/snmp/snmpv3" ],
-            "view": "services/SnmpV3_aeaafe",
+            "view": "services/SnmpV3_41f06b",
             "index": 2,
             "files": [ "/etc/config/snmpd" ]
         },
         "services/snmp/community": {
             "title": "Communities",
             "acls": [ "services/snmp/community" ],
-            "view": "services/Communities_aeaafe",
+            "view": "services/Communities_41f06b",
             "index": 3,
             "files": [ "/etc/config/snmpd" ]
         },
         "services/snmp/traps": {
             "title": "Trap Settings",
             "acls": [ "services/snmp/traps" ],
-            "view": "services/Trap_aeaafe",
+            "view": "services/Trap_41f06b",
             "index": 4,
             "files": [
                 "/etc/config/snmpd",

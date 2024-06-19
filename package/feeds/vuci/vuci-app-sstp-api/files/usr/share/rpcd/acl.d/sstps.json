@@ -2,26 +2,12 @@
 	"services/vpn/sstp": {
 		"description": "sstp configuration",
 		"read": {
-			"uci": ["network"],
-			"ubus": {
-				"vuci.system.certificates": [
-					"get_ca_files"
-				]
-			},
 			"api": [
 				"/sstp/*",
 				"/certificates/ca/*"
 			]
 		},
 		"write": {
-			"uci": ["network"],
-			"ubus": {
-				"vuci.services.sstp": [
-					"sstp_create",
-					"sstp_remove",
-					"sstp_save"
-				]
-			},
 			"api": [
 				"/sstp/*"
 			]

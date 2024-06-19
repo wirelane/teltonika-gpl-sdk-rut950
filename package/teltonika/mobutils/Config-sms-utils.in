@@ -45,11 +45,6 @@ config SMS_UTILS_HANDLER_API
     help
         Compile with API support
 
-config SMS_UTILS_HANDLER_ESIM
-	bool "eSIM handler"
-	default y
-    help
-        Compile with eSIM support
 
 endmenu
 

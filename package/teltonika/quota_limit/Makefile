@@ -20,7 +20,7 @@ define Package/quota_limit
 	SECTION:=base
 	CATEGORY:=Base system
 	TITLE:=quota_limit
-	DEPENDS:=+libuci +libtlt_uci +libgsm +libtlt-logger +iptables-mod-quota2 +libmdcollect +libnftnl
+	DEPENDS:=+libuci +libtlt_uci +libgsm +libtlt-logger +libmdcollect +libnftnl
 endef
 
 TARGET_CFLAGS += -D_GNU_SOURCE

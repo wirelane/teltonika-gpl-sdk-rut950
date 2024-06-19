@@ -5,12 +5,10 @@
             "api": [
                 "/dns/*",
                 "/interfaces/*"
-            ],
-            "uci": [ "dhcp"]
+            ]
         },
         "write": {
-            "api": ["/dns/*"],
-            "uci": [ "dhcp"]
+            "api": ["/dns/*"]
         }
     }
 }

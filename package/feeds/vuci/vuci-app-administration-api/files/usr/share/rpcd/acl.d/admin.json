@@ -6,40 +6,15 @@
         "/system/config/*",
         "/system/led/config/*",
         "/system/buttons/config/*",
-        "/package_manager/language_packages/*"
-      ],
-      "uci": [
-        "system",
-        "vuci",
-        "buttons"
-      ],
-      "ubus": {
-        "vuci.system": [
-          "check_config"
-        ],
-        "vuci.services.packages": [
-          "get_available_language_packages",
-          "install_package",
-          "remove_pending_package"
-        ],
-        "vuci.firmware": [
-          "user_defaults"
-        ]
-      }
+        "/package_manager/language_packages/*",
+        "/system/languages/*"
+      ]
     },
     "write": {
       "api": [
         "/system/config/*",
         "/system/led/config/*",
         "/system/buttons/config/*"
-      ],
-      "uci": [
-        "system",
-        "vuci",
-        "buttons"
-      ],
-      "vuci.firmware": [
-        "factory_reset"
       ]
     }
   },

@@ -106,7 +106,7 @@ decrypt_key() {
 	config_get decrypt "$s" decrypt ""
 	[ -z "$key" ] || [ -z "$decrypt" ] && return
 	[ ! -d "/var/etc/openvpn-dkey" ] && mkdir -p "/var/etc/openvpn-dkey"
-	/usr/bin/openssl rsa -in "$key" -out "/var/etc/openvpn-dkey/${s}.key" -passin pass:"$decrypt" 1>/dev/null 2>&1
+	/usr/bin/openssl pkey -in "$key" -out "/var/etc/openvpn-dkey/${s}.key" -passin pass:"$decrypt" 1>/dev/null 2>&1
 	echo -e "key /var/etc/openvpn-dkey/${s}.key" >>"/var/etc/openvpn-$s.conf"
 }
 

@@ -14,7 +14,7 @@
 			"network/routes/dynamic_routes/proto_eigrp": {
 				"title": "EIGRP",
 				"index": 40,
-				"view": "network/ProtoEigrp_aeaafe",
+				"view": "network/ProtoEigrp_41f06b",
 				"acls": [ "network/routes/dynamic_routes/proto_eigrp"],
 				"files": [ "/etc/config/eigrp"],
 				"orfiles": [ "/usr/lib/opkg/info/frr5-eigrpd.control", "/usr/lib/opkg/info/frr-eigrpd.control" ]
@@ -35,7 +35,7 @@
 			"status/routes/dynamic/eigrp": {
 				"title": "EIGRP",
 				"index": 40,
-				"view": "status/ProtoEigrp_aeaafe",
+				"view": "status/ProtoEigrp_41f06b",
 				"acls": [ "status/routes/dynamic/eigrp"],
 				"files": [ "/etc/config/eigrp" ],
 				"orfiles": [ "/usr/lib/opkg/info/frr5-eigrpd.control", "/usr/lib/opkg/info/frr-eigrpd.control" ]

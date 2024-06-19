@@ -435,7 +435,7 @@
             "properties": {
               "id": {
                 "type": "string",
-                "description": "OPC UA Value Configuration identifier (ID)."
+                "description": "OPC UA Value Configuration Identifier (ID)."
               }
             },
             "required": [

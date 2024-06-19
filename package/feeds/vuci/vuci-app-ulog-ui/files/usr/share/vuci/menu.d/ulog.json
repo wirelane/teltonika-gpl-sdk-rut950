@@ -2,7 +2,7 @@
 	"services/logging": {
 		"title": "Traffic Logging",
 		"index": 110,
-		"view": "services/Ulog_aeaafe",
+		"view": "services/Ulog_41f06b",
 		"acls": [ "services/logging" ],
 		"files": [ "/etc/config/ulogd" ]
 	}

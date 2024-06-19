@@ -299,7 +299,8 @@ ${pdptype:+ --pdp-type $pdptype}"
 proto_connm_teardown() {
 	local interface="$1"
 	local device="/dev/cdc-wdm0" conn_proto
-	local bridge_ipaddr method braddr_f
+	local bridge_ipaddr method
+	local braddr_f="/var/run/${interface}_braddr"
 
 	[ -n "$ctl_device" ] && device=$ctl_device
 
@@ -307,9 +308,10 @@ proto_connm_teardown() {
 
 	conn_proto="qmux"
 
-	braddr_f="/var/run/${interface}_braddr"
-	method=$(grep -o 'method:[^ ]*' $braddr_f 2> /dev/null | cut -d':' -f2)
-	bridge_ipaddr=$(grep -o 'bridge_ipaddr:[^ ]*' $braddr_f 2> /dev/null | cut -d':' -f2)
+	[ -f "$braddr_f" ] && {
+		method=$(get_braddr_var method "$interface")
+		bridge_ipaddr=$(get_braddr_var bridge_ipaddr "$interface")
+	}
 
 	clear_connection_values $interface $device "4" $conn_proto
 	ubus call network.interface down "{\"interface\":\"${interface}_4\"}"
@@ -327,15 +329,16 @@ proto_connm_teardown() {
 		rm -f "/tmp/dnsmasq.d/bridge" 2>/dev/null
 		rm -f "$braddr_f" 2> /dev/null
 		ethtool -r eth0
+
+		#Clear passthrough and bridge params
+		iptables -t nat -F postrouting_rule
+
+		local zone="$(fw3 -q network "$interface" 2>/dev/null)"
+		iptables -F forwarding_${zone}_rule
+
+		ip neigh flush proxy
+		ip neigh flush dev br-lan
 	}
-
-	#Clear passthrough and bridge params
-	iptables -t nat -F postrouting_rule
-
-	local zone="$(fw3 -q network "$interface" 2>/dev/null)"
-	iptables -F forwarding_${zone}_rule
-
-	ip neigh flush proxy
 
 	proto_init_update "*" 0
 	proto_send_update "$interface"

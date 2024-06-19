@@ -220,7 +220,7 @@ setup_bridge_v4() {
 	json_add_string interface "${interface}_4"
 	[ -n "$zone" ] && {
 		json_add_string zone "$zone"
-		iptables -A forwarding_${zone}_rule -m comment --comment "!fw3: Mobile bridge" -j zone_lan_dest_ACCEPT
+		iptables -w -A forwarding_${zone}_rule -m comment --comment "!fw3: Mobile bridge" -j zone_lan_dest_ACCEPT
 	}
 	ubus call network.interface set_data "$(json_dump)"
 
@@ -257,7 +257,13 @@ setup_bridge_v4() {
 	model="$(gsmctl --model ${modem_num:+-O "$modem_num"})"
 	[ "${model:0:4}" = "UC20" ] || [ "${model:0:6}" = "RG500U" ] && ip neighbor add proxy "$bridge_ipaddr" dev "$dev" 2>/dev/null
 
-	iptables -A postrouting_rule -m comment --comment "Bridge mode" -o "$dev" -j ACCEPT -tnat
+
+	[ -n "$mac" ] && {
+		ip neigh flush dev br-lan
+		ip neigh add "$bridge_ipaddr" dev br-lan lladdr "$mac"
+	}
+
+	iptables -w -A postrouting_rule -m comment --comment "Bridge mode" -o "$dev" -j ACCEPT -tnat
 
 	config_load network
 	config_foreach get_passthrough_interfaces interface
@@ -489,4 +495,8 @@ get_modem_type() {
 		return
 	done
 	echo "external"
+}
+
+get_braddr_var() {
+	grep -o "$1:[^ ]*" "/var/run/${2}_braddr" 2>/dev/null | cut -d':' -f2
 }

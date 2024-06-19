@@ -58,6 +58,7 @@ boot_run_hook() {
 		local ran; eval "ran=\$PI_RAN_$func"
 		[ -n "$ran" ] || {
 			export -n "PI_RAN_$func=1"
+		        echo "Executing $func $1 $2..."
 			$func "$1" "$2"
 		}
 	done

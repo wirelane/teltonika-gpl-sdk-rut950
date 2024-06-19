@@ -7,21 +7,6 @@
                     "list"
                 ]
             },
-            "uci": [
-                "dropbear",
-                "firewall",
-                "uhttpd",
-                "cli",
-                "telnetd",
-                "rpcd",
-                "pam"
-            ],
-            "ubus": {
-                "vuci.system": [
-                    "get_ca",
-                    "modify_ca"
-                ]
-            },
             "api": [
 				"/access_control/ssh/*",
 				"/access_control/cli/*",
@@ -31,27 +16,6 @@
 			]
         },
         "write": {
-            "uci": [
-                "dropbear",
-                "firewall",
-                "uhttpd",
-                "cli",
-                "telnetd",
-                "rpcd",
-                "pam"
-            ],
-            "ubus": {
-                "vuci.system": [
-                    "firewall_access",
-                    "cli_access",
-                    "telnet_access",
-                    "modify_ca",
-                    "validate_uhttpd_cert"
-                ]
-            },
-            "cgi-io": [
-                "upload"
-            ],
             "api": [
 				"/access_control/ssh/*",
 				"/access_control/cli/*",
@@ -63,22 +27,10 @@
     "system/admin/access_control/safety": {
         "description": "access control security",
         "read": {
-			"api": ["/access_control/security/*"],
-            "uci": [
-                "ip_blockd"
-            ]
+			"api": ["/access_control/security/*"]
         },
         "write": {
-			"api": ["/access_control/security/*"],
-            "uci": [
-                "ip_blockd"
-            ],
-            "ubus": {
-                "ip_block": [
-                    "unblock",
-                    "reload"
-                ]
-            }
+			"api": ["/access_control/security/*"]
         }
     }
 }

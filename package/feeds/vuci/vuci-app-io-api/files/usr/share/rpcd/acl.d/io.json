@@ -2,19 +2,9 @@
 	"services/io/general": {
 		"description": "input/output status configuration",
 		"read": {
-			"ubus": {
-				"ioman.*.*": [
-					"status"
-				]
-			},
 			"api": ["/io/*"]
 		},
 		"write": {
-			"ubus": {
-				"ioman.*.*": [
-					"update"
-				]
-			},
 			"api": ["/io/*"]
 		}
 	},
@@ -22,11 +12,9 @@
 	"services/io/post_get": {
 		"description": "input.output post/get configuration",
 		"read": {
-			"uci": ["ioman"],
 			"api": ["/io/post_get/*"]
 		},
 		"write": {
-			"uci": ["ioman"],
 			"api": ["/io/post_get/*"]
 		}
 	},
@@ -34,7 +22,6 @@
 	"services/io/scheduler": {
 		"description": "input.output scheduler configuration",
 		"read": {
-			"uci": ["ioman"],
 			"api": [
 				"/io/scheduler/*",
 				"/io/*",
@@ -45,7 +32,6 @@
 			]
 		},
 		"write": {
-			"uci": ["ioman"],
 			"api": ["/io/scheduler/*"]
 		}
 	},
@@ -57,17 +43,11 @@
 				"/io/juggler/config/*",
 				"/io/*",
 				"/io/scheduler/global/*"
-			],
-			"uci": [
-				"iojuggler"
 			]
 		},
 		"write": {
 			"api": [
 				"/io/juggler/config/*"
-			],
-			"uci": [
-				"iojuggler"
 			]
 		}
 	},
@@ -87,38 +67,11 @@
 				"/profiles/config/*",
 				"/network/devices/status/*",
 				"/certificates/config/*"
-			],
-			"uci": [
-				"iojuggler",
-				"user_groups",
-				"profiles",
-				"simcard"
-			],
-			"ubus": {
-				"vuci.network.mobile": [
-					"get_all_modems"
-				],
-				"sim": [
-					"get"
-				],
-				"network.device": [
-					"status"
-				],
-				"network.interface": [
-					"dump"
-				],
-				"vuci.network.network": [
-					"get_devices",
-					"network_netlist"
-				]
-			}
+			]
 		},
 		"write": {
 			"api": [
 				"/io/juggler/operations/config/*"
-			],
-			"uci": [
-				"iojuggler"
 			]
 		}
 	},
@@ -129,17 +82,11 @@
 			"api": [
 				"/io/juggler/conditions/config/*",
 				"/io/*"
-			],
-			"uci": [
-				"iojuggler"
 			]
 		},
 		"write": {
 			"api": [
 				"/io/juggler/conditions/config/*"
-			],
-			"uci": [
-				"iojuggler"
 			]
 		}
 	}

@@ -6,7 +6,7 @@
     "system/maintenance/speedtest": {
         "title": "Speed Test",
         "index": 80,
-        "view": "services/SpeedTest_aeaafe",
+        "view": "services/SpeedTest_41f06b",
         "acls": [ "system/maintenance/speedtest" ]
     }
 }

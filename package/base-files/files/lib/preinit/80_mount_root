@@ -15,7 +15,15 @@ missing_lines() {
 }
 
 do_mount_root() {
+	echo "Mounting root..."
 	mount_root
+	echo "Restoring hotplug.d subsystem..."
+	# ensure hotplug.d subsystem is not broken
+	[ -L /etc/hotplug.d ] && {
+		rm -rf /etc/hotplug.d
+		cp -r /rom/etc/hotplug.d /etc
+	}
+	echo "Preparing mount_root hook..."
 	boot_run_hook preinit_mount_root
 	if [ -f /user_defaults.tgz ]; then
 		echo "- restoring user config -"

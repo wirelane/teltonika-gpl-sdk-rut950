@@ -1,3 +1,22 @@
+# 2024-06-10 00.07.06.12
+
+### Improvements
+
+* OpenVPN: improved instance status state (ID: 18359)
+
+### Fix
+
+* Dropbear: added CVE-2023-48795 patch (ID: 18662)
+* FRR: patched CVE-2023-46752 and CVE-2023-46753 vulnerabilities for RUT2XX devices (ID: 18374)
+* OpenVPN: fixed the private key decryption for cases when a password is used (ID: 18488)
+
+# 2024-06-04 00.07.06.13
+
+### Fix
+
+* FRR: patched CVE-2023-46752 and CVE-2023-46753 vulnerabilities for RUT2XX devices (ID: 18374)
+* OpenVPN: fixed the private key decryption for cases when a password is used (ID: 18488)
+
 # 2024-05-03 00.07.06.11
 
 ### New

@@ -1,0 +1,113 @@
+Index: fstools-2022-05-03-9e11b372/mount_root.c
+===================================================================
+--- fstools-2022-05-03-9e11b372.orig/mount_root.c
++++ fstools-2022-05-03-9e11b372/mount_root.c
+@@ -34,24 +34,34 @@ start(int argc, char *argv[1])
+ 	struct volume *data = volume_find("rootfs_data");
+ 	struct stat s;
+ 
+-	if (!getenv("PREINIT") && stat("/tmp/.preinit", &s))
++	ULOG_NOTE("Searching for rootfs_data...\n");
++	data = volume_find("rootfs_data");
++
++	if (!getenv("PREINIT") && stat("/tmp/.preinit", &s)) {
++		ULOG_NOTE("PREINIT is not set: bailing out!\n");
+ 		return -1;
++	}
+ 
+ 	if (!data) {
++		ULOG_NOTE("Searching for rootfs...\n");
+ 		root = volume_find("rootfs");
++		ULOG_NOTE("Initializing rootfs...\n");
+ 		volume_init(root);
+ 		ULOG_NOTE("mounting /dev/root\n");
+ 		mount("/dev/root", "/", NULL, MS_NOATIME | MS_REMOUNT, 0);
+ 	}
+ 
+ 	/* Check for extroot config in rootfs before even trying rootfs_data */
++	ULOG_NOTE("Mounting exroot...\n");
+ 	if (!mount_extroot("")) {
+ 		ULOG_NOTE("switched to extroot\n");
+ 		return 0;
+ 	}
+ 
+ 	/* There isn't extroot, so just try to mount "rootfs_data" */
++	ULOG_NOTE("Initializing rootfs_data...\n");
+ 	volume_init(data);
++	ULOG_NOTE("Detecting type of rootfs_data...\n");
+ 	switch (volume_identify(data)) {
+ 	case FS_NONE:
+ 		ULOG_WARN("no usable overlay filesystem found, using tmpfs overlay\n");
+@@ -70,6 +80,7 @@ start(int argc, char *argv[1])
+ 	case FS_F2FS:
+ 	case FS_JFFS2:
+ 	case FS_UBIFS:
++		ULOG_NOTE("Overlay detected in rootfs_data, mounting...\n");
+ 		mount_overlay(data);
+ 		break;
+ 
+Index: fstools-2022-05-03-9e11b372/libfstools/overlay.c
+===================================================================
+--- fstools-2022-05-03-9e11b372.orig/libfstools/overlay.c
++++ fstools-2022-05-03-9e11b372/libfstools/overlay.c
+@@ -420,15 +457,21 @@ int mount_overlay(struct volume *v)
+ 	char *mp, *fs_name;
+ 	int err;
+ 
+-	if (!v)
++	ULOG_NOTE("Preparing overlay to mount...\n");
++
++	if (!v) {
++		ULOG_NOTE("Invalid volume received: bailing out!...\n");
+ 		return -1;
++	}
+ 
++	ULOG_NOTE("Searching for mount point...\n");
+ 	mp = find_mount_point(v->blk, 0);
+ 	if (mp) {
+ 		ULOG_ERR("rootfs_data:%s is already mounted as %s\n", v->blk, mp);
+ 		return -1;
+ 	}
+ 
++	ULOG_NOTE("Mounting overlay filesystem...\n");
+ 	err = overlay_mount_fs(v, overlay_mp);
+ 	if (err)
+ 		return err;
+@@ -437,6 +480,7 @@ int mount_overlay(struct volume *v)
+ 	 * Check for extroot config in overlay (rootfs_data) and if present then
+ 	 * prefer it over rootfs_data.
+ 	 */
++	ULOG_NOTE("Mounting exroot filesystem...\n");
+ 	if (!mount_extroot(overlay_mp)) {
+ 		ULOG_INFO("switched to extroot\n");
+ 		return 0;
+@@ -444,7 +488,9 @@ int mount_overlay(struct volume *v)
+ 
+ 	switch (fs_state_get(overlay_mp)) {
+ 	case FS_STATE_UNKNOWN:
++		ULOG_NOTE("OVERLAYFS: Unknown\n");
+ 		fs_state_set(overlay_mp, FS_STATE_PENDING);
++		ULOG_NOTE("OVERLAYFS: Pending state\n");
+ 		if (fs_state_get(overlay_mp) != FS_STATE_PENDING) {
+ 			ULOG_ERR("unable to set filesystem state\n");
+ 			break;
+@@ -454,9 +500,11 @@ int mount_overlay(struct volume *v)
+ 		overlay_delete(overlay_mp, true);
+ 		break;
+ 	case FS_STATE_READY:
++		ULOG_NOTE("OVERLAYFS: Ready\n");
+ 		break;
+ 	}
+ 
++	ULOG_NOTE("OVERLAYFS: sync\n");
+ 	fs_name = overlay_fs_name(volume_identify(v));
+ 	ULOG_INFO("switching to %s overlay\n", fs_name);
+ 	if (mount_move("/tmp", "", "/overlay") || fopivot("/overlay", "/rom")) {
+@@ -464,5 +512,7 @@ int mount_overlay(struct volume *v)
+ 		return ramoverlay();
+ 	}
+ 
++	ULOG_NOTE("OVERLAYFS: done\n");
++
+ 	return -1;
+ }

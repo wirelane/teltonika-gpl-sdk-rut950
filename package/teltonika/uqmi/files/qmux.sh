@@ -426,7 +426,8 @@ proto_qmux_teardown() {
 	#~ We need to put some time taking actions to background
 	local interface="$1"
 	local qmiif mif conn_proto
-	local device bridge_ipaddr method braddr_f
+	local device bridge_ipaddr method
+	local braddr_f="/var/run/${interface}_braddr"
 	json_get_vars device
 
 	[ -n "$ctl_device" ] && device="$ctl_device"
@@ -435,9 +436,10 @@ proto_qmux_teardown() {
 
 	conn_proto="qmux"
 
-	braddr_f="/var/run/${interface}_braddr"
-	method=$(grep -o 'method:[^ ]*' $braddr_f 2> /dev/null | cut -d':' -f2)
-	bridge_ipaddr=$(grep -o 'bridge_ipaddr:[^ ]*' $braddr_f 2> /dev/null | cut -d':' -f2)
+	[ -f "$braddr_f" ] && {
+		method=$(get_braddr_var method "$interface")
+		bridge_ipaddr=$(get_braddr_var bridge_ipaddr "$interface")
+	}
 
 	mif=$(cat "/var/run/${conn_proto}/${interface}.up" 2>/dev/null | head -1)
 	qmiif=$(cat "/var/run/${conn_proto}/${interface}.up" 2>/dev/null | tail -1)
@@ -460,18 +462,19 @@ proto_qmux_teardown() {
 		rm -f "/tmp/dnsmasq.d/bridge" 2>/dev/null
 		swconfig dev switch0 set soft_reset 5 &
 		rm -f "$braddr_f" 2> /dev/null
+
+		#Clear passthrough and bridge params
+		iptables -t nat -F postrouting_rule
+
+		local zone="$(fw3 -q network "$interface" 2>/dev/null)"
+		iptables -F forwarding_${zone}_rule
+
+		ip neigh flush proxy
+		ip neigh flush dev br-lan
 	}
 
 	# Remove device after interfaces are down
 	remove_qmimux "$qmiif" "$mif"
-
-	#Clear passthrough and bridge params
-	iptables -t nat -F postrouting_rule
-
-	local zone="$(fw3 -q network "$interface" 2>/dev/null)"
-	iptables -F forwarding_${zone}_rule
-
-	ip neigh flush proxy
 
 	proto_init_update "*" 0
 	proto_send_update "$interface"

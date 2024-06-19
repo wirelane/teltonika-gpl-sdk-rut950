@@ -1,0 +1,100 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+fix_hex() {
+        config_get name_is_hexed "$1" "name_is_hexed" ""
+        if [ "$name_is_hexed" = "1" ]; then
+                name_hex="$1"
+                name_text=$(
+                    i=0
+                    while [ $i -lt ${#name_hex} ]; do
+                        printf "\\x${name_hex:$i:2}"
+                        i=$((i + 2))
+                    done
+                )
+                name_text="${name_text##*client_}"
+                name_text="${name_text##*server_}"
+                name_text="$(echo "$name_text" | cut -c1-8)"
+
+                config_get ca "$1" "ca" ""
+                config_get cert "$1" "cert" ""
+                config_get key "$1" "key" ""
+                config_get dh "$1" "dh" ""
+                config_get tls_auth "$1" "tls_auth" ""
+                config_get tls_crypt "$1" "tls_crypt" ""
+                config_get crl_verify "$1" "crl_verify" ""
+                config_get secret "$1" "secret" ""
+                config_get userpass "$1" "userpass" ""
+                config_get config "$1" "config" ""
+
+                [ -n "$ca" ] && {
+                    ca_text="$(echo "$ca" | sed -e "s/${name_hex}/${name_text}/g")"
+                    uci_set "openvpn" "$1" "ca" "$ca_text"
+                    mv "$ca" "$ca_text"
+                }
+
+                [ -n "$cert" ] && {
+                    cert_text="$(echo "$cert" | sed -e "s/${name_hex}/${name_text}/g")"
+                    uci_set "openvpn" "$1" "cert" "$cert_text"
+                    mv "$cert" "$cert_text"
+                }
+
+                [ -n "$key" ] && {
+                    key_text=$(echo "$key" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "key" "$key_text"
+                    mv "$key" "$key_text"
+                }
+
+                [ -n "$dh" ] && {
+                    dh_text=$(echo "$dh" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "dh" "$dh_text"
+                    mv "$dh" "$dh_text"
+                }
+
+                [ -n "$tls_auth" ] && {
+                    tls_auth_text=$(echo "$tls_auth" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "tls_auth" "$tls_auth_text"
+                    mv "$tls_auth" "$tls_auth_text"
+                }
+
+                [ -n "$tls_crypt" ] && {
+                    tls_crypt_text=$(echo "$tls_crypt" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "tls_crypt" "$tls_crypt_text"
+                    mv "$tls_crypt" "$tls_crypt_text"
+                }
+
+                [ -n "$crl_verify" ] && {
+                    crl_verify_text=$(echo "$crl_verify" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "crl_verify" "$crl_verify_text"
+                    mv "$crl_verify" "$crl_verify_text"
+                }
+
+                [ -n "$secret" ] && {
+                    secret_text=$(echo "$secret" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "secret" "$secret_text"
+                    mv "$secret" "$secret_text"
+                }
+
+                [ -n "$userpass" ] && {
+                    userpass_text=$(echo "$userpass" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "userpass" "$userpass_text"
+                    mv "$userpass" "$userpass_text"
+                }
+
+                [ -n "$config" ] && {
+                    config_text=$(echo "$config" | sed -e "s/$name_hex/$name_text/g")
+                    uci_set "openvpn" "$1" "config" "$config_text"
+                    mv "$config" "$config_text"
+                }
+
+                uci_remove "openvpn" "$1" "_name"
+                uci_remove "openvpn" "$1" "name_is_hexed"
+                uci_remove "openvpn" "$1" "status"
+                uci_rename "openvpn" "$1" "$name_text"
+        fi
+}
+
+config_load "openvpn"
+config_foreach fix_hex "openvpn"
+uci_commit "openvpn"

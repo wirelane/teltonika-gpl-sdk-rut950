@@ -2,7 +2,7 @@
     "network/mobile/apn_database": {
         "title": "APN Database",
         "index": 40,
-        "view": "network/MobileAPN_aeaafe",
+        "view": "network/MobileAPN_41f06b",
         "acls": [ "network/mobile/apn_database" ]
     }
 }

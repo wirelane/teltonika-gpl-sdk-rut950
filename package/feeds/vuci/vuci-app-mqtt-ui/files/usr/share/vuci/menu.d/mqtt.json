@@ -6,14 +6,14 @@
     "services/mqtt/broker": {
         "title": "Broker",
         "index": 1,
-        "view": "services/MqttBroker_aeaafe",
+        "view": "services/MqttBroker_41f06b",
         "acls": [ "services/mqtt/broker" ],
         "files": [ "/etc/config/mosquitto" ]
     },
     "services/mqtt/publisher": {
         "title": "Publisher",
         "index": 2,
-        "view": "services/MqttPub_aeaafe",
+        "view": "services/MqttPub_41f06b",
         "acls": [ "services/mqtt/publisher" ],
         "files": [ "/etc/config/mqtt_pub" ]
     }

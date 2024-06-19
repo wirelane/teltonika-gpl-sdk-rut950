@@ -106,7 +106,7 @@ config CORE_NETWORK_PACKAGES
 	imply PACKAGE_iptables-mod-nflog
 	imply PACKAGE_kmod-br-netfilter if AP_DEVICE
 	imply PACKAGE_ip_blockd
-	imply PACKAGE_vuci-app-ports-settings-ui if !AP_DEVICE
+	imply PACKAGE_vuci-app-ports-settings-ui if !AP_DEVICE && !VERIFIED_BOOT_SUPPORT
 	imply BUSYBOX_CONFIG_FEATURE_IP_BLOCKD
 
 config ADVANCED_NETWORK
@@ -517,8 +517,6 @@ config MOBILE_SUPPORT
 	imply PACKAGE_post-get-mobile
 	imply PACKAGE_mctl
 	imply PACKAGE_urcd
-	imply PACKAGE_esim-lpac
-	imply PACKAGE_lua_lpac
 	imply BUSYBOX_CONFIG_FEATURE_NETIFD
 
 config MODEM_UPDATER_SUPPORT

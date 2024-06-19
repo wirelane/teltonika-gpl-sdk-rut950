@@ -2,7 +2,7 @@
 	"services/email_relay": {
 		"title": "Email Relay",
 		"index": 230,
-		"view": "services/EmailRelay_aeaafe",
+		"view": "services/EmailRelay_41f06b",
 		"acls": [ "services/email_relay" ],
 		"files": [ "/etc/config/emailrelay" ]
 	}

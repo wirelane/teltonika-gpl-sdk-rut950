@@ -2,7 +2,7 @@
     "services/ddns": {
         "title": "Dynamic DNS",
         "index": 210,
-        "view": "services/DynamicDNS_aeaafe",
+        "view": "services/DynamicDNS_41f06b",
         "acls": [ "services/ddns" ],
         "files": [ "/etc/config/ddns" ]
     }

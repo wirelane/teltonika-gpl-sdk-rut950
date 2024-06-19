@@ -81,18 +81,20 @@ CMAKE_HOST_OPTIONS += \
 	-DVERSION="$(PKG_SOURCE_VERSION) ($(PKG_SOURCE_DATE))"
 
 define Package/opkg/install
-	$(INSTALL_DIR) $(1)/usr/lib/opkg
+	$(INSTALL_DIR) $(1)/usr/lib/opkg $(1)/usr/lib/opkg/info
 	$(INSTALL_DIR) $(1)/bin
 	$(INSTALL_DIR) $(1)/etc/opkg
 	$(INSTALL_DATA) ./files/customfeeds.conf $(1)/etc/opkg/customfeeds.conf
 	$(INSTALL_DATA) ./files/opkg$(2).conf $(1)/etc/opkg.conf
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/opkg-cl $(1)/bin/opkg
+	$(INSTALL_BIN) ./files/default_postinst $(1)/usr/lib/opkg/info/default_postinst
+	$(INSTALL_BIN) ./files/default_prerm $(1)/usr/lib/opkg/info/default_prerm
   ifneq ($(CONFIG_SIGNATURE_CHECK),)
 	echo "option check_signature" >> $(1)/etc/opkg.conf
   endif
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) ./files/opkg-key $(1)/usr/sbin/
-	echo src/gz tlt_packages http://opkg.teltonika-networks.com/1ca2c5c16ddab1f67d53000407529d18d932f26609050970d48cbdf0d4bbb8a0 > $(1)/etc/opkg/teltonikafeeds.conf
+	echo src/gz tlt_packages http://opkg.teltonika-networks.com/37770a50eb1f52d072f8e98427ce43e646d8123930db85788bd96445688b7f61 > $(1)/etc/opkg/teltonikafeeds.conf
 endef
 
 define Host/Install

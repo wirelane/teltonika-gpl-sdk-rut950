@@ -5,19 +5,11 @@
 			"api": [
 				"/date_time/ntpd/*",
 				"/date_time/ntp/server/*"
-			],
-			"uci": [
-				"ntpd",
-				"ntpserver"
 			]
 		},
 		"write": {
 			"api": [
 				"/date_time/ntpd/*"
-			],
-			"uci": [
-				"ntpd",
-				"ntpserver"
 			]
 		}
 	}
