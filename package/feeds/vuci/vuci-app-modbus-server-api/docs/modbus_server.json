@@ -35,7 +35,7 @@
           }
         },
         "requestBody": {
-          "description": "Parameter section",
+          "description": "Parameters section",
           "content": {
             "application/json": {
               "schema": {

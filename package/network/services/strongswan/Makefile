@@ -646,6 +646,7 @@ define Plugin/updown/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/ipsec/plugins/libstrongswan-updown.so $(1)/usr/lib/ipsec/plugins/
 	$(INSTALL_DIR) $(1)/etc/hotplug.d/ipsec
 	$(CP) ./files/etc $(1)
+	chmod +x $(1)/etc/hotplug.d/ipsec/08-status-gen
 endef
 
 define Plugin/vici/install

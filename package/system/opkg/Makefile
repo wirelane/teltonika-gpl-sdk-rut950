@@ -94,7 +94,7 @@ define Package/opkg/install
   endif
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) ./files/opkg-key $(1)/usr/sbin/
-	echo src/gz tlt_packages http://opkg.teltonika-networks.com/37770a50eb1f52d072f8e98427ce43e646d8123930db85788bd96445688b7f61 > $(1)/etc/opkg/teltonikafeeds.conf
+	echo src/gz tlt_packages http://opkg.teltonika-networks.com/0a3d591ae1ea47ea55d50d5436927e254df5a8b7442caa6ea1013e00711180cf > $(1)/etc/opkg/teltonikafeeds.conf
 endef
 
 define Host/Install

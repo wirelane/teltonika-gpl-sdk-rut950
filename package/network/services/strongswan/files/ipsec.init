@@ -327,8 +327,12 @@ config_conn() {
 
 	[ -n "$local_sourceip" ] && ipsec_xappend "  leftsourceip=$local_sourceip"
 
-	[ "$local_firewall" -eq 1 ] && ipsec_xappend "  leftfirewall=yes" || \
+	if [ "$local_firewall" -eq 1 ]; then
+		ipsec_xappend "  leftfirewall=yes"
+	else
 		ipsec_xappend "  leftfirewall=no"
+		ipsec_xappend "  leftupdown=/etc/hotplug.d/ipsec/08-status-gen"
+	fi
 
 	[ "$remote_firewall" -eq 1 ] && ipsec_xappend "  rightfirewall=yes" || \
 		ipsec_xappend "  rightfirewall=no"

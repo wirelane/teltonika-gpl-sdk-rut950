@@ -361,6 +361,15 @@
               "pretty": "Port",
               "input-type": "input"
             }
+          },
+          "auth_code": {
+            "type": "string",
+            "description": "Authentication code provided by RMS after adding the device.",
+            "format": "default_validation",
+            "x-web": {
+              "pretty": "Authentication code",
+              "input-type": "input"
+            }
           }
         }
       },

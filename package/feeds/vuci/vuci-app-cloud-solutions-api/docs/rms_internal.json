@@ -1,0 +1,226 @@
+{
+  "openapi": "3.0.0",
+  "tags": [],
+  "paths": {
+    "/rms/internal/config": {
+      "get": {
+        "summary": "Returns RMS internal configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms_internal_multi"
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "put": {
+        "summary": "Updates RMS internal configuration in an array",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms_internal_multi"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/rms_internal_response_options"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "hidden": true,
+        "hidden_documentation_page": true,
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ]
+      }
+    },
+    "/rms/internal/config/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Configuration ID"
+        }
+      ],
+      "get": {
+        "summary": "Returns RMS internal configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms_internal"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "put": {
+        "summary": "Updates RMS internal configuration",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200rms_internal"
+          },
+          "404": {
+            "$ref": "#/components/responses/404response"
+          },
+          "422": {
+            "$ref": "#/components/responses/422response"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/rms_internal_options"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "General"
+        ]
+      },
+      "x-web": {
+        "hidden": true,
+        "hidden_documentation_page": true,
+        "menu": [
+          "Services",
+          "Cloud Solutions",
+          "RMS"
+        ]
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "200rms_internal": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/rms_internal_response_options"
+                }
+              }
+            }
+          }
+        }
+      },
+      "200rms_internal_multi": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "description": "Operation status"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "",
+                  "items": {
+                    "$ref": "#/components/schemas/rms_internal_response_options"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "rms_internal_options": {
+        "type": "object",
+        "properties": {
+          "rms_id": {
+            "type": "string",
+            "description": "RMS ID",
+            "format": "string",
+            "x-web": {
+              "pretty": "RMS ID",
+              "input-type": "input"
+            }
+          },
+          "demo_rms_id": {
+            "type": "string",
+            "description": "Demo RMS ID",
+            "format": "string",
+            "x-web": {
+              "pretty": "Demo RMS ID",
+              "input-type": "input"
+            }
+          },
+          "local_rms_id": {
+            "type": "string",
+            "description": "Local RMS ID",
+            "format": "string",
+            "x-web": {
+              "pretty": "Local RMS ID",
+              "input-type": "input"
+            }
+          }
+        }
+      },
+      "rms_internal_response_options": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Configuration ID"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/rms_internal_options"
+          }
+        ],
+        "required": ["id"]
+      }
+    }
+  }
+}

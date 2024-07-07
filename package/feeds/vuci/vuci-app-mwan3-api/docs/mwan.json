@@ -947,7 +947,9 @@
               "enum": [
                 "",
                 "connected",
-                "disconnected"
+                "disconnected",
+                "ifup",
+                "ifdown"
               ]
             },
             "x-web": {
@@ -955,7 +957,9 @@
               "input-type": "multiselect",
               "enum-pretty": {
                 "connected": "Connected",
-                "disconnected": "Disconnected"
+                "disconnected": "Disconnected",
+                "ifup": "Interface up",
+                "ifdown": "Interface down"
               }
             }
           },

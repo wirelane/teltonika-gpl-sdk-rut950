@@ -1,3 +1,21 @@
+# 2024-07-03 00.07.06.13
+
+### New
+
+* Multiwan: added additional connection flush options (ID: 19039)
+* RMS API/WebUI: added 'auth_code' option (ID: 19031)
+
+### Improvements
+
+* Mobile: added corrupted mobile statistics database restoration functionallity (ID: 18735)
+* Mobile: updated modem updater for better SLM750 compatibility (ID: 18905)
+* Mobile: optimized mobile data gathering on new modem event (ID: 18837)
+
+### Fix
+
+* OpenVPN: added fixes for the insecure tls-cert-profile option usage (ID: 18594)
+* IPsec: fixed the instance status when the local firewall option is disabled (ID: 18490)
+
 # 2024-06-10 00.07.06.12
 
 ### Improvements
@@ -7,13 +25,6 @@
 ### Fix
 
 * Dropbear: added CVE-2023-48795 patch (ID: 18662)
-* FRR: patched CVE-2023-46752 and CVE-2023-46753 vulnerabilities for RUT2XX devices (ID: 18374)
-* OpenVPN: fixed the private key decryption for cases when a password is used (ID: 18488)
-
-# 2024-06-04 00.07.06.13
-
-### Fix
-
 * FRR: patched CVE-2023-46752 and CVE-2023-46753 vulnerabilities for RUT2XX devices (ID: 18374)
 * OpenVPN: fixed the private key decryption for cases when a password is used (ID: 18488)
 

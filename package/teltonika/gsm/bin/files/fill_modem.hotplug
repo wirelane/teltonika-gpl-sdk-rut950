@@ -9,6 +9,62 @@ CFG=/etc/board.json
 
 . /usr/share/libubox/jshn.sh
 
+
+b_multi_apn=""
+b_operator_scan=""
+b_dhcp_filter=""
+b_dynamic_mtu=""
+b_ipv6=""
+b_volte=""
+b_csd=""
+b_revision=""
+b_modem_func_id=""
+
+compare_changes() {
+	local info="$1"
+	local revision multi_apn operator_scan dhcp_filter dynamic_mtu ipv6 volte csd  modem_func_id
+
+	revision="$(jsonfilter -s "$info" -qe '$.cache.firmware')"
+
+	json_load "$info"
+	json_get_vars modem_func_id multi_apn operator_scan dhcp_filter dynamic_mtu ipv6 volte csd
+
+	# Set value to 0 if it is empty (gsm info does not contain the value) because boardjson contains true/false
+	[ -z "$multi_apn" ] && {
+		multi_apn=0
+	}
+	[ -z "$operator_scan" ] && {
+		operator_scan=0
+	}
+	[ -z "$dhcp_filter" ] && {
+		dhcp_filter=0
+	}
+	[ -z "$dynamic_mtu" ] && {
+		dynamic_mtu=0
+	}
+	[ -z "$ipv6" ] && {
+		ipv6=0
+	}
+	[ -z "$volte" ] && {
+		volte=0
+	}
+	[ -z "$csd" ] && {
+		csd=0
+	}
+	[ -z "$revision" ] && {
+		revision=0
+	}
+	[ -z "$modem_func_id" ] && {
+		modem_func_id=0
+	}
+
+	# Compare gsm info values with board.json values
+	[ "$b_multi_apn" -ne "$multi_apn" ] || [ "$b_operator_scan" -ne "$operator_scan" ] || [ "$b_dhcp_filter" -ne "$dhcp_filter" ] || [ "$b_dynamic_mtu" -ne "$dynamic_mtu" ] || [ "$b_ipv6" -ne "$ipv6" ] ||
+	[ "$b_volte" -ne "$volte" ] || [ "$b_csd" -ne "$csd" ] || [ "$b_revision" -ne "$revision" ] || [ "$b_modem_func_id" -ne "$modem_func_id" ] && {
+		/bin/board_modem "$id" "$info"
+	}
+}
+
 json_init
 json_load_file "$CFG"
 json_get_keys modems modems
@@ -16,15 +72,32 @@ json_select modems
 
 for modem in $modems; do
 
-    json_select "$modem"
-    json_get_vars id service_modes
+	json_select "$modem"
+	json_get_vars id service_modes
 
-    [ "$id" = "$MODEM_ID" ] && [ -z "$service_modes" ] && {
-        /bin/board_modem "$id" "$(ubus call "$OBJECT_NAME" info)"
-        break
-    }
+	[ "$id" = "$MODEM_ID" ] && [ -z "$service_modes" ] && {
+		info="$(ubus call "$OBJECT_NAME" info)"
 
-    json_select ..
+		json_get_vars multi_apn operator_scan dhcp_filter dynamic_mtu ipv6 volte csd revision modem_func_id
+		json_get_values bands band_list
+
+		# Store borad.json values for comparison with gsm info values
+		b_multi_apn=${multi_apn:=0}
+		b_operator_scan=${operator_scan:=0}
+		b_dhcp_filter=${dhcp_filter:=0}
+		b_dynamic_mtu=${dynamic_mtu:=0}
+		b_ipv6=${ipv6:=0}
+		b_volte=${volte:=0}
+		b_csd=${csd:=0}
+		b_revision=${revision:=0}
+		b_modem_func_id=${modem_func_id:=0}
+
+		compare_changes "$info"
+
+		break
+	}
+
+	json_select ..
 done
 
 rm "$PROG"
