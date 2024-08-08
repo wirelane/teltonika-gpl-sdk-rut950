@@ -4202,10 +4202,10 @@
           },
           "delete_from_whitelist": {
             "type": "string",
-            "description": "Enables MAC removal from whitelist when device reaches IP block counter.",
+            "description": "Enables MAC removal from allowlist when device reaches IP block counter.",
             "enum": ["0", "1"],
             "x-web": {
-              "pretty": "Remove from whitelist",
+              "pretty": "Remove from allowlist",
               "group": "MAC-Filter",
               "input-type": "switch",
               "depends": [

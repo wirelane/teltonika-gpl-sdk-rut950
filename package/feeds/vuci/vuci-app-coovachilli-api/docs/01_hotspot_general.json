@@ -1066,6 +1066,17 @@
             "description": "Location ID.",
             "format": "default_validation"
           },
+          "uamblocklist": {
+            "type": "string",
+            "x-web": {
+              "pretty": "Enable blocklist",
+              "input-type": "switch",
+              "group": "General settings Wallen garden"
+            },
+            "description": "Allow all addresses to be accessed before authenticating, block specified.",
+            "format": "is_bool",
+            "enum": ["0", "1"]
+          },
           "uamdomainfile": {
             "type": "string",
             "x-web": {
@@ -1073,7 +1084,7 @@
               "input-type": "input",
               "group": "General settings Wallen garden"
             },
-            "description": "List of addresses the client can access without first authenticating. One record per line. See placeholder for accepted formats.",
+            "description": "List of addresses to be allowed or blocked before authenticating. One record per line. See placeholder for accepted formats.",
             "format": "hostname"
           },
           "paramuamip": {

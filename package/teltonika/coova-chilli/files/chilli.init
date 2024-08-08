@@ -110,7 +110,7 @@ set_chilli() {
 		seskeepalive | usetap | noarpentries | framedservice | scalewin | redir | injectwispr | redirurl | \
 		routeonetone | nousergardendata | uamgardendata | uamotherdata | withunixipc | uamallowpost | redirssl | \
 		uamuissl | layer3 | patricia | redirdnsreq | dhcpnotidle | ipv6 | ipv6only | registerusers | tos | testtime | \
-		trialusers | duplicateusers | nochallenge)
+		trialusers | duplicateusers | nochallenge | uamblocklist)
 		{
 			[ "$2" = "true" ] || [ "$2" = "1" ]
 		} && set_conf_bool "$@"

@@ -1,3 +1,23 @@
+# 2024-08-08 00.07.06.14
+
+### New
+
+* Hotspot: added Walled Garden blocklist functionality (ID: 19432)
+* Modbus Client: added 64bit data types (ID: 19717)
+
+### Improvements
+
+* WebUI: added clearer error message when trying to delete LAN which is used by hotspot (ID: 19729)
+* GPS: added send empty feature to AVL service (ID: 19424)
+
+### Fix
+
+* Hostapd: fixed wireless interface ubus object not being created after changing configuration. (ID: 19730)
+* Firewall: fixed firewall rule options not getting parsed if previous rule had errors (ID: 19521)
+* Mobile: fixed mobile data limit to calculate used limits from correct starting point after network restart (ID: 19803)
+* Hotspot: fixed walled garden changes to take effect after save, added walled garden to backup (ID: 19432)
+* Wireless: fixed connection issues after disabling encryption for RUT2 and RUT9 family devices (ID: 19731)
+
 # 2024-07-03 00.07.06.13
 
 ### New

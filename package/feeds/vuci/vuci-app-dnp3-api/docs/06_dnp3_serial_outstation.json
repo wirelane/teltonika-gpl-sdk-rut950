@@ -321,7 +321,7 @@
           },
           "device": {
             "type": "string",
-            "description": "Which serial port will be used for serial communication",
+            "description": "Serial port will be used for serial communication",
             "x-web": {
               "pretty": "Device",
               "input-type": "select",

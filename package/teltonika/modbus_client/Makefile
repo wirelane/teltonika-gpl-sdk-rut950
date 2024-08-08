@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/download.mk
 
 PKG_NAME:=modbus_client
-PKG_VERSION:=2024-01-27
-PKG_SOURCE_VERSION:=7.6.5-2
+PKG_VERSION:=2024-08-05
+PKG_SOURCE_VERSION:=7.6.14
 
 include $(INCLUDE_DIR)/package.mk
 

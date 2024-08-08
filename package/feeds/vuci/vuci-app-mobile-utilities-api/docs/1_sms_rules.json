@@ -1453,7 +1453,7 @@
           },
           "group": {
             "type": "string",
-            "description": "A list of whitelisted phone numbers",
+            "description": "A list of allowed phone numbers",
             "x-web": {
               "pretty": "Phone group",
               "input-type": "select",

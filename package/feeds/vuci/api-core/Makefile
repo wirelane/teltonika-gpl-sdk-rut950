@@ -17,7 +17,7 @@ define Package/api-core
   DEPENDS:=+rpcd +WIFI_SUPPORT:rpcd-mod-iwinfo +rpcd-mod-file +rpcd-mod-rpcsys +uhttpd \
 		+uhttpd-mod-ubus +lua +libubox-lua +libubus-lua \
 		+libuci-lua +liblua +luci-lib-jsonc +luci-lib-nixio \
-		+luci-lib-ip +rpcd-mod-rrdns +uhttpd-mod-lua +lua_crypto \
+		+luci-lib-ip +rpcd-mod-rrdns +uhttpd-mod-lua +lua_crypto +lua_extra_validators \
 		+libubus +luasocket +lsqlite3 +lrexlib
 endef
 

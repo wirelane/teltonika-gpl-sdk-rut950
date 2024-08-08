@@ -501,7 +501,7 @@
               "input-type": "input"
             },
             "type": "string",
-            "description": "A host which is blacklisted/whitelisted"
+            "description": "A host which is blocked/allowed"
           }
         }
       },

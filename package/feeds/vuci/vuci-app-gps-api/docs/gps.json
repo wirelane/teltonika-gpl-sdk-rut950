@@ -2365,6 +2365,33 @@
               "pretty": "Static navigation",
               "input-type": "switch"
             }
+          },
+          "send_empty": {
+            "type": "string",
+            "description": "Set to send AVL packet with zeros for latitude and longitude if no new data is received within the specified timeout period.",
+            "format": "is_bool",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "x-web": {
+              "pretty": "Send empty",
+              "input-type": "switch"
+            }
+          },
+          "timeout_empty": {
+            "type": "string",
+            "description": "Set the duration in seconds to wait for new data before beginning to collect zeroed messages.",
+            "format": "irange(2,86400)",
+            "x-web": {
+              "pretty": "No signal timeout",
+              "input-type": "input"
+            },
+            "depends": [
+              {
+                "send_empty": "1"
+              }
+            ]
           }
         },
         "required": [
@@ -2434,7 +2461,7 @@
           },
           "distance": {
             "type": "string",
-            "description": "Minimal distance (in meters) change in saved records to send",
+            "description": "Minimal distance (in meters) change required before saving record",
             "format": "irange(1,999999)",
             "default": "200",
             "x-web": {
@@ -2444,7 +2471,7 @@
           },
           "angle": {
             "type": "string",
-            "description": "Minimal angle change in Degrees",
+            "description": "Minimal angle (in Degrees) change required before saving record",
             "format": "irange(1,360)",
             "default": "30",
             "x-web": {
@@ -2679,7 +2706,7 @@
           },
           "distance": {
             "type": "string",
-            "description": "Minimal distance (in meters) change in saved records to send",
+            "description": "Minimal distance (in meters) change required before saving record",
             "format": "irange(1,999999)",
             "default": "200",
             "x-web": {
@@ -2689,7 +2716,7 @@
           },
           "angle": {
             "type": "string",
-            "description": "Minimal angle change in Degrees",
+            "description": "Minimal angle (in Degrees) change required before saving record",
             "format": "irange(1,360)",
             "default": "30",
             "x-web": {
