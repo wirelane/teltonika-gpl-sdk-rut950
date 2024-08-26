@@ -226,7 +226,7 @@
           },
           "section": {
             "type": "string",
-            "description": "Error section"
+            "description": "Section where error occurred"
           }
         },
         "required": [

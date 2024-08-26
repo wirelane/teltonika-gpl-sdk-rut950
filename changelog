@@ -1,3 +1,10 @@
+# 2024-08-26 00.07.06.15
+
+### Fix
+
+* WebUI: fixed failover rule policy save issue with newly added WAN interface (ID: 20058)
+* GPS: fixed NMEA forwarding when RMC/GGA were not synchronized when using same interval (ID: 19815)
+
 # 2024-08-08 00.07.06.14
 
 ### New
