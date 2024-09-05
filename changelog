@@ -1,3 +1,9 @@
+# 2024-08-28 00.07.06.16
+
+### Fix
+
+* Mobile: fixed data usage graph inconsistency and data usage counters when using ipv4 and ipv6 simultaneously with specific modems (ID: 20092)
+
 # 2024-08-26 00.07.06.15
 
 ### Fix
