@@ -440,7 +440,7 @@
             ],
             "description": "Select data type that will be used for checking conditions",
             "x-web": {
-              "pretty": "Compared condition data type",
+              "pretty": "Condition data type",
               "enum-pretty": {
                 "8bit_int": "8bit INT",
                 "8bit_uint": "8bit UINT",

@@ -2,11 +2,10 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/download.mk
 
 PKG_NAME:=sodog-tlt
-PKG_VERSION:=2024-02-21
-PKG_SOURCE_VERSION:=7.6.6
+PKG_VERSION:=2025-03-24
+PKG_SOURCE_VERSION:=7.8.1
 
 include $(INCLUDE_DIR)/package.mk
-
 define Package/$(PKG_NAME)
 	SECTION:=net
 	CATEGORY:=Network

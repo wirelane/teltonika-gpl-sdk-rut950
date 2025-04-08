@@ -14,7 +14,7 @@
  				    attr->btf_value_type_id);
 --- a/kernel/bpf/verifier.c
 +++ b/kernel/bpf/verifier.c
-@@ -6984,6 +6984,11 @@ static int check_btf_info(struct bpf_ver
+@@ -6989,6 +6989,11 @@ static int check_btf_info(struct bpf_ver
  	btf = btf_get_by_fd(attr->prog_btf_fd);
  	if (IS_ERR(btf))
  		return PTR_ERR(btf);

@@ -9,7 +9,7 @@
  
  /*-------------------------------------------------------------------------*/
  
-@@ -349,7 +351,12 @@ void usbnet_update_max_qlen(struct usbne
+@@ -348,7 +350,12 @@ void usbnet_update_max_qlen(struct usbne
  		goto insanity;
  	switch (speed) {
  	case USB_SPEED_HIGH:

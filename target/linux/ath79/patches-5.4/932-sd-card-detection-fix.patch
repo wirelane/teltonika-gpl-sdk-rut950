@@ -1,6 +1,6 @@
 --- a/drivers/mmc/host/mmc_spi.c
 +++ b/drivers/mmc/host/mmc_spi.c
-@@ -1344,7 +1344,8 @@ static int mmc_spi_probe(struct spi_devi
+@@ -1341,7 +1341,8 @@ static int mmc_spi_probe(struct spi_devi
  	 * that's the only reason not to use a few MHz for f_min (until
  	 * the upper layer reads the target frequency from the CSD).
  	 */

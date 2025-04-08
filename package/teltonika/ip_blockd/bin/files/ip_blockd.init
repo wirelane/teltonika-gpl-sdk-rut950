@@ -28,6 +28,10 @@ start_service() {
 	procd_close_instance
 }
 
+stop_service() {
+	ubus call ip_block reload >/dev/null 2>&1
+}
+
 reload_service() {
 	restart
 }

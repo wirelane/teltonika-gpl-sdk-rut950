@@ -1,3 +1,15 @@
+# 2025-04-07 00.07.06.18
+
+### Improvements
+
+* Linux: updated kernel version to 5.4.291 (ID: 24759)
+
+### Fix
+
+* IP Block: fixed blocked IPs persisting after stopping the service (ID: 23548)
+* Over IP: fixed re-connection feature not working for Over IP clients (ID: 24002)
+* WebUI: fixed redirect not working after installing new firmware (ID: 24287)
+
 # 2025-01-06 00.07.06.17
 
 ### Improvements

@@ -8,7 +8,7 @@
 +obj-$(CONFIG_SYSFS_MNFINFO)	+= sysfs-mnfinfo/
 --- a/drivers/spi/Kconfig
 +++ b/drivers/spi/Kconfig
-@@ -947,4 +947,6 @@ endif # SPI_SLAVE
+@@ -948,4 +948,6 @@ endif # SPI_SLAVE
  config SPI_DYNAMIC
  	def_bool ACPI || OF_DYNAMIC || SPI_SLAVE
  

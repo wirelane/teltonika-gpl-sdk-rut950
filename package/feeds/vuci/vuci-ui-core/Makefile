@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=vuci-ui-core
-PKG_VERSION:=2024-08-26-0a14a38af0
+PKG_VERSION:=2025-04-04-ae6c5bd05a
 PKG_RELEASE:=2
 
 PKG_BUILD_PARALLEL:=1
@@ -69,6 +69,7 @@ define install_closed_gpl
 	mv $(PKG_BUILD_DIR)/src/views/system/FwVerify_temp.vue \
 		$(PKG_BUILD_DIR)/src/views/system/FwVerify.vue
 
+	$(CP) -rf ./files $(PKG_GPL_BUILD_DIR)
 	$(CP) -rf "$(PKG_BUILD_DIR)/dist" $(1)
 
 	mv $(PKG_BUILD_DIR)/ui-core/plugins/brand/index.js \
@@ -120,6 +121,7 @@ define Package/vuci-ui-core/install
 	if [ ! -z "$$$$(ls ./modem-icons/$(TLT_PLATFORM_NAME)*)" ]; then \
 		$(CP) ./modem-icons/$(TLT_PLATFORM_NAME)* $(1)/www/tlt-icons/modem-icons/; \
 	fi
+	$(CP) ./files/* $(1)/
 	$(if $(CONFIG_VUCI_MINIFY_JSON),$(call JsonMin,$(1)/),true);
 
 	$(if $(CONFIG_DUAL_SIM_SUPPORT),, \

@@ -12,9 +12,9 @@ check_and_insert() {
     local ipt=$1 # for ipv6 support
     local rule=$2
 
-    $ipt -C $rule >& /dev/null
+    $ipt -w 5 -C $rule > /dev/null 2>&1
     [ "$?" = "1" ] && {
-        $ipt -I $rule
+        $ipt -w 5 -I $rule
     }
 }
 
@@ -22,9 +22,9 @@ check_and_remove() {
     local ipt=$1 # for ipv6 support
     local rule=$2
 
-    $ipt -C "$rule"
+    $ipt -w 5 -C $rule > /dev/null 2>&1
     [ "$?" = "0" ] && {
-        $ipt -D "$rule"
+        $ipt -w 5 -D $rule
     }
 }
 

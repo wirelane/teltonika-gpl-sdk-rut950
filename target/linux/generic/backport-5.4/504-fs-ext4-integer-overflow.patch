@@ -15,7 +15,7 @@ Signed-off-by: Jan Kara <jack@suse.cz>
 
 --- a/fs/ext4/extents.c
 +++ b/fs/ext4/extents.c
-@@ -552,6 +552,10 @@ static void ext4_cache_extents(struct in
+@@ -555,6 +555,10 @@ static void ext4_cache_extents(struct in
  		ext4_lblk_t lblk = le32_to_cpu(ex->ee_block);
  		int len = ext4_ext_get_actual_len(ex);
  

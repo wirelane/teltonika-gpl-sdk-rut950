@@ -203,7 +203,7 @@
  		/* control packet, we do not know what to do */
  		if (hdr->pad & 0x80)
  			goto skip;
-@@ -289,7 +423,7 @@ static struct attribute_group qmi_wwan_s
+@@ -290,7 +424,7 @@ static struct attribute_group qmi_wwan_s
  	.attrs = qmi_wwan_sysfs_qmimux_attrs,
  };
  
@@ -212,7 +212,7 @@
  {
  	struct net_device *new_dev;
  	struct qmimux_priv *priv;
-@@ -304,6 +438,7 @@ static int qmimux_register_device(struct
+@@ -305,6 +439,7 @@ static int qmimux_register_device(struct
  	priv = netdev_priv(new_dev);
  	priv->mux_id = mux_id;
  	priv->real_dev = real_dev;
@@ -220,7 +220,7 @@
  
  	priv->stats64 = netdev_alloc_pcpu_stats(struct pcpu_sw_netstats);
  	if (!priv->stats64) {
-@@ -363,7 +498,7 @@ static void qmi_wwan_netdev_setup(struct
+@@ -364,7 +499,7 @@ static void qmi_wwan_netdev_setup(struct
  		net->addr_len        = 0;
  		net->flags           = IFF_POINTOPOINT | IFF_NOARP | IFF_MULTICAST;
  		set_bit(EVENT_NO_IP_ALIGN, &dev->flags);
@@ -229,7 +229,7 @@
  	} else if (!net->header_ops) { /* don't bother if already set */
  		ether_setup(net);
  		/* Restoring min/max mtu values set originally by usbnet */
-@@ -470,7 +605,7 @@ static ssize_t add_mux_store(struct devi
+@@ -471,7 +606,7 @@ static ssize_t add_mux_store(struct devi
  		goto err;
  	}
  
@@ -238,7 +238,7 @@
  	if (!ret) {
  		info->flags |= QMI_WWAN_FLAG_MUX;
  		ret = len;
-@@ -830,6 +965,13 @@ static int qmi_wwan_bind(struct usbnet *
+@@ -831,6 +966,13 @@ static int qmi_wwan_bind(struct usbnet *
  	}
  	dev->net->netdev_ops = &qmi_wwan_netdev_ops;
  	dev->net->sysfs_groups[0] = &qmi_wwan_sysfs_attr_group;
@@ -252,7 +252,7 @@
  err:
  	return status;
  }
-@@ -844,7 +986,8 @@ static void qmi_wwan_unbind(struct usbne
+@@ -845,7 +987,8 @@ static void qmi_wwan_unbind(struct usbne
  		info->subdriver->disconnect(info->control);
  
  	/* disable MDM9x30 quirk */
@@ -262,7 +262,7 @@
  		qmi_wwan_change_dtr(dev, false);
  		qmi_wwan_manage_power(dev, 0);
  	}
-@@ -933,6 +1076,16 @@ static const struct driver_info	qmi_wwan
+@@ -934,6 +1077,16 @@ static const struct driver_info	qmi_wwan
  	.data           = QMI_WWAN_QUIRK_DTR,
  };
  
@@ -279,7 +279,7 @@
  #define HUAWEI_VENDOR_ID	0x12D1
  
  /* map QMI/wwan function by a fixed interface number */
-@@ -966,6 +1119,11 @@ static const struct driver_info	qmi_wwan
+@@ -967,6 +1120,11 @@ static const struct driver_info	qmi_wwan
  				      USB_SUBCLASS_VENDOR_SPEC, 0xff), \
  	.driver_info = (unsigned long)&qmi_wwan_info_quirk_dtr
  
@@ -291,8 +291,8 @@
  static const struct usb_device_id products[] = {
  	/* 1. CDC ECM like devices match on the control interface */
  	{	/* Huawei E392, E398 and possibly others sharing both device id and more... */
-@@ -1074,8 +1232,8 @@ static const struct usb_device_id produc
- 	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0306)},	/* Quectel EP06/EG06/EM06 */
+@@ -1077,8 +1235,8 @@ static const struct usb_device_id produc
+ 	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x030b)},	/* Quectel EG060K */
  	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0512)},	/* Quectel EG12/EM12 */
  	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0620)},	/* Quectel EM160R-GL */
 -	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0800)},	/* Quectel RM500Q-GL */

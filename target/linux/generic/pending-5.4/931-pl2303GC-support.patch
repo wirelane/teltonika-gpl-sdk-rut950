@@ -13,7 +13,7 @@
  	{ USB_DEVICE(IODATA_VENDOR_ID, IODATA_PRODUCT_ID) },
  	{ USB_DEVICE(IODATA_VENDOR_ID, IODATA_PRODUCT_ID_RSAQ5) },
  	{ USB_DEVICE(ATEN_VENDOR_ID, ATEN_PRODUCT_ID),
-@@ -135,9 +141,11 @@ MODULE_DEVICE_TABLE(usb, id_table);
+@@ -136,9 +142,11 @@ MODULE_DEVICE_TABLE(usb, id_table);
  
  #define VENDOR_WRITE_REQUEST_TYPE	0x40
  #define VENDOR_WRITE_REQUEST		0x01
@@ -25,7 +25,7 @@
  
  #define UART_STATE_INDEX		8
  #define UART_STATE_MSR_MASK		0x8b
-@@ -158,6 +166,7 @@ static void pl2303_set_break(struct usb_
+@@ -159,6 +167,7 @@ static void pl2303_set_break(struct usb_
  enum pl2303_type {
  	TYPE_01,	/* Type 0 and 1 (difference unknown) */
  	TYPE_HX,	/* HX version of the pl2303 chip */
@@ -33,7 +33,7 @@
  	TYPE_COUNT
  };
  
-@@ -189,16 +198,26 @@ static const struct pl2303_type_data pl2
+@@ -190,16 +199,26 @@ static const struct pl2303_type_data pl2
  	[TYPE_HX] = {
  		.max_baud_rate		= 12000000,
  	},
@@ -61,7 +61,7 @@
  			value, 0, buf, 1, 100);
  	if (res != 1) {
  		dev_err(dev, "%s - failed to read [%04x]: %d\n", __func__,
-@@ -217,12 +236,19 @@ static int pl2303_vendor_read(struct usb
+@@ -218,12 +237,19 @@ static int pl2303_vendor_read(struct usb
  static int pl2303_vendor_write(struct usb_serial *serial, u16 value, u16 index)
  {
  	struct device *dev = &serial->interface->dev;
@@ -82,7 +82,7 @@
  			value, index, NULL, 0, 100);
  	if (res) {
  		dev_err(dev, "%s - failed to write [%04x]: %d\n", __func__,
-@@ -325,7 +351,8 @@ static int pl2303_startup(struct usb_ser
+@@ -326,7 +352,8 @@ static int pl2303_startup(struct usb_ser
  	struct pl2303_serial_private *spriv;
  	enum pl2303_type type = TYPE_01;
  	unsigned char *buf;
@@ -92,7 +92,7 @@
  	spriv = kzalloc(sizeof(*spriv), GFP_KERNEL);
  	if (!spriv)
  		return -ENOMEM;
-@@ -346,26 +373,37 @@ static int pl2303_startup(struct usb_ser
+@@ -347,26 +374,37 @@ static int pl2303_startup(struct usb_ser
  		type = TYPE_01;		/* type 1 */
  	dev_dbg(&serial->interface->dev, "device type: %d\n", type);
  
@@ -144,7 +144,7 @@
  
  	kfree(buf);
  
-@@ -708,6 +746,10 @@ static void pl2303_set_termios(struct tt
+@@ -709,6 +747,10 @@ static void pl2303_set_termios(struct tt
  			memcpy(priv->line_settings, buf, 7);
  	}
  
@@ -155,7 +155,7 @@
  	/* change control lines if we are switching to or from B0 */
  	spin_lock_irqsave(&priv->lock, flags);
  	control = priv->line_control;
-@@ -724,14 +766,23 @@ static void pl2303_set_termios(struct tt
+@@ -725,14 +767,23 @@ static void pl2303_set_termios(struct tt
  	}
  
  	if (C_CRTSCTS(tty)) {
@@ -185,7 +185,7 @@
  	}
  
  	kfree(buf);
-@@ -772,8 +823,12 @@ static int pl2303_open(struct tty_struct
+@@ -773,8 +824,12 @@ static int pl2303_open(struct tty_struct
  		usb_clear_halt(serial->dev, port->read_urb->pipe);
  	} else {
  		/* reset upstream data pipes */

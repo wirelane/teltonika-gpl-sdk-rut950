@@ -1,6 +1,6 @@
 --- a/drivers/net/usb/qmi_wwan.c
 +++ b/drivers/net/usb/qmi_wwan.c
-@@ -1071,6 +1071,7 @@ static const struct usb_device_id produc
+@@ -1074,6 +1074,7 @@ static const struct usb_device_id produc
  	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0620)},	/* Quectel EM160R-GL */
  	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0800)},	/* Quectel RM500Q-GL */
  	{QMI_MATCH_FF_FF_FF(0x2c7c, 0x0801)},	/* Quectel RM520N */
@@ -19,7 +19,7 @@
  
  #define MEIGLINK_VENDOR_ID 			0x2DEE
  #define MEIG_PRODUCT_SLM790 			0x4D20
-@@ -1195,6 +1197,11 @@ static const struct usb_device_id option
+@@ -1204,6 +1206,11 @@ static const struct usb_device_id option
  	  .driver_info = ZLP },
  	{ USB_DEVICE(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_BG96),
  	  .driver_info = RSVD(4) },

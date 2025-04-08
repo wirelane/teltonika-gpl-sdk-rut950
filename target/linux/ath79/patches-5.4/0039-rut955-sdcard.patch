@@ -1,6 +1,6 @@
 --- a/drivers/mmc/core/core.c
 +++ b/drivers/mmc/core/core.c
-@@ -1135,7 +1135,7 @@ u32 mmc_select_voltage(struct mmc_host *
+@@ -1140,7 +1140,7 @@ u32 mmc_select_voltage(struct mmc_host *
  
  	ocr &= host->ocr_avail;
  	if (!ocr) {
@@ -11,7 +11,7 @@
  
 --- a/drivers/mmc/host/mmc_spi.c
 +++ b/drivers/mmc/host/mmc_spi.c
-@@ -1418,6 +1418,9 @@ static int mmc_spi_probe(struct spi_devi
+@@ -1415,6 +1415,9 @@ static int mmc_spi_probe(struct spi_devi
  		mmc->caps2 |= host->pdata->caps2;
  	}
  

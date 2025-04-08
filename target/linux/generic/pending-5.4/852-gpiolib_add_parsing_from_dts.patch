@@ -1,6 +1,6 @@
 --- a/drivers/gpio/gpiolib-devprop.c
 +++ b/drivers/gpio/gpiolib-devprop.c
-@@ -58,3 +58,64 @@ void devprop_gpiochip_set_names(struct g
+@@ -58,3 +58,83 @@ void devprop_gpiochip_set_names(struct g
  	kfree(names);
  }
  EXPORT_SYMBOL_GPL(devprop_gpiochip_set_names);
@@ -65,6 +65,25 @@
 +}
 +EXPORT_SYMBOL_GPL(gpiochip_find_by_id);
 +
++int tlt_gpio_get_line_by_name(struct gpio_chip *chip, const char *line_name)
++{
++	struct gpio_device *gdev;
++	int i;
++
++	if (!chip || !line_name) {
++		return -1;
++	}
++
++	gdev = chip->gpiodev;
++	for (i = 0; i < gdev->ngpio; i++) {
++		if (gdev->descs[i].name && !strcmp(gdev->descs[i].name, line_name)) {
++			return i;
++		}
++	}
++	return -1;
++}
++EXPORT_SYMBOL_GPL(tlt_gpio_get_line_by_name);
++
 --- a/drivers/gpio/gpiolib-of.c
 +++ b/drivers/gpio/gpiolib-of.c
 @@ -900,9 +900,10 @@ int of_gpiochip_add(struct gpio_chip *ch
@@ -83,13 +102,14 @@
  
 --- a/include/linux/gpio/driver.h
 +++ b/include/linux/gpio/driver.h
-@@ -716,6 +716,10 @@ void gpiochip_free_own_desc(struct gpio_
+@@ -716,6 +716,11 @@ void gpiochip_free_own_desc(struct gpio_
  void devprop_gpiochip_set_names(struct gpio_chip *chip,
  				const struct fwnode_handle *fwnode);
  
 +int tlt_gpio_set_line_name(struct gpio_chip *chip, char *line_name, int index);
 +int tlt_gpio_set_active_low(struct gpio_chip *chip, int index);
 +struct gpio_chip *gpiochip_find_by_id(int id);
++int tlt_gpio_get_line_by_name(struct gpio_chip *chip, const char *line_name);
 +
  #ifdef CONFIG_GPIOLIB
  

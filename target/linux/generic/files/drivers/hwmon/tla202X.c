@@ -155,7 +155,6 @@ static int tla2021_probe(struct i2c_client *client, const struct i2c_device_id *
 {
 	int err, ret, idx;
 	struct tla2021_data *data = NULL;
-	struct device_node *np	  = client->dev.of_node;
 	u16 status;
 
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C))
@@ -179,6 +178,8 @@ static int tla2021_probe(struct i2c_client *client, const struct i2c_device_id *
 		return -ENODEV;
 
 	dev_info(&client->dev, "Found ADC: TLA2021");
+
+	mutex_init(&data->lock);
 
 	err = sysfs_create_file(&client->dev.kobj, &dev_attr_in0_input.attr);
 	if (err)

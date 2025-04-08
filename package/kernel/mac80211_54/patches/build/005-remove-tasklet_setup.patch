@@ -1,0 +1,23 @@
+--- a/backport-include/linux/interrupt.h	2025-03-26 11:55:41.501853478 +0200
++++ b/backport-include/linux/interrupt.h	2025-03-26 11:55:45.656909696 +0200
+@@ -34,20 +34,4 @@
+ 
+ #endif
+ 
+-#if LINUX_VERSION_IS_LESS(5,9,0)
+-
+-static inline void
+-tasklet_setup(struct tasklet_struct *t,
+-	      void (*callback)(struct tasklet_struct *))
+-{
+-	void (*cb)(unsigned long data) = (void *)callback;
+-
+-	tasklet_init(t, cb, (unsigned long)t);
+-}
+-
+-#define from_tasklet(var, callback_tasklet, tasklet_fieldname) \
+-	container_of(callback_tasklet, typeof(*var), tasklet_fieldname)
+-
+-#endif
+-
+ #endif /* _BP_LINUX_INTERRUPT_H */

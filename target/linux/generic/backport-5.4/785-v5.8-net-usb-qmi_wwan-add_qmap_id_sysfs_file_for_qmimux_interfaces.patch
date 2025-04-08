@@ -1,6 +1,6 @@
 --- a/drivers/net/usb/qmi_wwan.c
 +++ b/drivers/net/usb/qmi_wwan.c
-@@ -262,6 +262,28 @@ skip:
+@@ -263,6 +263,28 @@ skip:
  	return 1;
  }
  
@@ -29,7 +29,7 @@
  static int qmimux_register_device(struct net_device *real_dev, u8 mux_id)
  {
  	struct net_device *new_dev;
-@@ -284,6 +306,8 @@ static int qmimux_register_device(struct
+@@ -285,6 +307,8 @@ static int qmimux_register_device(struct
  		goto out_free_newdev;
  	}
  

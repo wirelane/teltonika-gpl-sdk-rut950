@@ -1,7 +1,5 @@
-Index: linux-5.4.258/drivers/net/usb/qmi_wwan.c
-===================================================================
---- linux-5.4.258.orig/drivers/net/usb/qmi_wwan.c
-+++ linux-5.4.258/drivers/net/usb/qmi_wwan.c
+--- a/drivers/net/usb/qmi_wwan.c
++++ b/drivers/net/usb/qmi_wwan.c
 @@ -47,8 +47,19 @@
   * commands on a serial interface
   */
@@ -210,7 +208,7 @@ Index: linux-5.4.258/drivers/net/usb/qmi_wwan.c
  }
  
  static struct net_device *qmimux_find_dev(struct usbnet *dev, u8 mux_id)
-@@ -423,6 +562,39 @@ static struct attribute_group qmi_wwan_s
+@@ -424,6 +563,39 @@ static struct attribute_group qmi_wwan_s
  	.attrs = qmi_wwan_sysfs_qmimux_attrs,
  };
  
@@ -250,7 +248,7 @@ Index: linux-5.4.258/drivers/net/usb/qmi_wwan.c
  static int qmimux_register_device(struct net_device *real_dev, u8 mux_id, int qmap_v5)
  {
  	struct net_device *new_dev;
-@@ -650,14 +822,82 @@ err:
+@@ -651,14 +823,82 @@ err:
  	return ret;
  }
  
@@ -333,7 +331,7 @@ Index: linux-5.4.258/drivers/net/usb/qmi_wwan.c
  	NULL,
  };
  
-@@ -878,10 +1118,16 @@ static int qmi_wwan_bind(struct usbnet *
+@@ -879,10 +1119,16 @@ static int qmi_wwan_bind(struct usbnet *
  	struct usb_driver *driver = driver_of(intf);
  	struct qmi_wwan_state *info = (void *)&dev->data;
  	struct usb_cdc_parsed_header hdr;
@@ -350,7 +348,7 @@ Index: linux-5.4.258/drivers/net/usb/qmi_wwan.c
  	/* set up initial state */
  	info->control = intf;
  	info->data = intf;
-@@ -950,6 +1196,16 @@ static int qmi_wwan_bind(struct usbnet *
+@@ -951,6 +1197,16 @@ static int qmi_wwan_bind(struct usbnet *
  		qmi_wwan_change_dtr(dev, true);
  	}
  
@@ -367,7 +365,7 @@ Index: linux-5.4.258/drivers/net/usb/qmi_wwan.c
  	/* Never use the same address on both ends of the link, even if the
  	 * buggy firmware told us to. Or, if device is assigned the well-known
  	 * buggy firmware MAC address, replace it with a random address,
-@@ -981,6 +1237,12 @@ static void qmi_wwan_unbind(struct usbne
+@@ -982,6 +1238,12 @@ static void qmi_wwan_unbind(struct usbne
  	struct qmi_wwan_state *info = (void *)&dev->data;
  	struct usb_driver *driver = driver_of(intf);
  	struct usb_interface *other;

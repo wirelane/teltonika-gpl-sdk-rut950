@@ -1,6 +1,6 @@
 --- a/net/bluetooth/hci_event.c
 +++ b/net/bluetooth/hci_event.c
-@@ -5336,7 +5336,7 @@ static void process_adv_report(struct hc
+@@ -5356,7 +5356,7 @@ static void process_adv_report(struct hc
  	struct hci_conn *conn;
  	bool match;
  	u32 flags;
@@ -9,7 +9,7 @@
  
  	switch (type) {
  	case LE_ADV_IND:
-@@ -5367,13 +5367,10 @@ static void process_adv_report(struct hc
+@@ -5387,13 +5387,10 @@ static void process_adv_report(struct hc
  			break;
  	}
  
