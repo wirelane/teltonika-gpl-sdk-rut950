@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=vuci-ui-core
-PKG_VERSION:=2025-04-04-ae6c5bd05a
+PKG_VERSION:=2025-07-21-befee11f19c
 PKG_RELEASE:=2
 
 PKG_BUILD_PARALLEL:=1

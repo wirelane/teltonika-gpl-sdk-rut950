@@ -36,6 +36,7 @@ proto_l2tp_setup() {
 	local interface="$1"
 	local optfile="/tmp/l2tp/options.${interface}"
 	local static_opt="/etc/ppp/options.l2tp"
+	local active_wan="/tmp/run/mwan3/active_wan"
 	local ip serv_addr server host defaultroute
 
 	json_get_vars server defaultroute
@@ -54,7 +55,14 @@ proto_l2tp_setup() {
 
 	for ip in $(resolveip -t 5 "$host"); do
 		[ "$defaultroute" -eq 1 ] && {
-			default="$(ip route show default | head -n 1 | awk -F"dev " '{print $2}' | sed 's/\s.*$//')"
+			if [ -f "$active_wan" ]; then
+				default_int=$(cat "$active_wan")
+					if [ "$default_int" = "mob1s1a1" ] || [ "$default_int" = "mob1s2a1" ]; then
+						default_int="${default_int}_4"
+					fi
+					default="$(ubus call network.interface dump | jsonfilter -e '@.interface[@.interface="'"${default_int}"'"].device')"
+			fi
+			[ -z "$default" ] && default="$(ip route show default | head -n 1 | awk -F"dev " '{print $2}' | sed 's/\s.*$//')"
 			gw="$(ip route show default dev $default | head -n 1 | awk -F"via " '{print $2}' | sed 's/\s.*$//')"
 			metric="$(ip route show default dev $default | awk -F"metric " '{print $2}' | sed 's/\s.*$//')"
 

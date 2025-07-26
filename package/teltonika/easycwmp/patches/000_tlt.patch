@@ -24,7 +24,7 @@ diff --recursive --unified --new-file --no-dereference orig/.gitlab-ci.yml src/.
 +    - job: semgrep_errors
 \ No newline at end of file
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/config/easycwmp src/ext/openwrt/config/easycwmp
---- orig/ext/openwrt/config/easycwmp	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/config/easycwmp	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/config/easycwmp	2023-11-06 05:25:51.000000000 +0000
 @@ -22,6 +22,7 @@
  	option periodic_enable '1'
@@ -35,7 +35,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/config/e
  config device
  	option manufacturer easycwmp
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/init.d/easycwmpd src/ext/openwrt/init.d/easycwmpd
---- orig/ext/openwrt/init.d/easycwmpd	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/init.d/easycwmpd	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/init.d/easycwmpd	2023-11-06 05:25:51.000000000 +0000
 @@ -2,6 +2,7 @@
  # Copyright (C) 2012-2014 OpenWrt.org
@@ -126,7 +126,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/init.d/e
 +	start
 +}
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/easycwmp.sh src/ext/openwrt/scripts/easycwmp.sh
---- orig/ext/openwrt/scripts/easycwmp.sh	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/easycwmp.sh	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/easycwmp.sh	2023-11-06 05:25:51.000000000 +0000
 @@ -8,6 +8,7 @@
  . /lib/functions.sh
@@ -333,7 +333,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
  			chmod +x "$apply_service_tmp_file"
  			/bin/sh "$apply_service_tmp_file"
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/common/common src/ext/openwrt/scripts/functions/common/common
---- orig/ext/openwrt/scripts/functions/common/common	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/common/common	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/common/common	2023-11-06 05:25:51.000000000 +0000
 @@ -192,23 +192,21 @@
  	
@@ -432,7 +432,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
 -	echo $ip1.$ip2.$ip3.$ip4
 -}
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/common/device_info src/ext/openwrt/scripts/functions/common/device_info
---- orig/ext/openwrt/scripts/functions/common/device_info	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/common/device_info	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/common/device_info	2023-11-06 05:25:51.000000000 +0000
 @@ -14,17 +14,18 @@
  entry_execute_method_list="$entry_execute_method_list entry_execute_method_root_DeviceInfo"
@@ -469,7 +469,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
 +	echo "$val"
 +}
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/common/ipping_launch src/ext/openwrt/scripts/functions/common/ipping_launch
---- orig/ext/openwrt/scripts/functions/common/ipping_launch	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/common/ipping_launch	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/common/ipping_launch	2023-11-06 05:25:51.000000000 +0000
 @@ -1,172 +1,72 @@
  #!/bin/sh
@@ -682,7 +682,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
 +[ "$1" == "run" ] && { ipping_launch; exit 0; }
 +[ "$1" == "stop" ] && ipping_stop
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/common/management_server src/ext/openwrt/scripts/functions/common/management_server
---- orig/ext/openwrt/scripts/functions/common/management_server	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/common/management_server	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/common/management_server	2023-11-06 05:25:51.000000000 +0000
 @@ -15,13 +15,13 @@
  		common_execute_method_obj "$DMROOT.ManagementServer." "0"
@@ -1123,7 +1123,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
 +	config_foreach sub_entry_hotpsot_general chilli $1
 +}
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/tr098/wan_device src/ext/openwrt/scripts/functions/tr098/wan_device
---- orig/ext/openwrt/scripts/functions/tr098/wan_device	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/tr098/wan_device	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/tr098/wan_device	2023-11-06 05:25:51.000000000 +0000
 @@ -25,7 +25,7 @@
  sub_entry_wandevice_wanconnectiondevice() {
@@ -1192,7 +1192,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
  }
  
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/tr181/ip src/ext/openwrt/scripts/functions/tr181/ip
---- orig/ext/openwrt/scripts/functions/tr181/ip	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/tr181/ip	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/tr181/ip	2023-11-06 05:25:51.000000000 +0000
 @@ -12,9 +12,10 @@
  
@@ -1389,7 +1389,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
 +	return 0
 +}
 diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/functions/tr181/wifi src/ext/openwrt/scripts/functions/tr181/wifi
---- orig/ext/openwrt/scripts/functions/tr181/wifi	2019-09-26 14:27:06.000000000 +0000
+--- orig/ext/openwrt/scripts/functions/tr181/wifi	2019-09-26 13:02:11.000000000 +0000
 +++ src/ext/openwrt/scripts/functions/tr181/wifi	2023-11-06 05:25:51.000000000 +0000
 @@ -12,6 +12,8 @@
  prefix_list="$prefix_list $DMROOT.WiFi."
@@ -2719,7 +2719,7 @@ diff --recursive --unified --new-file --no-dereference orig/ext/openwrt/scripts/
 +# Copyright (C) 2011 Luka Perkov <freecwmp@lukaperkov.net>
 +
 diff --recursive --unified --new-file --no-dereference orig/src/cwmp.h src/src/cwmp.h
---- orig/src/cwmp.h	2019-09-26 14:27:06.000000000 +0000
+--- orig/src/cwmp.h	2019-09-26 13:02:11.000000000 +0000
 +++ src/src/cwmp.h	2023-11-06 05:25:51.000000000 +0000
 @@ -142,7 +142,7 @@
  };

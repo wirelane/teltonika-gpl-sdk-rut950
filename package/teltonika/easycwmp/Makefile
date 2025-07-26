@@ -18,8 +18,8 @@ PKG_ORIGIN_URL:=https://easycwmp.org/get
 PKG_LICENSE:=GPL-2.0
 
 PKG_UPSTREAM_VERSION:=1.8.3
-PKG_UPSTREAM_URL:=https://easycwmp.org/download/
-PKG_UPSTREAM_FILE:=easycwmp-$(PKG_UPSTREAM_VERSION).tar.gz
+PKG_UPSTREAM_URL:=https://github.com/pivasoftware/easycwmp/archive/refs/tags/
+PKG_UPSTREAM_FILE:=EasyCwmp-$(PKG_UPSTREAM_VERSION).tar.gz
 
 PKG_FIXUP:=autoreconf
 GPL_INCLUDE_SRC:=1

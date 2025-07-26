@@ -1,0 +1,42 @@
+Index: mwan3-2.10.12/files/usr/share/15-mwan3
+===================================================================
+--- mwan3-2.10.12.orig/files/usr/share/15-mwan3
++++ mwan3-2.10.12/files/usr/share/15-mwan3
+@@ -136,10 +136,37 @@ flush_conntrack_openvpn() {
+ 	esac
+ }
+ 
++restart_vpn_services() {
++	local sid="$1"
++	local disabled proto active
++	local restart=0
++	config_get disabled "$sid" disabled
++	config_get proto "$sid" proto
++	active="$(cat /tmp/run/mwan3/active_wan)"
++	if [ "$MWAN3_STARTUP" != "init" ] && [ "$disabled" != "1" ] && [ "$proto" = "l2tp" ] && [ "$IFNAME" != "$sid" ]; then
++		case "$ACTION" in
++			ifup|connected)
++				[ "$IFNAME" = "$active" ] && restart=1
++				;;
++			ifdown|disconnected)
++				[ "$IFNAME" != "$active" ] && [ "$(uci -q get mwan3.${IFNAME}_member_mwan.metric)" -lt "$(uci -q get mwan3.${active}_member_mwan.metric)" ] && restart=1
++				;;
++		esac
++		if [ "$restart" = 1 ];then
++			{ sleep 3
++			logger -t mwan3 "$proto interface $sid is restarting"
++			ifup "$sid"; } &
++		fi
++	fi
++}
++
++
+ config_load ipsec
+ config_foreach flush_conntrack connection
+ config_load openvpn
+ config_foreach flush_conntrack_openvpn openvpn
++config_load network
++config_foreach restart_vpn_services interface
+ config_load mwan3
+ 
+ exit 0
