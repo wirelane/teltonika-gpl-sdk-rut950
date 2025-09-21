@@ -1,3 +1,9 @@
+# 2025-09-10 00.07.06.20
+
+### Fix
+
+* Data limit: fixed interface data limit not being reset when interface is down (ID: 28119)
+
 # 2025-04-07 00.07.06.18
 
 ### Improvements
