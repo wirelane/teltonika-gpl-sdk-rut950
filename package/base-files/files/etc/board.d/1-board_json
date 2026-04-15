@@ -224,6 +224,7 @@ setup_json() {
 		[ "${model:6:1}" = "1" ] && ucidef_set_hwinfo mobile wifi nat_offloading \
 		ethernet || ucidef_set_hwinfo mobile wifi ethernet ios nat_offloading
 		ucidef_set_network_options "vlans" 16 "max_mtu" 1500
+		[ "${model:4:2}" = "40" ] && ucidef_add_eol "2028-07-31" "RUT200"
 		;;
 	RUT300*)
 		ucidef_set_led_switch "lan1" "LAN1" "eth1_led" "switch0" "0x02"
@@ -272,6 +273,7 @@ setup_json() {
 		[ "${model:7:2}" = "06" ] && ucidef_set_hwinfo dual_sim mobile nat_offloading \
 		wifi ethernet || ucidef_set_hwinfo dual_sim mobile wifi ethernet ios nat_offloading
 		ucidef_set_network_options "vlans" 15 "max_mtu" 1500 "readonly_vlans" 1
+		ucidef_add_eol "2028-07-31" "RUT951" "RUT901"
 		;;
 	RUT955*)
 		ucidef_set_led_switch "lan1" "LAN1" "eth1_led" "switch0" "0x10"
@@ -302,6 +304,7 @@ setup_json() {
 			"even odd none" \
 			"/tty/ttyATH1"
 		ucidef_set_network_options "vlans" 15 "max_mtu" 1500 "readonly_vlans" 1
+		ucidef_add_eol "2028-07-31" "RUT906" "RUT956"
 		;;
 	RUT901* |\
 	RUT951*)

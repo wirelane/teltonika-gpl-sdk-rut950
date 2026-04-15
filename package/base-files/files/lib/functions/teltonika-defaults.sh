@@ -3,6 +3,24 @@
 . /lib/functions.sh
 . /usr/share/libubox/jshn.sh
 
+ucidef_add_eol() {
+	local date="$1"
+	shift
+
+	json_add_object "eol"
+	json_add_string date "$date"
+
+	[ $# -gt 0 ] && {
+		json_add_array replacement
+		for replacement_device in "$@"; do
+			json_add_string "" "$replacement_device"
+		done
+		json_close_array
+	}
+
+	json_close_object
+}
+
 ucidef_add_static_modem_info() {
 	#Parameters: model usb_id sim_count other_params
 	local model usb_id count

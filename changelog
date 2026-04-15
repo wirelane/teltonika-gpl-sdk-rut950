@@ -1,4 +1,20 @@
-# 2025-09-10 00.07.06.20
+# 2025-11-07 00.07.06.21
+
+### New
+
+* WebUI: added End of Support notifications (ID: 28546)
+
+### Improvements
+
+* Modbus client: added %fa expansion specifier in Modbus alarms (ID: 22586)
+
+### Fix
+
+* Modbus client: fixed %ut expansion specifier in Modbus alarms (ID: 22586)
+* Data to Server: fixed duplicate modbus data sending (ID: 28925)
+* RMS: fixed RMS authentication under poor internet conditions (ID: 28160)
+
+# 2025-09-30 00.07.06.20
 
 ### Fix
 

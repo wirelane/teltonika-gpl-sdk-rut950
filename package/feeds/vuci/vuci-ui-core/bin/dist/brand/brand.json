@@ -12,5 +12,6 @@
   "licenseUrl": "https://wiki.teltonika-networks.com/view/GPL#Licensing",
   "mqttWikiURL": "https://wiki.teltonika-networks.com/view/Monitoring_via_MQTT#How_MQTT_works",
   "modemUpdateWikiURL": "https://wiki.teltonika-networks.com/view/AT%26T_3G_Network_shutdown_information",
-  "mobileRSSIWikiURL": "https://wiki.teltonika-networks.com/view/RSSI"
+  "mobileRSSIWikiURL": "https://wiki.teltonika-networks.com/view/RSSI",
+  "eolURL": "https://www.teltonika-networks.com/support/eol-products"
 }

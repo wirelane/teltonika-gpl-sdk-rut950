@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/download.mk
 
 PKG_NAME:=libparam
-PKG_VERSION:=2023-12-08
+PKG_VERSION:=2025-09-29
 PKG_RELEASE:=1
 
-PKG_SOURCE_VERSION:=1.4
+PKG_SOURCE_VERSION:=1.4.1
 
 include $(INCLUDE_DIR)/package.mk
 
